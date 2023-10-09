@@ -12,4 +12,8 @@ class KeyStage extends Model
     protected $fillable = [
         'name'
     ];
+    public function year()
+    {
+        return $this->hasMany(Year::class, 'key_stage_id');
+    }
 }

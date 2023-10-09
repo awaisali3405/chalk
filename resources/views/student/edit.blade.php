@@ -42,7 +42,7 @@
 
                                         <div class="row">
 
-
+                                            <input type="hidden" id="student_id" value="{{ $student->id }}">
                                             <input type='file' id="upload" class="d-none" name="profile_pic">
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
@@ -445,7 +445,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <div class="col-lg-6 col-md-6 col-sm-12  d-none">
                                                     <div class="form-group">
                                                         <label class="form-label">Resource Discount</label>
                                                         <div class="input-group mb-2">

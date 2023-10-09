@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\EnquirySubjectController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\YearController;
 use App\Models\Enquiry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,3 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('enquiry/subject/create', [EnquirySubjectController::class, 'apiCreate']);
 Route::get('enquiry/subject/delete/{id}', [EnquirySubjectController::class, 'apiDelete']);
+Route::get('/get/year/{id}', [YearController::class, 'getYear']);
+Route::get('/get/subject/{id}', [SubjectController::class, 'getSubject']);
+Route::get('/get/student/{id}', [StudentController::class, 'getStudent']);

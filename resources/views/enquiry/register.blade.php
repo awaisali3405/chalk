@@ -42,29 +42,34 @@
                                         <div class="row">
 
 
+                                            <input type='hidden' value="{{ $enquiry->id }}" name="enquiry_id">
                                             <input type='file' id="upload" class="d-none" name="profile_pic">
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">First Name</label>
-                                                    <input type="text" class="form-control" name="first_name" required>
+                                                    <input type="text" class="form-control" name="first_name"
+                                                        value="{{ $enquiry->first_name }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Last Name</label>
-                                                    <input type="text" class="form-control" name="last_name" required>
+                                                    <input type="text" class="form-control" name="last_name"
+                                                        value="{{ $enquiry->last_name }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Date of Birth</label>
-                                                    <input type="date" class="form-control" name="dob" required>
+                                                    <input type="date" class="form-control" name="dob"
+                                                        value="{{ $enquiry->dob }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Email</label>
-                                                    <input type="email" class="form-control" name="email" required>
+                                                    <input type="email" class="form-control" name="email"
+                                                        value="{{ $enquiry->email }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -234,127 +239,7 @@
                                                 </div>
                                             </div>
 
-                                            {{-- <div class="" style="padding-left: 15%; width: 70%;">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <div class="row">
-                                                            <div class="col-3">
-                                                                <div class="form-group">
-                                                                    <label class="form-label">Subject</label>
 
-                                                                    <select class="form-control" id="subject_id">
-
-                                                                        @foreach ($subject as $value)
-                                                                            <option value="{{ $value->id }}">
-                                                                                {{ $value->name }}</option>
-                                                                        @endforeach
-
-                                                                    </select>
-
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="col-3">
-                                                                <div class="form-group">
-                                                                    <label class="form-label">Board</label>
-
-                                                                    <select class="form-control" id="board_id">
-                                                                        <option value="">-</option>
-                                                                        @foreach ($board as $value)
-                                                                            <option value="{{ $value->id }}">
-                                                                                {{ $value->name }}</option>
-                                                                        @endforeach
-
-                                                                    </select>
-
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="col-3">
-                                                                <div class="form-group">
-                                                                    <label class="form-label">Paper</label>
-
-                                                                    <select class="form-control" id="paper_id">
-                                                                        <option value="">-</option>
-                                                                        @foreach ($paper as $value)
-                                                                            <option value="{{ $value->id }}">
-                                                                                {{ $value->name }}</option>
-                                                                        @endforeach
-
-                                                                    </select>
-
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="col-3">
-                                                                <div class="form-group">
-
-                                                                    <label class="form-label">Science Type</label>
-                                                                    <select class="form-control" id="science_type_id">
-                                                                        <option value="">-</option>
-                                                                        @foreach ($scienceType as $value)
-                                                                            <option value="{{ $value->id }}">
-                                                                                {{ $value->name }}</option>
-                                                                        @endforeach
-
-                                                                    </select>
-
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-1">
-                                                            <div class="form-group">
-
-                                                                <label class="form-label"></label>
-                                                                <span type="button" class="btn btn-primary " id="add-subject">+
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="">
-                                                            <table id="" class="display" style="width:100%;">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Subject</th>
-                                                                        <th>Board</th>
-                                                                        <th>Paper</th>
-                                                                        <th>Science Type</th>
-
-
-                                                                        <th>Action</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody id="subject">
-                                                                    @foreach ($enquirySubject as $value)
-                                                                        <tr>
-                                                                            <td>{{ $value->subject->name }}</td>
-                                                                            <td>{{ $value->board ? $value->board->name : '-' }}
-                                                                            </td>
-                                                                            <td>{{ $value->paper ? $value->paper->name : '-' }}
-                                                                            </td>
-                                                                            <td>{{ $value->scienceType ? $value->scienceType->name : '-' }}
-                                                                            </td>
-                                                                            <td>
-                                                                                <input type="hidden" value="{{ $value->id }}"
-                                                                                    class="id">
-                                                                                <a class="delete-subject"
-                                                                                    href="javascript:void(0);"><i
-                                                                                        class=" fa fa-close color-danger"></i></a>
-                                                                            </td>
-                                                                        </tr>
-                                                                    @endforeach
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
-                                            {{-- <div class="col-lg-12 col-md-12 col-sm-12">
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                                <a href="{{ route('student.index') }}" class="btn btn-light">Cencel</a>
-                                            </div> --}}
 
                                         </div>
 
@@ -473,7 +358,7 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody id="subject">
-                                                                    @foreach ($enquirySubject as $value)
+                                                                    {{-- @foreach ($enquirySubject as $value)
                                                                         <tr>
                                                                             <td>{{ $value->subject->name }}</td>
                                                                             <td>{{ $value->board ? $value->board->name : '-' }}
@@ -492,7 +377,7 @@
                                                                                         class=" fa fa-close color-danger"></i></a>
                                                                             </td>
                                                                         </tr>
-                                                                    @endforeach
+                                                                    @endforeach --}}
                                                                 </tbody>
                                                             </table>
                                                         </div>

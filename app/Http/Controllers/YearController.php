@@ -71,4 +71,14 @@ class YearController extends Controller
     {
         //
     }
+    public function getYear($id)
+    {
+        $keyStage = KeyStage::find($id);
+        $string = '<option value="">-</option>';
+        foreach ($keyStage->year as $key => $value) {
+            # code...
+            $string .= "<option value='" . $value->id . "'>" . $value->name . "</option>";
+        }
+        return response()->json(['data' => $string]);
+    }
 }

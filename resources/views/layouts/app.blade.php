@@ -161,6 +161,7 @@
             board = $('#board_id').val();
             scienceType = $('#science_type_id').val();
             enquiry = $('#enquiry_id').val();
+
             var name = '';
             var data = {
                 "_token": "{{ csrf_token() }}",
@@ -168,7 +169,13 @@
                 'paper_id': paper,
                 'board_id': board,
                 'science_type_id': scienceType,
-                'enquiry_id': enquiry == 0 ? null : enquiry,
+
+            }
+            if (!enquiry) {
+                data['student_id'] = $('#student_id').val()
+            } else {
+                data['enquiry_id'] = $('#enquiry_id').val()
+
             }
             if (subject) {
 
@@ -330,6 +337,51 @@
             });
 
         });
+        $('#discount').on('change keyup', function() {
+            discount = $('#discount').val();
+            late = $('#late_fee').val();
+            amount = $('#actual_amount').val()
+            pay = (amount - discount) + +late
+            $('#pay_amount').val(pay)
+        })
+        $('#late_fee').on('change keyup', function() {
+            discount = $('#discount').val();
+            late = $('#late_fee').val();
+            amount = $('#actual_amount').val()
+            pay = (amount - discount) + +late
+            $('#pay_amount').val(pay)
+        })
+        $('#keyStage').on('change keyup', function() {
+            id = $(this).val()
+            $.ajax({
+                method: "GET",
+                'url': `/api/get/year/${id}`,
+                success: function(success) {
+                    // if (success.message == 'success') {
+                    console.log(success.data)
+                    $('#year').html(success.data);
+                    // }
+
+
+                }
+            })
+        })
+        $('#year').on('change keyup', function() {
+            id = $(this).val()
+            $.ajax({
+                method: "GET",
+                'url': `/api/get/subject/${id}`,
+                success: function(success) {
+                    // if (success.message == 'success') {
+
+                    $('#subject').append(success.data);
+                    // console.log(success.data);
+                    // }
+
+
+                }
+            })
+        })
     </script>
 
 </body>

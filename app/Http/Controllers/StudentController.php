@@ -8,9 +8,11 @@ use App\Models\Parents;
 use App\Models\student;
 use App\Models\enquirySubject;
 use App\Models\EnquiryUpload;
+use App\Models\InvoiceSubject;
 use App\Models\KeyStage;
 use App\Models\Paper;
 use App\Models\ScienceType;
+use App\Models\StudentInvoice;
 use App\Models\Subject;
 use App\Models\Year;
 use Illuminate\Http\Request;
@@ -100,6 +102,36 @@ class StudentController extends Controller
                 $student->parents()->attach([$parent->id]);
             }
         }
+        $subject = $student->enquirySubject()->pluck('id')->toArray();
+        // dd($subject);
+        $invoice = StudentInvoice::create([
+            'student_id' => $student->id,
+            'amount' => $student->deposit,
+            'type' => 'Refundable',
+        ]);
+        $invoice = StudentInvoice::create([
+            'student_id' => $student->id,
+            'amount' => $student->registration_fee,
+            'type' => 'Non Refundable',
+        ]);
+        $invoice = StudentInvoice::create([
+            'student_id' => $student->id,
+            'amount' => 0,
+            'type' => 'Resource Fee',
+        ]);
+        foreach ($student->enquirySubject as $key => $value) {
+            InvoiceSubject::create([
+                'invoice_id' => $invoice->id,
+                'subject_name' => $value->subject->name,
+                'subject_rate' => $value->subject->rate
+            ]);
+        }
+        $invoice->update([
+            'amount' => $invoice->subject->sum('student_rate')
+        ]);
+
+
+
         $subject = enquirySubject::whereIn('id', $data['enquiry_subject'])->update([
             'student_id' => $student->id
         ]);
@@ -167,6 +199,41 @@ class StudentController extends Controller
                 $student->parents()->attach([$parent->id]);
             }
         }
+        $invoice = StudentInvoice::create([
+            'student_id' => $student->id,
+            'amount' => $student->deposit,
+            'type' => 'Refundable',
+            'from_date' => auth()->user()->session()->start_date,
+            'to_date' => auth()->user()->session()->end_date,
+        ]);
+        $invoice = StudentInvoice::create([
+            'student_id' => $student->id,
+            'amount' => $student->registration_fee,
+            'type' => 'Non Refundable',
+            'from_date' => auth()->user()->session()->start_date,
+            'to_date' => auth()->user()->session()->end_date,
+        ]);
+        $invoice = StudentInvoice::create([
+            'student_id' => $student->id,
+            'amount' => 0,
+            'type' => 'Resource Fee',
+            'from_date' => auth()->user()->session()->start_date,
+            'to_date' => auth()->user()->session()->end_date,
+        ]);
+        foreach ($student->enquirySubject as $key => $value) {
+            InvoiceSubject::create([
+                'invoice_id' => $invoice->id,
+                'subject_name' => $value->subject->name,
+                'subject_rate' => $value->subject->rate,
+                'from_date' => auth()->user()->session()->start_date,
+                'to_date' => auth()->user()->session()->end_date,
+            ]);
+        }
+        // dd($invoice->subject->sum('subject_rate'), $invoice->subject, $student->enquirySubject);
+        $invoice->update([
+            'amount' => $invoice->subject->sum('subject_rate')
+        ]);
+
         // dd($data, $student->parent);
         return redirect()->route('student.index')->with('success', 'Branch Updated Successfully');
     }
@@ -211,5 +278,14 @@ class StudentController extends Controller
     {
         $student = EnquiryUpload::find($id)->delete();
         return redirect()->back()->with('success', 'Deleted Successfully');
+    }
+    public function getStudent($id)
+    {
+        $year = Year::find($id);
+        $string = '<option value="">-</option>';
+        foreach ($year->student as $key => $value) {
+            $string .= '<option value="' . $value->id . '">' . $value->first_name . '</option>';
+        }
+        return response()->json(['data' => $string]);
     }
 }

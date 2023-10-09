@@ -82,4 +82,5 @@ class Student extends Model
     {
         return $this->belongsToMany(Parents::class, 'student_parent', 'student_id', 'parent_id');
     }
+    
 }

@@ -18,4 +18,12 @@ class Year extends Model
     {
         return $this->belongsTo(KeyStage::class, 'key_stage_id');
     }
+    public function student()
+    {
+        return $this->hasMany(Student::class, 'year_id');
+    }
+    public function subject()
+    {
+        return $this->hasMany(Subject::class, 'subject_id');
+    }
 }

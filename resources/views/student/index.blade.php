@@ -76,6 +76,9 @@
                                                             <a href="{{ route('student.show', $value->id) }}"
                                                                 title="upload" class="btn btn-sm btn-info"><i
                                                                     class="la la-eye"></i></a>
+                                                            <a href="{{ route('invoice.show', $value->id) }}"
+                                                                title="upload" class="btn btn-sm btn-info">Invoice</a>
+
 
                                                             {{-- <a href="{{ route('student.destory', $value->id) }}"
                                                                 title="note" class="btn btn-sm btn-danger"><i

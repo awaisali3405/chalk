@@ -44,21 +44,21 @@
                                                 Relationship
                                             </label>
                                             <input type="text" class="form-control" name="relationship"
-                                                value="{{ $enquiry->caller_name }}" required>
+                                                value="{{ $enquiry->relationship }}" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">First Name</label>
                                             <input type="text" class="form-control" name="first_name"
-                                                value="{{ $enquiry->caller_name }}" required>
+                                                value="{{ $enquiry->first_name }}" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Last Name</label>
                                             <input type="text" class="form-control" name="last_name"
-                                                value="{{ $enquiry->caller_name }}" required>
+                                                value="{{ $enquiry->last_name }}" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">

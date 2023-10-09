@@ -71,4 +71,13 @@ class SubjectController extends Controller
     {
         //
     }
+    public function getSubject($id)
+    {
+        $year = Year::find($id);
+        $string = '<option value="">-</option>';
+        foreach ($year as $key => $value) {
+            $string .= '<option value="' . $value->id . '">' . $value->name . '</option>';
+        }
+        return response()->json(['data' => $string]);
+    }
 }
