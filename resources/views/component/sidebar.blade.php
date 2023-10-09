@@ -1,6 +1,6 @@
 <div class="dlabnav">
-    <div class="dlabnav-scroll">
-        <ul class="metismenu" id="menu">
+    <div class="dlabnav-scroll mm-active ps ps--active-y">
+        <ul class="metismenu mm-show" id="menu">
             <li class="nav-label first">Main Menu</li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="la la-home"></i>

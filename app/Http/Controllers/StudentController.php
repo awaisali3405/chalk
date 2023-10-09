@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Board;
 use App\Models\Branch;
+use App\Models\Parents;
 use App\Models\student;
 use App\Models\enquirySubject;
 use App\Models\EnquiryUpload;
@@ -15,7 +16,7 @@ use App\Models\Year;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
-class studentController extends Controller
+class StudentController extends Controller
 {
     public function __construct()
     {
@@ -57,10 +58,49 @@ class studentController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $data = $request->except('_token');
-        // dd($data, $subject);
+        // dd($data, new student);
+        if (isset($request->profile_pic)) {
+            $data['profile_pic'] =   $this->saveImage($request->profile_pic);
+        } else {
+            $data['profile_pic'] = 'images/avatar/1.png';
+        }
         $student = Student::create($data);
-        $subject = enquirySubject::whereIn('id', $data['student_subject'])->update([
+
+
+        $student->parents()->detach();
+        foreach ($data['first_name1'] as $key => $value) {
+            $parent = Parents::where('first_name', $data['first_name1'][$key])->first();
+            // dd($parent->id, $student);
+            if ($parent) {
+                $parent->update([
+                    'relationship' => $data['relationship'][$key],
+                    'last_name' => $data['last_name1'][$key],
+                    'first_name' => $data['first_name1'][$key],
+                    'email' => $data['email1'][$key],
+                    'address' => $data['address'][$key],
+                    'post_code' => $data['post_code1'][$key],
+                    'occupation' => $data['occupation'][$key],
+                    'contact' => $data['contact'][$key],
+                ]);
+                $student->parents()->attach([$parent->id]);
+            } else {
+                $parent = Parents::create([
+                    'relationship' => $data['relationship'][$key],
+                    'last_name' => $data['last_name1'][$key],
+                    'first_name' => $data['first_name1'][$key],
+                    'email' => $data['email1'][$key],
+                    'address' => $data['address'][$key],
+                    'post_code' => $data['post_code1'][$key],
+                    'occupation' => $data['occupation'][$key],
+                    'contact' => $data['contact'][$key],
+                ]);
+                // dd($parent);
+                $student->parents()->attach([$parent->id]);
+            }
+        }
+        $subject = enquirySubject::whereIn('id', $data['enquiry_subject'])->update([
             'student_id' => $student->id
         ]);
         return redirect()->route('student.index')->with('success', 'student Created Successfully');
@@ -71,7 +111,8 @@ class studentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $student = Student::find($id);
+        return view('student.show', compact('student'));
     }
 
     /**
@@ -89,7 +130,44 @@ class studentController extends Controller
     public function update(Request $request, string $id)
     {
         $data = $request->except('_token', 'method');
-        student::find($id)->update($data);
+        if (isset($request->profile_pic)) {
+            $data['profile_pic'] =   $this->saveImage($request->profile_pic);
+        }
+
+        $student = student::find($id);
+        $student->update($data);
+        $student->parents()->detach();
+        foreach ($data['first_name1'] as $key => $value) {
+            $parent = Parents::where('first_name', $data['first_name1'][$key])->first();
+            // dd($parent->id, $student);
+            if ($parent) {
+                $parent->update([
+                    'relationship' => $data['relationship'][$key],
+                    'last_name' => $data['last_name1'][$key],
+                    'first_name' => $data['first_name1'][$key],
+                    'email' => $data['email1'][$key],
+                    'address' => $data['address'][$key],
+                    'post_code' => $data['post_code1'][$key],
+                    'occupation' => $data['occupation'][$key],
+                    'contact' => $data['contact'][$key],
+                ]);
+                $student->parents()->attach([$parent->id]);
+            } else {
+                $parent = Parents::create([
+                    'relationship' => $data['relationship'][$key],
+                    'last_name' => $data['last_name1'][$key],
+                    'first_name' => $data['first_name1'][$key],
+                    'email' => $data['email1'][$key],
+                    'address' => $data['address'][$key],
+                    'post_code' => $data['post_code1'][$key],
+                    'occupation' => $data['occupation'][$key],
+                    'contact' => $data['contact'][$key],
+                ]);
+                // dd($parent);
+                $student->parents()->attach([$parent->id]);
+            }
+        }
+        // dd($data, $student->parent);
         return redirect()->route('student.index')->with('success', 'Branch Updated Successfully');
     }
 

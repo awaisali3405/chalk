@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('dashboard');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/enquiry/{id}/upload', [EnquiryController::class, 'upload'])->name('enquiry.upload');
     Route::get('/enquiry/{id}/upload/delete', [EnquiryController::class, 'uploadDelete'])->name('enquiry.upload.delete');
     Route::get('/enquiry/{id}/note', [EnquiryController::class, 'note'])->name('enquiry.note');
+    Route::get('/enquiry/{id}/register', [EnquiryController::class, 'register'])->name('enquiry.register');
     Route::post('/enquiry/{id}/note', [EnquiryController::class, 'noteStore'])->name('enquiry.note.store');
     Route::post('/enquiry/upload', [EnquiryController::class, 'uploadStore'])->name('enquiry.upload.store');
     Route::get('/student/{id}/note', [studentController::class, 'note'])->name('student.note');

@@ -134,4 +134,7 @@ class EnquiryController extends Controller
         $enquiry = EnquiryUpload::find($id)->delete();
         return redirect()->back()->with('success', 'Deleted Successfully');
     }
+    public function register($id){
+        
+    }
 }

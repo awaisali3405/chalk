@@ -136,7 +136,8 @@
     <script src="{{ asset('js/plugins-init/widgets-script-init.js') }}"></script>
 
     <!-- Demo scripts -->
-    <script src="{{ asset('js/dashboard/dashboard.js') }}"></script>
+    <!-- Demo scripts -->
+    <script src="{{ asset('js/dashboard/dashboard-2.js') }}"></script>
 
     <!-- Summernote -->
     <script src="{{ asset('vendor/summernote/js/summernote.min.js') }}"></script>
@@ -205,6 +206,75 @@
                 });
             }
         });
+        $('#add-parent').on('click', function() {
+            x = ` <div class="row">
+
+
+
+<div class="col-lg-3 col-md-6 col-sm-12">
+    <div class="form-group">
+        <label class="form-label">RelationShip</label>
+        <select class="form-control select2" style="width: 100%;" name="relationship[]">
+            <option value="Father">Father</option>
+            <option value="Mother">Mother</option>
+            <option value="Brother">Brother</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+</div>
+<div class="col-lg-3 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">First Name</label>
+                                                <input type="text" class="form-control" name="first_name1[]">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">Last Name</label>
+                                                <input type="text" class="form-control" name="last_name1[]">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">Address</label>
+                                                <input type="text" class="form-control" name="address[]">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">Contact</label>
+                                                <input type="text" class="form-control" name="contact[]">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">Email</label>
+                                                <input type="email" class="form-control" name="email1[]">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">Occupation</label>
+                                                <input type="text" class="form-control" name="occupation[]">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">Post Code</label>
+                                                <input type="text" class="form-control" name="post_code1[]">
+                                            </div>
+                                        </div>
+<div class="col-1">
+    <div class="form-group pt-4">
+
+        <label class="form-label"></label>
+          <span type="button" class="btn btn-primary remove-parent">-
+        </span>
+    </div>
+</div>
+</div>`;
+            $('#parent').append(x);
+        });
         $(document).on("click", ".delete-subject", function() {
             // $('.delete-subject').on('click', function() {
             id = $(this).parent().children('.id').val();
@@ -224,6 +294,12 @@
             })
             $(this).parent().parent().remove()
         });
+        $(document).on("click", ".remove-parent", function() {
+
+
+
+            $(this).parent().parent().parent().remove()
+        });
 
         function isNumber(evt) {
             evt = (evt) ? evt : window.event;
@@ -233,7 +309,29 @@
             }
             return true;
         }
+
+        $(function() {
+            $('#upload').change(function() {
+                var input = this;
+                var url = $(this).val();
+                var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+                if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" ||
+                        ext == "jpg")) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $('#img').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                } else {
+                    $('#img').attr('src', "{{ asset('/assets/image/1.png') }}");
+
+                }
+            });
+
+        });
     </script>
+
 </body>
 
 </html>

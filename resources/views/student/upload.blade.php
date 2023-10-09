@@ -11,16 +11,16 @@
                             <h5 class="card-title">Basic Info</h5>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('enquiry.upload.store') }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ route('student.upload.store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Document Name</label>
-                                            <input type="hidden" name="enquiry_id" value="{{ $enquiry->id }}">
+                                            <input type="hidden" name="student_id" value="{{ $student->id }}">
 
 
-                                            <select class="form-control" name="document_name">
+                                            <select class="form-control" name="document_name" required>
 
                                                 <option value="Student Admission Form">Student Admission Form</option>
                                                 <option value="Discussion Page">Discussion Page</option>
@@ -40,7 +40,7 @@
 
 
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" name="file">
+                                                <input type="file" class="custom-file-input" name="file" required>
                                                 <label class="custom-file-label">Choose file</label>
                                             </div>
 
@@ -50,7 +50,7 @@
 
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                        <button type="submit" class="btn btn-light">Cencel</button>
+                                        <a href="{{ route('student.index') }}" class="btn btn-light">Cencel</a>
                                     </div>
                                 </div>
                             </form>
@@ -81,7 +81,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($enquiry->upload as $key => $value)
+                                                @foreach ($student->upload as $key => $value)
                                                     <tr>
                                                         <td>{{ $key + 1 }}</td>
 
@@ -91,7 +91,7 @@
 
                                                         <td>
 
-                                                            <a href="{{ route('enquiry.upload.delete', $value->id) }}"
+                                                            <a href="{{ route('student.upload.delete', $value->id) }}"
                                                                 title="note" class="btn btn-sm btn-danger"><i
                                                                     class="la la-trash-o"></i></a>
 

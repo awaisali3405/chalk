@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone_no');
             $table->string('post_code');
-            $table->string('ethic_group');
+            $table->string('ethic_group')->nullable();
             $table->string('religion');
             $table->string('home_language');
             $table->string('current_school_name');

@@ -66,7 +66,7 @@ class Student extends Model
      */
     public function enquirySubject(): HasMany
     {
-        return $this->hasMany(EnquirySubject::class, 'enquiry_id');
+        return $this->hasMany(EnquirySubject::class, 'student_id');
     }
     /**
      * Get all of the upload for the Enquiry
@@ -75,6 +75,11 @@ class Student extends Model
      */
     public function upload(): HasMany
     {
-        return $this->hasMany(EnquiryUpload::class, 'enquiry_id');
+        return $this->hasMany(EnquiryUpload::class, 'student_id');
+    }
+
+    public function parents()
+    {
+        return $this->belongsToMany(Parents::class, 'student_parent', 'student_id', 'parent_id');
     }
 }

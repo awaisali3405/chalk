@@ -73,7 +73,7 @@
                                                             <a href="{{ route('enquiry.upload', $value->id) }}"
                                                                 title="upload" class="btn btn-sm btn-info"><i
                                                                     class="la la-arrow-circle-up"></i></a>
-                                                            <a href="{{ route('enquiry.edit', $value->id) }}"
+                                                            <a href="{{ route('enquiry.register', $value->id) }}"
                                                                 title="note" class="btn btn-sm btn-info"><i
                                                                     class="la la-registered"></i></a>
                                                             <a href="{{ route('enquiry.edit', $value->id) }}"

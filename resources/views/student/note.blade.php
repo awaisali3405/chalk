@@ -26,7 +26,7 @@
                             <h5 class="card-title">Basic Info</h5>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('enquiry.note.store', $enquiry->id) }}" method="post">
+                            <form action="{{ route('student.note.store', $student->id) }}" method="post">
                                 @csrf
                                 <div class="row">
                                     <div class="row">
@@ -36,7 +36,7 @@
                                                     <h4 class="card-title">Summernote Editor</h4>
                                                 </div>
                                                 <div class="card-body">
-                                                    <textarea name="note" class="summernote">{{ $enquiry->note }}</textarea>
+                                                    <textarea name="note" class="summernote">{{ $student->note }}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -44,7 +44,7 @@
                                     {{-- {!! Form::textarea('description', null, ['class' => 'form-control summernote', 'id' => 'summernote']) !!} --}}
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                        <button type="submit" class="btn btn-light">Cencel</button>
+                                        <a href="{{ route('student.index') }}" class="btn btn-light">Cencel</a>
                                     </div>
                                 </div>
                             </form>
