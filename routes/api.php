@@ -27,3 +27,4 @@ Route::get('enquiry/subject/delete/{id}', [EnquirySubjectController::class, 'api
 Route::get('/get/year/{id}', [YearController::class, 'getYear']);
 Route::get('/get/subject/{id}', [SubjectController::class, 'getSubject']);
 Route::get('/get/student/{id}', [StudentController::class, 'getStudent']);
+Route::get('/get/student/data/{id}', [StudentController::class, 'getStudentData']);

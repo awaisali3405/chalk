@@ -199,40 +199,6 @@ class StudentController extends Controller
                 $student->parents()->attach([$parent->id]);
             }
         }
-        $invoice = StudentInvoice::create([
-            'student_id' => $student->id,
-            'amount' => $student->deposit,
-            'type' => 'Refundable',
-            'from_date' => auth()->user()->session()->start_date,
-            'to_date' => auth()->user()->session()->end_date,
-        ]);
-        $invoice = StudentInvoice::create([
-            'student_id' => $student->id,
-            'amount' => $student->registration_fee,
-            'type' => 'Non Refundable',
-            'from_date' => auth()->user()->session()->start_date,
-            'to_date' => auth()->user()->session()->end_date,
-        ]);
-        $invoice = StudentInvoice::create([
-            'student_id' => $student->id,
-            'amount' => 0,
-            'type' => 'Resource Fee',
-            'from_date' => auth()->user()->session()->start_date,
-            'to_date' => auth()->user()->session()->end_date,
-        ]);
-        foreach ($student->enquirySubject as $key => $value) {
-            InvoiceSubject::create([
-                'invoice_id' => $invoice->id,
-                'subject_name' => $value->subject->name,
-                'subject_rate' => $value->subject->rate,
-                'from_date' => auth()->user()->session()->start_date,
-                'to_date' => auth()->user()->session()->end_date,
-            ]);
-        }
-        // dd($invoice->subject->sum('subject_rate'), $invoice->subject, $student->enquirySubject);
-        $invoice->update([
-            'amount' => $invoice->subject->sum('subject_rate')
-        ]);
 
         // dd($data, $student->parent);
         return redirect()->route('student.index')->with('success', 'Branch Updated Successfully');
@@ -283,9 +249,22 @@ class StudentController extends Controller
     {
         $year = Year::find($id);
         $string = '<option value="">-</option>';
+        // dd($year);
         foreach ($year->student as $key => $value) {
-            $string .= '<option value="' . $value->id . '">' . $value->first_name . '</option>';
+            $string .= "<option value='" . $value->id . "'>" . $value->first_name . "</option>";
         }
         return response()->json(['data' => $string]);
+    }
+    public function getStudentData($id)
+    {
+        // $year = Year::find($id);
+        // dd($year);
+        $student = Student::with('branch', 'year')->find($id);
+        // dd($student->year->name);
+        $html = '<option value="">-</option>';
+        foreach ($student->enquirySubject as $key => $value) {
+            $html .= "<option value" . $value->id . ">" . $value->name . "</option>";
+        }
+        return response()->json(['data' => $student, 'html' => $html]);
     }
 }

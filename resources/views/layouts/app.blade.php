@@ -351,7 +351,7 @@
             pay = (amount - discount) + +late
             $('#pay_amount').val(pay)
         })
-        $('#keyStage').on('change keyup', function() {
+        $('.keyStage').on('change keyup', function() {
             id = $(this).val()
             $.ajax({
                 method: "GET",
@@ -359,14 +359,29 @@
                 success: function(success) {
                     // if (success.message == 'success') {
                     console.log(success.data)
-                    $('#year').html(success.data);
+                    $('.year_student').html(success.data);
                     // }
 
 
                 }
             })
         })
-        $('#year').on('change keyup', function() {
+        $('.keyStage').on('change keyup', function() {
+            id = $(this).val()
+            $.ajax({
+                method: "GET",
+                'url': `/api/get/year/${id}`,
+                success: function(success) {
+                    // if (success.message == 'success') {
+                    $('.year_student').html(success.data);
+                    $('.year').html(success.data);
+                    // }
+
+
+                }
+            })
+        })
+        $('.year').on('change keyup', function() {
             id = $(this).val()
             $.ajax({
                 method: "GET",
@@ -374,13 +389,72 @@
                 success: function(success) {
                     // if (success.message == 'success') {
 
-                    $('#subject').append(success.data);
+                    // $('#subject').html(success.data);
                     // console.log(success.data);
                     // }
 
 
                 }
             })
+        })
+        $('.year_student').on('change keyup', function() {
+            id = $(this).val()
+            $.ajax({
+                method: "GET",
+                'url': `/api/get/student/${id}`,
+                success: function(success) {
+                    // if (success.message == 'success') {
+
+                    $('.student').html(success.data);
+                    // console.log(success.data);
+                    // }
+
+
+                }
+            })
+        })
+        $('.student').on('change keyup', function() {
+
+            id = $(this).val()
+            console.log(id)
+            $.ajax({
+                method: "GET",
+                'url': `/api/get/student/data/${id}`,
+                success: function(success) {
+
+                    image = "http://" + $(location).attr('host') + "/" + success.data.profile_pic
+                    $('#p_name').html(`${success.data.first_name} ${success.data.last_name}`)
+                    $('#p_image').attr('src', image)
+                    $('#p_roll').html(success.data.id)
+                    $('#p_year').html(success.data.year.name)
+                    $('#payment').html(success.data.payment_period)
+                    $('#p_branch').html(success.data.branch.name)
+                    $('#subject').html(success.html.subject);
+                }
+            })
+        })
+        $('.general').on('change keyup click', function() {
+            $('#widget').addClass("col-xl-12 col-xxl-12 col-lg-12")
+            $('#profile').hide()
+        })
+        $('.individual').on('change keyup click', function() {
+            $('#widget').removeClass("col-xl-12 col-xxl-12 col-lg-12")
+            $('#widget').addClass("col-xl-9 col-xxl-9 col-lg-9")
+            $('#profile').show()
+            image = "http://" + $(location).attr('host') + "/images/1.jpg"
+            $('#p_name').html()
+            $('#p_image').attr('src', image)
+            $('#p_roll').html('')
+            $('#p_year').html('')
+            $('#payment').html('')
+            $('#p_branch').html('')
+            $('.student').html('')
+            $('.year_student').html('')
+        })
+        $('#check_all').on('click change', function() {
+            value = $(this).val()
+            console.log(value);
+            $('input:checkbox').prop('checked', this.checked);
         })
     </script>
 

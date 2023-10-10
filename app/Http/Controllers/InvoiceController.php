@@ -11,10 +11,12 @@ class InvoiceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+
         $invoice = StudentInvoice::all();
-        return view('invoice.index', compact('invoice'));
+        $student = Student::all();
+        return view('invoice.index', compact('invoice', 'student'));
     }
 
     /**
@@ -31,6 +33,14 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
         $data = $request->except('_token');
+        $data['type'] = 'Refundable';
+        $student = Student::find($request->student_id);
+        if ($student->payment_period == 'Weekly') {
+
+            $data['amount'] = ($student->fee - $student->fee_discount) / 7;
+        } else {
+            $data['amount'] = ($student->fee - $student->fee_discount) / 30;
+        }
         StudentInvoice::create($data);
         return redirect()->route('invoice.index')->with('success', 'invoice Created Successfully');
     }
@@ -72,5 +82,4 @@ class InvoiceController extends Controller
     {
         //
     }
-    
 }
