@@ -39,7 +39,7 @@ class EnquiryController extends Controller
      */
     public function index()
     {
-        $enquiry = enquiry::all();
+        $enquiry = Enquiry::all();
         return view('enquiry.index', compact('enquiry'));
     }
 
@@ -59,7 +59,7 @@ class EnquiryController extends Controller
     {
         $data = $request->except('_token');
         // dd($data, $subject);
-        $enquiry = enquiry::create($data);
+        $enquiry = Enquiry::create($data);
         $subject = EnquirySubject::whereIn('id', $data['enquiry_subject'])->update([
             'enquiry_id' => $enquiry->id
         ]);
@@ -79,7 +79,7 @@ class EnquiryController extends Controller
      */
     public function edit(string $id)
     {
-        $enquiry = enquiry::find($id);
+        $enquiry = Enquiry::find($id);
         return view('enquiry.edit', compact('enquiry'));
     }
 
@@ -89,7 +89,7 @@ class EnquiryController extends Controller
     public function update(Request $request, string $id)
     {
         $data = $request->except('_token', 'method');
-        enquiry::find($id)->update($data);
+        Enquiry::find($id)->update($data);
         return redirect()->route('enquiry.index')->with('success', 'Branch Updated Successfully');
     }
 
@@ -102,14 +102,14 @@ class EnquiryController extends Controller
     }
     public function note($id)
     {
-        $enquiry = enquiry::find($id);
+        $enquiry = Enquiry::find($id);
         return view('enquiry.note', compact('enquiry'));
     }
     public function noteStore(Request $request, $id)
     {
         $data = $request->except('_token');
         // dd($data);
-        enquiry::find($id)->update([
+        Enquiry::find($id)->update([
             'note' => $request->note
         ]);
         return redirect()->route('enquiry.index')->with('success', 'Branch Updated Successfully');
@@ -117,7 +117,7 @@ class EnquiryController extends Controller
     public function upload($id)
     {
 
-        $enquiry = enquiry::find($id);
+        $enquiry = Enquiry::find($id);
         return view('enquiry.upload', compact('enquiry'));
     }
     public function uploadStore(Request $request)
