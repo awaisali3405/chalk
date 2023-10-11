@@ -63,11 +63,11 @@
                     <span class="nav-text">Student</span>
                 </a>
             </li>
-            <li><a class="ai-icon" href="{{ route('invoice.index') }}" aria-expanded="false">
+            {{-- <li><a class="ai-icon" href="{{ route('invoice.index') }}" aria-expanded="false">
                     <i class="la la-calendar"></i>
                     <span class="nav-text">Invoice</span>
                 </a>
-            </li>
+            </li> --}}
             <li><a class="ai-icon" href="{{ route('product.index') }}" aria-expanded="false">
                     <i class="la la-calendar"></i>
                     <span class="nav-text">Product</span>
