@@ -67,7 +67,7 @@
                     <i class="la la-calendar"></i>
                     <span class="nav-text">Invoice</span>
                 </a>
-            </li> --}}
+            </li>
             <li><a class="ai-icon" href="{{ route('product.index') }}" aria-expanded="false">
                     <i class="la la-calendar"></i>
                     <span class="nav-text">Product</span>
@@ -82,7 +82,7 @@
                     <i class="la la-calendar"></i>
                     <span class="nav-text">Purchase</span>
                 </a>
-            </li>
+            </li> --}}
             <li><a class="ai-icon" href="event-management.html" aria-expanded="false">
                     <i class="la la-calendar"></i>
                     <span class="nav-text">Event Management</span>
