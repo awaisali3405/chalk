@@ -83,7 +83,7 @@
                     <span class="nav-text">Purchase</span>
                 </a>
             </li> --}}
-            <li><a class="ai-icon" href="event-management.html" aria-expanded="false">
+            {{-- <li><a class="ai-icon" href="event-management.html" aria-expanded="false">
                     <i class="la la-calendar"></i>
                     <span class="nav-text">Event Management</span>
                 </a>
@@ -299,7 +299,7 @@
                     </li>
                     <li><a href="page-lock-screen.html">Lock Screen</a></li>
                 </ul>
-            </li>
+            </li> --}}
         </ul>
     </div>
 </div>

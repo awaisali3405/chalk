@@ -51,7 +51,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $enquirySubject = enquirySubject::where('student_id', null)->where('enquiry_id', null)->get();
+        $enquirySubject = EnquirySubject::where('student_id', null)->where('enquiry_id', null)->get();
         return view('student.add', compact('enquirySubject'));
     }
 
@@ -132,7 +132,7 @@ class StudentController extends Controller
 
 
 
-        $subject = enquirySubject::whereIn('id', $data['enquiry_subject'])->update([
+        $subject = EnquirySubject::whereIn('id', $data['enquiry_subject'])->update([
             'student_id' => $student->id
         ]);
         return redirect()->route('student.index')->with('success', 'student Created Successfully');
