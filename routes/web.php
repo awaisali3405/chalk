@@ -17,12 +17,7 @@ use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\SupplierControlller;
 use App\Http\Controllers\YearController;
-use App\Models\AcademicCalender;
-use App\Models\Board;
-use App\Models\Branch;
-use App\Models\Enquiry;
-use App\Models\Student;
-use App\Models\Subject;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 

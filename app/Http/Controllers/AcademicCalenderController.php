@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\academicCalender;
+use App\Models\AcademicCalender;
 use Illuminate\Http\Request;
 
 class AcademicCalenderController extends Controller
@@ -12,7 +12,7 @@ class AcademicCalenderController extends Controller
      */
     public function index()
     {
-        $academicCalender = academicCalender::all();
+        $academicCalender = AcademicCalender::all();
         return view('academicCalender.index', compact('academicCalender'));
     }
 
@@ -30,7 +30,7 @@ class AcademicCalenderController extends Controller
     public function store(Request $request)
     {
         $data = $request->except('_token');
-        academicCalender::create($data);
+        AcademicCalender::create($data);
         return redirect()->route('academicCalender.index')->with('success', 'academicCalender Created Successfully');
     }
 
@@ -39,7 +39,7 @@ class AcademicCalenderController extends Controller
      */
     public function show(string $id)
     {
-        $calender = academicCalender::find($id);
+        $calender = AcademicCalender::find($id);
         $calender->update([
             'active' => !$calender->active
         ]);
@@ -57,7 +57,7 @@ class AcademicCalenderController extends Controller
      */
     public function edit(string $id)
     {
-        $academicCalender = academicCalender::find($id);
+        $academicCalender = AcademicCalender::find($id);
         return view('academicCalender.edit', compact('academicCalender'));
     }
 
@@ -67,7 +67,7 @@ class AcademicCalenderController extends Controller
     public function update(Request $request, string $id)
     {
         $data = $request->except('_token', 'method');
-        academicCalender::find($id)->update($data);
+        AcademicCalender::find($id)->update($data);
         return redirect()->route('academicCalender.index')->with('success', 'Branch Updated Successfully');
     }
 

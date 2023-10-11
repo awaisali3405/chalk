@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\EnquirySubjectController;
-use App\Http\Controllers\StudentController;
+use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\YearController;
 use App\Models\Enquiry;
@@ -26,5 +26,5 @@ Route::post('enquiry/subject/create', [EnquirySubjectController::class, 'apiCrea
 Route::get('enquiry/subject/delete/{id}', [EnquirySubjectController::class, 'apiDelete']);
 Route::get('/get/year/{id}', [YearController::class, 'getYear']);
 Route::get('/get/subject/{id}', [SubjectController::class, 'getSubject']);
-Route::get('/get/student/{id}', [StudentController::class, 'getStudent']);
-Route::get('/get/student/data/{id}', [StudentController::class, 'getStudentData']);
+Route::get('/get/student/{id}', [StudentsController::class, 'getStudent']);
+Route::get('/get/student/data/{id}', [StudentsController::class, 'getStudentData']);
