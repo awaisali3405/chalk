@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Board;
 use App\Models\Branch;
-use App\Models\enquiry;
+use App\Models\Enquiry;
 use App\Models\EnquirySubject;
 use App\Models\EnquiryUpload;
 use App\Models\KeyStage;
