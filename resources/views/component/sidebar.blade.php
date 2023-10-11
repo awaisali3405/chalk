@@ -68,6 +68,21 @@
                     <span class="nav-text">Invoice</span>
                 </a>
             </li>
+            <li><a class="ai-icon" href="{{ route('product.index') }}" aria-expanded="false">
+                    <i class="la la-calendar"></i>
+                    <span class="nav-text">Product</span>
+                </a>
+            </li>
+            <li><a class="ai-icon" href="{{ route('supplier.index') }}" aria-expanded="false">
+                    <i class="la la-calendar"></i>
+                    <span class="nav-text">Supplier</span>
+                </a>
+            </li>
+            <li><a class="ai-icon" href="{{ route('purchase.index') }}" aria-expanded="false">
+                    <i class="la la-calendar"></i>
+                    <span class="nav-text">Purchase</span>
+                </a>
+            </li>
             <li><a class="ai-icon" href="event-management.html" aria-expanded="false">
                     <i class="la la-calendar"></i>
                     <span class="nav-text">Event Management</span>
