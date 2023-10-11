@@ -13,7 +13,7 @@ use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\ScienceTypeController;
 
 
-use App\Http\Controllers\StudentController;
+use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\SupplierControlller;
 use App\Http\Controllers\YearController;
@@ -51,7 +51,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('paper', PaperController::class);
     Route::resource('scienceType', ScienceTypeController::class);
     Route::resource('academicCalender', AcademicCalenderController::class);
-    Route::resource('student', StudentController::class);
+    Route::resource('student', StudentsController::class);
     Route::resource('enquiry', EnquiryController::class);
     Route::resource('invoice', InvoiceController::class);
 
@@ -66,12 +66,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/enquiry/{id}/register', [EnquiryController::class, 'register'])->name('enquiry.register');
     Route::post('/enquiry/{id}/note', [EnquiryController::class, 'noteStore'])->name('enquiry.note.store');
     Route::post('/enquiry/upload', [EnquiryController::class, 'uploadStore'])->name('enquiry.upload.store');
-    Route::get('/student/{id}/note', [StudentController::class, 'note'])->name('student.note');
-    Route::get('/student/{id}/upload', [StudentController::class, 'upload'])->name('student.upload');
-    Route::get('/student/{id}/upload/delete', [StudentController::class, 'uploadDelete'])->name('student.upload.delete');
-    Route::get('/student/{id}/note', [StudentController::class, 'note'])->name('student.note');
-    Route::post('/student/{id}/note', [StudentController::class, 'noteStore'])->name('student.note.store');
-    Route::post('/student/upload', [StudentController::class, 'uploadStore'])->name('student.upload.store');
+    Route::get('/student/{id}/note', [StudentsController::class, 'note'])->name('student.note');
+    Route::get('/student/{id}/upload', [StudentsController::class, 'upload'])->name('student.upload');
+    Route::get('/student/{id}/upload/delete', [StudentsController::class, 'uploadDelete'])->name('student.upload.delete');
+    Route::get('/student/{id}/note', [StudentsController::class, 'note'])->name('student.note');
+    Route::post('/student/{id}/note', [StudentsController::class, 'noteStore'])->name('student.note.store');
+    Route::post('/student/upload', [StudentsController::class, 'uploadStore'])->name('student.upload.store');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
