@@ -42,7 +42,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $student = student::all();
+        $student = Student::all();
         return view('student.index', compact('student'));
     }
 
@@ -152,7 +152,7 @@ class StudentController extends Controller
      */
     public function edit(string $id)
     {
-        $student = student::find($id);
+        $student = Student::find($id);
         return view('student.edit', compact('student'));
     }
 
@@ -166,7 +166,7 @@ class StudentController extends Controller
             $data['profile_pic'] =   $this->saveImage($request->profile_pic);
         }
 
-        $student = student::find($id);
+        $student = Student::find($id);
         $student->update($data);
         $student->parents()->detach();
         foreach ($data['first_name1'] as $key => $value) {
@@ -213,14 +213,14 @@ class StudentController extends Controller
     }
     public function note($id)
     {
-        $student = student::find($id);
+        $student = Student::find($id);
         return view('student.note', compact('student'));
     }
     public function noteStore(Request $request, $id)
     {
         $data = $request->except('_token');
         // dd($data);
-        student::find($id)->update([
+        Student::find($id)->update([
             'note' => $request->note
         ]);
         return redirect()->route('student.index')->with('success', 'Branch Updated Successfully');
@@ -228,7 +228,7 @@ class StudentController extends Controller
     public function upload($id)
     {
 
-        $student = student::find($id);
+        $student = Student::find($id);
         return view('student.upload', compact('student'));
     }
     public function uploadStore(Request $request)
