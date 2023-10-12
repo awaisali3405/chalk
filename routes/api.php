@@ -25,6 +25,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('enquiry/subject/create', [EnquirySubjectController::class, 'apiCreate']);
 Route::get('enquiry/subject/delete/{id}', [EnquirySubjectController::class, 'apiDelete']);
 Route::get('/get/year/{id}', [YearController::class, 'getYear']);
-Route::get('/get/subject/{id}', [SubjectController::class, 'getSubject']);
+Route::get('/get/subject/{id}', [SubjectsController::class, 'getSubject']);
 Route::get('/get/student/{id}', [StudentsController::class, 'getStudent']);
 Route::get('/get/student/data/{id}', [StudentsController::class, 'getStudentData']);
