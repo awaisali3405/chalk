@@ -83,6 +83,11 @@
                     <span class="nav-text">Purchase</span>
                 </a>
             </li>
+            <li><a class="ai-icon" href="{{ route('sale.index') }}" aria-expanded="false">
+                    <i class="la la-calendar"></i>
+                    <span class="nav-text">Sale</span>
+                </a>
+            </li>
             {{-- <li><a class="ai-icon" href="event-management.html" aria-expanded="false">
                     <i class="la la-calendar"></i>
                     <span class="nav-text">Event Management</span>

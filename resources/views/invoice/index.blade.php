@@ -216,8 +216,7 @@
                                                                             <div class="form-group">
                                                                                 <label class="form-label">Subject</label>
 
-                                                                                <select class="form-control"
-                                                                                    id="subject">
+                                                                                <select class="form-control subject">
 
 
 

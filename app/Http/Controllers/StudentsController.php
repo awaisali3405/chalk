@@ -247,7 +247,7 @@ class StudentsController extends Controller
         // dd($student->year->name);
         $html = '<option value="">-</option>';
         foreach ($student->enquirySubject as $key => $value) {
-            $html .= "<option value" . $value->id . ">" . $value->name . "</option>";
+            $html .= "<option value='" . $value->id . "'>" . $value->subject->name . "</option>";
         }
         return response()->json(['data' => $student, 'html' => $html]);
     }
