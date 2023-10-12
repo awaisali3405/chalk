@@ -382,10 +382,11 @@
             })
         })
         $('.year').on('change keyup', function() {
-            id = $(this).val()
+            year = $(this).val()
+            branch = $(".branch").val()
             $.ajax({
                 method: "GET",
-                'url': `/api/get/subject/${id}`,
+                'url': `/api/get/subject/${year}`,
                 success: function(success) {
                     // if (success.message == 'success') {
 
@@ -396,7 +397,23 @@
 
                 }
             })
+            if (year && branch) {
+                $.ajax({
+                    method: "GET",
+                    'url': `/api/get/product/${year}/${branch}`,
+                    success: function(success) {
+                        $('.product').html(success.data)
+                    }
+                })
+            }
         })
+        $('.branch').on('change keyup', function() {
+            $('.year').html('');
+            $('.product').html('');
+            // $('.keyStage').html();
+            // $('.').html();
+        })
+
         $('.year_student').on('change keyup', function() {
             id = $(this).val()
             $.ajax({
@@ -412,6 +429,17 @@
 
                 }
             })
+        })
+        $('.rate').on('change keyup', function() {
+            rate = $('.rate').val()
+            quantity = $('.quantity').val()
+            $('.amount').val((rate * quantity).toFixed(0))
+        })
+        $('.quantity').on('change keyup', function() {
+            rate = $('.rate').val()
+            quantity = $('.quantity').val()
+            
+            $('.amount').val((rate * quantity).toFixed(0))
         })
         $('.student').on('change keyup', function() {
 
@@ -429,7 +457,8 @@
                     $('#p_year').html(success.data.year.name)
                     $('#payment').html(success.data.payment_period)
                     $('#p_branch').html(success.data.branch.name)
-                    $('#subject').html(success.html.subject);
+                    $('.subject').html(success.html);
+                    console.log(success);
                 }
             })
         })
@@ -455,6 +484,72 @@
             value = $(this).val()
             console.log(value);
             $('input:checkbox').prop('checked', this.checked);
+        })
+        $('.add-resource').on('click', function() {
+            id = $('.student').val();
+            $.ajax({
+                method: "GET",
+                'url': `/api/get/student/data/${id}`,
+                success: function(success) {
+                    x = `  <div class="row">
+                                                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label class="form-label">Resource</label>
+                                                                    <div class="input-group mb-2">
+                                                                        <select name="product_id[]"
+                                                                            class="form-control subject">
+                                                                            ${success.html}
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label class="form-label">Quantiy</label>
+                                                                    <div class="input-group mb-2">
+                                                                        <input type="text" name="quantity[]"
+                                                                            class="form-control quantity">
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label class="form-label">Rate</label>
+                                                                    <div class="input-group mb-2">
+                                                                        <div class="input-group-prepend">
+                                                                            <div class="input-group-text">£</div>
+                                                                        </div>
+                                                                        <input name="rate[]"
+                                                                            class="form-control rate">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-2 col-md-3 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label class="form-label">Amount</label>
+                                                                    <div class="input-group mb-2">
+                                                                        <div class="input-group-prepend">
+                                                                            <div class="input-group-text">£</div>
+                                                                        </div>
+                                                                        <input name="amount[]"
+                                                                            class="form-control amount">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-1 col-md-3 col-sm-12 pt-4">
+                                                                <div class="form-group">
+                                                                    <span class="remove-resource btn btn-danger">-</span>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>`;
+                    $('.subject-resource').append(x);
+                }
+
+            })
         })
     </script>
 

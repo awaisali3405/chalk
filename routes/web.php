@@ -10,6 +10,7 @@ use App\Http\Controllers\PaperController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\ReceiptController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ScienceTypeController;
 
 
@@ -32,9 +33,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+// Route::get('/', function () {
+//     return view('auth.login');
+// });
 
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
@@ -53,6 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('receipt', ReceiptController::class);
     Route::resource('product', ProductController::class);
     Route::resource('purchase', PurchaseController::class);
+    Route::resource('sale', SaleController::class);
     Route::resource('supplier', SupplierControlller::class);
     Route::get('/enquiry/{id}/note', [EnquiryController::class, 'note'])->name('enquiry.note');
     Route::get('/enquiry/{id}/upload', [EnquiryController::class, 'upload'])->name('enquiry.upload');
@@ -69,4 +71,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/student/upload', [StudentsController::class, 'uploadStore'])->name('student.upload.store');
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

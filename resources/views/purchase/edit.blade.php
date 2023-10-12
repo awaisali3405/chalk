@@ -26,32 +26,18 @@
                             <h5 class="card-title">Basic Info</h5>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('product.update', $product->id) }}" method="post">
+                            <form action="{{ route('purchase.update', $purchase->id) }}" method="post">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Year</label>
-                                            <select class="form-control" name="year_id">
-                                                <option value="">Select Year</option>
-                                                @foreach ($year as $value)
-                                                    <option value="{{ $value->id }}"
-                                                        {{ $product->year_id == $value->id ? 'selected' : '' }}>
-                                                        {{ $value->name }}</option>
-                                                @endforeach
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                        <div class="form-group">
                                             <label class="form-label">Branch</label>
-                                            <select class="form-control" name="branch_id">
+                                            <select class="form-control branch" name="branch_id" required>
                                                 <option value="">Select Branch</option>
                                                 @foreach ($branch as $value)
                                                     <option value="{{ $value->id }}"
-                                                        {{ $product->branch_id == $value->id ? 'selected' : '' }}>
+                                                        {{ $value->id == $purchase->branch_id ? 'selected' : '' }}>
                                                         {{ $value->name }}</option>
                                                 @endforeach
 
@@ -60,12 +46,114 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Resource Name</label>
-                                            <input type="text" class="form-control" name="name"
-                                                value="{{ $product->name }}">
+                                            <label class="form-label">Supplier</label>
+                                            <select class="form-control" name="supplier_id" required>
+                                                <option value="">Select Supplier</option>
+                                                @foreach ($supplier as $value)
+                                                    <option value="{{ $value->id }}"
+                                                        {{ $value->id == $purchase->supplier_id ? 'selected' : '' }}>
+                                                        {{ $value->name }}</option>
+                                                @endforeach
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Key Stage</label>
+                                            <select class="form-control keyStage" name="key_stage_id" required>
+                                                <option value="">-</option>
+                                                @foreach ($keyStage as $value)
+                                                    <option value="{{ $value->id }}"
+                                                        {{ $value->id == $purchase->key_stage_id ? 'selected' : '' }}>
+                                                        {{ $value->name }}</option>
+                                                @endforeach
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Year</label>
+                                            <select class="form-control year" name="year_id" required>
+                                                <option value="{{ $purchase->year_id }}">{{ $purchase->year->name }}
+                                                </option>
+
+                                            </select>
                                         </div>
                                     </div>
 
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Resource</label>
+                                            <select class="form-control product" name="product_id" required>
+                                                <option value="{{ $purchase->product_id }}">{{ $purchase->product->name }}
+                                                </option>
+
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Quantity</label>
+                                            <input class="form-control quantity " name="quantity"
+                                                value="{{ $purchase->quantity }}">
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Rate</label>
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">£</div>
+                                                </div>
+                                                <input class="form-control rate" name="rate"
+                                                    value="{{ $purchase->rate }}">
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Amount</label>
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">£</div>
+                                                </div>
+                                                <input type="text" class="form-control amount" name="amount"
+                                                    value="{{ $purchase->amount }}" readonly>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Mode</label>
+                                            <select class="form-control " name="mode">
+                                                <option value="Cash" {{ $purchase->mode == 'Cash' ? 'selected' : '' }}>
+                                                    Cash
+                                                </option>
+                                                <option value="Bank" {{ $purchase->mode == 'Bank' ? 'selected' : '' }}>
+                                                    Bank
+                                                </option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Date</label>
+                                            <input type="date" class="form-control " value="{{ $purchase->date }}"
+                                                name="date">
+
+
+                                        </div>
+                                    </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                         <a href="{{ route('product.index') }}" class="btn btn-light">Cencel</a>

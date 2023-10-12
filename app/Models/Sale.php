@@ -2,28 +2,21 @@
 
 namespace App\Models;
 
+use App\Models\SaleProduct;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Purchase extends Model
+class Sale extends Model
 {
     use HasFactory;
-    protected $table = 'purchase';
+    protected $table = 'sale';
     protected $fillable = [
-        'supplier_id',
         'branch_id',
         'year_id',
         'key_stage_id',
-        'product_id',
-        'quantity',
-        'rate',
-        'amount',
-        'date', 'mode'
+        'student_id',
+        'date',
     ];
-    public function supplier()
-    {
-        return $this->belongsTo(Supplier::class, 'supplier_id');
-    }
     public function branch()
     {
         return $this->belongsTo(Branch::class, 'branch_id');
@@ -34,7 +27,7 @@ class Purchase extends Model
     }
     public function product()
     {
-        return $this->belongsTo(Product::class, 'product_id');
+        return $this->hasMany(SaleProduct::class, 'sale_id');
     }
     public function keyStage()
     {

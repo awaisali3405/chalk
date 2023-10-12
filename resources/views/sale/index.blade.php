@@ -34,7 +34,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">All Staff </h4>
-                                    <a href="{{ route('purchase.create') }}" class="btn btn-primary">+ Add new</a>
+                                    <a href="{{ route('sale.create') }}" class="btn btn-primary">+ Add new</a>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -53,13 +53,13 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($purchase as $key => $value)
+                                                @foreach ($sale as $key => $value)
                                                     <tr>
                                                         <td>{{ $key + 1 }}</td>
 
                                                         <td>{{ $value->year->name }}</td>
                                                         <td>{{ $value->branch->name }}</td>
-                                                        <td>{{ $value->amount }}</td>
+                                                        <td>{{ $value->product->sum('amount') }}</td>
                                                         <td>
                                                             <a href="{{ route('purchase.edit', $value->id) }}"
                                                                 class="btn btn-sm btn-primary"><i

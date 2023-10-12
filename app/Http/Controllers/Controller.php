@@ -8,6 +8,7 @@ use App\Models\KeyStage;
 use App\Models\Paper;
 use App\Models\ScienceType;
 use App\Models\Subject;
+use App\Models\Supplier;
 use App\Models\Year;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -39,5 +40,7 @@ class Controller extends BaseController
         View::share('scienceType', $scienceType);
         $paper = Paper::all();
         View::share('paper', $paper);
+        $supplier = Supplier::all();
+        View::share('supplier', $supplier);
     }
 }

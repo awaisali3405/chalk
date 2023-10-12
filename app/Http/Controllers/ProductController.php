@@ -70,4 +70,13 @@ class ProductController extends Controller
         Product::find($id)->delete();
         return redirect()->route('product.index')->with('success', 'Product Deleted Successfully');
     }
+    public function getProduct($year, $branch)
+    {
+        $product = Product::where('year_id', $year)->where('branch_id', $branch)->get();
+        $string = '<option value="">-</option>';
+        foreach ($product as $key => $value) {
+            $string .= '<option value="' . $value->id . '">' . $value->name . '</option>';
+        }
+        return response()->json(['data' => $string]);
+    }
 }

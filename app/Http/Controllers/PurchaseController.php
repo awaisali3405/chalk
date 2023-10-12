@@ -30,6 +30,7 @@ class PurchaseController extends Controller
     public function store(Request $request)
     {
         $data = $request->except('_token');
+        // dd($data);
         Purchase::create($data);
         return redirect()->route('purchase.index')->with('success', 'Purchase Created Successfully');
     }
