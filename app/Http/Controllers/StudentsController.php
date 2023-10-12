@@ -20,23 +20,7 @@ use Illuminate\Support\Facades\View;
 
 class StudentsController extends Controller
 {
-    public function __construct()
-    {
-        $branch = Branch::all();
-        View::share('branch', $branch);
-        $year = Year::all();
-        View::share('year', $year);
-        $keyStage = KeyStage::all();
-        View::share('keyStage', $keyStage);
-        $subject = Subject::all();
-        View::share('subject', $subject);
-        $board = Board::all();
-        View::share('board', $board);
-        $scienceType = ScienceType::all();
-        View::share('scienceType', $scienceType);
-        $paper = Paper::all();
-        View::share('paper', $paper);
-    }
+
     /**
      * Display a listing of the resource.
      */
