@@ -19,9 +19,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 Route::post('enquiry/subject/create', [EnquirySubjectController::class, 'apiCreate']);
 Route::get('enquiry/subject/delete/{id}', [EnquirySubjectController::class, 'apiDelete']);
 Route::get('/get/year/{id}', [YearController::class, 'getYear']);
