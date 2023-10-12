@@ -62,7 +62,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Phone </label>
-                                            <input type="password" class="form-control" name="phone_number">
+                                            <input type="text" class="form-control" name="phone_number">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">

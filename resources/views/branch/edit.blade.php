@@ -29,6 +29,7 @@
                             <form action="{{ route('branch.update', $branch->id) }}" method="post">
                                 @csrf
                                 @method('PUT')
+                                {{-- @dd($branch) --}}
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
@@ -54,7 +55,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Account Number</label>
-                                            <input type="text" class="form-control" value="{{ $branch->account }}"
+                                            <input type="text" class="form-control" value="{{ $branch->account_number }}"
                                                 name="account_number">
                                         </div>
                                     </div>
@@ -68,7 +69,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Phone </label>
-                                            <input type="text" class="form-control" value="{{ $branch->phone_numebr }}"
+                                            <input type="text" class="form-control" value="{{ $branch->phone_number }}"
                                                 name="phone_number">
                                         </div>
                                     </div>
