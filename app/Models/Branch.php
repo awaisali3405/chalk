@@ -16,5 +16,6 @@ class Branch extends Model
         'short_code',
         'phone_number',
         'email',
+        'address',
     ];
 }
