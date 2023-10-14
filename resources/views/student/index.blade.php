@@ -52,7 +52,12 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($student as $key => $value)
+                                                {{-- @forelse ( as )
+
+                                                @empty --}}
+
+
+                                                @forelse ($student as $key => $value)
                                                     <tr>
                                                         <td>{{ $key + 1 }}</td>
 
@@ -88,7 +93,11 @@
                                                                     class="la la-trash-o"></i></a> --}}
                                                         </td>
                                                     </tr>
-                                                @endforeach
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="6">No data</td>
+                                                    </tr>
+                                                @endforelse
                                             </tbody>
                                         </table>
                                     </div>

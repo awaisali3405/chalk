@@ -19,6 +19,8 @@
     <!-- Datatable -->
     <link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 
+    {{-- Select 2 --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -153,8 +155,21 @@
     <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('js/plugins-init/datatables.init.js') }}"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.getaddress.io/scripts/getaddress-autocomplete-1.1.3.min.js"></script>
+
+    <!-- after your form -->
+    <script>
+        getAddress.autocomplete('formatted_address_0', 'uIIn_5Plkk2X3bCt-L3Cjw40707');
+    </script>
     {{-- Stock JS --}}
     <script>
+        $('#check_all_agreemnet').on('change keyup', function() {
+            $('input:checkbox').prop('checked', this.checked);
+        })
+        $(document).ready(function() {
+            $('.select').select2();
+        });
         $('#add-subject').on('click', function() {
             subject = $('#subject_id').val();
             paper = $('#paper_id').val();
@@ -390,7 +405,7 @@
                 success: function(success) {
                     // if (success.message == 'success') {
 
-                    // $('#subject').html(success.data);
+                    $('.subject').html(success.data);
                     // console.log(success.data);
                     // }
 
@@ -438,7 +453,7 @@
         $('.quantity').on('change keyup', function() {
             rate = $('.rate').val()
             quantity = $('.quantity').val()
-            
+
             $('.amount').val((rate * quantity).toFixed(0))
         })
         $('.student').on('change keyup', function() {

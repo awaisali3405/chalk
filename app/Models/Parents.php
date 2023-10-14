@@ -12,14 +12,25 @@ class Parents extends Model
     protected $table = 'parent';
     protected $fillable = [
 
-        'relationship',
-        'first_name',
         'last_name',
-        'address',
-        'contact',
+        'first_name',
+        'given_name',
+        'gender',
+        'relationship',
+        'emp_status',
+        'company_name',
+        'work_phone_number',
+        'mobile_number',
         'email',
-        'occupation',
-        'post_code'
+        'signature',
+        'signature_date',
+        'res_address',
+        'res_second_address',
+        'res_third_address',
+        'res_town',
+        'res_country',
+        'res_postal_code',
+        'user_id'
     ];
     /**
      * The student that belong to the Parent
@@ -28,6 +39,6 @@ class Parents extends Model
      */
     public function student(): BelongsToMany
     {
-        return $this->belongsToMany(Student::class, 'student_parent');
+        return $this->belongsToMany(Student::class, 'student_parent', 'parent_id', 'student_id');
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\KeyStageController;
 use App\Http\Controllers\PaperController;
+use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\ReceiptController;
@@ -39,6 +40,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('branch', BranchController::class);
     Route::resource('keyStage', KeyStageController::class);
     Route::resource('year', YearController::class);
@@ -56,6 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('purchase', PurchaseController::class);
     Route::resource('sale', SaleController::class);
     Route::resource('supplier', SupplierControlller::class);
+    Route::resource('parent', ParentController::class);
     Route::get('/enquiry/{id}/note', [EnquiryController::class, 'note'])->name('enquiry.note');
     Route::get('/enquiry/{id}/upload', [EnquiryController::class, 'upload'])->name('enquiry.upload');
     Route::get('/enquiry/{id}/upload/delete', [EnquiryController::class, 'uploadDelete'])->name('enquiry.upload.delete');
@@ -70,5 +73,3 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/student/{id}/note', [StudentsController::class, 'noteStore'])->name('student.note.store');
     Route::post('/student/upload', [StudentsController::class, 'uploadStore'])->name('student.upload.store');
 });
-
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

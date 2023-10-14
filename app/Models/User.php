@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id'
     ];
 
     /**
@@ -45,5 +46,13 @@ class User extends Authenticatable
     public function session()
     {
         return AcademicCalender::where('active', true)->first();
+    }
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+    public function parent()
+    {
+        return $this->hasOne(Parents::class, 'user_id');
     }
 }

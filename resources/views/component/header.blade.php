@@ -9,8 +9,7 @@
                         </span>
                         <div class="dropdown-menu p-0 m-0">
                             <form>
-                                <input class="form-control" type="search" placeholder="Search"
-                                    aria-label="Search">
+                                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
                             </form>
                         </div>
                     </div>
@@ -91,20 +90,18 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a href="app-profile.html" class="dropdown-item ai-icon">
-                                <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" width="18"
-                                    height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                    class="feather feather-user">
+                                <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
                                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                     <circle cx="12" cy="7" r="4"></circle>
                                 </svg>
                                 <span class="ml-2">Profile </span>
                             </a>
                             <a href="email-inbox.html" class="dropdown-item ai-icon">
-                                <svg id="icon-inbox" xmlns="http://www.w3.org/2000/svg" width="18"
-                                    height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                    class="feather feather-mail">
+                                <svg id="icon-inbox" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail">
                                     <path
                                         d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
                                     </path>
@@ -122,7 +119,16 @@
                                     <line x1="21" y1="12" x2="9" y2="12">
                                     </line>
                                 </svg>
-                                <span class="ml-2">Logout </span>
+                                <span class="ml-2" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Logout
+                                </span>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                                {{-- <a >Logout </a> --}}
                             </a>
                         </div>
                     </li>

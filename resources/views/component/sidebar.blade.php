@@ -12,82 +12,94 @@
                     <li><a href="index-3.html">Dashboard 3</a></li>
                 </ul>
             </li>
-
-            <li><a class="ai-icon" href="{{ route('branch.index') }}" aria-expanded="false">
-                    <i class="la la-calendar"></i>
-                    <span class="nav-text">Branch</span>
-                </a>
-            </li>
-            <li><a class="ai-icon" href="{{ route('keyStage.index') }}" aria-expanded="false">
-                    <i class="la la-calendar"></i>
-                    <span class="nav-text">Key Stage</span>
-                </a>
-            </li>
-            <li><a class="ai-icon" href="{{ route('year.index') }}" aria-expanded="false">
-                    <i class="la la-calendar"></i>
-                    <span class="nav-text">Year</span>
-                </a>
-            </li>
-            <li><a class="ai-icon" href="{{ route('subject.index') }}" aria-expanded="false">
-                    <i class="la la-calendar"></i>
-                    <span class="nav-text">Subject</span>
-                </a>
-            </li>
-            <li><a class="ai-icon" href="{{ route('board.index') }}" aria-expanded="false">
-                    <i class="la la-calendar"></i>
-                    <span class="nav-text">board</span>
-                </a>
-            </li>
-            <li><a class="ai-icon" href="{{ route('paper.index') }}" aria-expanded="false">
-                    <i class="la la-calendar"></i>
-                    <span class="nav-text">paper</span>
-                </a>
-            </li>
-            <li><a class="ai-icon" href="{{ route('scienceType.index') }}" aria-expanded="false">
-                    <i class="la la-calendar"></i>
-                    <span class="nav-text">Science Type</span>
-                </a>
-            </li>
-            <li><a class="ai-icon" href="{{ route('enquiry.index') }}" aria-expanded="false">
-                    <i class="la la-calendar"></i>
-                    <span class="nav-text">Enquiry</span>
-                </a>
-            </li>
-            <li><a class="ai-icon" href="{{ route('academicCalender.index') }}" aria-expanded="false">
-                    <i class="la la-calendar"></i>
-                    <span class="nav-text">Academic Calender</span>
-                </a>
-            </li>
-            <li><a class="ai-icon" href="{{ route('student.index') }}" aria-expanded="false">
-                    <i class="la la-calendar"></i>
-                    <span class="nav-text">Student</span>
-                </a>
-            </li>
-            <li><a class="ai-icon" href="{{ route('invoice.index') }}" aria-expanded="false">
-                    <i class="la la-calendar"></i>
-                    <span class="nav-text">Invoice</span>
-                </a>
-            </li>
-            <li><a class="ai-icon" href="{{ route('product.index') }}" aria-expanded="false">
-                    <i class="la la-calendar"></i>
-                    <span class="nav-text">Product</span>
-                </a>
-            </li>
-            <li><a class="ai-icon" href="{{ route('supplier.index') }}" aria-expanded="false">
-                    <i class="la la-calendar"></i>
-                    <span class="nav-text">Supplier</span>
-                </a>
-            </li>
-            <li><a class="ai-icon" href="{{ route('purchase.index') }}" aria-expanded="false">
-                    <i class="la la-calendar"></i>
-                    <span class="nav-text">Purchase</span>
-                </a>
-            </li>
-            <li><a class="ai-icon" href="{{ route('sale.index') }}" aria-expanded="false">
-                    <i class="la la-calendar"></i>
-                    <span class="nav-text">Sale</span>
-                </a>
-            </li>
+            @if (auth()->user()->role->name == 'supper admin')
+                <li><a class="ai-icon" href="{{ route('branch.index') }}" aria-expanded="false">
+                        <i class="la la-calendar"></i>
+                        <span class="nav-text">Branch</span>
+                    </a>
+                </li>
+                <li><a class="ai-icon" href="{{ route('keyStage.index') }}" aria-expanded="false">
+                        <i class="la la-calendar"></i>
+                        <span class="nav-text">Key Stage</span>
+                    </a>
+                </li>
+                <li><a class="ai-icon" href="{{ route('year.index') }}" aria-expanded="false">
+                        <i class="la la-calendar"></i>
+                        <span class="nav-text">Year</span>
+                    </a>
+                </li>
+                <li><a class="ai-icon" href="{{ route('subject.index') }}" aria-expanded="false">
+                        <i class="la la-calendar"></i>
+                        <span class="nav-text">Subject</span>
+                    </a>
+                </li>
+                <li><a class="ai-icon" href="{{ route('board.index') }}" aria-expanded="false">
+                        <i class="la la-calendar"></i>
+                        <span class="nav-text">board</span>
+                    </a>
+                </li>
+                <li><a class="ai-icon" href="{{ route('paper.index') }}" aria-expanded="false">
+                        <i class="la la-calendar"></i>
+                        <span class="nav-text">paper</span>
+                    </a>
+                </li>
+                <li><a class="ai-icon" href="{{ route('scienceType.index') }}" aria-expanded="false">
+                        <i class="la la-calendar"></i>
+                        <span class="nav-text">Science Type</span>
+                    </a>
+                </li>
+                <li><a class="ai-icon" href="{{ route('enquiry.index') }}" aria-expanded="false">
+                        <i class="la la-calendar"></i>
+                        <span class="nav-text">Enquiry</span>
+                    </a>
+                </li>
+                <li><a class="ai-icon" href="{{ route('academicCalender.index') }}" aria-expanded="false">
+                        <i class="la la-calendar"></i>
+                        <span class="nav-text">Academic Calender</span>
+                    </a>
+                </li>
+            @endif
+            @if (auth()->user()->role->name == 'parent' ||
+                    auth()->user()->role->name == 'admin' ||
+                    auth()->user()->role->name == 'super admin')
+                <li><a class="ai-icon" href="{{ route('student.index') }}" aria-expanded="false">
+                        <i class="la la-calendar"></i>
+                        <span class="nav-text">Student</span>
+                    </a>
+                </li>
+            @endif
+            @if (auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'super admin')
+                <li><a class="ai-icon" href="{{ route('parent.index') }}" aria-expanded="false">
+                        <i class="la la-calendar"></i>
+                        <span class="nav-text">Parent</span>
+                    </a>
+                </li>
+                <li><a class="ai-icon" href="{{ route('invoice.index') }}" aria-expanded="false">
+                        <i class="la la-calendar"></i>
+                        <span class="nav-text">Invoice</span>
+                    </a>
+                </li>
+                <li><a class="ai-icon" href="{{ route('product.index') }}" aria-expanded="false">
+                        <i class="la la-calendar"></i>
+                        <span class="nav-text">Product</span>
+                    </a>
+                </li>
+                <li><a class="ai-icon" href="{{ route('supplier.index') }}" aria-expanded="false">
+                        <i class="la la-calendar"></i>
+                        <span class="nav-text">Supplier</span>
+                    </a>
+                </li>
+                <li><a class="ai-icon" href="{{ route('purchase.index') }}" aria-expanded="false">
+                        <i class="la la-calendar"></i>
+                        <span class="nav-text">Purchase</span>
+                    </a>
+                </li>
+                <li><a class="ai-icon" href="{{ route('sale.index') }}" aria-expanded="false">
+                        <i class="la la-calendar"></i>
+                        <span class="nav-text">Sale</span>
+                    </a>
+                </li>
+            @endif
             {{-- <li><a class="ai-icon" href="event-management.html" aria-expanded="false">
                     <i class="la la-calendar"></i>
                     <span class="nav-text">Event Management</span>

@@ -174,9 +174,9 @@
                                                                         <div class="input-group mb-2">
                                                                             <select name="product_id[]"
                                                                                 class="form-control subject">
-                                                                                @foreach ( as )
+                                                                                {{-- @foreach ( as )
 
-                                                                                @endforeach
+                                                                                @endforeach --}}
 
                                                                             </select>
                                                                         </div>

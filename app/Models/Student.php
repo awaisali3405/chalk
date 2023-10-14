@@ -12,22 +12,24 @@ class Student extends Model
     use HasFactory;
     protected $table = 'student';
     protected $fillable = [
+        'enquiry_id',
         'profile_pic',
         'first_name',
         'last_name',
-        'dob',
-        'email',
+        'middle_name',
         'phone_no',
-        'post_code',
-        'ethic_group',
-        'religion',
-        'home_language',
+        'gender',
+        'nationality',
+        'main_language',
+        'other_language',
+        'dob',
         'current_school_name',
+        'current_year',
+        'branch_id',
+        'payment_period',
         'year_id',
         'key_stage_id',
         'lesson_type',
-        'branch_id',
-        'payment_period',
         'admission_date',
         'deposit',
         'registration_fee',
@@ -36,10 +38,35 @@ class Student extends Model
         'exercise_book_fee',
         'fee',
         'fee_discount',
-        'learning',
-        'medical',
-        'awareness',
-        'note'
+        'note',
+        'note_files',
+        'ethic_group',
+        'religion',
+        'o_full_name_1',
+        'o_work_phone_1',
+        'o_relationship_1',
+        'o_mobile_phone_1',
+        'o_work_place_1',
+        'o_full_name_2',
+        'o_work_phone_2',
+        'o_relationship_2',
+        'o_mobile_phone_2',
+        'o_work_place_2',
+        'e_full_name_1',
+        'e_work_phone_1',
+        'e_relationship_1',
+        'e_mobile_phone_1',
+        'e_contact_info_1',
+        'e_full_name_2',
+        'e_work_phone_2',
+        'e_relationship_2',
+        'e_mobile_phone_2',
+        'e_contact_info_2',
+        'is_disable',
+        'disorder_detail',
+        'signature_person',
+        'know_about_us',
+        'feedback',
     ];
     public function year()
     {
@@ -82,5 +109,4 @@ class Student extends Model
     {
         return $this->belongsToMany(Parents::class, 'student_parent', 'student_id', 'parent_id');
     }
-    
 }

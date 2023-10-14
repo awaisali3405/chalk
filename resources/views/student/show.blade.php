@@ -194,7 +194,7 @@
                                                             {{ $student->dob }}</span>
                                                     </div>
                                                 </div>
-                                                <div class="row mb-4">
+                                                {{-- <div class="row mb-4">
                                                     <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                                                         <h5 class="f-w-500">Location <span class="pull-right">:</span>
                                                         </h5>
@@ -202,7 +202,7 @@
                                                     <div class="col-lg-9 col-md-8 col-sm-6 col-6">
                                                         <span>{{ $student->parents[0]->address }}</span>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             <div class="profile-skills pt-2 border-bottom-1 pb-2">
                                                 <h4 class="text-primary mb-4">Subject</h4>
