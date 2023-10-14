@@ -18,7 +18,14 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
-            'password' => Hash::make('admin')
+            'password' => Hash::make('admin'),
+            'role_id' => 3
+        ]);
+        DB::table('role')->create([
+            ['name' => 'parent'],
+            ['name' => 'admin'],
+            ['name' => 'super admin'],
+            ['name' => 'teacher'],
         ]);
 
         // \App\Models\User::factory(10)->create();
