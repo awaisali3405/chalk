@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('admin'),
             'role_id' => 3
         ]);
-        DB::table('role')->create([
+        DB::table('role')->insert([
             ['name' => 'parent'],
             ['name' => 'admin'],
             ['name' => 'super admin'],
