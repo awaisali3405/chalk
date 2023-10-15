@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AcademicCalenderController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\EnquiryController;
@@ -59,6 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('sale', SaleController::class);
     Route::resource('supplier', SupplierControlller::class);
     Route::resource('parent', ParentController::class);
+    Route::resource('attendance', AttendanceController::class);
     Route::get('/enquiry/{id}/note', [EnquiryController::class, 'note'])->name('enquiry.note');
     Route::get('/enquiry/{id}/upload', [EnquiryController::class, 'upload'])->name('enquiry.upload');
     Route::get('/enquiry/{id}/upload/delete', [EnquiryController::class, 'uploadDelete'])->name('enquiry.upload.delete');

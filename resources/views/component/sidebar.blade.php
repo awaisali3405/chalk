@@ -52,8 +52,8 @@
                         <span class="nav-text">Attedance</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="{{ route('invoice.index') }}">All Attendance</a></li>
-                        <li><a href="{{ route('invoice.create') }}">Add Attendance</a></li>
+                        <li><a href="{{ route('attendance.index') }}">All Attendance</a></li>
+                        <li><a href="{{ route('attendance.create') }}">Add Attendance</a></li>
                     </ul>
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
