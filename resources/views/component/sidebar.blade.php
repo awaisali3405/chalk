@@ -2,7 +2,7 @@
     <div class="dlabnav-scroll mm-active ps ps--active-y">
         <ul class="metismenu mm-show" id="menu">
             <li class="nav-label first">Main Menu</li>
-            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+            {{-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="la la-home"></i>
                     <span class="nav-text">Dashboard</span>
                 </a>
@@ -11,8 +11,45 @@
                     <li><a href="index-2.html">Dashboard 2</a></li>
                     <li><a href="index-3.html">Dashboard 3</a></li>
                 </ul>
-            </li>
+            </li> --}}
             @if (auth()->user()->role->name == 'super admin' || auth()->user()->role->name == 'admin')
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-headphones"></i>
+                        <span class="nav-text">Enquiry</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('enquiry.index') }}">All Enquiry</a></li>
+                        <li><a href="{{ route('enquiry.create') }}">Add Enquiry</a></li>
+                    </ul>
+                </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-user"></i>
+                        <span class="nav-text">Parent</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('parent.index') }}">All Parent</a></li>
+                        <li><a href="{{ route('parent.create') }}">Add Parent</a></li>
+                    </ul>
+                </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-home"></i>
+                        <span class="nav-text">Invoice</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('invoice.index') }}">All Invoice</a></li>
+                        <li><a href="{{ route('invoice.create') }}">Add Invoice</a></li>
+                    </ul>
+                </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-home"></i>
+                        <span class="nav-text">Purchase/Sale</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('product.index') }}">Product</a></li>
+                        <li><a href="{{ route('purchase.index') }}">Pruchase</a></li>
+                        <li><a href="{{ route('sale.index') }}">Sale</a></li>
+                    </ul>
+                </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-university"></i>
                         <span class="nav-text">Branch</span>
@@ -76,15 +113,7 @@
                         <li><a href="{{ route('scienceType.create') }}">Add Science Type</a></li>
                     </ul>
                 </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-headphones"></i>
-                        <span class="nav-text">Enquiry</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('enquiry.index') }}">All Enquiry</a></li>
-                        <li><a href="{{ route('enquiry.create') }}">Add Enquiry</a></li>
-                    </ul>
-                </li>
+
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-home"></i>
                         <span class="nav-text">Academic Calender</span>
@@ -109,35 +138,6 @@
                 </li>
             @endif
             @if (auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'super admin')
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-user"></i>
-                        <span class="nav-text">Parent</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('parent.index') }}">All Parent</a></li>
-                        <li><a href="{{ route('parent.create') }}">Add Parent</a></li>
-                    </ul>
-                </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-home"></i>
-                        <span class="nav-text">Invoice</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('invoice.index') }}">All Invoice</a></li>
-                        <li><a href="{{ route('invoice.create') }}">Add Invoice</a></li>
-                    </ul>
-                </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-home"></i>
-                        <span class="nav-text">Purchase/Sale</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('product.index') }}">Product</a></li>
-                        <li><a href="{{ route('purchase.index') }}">Pruchase</a></li>
-                        <li><a href="{{ route('sale.index') }}">Sale</a></li>
-                    </ul>
-                </li>
-
                 {{-- <li><a class="ai-icon" href="{{ route('product.index') }}" aria-expanded="false">
                         <i class="la la-calendar"></i>
                         <span class="nav-text">Product</span>

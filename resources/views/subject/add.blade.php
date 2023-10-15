@@ -54,7 +54,8 @@
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">£</div>
                                                 </div>
-                                                <input type="text" class="form-control" name="rate">
+                                                <input type="text" class="form-control" onkeypress="return isNumber(e)"
+                                                    name="rate" required>
                                             </div>
                                         </div>
                                     </div>

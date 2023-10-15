@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Edumin - Bootstrap Admin Dashboard </title>
+    <title>Chalk 'n' Duster </title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon.png') }}">
     <link rel="stylesheet" href="{{ asset('vendor/jqvmap/css/jqvmap.min.css') }}">
@@ -483,7 +483,7 @@
         })
         $('.individual').on('change keyup click', function() {
             $('#widget').removeClass("col-xl-12 col-xxl-12 col-lg-12")
-            $('#widget').addClass("col-xl-9 col-xxl-9 col-lg-9")
+            $('#widget').addClass("col-xl-8 col-xxl-8 col-lg-9")
             $('#profile').show()
             image = "http://" + $(location).attr('host') + "/images/1.jpg"
             $('#p_name').html()

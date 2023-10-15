@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
-    <div class="content-body">
+    <div class="content-body ">
         <!-- row -->
-        <div class="container-fluid">
+        <div class="container-fluid d-none">
 
             <div class="row">
                 <div class="col-xl-3 col-xxl-3 col-sm-6">
