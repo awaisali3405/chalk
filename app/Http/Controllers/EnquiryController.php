@@ -48,8 +48,8 @@ class EnquiryController extends Controller
      */
     public function create()
     {
-        $enquirySubject = EnquirySubject::where('enquiry_id', null)->get();
-        return view('enquiry.add', compact('enquirySubject'));
+        $enquirySubject = EnquirySubject::where('student_id', null)->where('enquiry_id', null)->delete();
+        return view('enquiry.add');
     }
 
     /**

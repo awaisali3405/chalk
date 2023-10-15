@@ -357,7 +357,15 @@
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody id="subject">
-
+                                                                            @foreach ($student->enquirySubject as $value)
+                                                                                <tr>
+                                                                                    <td>{{ $value->subject->name }}</td>
+                                                                                    <td>{{ $value->board->name }}</td>
+                                                                                    <td>{{ $value->paper->name }}</td>
+                                                                                    <td>{{ $value->scienceType->name }}
+                                                                                    </td>
+                                                                                </tr>
+                                                                            @endforeach
                                                                         </tbody>
                                                                     </table>
                                                                 </div>

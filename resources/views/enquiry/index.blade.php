@@ -31,7 +31,6 @@
                                                     <th>Sr</th>
                                                     <th>Caller</th>
                                                     <th>Year</th>
-                                                    <th>Section</th>
                                                     <th>Date</th>
                                                     <th>Week</th>
 
@@ -45,7 +44,6 @@
 
                                                         <td>{{ $value->caller_name }}</td>
                                                         <td>{{ $value->year->name }}</td>
-                                                        <td>{{ $value->keyStage->name }}</td>
                                                         <td>{{ $value->enquiry_date }}</td>
                                                         <td>Week
                                                             {{ \Carbon\Carbon::parse(auth()->user()->session()->start_date)->diffInWeeks(\Carbon\Carbon::parse($value->enquriy)->addDay(1)) }}

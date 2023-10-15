@@ -51,12 +51,12 @@
                                             <input type="text" class="form-control" name="last_name" required>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                    {{-- <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Date of Birth</label>
                                             <input type="date" class="form-control" name="dob" required>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Email</label>
@@ -75,19 +75,19 @@
                                             <input type="text" class="form-control" name="mobile_no" required>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                    {{-- <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Address</label>
                                             <input type="text" class="form-control" name="address" required>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Current School Name</label>
                                             <input type="text" class="form-control" name="current_school_name" required>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                    {{-- <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Key Stage</label>
 
@@ -100,14 +100,16 @@
 
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Year</label>
 
 
                                             <select class="form-control year" name="year_id" required>
-
+                                                @foreach ($year as $value)
+                                                    <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                                @endforeach
                                             </select>
 
 
@@ -115,7 +117,7 @@
                                     </div>
                                     <div class="col-lg-12 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Lession Type</label>
+                                            <label class="form-label">Lesson Type</label>
                                             <div class="row">
                                                 <div class="col-3">
 
