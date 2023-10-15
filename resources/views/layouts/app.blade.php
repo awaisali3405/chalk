@@ -483,7 +483,7 @@
         })
         $('.individual').on('change keyup click', function() {
             $('#widget').removeClass("col-xl-12 col-xxl-12 col-lg-12")
-            $('#widget').addClass("col-xl-8 col-xxl-8 col-lg-9")
+            $('#widget').addClass("col-xl-9 col-xxl-8 col-lg-8")
             $('#profile').show()
             image = "http://" + $(location).attr('host') + "/images/1.jpg"
             $('#p_name').html()
