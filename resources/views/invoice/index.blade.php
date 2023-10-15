@@ -10,13 +10,7 @@
                         <h4>Generate Invoice</h4>
                     </div>
                 </div>
-                <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0);">Students</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0);">About Student</a></li>
-                    </ol>
-                </div>
+          
             </div>
 
             <div class="row">
@@ -67,38 +61,7 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="card">
-                                {{-- <div class="card-header d-block">
-                                    <h4 class="card-title">Parent Login Detail </h4>
-                                </div> --}}
-                                {{-- <div class="card-body">
-                                    <h6>Photoshop
-                                        <span class="pull-right">85%</span>
-                                    </h6>
-                                    <div class="progress ">
-                                        <div class="progress-bar bg-danger progress-animated"
-                                            style="width: 85%; height:6px;" role="progressbar">
-                                            <span class="sr-only">60% Complete</span>
-                                        </div>
-                                    </div>
-                                    <h6 class="mt-4">Code editor
-                                        <span class="pull-right">90%</span>
-                                    </h6>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-info progress-animated" style="width: 90%; height:6px;"
-                                            role="progressbar">
-                                            <span class="sr-only">60% Complete</span>
-                                        </div>
-                                    </div>
-                                    <h6 class="mt-4">Illustrator
-                                        <span class="pull-right">65%</span>
-                                    </h6>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-success progress-animated"
-                                            style="width: 65%; height:6px;" role="progressbar">
-                                            <span class="sr-only">60% Complete</span>
-                                        </div>
-                                    </div>
-                                </div> --}}
+                         
                             </div>
                         </div>
                     </div>

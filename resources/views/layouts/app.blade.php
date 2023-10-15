@@ -149,7 +149,7 @@
     <!-- Svganimation scripts -->
     <script src="{{ asset('vendor/svganimation/vivus.min.js') }}"></script>
     <script src="{{ asset('vendor/svganimation/svg.animation.js') }}"></script>
-    <script src="{{ asset('js/styleSwitcher.js') }}"></script>
+    {{-- <script src="{{ asset('js/styleSwitcher.js') }}"></script> --}}
 
     <!-- Datatable -->
     <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
