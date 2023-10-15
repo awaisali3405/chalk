@@ -10,11 +10,11 @@
                         <h4>All Student</h4>
                     </div>
                 </div>
-               
+
             </div>
 
             <div class="row">
-            
+
                 <div class="col-lg-12">
                     <div class="row tab-content">
                         <div id="list-view" class="tab-pane fade active show col-lg-12">
@@ -56,11 +56,28 @@
                                                             {{ \Carbon\Carbon::parse(auth()->user()->session()->start_date)->diffInWeeks(\Carbon\Carbon::parse($value->admission_date)->addDay(1)) }}
                                                         </td>
                                                         <td>
-                                                            <a href="{{ route('student.edit', $value->id) }}" title="edit"
-                                                                class="btn btn-sm btn-primary"><i
+                                                            <button type="button" class="btn btn-primary dropdown-toggle"
+                                                                data-toggle="dropdown" aria-expanded="true">
+                                                                Action
+                                                            </button>
+                                                            <div class="dropdown-menu" x-placement="bottom-start"
+                                                                style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
+                                                                <a class="dropdown-item"
+                                                                    href="{{ route('student.edit', $value->id) }}">Edit</a>
+                                                                <a class="dropdown-item"
+                                                                    href="{{ route('student.note', $value->id) }}">Note</a>
+                                                                <a class="dropdown-item"
+                                                                    href="{{ route('student.upload', $value->id) }}">Upload</a>
+                                                                <a class="dropdown-item"
+                                                                    href="{{ route('student.show', $value->id) }}">Show</a>
+                                                                <a class="dropdown-item"
+                                                                    href="{{ route('invoice.show', $value->id) }}">Invoice</a>
+                                                            </div>
+                                                            {{-- <a href="{{ route('student.edit', $value->id) }}"
+                                                                title="edit" class="btn btn-sm btn-primary"><i
                                                                     class="la la-pencil"></i></a>
-                                                            <a href="{{ route('student.note', $value->id) }}" title="note"
-                                                                class="btn btn-sm btn-secondary"><i
+                                                            <a href="{{ route('student.note', $value->id) }}"
+                                                                title="note" class="btn btn-sm btn-secondary"><i
                                                                     class="la la-sticky-note"></i></a>
                                                             <a href="{{ route('student.upload', $value->id) }}"
                                                                 title="upload" class="btn btn-sm btn-info"><i
@@ -69,7 +86,7 @@
                                                                 title="upload" class="btn btn-sm btn-info"><i
                                                                     class="la la-eye"></i></a>
                                                             <a href="{{ route('invoice.show', $value->id) }}"
-                                                                title="upload" class="btn btn-sm btn-info">Invoice</a>
+                                                                title="upload" class="btn btn-sm btn-info">Invoice</a> --}}
 
 
                                                             {{-- <a href="{{ route('student.destory', $value->id) }}"
