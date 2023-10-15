@@ -4,19 +4,18 @@
         <!-- row -->
         <div class="container-fluid">
 
-            <div class="row page-titles mx-0">
-                <div class="col-sm-6 p-md-0">
-                    <div class="welcome-text">
-                        <h4>Add Student</h4>
+            <div class="row ">
+                <div class="col-12 ">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="welcome-text d-flex justify-content-center">
+                                <h2>Student Informatioin</h2>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0);">Student</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0);">Add Student</a></li>
-                    </ol>
-                </div>
+
             </div>
             <form action="{{ route('student.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
@@ -218,33 +217,56 @@
                                                 </div>
                                             </div>
 
-
                                             <div class="col-lg-12 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Lession Type</label>
+                                                    <div class="row">
+                                                        <div class="col-3 ">
 
-                                                    <div class="form-group">
-                                                        <label class="radio-inline">
-                                                            <input type="radio" name="lesson_type" value="Normal Group"
-                                                                required>Normal
-                                                            Group</label>
-                                                        <label class="radio-inline">
-                                                            <input type="radio" name="lesson_type" value="Small Group"
-                                                                required>
-                                                            Small
-                                                            Group</label>
-                                                        <label class="radio-inline">
-                                                            <input type="radio" name="lesson_type" value="One - One"
-                                                                required>
-                                                            One -
-                                                            One</label>
-                                                        <label class="radio-inline">
-                                                            <input type="radio" name="lesson_type"
-                                                                value="H/W Help Group" required>
-                                                            H/W Help Group</label>
+                                                            <div class="form-check">
+
+                                                                <input type="radio" name="lesson_type"
+                                                                    value="Normal Group" id="Normal Group" required>
+                                                                <label class="form-check-label" for="Normal Group">Normal
+                                                                    Group</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-3 ">
+
+                                                            <div class="form-check">
+
+                                                                <input type="radio" name="lesson_type"
+                                                                    value="Small Group" id="Small Group" required>
+                                                                <label class="form-check-label" for="Small Group">Small
+                                                                    Group</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-3 ">
+
+                                                            <div class="form-check">
+
+                                                                <input type="radio" name="lesson_type"
+                                                                    value="One - One" id="One - One" required>
+                                                                <label class="form-check-label" for="One - One">One -
+                                                                    One</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-3 ">
+
+                                                            <div class="form-check">
+
+                                                                <input type="radio" name="lesson_type"
+                                                                    value="H/W Help Group" id="H/W Help Group" required>
+                                                                <label class="form-check-label" for="H/W Help Group">H/W
+                                                                    Help Group</label>
+                                                            </div>
+                                                        </div>
+
+
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="col-12">
 
                                                 <div class="row">
@@ -893,16 +915,49 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Mailing Address </label>
-                                                    <input type="text" class="form-control" name="mail_address[]">
+                                                    <label class="form-label">Mailing Address</label>
+                                                    <input type="text" id="formatted_address_0" class="form-control"
+                                                        name="f_address_line[]">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Resdential Adress </label>
-                                                    <input type="text" class="form-control" name="res_address[]">
+                                                    <label class="form-label">Second Mailing Address Line </label>
+                                                    <input type="text" id="formatted_address_1" class="form-control"
+                                                        name="s_address_line[]">
                                                 </div>
                                             </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="form-label">Third Mailing Address Line</label>
+                                                    <input type="text" id="formatted_address_2" class="form-control"
+                                                        name="t_address_line[]">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="form-label"> Mailing Town</label>
+                                                    <input type="text" id="town_or_city" class="form-control"
+                                                        name="town[]">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="form-label"> Mailing County </label>
+                                                    <input type="text" id="county" class="form-control"
+                                                        name="county[]">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="form-label"> Mailing Postcode</label>
+                                                    <input type="text" id="postcode" class="form-control"
+                                                        name="res_address1[]">
+                                                </div>
+                                            </div>
+
+
+
 
 
 

@@ -22,6 +22,7 @@
                         <li><a href="{{ route('enquiry.create') }}">Add Enquiry</a></li>
                     </ul>
                 </li>
+
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-user"></i>
                         <span class="nav-text">Parent</span>
@@ -29,6 +30,30 @@
                     <ul aria-expanded="false">
                         <li><a href="{{ route('parent.index') }}">All Parent</a></li>
                         <li><a href="{{ route('parent.create') }}">Add Parent</a></li>
+                    </ul>
+                </li>
+            @endif
+            @if (auth()->user()->role->name == 'parent' ||
+                    auth()->user()->role->name == 'admin' ||
+                    auth()->user()->role->name == 'super admin')
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-graduation-cap"></i>
+                        <span class="nav-text">Student</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('student.index') }}">All Student</a></li>
+                        <li><a href="{{ route('student.create') }}">Add Student</a></li>
+                    </ul>
+                </li>
+            @endif
+            @if (auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'super admin')
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-home"></i>
+                        <span class="nav-text">Attedance</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('invoice.index') }}">All Attendance</a></li>
+                        <li><a href="{{ route('invoice.create') }}">Add Attendance</a></li>
                     </ul>
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -95,7 +120,7 @@
                         <li><a href="{{ route('board.create') }}">Add Board</a></li>
                     </ul>
                 </li>
-                {{-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-home"></i>
                         <span class="nav-text">Paper</span>
                     </a>
@@ -103,7 +128,7 @@
                         <li><a href="{{ route('paper.index') }}">All Paper</a></li>
                         <li><a href="{{ route('paper.create') }}">Add Paper</a></li>
                     </ul>
-                </li> --}}
+                </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-home"></i>
                         <span class="nav-text">Science Type</span>
@@ -124,21 +149,8 @@
                     </ul>
                 </li>
             @endif
-            @if (auth()->user()->role->name == 'parent' ||
-                    auth()->user()->role->name == 'admin' ||
-                    auth()->user()->role->name == 'super admin')
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-graduation-cap"></i>
-                        <span class="nav-text">Student</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('student.index') }}">All Student</a></li>
-                        <li><a href="{{ route('student.create') }}">Add Student</a></li>
-                    </ul>
-                </li>
-            @endif
-            @if (auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'super admin')
-                {{-- <li><a class="ai-icon" href="{{ route('product.index') }}" aria-expanded="false">
+
+            {{-- <li><a class="ai-icon" href="{{ route('product.index') }}" aria-expanded="false">
                         <i class="la la-calendar"></i>
                         <span class="nav-text">Product</span>
                     </a>
@@ -158,7 +170,7 @@
                         <span class="nav-text">Sale</span>
                     </a>
                 </li> --}}
-            @endif
+            {{-- @endif --}}
             {{-- <li><a class="ai-icon" href="event-management.html" aria-expanded="false">
                     <i class="la la-calendar"></i>
                     <span class="nav-text">Event Management</span>

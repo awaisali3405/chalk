@@ -4,21 +4,23 @@
         <!-- row -->
         <div class="container-fluid">
 
-            <div class="row page-titles mx-0">
-                <div class="col-sm-6 p-md-0">
-                    <div class="welcome-text">
-                        <h4>Add Enquiry</h4>
+
+            <div class="row ">
+                <div class="col-12 ">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="welcome-text d-flex justify-content-center">
+                                <h2>Enquiry Informatioin</h2>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
-
             <div class="row">
                 <div class="col-xl-12 col-xxl-12 col-sm-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title">Basic Info</h5>
-                        </div>
+
                         <div class="card-body">
                             <form action="{{ route('enquiry.store') }}" method="post">
                                 @csrf
@@ -87,67 +89,91 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Year</label>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <label class="form-label">Key Stage</label>
 
-                                                <select class="form-control" name="year_id">
-                                                    <option value="">Select Year Stage</option>
-                                                    @foreach ($year as $value)
-                                                        <option value="{{ $value->id }}">
-                                                            {{ $value->name }}</option>
-                                                    @endforeach
+                                            <select class="form-control keyStage" name="key_stage_id" required>
+                                                <option value="">Select Key Stage</option>
+                                                @foreach ($keyStage as $value)
+                                                    <option value="{{ $value->id }}">
+                                                        {{ $value->name }}</option>
+                                                @endforeach
 
-                                                </select>
-                                            </div>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Session</label>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <label class="form-label">Year</label>
 
-                                                <select class="form-control" name="key_stage_id">
-                                                    <option value="">Select Session</option>
-                                                    @foreach ($keyStage as $value)
-                                                        <option value="{{ $value->id }}">
-                                                            {{ $value->name }}</option>
-                                                    @endforeach
 
-                                                </select>
-                                            </div>
+                                            <select class="form-control year" name="year_id" required>
+
+                                            </select>
+
+
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="col-lg-12 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Lession Type</label>
+                                            <div class="row">
+                                                <div class="col-3">
 
-                                            <div class="form-group">
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="lesson_type" value="Normal Group">Normal
-                                                    Group</label>
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="lesson_type" value="Small Group"> Small
-                                                    Group</label>
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="lesson_type" value="One - One"> One -
-                                                    One</label>
+                                                    <div class="form-check">
+
+                                                        <input type="radio" name="lesson_type" value="Normal Group"
+                                                            id="Normal Group" required>
+                                                        <label class="form-check-label" for="Normal Group">Normal
+                                                            Group</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+
+                                                    <div class="form-check">
+
+                                                        <input type="radio" name="lesson_type" value="Small Group"
+                                                            id="Small Group" required>
+                                                        <label class="form-check-label" for="Small Group">Small
+                                                            Group</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+
+                                                    <div class="form-check">
+
+                                                        <input type="radio" name="lesson_type" value="One - One"
+                                                            id="One - One" required>
+                                                        <label class="form-check-label" for="One - One">One -
+                                                            One</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+
+                                                    <div class="form-check">
+
+                                                        <input type="radio" name="lesson_type" value="H/W Help Group"
+                                                            id="H/W Help Group" required>
+                                                        <label class="form-check-label" for="H/W Help Group">H/W
+                                                            Help Group</label>
+                                                    </div>
+                                                </div>
+
+
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Branch</label>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <select class="form-control" name="branch_id">
-                                                    <option value="">Select Branch</option>
-                                                    @foreach ($branch as $value)
-                                                        <option value="{{ $value->id }}">
-                                                            {{ $value->name }}</option>
-                                                    @endforeach
+                                            <select class="form-control" name="branch_id">
+                                                <option value="">Select Branch</option>
+                                                @foreach ($branch as $value)
+                                                    <option value="{{ $value->id }}">
+                                                        {{ $value->name }}</option>
+                                                @endforeach
 
-                                                </select>
+                                            </select>
 
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
@@ -171,17 +197,17 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">How do you Know About Us</label>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <input list="browsers" name="know_about_us" id="browser"
-                                                    class="form-control" required>
-                                                <datalist id="browsers">
-                                                    <option value="Leaflet">
-                                                    <option value="Google">
-                                                    <option value="Facebook">
-                                                    <option value="Friends/Family">
 
-                                                </datalist>
-                                            </div>
+                                            <input list="browsers" name="know_about_us" id="browser"
+                                                class="form-control" required>
+                                            <datalist id="browsers">
+                                                <option value="Leaflet">
+                                                <option value="Google">
+                                                <option value="Facebook">
+                                                <option value="Friends/Family">
+
+                                            </datalist>
+
                                         </div>
                                     </div>
                                     <div class="" style="padding-left: 15%; width: 70%;">
@@ -192,12 +218,9 @@
                                                         <div class="form-group">
                                                             <label class="form-label">Subject</label>
 
-                                                            <select class="form-control" id="subject_id">
+                                                            <select class="form-control subject" id="subject_id">
 
-                                                                @foreach ($subject as $value)
-                                                                    <option value="{{ $value->id }}">
-                                                                        {{ $value->name }}</option>
-                                                                @endforeach
+
 
                                                             </select>
 
@@ -277,24 +300,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody id="subject">
-                                                            @foreach ($enquirySubject as $value)
-                                                                <tr>
-                                                                    <td>{{ $value->subject->name }}</td>
-                                                                    <td>{{ $value->board ? $value->board->name : '-' }}
-                                                                    </td>
-                                                                    <td>{{ $value->paper ? $value->paper->name : '-' }}
-                                                                    </td>
-                                                                    <td>{{ $value->scienceType ? $value->scienceType->name : '-' }}
-                                                                    </td>
-                                                                    <td>
-                                                                        <input type="hidden" value="{{ $value->id }}"
-                                                                            name="enquiry_subject[]" class="id">
-                                                                        <a class="delete-subject"
-                                                                            href="javascript:void(0);"><i
-                                                                                class=" fa fa-close color-danger"></i></a>
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
+
                                                         </tbody>
                                                     </table>
                                                 </div>
