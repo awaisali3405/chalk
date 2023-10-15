@@ -6,6 +6,7 @@ use App\Models\Board;
 use App\Models\Branch;
 use App\Models\KeyStage;
 use App\Models\Paper;
+use App\Models\Parents;
 use App\Models\ScienceType;
 use App\Models\Subject;
 use App\Models\Supplier;
@@ -42,5 +43,7 @@ class Controller extends BaseController
         View::share('paper', $paper);
         $supplier = Supplier::all();
         View::share('supplier', $supplier);
+        $parent = Parents::all();
+        View::share('parent', $parent);
     }
 }

@@ -14,7 +14,7 @@ class ParentController extends Controller
      */
     public function index()
     {
-       
+
         $parent = Parents::latest()->get();
         return view('parent.index', compact('parent'));
     }
@@ -85,5 +85,10 @@ class ParentController extends Controller
     {
         $data = Parents::find($id)->delete();
         return redirect()->route('parent.index')->with('success', 'Parent Deleted Successfully');
+    }
+    public function getParentData($id)
+    {
+        $parent = Parents::find($id);
+        return response()->json(['data' => $parent]);
     }
 }

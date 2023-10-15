@@ -56,111 +56,116 @@ class StudentsController extends Controller
     public function store(Request $request)
     {
         // dd($request);
-        // $data = $request->validate([
-        //     'enquiry_id' => 'nullable',
-        //     'profile_pic' => 'required',
-        //     'first_name' => 'required',
-        //     'last_name' => 'required',
-        //     'middle_name' => 'nullable',
-        //     'phone_no' => 'required',
-        //     'gender' => 'required',
-        //     'nationality' => 'required',
-        //     'main_language' => 'required',
-        //     'other_language' => 'nullable',
-        //     'dob' => 'required',
-        //     'current_school_name' => 'required',
-        //     'current_year' => 'required',
-        //     'branch_id' => 'nullable',
-        //     'payment_period' => 'nullable',
-        //     'year_id' => 'required',
-        //     'key_stage_id' => 'required',
-        //     'lesson_type' => 'required',
-        //     'admission_date' => 'nullable',
-        //     'deposit' => 'nullable',
-        //     'registration_fee' => 'nullable',
-        //     'annual_resource_fee' => 'nullable',
-        //     'resource_discount' => 'nullable',
-        //     'exercise_book_fee' => 'nullable',
-        //     'fee' => 'nullable',
-        //     'fee_discount' => 'nullable',
+        $data1 = $request->except('_token');
+        // dd($data);
+        $data = $request->validate([
+            'enquiry_id' => 'nullable',
+            'profile_pic' => 'nullable',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'middle_name' => 'nullable',
+            'phone_no' => 'required',
+            'gender' => 'required',
+            'nationality' => 'required',
+            'place_of_birth' => 'required',
+            'main_language' => 'required',
+            'other_language' => 'nullable',
+            'dob' => 'required',
+            'current_school_name' => 'required',
+            'current_year' => 'required',
+            'branch_id' => 'required',
+            'payment_period' => 'required',
+            'year_id' => 'required',
+            'key_stage_id' => 'required',
+            'lesson_type' => 'required',
+            'admission_date' => 'nullable',
+            'deposit' => 'nullable',
+            'registration_fee' => 'nullable',
+            'annual_resource_fee' => 'nullable',
+            'resource_discount' => 'nullable',
+            'exercise_book_fee' => 'nullable',
+            'fee' => 'nullable',
+            'fee_discount' => 'nullable',
 
-        //     'ethic_group' => 'nullable',
-        //     'religion' => 'nullable',
-        //     'o_full_name_1' => 'nullable',
-        //     'o_work_phone_1' => 'nullable',
-        //     'o_relationship_1' => 'nullable',
-        //     'o_mobile_phone_1' => 'nullable',
-        //     'o_work_place_1' => 'nullable',
-        //     'o_full_name_2' => 'nullable',
-        //     'o_work_phone_2' => 'nullable',
-        //     'o_relationship_2' => 'nullable',
-        //     'o_mobile_phone_2' => 'nullable',
-        //     'o_work_place_2' => 'nullable',
-        //     'e_full_name_1' => 'nullable',
-        //     'e_work_phone_1' => 'nullable',
-        //     'e_relationship_1' => 'nullable',
-        //     'e_mobile_phone_1' => 'nullable',
-        //     'e_contact_info_1' => 'nullable',
-        //     'e_full_name_2' => 'nullable',
-        //     'e_work_phone_2' => 'nullable',
-        //     'e_relationship_2' => 'nullable',
-        //     'e_mobile_phone_2' => 'nullable',
-        //     'e_contact_info_2' => 'nullable',
-        //     'is_disable' => 'required',
-        //     'disorder_detail' => 'nullable',
-        //     'signature_person' => 'required',
-        //     'know_about_us' => 'nullable',
-        //     'feedback' => 'nullable',
-        // ]);
-
+            // 'ethic_group' => 'nullable',
+            // 'religion' => 'nullable',
+            'o_full_name_1' => 'nullable',
+            'o_work_phone_1' => 'nullable',
+            'o_relationship_1' => 'nullable',
+            'o_mobile_phone_1' => 'nullable',
+            'o_work_place_1' => 'nullable',
+            'o_full_name_2' => 'nullable',
+            'o_work_phone_2' => 'nullable',
+            'o_relationship_2' => 'nullable',
+            'o_mobile_phone_2' => 'nullable',
+            'o_work_place_2' => 'nullable',
+            'e_full_name_1' => 'nullable',
+            'e_work_phone_1' => 'nullable',
+            'e_relationship_1' => 'nullable',
+            'e_mobile_phone_1' => 'nullable',
+            'e_contact_info_1' => 'nullable',
+            'e_full_name_2' => 'nullable',
+            'e_work_phone_2' => 'nullable',
+            'e_relationship_2' => 'nullable',
+            'e_mobile_phone_2' => 'nullable',
+            'e_contact_info_2' => 'nullable',
+            'is_disable' => 'required',
+            'disorder_detail' => 'nullable',
+            'signature_person' => 'nullable',
+            'know_about_us' => 'nullable',
+            'feedback' => 'nullable',
+            'parent_id' => 'required'
+        ]);
         if (isset($request->profile_pic)) {
             $data['profile_pic'] =   $this->saveImage($request->profile_pic);
         } else {
             $data['profile_pic'] = 'images/avatar/1.png';
         }
+        // dd($data1);
         $student = Student::create($data);
-
         if (auth()->user()->role == 'parent') {
-            $parent = Parents::create([
-                'last_name' => $data['last_name1'][1],
-                'first_name' => $data['first_name1'][1],
-                'given_name' => $data['given_name1'][1],
-                'gender' => $data['gender1'][1],
-                'relationship' => $data['relationship1'][1],
-                'emp_status' => $data['emp_status1'][1],
-                'company_name' => $data['company_name1'][1],
-                'work_phone_number' => $data['work_phone_number1'][1],
-                'mobile_number' => $data['mobile_number1'][1],
-                'email' => $data['email1'][1],
-                'signature' => $data['signature1'][1],
-                'signature_date' => $data['signature_date1'][1],
-                'mail_address' => $data['mail_address1'][1],
-                'res_address' => $data['res_address1'][1],
-            ]);
-            $student->parents()->attach([$parent->id]);
+            if ($data1['last_name1'][0]) {
+
+                $parent = Parents::create([
+                    'last_name' => $data1['last_name1'][0],
+                    'first_name' => $data1['first_name1'][0],
+                    'given_name' => $data1['given_name1'][0],
+                    'gender' => $data1['gender1'][0],
+                    'relationship' => $data1['relationship1'][0],
+                    'emp_status' => $data1['emp_status1'][0],
+                    'company_name' => $data1['company_name1'][0],
+                    'work_phone_number' => $data1['work_phone_number1'][0],
+                    'mobile_number' => $data1['mobile_number1'][0],
+                    'email' => $data1['email1'][0],
+                    'signature' => $data1['signature1'][0],
+                    'signature_date' => $data1['signature_date1'][0],
+                    'mail_address' => $data1['mail_address1'][0],
+                    'res_address' => $data1['res_address1'][0],
+                ]);
+                $student->parents()->attach([$parent->id]);
+            }
         } else {
 
-            $student->parents()->detach();
-            foreach ($data['first_name1'] as $key => $value) {
-                $parent = Parents::where('first_name', $data['first_name1'][$key])->first();
-                // dd($parent->id, $student);
-                if ($parent) {
-                    $parent->update([
-                        'relationship' => $data['relationship'][$key],
-                        'last_name' => $data['last_name1'][$key],
-                        'first_name' => $data['first_name1'][$key],
-                        'email' => $data['email1'][$key],
-                        'address' => $data['address'][$key],
-                        'post_code' => $data['post_code1'][$key],
-                        'occupation' => $data['occupation'][$key],
-                        'contact' => $data['contact'][$key],
-                    ]);
-                    $student->parents()->attach([$parent->id]);
-                } else {
+            $student->parents()->attach($data1['parent_id']);
+            if ($data1['last_name1'][0]) {
 
-                    // dd($parent);
-                    $student->parents()->attach([$parent->id]);
-                }
+                $parent = Parents::create([
+                    'last_name' => $data1['last_name1'][0],
+                    'first_name' => $data1['first_name1'][0],
+                    'given_name' => $data1['given_name1'][0],
+                    'gender' => $data1['gender1'][0],
+                    'relationship' => $data1['relationship1'][0],
+                    'emp_status' => $data1['emp_status1'][0],
+                    'company_name' => $data1['company_name1'][0],
+                    'work_phone_number' => $data1['work_phone_number1'][0],
+                    'mobile_number' => $data1['mobile_number1'][0],
+                    'email' => $data1['email1'][0],
+                    'signature' => $data1['signature1'][0],
+                    'signature_date' => $data1['signature_date1'][0],
+                    'mail_address' => $data1['mail_address1'][0],
+                    'res_address' => $data1['res_address1'][0],
+                ]);
+                $student->parents()->attach([$parent->id]);
             }
             $subject = $student->enquirySubject()->pluck('id')->toArray();
             // dd($subject);
@@ -192,7 +197,7 @@ class StudentsController extends Controller
 
 
 
-            $subject = EnquirySubject::whereIn('id', $data['enquiry_subject'])->update([
+            $subject = EnquirySubject::whereIn('id', $data1['enquiry_subject'])->update([
                 'student_id' => $student->id
             ]);
         }
@@ -222,44 +227,103 @@ class StudentsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data = $request->except('_token', 'method');
+        $data = $request->validate([
+            'enquiry_id' => 'nullable',
+            'profile_pic' => 'nullable',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'middle_name' => 'nullable',
+            'phone_no' => 'required',
+            'gender' => 'required',
+            'nationality' => 'required',
+            'place_of_birth' => 'required',
+            'main_language' => 'required',
+            'other_language' => 'nullable',
+            'dob' => 'required',
+            'current_school_name' => 'required',
+            'current_year' => 'required',
+            'branch_id' => 'required',
+            'payment_period' => 'required',
+            'year_id' => 'required',
+            'key_stage_id' => 'required',
+            'lesson_type' => 'required',
+            'admission_date' => 'nullable',
+            'deposit' => 'nullable',
+            'registration_fee' => 'nullable',
+            'annual_resource_fee' => 'nullable',
+            'resource_discount' => 'nullable',
+            'exercise_book_fee' => 'nullable',
+            'fee' => 'nullable',
+            'fee_discount' => 'nullable',
+
+            // 'ethic_group' => 'nullable',
+            // 'religion' => 'nullable',
+            'o_full_name_1' => 'nullable',
+            'o_work_phone_1' => 'nullable',
+            'o_relationship_1' => 'nullable',
+            'o_mobile_phone_1' => 'nullable',
+            'o_work_place_1' => 'nullable',
+            'o_full_name_2' => 'nullable',
+            'o_work_phone_2' => 'nullable',
+            'o_relationship_2' => 'nullable',
+            'o_mobile_phone_2' => 'nullable',
+            'o_work_place_2' => 'nullable',
+            'e_full_name_1' => 'nullable',
+            'e_work_phone_1' => 'nullable',
+            'e_relationship_1' => 'nullable',
+            'e_mobile_phone_1' => 'nullable',
+            'e_contact_info_1' => 'nullable',
+            'e_full_name_2' => 'nullable',
+            'e_work_phone_2' => 'nullable',
+            'e_relationship_2' => 'nullable',
+            'e_mobile_phone_2' => 'nullable',
+            'e_contact_info_2' => 'nullable',
+            'is_disable' => 'required',
+            'disorder_detail' => 'nullable',
+            'signature_person' => 'nullable',
+            'know_about_us' => 'nullable',
+            'feedback' => 'nullable',
+            'parent_id' => 'required'
+        ]);
+        // $data = $request->except('_token', 'method');
         if (isset($request->profile_pic)) {
             $data['profile_pic'] =   $this->saveImage($request->profile_pic);
         }
 
         $student = Student::find($id);
         $student->update($data);
-        $student->parents()->detach();
-        foreach ($data['first_name1'] as $key => $value) {
-            $parent = Parents::where('first_name', $data['first_name1'][$key])->first();
-            // dd($parent->id, $student);
-            if ($parent) {
-                $parent->update([
-                    'relationship' => $data['relationship'][$key],
-                    'last_name' => $data['last_name1'][$key],
-                    'first_name' => $data['first_name1'][$key],
-                    'email' => $data['email1'][$key],
-                    'address' => $data['address'][$key],
-                    'post_code' => $data['post_code1'][$key],
-                    'occupation' => $data['occupation'][$key],
-                    'contact' => $data['contact'][$key],
-                ]);
-                $student->parents()->attach([$parent->id]);
-            } else {
-                $parent = Parents::create([
-                    'relationship' => $data['relationship'][$key],
-                    'last_name' => $data['last_name1'][$key],
-                    'first_name' => $data['first_name1'][$key],
-                    'email' => $data['email1'][$key],
-                    'address' => $data['address'][$key],
-                    'post_code' => $data['post_code1'][$key],
-                    'occupation' => $data['occupation'][$key],
-                    'contact' => $data['contact'][$key],
-                ]);
-                // dd($parent);
-                $student->parents()->attach([$parent->id]);
-            }
-        }
+        
+        // $student->parents()->detach();
+        // foreach ($data['first_name1'] as $key => $value) {
+        //     $parent = Parents::where('first_name', $data['first_name1'][$key])->first();
+        //     // dd($parent->id, $student);
+        //     if ($parent) {
+        //         $parent->update([
+        //             'relationship' => $data['relationship'][$key],
+        //             'last_name' => $data['last_name1'][$key],
+        //             'first_name' => $data['first_name1'][$key],
+        //             'email' => $data['email1'][$key],
+        //             'address' => $data['address'][$key],
+        //             'post_code' => $data['post_code1'][$key],
+        //             'occupation' => $data['occupation'][$key],
+        //             'contact' => $data['contact'][$key],
+        //         ]);
+        //         $student->parents()->attach([$parent->id]);
+        //     } else {
+        //         $parent = Parents::create([
+        //             'relationship' => $data['relationship'][$key],
+        //             'last_name' => $data['last_name1'][$key],
+        //             'first_name' => $data['first_name1'][$key],
+        //             'email' => $data['email1'][$key],
+        //             'address' => $data['address'][$key],
+        //             'post_code' => $data['post_code1'][$key],
+        //             'occupation' => $data['occupation'][$key],
+        //             'contact' => $data['contact'][$key],
+        //         ]);
+        //         // dd($parent);
+        //         $student->parents()->attach([$parent->id]);
+        //     }
+        // }
 
         // dd($data, $student->parent);
         return redirect()->route('student.index')->with('success', 'Branch Updated Successfully');

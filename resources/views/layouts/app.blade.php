@@ -568,6 +568,44 @@
         })
     </script>
 
+
+
+    <script>
+        $('#p_select').on('change keyup', function() {
+            id = $(this).val()
+            $.ajax({
+                method: "GET",
+                'url': `/api/get/parent/data/${id}`,
+                success: function(success) {
+                    console.log(success);
+                    $('#p_first_name').val(success.data.first_name)
+                    $('#p_last_name').val(success.data.last_name)
+                    $('#p_given_name').val(success.data.given_name)
+                    if (success.data.gender == 'male') {
+
+                        $('#p_male').prop('checked', true);
+                    } else if (success.data.gender == 'female') {
+                        $('#p_female').prop('checked', true);
+
+                    } else {
+                        $('#p_other').prop('checked', true);
+
+                    }
+                    $('#p_relation').val(success.data.relationship)
+                    $('#p_emp_status').val(success.data.emp_status)
+                    $('#p_company_name').val(success.data.company_name)
+                    $('#p_work').val(success.data.work_phone_name)
+                    $('#p_mobile').val(success.data.mobile_number)
+                    $('#formatted_address_0').val(success.data.res_address)
+                    $('#formatted_address_1').val(success.data.res_second_address)
+                    $('#formatted_address_2').val(success.data.res_third_address)
+                    $('#town_or_city').val(success.data.res_town)
+                    $('#county').val(success.data.res_country)
+                    $('#postcode').val(success.data.res_postal_code)
+                }
+            })
+        })
+    </script>
 </body>
 
 </html>

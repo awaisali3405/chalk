@@ -11,12 +11,17 @@
 
                             <div class="welcome-text d-flex justify-content-center">
                                 <h2>Student Informatioin</h2>
+                                @if ($errors->any())
+                                    {!! implode('', $errors->all('<div>:message</div>')) !!}
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
 
             </div>
+
+
             <form action="{{ route('student.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="text-center p-3 bg-white" style="">
@@ -45,25 +50,29 @@
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">First Name</label>
-                                                    <input type="text" class="form-control" name="first_name" required>
+                                                    <input type="text" class="form-control" name="first_name"
+                                                        value="{{ old('first_name') }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Last Name</label>
-                                                    <input type="text" class="form-control" name="last_name" required>
+                                                    <input type="text" class="form-control" name="last_name"
+                                                        value="{{ old('last_name') }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Middle Name</label>
-                                                    <input type="text" class="form-control" name="middle_name" required>
+                                                    <input type="text" class="form-control" name="middle_name"
+                                                        value="{{ old('middle_name') }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Phone</label>
-                                                    <input type="text" class="form-control" name="phone_no" required>
+                                                    <input type="text" class="form-control" name="phone_no"
+                                                        value="{{ old('phone_no') }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -75,7 +84,8 @@
                                                             <div class="form-check">
 
                                                                 <input type="radio" class="form-check-input"
-                                                                    id="male" value="male" name="gender">
+                                                                    id="male" value="male" name="gender"
+                                                                    {{ old('gender') == 'male' ? 'checked' : '' }}>
                                                                 <label class="form-check-label" for="male">Male</label>
                                                             </div>
                                                         </div>
@@ -83,7 +93,8 @@
                                                             <div class="form-check">
 
                                                                 <input type="radio" class="form-check-input"
-                                                                    id="female" value="female" name="gender">
+                                                                    id="female" value="female" name="gender"
+                                                                    {{ old('gender') == 'female' ? 'checked' : '' }}>
                                                                 <label class="form-check-label"
                                                                     for="female">Female</label>
                                                             </div>
@@ -93,7 +104,8 @@
                                                             <div class="form-check">
 
                                                                 <input type="radio" class="form-check-input"
-                                                                    id="other" value="other" name="gender">
+                                                                    id="other" value="other" name="gender"
+                                                                    {{ old('gender') == 'other' ? 'checked' : '' }}>
                                                                 <label class="form-check-label" for="other">Other</label>
                                                             </div>
 
@@ -104,129 +116,67 @@
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Nationality</label>
-                                                    <input type="text" class="form-control" name="nationality" required>
+                                                    <input type="text" class="form-control" name="nationality"
+                                                        value="{{ old('nationality') }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Place Of Birth</label>
                                                     <input type="text" class="form-control" name="place_of_birth"
-                                                        required>
+                                                        value="{{ old('place_of_birth') }}" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="form-label">Date of Birth</label>
+                                                    <input type="date" class="form-control" name="dob"
+                                                        value="{{ old('dob') }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Main Languague</label>
                                                     <input type="text" class="form-control" name="main_language"
-                                                        required>
+                                                        value="{{ old('main_language') }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Other Language</label>
-                                                    <input type="text" class="form-control" name="other_language">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Date of Birth</label>
-                                                    <input type="date" class="form-control" name="dob" required>
-                                                </div>
-                                            </div>
-                                            {{-- <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Ethnic Group</label>
-
-
-                                                    <select class="form-control" name="ethic_group">
-                                                        <option value=""> - </option>
-                                                        <option value="Arab">Arab</option>
-                                                        <option value="Asian - Other">Asian - Other</option>
-                                                        <option value="Asian - Bangladeshi">Asian - Bangladeshi</option>
-                                                        <option value="Asian - Chinese">Asian - Chinese</option>
-                                                        <option value="Asian - Indian">Asian - Indian</option>
-                                                        <option value="Asian - Pakistani">Asian - Pakistani</option>
-                                                        <option value="Black - African">Black - African</option>
-                                                        <option value="Black - Black Other">Black - Black Other</option>
-                                                        <option value="Black - Caribbean">Black - Caribbean</option>
-                                                        <option value="Mixed - White &amp; Asian">Mixed - White &amp; Asian
-                                                        </option>
-                                                        <option value="Mixed - White &amp; Black African">Mixed - White
-                                                            &amp; Black
-                                                            African</option>
-                                                        <option value="Mixed - White &amp; Black Caribbean">Mixed - White
-                                                            &amp;
-                                                            Black Caribbean</option>
-                                                        <option value="Mixed - Other">Mixed - Other</option>
-                                                        <option value="White - British">White - British</option>
-                                                        <option value="White - White Irish">White - White Irish</option>
-                                                        <option value="White - White Other">White - White Other</option>
-                                                        <option value="Other Ethnic Group">Other Ethnic Group</option>
-                                                        <option value="Prefer not to say">Prefer not to say</option>
-
-
-                                                    </select>
-
-
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Relegion</label>
-
-
-                                                    <select class="form-control" name="religion" required>
-                                                        <option value=""> - </option>
-                                                        <option value="No Religion">No Religion</option>
-                                                        <option value="Buddhist">Buddhist</option>
-                                                        <option value="Christian">Christian</option>
-                                                        <option value="Hindu">Hindu</option>
-                                                        <option value="Jewish">Jewish</option>
-                                                        <option value="Muslim">Muslim</option>
-                                                        <option value="Sikh">Sikh</option>
-                                                        <option value="Other">Other</option>
-                                                        <option value="Prefer not to say">Prefer not to say</option>
-
-
-                                                    </select>
-
-
+                                                    <input type="text" class="form-control" name="other_language"
+                                                        value="{{ old('other_language') }}">
                                                 </div>
                                             </div>
 
 
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Home Language</label>
-                                                    <input type="text" class="form-control" name="home_language"
-                                                        required>
-                                                </div>
-                                            </div> --}}
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Current School Name</label>
                                                     <input type="text" class="form-control" name="current_school_name"
-                                                        required>
+                                                        value="{{ old('current_school_name') }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Current Year</label>
                                                     <input type="date" class="form-control" name="current_year"
-                                                        required>
+                                                        value="{{ old('current_year') }}" required>
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-12 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Lession Type</label>
+                                                    <label class="form-label">Lesson Type</label>
                                                     <div class="row">
                                                         <div class="col-3 ">
 
                                                             <div class="form-check">
 
                                                                 <input type="radio" name="lesson_type"
-                                                                    value="Normal Group" id="Normal Group" required>
+                                                                    value="Normal Group" id="Normal Group"
+                                                                    {{ old('lesson_type') == 'Normal Group' ? 'checked' : '' }}
+                                                                    required>
                                                                 <label class="form-check-label" for="Normal Group">Normal
                                                                     Group</label>
                                                             </div>
@@ -236,7 +186,9 @@
                                                             <div class="form-check">
 
                                                                 <input type="radio" name="lesson_type"
-                                                                    value="Small Group" id="Small Group" required>
+                                                                    value="Small Group" id="Small Group"
+                                                                    {{ old('lesson_type') == 'Small Group' ? 'checked' : '' }}
+                                                                    required>
                                                                 <label class="form-check-label" for="Small Group">Small
                                                                     Group</label>
                                                             </div>
@@ -246,7 +198,9 @@
                                                             <div class="form-check">
 
                                                                 <input type="radio" name="lesson_type"
-                                                                    value="One - One" id="One - One" required>
+                                                                    value="One - One" id="One - One"
+                                                                    {{ old('lesson_type') == 'One - One' ? 'checked' : '' }}
+                                                                    required>
                                                                 <label class="form-check-label" for="One - One">One -
                                                                     One</label>
                                                             </div>
@@ -256,7 +210,9 @@
                                                             <div class="form-check">
 
                                                                 <input type="radio" name="lesson_type"
-                                                                    value="H/W Help Group" id="H/W Help Group" required>
+                                                                    value="H/W Help Group" id="H/W Help Group"
+                                                                    {{ old('lesson_type') == 'H/W Help Group' ? 'checked' : '' }}
+                                                                    required>
                                                                 <label class="form-check-label" for="H/W Help Group">H/W
                                                                     Help Group</label>
                                                             </div>
@@ -278,7 +234,8 @@
                                                                 required>
                                                                 <option value="">Select Key Stage</option>
                                                                 @foreach ($keyStage as $value)
-                                                                    <option value="{{ $value->id }}">
+                                                                    <option value="{{ $value->id }}"
+                                                                        {{ old('key_stage_id') == $value->id ? 'selected' : '' }}>
                                                                         {{ $value->name }}</option>
                                                                 @endforeach
 
@@ -437,7 +394,8 @@
                                                         <select class="form-control" name="branch_id">
                                                             <option value="">Select Branch</option>
                                                             @foreach ($branch as $value)
-                                                                <option value="{{ $value->id }}">
+                                                                <option value="{{ $value->id }}"
+                                                                    {{ old('branch_id') == $value->id ? 'selected' : '' }}>
                                                                     {{ $value->name }}</option>
                                                             @endforeach
 
@@ -450,8 +408,13 @@
                                                     <div class="form-group">
                                                         <label class="form-label">Payment Type</label>
                                                         <select class="form-control" name="payment_period">
-                                                            <option value="Weekly">Weekly</option>
-                                                            <option value="Monthly">Monthly</option>
+                                                            <option value="Weekly"
+                                                                {{ old('payment_period') == 'Weekly' ? 'selected' : '' }}>
+                                                                Weekly
+                                                            </option>
+                                                            <option value="Monthly"
+                                                                {{ old('payment_period') == 'Monthly' ? 'selected' : '' }}>
+                                                                Monthly</option>
 
                                                         </select>
 
@@ -589,6 +552,7 @@
                         </div>
                     </div>
                     <div class="row">
+
                         @if (auth()->user()->role->name == 'parent')
                             <div class="col-xl-6 col-xxl-6 col-sm-12">
                                 <div class="card">
@@ -796,35 +760,51 @@
                             </div>
                         @else
                             <div class="col-xl-6 col-xxl-6 col-sm-12">
+
                                 <div class="card">
                                     <div class="card-header">
                                         <h5 class="card-title">Parent 1 /Guardian 1 Details</h5>
                                     </div>
 
                                     <div class="card-body " id="parent">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="" class="form-label">Selected Parent</label>
+                                                    <select name="parent_id" id="p_select" class="form-control"
+                                                        required>
+                                                        <option value="">-</option>
+                                                        @foreach ($parent as $value)
+                                                            <option value="{{ $value->id }}">{{ $value->given_name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
                                         {{-- @dd($student->parents) --}}
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Mr./Mrs./Ms./Other</label>
-                                                    <input type="text" class="form-control"
-                                                        value="{{ old('first_name') }}" name="first_name[]" required>
+                                                    <input type="text" class="form-control" id="p_first_name"
+                                                        name="first_name[]" disabled>
 
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Family Name</label>
-                                                    <input type="text" class="form-control"
-                                                        value="{{ old('last_name') }}" name="last_name[]" required>
+                                                    <input type="text" class="form-control" id="p_last_name"
+                                                        name="last_name[]" disabled>
 
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Given Name</label>
-                                                    <input type="text" class="form-control" name="given_name[]"
-                                                        required>
+                                                    <input type="text" class="form-control" id="p_given_name"
+                                                        name="given_name[]" disabled>
 
                                                 </div>
                                             </div>
@@ -837,8 +817,8 @@
                                                             <div class="form-check">
 
                                                                 <input type="radio" class="form-check-input"
-                                                                    id="male" value="male" name="gender[]"
-                                                                    required>
+                                                                    id="p_male" value="male" name="gender1[]"
+                                                                    disabled>
                                                                 <label class="form-check-label"
                                                                     for="male">Male</label>
                                                             </div>
@@ -847,8 +827,8 @@
                                                             <div class="form-check">
 
                                                                 <input type="radio" class="form-check-input"
-                                                                    id="female" value="female" name="gender[]"
-                                                                    required>
+                                                                    id="p_female" value="female" name="gender1[]"
+                                                                    disabled>
                                                                 <label class="form-check-label"
                                                                     for="female">Female</label>
                                                             </div>
@@ -858,8 +838,8 @@
                                                             <div class="form-check">
 
                                                                 <input type="radio" class="form-check-input"
-                                                                    id="other" value="other" name="gender[]"
-                                                                    required>
+                                                                    id="p_other" value="other" name="gender1[]"
+                                                                    disabled>
                                                                 <label class="form-check-label"
                                                                     for="other">Other</label>
                                                             </div>
@@ -873,7 +853,7 @@
                                                     <label class="form-label">Relationship to Student</label>
 
                                                     <input type="text" list="parent" class="form-control"
-                                                        name="relationship[]" required>
+                                                        id="p_relation" name="relationship[]" disabled>
                                                     <datalist id="parent">
                                                         <option>Father</option>
                                                         <option>Mother</option>
@@ -884,75 +864,79 @@
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Employment Status</label>
-                                                    <input type="text" class="form-control" name="emp_status[]">
+                                                    <input type="text" class="form-control" id="p_emp_status"
+                                                        name="emp_status[]" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Company Name</label>
-                                                    <input type="text" class="form-control" name="company_name[]">
+                                                    <input type="text" class="form-control" id="p_company_name"
+                                                        name="company_name[]" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Work Phone Number</label>
-                                                    <input type="text" class="form-control"
-                                                        name="work_phone_number[]">
+                                                    <input type="text" class="form-control" id="p_work"
+                                                        name="work_phone_number[]" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Mobile Number</label>
-                                                    <input type="text" class="form-control" name="mobile_number[]">
+                                                    <input type="text" class="form-control" name="mobile_number[]"
+                                                        id="p_mobile" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Email Address
                                                     </label>
-                                                    <input type="text" class="form-control" name="email[]">
+                                                    <input type="text" class="form-control" name="email[]"
+                                                        id="p_email" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Mailing Address</label>
+                                                    <label class="form-label">Address</label>
                                                     <input type="text" id="formatted_address_0" class="form-control"
-                                                        name="f_address_line[]">
+                                                        name="f_address_line[]" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Second Mailing Address Line </label>
+                                                    <label class="form-label">Second Address Line </label>
                                                     <input type="text" id="formatted_address_1" class="form-control"
-                                                        name="s_address_line[]">
+                                                        name="s_address_line[]" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Third Mailing Address Line</label>
+                                                    <label class="form-label">Third Address Line</label>
                                                     <input type="text" id="formatted_address_2" class="form-control"
-                                                        name="t_address_line[]">
+                                                        name="t_address_line[]" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label"> Mailing Town</label>
+                                                    <label class="form-label"> Town</label>
                                                     <input type="text" id="town_or_city" class="form-control"
-                                                        name="town[]">
+                                                        name="town[]" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label"> Mailing County </label>
+                                                    <label class="form-label"> County </label>
                                                     <input type="text" id="county" class="form-control"
-                                                        name="county[]">
+                                                        name="county[]" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label"> Mailing Postcode</label>
+                                                    <label class="form-label"> Postcode</label>
                                                     <input type="text" id="postcode" class="form-control"
-                                                        name="res_address1[]">
+                                                        name="res_address1[]" disabled>
                                                 </div>
                                             </div>
 
@@ -1120,14 +1104,16 @@
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">Full Name</label>
-                                                <input type="text" class="form-control" name="o_full_name_1">
+                                                <input type="text" class="form-control" name="o_full_name_1"
+                                                    value="{{ old('o_full_name_1') }}">
 
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">Work Phone</label>
-                                                <input type="text" class="form-control" name="o_work_phone_1">
+                                                <input type="text" class="form-control" name="o_work_phone_1"
+                                                    value="{{ old('o_work_phone_1') }}">
 
                                             </div>
                                         </div>
@@ -1136,7 +1122,7 @@
                                                 <label class="form-label">Relationship to Student</label>
 
                                                 <input type="text" list="parent" class="form-control"
-                                                    name="o_relationship_1">
+                                                    value="{{ old('o_relationship_1') }}" name="o_relationship_1">
                                                 <datalist id="parent">
                                                     <option>Father</option>
                                                     <option>Mother</option>
@@ -1147,7 +1133,8 @@
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">Mobile Phone</label>
-                                                <input type="text" class="form-control" name="o_mobile_phone_1">
+                                                <input type="text" class="form-control" name="o_mobile_phone_1"
+                                                    value="{{ old('o_mobile_phone_1') }}">
 
                                             </div>
                                         </div>
@@ -1156,7 +1143,8 @@
                                         <div class="col-lg-12 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">Work Place</label>
-                                                <input type="text" class="form-control" name="o_work_place_1">
+                                                <input type="text" class="form-control" name="o_work_place_1"
+                                                    value="{{ old('o_work_place_1') }}">
                                             </div>
                                         </div>
 
@@ -1178,14 +1166,16 @@
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">Full Name</label>
-                                                <input type="text" class="form-control" name="o_full_name_2">
+                                                <input type="text" class="form-control" name="o_full_name_2"
+                                                    value="{{ old('o_full_name_2') }}">
 
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">Work Phone</label>
-                                                <input type="text" class="form-control" name="o_work_phone_2">
+                                                <input type="text" class="form-control" name="o_work_phone_2"
+                                                    value="{{ old('o_work_phone_2') }}">
 
                                             </div>
                                         </div>
@@ -1194,7 +1184,7 @@
                                                 <label class="form-label">Relationship to Student</label>
 
                                                 <input type="text" list="parent" class="form-control"
-                                                    name="o_relationship_2">
+                                                    value="{{ old('o_relationship_2') }}" name="o_relationship_2">
                                                 <datalist id="parent">
                                                     <option>Father</option>
                                                     <option>Mother</option>
@@ -1205,7 +1195,8 @@
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">Mobile Phone</label>
-                                                <input type="text" class="form-control" name="o_mobile_phone_2">
+                                                <input type="text" class="form-control" name="o_mobile_phone_2"
+                                                    value="{{ old('o_mobile_phone_2') }}">
 
                                             </div>
                                         </div>
@@ -1214,7 +1205,8 @@
                                         <div class="col-lg-12 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">Work Place</label>
-                                                <input type="text" class="form-control" name="o_work_place_2">
+                                                <input type="text" class="form-control" name="o_work_place_2"
+                                                    value="{{ old('o_work_place_2') }}">
                                             </div>
                                         </div>
 
@@ -1248,14 +1240,16 @@
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">Full Name</label>
-                                                <input type="text" class="form-control" name="e_full_name_1">
+                                                <input type="text" class="form-control" name="e_full_name_1"
+                                                    value="{{ old('e_full_name_1') }}">
 
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">Work Phone</label>
-                                                <input type="text" class="form-control" name="e_work_phone_1">
+                                                <input type="text" class="form-control" name="e_work_phone_1"
+                                                    value="{{ old('e_work_phone_1') }}">
 
                                             </div>
                                         </div>
@@ -1264,7 +1258,7 @@
                                                 <label class="form-label">Relationship to Student</label>
 
                                                 <input type="text" list="parent" class="form-control"
-                                                    name="e_relationship_1">
+                                                    value="{{ old('e_relationship_1') }}" name="e_relationship_1">
                                                 <datalist id="parent">
                                                     <option>Father</option>
                                                     <option>Mother</option>
@@ -1275,7 +1269,8 @@
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">Mobile Phone</label>
-                                                <input type="text" class="form-control" name="e_mobile_phone_1">
+                                                <input type="text" class="form-control" name="e_mobile_phone_1"
+                                                    value="{{ old('e_mobile_phone_1') }}">
 
                                             </div>
                                         </div>
@@ -1284,7 +1279,8 @@
                                         <div class="col-lg-12 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">Other Contact Info</label>
-                                                <input type="text" class="form-control" name="e_contact_info_1">
+                                                <input type="text" class="form-control" name="e_contact_info_1"
+                                                    value="{{ old('e_contact_info_1') }}">
                                             </div>
                                         </div>
 
@@ -1306,14 +1302,16 @@
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">Full Name</label>
-                                                <input type="text" class="form-control" name="e_full_name_2">
+                                                <input type="text" class="form-control" name="e_full_name_2"
+                                                    value="{{ old('e_full_name_2') }}">
 
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">Work Phone</label>
-                                                <input type="text" class="form-control" name="e_work_phone_2">
+                                                <input type="text" class="form-control" name="e_work_phone_2"
+                                                    value="{{ old('e_work_phone_2') }}">
 
                                             </div>
                                         </div>
@@ -1322,7 +1320,7 @@
                                                 <label class="form-label">Relationship to Student</label>
 
                                                 <input type="text" list="parent" class="form-control"
-                                                    name="e_relationship_2">
+                                                    value="{{ old('e_relationship_2') }}" name="e_relationship_2">
                                                 <datalist id="parent">
                                                     <option>Father</option>
                                                     <option>Mother</option>
@@ -1333,7 +1331,8 @@
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">Mobile Phone</label>
-                                                <input type="text" class="form-control" name="e_mobile_phone_2">
+                                                <input type="text" class="form-control" name="e_mobile_phone_2"
+                                                    value="{{ old('e_mobile_phone_2') }}">
 
                                             </div>
                                         </div>
@@ -1342,7 +1341,8 @@
                                         <div class="col-lg-12 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">Other Contact Info</label>
-                                                <input type="text" class="form-control" name="e_contact_info_2">
+                                                <input type="text" class="form-control" name="e_contact_info_2"
+                                                    value="{{ old('e_contact_info_2') }}">
                                             </div>
                                         </div>
 
@@ -1375,8 +1375,8 @@
                                                     <div class="form-check">
 
                                                         <input type="radio" class="form-check-input" id="is_disorder"
-                                                            value="1" name="is_disorder">
-                                                        <label class="form-check-label" for="is_disorder">Yes</label>
+                                                            value="1" name="is_disable">
+                                                        <label class="form-check-label" for="is_disable">Yes</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-4">
@@ -1384,7 +1384,7 @@
                                                     <div class="form-check">
 
                                                         <input type="radio" class="form-check-input"
-                                                            id="is_disorder_not" value="0" name="is_disorder">
+                                                            id="is_disorder_not" value="0" name="is_disable">
                                                         <label class="form-check-label" for="is_disorder_not">No</label>
                                                     </div>
                                                 </div>
@@ -1396,7 +1396,7 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">If yes, please specify:</label>
-                                            <textarea name="disorder_detail" class="form-control" id=""></textarea>
+                                            <textarea name="disorder_detail" class="form-control" id="">{{ old('disorder_detail') }}</textarea>
 
                                         </div>
                                     </div>
@@ -1430,7 +1430,7 @@
                                             <label class="form-label">How do you Know About Us</label>
 
                                             <input list="browsers" name="know_about_us" id="browser"
-                                                class="form-control" required>
+                                                value="{{ old('know_about_us') }}" class="form-control" required>
                                             <datalist id="browsers">
                                                 <option value="Leaflet">
                                                 <option value="Google">
@@ -1444,7 +1444,8 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Do you have any comments or feedback?</label>
-                                            <input type="text" class="form-control" name="feedback" id="">
+                                            <input type="text" class="form-control" name="feedback" id=""
+                                                value="{{ old('feedback') }}">
 
 
                                         </div>
@@ -1520,7 +1521,8 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <input type="checkbox" name="">
-                                            <label class="form-label pl-2">I am aware that if child misses a lesson for any
+                                            <label class="form-label pl-2">I am aware that if child misses a lesson for
+                                                any
                                                 reason, class will not be refunded.
 
                                             </label>

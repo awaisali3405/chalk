@@ -141,41 +141,42 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Mailing Address</label>
+                                            <label class="form-label">First Address</label>
                                             <input type="text" id="formatted_address_0" class="form-control"
                                                 name="res_address">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Second Mailing Address Line </label>
+                                            <label class="form-label">Second Address Line </label>
                                             <input type="text" id="formatted_address_1" class="form-control"
                                                 name="res_second_address">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Third Mailing Address Line</label>
+                                            <label class="form-label">Third Address Line</label>
                                             <input type="text" id="formatted_address_2" class="form-control"
                                                 name="res_third_address">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label"> Mailing Town</label>
+                                            <label class="form-label"> Town</label>
                                             <input type="text" id="town_or_city" class="form-control"
                                                 name="res_town">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label"> Mailing County </label>
-                                            <input type="text" id="county" class="form-control" name="res_country">
+                                            <label class="form-label"> County </label>
+                                            <input type="text" id="county" class="form-control"
+                                                name="res_country">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label"> Mailing Postcode</label>
+                                            <label class="form-label"> Postcode</label>
                                             <input type="text" id="postcode" class="form-control"
                                                 name="res_postal_code">
                                         </div>
