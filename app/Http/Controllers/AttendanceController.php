@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -9,9 +10,14 @@ class AttendanceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('attendance.index');
+        if (isset($request)) {
+            $student = Student::where('year_id', $request->year_id)->get();
+        } else {
+            $student = array();
+        }
+        return view('attendance.index', compact('student'));
     }
 
     /**
