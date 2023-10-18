@@ -19,16 +19,35 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="text-center p-3 bg-white" style="">
+            <div class="row bg-white d-flex justify-content-center">
+                <div class="col-4">
+                    <div class="text-center p-3 " style="">
                         <div class="profile-photo">
                             {{-- @dd($invoice) --}}
                             <img id="img" src="{{ asset($student->profile_pic) }}" width="100" height="100"
                                 class="img-fluid rounded-circle" alt="">
                         </div>
-                        <label for="upload" class="mt-3 mb-1 text-bold"> Name :{{ $student->first_name }}
+                        <label for="upload" class="mt-3 mb-1 text-bold"> Name : {{ $student->first_name }}
                             {{ $student->last_name }} </label>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div>
+
+                        <label for="upload" class="mt-3 mb-1 text-bold"> Roll No: {{ $student->id }} </label>
+                    </div>
+                    <div>
+
+                        <label for="upload" class="mt-3 mb-1 text-bold"> Year : {{ $student->year->name }} </label>
+                    </div>
+                    <div>
+
+                        <label for="upload" class="mt-3 mb-1 text-bold"> Payment : {{ $student->payment_period }}
+                        </label>
+                    </div>
+                    <div>
+
+                        <label for="upload" class="mt-3 mb-1 text-bold"> Branch : {{ $student->branch->name }}</label>
                     </div>
                 </div>
 
@@ -50,19 +69,36 @@
                                                 <th>Invoice Date</th>
                                                 <th>Type</th>
                                                 <th>Amount</th>
+                                                <th>Paid Amount</th>
+                                                <th>Payable</th>
                                                 <th>Status</th>
                                                 <th>Period</th>
 
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
+                                        @php
+                                            $total = 0;
+                                            $total_paid = 0;
+                                            $tatal_remaining = 0;
+                                        @endphp
                                         <tbody>
                                             @foreach ($invoice as $key => $value)
+                                                @php
+                                                    $total += $value->amount;
+                                                    // dd($value->);
+                                                    $total_paid += $value->receipt->sum('amount');
+                                                    $tatal_remaining += $value->amount - ($value->receipt->sum('discount') - $value->receipt->sum('late_fee')) - $value->receipt->sum('amount');
+                                                @endphp
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ $value->created_at->toDateString() }}</td>
                                                     <td>{{ $value->type }}</td>
                                                     <td>{{ $value->amount }}</td>
+                                                    <td>{{ $value->receipt->sum('amount') }}
+                                                    </td>
+                                                    <td>{{ $value->amount - ($value->receipt->sum('discount') - $value->receipt->sum('late_fee')) - $value->receipt->sum('amount') }}
+                                                    </td>
                                                     <td>{{ $value->is_paid ? 'Paid' : 'Un Paid' }}</td>
                                                     <td>{{ $value->from_date }} - {{ $value->to_date }}</td>
                                                     <td>
@@ -78,7 +114,22 @@
                                                     </td>
                                                 </tr>
                                             @endforeach
+
+
                                         </tbody>
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th>{{ $total }}</th>
+                                                <th>{{ $total_paid }}</th>
+                                                <th>{{ $tatal_remaining }}</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
                                     </table>
                                 </div>
                             </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\StudentInvoice;
+use App\Models\StudentInvoiceReceipt;
 use Illuminate\Http\Request;
 
 class ReceiptController extends Controller
@@ -16,8 +17,8 @@ class ReceiptController extends Controller
      */
     public function index($id)
     {
-        $invoice = StudentInvoice::find($id);
-        return view('receipt.index', compact('invoice'));
+        // $invoice = StudentInvoice::find($id);
+        // return view('receipt.index', compact('invoice'));
     }
 
     /**
@@ -33,7 +34,15 @@ class ReceiptController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->except('_token');
+        $data = StudentInvoiceReceipt::create($data);
+        $invoice = StudentInvoice::find($request->invoice_id);
+        if ($invoice->amount - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount') <= 0) {
+            $invoice->update([
+                'is_paid' => 1
+            ]);
+        }
+        return redirect()->route('receipt.show', $request->invoice_id)->with('success', "Receipt Created Successfully");
     }
 
     /**

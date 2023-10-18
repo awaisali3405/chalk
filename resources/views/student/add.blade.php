@@ -456,7 +456,8 @@
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
                                                                     <input type="text" class="form-control"
-                                                                        value="0" name="annual_resource_fee">
+                                                                        value="0" name="annual_resource_fee"
+                                                                        id="annual_resource_fee" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -467,8 +468,9 @@
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
-                                                                    <input type="text" class="form-control"
-                                                                        value="0" name="resource_discount">
+                                                                    <input type="text" id="resource_discount"
+                                                                        class="form-control" value="0"
+                                                                        name="resource_discount">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -479,8 +481,9 @@
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
-                                                                    <input type="text" class="form-control"
-                                                                        value="0" name="exercise_book_fee">
+                                                                    <input type="text" id="exercise_book"
+                                                                        class="form-control" value="0"
+                                                                        name="exercise_book_fee" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>

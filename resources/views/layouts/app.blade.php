@@ -21,7 +21,18 @@
 
     {{-- Select 2 --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 </head>
+<style>
+    .unselectable {
+        background-color: #f2f2f2;
+        cursor: not-allowed;
+    }
+</style>
 
 <body>
 
@@ -219,6 +230,12 @@
                                         </td>
                                     </tr>`;
                         console.log(x);
+                        price = parseFloat($("#annual_resource_fee").val()) + +success.data.subject.rate
+                        e_price = parseFloat($("#exercise_book").val()) + +success.data.subject
+                            .book_rate
+                        console.log(price);
+                        $('#annual_resource_fee').val(price)
+                        $('#exercise_book').val(e_price)
                         $('#subject').append(x);
                     },
                     error: function(e) {
@@ -310,7 +327,22 @@
                     // if (success.message == 'success') {
                     console.log(success, $(this).parent().parent());
                     // }
+                    price = parseFloat($('#annual_resource_fee').val()) - +success.data.rate
+                    if (price && price < 0) {
 
+                        $('#annual_resource_fee').val(0)
+                    } else {
+                        $('#annual_resource_fee').val(price)
+                    }
+                    e_price = parseFloat($('#exercise_book').val()) - +success.data.book_rate
+                    console.log(e_price);
+                    if (e_price && e_price < 0) {
+
+                        $('#exercise_book').val(0)
+                    } else {
+
+                        $('#exercise_book').val(e_price)
+                    }
 
                 }
             })
@@ -606,6 +638,65 @@
             })
         })
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            function allowMondayDate(date) {
+                // Allow Mondays, Saturdays, the first day, and the last day of the month
+                return (date.getDay() === 1);
+            }
+
+            function allowFirstDate(date) {
+                return (date.getDate() === 1);
+            }
+
+            function allowLastDate(date) {
+                return (new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate() === date.getDate());
+            }
+
+            function allowSundayDate(date) {
+                // Allow Mondays, Saturdays, the first day, and the last day of the month
+                return (date.getDay() === 0);
+            }
+            var payment = $(".payment").val()
+            $('.payment').on('change keyup', function() {
+                payment = $(this).val()
+            })
+            console.log(payment)
+            $(".start_date").datepicker({
+                beforeShowDay: function(date) {
+                    if (payment == "Weekly") {
+
+                        var cssClass = allowMondayDate(date) ? 'selectable' : 'unselectable';
+                        return [allowMondayDate(date), cssClass];
+                    } else {
+                        var cssClass = allowFirstDate(date) ? 'selectable' : 'unselectable';
+                        return [allowFirstDate(date), cssClass];
+
+                    }
+                }
+            });
+            $(".end_date").datepicker({
+                beforeShowDay: function(date) {
+                    if (payment == "Weekly") {
+
+                        var cssClass = allowSundayDate(date) ? 'selectable' : 'unselectable';
+                        return [allowSundayDate(date), cssClass];
+                    } else {
+                        var cssClass = allowLastDate(date) ? 'selectable' : 'unselectable';
+                        return [allowLastDate(date), cssClass];
+
+                    }
+                }
+            });
+
+        });
+        // $('#start_date').on('change keyup', function() {
+
+        // })
+    </script>
+
 </body>
 
 </html>

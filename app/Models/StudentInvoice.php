@@ -25,4 +25,8 @@ class StudentInvoice extends Model
     {
         return $this->hasMany(InvoiceSubject::class, 'invoice_id');
     }
+    public function receipt()
+    {
+        return $this->hasMany(StudentInvoiceReceipt::class, 'invoice_id');
+    }
 }

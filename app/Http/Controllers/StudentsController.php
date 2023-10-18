@@ -167,40 +167,41 @@ class StudentsController extends Controller
                 ]);
                 $student->parents()->attach([$parent->id]);
             }
-            $subject = $student->enquirySubject()->pluck('id')->toArray();
-            // dd($subject);
-            $invoice = StudentInvoice::create([
-                'student_id' => $student->id,
-                'amount' => $student->deposit,
-                'type' => 'Refundable',
-            ]);
-            $invoice = StudentInvoice::create([
-                'student_id' => $student->id,
-                'amount' => $student->registration_fee,
-                'type' => 'Non Refundable',
-            ]);
-            $invoice = StudentInvoice::create([
-                'student_id' => $student->id,
-                'amount' => 0,
-                'type' => 'Resource Fee',
-            ]);
-            foreach ($student->enquirySubject as $key => $value) {
-                InvoiceSubject::create([
-                    'invoice_id' => $invoice->id,
-                    'subject_name' => $value->subject->name,
-                    'subject_rate' => $value->subject->rate
-                ]);
-            }
-            $invoice->update([
-                'amount' => $invoice->subject->sum('student_rate')
-            ]);
-
-
-
-            $subject = EnquirySubject::whereIn('id', $data1['enquiry_subject'])->update([
-                'student_id' => $student->id
+        }
+        $subject = $student->enquirySubject()->pluck('id')->toArray();
+        // dd($subject);
+        $invoice = StudentInvoice::create([
+            'student_id' => $student->id,
+            'amount' => $student->deposit,
+            'type' => 'Refundable',
+        ]);
+        $invoice = StudentInvoice::create([
+            'student_id' => $student->id,
+            'amount' => $student->registration_fee,
+            'type' => 'Registration',
+        ]);
+        $invoice = StudentInvoice::create([
+            'student_id' => $student->id,
+            'amount' => 0,
+            'type' => 'Resource Fee',
+        ]);
+        foreach ($student->enquirySubject as $key => $value) {
+            InvoiceSubject::create([
+                'invoice_id' => $invoice->id,
+                'subject_name' => $value->subject->name,
+                'subject_rate' => $value->subject->rate
             ]);
         }
+        $invoice->update([
+            'amount' => $request->annual_resource_fee + $request->exercise_book_fee
+        ]);
+
+
+
+        $subject = EnquirySubject::whereIn('id', $data1['enquiry_subject'])->update([
+            'student_id' => $student->id
+        ]);
+
         return redirect()->route('student.index')->with('success', 'student Created Successfully');
     }
 
@@ -292,7 +293,7 @@ class StudentsController extends Controller
 
         $student = Student::find($id);
         $student->update($data);
-        
+
         // $student->parents()->detach();
         // foreach ($data['first_name1'] as $key => $value) {
         //     $parent = Parents::where('first_name', $data['first_name1'][$key])->first();

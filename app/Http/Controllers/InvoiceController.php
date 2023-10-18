@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Models\StudentInvoice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class InvoiceController extends Controller
 {
@@ -14,8 +15,28 @@ class InvoiceController extends Controller
     public function index(Request $request)
     {
 
-        $invoice = StudentInvoice::all();
-        $student = Student::all();
+        if (request()->input()) {
+            $invoice = StudentInvoice::all();
+
+            $student = Student::where(function ($query) use ($request) {
+                if ($request->branch_id != 0) {
+                    $query->where('branch_id', $request->branch_id);
+                }
+                if ($request->year_id) {
+
+                    $query->where('year_id', $request->year_id);
+                }
+                if ($request->payment_period != 0) {
+
+                    $query->where('payment_period', $request->payment_period);
+                }
+            })->get();
+            // dd($student);
+        } else {
+            $invoice = StudentInvoice::all();
+            $student = Student::where('payment_period', "Weekly")->get();
+        }
+
         return view('invoice.index', compact('invoice', 'student'));
     }
 
@@ -37,9 +58,9 @@ class InvoiceController extends Controller
         $student = Student::find($request->student_id);
         if ($student->payment_period == 'Weekly') {
 
-            $data['amount'] = ($student->fee - $student->fee_discount) / 7;
+            $data['amount'] = (($student->fee - $student->fee_discount) / 7) * 30;
         } else {
-            $data['amount'] = ($student->fee - $student->fee_discount) / 30;
+            $data['amount'] = ($student->fee - $student->fee_discount);
         }
         StudentInvoice::create($data);
         return redirect()->route('invoice.index')->with('success', 'invoice Created Successfully');
@@ -81,5 +102,44 @@ class InvoiceController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function groupInvoice(Request $request)
+    {
+        $to = \Carbon\Carbon::parse($request->from_date);
+        $from = \Carbon\Carbon::parse($request->to_date);
+        $days = $to->diffInDays($from) + 1;
+        $weeks = $to->diffInWeeks($from->addDay(2));
+        // $days=$request->from_date
+        // dd($request, $days, $weeks);
+
+        if ($request->student) {
+
+
+            foreach ($request->student as $value) {
+                $student = Student::find($value);
+                if ($student->payment_period == "Weekly") {
+                    $amount = ($student->fee - $student->fee_discount) * $weeks;
+                    StudentInvoice::create([
+                        'student_id' => $student->id,
+                        'type' => $weeks . ' Weeks Fee',
+                        'amount' => $amount,
+                        'from_date' => $to,
+                        'to_date' => $from,
+                    ]);
+                } else {
+                    $amount = ($student->fee - $student->fee_discount);
+                    StudentInvoice::create([
+                        'student_id' => $student->id,
+                        'type' => 'Monthly Fee',
+                        'amount' => $amount,
+                        'from_date' => $to,
+                        'to_date' => $from,
+                    ]);
+                }
+            }
+            return redirect()->route('invoice.index')->with('success', "General Invoice Created Successfully");
+        } else {
+            return redirect()->route('invoice.index')->with('error', "Select Student");
+        }
     }
 }

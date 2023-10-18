@@ -7,16 +7,10 @@
             <div class="row page-titles mx-0">
                 <div class="col-sm-6 p-md-0">
                     <div class="welcome-text">
-                        <h4>About Student</h4>
+                        <h4>Receipt</h4>
                     </div>
                 </div>
-                <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0);">Students</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0);">About Student</a></li>
-                    </ol>
-                </div>
+
             </div>
 
             <div class="row">
@@ -47,12 +41,16 @@
                                     <li class="list-group-item d-flex justify-content-between"><span
                                             class="mb-0">Branch</span> <strong
                                             class="text-muted">{{ $invoice->student->branch->name }}</strong></li>
-                                    <li class="list-group-item d-flex justify-content-between"><span
-                                            class="mb-0">Balance</span> <strong class="text-muted">0</strong></li>
+                                    <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Student
+                                            Balance</span> <strong class="text-muted">0</strong></li>
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Invoice
                                             #</span> <strong class="text-muted">{{ $invoice->id }}</strong></li>
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Invoice
                                             Amount</span> <strong class="text-muted">£{{ $invoice->amount }}</strong></li>
+                                    <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Invoice
+                                            Remaining </span> <strong
+                                            class="text-muted">£{{ $invoice->amount - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount') }}</strong>
+                                    </li>
                                 </ul>
 
                             </div>
@@ -70,9 +68,9 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="card">
-                                <div class="card-header d-block">
+                                {{-- <div class="card-header d-block">
                                     <h4 class="card-title">Parent Login Detail </h4>
-                                </div>
+                                </div> --}}
                                 {{-- <div class="card-body">
                                     <h6>Photoshop
                                         <span class="pull-right">85%</span>
@@ -131,22 +129,27 @@
                                         <div id="about-me" class="tab-pane fade active show">
                                             <div class="profile-personal-info pt-4">
                                                 {{-- <h4 class="text-primary mb-4">Personal Information</h4> --}}
-                                                <form action="{{ route('subject.store') }}" method="post">
+                                                <form action="{{ route('receipt.store') }}" method="post">
                                                     @csrf
                                                     <div class="row">
 
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <input type="hidden" name="invoice_id"
+                                                                value="{{ $invoice->id }}">
                                                             <div class="form-group">
                                                                 <label class="form-label">Balance To Pay</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
+                                                                    {{-- @dd($invoice->receipt->sum('amount') - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee'))) --}}
                                                                     <input type="hidden" class="form-control"
-                                                                        id="actual_amount" value="{{ $invoice->amount }}">
+                                                                        id="actual_amount"
+                                                                        value="{{ $invoice->amount - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount') }}">
                                                                     <input type="text" class="form-control"
-                                                                        id="pay_amount" value="{{ $invoice->amount }}"
-                                                                        name="pay_amount" required>
+                                                                        id="pay_amount"
+                                                                        value="{{ $invoice->amount - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount') }}"
+                                                                        name="amount" required>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -158,8 +161,8 @@
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
                                                                     <input type="text" class="form-control"
-                                                                        id="discount" name="discount_amount"
-                                                                        value="0" placeholder="" required>
+                                                                        id="discount" name="discount" value="0"
+                                                                        placeholder="" required>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -171,8 +174,8 @@
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
                                                                     <input type="text" class="form-control"
-                                                                        id="late_fee" name="discount_amount"
-                                                                        value="0" placeholder="" required>
+                                                                        id="late_fee" name="late_fee" value="0"
+                                                                        placeholder="" required>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -184,13 +187,13 @@
                                                                         <div class="input-group-text">£</div>
                                                                     </div> --}}
                                                                     <input type="date" class="form-control"
-                                                                        name="discount_amount" placeholder="">
+                                                                        name="date" placeholder="" required>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-12 col-md-6 col-sm-12">
                                                             <div class="form-group">
-                                                                <label class="form-label">Date</label>
+                                                                <label class="form-label">Description</label>
                                                                 <div class="input-group mb-2">
                                                                     {{-- <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
@@ -251,13 +254,28 @@
                                                                 <th>Receipt Date</th>
                                                                 <th>Paid</th>
                                                                 <th>Discount</th>
+                                                                <th>Late Fee</th>
                                                                 <th>Mode</th>
 
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-
+                                                            @forelse ($invoice->receipt as $key=> $value)
+                                                                <tr>
+                                                                    <td>{{ $key + 1 }}</td>
+                                                                    <td>{{ $value->date }}</td>
+                                                                    <td>{{ $value->amount }}</td>
+                                                                    <td>{{ $value->discount }}</td>
+                                                                    <td>{{ $value->late_fee }}</td>
+                                                                    <td>{{ $value->mode }}</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                            @empty
+                                                                <tr>
+                                                                    <td colspan="7">No Data Available </td>
+                                                                </tr>
+                                                            @endforelse
                                                         </tbody>
                                                     </table>
                                                 </div>

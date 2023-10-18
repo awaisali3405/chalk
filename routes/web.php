@@ -53,6 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('student', StudentsController::class);
     Route::resource('enquiry', EnquiryController::class);
     Route::resource('invoice', InvoiceController::class);
+    Route::post('invoice/group/generate', [InvoiceController::class, 'groupInvoice'])->name('group.invoice');
 
     Route::resource('receipt', ReceiptController::class);
     Route::resource('product', ProductController::class);

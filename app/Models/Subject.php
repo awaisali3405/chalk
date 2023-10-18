@@ -12,7 +12,8 @@ class Subject extends Model
     protected $fillable = [
         'name',
         'year_id',
-        'rate'
+        'rate',
+        'book_rate'
     ];
     public function year()
     {

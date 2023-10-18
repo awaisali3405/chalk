@@ -56,6 +56,18 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Book Rate</label>
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">£</div>
+                                                </div>
+                                                <input type="text" class="form-control" onkeypress="return isNumber(e)"
+                                                    name="book_rate" required>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                         <button type="submit" class="btn btn-light">Cencel</button>

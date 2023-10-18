@@ -36,6 +36,9 @@
                                                     <th>
                                                         Rate Per Lecture
                                                     </th>
+                                                    <th>
+                                                        Book Fee
+                                                    </th>
 
                                                     <th>Action</th>
                                                 </tr>
@@ -48,6 +51,7 @@
                                                         <td>{{ $value->name }}</td>
                                                         <td>{{ $value->year->name }}</td>
                                                         <td>£ {{ $value->rate }}</td>
+                                                        <td>£ {{ $value->book_rate }}</td>
                                                         <td>
                                                             <a href="{{ route('subject.edit', $value->id) }}"
                                                                 class="btn btn-sm btn-primary"><i

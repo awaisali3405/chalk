@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\EnquirySubject;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 
 class EnquirySubjectController extends Controller
@@ -31,9 +32,10 @@ class EnquirySubjectController extends Controller
     }
     public function apiDelete($id)
     {
-        EnquirySubject::find($id)->delete();
+        $enquirySubject = EnquirySubject::whereId($id)->first();
+        $enquirySubject->delete();
         return response()->json([
-            'message' => 'success'
+            'message' => 'success', 'data' => $enquirySubject->subject
         ]);
     }
 }
