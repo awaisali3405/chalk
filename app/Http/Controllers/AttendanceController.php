@@ -80,7 +80,7 @@ class AttendanceController extends Controller
                 }
             }
         }
-        return redirect()->route('attendance.index')->with('success', 'Attendance Created Successfully');
+        return redirect()->route('attendance.create')->with('success', 'Attendance Created Successfully');
         // }
     }
 
