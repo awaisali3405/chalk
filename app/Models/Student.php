@@ -109,4 +109,23 @@ class Student extends Model
     {
         return $this->belongsToMany(Parents::class, 'student_parent', 'student_id', 'parent_id');
     }
+    public function attendance()
+    {
+        return $this->hasMany(Attendance::class, 'student_id');
+    }
+    public function attendanceStatus($subject, $date)
+    {
+        // dd($date);
+        $attend = $this->attendance()->where('subject_id', $subject)->where('date', $date)->first();
+        if ($attend) {
+
+            return $attend->status;
+        } else {
+            return 0;
+        }
+    }
+    public function totalAttendance($from, $to)
+    {
+        return $this->attendance()->where('date', ">=", $from)->where('date', '<=', $to);
+    }
 }

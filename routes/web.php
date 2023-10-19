@@ -62,6 +62,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('supplier', SupplierControlller::class);
     Route::resource('parent', ParentController::class);
     Route::resource('attendance', AttendanceController::class);
+    Route::get('student/{id}/attendance', [StudentsController::class, 'show'])->name('attendance.student.detail');
     Route::get('/enquiry/{id}/note', [EnquiryController::class, 'note'])->name('enquiry.note');
     Route::get('/enquiry/{id}/upload', [EnquiryController::class, 'upload'])->name('enquiry.upload');
     Route::get('/enquiry/{id}/upload/delete', [EnquiryController::class, 'uploadDelete'])->name('enquiry.upload.delete');

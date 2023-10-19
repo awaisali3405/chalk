@@ -143,6 +143,7 @@
                         </div>
                     </div>
                 </div>
+                {{-- @dd(str_contains('/attendance', url()->current())) --}}
                 <div class="col-xl-9 col-xxl-8 col-lg-8">
                     <div class="card">
                         <div class="card-body">
@@ -150,20 +151,23 @@
                                 <div class="custom-tab-1">
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item"><a href="#about-me" data-toggle="tab"
-                                                class="nav-link active show">About Me</a></li>
+                                                class="nav-link {{ str_contains('attendance', url()->current()) ? '' : 'active show' }} ">About
+                                                Me</a></li>
                                         <li class="nav-item"><a href="#upload" data-toggle="tab" class="nav-link">Upload</a>
                                         </li>
                                         <li class="nav-item"><a href="#note" data-toggle="tab" class="nav-link">Notes</a>
                                         </li>
-                                        <li class="nav-item"><a href="#attandence" data-toggle="tab"
-                                                class="nav-link">Attendance</a></li>
+                                        <li class="nav-item"><a href="#attendance" data-toggle="tab"
+                                                class="nav-link {{ str_contains('attendance', url()->current()) ? 'active show' : '' }}">Attendance</a>
+                                        </li>
                                         <li class="nav-item"><a href="#statement" data-toggle="tab"
                                                 class="nav-link">Statement</a></li>
                                         <li class="nav-item"><a href="#parent" data-toggle="tab" class="nav-link">Parent
                                                 Detail</a></li>
                                     </ul>
                                     <div class="tab-content">
-                                        <div id="about-me" class="tab-pane fade active show">
+                                        <div id="about-me"
+                                            class="tab-pane fade {{ str_contains('attendance', url()->current()) ? '' : 'active show' }}">
                                             <div class="profile-personal-info pt-4">
                                                 <h4 class="text-primary mb-4">Personal Information</h4>
                                                 <div class="row mb-4">
@@ -232,14 +236,6 @@
                                                 </div>
                                             </div> --}}
                                         </div>
-                                        <div id="note" class="tab-pane fade">
-                                            <div class="my-post-content pt-3">
-                                                <div class="post-input">
-                                                    {!! $student->note !!}
-                                                </div>
-
-                                            </div>
-                                        </div>
                                         <div id="upload" class="tab-pane fade">
                                             <div class="my-post-content pt-3">
                                                 <div class="post-input">
@@ -274,6 +270,47 @@
                                                                             class="btn btn-sm btn-danger"><i
                                                                                 class="la la-trash-o"></i></a> --}}
                                                                     </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div id="note" class="tab-pane fade">
+                                            <div class="my-post-content pt-3">
+                                                <div class="post-input">
+                                                    {!! $student->note !!}
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div id="attendance"
+                                            class="tab-pane fade {{ str_contains('attendance', url()->current()) ? 'active show' : '' }}">
+                                            <div class="my-post-content pt-3">
+                                                <div class="post-input">
+                                                    <table id="example5" class="display" style="min-width: 845px">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Date</th>
+                                                                <th>Subject</th>
+                                                                <th>Status</th>
+
+
+                                                                {{-- <th>Action</th> --}}
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($student->attendance as $key => $value)
+                                                                <tr>
+                                                                    <td>{{ $value->date }}</td>
+
+                                                                    <td>{{ $value->subject->name }}</td>
+                                                                    <td>{{ $value->statusName() }}</td>
+
+
+
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>

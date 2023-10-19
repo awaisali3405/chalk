@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -12,20 +13,45 @@ class AttendanceController extends Controller
      */
     public function index(Request $request)
     {
-        if (isset($request)) {
-            $student = Student::where('year_id', $request->year_id)->get();
+        if (request()->input()) {
+            $student = new Student;
+            if (request()->input('year_id') != '') {
+
+                $student = $student->where('year_id', $request->year_id);
+            }
+            if (request()->input('branch_id') != '') {
+
+                $student = $student->where('branch_id', $request->branch_id);
+            }
+            $student = $student->get();
         } else {
             $student = array();
         }
+        // dd($student);
         return view('attendance.index', compact('student'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        if (request()->input()) {
+            $student = new Student;
+            if (request()->input('year_id') != '') {
+
+                $student = $student->where('year_id', $request->year_id);
+            }
+            if (request()->input('branch_id') != '') {
+
+                $student = $student->where('branch_id', $request->branch_id);
+            }
+            $student = $student->get();
+        } else {
+            $student = array();
+        }
+        // dd($student);
+        return view('attendance.add', compact('student'));
     }
 
     /**
@@ -33,15 +59,38 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $data = $request->except('_token');
+        // foreach ($data['student'] as $key => $student) {
+        foreach ($data['subject_id'] as $student => $studentSubjects) {
+            foreach ($studentSubjects as $key => $subject) {
+                $attendance = Attendance::where('student_id', $student)->where('subject_id', $subject)->where('date', $data['date'])->first();
+                if ($attendance) {
+                    $attendance->update([
+                        'status' => $data['status'][$student][$subject]
+                    ]);
+                } else {
+
+                    Attendance::create([
+                        'student_id' => $student,
+                        'subject_id' => $subject,
+                        'status' => $data['status'][$student][$subject],
+                        'date' => $data['date']
+                    ]);
+                }
+            }
+        }
+        return redirect()->route('attendance.index')->with('success', 'Attendance Created Successfully');
+        // }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id, Request $request)
     {
-        //
+        // $student = Student::find($id);
+        // return
     }
 
     /**
