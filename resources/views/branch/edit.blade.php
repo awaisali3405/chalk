@@ -44,7 +44,7 @@
                                         <div class="form-group">
                                             <label class="form-label">Company Registration Number</label>
                                             <input type="text" class="form-control" name="company_number"
-                                                value="{{ $branch->company_nummber }}">
+                                                value="{{ $branch->company_number }}">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
