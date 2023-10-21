@@ -15,6 +15,7 @@ use App\Models\Student;
 use App\Models\StudentInvoice;
 use App\Models\Subject;
 use App\Models\Year;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -392,5 +393,12 @@ class StudentsController extends Controller
             $html .= "<option value='" . $value->id . "'>" . $value->subject->name . "</option>";
         }
         return response()->json(['data' => $student, 'html' => $html]);
+    }
+    public function statementPrint($id)
+    {
+        $student = Student::find($id);
+        // $pdf = Pdf::loadView('student.print.statement', ['student' => $student]);
+        // return $pdf->stream('statement.pdf');
+        return view('student.print.statement', compact('student'));
     }
 }

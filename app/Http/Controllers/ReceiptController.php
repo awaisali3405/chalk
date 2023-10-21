@@ -77,4 +77,8 @@ class ReceiptController extends Controller
     {
         //
     }
+    public function print($id)
+    {
+        // Receipt::find();
+    }
 }

@@ -72,6 +72,8 @@
                                                                     href="{{ route('student.show', $value->id) }}">Show</a>
                                                                 <a class="dropdown-item"
                                                                     href="{{ route('invoice.show', $value->id) }}">Invoice</a>
+                                                                <a class="dropdown-item" target="_blank"
+                                                                    href="{{ route('student.statement', $value->id) }}">Statement</a>
                                                             </div>
                                                             {{-- <a href="{{ route('student.edit', $value->id) }}"
                                                                 title="edit" class="btn btn-sm btn-primary"><i

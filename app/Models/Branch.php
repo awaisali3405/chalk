@@ -17,5 +17,12 @@ class Branch extends Model
         'phone_number',
         'email',
         'address',
+        'res_address',
+        'res_second_address',
+        'res_third_address',
+        'res_town',
+        'res_country',
+        'res_postal_code',
+        'company_number'
     ];
 }

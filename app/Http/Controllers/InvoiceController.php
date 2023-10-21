@@ -142,4 +142,9 @@ class InvoiceController extends Controller
             return redirect()->route('invoice.index')->with('error', "Select Student");
         }
     }
+    public function print($id)
+    {
+        $invoice = StudentInvoice::find($id);
+        return view('invoice.print.pdf', compact('invoice'));
+    }
 }

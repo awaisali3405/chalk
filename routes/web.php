@@ -51,9 +51,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('scienceType', ScienceTypeController::class);
     Route::resource('academicCalender', AcademicCalenderController::class);
     Route::resource('student', StudentsController::class);
+    Route::get('student/statement/{id}', [StudentsController::class, 'statementPrint'])->name('student.statement');
+
     Route::resource('enquiry', EnquiryController::class);
     Route::resource('invoice', InvoiceController::class);
     Route::post('invoice/group/generate', [InvoiceController::class, 'groupInvoice'])->name('group.invoice');
+    Route::get('invoice/pdf/{id}', [InvoiceController::class, 'print'])->name('invoice.print');
 
     Route::resource('receipt', ReceiptController::class);
     Route::resource('product', ProductController::class);

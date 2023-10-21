@@ -73,7 +73,6 @@
                                                 <th>Payable</th>
                                                 <th>Status</th>
                                                 <th>Period</th>
-
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -104,7 +103,7 @@
                                                     <td>
                                                         <a href="{{ route('receipt.show', $value->id) }}"
                                                             class="btn btn-sm btn-primary">Recieve</a>
-                                                        <a href="{{ route('board.edit', $value->id) }}"
+                                                        <a href="{{ route('invoice.print', $value->id) }}"
                                                             class="btn btn-sm btn-primary">Print</a>
                                                         <a href="{{ route('board.edit', $value->id) }}"
                                                             class="btn btn-sm btn-primary">Delete</a>

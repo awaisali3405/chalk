@@ -32,18 +32,19 @@
                                                 name="name">
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-label">Address</label>
-                                            <input type="text" class="form-control" value="{{ $branch->address }}"
-                                                name="address">
-                                        </div>
-                                    </div>
+
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Bank Name</label>
                                             <input type="text" class="form-control" value="{{ $branch->bank_name }}"
                                                 name="bank_name">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Company Registration Number</label>
+                                            <input type="text" class="form-control" name="company_number"
+                                                value="{{ $branch->company_nummber }}">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
@@ -74,7 +75,50 @@
                                                 name="email">
                                         </div>
                                     </div>
-
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">First Address</label>
+                                            <input type="text" id="formatted_address_0"
+                                                value="{{ $branch->res_address }}" class="form-control" name="res_address">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Second Address Line </label>
+                                            <input type="text" id="formatted_address_1"
+                                                value="{{ $branch->res_second_address }}" class="form-control"
+                                                name="res_second_address">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Third Address Line</label>
+                                            <input type="text" id="formatted_address_2"
+                                                value="{{ $branch->res_third_address }}" class="form-control"
+                                                name="res_third_address">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label"> Town</label>
+                                            <input type="text" id="town_or_city" value="{{ $branch->res_town }}"
+                                                class="form-control" name="res_town">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label"> County </label>
+                                            <input type="text" id="county" value="{{ $branch->res_country }}"
+                                                class="form-control" name="res_country">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label"> Postcode</label>
+                                            <input type="text" id="postcode" value="{{ $branch->res_postal_code }}"
+                                                class="form-control" name="res_postal_code">
+                                        </div>
+                                    </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                         <button type="submit" class="btn btn-light">Cencel</button>
