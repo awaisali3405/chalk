@@ -175,16 +175,22 @@ class StudentsController extends Controller
             'student_id' => $student->id,
             'amount' => $student->deposit,
             'type' => 'Refundable',
+            'from_date' => auth()->user()->session()->start_date,
+            'to_date' => auth()->user()->session()->end_date
         ]);
         $invoice = StudentInvoice::create([
             'student_id' => $student->id,
             'amount' => $student->registration_fee,
             'type' => 'Registration',
+            'from_date' => auth()->user()->session()->start_date,
+            'to_date' => auth()->user()->session()->end_date
         ]);
         $invoice = StudentInvoice::create([
             'student_id' => $student->id,
             'amount' => 0,
             'type' => 'Resource Fee',
+            'from_date' => auth()->user()->session()->start_date,
+            'to_date' => auth()->user()->session()->end_date
         ]);
         foreach ($student->enquirySubject as $key => $value) {
             InvoiceSubject::create([

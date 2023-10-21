@@ -133,4 +133,15 @@ class Student extends Model
     {
         return $this->hasMany(StudentInvoice::class, 'student_id');
     }
+    public function attendanceNote($subject, $date)
+    {
+        // dd($date);
+        $attend = $this->attendance()->where('subject_id', $subject)->where('date', $date)->first();
+        if ($attend) {
+
+            return $attend->note;
+        } else {
+            return "";
+        }
+    }
 }

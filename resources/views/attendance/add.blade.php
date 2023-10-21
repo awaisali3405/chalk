@@ -229,7 +229,10 @@
                                                                     </div>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" name="" id="">
+                                                                    <input type="text"
+                                                                        name="note[{{ $value->id }}][{{ $value1->subject_id }}]"
+                                                                        value="{{ $value->attendanceNote($value1->subject_id, request()->get('date')) }}"
+                                                                        id="">
                                                                 </td>
                                                             </tr>
                                                         @endforeach

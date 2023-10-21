@@ -67,15 +67,17 @@ class AttendanceController extends Controller
                 $attendance = Attendance::where('student_id', $student)->where('subject_id', $subject)->where('date', $data['date'])->first();
                 if ($attendance) {
                     $attendance->update([
-                        'status' => $data['status'][$student][$subject]
+                        'status' => $data['status'][$student][$subject],
+                        'note' => $data['note'][$student][$subject],
                     ]);
                 } else {
 
-                    Attendance::create([
+                    $attendance =  Attendance::create([
                         'student_id' => $student,
                         'subject_id' => $subject,
                         'status' => $data['status'][$student][$subject],
-                        'date' => $data['date']
+                        'date' => $data['date'],
+                        'note' => $data['note'][$student][$subject],
                     ]);
                 }
             }
