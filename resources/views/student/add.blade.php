@@ -165,7 +165,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-lg-12 col-md-6 col-sm-12">
+                                            {{-- <div class="col-lg-12 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Lesson Type</label>
                                                     <div class="row">
@@ -221,7 +221,7 @@
 
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
 
                                             <div class="col-12">
 
@@ -264,7 +264,23 @@
                                                             </div>
                                                             <div class="card-body">
                                                                 <div class="row">
-                                                                    <div class="col-3">
+                                                                    <div class="col-2">
+                                                                        <div class="form-group">
+                                                                            <label class="form-label">Lesson Type</label>
+
+                                                                            <select class="form-control"
+                                                                                id="lesson_type_id">
+                                                                                @foreach ($lessonType as $value)
+                                                                                    <option value="{{ $value->id }}">
+                                                                                        {{ $value->name }}
+                                                                                    </option>
+                                                                                @endforeach
+                                                                            </select>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="col-2">
                                                                         <div class="form-group">
                                                                             <label class="form-label">Subject</label>
 
@@ -278,7 +294,7 @@
                                                                         </div>
 
                                                                     </div>
-                                                                    <div class="col-3">
+                                                                    <div class="col-1">
                                                                         <div class="form-group">
                                                                             <label class="form-label">Board</label>
 
@@ -294,7 +310,7 @@
                                                                         </div>
 
                                                                     </div>
-                                                                    <div class="col-3">
+                                                                    <div class="col-1">
                                                                         <div class="form-group">
                                                                             <label class="form-label">Paper</label>
 
@@ -327,6 +343,39 @@
                                                                         </div>
 
                                                                     </div>
+                                                                    <div class="col-1">
+                                                                        <div class="form-group">
+
+                                                                            <label class="form-label">Rate</label>
+                                                                            <input type="text" name="per_hour_rate"
+                                                                                id="rate" class="form-control">
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-1">
+                                                                        <div class="form-group">
+
+                                                                            <label class="form-label">Hours
+                                                                            </label>
+                                                                            <input type="text" name="no_of_hr"
+                                                                                id="hours" class="form-control">
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-1">
+                                                                        <div class="form-group">
+
+                                                                            <label class="form-label">Amount
+                                                                            </label>
+                                                                            <input type="text" name="amount"
+                                                                                id="amount" class="form-control">
+
+
+                                                                        </div>
+                                                                    </div>
+
                                                                     <div class="col-1 pt-4">
                                                                         <div class="form-group">
 
@@ -343,10 +392,14 @@
                                                                         style="width:100%;">
                                                                         <thead>
                                                                             <tr>
+                                                                                <th>Lesson Type</th>
                                                                                 <th>Subject</th>
                                                                                 <th>Board</th>
                                                                                 <th>Paper</th>
                                                                                 <th>Science Type</th>
+                                                                                <th>Rate</th>
+                                                                                <th>Hours</th>
+                                                                                <th>Amount</th>
 
 
                                                                                 <th>Action</th>

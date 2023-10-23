@@ -24,6 +24,9 @@ class EnquirySubjectController extends Controller
         if ($enquirySubject->scienceType) {
             $enquirySubject1 =   $enquirySubject1->with('scienceType');
         }
+        if ($enquirySubject->lessonType) {
+            $enquirySubject1 =   $enquirySubject1->with('lessonType');
+        }
         $enquirySubject1 =  $enquirySubject1->find($enquirySubject->id);
         return response()->json([
             'message' => 'success',

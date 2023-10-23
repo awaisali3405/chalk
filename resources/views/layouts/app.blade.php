@@ -182,9 +182,13 @@
             $('.select').select2();
         });
         $('#add-subject').on('click', function() {
+            lessonType = $('#lesson_type_id').val();
             subject = $('#subject_id').val();
             paper = $('#paper_id').val();
             board = $('#board_id').val();
+            rate = parseFloat($('#rate').val());
+            hours = parseFloat($('#hours').val());
+            amount = parseFloat($('#amount').val());
             scienceType = $('#science_type_id').val();
             enquiry = $('#enquiry_id').val();
 
@@ -195,8 +199,13 @@
                 'paper_id': paper,
                 'board_id': board,
                 'science_type_id': scienceType,
+                'lesson_type_id': lessonType,
+                'rate_per_hr': rate,
+                'no_hr_weekly': hours,
+                'amount': amount
 
             }
+            console.log(data)
             if (!enquiry) {
                 data['student_id'] = $('#student_id').val()
             } else {
@@ -216,12 +225,17 @@
                         console.log(success);
                         x = `  <tr>
                                         <td>
-
+                                            <a href="javascript:void(0);">${success.data.lesson_type.name}</a>
+                                        </td>
+                                        <td>
                                             <a href="javascript:void(0);">${success.data.subject.name}</a>
                                         </td>
                                         <td>${success.data.board? success.data.board.name:'-'}</td>
                                         <td>${success.data.paper? success.data.paper.name:"-"}</td>
                                         <td>${success.data.science_type?success.data.science_type.name:'-'}</td>
+                                        <td>${success.data.rate_per_hr}</td>
+                                        <td>${success.data.no_hr_weekly}</td>
+                                        <td>${success.data.amount}</td>
 
                                         <td>
 
@@ -695,6 +709,21 @@
         // $('#start_date').on('change keyup', function() {
 
         // })
+    </script>
+
+
+    {{-- Student Subject Amount --}}
+    <script>
+        $('#rate').on('keyup', function() {
+            let rate = parseFloat($('#rate').val()) || 0;
+            let hours = parseFloat($('#hours').val()) || 0;
+            $('#amount').val(rate * hours);
+        })
+        $('#hours').on('keyup', function() {
+            let rate = parseFloat($('#rate').val()) || 0;
+            let hours = parseFloat($('#hours').val()) || 0;
+            $('#amount').val(rate * hours);
+        })
     </script>
 
 </body>

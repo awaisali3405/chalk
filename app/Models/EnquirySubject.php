@@ -18,7 +18,11 @@ class EnquirySubject extends Model
         'paper_id',
         'science_type_id',
         'enquiry_id',
-        'student_id'
+        'student_id',
+        'lesson_type_id',
+        'rate_per_hr',
+        'no_hr_weekly',
+        'amount',
     ];
     /**
      * Get the subject that owns the EnquirySubject
@@ -64,5 +68,9 @@ class EnquirySubject extends Model
     public function enquiry(): BelongsTo
     {
         return $this->belongsTo(Enquiry::class, 'enquiry_id');
+    }
+    public function lessonType()
+    {
+        return $this->belongsTo(LessonType::class, 'lesson_type_id');
     }
 }

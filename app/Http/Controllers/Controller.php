@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Board;
 use App\Models\Branch;
 use App\Models\KeyStage;
+use App\Models\LessonType;
 use App\Models\Paper;
 use App\Models\Parents;
 use App\Models\ScienceType;
@@ -45,5 +46,7 @@ class Controller extends BaseController
         View::share('supplier', $supplier);
         $parent = Parents::all();
         View::share('parent', $parent);
+        $lessonType = LessonType::all();
+        View::share('lessonType', $lessonType);
     }
 }
