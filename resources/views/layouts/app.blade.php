@@ -244,12 +244,16 @@
                                         </td>
                                     </tr>`;
                         console.log(x);
-                        price = parseFloat($("#annual_resource_fee").val()) + +success.data.subject.rate
-                        e_price = parseFloat($("#exercise_book").val()) + +success.data.subject
-                            .book_rate
-                        console.log(price);
-                        $('#annual_resource_fee').val(price)
-                        $('#exercise_book').val(e_price)
+                        if (success.data.lesson_type_id == 1) {
+
+                            price = parseFloat($("#annual_resource_fee").val()) + +success.data.subject
+                                .rate
+                            e_price = parseFloat($("#exercise_book").val()) + +success.data.subject
+                                .book_rate
+                            console.log(price);
+                            $('#annual_resource_fee').val(price)
+                            $('#exercise_book').val(e_price)
+                        }
                         $('#subject').append(x);
                     },
                     error: function(e) {

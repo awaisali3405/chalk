@@ -144,4 +144,16 @@ class Student extends Model
             return "";
         }
     }
+    public function hasOneOnOne()
+    {
+        return $this->enquirySubject->where("lesson_type_id ", 2)->count() > 0 ? true : false;
+    }
+    public function oneOnOneSubject()
+    {
+        return $this->enquirySubject()->where('lesson_type_id', 2)->get();
+    }
+    public function normalSubject()
+    {
+        return $this->enquirySubject()->where('lesson_type_id', 1)->get();
+    }
 }

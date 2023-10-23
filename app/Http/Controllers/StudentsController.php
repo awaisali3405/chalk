@@ -78,7 +78,7 @@ class StudentsController extends Controller
             'payment_period' => 'required',
             'year_id' => 'required',
             'key_stage_id' => 'required',
-            'lesson_type' => 'required',
+            // 'lesson_type' => 'required',
             'admission_date' => 'nullable',
             'deposit' => 'nullable',
             'registration_fee' => 'nullable',
@@ -193,11 +193,14 @@ class StudentsController extends Controller
             'to_date' => auth()->user()->session()->end_date
         ]);
         foreach ($student->enquirySubject as $key => $value) {
-            InvoiceSubject::create([
-                'invoice_id' => $invoice->id,
-                'subject_name' => $value->subject->name,
-                'subject_rate' => $value->subject->rate
-            ]);
+            if ($value->subject->lesson_type_id == 1) {
+
+                InvoiceSubject::create([
+                    'invoice_id' => $invoice->id,
+                    'subject_name' => $value->subject->name,
+                    'subject_rate' => $value->subject->amount
+                ]);
+            }
         }
         $invoice->update([
             'amount' => $request->annual_resource_fee + $request->exercise_book_fee
