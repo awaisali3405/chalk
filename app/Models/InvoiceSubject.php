@@ -12,7 +12,10 @@ class InvoiceSubject extends Model
     protected $fillable = [
         'invoice_id',
         'subject_name',
-        'subject_rate'
+        'subject_rate',
+        'subject_book_fee',
+        'subject_hr',
+        'subject_amount',
     ];
     public function invoice()
     {

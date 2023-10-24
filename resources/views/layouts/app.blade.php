@@ -244,16 +244,16 @@
                                         </td>
                                     </tr>`;
                         console.log(x);
-                        if (success.data.lesson_type_id == 1) {
+                        // if (success.data.lesson_type_id == 1) {
 
-                            price = parseFloat($("#annual_resource_fee").val()) + +success.data.subject
-                                .rate
-                            e_price = parseFloat($("#exercise_book").val()) + +success.data.subject
-                                .book_rate
-                            console.log(price);
-                            $('#annual_resource_fee').val(price)
-                            $('#exercise_book').val(e_price)
-                        }
+                        price = parseFloat($("#annual_resource_fee").val()) + +success.data.subject
+                            .rate
+                        e_price = parseFloat($("#exercise_book").val()) + +success.data.subject
+                            .book_rate
+                        console.log(price);
+                        $('#annual_resource_fee').val(price)
+                        $('#exercise_book').val(e_price)
+                        // }
                         $('#subject').append(x);
                     },
                     error: function(e) {
@@ -683,6 +683,7 @@
             })
             console.log(payment)
             $(".start_date").datepicker({
+                format: 'yyyy-mm-dd',
                 beforeShowDay: function(date) {
                     if (payment == "Weekly") {
 
@@ -696,6 +697,7 @@
                 }
             });
             $(".end_date").datepicker({
+                format: 'yyyy-mm-dd',
                 beforeShowDay: function(date) {
                     if (payment == "Weekly") {
 
@@ -727,6 +729,112 @@
             let rate = parseFloat($('#rate').val()) || 0;
             let hours = parseFloat($('#hours').val()) || 0;
             $('#amount').val(rate * hours);
+        })
+    </script>
+
+
+
+    {{-- Addition Invoice --}}
+    <script>
+        $('#add-subject').on('click', function() {
+            console.log('asasas')
+            var subject = '';
+            id = $(".student").val()
+            console.log(id)
+            $.ajax({
+                method: "GET",
+                'url': `/api/get/student/data/${id}`,
+                success: function(success) {
+                    x = `  <div class="row">
+                                                                        <div class="col-3">
+                                                                            <div class="form-group">
+                                                                                <label class="form-label">Subject</label>
+
+                                                                                <select class="form-control subject" required>
+${success.html}
+
+                                                                                </select>
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-3">
+                                                                            <div class="form-group">
+                                                                                <label class="form-label">Hours</label>
+
+                                                                                <input type="number" name="hours"
+                                                                                    id="" class="form-control hours" required>
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-3">
+                                                                            <div class="form-group">
+                                                                                <label class="form-label">Rate</label>
+
+                                                                                <div class="input-group mb-2">
+                                                                                    <div class="input-group-prepend">
+                                                                                        <div class="input-group-text">£
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <input type="number"
+                                                                                        class="form-control rate"
+                                                                                        id="" value=""
+                                                                                        name="" required>
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-2">
+                                                                            <div class="form-group">
+                                                                                <label class="form-label">Amount</label>
+
+                                                                                <div class="input-group mb-2">
+                                                                                    <div class="input-group-prepend">
+                                                                                        <div class="input-group-text">£
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <input type="number"
+                                                                                        class="form-control amount"
+                                                                                        id="" value=""
+                                                                                        name="" required>
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-1">
+                                                                            <div class="form-group pt-4">
+
+                                                                                <label class="form-label"></label>
+                                                                                <span type="button"
+                                                                                    class="btn btn-primary remove-subject">-
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>`;
+                    $('.addition-subject').append(x);
+
+                }
+            })
+        })
+        $('.row').on('click', '.remove-subject', function() {
+            console.log('sdasas');
+            $(this).closest('.row').remove();
+        })
+
+        // Student Adittion sum rate and hr
+        $('.rate').on('change keyup', function() {
+            console.log('asasdsadas')
+            rate = parseFloat($(this).val()) || 0;
+            hour = parseFloat($(this).closest('.hours').val()) || 0;
+            $(this).closest('.amount').val(rate * hour)
+        })
+        $('.hours').on('change keyup', function() {
+            hour = parseFloat($(this).val()) || 0;
+            rate = parseFloat($(this).closest('.rate').val()) || 0;
+            $(this).closest('.amount').val(rate * hour)
         })
     </script>
 

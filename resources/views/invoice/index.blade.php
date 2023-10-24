@@ -107,7 +107,7 @@
                                                                 <label class="form-label">Branch</label>
                                                                 <div class="input-group mb-2">
                                                                     <select name="branch" id="branch_id"
-                                                                        class="form-control">
+                                                                        class="form-control" required>
                                                                         <option value="">-</option>
                                                                         @foreach ($branch as $value)
                                                                             <option value="{{ $value->id }}">
@@ -122,7 +122,7 @@
                                                                 <label class="form-label">Key Stage</label>
                                                                 <div class="input-group mb-2">
                                                                     <select name="key_stage_id" id=""
-                                                                        class="form-control keyStage">
+                                                                        class="form-control keyStage" required>
                                                                         <option value="">-</option>
                                                                         @foreach ($keyStage as $value)
                                                                             <option value="{{ $value->id }}">
@@ -136,8 +136,8 @@
                                                             <div class="form-group">
                                                                 <label class="form-label">Year</label>
                                                                 <div class="input-group mb-2">
-                                                                    <select name="branch"
-                                                                        class="form-control year_student">
+                                                                    <select name="branch" class="form-control year_student"
+                                                                        required>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -146,8 +146,8 @@
                                                             <div class="form-group">
                                                                 <label class="form-label">Student</label>
                                                                 <div class="input-group mb-2">
-                                                                    <select name="student_id"
-                                                                        class="form-control student">
+                                                                    <select name="student_id" class="form-control student"
+                                                                        required>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -176,13 +176,14 @@
 
                                                         <div class="col-12" style="">
                                                             <div class="card">
-                                                                <div class="card-header">
+                                                                <div class="card-body addition-subject">
                                                                     <div class="row">
                                                                         <div class="col-3">
                                                                             <div class="form-group">
                                                                                 <label class="form-label">Subject</label>
 
-                                                                                <select class="form-control subject">
+                                                                                <select class="form-control subject" name="subject[]"
+                                                                                    required>
 
 
 
@@ -191,17 +192,18 @@
                                                                             </div>
 
                                                                         </div>
-                                                                        <div class="col-2">
+                                                                        <div class="col-3">
                                                                             <div class="form-group">
                                                                                 <label class="form-label">Hours</label>
 
-                                                                                <input type="number" name="hours"
-                                                                                    id="hours" class="form-control">
+                                                                                <input type="number" name="hours[]"
+                                                                                    id="hours" class="form-control"
+                                                                                    required>
 
                                                                             </div>
 
                                                                         </div>
-                                                                        <div class="col-2">
+                                                                        <div class="col-3">
                                                                             <div class="form-group">
                                                                                 <label class="form-label">Rate</label>
 
@@ -213,7 +215,7 @@
                                                                                     <input type="number"
                                                                                         class="form-control"
                                                                                         id="rate" value=""
-                                                                                        name="">
+                                                                                        name="rate[]" required>
                                                                                 </div>
 
                                                                             </div>
@@ -231,31 +233,12 @@
                                                                                     <input type="number"
                                                                                         class="form-control"
                                                                                         id="amount" value=""
-                                                                                        name="">
+                                                                                        name="amount[]" required>
                                                                                 </div>
 
                                                                             </div>
 
                                                                         </div>
-                                                                        <div class="col-2">
-                                                                            <div class="form-group">
-                                                                                <label class="form-label">Discount</label>
-
-                                                                                <div class="input-group mb-2">
-                                                                                    <div class="input-group-prepend">
-                                                                                        <div class="input-group-text">£
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <input type="number"
-                                                                                        class="form-control"
-                                                                                        id="amount" value=""
-                                                                                        name="">
-                                                                                </div>
-
-                                                                            </div>
-
-                                                                        </div>
-
                                                                         <div class="col-1">
                                                                             <div class="form-group pt-4">
 

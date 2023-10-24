@@ -187,30 +187,34 @@ class StudentsController extends Controller
         ]);
         $invoice = StudentInvoice::create([
             'student_id' => $student->id,
-            'amount' => 0,
+            'amount' => $request->annual_resource_fee + $request->exercise_book_fee,
             'type' => 'Resource Fee',
             'from_date' => auth()->user()->session()->start_date,
             'to_date' => auth()->user()->session()->end_date
         ]);
-        foreach ($student->enquirySubject as $key => $value) {
-            if ($value->subject->lesson_type_id == 1) {
-
-                InvoiceSubject::create([
-                    'invoice_id' => $invoice->id,
-                    'subject_name' => $value->subject->name,
-                    'subject_rate' => $value->subject->amount
-                ]);
-            }
-        }
-        $invoice->update([
-            'amount' => $request->annual_resource_fee + $request->exercise_book_fee
-        ]);
-
-
-
         $subject = EnquirySubject::whereIn('id', $data1['enquiry_subject'])->update([
             'student_id' => $student->id
         ]);
+        foreach ($student->enquirySubject as $key => $value) {
+            // if ($value->subject->lesson_type_id == 1) {
+
+            InvoiceSubject::create([
+                'invoice_id' => $invoice->id,
+                'subject_name' => $value->subject->name,
+                'subject_rate' => $value->subject->rate,
+                'subject_book_fee' => $value->subject->book_rate
+            ]);
+            // }
+        }
+        // $invoice->update([
+        //     'amount' =>
+        // ]);
+
+
+
+        // $subject = EnquirySubject::whereIn('id', $data1['enquiry_subject'])->update([
+        //     'student_id' => $student->id
+        // ]);
 
         return redirect()->route('student.index')->with('success', 'student Created Successfully');
     }

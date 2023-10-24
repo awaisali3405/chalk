@@ -54,14 +54,9 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
         $data = $request->except('_token');
-        $data['type'] = 'Refundable';
+        $data['type'] = 'Addition Invoice';
         $student = Student::find($request->student_id);
-        if ($student->payment_period == 'Weekly') {
-
-            $data['amount'] = (($student->fee - $student->fee_discount) / 7) * 30;
-        } else {
-            $data['amount'] = ($student->fee - $student->fee_discount);
-        }
+  
         StudentInvoice::create($data);
         return redirect()->route('invoice.index')->with('success', 'invoice Created Successfully');
     }
@@ -107,10 +102,15 @@ class InvoiceController extends Controller
     {
         $to = \Carbon\Carbon::parse($request->from_date);
         $from = \Carbon\Carbon::parse($request->to_date);
+
+
         $days = $to->diffInDays($from) + 1;
         $weeks = $to->diffInWeeks($from->addDay(2));
+        $months = $to->diffInMonths($from->addDay(1));
         // $days=$request->from_date
-        // dd($request, $days, $weeks);
+        $to = Carbon::createFromFormat('m/d/Y', $request->from_date)->format('Y-m-d');
+        $from = Carbon::createFromFormat('m/d/Y', $request->to_date)->format('Y-m-d');
+        // dd($request, $days, $weeks, $to, $from, date('m/d/y', strtotime($to)));
 
         if ($request->student) {
 
@@ -119,7 +119,7 @@ class InvoiceController extends Controller
                 $student = Student::find($value);
                 if ($student->payment_period == "Weekly") {
                     $amount = ($student->enquirySubject->sum('amount')) * $weeks;
-                    StudentInvoice::create([
+                    $invoice = StudentInvoice::create([
                         'student_id' => $student->id,
                         'type' => $weeks . ' Weeks Fee',
                         'amount' => $amount,
@@ -127,7 +127,12 @@ class InvoiceController extends Controller
                         'to_date' => $from,
                     ]);
                 } else {
-                    $amount = ($student->fee - $student->fee_discount);
+                    if (str_contains($student->year->name, "11")) {
+                        $amount = (($student->enquirySubject->sum('amount')) * 40 / 9) * $months;
+                    } else {
+
+                        $amount = (($student->enquirySubject->sum('amount')) * 52 / 12) * $months;
+                    }
                     StudentInvoice::create([
                         'student_id' => $student->id,
                         'type' => 'Monthly Fee',
