@@ -23,8 +23,6 @@ class Enquiry extends Model
         'address',
         'current_school_name',
         'year_id',
-        'key_stage_id',
-        'lesson_type',
         'branch_id',
         'enquiry_date',
         'assessment_date',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sale;
 use App\Models\SaleProduct;
+use App\Models\StudentInvoice;
 use Illuminate\Http\Request;
 
 class SaleController extends Controller
@@ -32,11 +33,31 @@ class SaleController extends Controller
     {
         $data = $request->except('_token');
         // dd($data);
-        $sale = Sale::create($data);
-        foreach ($data['product_id'] as $key => $value) {
+        $amount = 0;
+        foreach ($data['amount'] as $value) {
+            $amount += $value;
+        }
+        $invoice = StudentInvoice::create([
+            'student_id' => $data['student_id'],
+            'amount' => $amount,
+            'type' => 'Sale Invoice',
+            'from_date' => auth()->user()->session()->start_date,
+            'to_date' => auth()->user()->session()->end_date,
+
+        ]);
+        $sale = Sale::create([
+            'branch_id' => $data['branch_id'],
+            'year_id' => $data['year_id'],
+            'key_stage_id' => $data['key_stage_id'],
+            'student_id' => $data['student_id'],
+            'invoice_id' => $invoice->id,
+            'date' => $data['date']
+        ]);
+
+        foreach ($data['product'] as $key => $value) {
             SaleProduct::create([
                 'sale_id' => $sale->id,
-                'product_id' => $data['product_id'][$key],
+                'product_id' => $data['product'][$key],
                 'quantity' => $data['quantity'][$key],
                 'rate' => $data['rate'][$key],
                 'amount' => $data['amount'][$key],

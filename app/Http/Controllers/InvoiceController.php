@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EnquirySubject;
+use App\Models\InvoiceSubject;
 use App\Models\Student;
 use App\Models\StudentInvoice;
 use Illuminate\Http\Request;
@@ -16,7 +18,7 @@ class InvoiceController extends Controller
     {
 
         if (request()->input()) {
-            $invoice = StudentInvoice::all();
+            $invoice = StudentInvoice::latest();
 
             $student = Student::where(function ($query) use ($request) {
                 if ($request->branch_id != 0) {
@@ -56,8 +58,30 @@ class InvoiceController extends Controller
         $data = $request->except('_token');
         $data['type'] = 'Addition Invoice';
         $student = Student::find($request->student_id);
-  
-        StudentInvoice::create($data);
+
+        $amount = 0;
+        foreach ($data['amount'] as $value) {
+            $amount += $value;
+        }
+        // dd($data, $amount);
+
+        $invoice = StudentInvoice::create([
+            'student_id' => $data['student_id'],
+            'amount' => $amount,
+            'type' => $data['type'],
+            'from_date' => $data['from_date'],
+            'to_date' => $data['to_date']
+        ]);
+        foreach ($data['subject'] as $key => $value) {
+            InvoiceSubject::create([
+                'invoice_id' => $invoice->id,
+                'subject_name' => EnquirySubject::find($value)->subject->name,
+                'subject_rate' => $data['rate'][$key],
+                'subject_hr' => $data['hours'][$key],
+                'subject_amount' => $data['amount'][$key],
+            ]);
+        }
+
         return redirect()->route('invoice.index')->with('success', 'invoice Created Successfully');
     }
 
@@ -66,7 +90,7 @@ class InvoiceController extends Controller
      */
     public function show(string $id)
     {
-        $invoice = StudentInvoice::where('student_id', $id)->get();
+        $invoice = StudentInvoice::where('student_id', $id)->latest()->get();
         $student = Student::find($id);
         return view('invoice.show', compact('invoice', 'student'));
     }

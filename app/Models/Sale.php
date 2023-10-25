@@ -16,7 +16,12 @@ class Sale extends Model
         'key_stage_id',
         'student_id',
         'date',
+        'invoice_id'
     ];
+    public function invoice()
+    {
+        return $this->belongsTo(StudentInvoice::class, 'invoice_id');
+    }
     public function branch()
     {
         return $this->belongsTo(Branch::class, 'branch_id');

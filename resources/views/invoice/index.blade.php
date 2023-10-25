@@ -176,14 +176,14 @@
 
                                                         <div class="col-12" style="">
                                                             <div class="card">
-                                                                <div class="card-body addition-subject">
+                                                                <div class="card-body ">
                                                                     <div class="row">
                                                                         <div class="col-3">
                                                                             <div class="form-group">
                                                                                 <label class="form-label">Subject</label>
 
-                                                                                <select class="form-control subject" name="subject[]"
-                                                                                    required>
+                                                                                <select class="form-control subject"
+                                                                                    name="" required>
 
 
 
@@ -196,9 +196,9 @@
                                                                             <div class="form-group">
                                                                                 <label class="form-label">Hours</label>
 
-                                                                                <input type="number" name="hours[]"
-                                                                                    id="hours" class="form-control"
-                                                                                    required>
+                                                                                <input type="number" name=""
+                                                                                    id="hours"
+                                                                                    class="form-control hours" required>
 
                                                                             </div>
 
@@ -212,10 +212,10 @@
                                                                                         <div class="input-group-text">£
                                                                                         </div>
                                                                                     </div>
-                                                                                    <input type="number"
-                                                                                        class="form-control"
+                                                                                    <input type="text"
+                                                                                        class="form-control rate"
                                                                                         id="rate" value=""
-                                                                                        name="rate[]" required>
+                                                                                        name="" required>
                                                                                 </div>
 
                                                                             </div>
@@ -230,10 +230,10 @@
                                                                                         <div class="input-group-text">£
                                                                                         </div>
                                                                                     </div>
-                                                                                    <input type="number"
-                                                                                        class="form-control"
+                                                                                    <input type="text"
+                                                                                        class="form-control "
                                                                                         id="amount" value=""
-                                                                                        name="amount[]" required>
+                                                                                        name="" required>
                                                                                 </div>
 
                                                                             </div>
@@ -243,36 +243,37 @@
                                                                             <div class="form-group pt-4">
 
                                                                                 <label class="form-label"></label>
-                                                                                <span type="button"
-                                                                                    class="btn btn-primary "
-                                                                                    id="add-subject">+
+                                                                                <span class="btn btn-primary addition-subject "
+                                                                                    id="">+
                                                                                 </span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                {{-- <div class="card-body">
+                                                                <div class="card-body">
                                                                     <div class="">
                                                                         <table id="" class="display"
                                                                             style="width:100%;">
                                                                             <thead>
                                                                                 <tr>
                                                                                     <th>Subject</th>
-                                                                                    <th>Board</th>
-                                                                                    <th>Paper</th>
-                                                                                    <th>Science Type</th>
+                                                                                    <th>Hour</th>
+                                                                                    <th>Rate</th>
+                                                                                    <th>Amount</th>
 
 
                                                                                     <th>Action</th>
                                                                                 </tr>
                                                                             </thead>
-                                                                            <tbody id="">
+                                                                            <tbody id=""
+                                                                                class="addition-subject-add">
 
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
-                                                                </div> --}}
+                                                                </div>
                                                             </div>
+
                                                         </div>
                                                         <div class="col-lg-12 col-md-12 col-sm-12">
                                                             <button type="submit"

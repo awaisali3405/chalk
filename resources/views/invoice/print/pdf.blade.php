@@ -173,7 +173,8 @@
                             <h3 class="font-weight-bolder">Invoice Date</h3>
                         </td>
                         <td class="text-align-end">
-                            <h3 class="font-weight-bolder">{{ $invoice->created_at->format('j-f-Y') }}</h3>
+                            <h3 class="font-weight-bolder">
+                                {{ \Carbon\Carbon::parse($invoice->created_at)->format('j-F-Y') }}</h3>
                         </td>
                     </tr>
                     <tr>
@@ -253,11 +254,34 @@
                         <td class="bg-grey"></td>
                         <td class="bg-grey"></td>
                     </tr>
-                @elseif($invoice->student->payment_period == 'Weekly')
+                @elseif (str_contains($invoice->type, 'Sale Invoice'))
+                    <tr>
+                        <td></td>
+                        <td class="text-center">
+                            <h4 class="">Sale Invoice
+                                {{ date('Y', strtotime($invoice->from_date)) }}/{{ date('Y', strtotime($invoice->to_date)) }}
+                            </h4>
+                        </td>
+                        <td class="bg-grey"></td>
+                        <td class="bg-grey"></td>
+                    </tr>
+                @elseif(str_contains($invoice->type, 'Week'))
                     <tr>
                         <td></td>
                         <td class="text-center">
                             <h3 class="font-weight-bolder">{{ $weeks }} Week</h3>
+                        </td>
+
+                        <td class="bg-grey"></td>
+                        <td class="bg-grey"></td>
+                    </tr>
+                @elseif (str_contains($invoice->type, 'Addition Invoice'))
+                    <tr>
+                        <td></td>
+                        <td class="text-center">
+                            <h3 class="font-weight-bolder">Additional Invoice ({{ $invoice->from_date }} -
+                                {{ $invoice->to_date }})
+                            </h3>
                         </td>
 
                         <td class="bg-grey"></td>
@@ -301,6 +325,67 @@
                     @php
                         $sr = 2;
                     @endphp
+                @elseif (str_contains($invoice->type, 'Sale Invoice'))
+                    @foreach ($invoice->saleProduct as $key => $value)
+                        <tr class="bg-grey">
+                            <td class="text-center">
+                                <h3 class="font-weight-bolder">{{ $key + 1 }}</h3>
+                            </td>
+                            <td class="pl-2 ">
+                                <h3 class="font-weight-bolder"> {{ $value->product->name }}</h3>
+                            </td>
+                            <td class="text-center bg-grey">
+                                <h3 class="font-weight-bolder">£{{ $value->rate }}</h3>
+                            </td>
+                            <td class="text-align-end bg-grey">
+                                <h3 class="font-weight-bolder">£{{ $value->amount }}</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="pl-2">
+                            </td>
+                            <td class="bg-grey text-center">
+                                <h3 class="">{{ $value->quantity }} Qty </h3>
+
+                            </td>
+                            <td class="bg-grey"></td>
+                        </tr>
+                    @endforeach
+                    @php
+                        $sr = $key + 2;
+                    @endphp
+                @elseif (str_contains($invoice->type, 'Addition Invoice'))
+                    @foreach ($invoice->subject as $key => $value)
+                        <tr class="bg-grey">
+                            <td class="text-center">
+                                <h3 class="font-weight-bolder">{{ $key + 1 }}</h3>
+                            </td>
+                            <td class="pl-2 ">
+                                <h3 class="font-weight-bolder"> {{ $value->subject_name }}</h3>
+                            </td>
+                            <td class="text-align-end text-center">
+                                <h3 class="font-weight-bolder">£{{ $value->subject_rate }}</h3>
+                            </td>
+                            <td class="text-align-end bg-grey">
+                                <h3 class="font-weight-bolder">£{{ $value->subject_amount }}</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="pl-2">
+                                {{-- <h3 class="">Until {{ $invoice->to_date }} </h3> --}}
+                            </td>
+                            <td class="bg-grey">
+                                <h3 class=" text-center"> {{ $value->subject_hr }} hr</h3>
+
+                            </td>
+                            <td class="bg-grey"></td>
+                        </tr>
+                        @php
+                            $sr = $key + 1;
+                        @endphp
+                    @endforeach
                 @elseif(str_contains($invoice->type, 'Registration'))
                     <tr class="bg-grey">
                         <td class="text-center">
@@ -475,7 +560,7 @@
                 @if (count($invoice->receipt) > 0)
                     @foreach ($invoice->receipt as $key => $value)
                         @if ($value->discount > 0)
-                            <tr class="">
+                            <tr class="bg-grey">
                                 <td class=" text-center">
                                     <h3 class="font-weight-bolder">
                                         {{ $sr++ }}
@@ -532,7 +617,7 @@
                                 <td></td>
                             </tr> --}}
                         @endif
-                        <tr class="">
+                        <tr class="bg-grey">
                             <td class=" text-center">
                                 <h3 class="font-weight-bolder">
 
@@ -557,7 +642,8 @@
                             <td class="pl-2">
                                 <h3 class="">{{ $value->date }}</h3>
                             </td>
-                            <td></td>
+                            <td class="bg-grey"></td>
+                            <td class="bg-grey"></td>
                         </tr>
                     @endforeach
                 @endif

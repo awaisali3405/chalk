@@ -143,7 +143,7 @@
                                                                 <label class="form-label">Year</label>
                                                                 <div class="input-group mb-2">
                                                                     <select name="year_id"
-                                                                        class="form-control year_student">
+                                                                        class="form-control year_student year">
 
                                                                     </select>
                                                                 </div>
@@ -172,15 +172,15 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="subject-resource">
+                                                        <div class="">
 
-                                                            <div class="row">
+                                                            <div class="row pl-3">
                                                                 <div class="col-lg-3 col-md-3 col-sm-12">
                                                                     <div class="form-group">
                                                                         <label class="form-label">Resource</label>
                                                                         <div class="input-group mb-2">
-                                                                            <select name="product_id[]"
-                                                                                class="form-control subject">
+                                                                            <select name=""
+                                                                                class="form-control product">
 
                                                                             </select>
                                                                         </div>
@@ -190,7 +190,7 @@
                                                                     <div class="form-group">
                                                                         <label class="form-label">Quantiy</label>
                                                                         <div class="input-group mb-2">
-                                                                            <input type="text" name="quantity[]"
+                                                                            <input type="text" name=""
                                                                                 class="form-control quantity">
 
 
@@ -204,7 +204,7 @@
                                                                             <div class="input-group-prepend">
                                                                                 <div class="input-group-text">£</div>
                                                                             </div>
-                                                                            <input name="rate[]"
+                                                                            <input name=""
                                                                                 class="form-control rate">
 
                                                                         </div>
@@ -217,7 +217,7 @@
                                                                             <div class="input-group-prepend">
                                                                                 <div class="input-group-text">£</div>
                                                                             </div>
-                                                                            <input name="amount[]"
+                                                                            <input name=""
                                                                                 class="form-control amount">
                                                                         </div>
                                                                     </div>
@@ -228,6 +228,23 @@
                                                                     </div>
                                                                 </div>
 
+                                                            </div>
+                                                            <div class="pl-4 pb-5 pt-3">
+                                                                <table id="" class="display"
+                                                                    style="width:100%;">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Resource</th>
+                                                                            <th>Quantity</th>
+                                                                            <th>Rate</th>
+                                                                            <th>Amount</th>
+                                                                            <th>Action</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="" class="subject-resource">
+
+                                                                    </tbody>
+                                                                </table>
                                                             </div>
                                                         </div>
 

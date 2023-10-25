@@ -69,6 +69,8 @@
                                                 <th>Invoice Date</th>
                                                 <th>Type</th>
                                                 <th>Amount</th>
+                                                <th>Discount</th>
+                                                <th>Late Fee</th>
                                                 <th>Paid Amount</th>
                                                 <th>Payable</th>
                                                 <th>Status</th>
@@ -94,6 +96,8 @@
                                                     <td>{{ $value->created_at->toDateString() }}</td>
                                                     <td>{{ $value->type }}</td>
                                                     <td>{{ $value->amount }}</td>
+                                                    <td>{{ $value->receipt->sum('discount') }}</td>
+                                                    <td>{{ $value->receipt->sum('late_fee') }}</td>
                                                     <td>{{ $value->receipt->sum('amount') }}
                                                     </td>
                                                     <td>{{ $value->amount - ($value->receipt->sum('discount') - $value->receipt->sum('late_fee')) - $value->receipt->sum('amount') }}
@@ -122,6 +126,8 @@
                                                 <th></th>
                                                 <th></th>
                                                 <th>{{ $total }}</th>
+                                                <th></th>
+                                                <th></th>
                                                 <th>{{ $total_paid }}</th>
                                                 <th>{{ $tatal_remaining }}</th>
                                                 <th></th>

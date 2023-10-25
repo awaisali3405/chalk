@@ -36,6 +36,7 @@
                                                         Branch
                                                     </th>
                                                     <th>Amount</th>
+                                                    <th>Student</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -46,11 +47,13 @@
 
                                                         <td>{{ $value->year->name }}</td>
                                                         <td>{{ $value->branch->name }}</td>
-                                                        <td>{{ $value->product->sum('amount') }}</td>
+                                                        <td>{{ $value->invoice->amount }}</td>
+                                                        <td>{{ $value->invoice->student->first_name }}
+                                                            {{ $value->invoice->student->last_name }}</td>
                                                         <td>
-                                                            <a href="{{ route('purchase.edit', $value->id) }}"
+                                                            {{-- <a href="{{ route('purchase.edit', $value->id) }}"
                                                                 class="btn btn-sm btn-primary"><i
-                                                                    class="la la-pencil"></i></a>
+                                                                    class="la la-pencil"></i></a> --}}
                                                             {{-- <a href="{{ route('year.show', $value->id) }}"
                                                                 class="btn btn-sm btn-danger"><i
                                                                     class="la la-trash-o"></i></a> --}}

@@ -29,4 +29,19 @@ class StudentInvoice extends Model
     {
         return $this->hasMany(StudentInvoiceReceipt::class, 'invoice_id');
     }
+    public function sale()
+    {
+        return $this->hasOne(Sale::class, 'invoice_id');
+    }
+    public function saleProduct()
+    {
+        return $this->hasManyThrough(
+            SaleProduct::class,
+            Sale::class,
+            'invoice_id', // Foreign key on the environments table...
+            'sale_id', // Foreign key on the deployments table...
+            'id',
+            'id'
+        );
+    }
 }

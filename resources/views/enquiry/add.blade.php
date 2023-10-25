@@ -115,55 +115,7 @@
 
                                         </div>
                                     </div>
-                                    <div class="col-lg-12 col-md-6 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-label">Lesson Type</label>
-                                            <div class="row">
-                                                <div class="col-3">
-
-                                                    <div class="form-check">
-
-                                                        <input type="radio" name="lesson_type" value="Normal Group"
-                                                            id="Normal Group" required>
-                                                        <label class="form-check-label" for="Normal Group">Normal
-                                                            Group</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-3">
-
-                                                    <div class="form-check">
-
-                                                        <input type="radio" name="lesson_type" value="Small Group"
-                                                            id="Small Group" required>
-                                                        <label class="form-check-label" for="Small Group">Small
-                                                            Group</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-3">
-
-                                                    <div class="form-check">
-
-                                                        <input type="radio" name="lesson_type" value="One - One"
-                                                            id="One - One" required>
-                                                        <label class="form-check-label" for="One - One">One -
-                                                            One</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-3">
-
-                                                    <div class="form-check">
-
-                                                        <input type="radio" name="lesson_type" value="H/W Help Group"
-                                                            id="H/W Help Group" required>
-                                                        <label class="form-check-label" for="H/W Help Group">H/W
-                                                            Help Group</label>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
+                                   
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Branch</label>
@@ -212,103 +164,9 @@
 
                                         </div>
                                     </div>
-                                    <div class="" style="padding-left: 15%; width: 70%;">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <div class="row">
-                                                    <div class="col-3">
-                                                        <div class="form-group">
-                                                            <label class="form-label">Subject</label>
+                                 <div class="checkbox">
 
-                                                            <select class="form-control subject" id="subject_id">
-
-
-
-                                                            </select>
-
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <div class="form-group">
-                                                            <label class="form-label">Board</label>
-
-                                                            <select class="form-control" id="board_id">
-                                                                <option value="">-</option>
-                                                                @foreach ($board as $value)
-                                                                    <option value="{{ $value->id }}">
-                                                                        {{ $value->name }}</option>
-                                                                @endforeach
-
-                                                            </select>
-
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <div class="form-group">
-                                                            <label class="form-label">Paper</label>
-
-                                                            <select class="form-control" id="paper_id">
-                                                                <option value="">-</option>
-                                                                @foreach ($paper as $value)
-                                                                    <option value="{{ $value->id }}">
-                                                                        {{ $value->name }}</option>
-                                                                @endforeach
-
-                                                            </select>
-
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <div class="form-group">
-
-                                                            <label class="form-label">Science Type</label>
-                                                            <select class="form-control" id="science_type_id">
-                                                                <option value="">-</option>
-                                                                @foreach ($scienceType as $value)
-                                                                    <option value="{{ $value->id }}">
-                                                                        {{ $value->name }}</option>
-                                                                @endforeach
-
-                                                            </select>
-
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                                <div class="col-1">
-                                                    <div class="form-group">
-
-                                                        <label class="form-label"></label>
-                                                        <span type="button" class="btn btn-primary " id="add-subject">+
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="">
-                                                    <table id="" class="display" style="width:100%;">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Subject</th>
-                                                                <th>Board</th>
-                                                                <th>Paper</th>
-                                                                <th>Science Type</th>
-
-
-                                                                <th>Action</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody id="subject">
-
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                 </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                         <button type="submit" class="btn btn-light">Cencel</button>
@@ -322,3 +180,5 @@
         </div>
     </div>
 @endsection
+
+

@@ -448,7 +448,7 @@
         })
         $('.year').on('change keyup', function() {
             year = $(this).val()
-            branch = $(".branch").val()
+            branch = $("#branch_id").val()
             $.ajax({
                 method: "GET",
                 'url': `/api/get/subject/${year}`,
@@ -462,6 +462,7 @@
 
                 }
             })
+            console.log(year, branch);
             if (year && branch) {
                 $.ajax({
                     method: "GET",
@@ -549,72 +550,6 @@
             value = $(this).val()
             console.log(value);
             $('input:checkbox').prop('checked', this.checked);
-        })
-        $('.add-resource').on('click', function() {
-            id = $('.student').val();
-            $.ajax({
-                method: "GET",
-                'url': `/api/get/student/data/${id}`,
-                success: function(success) {
-                    x = `  <div class="row">
-                                                            <div class="col-lg-3 col-md-3 col-sm-12">
-                                                                <div class="form-group">
-                                                                    <label class="form-label">Resource</label>
-                                                                    <div class="input-group mb-2">
-                                                                        <select name="product_id[]"
-                                                                            class="form-control subject">
-                                                                            ${success.html}
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3 col-md-3 col-sm-12">
-                                                                <div class="form-group">
-                                                                    <label class="form-label">Quantiy</label>
-                                                                    <div class="input-group mb-2">
-                                                                        <input type="text" name="quantity[]"
-                                                                            class="form-control quantity">
-
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3 col-md-3 col-sm-12">
-                                                                <div class="form-group">
-                                                                    <label class="form-label">Rate</label>
-                                                                    <div class="input-group mb-2">
-                                                                        <div class="input-group-prepend">
-                                                                            <div class="input-group-text">£</div>
-                                                                        </div>
-                                                                        <input name="rate[]"
-                                                                            class="form-control rate">
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-2 col-md-3 col-sm-12">
-                                                                <div class="form-group">
-                                                                    <label class="form-label">Amount</label>
-                                                                    <div class="input-group mb-2">
-                                                                        <div class="input-group-prepend">
-                                                                            <div class="input-group-text">£</div>
-                                                                        </div>
-                                                                        <input name="amount[]"
-                                                                            class="form-control amount">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-1 col-md-3 col-sm-12 pt-4">
-                                                                <div class="form-group">
-                                                                    <span class="remove-resource btn btn-danger">-</span>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>`;
-                    $('.subject-resource').append(x);
-                }
-
-            })
         })
     </script>
 
@@ -736,92 +671,48 @@
 
     {{-- Addition Invoice --}}
     <script>
-        $('#add-subject').on('click', function() {
+        $('.addition-subject').on('click', function() {
             console.log('asasas')
-            var subject = '';
-            id = $(".student").val()
-            console.log(id)
-            $.ajax({
-                method: "GET",
-                'url': `/api/get/student/data/${id}`,
-                success: function(success) {
-                    x = `  <div class="row">
-                                                                        <div class="col-3">
-                                                                            <div class="form-group">
-                                                                                <label class="form-label">Subject</label>
+            // var subject = '';
+            subject_id = $(".subject option:selected").val()
+            subject = $(".subject option:selected").text()
+            hours = parseFloat($(".hours").val())
+            rate = parseFloat($(".rate").val())
+            amount = parseFloat($("#amount").val())
+            console.log(subject, hours, rate, amount)
+            if (subject && hours && rate && amount) {
+                x = `<tr>
+                                        <td>
+                                            ${subject}
+                                            <input type="hidden" name="subject[]" value="${subject_id}">
+                                            </td>
+                                            <td>
+                                                ${hours}
+                                                <input type="hidden" name="hours[]" value="${hours}">
+                                                </td>
+                                                <td>${rate}
+                                                    <input type="hidden" name="rate[]" value="${rate}">
+                                                    </td>
+                                                    <td>
+                                                        <input type="hidden" name="amount[]" value="${amount}">
+                                                        ${amount}</td>
 
-                                                                                <select class="form-control subject" required>
-${success.html}
+                                        <td>
 
-                                                                                </select>
+                                            <a class="delete-addition-subject" href="javascript:void(0);"><i class=" fa fa-close color-danger"></i></a>
+                                        </td>
+                                    </tr>
+                    `;
+                $('.addition-subject-add').append(x);
+            }
 
-                                                                            </div>
 
-                                                                        </div>
-                                                                        <div class="col-3">
-                                                                            <div class="form-group">
-                                                                                <label class="form-label">Hours</label>
-
-                                                                                <input type="number" name="hours"
-                                                                                    id="" class="form-control hours" required>
-
-                                                                            </div>
-
-                                                                        </div>
-                                                                        <div class="col-3">
-                                                                            <div class="form-group">
-                                                                                <label class="form-label">Rate</label>
-
-                                                                                <div class="input-group mb-2">
-                                                                                    <div class="input-group-prepend">
-                                                                                        <div class="input-group-text">£
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <input type="number"
-                                                                                        class="form-control rate"
-                                                                                        id="" value=""
-                                                                                        name="" required>
-                                                                                </div>
-
-                                                                            </div>
-
-                                                                        </div>
-                                                                        <div class="col-2">
-                                                                            <div class="form-group">
-                                                                                <label class="form-label">Amount</label>
-
-                                                                                <div class="input-group mb-2">
-                                                                                    <div class="input-group-prepend">
-                                                                                        <div class="input-group-text">£
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <input type="number"
-                                                                                        class="form-control amount"
-                                                                                        id="" value=""
-                                                                                        name="" required>
-                                                                                </div>
-
-                                                                            </div>
-
-                                                                        </div>
-                                                                        <div class="col-1">
-                                                                            <div class="form-group pt-4">
-
-                                                                                <label class="form-label"></label>
-                                                                                <span type="button"
-                                                                                    class="btn btn-primary remove-subject">-
-                                                                                </span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>`;
-                    $('.addition-subject').append(x);
-
-                }
-            })
+            // }
+            // })
         })
-        $('.row').on('click', '.remove-subject', function() {
+        $('.addition-subject-add').on('click', '.delete-addition-subject', function() {
             console.log('sdasas');
-            $(this).closest('.row').remove();
+            $(this).parent().parent().remove();
         })
 
         // Student Adittion sum rate and hr
@@ -838,6 +729,88 @@ ${success.html}
         })
     </script>
 
+    {{-- Sale Product --}}
+
+    <script>
+        // Get Product
+        // getProduct() {
+        //     branch = $('#branch_id').val();
+        //     year = $('.year').val
+        //     $.ajax({
+        //         method: "GET",
+        //         'url': `/api/get/product/${year}/${branch}`,
+        //         success: function(success) {
+        //             $('.product').html(success.data)
+        //         }
+        //     })
+        // }
+
+        $('.add-resource').on('click', function() {
+            product = $('.product option:selected').text();
+            product_id = $('.product').val();
+            quantity = $('.quantity').val();
+            rate = $('.rate').val();
+            amount = $('.amount').val();
+            console.log(product, quantity, rate, amount);
+            if (product && quantity && rate && amount) {
+                x = `<tr>
+                                        <td>
+                                            ${product}
+                                            <input type="hidden" name="product[]" value="${product_id}">
+                                            </td>
+                                            <td>
+                                                ${quantity}
+                                                <input type="hidden" name="quantity[]" value="${quantity}">
+                                                </td>
+                                                <td>${rate}
+                                                    <input type="hidden" name="rate[]" value="${rate}">
+                                                    </td>
+                                                    <td>
+                                                        <input type="hidden" name="amount[]" value="${amount}">
+                                                        ${amount}</td>
+
+                                        <td>
+
+                                            <a class="delete-resource" href="javascript:void(0);"><i class=" fa fa-close color-danger"></i></a>
+                                        </td>
+                                    </tr>
+                    `;
+                $('.subject-resource').append(x);
+            }
+
+
+
+
+        })
+
+        $('.subject-resource').on('click', '.delete-resource', function() {
+            $(this).closest('tr').remove();
+        })
+    </script>
+
+
+
+
+
+    {{-- Enquiry  --}}
+    <script>
+        $('.enquiry_year').on('change', function() {
+            var year = $(this).val();
+            $.ajax({
+                method: "GET",
+                'url': `/api/get/subject/${year}/value`,
+                success: function(success) {
+                    // if (success.message == 'success') {
+
+                    $('.subject').html(success.data);
+                    // console.log(success.data);
+                    // }
+
+
+                }
+            })
+        })
+    </script>
 </body>
 
 </html>
