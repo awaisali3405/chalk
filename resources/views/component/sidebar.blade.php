@@ -86,6 +86,15 @@
                     </ul>
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-university"></i>
+                        <span class="nav-text">Balance Sheet</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('balanceSheet.index') }}">Balance Sheet</a></li>
+                        {{-- <li><a href="{{ route('branch.create') }}"></a></li> --}}
+                    </ul>
+                </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-home"></i>
                         <span class="nav-text">Key Stage</span>
                     </a>

@@ -145,7 +145,7 @@ class InvoiceController extends Controller
                     $amount = ($student->enquirySubject->sum('amount')) * $weeks;
                     $invoice = StudentInvoice::create([
                         'student_id' => $student->id,
-                        'type' => $weeks . ' Weeks Fee',
+                        'type' => 'Weekly Fee',
                         'amount' => $amount,
                         'from_date' => $to,
                         'to_date' => $from,

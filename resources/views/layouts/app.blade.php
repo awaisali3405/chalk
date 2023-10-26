@@ -32,6 +32,14 @@
         background-color: #f2f2f2;
         cursor: not-allowed;
     }
+
+    .border {
+        border: 1px solid black;
+    }
+
+    .border td {
+        border: 1px solid black;
+    }
 </style>
 
 <body>

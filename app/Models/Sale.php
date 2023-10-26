@@ -34,6 +34,10 @@ class Sale extends Model
     {
         return $this->hasMany(SaleProduct::class, 'sale_id');
     }
+    public function productSum()
+    {
+        return $this->product()->sum('amount');
+    }
     public function keyStage()
     {
         return $this->belongsTo(KeyStage::class, 'key_stage_id');

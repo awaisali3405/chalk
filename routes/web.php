@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AcademicCalenderController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\BalanceSheetController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\EnquiryController;
@@ -65,6 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('supplier', SupplierControlller::class);
     Route::resource('parent', ParentController::class);
     Route::resource('attendance', AttendanceController::class);
+    Route::resource('balanceSheet', BalanceSheetController::class);
     Route::get('student/{id}/attendance', [StudentsController::class, 'show'])->name('attendance.student.detail');
     Route::get('/enquiry/{id}/note', [EnquiryController::class, 'note'])->name('enquiry.note');
     Route::get('/enquiry/{id}/upload', [EnquiryController::class, 'upload'])->name('enquiry.upload');
