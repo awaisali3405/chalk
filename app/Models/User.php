@@ -111,13 +111,9 @@ class User extends Authenticatable
     }
     public function depositRefundable($branch, $academicYear)
     {
-        $invoice = $this->invoice($branch, $academicYear)->where('type', 'Refundable');
-        $invoice_id = $invoice->pluck('id');
-        $invoice_sum = $invoice->get()->sum('amount');
-        $invoiceReceived =  $this->receipt($invoice_id)->get();
-        $received = $invoiceReceived->sum('amount');
+
         // dd($invoice_sum, $received);
-        return  $received;
+        return  $this->depositRefundableByCash($branch, $academicYear) + $this->depositRefundableByBank($branch, $academicYear);
     }
     public function depositRefundableByCash($branch, $academicYear)
     {
@@ -287,5 +283,41 @@ class User extends Authenticatable
         $late_fee = $invoiceReceived->sum('late_fee');
         // dd();
         return  number_format($received);
+    }
+    public function totalAsset($branch, $academicYear)
+    {
+        $feeDue = $this->feeDue($branch, $academicYear);
+        $feeReceived = $this->feeReceived($branch, $academicYear);
+        $depositReceived = $this->depositReceived($branch, $academicYear);
+        $depositDue = $this->depositDue($branch, $academicYear);
+        $resourceReceived = $this->resourceReceived($branch, $academicYear);
+        $resourceDue = $this->resourceDue($branch, $academicYear);
+        $resourceFeeDue = $this->resourceFeeDue($branch, $academicYear);
+        $resourceFeeReceived = $this->resourceFeeReceived($branch, $academicYear);
+        $availableStock = $this->availableStock($branch, $academicYear);
+        return $feeDue + $feeReceived + $depositReceived + $depositDue + $resourceReceived + $resourceDue + $resourceFeeReceived + $resourceFeeDue + $availableStock;
+    }
+    // public function totalLiability(){
+
+    //     return
+    // }
+
+
+
+
+    //Cash and Bank
+    public function totalCashReceived($branch, $academicYear)
+    {
+        $feeReceivedByCash = $this->feeReceivedByCash($branch, $academicYear);
+        $depositRegistrationByCash = $this->depositRegistrationByCash($branch, $academicYear);
+        $depositRefundableByCash = $this->depositRefundableByCash($branch, $academicYear);
+        return $feeReceivedByCash + $depositRegistrationByCash + $depositRefundableByCash;
+    }
+    public function totalBankReceived($branch, $academicYear)
+    {
+        $feeReceivedByBank = $this->feeReceivedByBank($branch, $academicYear);
+        $depositRegistrationByBank = $this->depositRegistrationByBank($branch, $academicYear);
+        $depositRefundableByBank = $this->depositRefundableByBank($branch, $academicYear);
+        return $feeReceivedByBank + $depositRegistrationByBank + $depositRefundableByBank;
     }
 }

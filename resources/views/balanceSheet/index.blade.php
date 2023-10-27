@@ -168,58 +168,58 @@
                                                         {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->availableStock(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
 
                                                     </td>
-                                                    <td class="text-left"></td>
-                                                    <td class="text-left"></td>
+
+                                                    <td colspan="2" class="text-left"></td>
                                                 </tr>
+
                                                 <tr>
-                                                    <td colspan="4">
-                                                        <hr>
-                                                    </td>
+                                                    <th class="text-center">
+                                                        <b>Total</b>
+                                                    </th>
+                                                    <th class="">
+                                                        <b>
+                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->totalAsset(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+
+                                                        </b>
+                                                    </th>
+                                                    <th class="text-center">
+                                                        <b>Total</b>
+                                                    </th>
+                                                    <th class="text-center">
+                                                        <b>
+
+                                                        </b>
+                                                    </th>
 
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-center">
-                                                        <b>Total</b>
-                                                    </td>
-                                                    <td class="text-center">
+                                                    <th class="text-center">
                                                         <b></b>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <b>Total</b>
-                                                    </td>
-                                                    <td class="text-center">
+                                                    </th>
+                                                    <th class="text-center">
                                                         <b></b>
-                                                    </td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center">
-                                                        <b></b>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <b></b>
-                                                    </td>
-                                                    <td class="text-center">
+                                                    </th>
+                                                    <th class="text-center">
                                                         <b>Current Balance</b>
-                                                    </td>
-                                                    <td class="text-center">
+                                                    </th>
+                                                    <th class="text-center">
                                                         <b></b>
-                                                    </td>
+                                                    </th>
 
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-center">
+                                                    <th class="text-center">
                                                         <b></b>
-                                                    </td>
-                                                    <td class="text-center">
+                                                    </th>
+                                                    <th class="text-center">
                                                         <b></b>
-                                                    </td>
-                                                    <td class="text-center">
+                                                    </th>
+                                                    <th class="text-center">
                                                         <b>Profit/Loss</b>
-                                                    </td>
-                                                    <td class="text-center">
+                                                    </th>
+                                                    <th class="text-center">
                                                         <b></b>
-                                                    </td>
+                                                    </th>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -252,7 +252,10 @@
                                                             {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->feeReceivedByCash(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
 
                                                         </td>
-                                                        <td>0</td>
+                                                        <td>
+                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->totalCashReceived(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+
+                                                        </td>
                                                     </tr>
                                                     <tr class="border">
                                                         <td>Bank</td>
@@ -268,7 +271,10 @@
                                                             {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->feeReceivedByBank(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
 
                                                         </td>
-                                                        <td>0</td>
+                                                        <td>
+                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->totalBankReceived(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             </table>

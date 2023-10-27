@@ -80,4 +80,9 @@ class SubjectController extends Controller
         }
         return response()->json(['data' => $string]);
     }
+    public function getSubjectValue($id)
+    {
+        $year = Year::find($id);
+        return response()->json(['data' => $year->subject]);
+    }
 }

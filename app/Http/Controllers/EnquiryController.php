@@ -19,20 +19,21 @@ class EnquiryController extends Controller
 {
     public function __construct()
     {
-        $branch = Branch::all();
-        View::share('branch', $branch);
-        $year = Year::all();
-        View::share('year', $year);
-        $keyStage = KeyStage::all();
-        View::share('keyStage', $keyStage);
-        $subject = Subject::all();
-        View::share('subject', $subject);
-        $board = Board::all();
-        View::share('board', $board);
-        $scienceType = ScienceType::all();
-        View::share('scienceType', $scienceType);
-        $paper = Paper::all();
-        View::share('paper', $paper);
+        // $branch = Branch::all();
+        // View::share('branch', $branch);
+        // $year = Year::all();
+        // View::share('year', $year);
+        // $keyStage = KeyStage::all();
+        // View::share('keyStage', $keyStage);
+        // $subject = Subject::all();
+        // View::share('subject', $subject);
+        // $board = Board::all();
+        // View::share('board', $board);
+        // $scienceType = ScienceType::all();
+        // View::share('scienceType', $scienceType);
+        // $paper = Paper::all();
+        // View::share('paper', $paper);
+        parent::__construct();
     }
     /**
      * Display a listing of the resource.
@@ -58,11 +59,10 @@ class EnquiryController extends Controller
     public function store(Request $request)
     {
         $data = $request->except('_token');
-        // dd($data, $subject);
+        $data['subject'] = json_encode($data['subject']);
         $enquiry = Enquiry::create($data);
-        $subject = EnquirySubject::whereIn('id', $data['enquiry_subject'])->update([
-            'enquiry_id' => $enquiry->id
-        ]);
+        // dd($data);
+
         return redirect()->route('enquiry.index')->with('success', 'enquiry Created Successfully');
     }
 

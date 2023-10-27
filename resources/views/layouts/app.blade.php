@@ -160,10 +160,6 @@
     <!-- Demo scripts -->
     <script src="{{ asset('js/dashboard/dashboard-2.js') }}"></script>
 
-    <!-- Summernote -->
-    <script src="{{ asset('vendor/summernote/js/summernote.min.js') }}"></script>
-    <!-- Summernote init -->
-    <script src="{{ asset('js/plugins-init/summernote-init.js') }}"></script>
 
     <!-- Svganimation scripts -->
     <script src="{{ asset('vendor/svganimation/vivus.min.js') }}"></script>
@@ -174,7 +170,7 @@
     <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('js/plugins-init/datatables.init.js') }}"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script src="https://cdn.getaddress.io/scripts/getaddress-autocomplete-1.1.3.min.js"></script>
 
     <!-- after your form -->
@@ -186,9 +182,9 @@
         $('#check_all_agreemnet').on('change keyup', function() {
             $('input:checkbox').prop('checked', this.checked);
         })
-        $(document).ready(function() {
-            $('.select').select2();
-        });
+        // $(document).ready(function() {
+        //     $('.select').select2();
+        // });
         $('#add-subject').on('click', function() {
             lessonType = $('#lesson_type_id').val();
             subject = $('#subject_id').val();
@@ -802,7 +798,7 @@
 
     {{-- Enquiry  --}}
     <script>
-        $('.enquiry_year').on('change', function() {
+        $('.year_enquiry').on('change', function() {
             var year = $(this).val();
             $.ajax({
                 method: "GET",
@@ -811,6 +807,14 @@
                     // if (success.message == 'success') {
 
                     $('.subject').html(success.data);
+                    $('.checkbox').html('');
+                    success.data.forEach(element => {
+                        x = `     <div class="col-lg-2 col-md-2 col-sm-6">
+                                                    <input type="checkbox" name="subject[]" value="${element.name}" id="">
+                                                    <label class="">${element.name}</label>
+                                                </div>`;
+                        $('.checkbox').append(x);
+                    });
                     // console.log(success.data);
                     // }
 
@@ -819,6 +823,30 @@
             })
         })
     </script>
+
+
+
+
+
+
+
+
+
+    {{--
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script> --}}
+
+    <!-- Summernote -->
+    <script src="{{ asset('vendor/summernote/js/summernote.min.js') }}"></script>
+    <!-- Summernote init -->
+    <script src="{{ asset('js/plugins-init/summernote-init.js') }}"></script>
 </body>
+
 
 </html>

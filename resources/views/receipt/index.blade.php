@@ -44,7 +44,9 @@
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Student
                                             Balance</span> <strong class="text-muted">0</strong></li>
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Invoice
-                                            #</span> <strong class="text-muted">{{ $invoice->id }}</strong></li>
+                                            #</span> <strong class="text-muted"><a
+                                                href="{{ route('invoice.show', $invoice->student->id) }}">{{ $invoice->id }}</a></strong>
+                                    </li>
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Invoice
                                             Amount</span> <strong class="text-muted">£{{ $invoice->amount }}</strong></li>
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Invoice

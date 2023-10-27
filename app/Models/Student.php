@@ -156,4 +156,15 @@ class Student extends Model
     {
         return $this->enquirySubject()->where('lesson_type_id', 1)->get();
     }
+    public function isFullyPaid()
+    {
+        $paid = true;
+        foreach ($this->invoice as $value) {
+            if (!$value->is_paid) {
+                $paid = false;
+            }
+        }
+        // dd($paid);
+        return $paid;
+    }
 }

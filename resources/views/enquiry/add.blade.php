@@ -105,8 +105,8 @@
                                         <div class="form-group">
                                             <label class="form-label">Year</label>
 
-
-                                            <select class="form-control year" name="year_id" required>
+                                            <select class="form-control year_enquiry" name="year_id" required>
+                                                <option value="">-</option>
                                                 @foreach ($year as $value)
                                                     <option value="{{ $value->id }}">{{ $value->name }}</option>
                                                 @endforeach
@@ -115,7 +115,7 @@
 
                                         </div>
                                     </div>
-                                   
+
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Branch</label>
@@ -152,8 +152,8 @@
                                         <div class="form-group">
                                             <label class="form-label">How do you Know About Us</label>
 
-                                            <input list="browsers" name="know_about_us" id="browser"
-                                                class="form-control" required>
+                                            <input list="browsers" name="know_about_us" id="browser" class="form-control"
+                                                required>
                                             <datalist id="browsers">
                                                 <option value="Leaflet">
                                                 <option value="Google">
@@ -164,21 +164,40 @@
 
                                         </div>
                                     </div>
-                                 <div class="checkbox">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Subjects</label>
+                                        </div>
+                                        <div class=" pl-3">
+                                            <div class="row checkbox">
 
-                                 </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                        <button type="submit" class="btn btn-light">Cencel</button>
+
+                                            </div>
+                                        </div>
                                     </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Note</label>
+
+
+                                            <textarea name="note" class="summernote"></textarea>
+                                        </div>
+                                    </div>
+
+
+
                                 </div>
-                            </form>
+
+
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-light">Cencel</button>
+                                </div>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
-
-

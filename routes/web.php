@@ -13,6 +13,7 @@ use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\ReceiptController;
+use App\Http\Controllers\RefundController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ScienceTypeController;
 
@@ -81,4 +82,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/student/{id}/note', [StudentsController::class, 'note'])->name('student.note');
     Route::post('/student/{id}/note', [StudentsController::class, 'noteStore'])->name('student.note.store');
     Route::post('/student/upload', [StudentsController::class, 'uploadStore'])->name('student.upload.store');
+    Route::resource('refund', RefundController::class);
+    Route::get('/paid-by-cash/{id}', [RefundController::class, 'paidByBank'])->name('refund.paid.bank');
+    Route::get('/paid-by-bank/{id}', [RefundController::class, 'paidByCash'])->name('refund.paid.cash');
 });

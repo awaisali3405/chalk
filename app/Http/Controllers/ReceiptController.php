@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Refund;
 use App\Models\StudentInvoice;
 use App\Models\StudentInvoiceReceipt;
 use Illuminate\Http\Request;
@@ -41,6 +42,11 @@ class ReceiptController extends Controller
             $invoice->update([
                 'is_paid' => 1
             ]);
+            if ($invoice->type == "Refundable") {
+                Refund::create([
+                    'invoice_id' => $invoice->id
+                ]);
+            }
         }
         return redirect()->route('receipt.show', $request->invoice_id)->with('success', "Receipt Created Successfully");
     }

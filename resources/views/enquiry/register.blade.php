@@ -45,21 +45,22 @@
 
                                         <div class="row">
 
-                                            <input type='hidden' value="{{ $enquiry->id }}" name="enquiry_id">
-                                         
+
+                                            <input type='hidden' id="upload" class="d-none" value="{{ $enquiry->id }}"
+                                                name="enquiry_id">
                                             <input type='file' id="upload" class="d-none" name="profile_pic">
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">First Name</label>
                                                     <input type="text" class="form-control" name="first_name"
-                                                        value="{{ old('first_name') }}" required>
+                                                        value="{{ old('first_name', $enquiry->first_name) }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Last Name</label>
                                                     <input type="text" class="form-control" name="last_name"
-                                                        value="{{ old('last_name') }}" required>
+                                                        value="{{ old('last_name', $enquiry->last_name) }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -73,7 +74,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Phone</label>
                                                     <input type="text" class="form-control" name="phone_no"
-                                                        value="{{ old('phone_no') }}" required>
+                                                        value="{{ old('phone_no', $enquiry->phone_no) }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -155,7 +156,8 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Current School Name</label>
                                                     <input type="text" class="form-control" name="current_school_name"
-                                                        value="{{ old('current_school_name') }}" required>
+                                                        value="{{ old('current_school_name', $enquiry->current_school_name) }}"
+                                                        required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -166,7 +168,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-lg-12 col-md-6 col-sm-12">
+                                            {{-- <div class="col-lg-12 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Lesson Type</label>
                                                     <div class="row">
@@ -222,7 +224,7 @@
 
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
 
                                             <div class="col-12">
 
@@ -236,7 +238,7 @@
                                                                 <option value="">Select Key Stage</option>
                                                                 @foreach ($keyStage as $value)
                                                                     <option value="{{ $value->id }}"
-                                                                        {{ old('key_stage_id') == $value->id ? 'selected' : '' }}>
+                                                                        {{ old('key_stage_id', $enquiry->year->keyStage->id) == $value->id ? 'selected' : '' }}>
                                                                         {{ $value->name }}</option>
                                                                 @endforeach
 
@@ -249,7 +251,8 @@
 
 
                                                             <select class="form-control year" name="year_id" required>
-
+                                                                <option value="{{ $enquiry->year->id }}">
+                                                                    {{ $enquiry->year->name }}</option>
                                                             </select>
 
 
@@ -265,7 +268,23 @@
                                                             </div>
                                                             <div class="card-body">
                                                                 <div class="row">
-                                                                    <div class="col-3">
+                                                                    <div class="col-2">
+                                                                        <div class="form-group">
+                                                                            <label class="form-label">Lesson Type</label>
+
+                                                                            <select class="form-control"
+                                                                                id="lesson_type_id">
+                                                                                @foreach ($lessonType as $value)
+                                                                                    <option value="{{ $value->id }}">
+                                                                                        {{ $value->name }}
+                                                                                    </option>
+                                                                                @endforeach
+                                                                            </select>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="col-2">
                                                                         <div class="form-group">
                                                                             <label class="form-label">Subject</label>
 
@@ -279,7 +298,7 @@
                                                                         </div>
 
                                                                     </div>
-                                                                    <div class="col-3">
+                                                                    <div class="col-1">
                                                                         <div class="form-group">
                                                                             <label class="form-label">Board</label>
 
@@ -295,7 +314,7 @@
                                                                         </div>
 
                                                                     </div>
-                                                                    <div class="col-3">
+                                                                    <div class="col-1">
                                                                         <div class="form-group">
                                                                             <label class="form-label">Paper</label>
 
@@ -328,6 +347,39 @@
                                                                         </div>
 
                                                                     </div>
+                                                                    <div class="col-1">
+                                                                        <div class="form-group">
+
+                                                                            <label class="form-label">Rate</label>
+                                                                            <input type="text" name="per_hour_rate"
+                                                                                id="rate" class="form-control">
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-1">
+                                                                        <div class="form-group">
+
+                                                                            <label class="form-label">Hours
+                                                                            </label>
+                                                                            <input type="text" name="no_of_hr"
+                                                                                id="hours" class="form-control">
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-1">
+                                                                        <div class="form-group">
+
+                                                                            <label class="form-label">Amount
+                                                                            </label>
+                                                                            <input type="text" name="amount"
+                                                                                id="amount" class="form-control">
+
+
+                                                                        </div>
+                                                                    </div>
+
                                                                     <div class="col-1 pt-4">
                                                                         <div class="form-group">
 
@@ -344,10 +396,14 @@
                                                                         style="width:100%;">
                                                                         <thead>
                                                                             <tr>
+                                                                                <th>Lesson Type</th>
                                                                                 <th>Subject</th>
                                                                                 <th>Board</th>
                                                                                 <th>Paper</th>
                                                                                 <th>Science Type</th>
+                                                                                <th>Rate</th>
+                                                                                <th>Hours</th>
+                                                                                <th>Amount</th>
 
 
                                                                                 <th>Action</th>
@@ -396,7 +452,7 @@
                                                             <option value="">Select Branch</option>
                                                             @foreach ($branch as $value)
                                                                 <option value="{{ $value->id }}"
-                                                                    {{ old('branch_id') == $value->id ? 'selected' : '' }}>
+                                                                    {{ old('branch_id', $enquiry->branch_id) == $value->id ? 'selected' : '' }}>
                                                                     {{ $value->name }}</option>
                                                             @endforeach
 
@@ -457,7 +513,8 @@
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
                                                                     <input type="text" class="form-control"
-                                                                        value="0" name="annual_resource_fee">
+                                                                        value="0" name="annual_resource_fee"
+                                                                        id="annual_resource_fee" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -468,8 +525,9 @@
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
-                                                                    <input type="text" class="form-control"
-                                                                        value="0" name="resource_discount">
+                                                                    <input type="text" id="resource_discount"
+                                                                        class="form-control" value="0"
+                                                                        name="resource_discount">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -480,8 +538,9 @@
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
-                                                                    <input type="text" class="form-control"
-                                                                        value="0" name="exercise_book_fee">
+                                                                    <input type="text" id="exercise_book"
+                                                                        class="form-control" value="0"
+                                                                        name="exercise_book_fee" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1431,7 +1490,8 @@
                                             <label class="form-label">How do you Know About Us</label>
 
                                             <input list="browsers" name="know_about_us" id="browser"
-                                                value="{{ old('know_about_us') }}" class="form-control" required>
+                                                value="{{ old('know_about_us', $enquiry->know_about_us) }}"
+                                                class="form-control" required>
                                             <datalist id="browsers">
                                                 <option value="Leaflet">
                                                 <option value="Google">
@@ -1572,5 +1632,3 @@
         </div>
     </div>
 @endsection
-
-

@@ -28,7 +28,8 @@ class Enquiry extends Model
         'assessment_date',
         'assessment_time',
         'know_about_us',
-        'note'
+        'note',
+        'subject'
     ];
     public function year()
     {
