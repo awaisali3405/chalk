@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Board;
 use App\Models\Branch;
 use App\Models\Parents;
-use App\Models\studentSubject;
+use App\Models\StudentSubject;
 use App\Models\studentUpload;
 use App\Models\InvoiceSubject;
 use App\Models\KeyStage;
