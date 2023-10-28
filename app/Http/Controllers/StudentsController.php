@@ -70,7 +70,7 @@ class StudentsController extends Controller
      */
     public function create()
     {
-        $studentSubject = studentSubject::where('student_id', null)->where('student_id', null)->delete();
+        $studentSubject = StudentSubject::where('student_id', null)->where('student_id', null)->delete();
         return view('student.add');
     }
 
