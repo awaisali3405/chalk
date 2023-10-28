@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -111,9 +112,7 @@ class User extends Authenticatable
     }
     public function depositRefundable($branch, $academicYear)
     {
-
-        // dd($invoice_sum, $received);
-        return  $this->depositRefundableByCash($branch, $academicYear) + $this->depositRefundableByBank($branch, $academicYear);
+        return ($this->depositRefundableByCash($branch, $academicYear) + $this->depositRefundableByBank($branch, $academicYear));
     }
     public function depositRefundableByCash($branch, $academicYear)
     {
@@ -319,5 +318,44 @@ class User extends Authenticatable
         $depositRegistrationByBank = $this->depositRegistrationByBank($branch, $academicYear);
         $depositRefundableByBank = $this->depositRefundableByBank($branch, $academicYear);
         return $feeReceivedByBank + $depositRegistrationByBank + $depositRefundableByBank;
+    }
+    // Total Refunded
+    // public function refund($branch, $academicYear)
+    // {
+    //     return Refund::where('paid_by_bank', true)->orWhere('paid_by_cash', true)->whereHas('invoice',function($query) use($branch,$academicYear){
+    //         $query->
+    //     })->get();
+    // }
+    // public function totalRefunded($branch, $academicYear)
+    // {
+    // }
+
+
+
+    // Expense
+    public function expense()
+    {
+        return Expense::all();
+    }
+    public function totalExpense()
+    {
+        return $this->expense()->sum('amount');
+    }
+
+
+
+    // Week
+    public function week($date)
+    {
+        $year = AcademicCalender::where('start_date', '<=', $date)->where('end_date', '>=', $date)->first();
+        // dd($year);
+        if ($year) {
+            return Carbon::parse($year->start_date)->diffInWeeks(Carbon::parse($date)) + 1;
+        }
+    }
+    public function dateWeek($week)
+    {
+        $date = Carbon::parse($this->session()->start_date)->addWeeks($week);
+        return $date;
     }
 }

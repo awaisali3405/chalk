@@ -87,6 +87,33 @@
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-university"></i>
+                        <span class="nav-text">Expense Acount Type</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('expenseTypeAccount.index') }}">All Expense Acount Type</a></li>
+                        <li><a href="{{ route('expenseTypeAccount.create') }}">Add Expense Acount Type</a></li>
+                    </ul>
+                </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-university"></i>
+                        <span class="nav-text">Expense</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('expense.index') }}">All Expense</a></li>
+                        <li><a href="{{ route('expense.create') }}">Add Expense</a></li>
+                    </ul>
+                </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-university"></i>
+                        <span class="nav-text">Teacher Enquiry</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('enquiryTeacher.index') }}">All Teacher Enquiry</a></li>
+                        <li><a href="{{ route('enquiryTeacher.create') }}">Add Teacher Enquiry</a></li>
+                    </ul>
+                </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-university"></i>
                         <span class="nav-text">Balance Sheet</span>
                     </a>
                     <ul aria-expanded="false">

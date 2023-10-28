@@ -6,6 +6,8 @@ use App\Http\Controllers\BalanceSheetController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\EnquiryController;
+use App\Http\Controllers\ExpenseAccountTypeController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\KeyStageController;
 use App\Http\Controllers\PaperController;
@@ -21,8 +23,9 @@ use App\Http\Controllers\ScienceTypeController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\SupplierControlller;
+use App\Http\Controllers\TeacherEnquiryController;
 use App\Http\Controllers\YearController;
-
+use App\Models\ExpenseAccountType;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -85,4 +88,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('refund', RefundController::class);
     Route::get('/paid-by-cash/{id}', [RefundController::class, 'paidByBank'])->name('refund.paid.bank');
     Route::get('/paid-by-bank/{id}', [RefundController::class, 'paidByCash'])->name('refund.paid.cash');
+
+
+
+    // Expense Account Type
+    Route::resource('expenseTypeAccount', ExpenseAccountTypeController::class);
+    Route::resource('expense', ExpenseController::class);
+
+    // Teacher Enquiry
+    Route::resource('enquiryTeacher', TeacherEnquiryController::class);
 });

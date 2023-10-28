@@ -38,9 +38,34 @@ class EnquiryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $enquiry = Enquiry::all();
+
+        if ($request->input()) {
+            $enquiry = new Enquiry();
+            if ($request->input('branch_id')) {
+                $enquiry = $enquiry->where('branch_id', $request->input('branch_id'));
+            }
+            if ($request->input('from_date')) {
+                $enquiry = $enquiry->where('enquiry_date', '>=', $request->input('from_date'));
+            }
+            if ($request->input('to_date')) {
+                $enquiry = $enquiry->where('enquiry_date', '<=', $request->input('to_date'));
+            }
+            if ($request->input('current_school')) {
+                $enquiry = $enquiry->where('current_school_name', $request->input('current_school'));
+            }
+            if ($request->input('from_week')) {
+                $enquiry = $enquiry->where('enquiry_date', '>=', auth()->user()->dateWeek($request->input('from_week')));
+            }
+            if ($request->input('to_week')) {
+                $enquiry = $enquiry->where('enquiry_date', '<=', auth()->user()->dateWeek($request->input('to_week')));
+            }
+            $enquiry = $enquiry->get();
+        } else {
+
+            $enquiry = Enquiry::all();
+        }
         return view('enquiry.index', compact('enquiry'));
     }
 

@@ -18,6 +18,108 @@
                 <div class="col-lg-12">
                     <div class="row tab-content">
                         <div id="list-view" class="tab-pane fade active show col-lg-12">
+                            <form action="{{ route('student.index') }}" method="GET">
+                                {{-- @csrf --}}
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <label class="form-label">Branch</label>
+                                                    <select name="branch_id" id="" class="form-control">
+
+                                                        <option value="">All</option>
+                                                        @foreach ($branch as $value)
+                                                            <option value="{{ $value->id }}"
+                                                                {{ $value->id == request()->input('branch_id') ? 'selected' : '' }}>
+                                                                {{ $value->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            {{-- <div class="col-3">
+                                                <div class="form-group">
+                                                    <label class="form-label">Academic Year</label>
+                                                    <select name="academic_year_id" id="" class="form-control">
+
+                                                        <option value="">All</option>
+                                                        @foreach ($academicYear as $value)
+                                                            <option value="{{ $value->id }}"
+                                                                {{ $value->id == request()->input('academic_year_id') ? 'selected' : '' }}>
+                                                                {{ $value->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div> --}}
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <label class="form-label">From Date</label>
+                                                    <input type="date" class="form-control" name="from_date"
+                                                        value="{{ request()->input('from_date') }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <label class="form-label">To Date</label>
+                                                    <input type="date" class="form-control" name="to_date"
+                                                        value="{{ request()->input('to_date') }}">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <label class="form-label">Current School</label>
+                                                    <select name="current_school" id="" class="form-control">
+
+                                                        <option value="">All</option>
+                                                        @foreach ($currentShool as $value)
+                                                            <option value="{{ $value }}"
+                                                                {{ $value == request()->input('current_school') ? 'selected' : '' }}>
+                                                                {{ $value }}</option>
+                                                        @endforeach
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <label class="form-label">From Week</label>
+                                                    <select name="from_week" id="" class="form-control">
+
+                                                        <option value="">None</option>
+                                                        @for ($i = 1; $i < 53; $i++)
+                                                            <option value="{{ $i }}"
+                                                                {{ $i == request()->input('from_week') ? 'selected' : '' }}>
+                                                                Week {{ $i }}</option>
+                                                        @endfor
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <label class="form-label">To Week</label>
+                                                    <select name="to_week" id="" class="form-control">
+
+                                                        <option value="">None</option>
+                                                        @for ($i = 1; $i < 53; $i++)
+                                                            <option value="{{ $i }}"
+                                                                {{ $i == request()->input('to_week') ? 'selected' : '' }}>
+                                                                Week {{ $i }}</option>
+                                                        @endfor
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 d-flex justify-content-center pt-2">
+                                                <div class="form-group">
+
+                                                    <button type="submit" class=" btn btn-primary">Show</button>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                            </form>
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">All Student </h4>

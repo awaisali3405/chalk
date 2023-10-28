@@ -121,7 +121,11 @@
 
                                                     </td>
                                                     <td class="text-left">Misc Expense(Bill,Rent,Others)</td>
-                                                    <td class="text-left"></td>
+                                                    <td class="text-left">
+
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->totalExpense(): 0 }}
+
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left">Yearly Resource Received</td>

@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Board;
 use App\Models\Branch;
 use App\Models\Parents;
-use App\Models\EnquirySubject;
-use App\Models\EnquiryUpload;
+use App\Models\studentSubject;
+use App\Models\studentUpload;
 use App\Models\InvoiceSubject;
 use App\Models\KeyStage;
 use App\Models\Paper;
@@ -25,11 +25,34 @@ class StudentsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         if (auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'super admin') {
 
-            $student = Student::all();
+            if ($request->input()) {
+                $student = new Student();
+                if ($request->input('branch_id')) {
+                    $student = $student->where('branch_id', $request->input('branch_id'));
+                }
+                if ($request->input('from_date')) {
+                    $student = $student->where('admission_date', '>=', $request->input('from_date'));
+                }
+                if ($request->input('to_date')) {
+                    $student = $student->where('admission_date', '<=', $request->input('to_date'));
+                }
+                if ($request->input('current_school')) {
+                    $student = $student->where('current_school_name', $request->input('current_school'));
+                }
+                if ($request->input('from_week')) {
+                    $student = $student->where('admission_date', '>=', auth()->user()->dateWeek($request->input('from_week')));
+                }
+                if ($request->input('to_week')) {
+                    $student = $student->where('admission_date', '<=', auth()->user()->dateWeek($request->input('to_week')));
+                }
+                $student = $student->get();
+            } else {
+                $student = Student::all();
+            }
         } else if (auth()->user()->role->name == 'parent') {
             $student = Parents::where('user_id', auth()->user()->id)->first();
             if ($student) {
@@ -47,7 +70,7 @@ class StudentsController extends Controller
      */
     public function create()
     {
-        $enquirySubject = EnquirySubject::where('student_id', null)->where('enquiry_id', null)->delete();
+        $studentSubject = studentSubject::where('student_id', null)->where('student_id', null)->delete();
         return view('student.add');
     }
 
@@ -60,7 +83,7 @@ class StudentsController extends Controller
         $data1 = $request->except('_token');
         // dd($data);
         $data = $request->validate([
-            'enquiry_id' => 'nullable',
+            'student_id' => 'nullable',
             'profile_pic' => 'nullable',
             'first_name' => 'required',
             'last_name' => 'required',
@@ -169,7 +192,7 @@ class StudentsController extends Controller
                 $student->parents()->attach([$parent->id]);
             }
         }
-        $subject = $student->enquirySubject()->pluck('id')->toArray();
+        $subject = $student->studentSubject()->pluck('id')->toArray();
         // dd($subject);
         $invoice = StudentInvoice::create([
             'student_id' => $student->id,
@@ -192,10 +215,10 @@ class StudentsController extends Controller
             'from_date' => auth()->user()->session()->start_date,
             'to_date' => auth()->user()->session()->end_date
         ]);
-        $subject = EnquirySubject::whereIn('id', $data1['enquiry_subject'])->update([
+        $subject = studentSubject::whereIn('id', $data1['student_subject'])->update([
             'student_id' => $student->id
         ]);
-        foreach ($student->enquirySubject as $key => $value) {
+        foreach ($student->studentSubject as $key => $value) {
             // if ($value->subject->lesson_type_id == 1) {
 
             InvoiceSubject::create([
@@ -212,7 +235,7 @@ class StudentsController extends Controller
 
 
 
-        // $subject = EnquirySubject::whereIn('id', $data1['enquiry_subject'])->update([
+        // $subject = studentSubject::whereIn('id', $data1['student_subject'])->update([
         //     'student_id' => $student->id
         // ]);
 
@@ -243,7 +266,7 @@ class StudentsController extends Controller
     public function update(Request $request, string $id)
     {
         $data = $request->validate([
-            'enquiry_id' => 'nullable',
+            'student_id' => 'nullable',
             'profile_pic' => 'nullable',
             'first_name' => 'required',
             'last_name' => 'required',
@@ -377,12 +400,12 @@ class StudentsController extends Controller
         $data['file'] = $this->saveImage($request->file);
         $data['file_name'] = $request->file->getClientOriginalName();
         // dd($data);
-        EnquiryUpload::create($data);
+        studentUpload::create($data);
         return redirect()->back()->with('success', 'Created Successfully');
     }
     public function uploadDelete($id)
     {
-        $student = EnquiryUpload::find($id)->delete();
+        $student = studentUpload::find($id)->delete();
         return redirect()->back()->with('success', 'Deleted Successfully');
     }
     public function getStudent($id)
@@ -402,7 +425,7 @@ class StudentsController extends Controller
         $student = Student::with('branch', 'year')->find($id);
         // dd($student->year->name);
         $html = '<option value="">-</option>';
-        foreach ($student->enquirySubject as $key => $value) {
+        foreach ($student->studentSubject as $key => $value) {
             $html .= "<option value='" . $value->id . "'>" . $value->subject->name . "</option>";
         }
         return response()->json(['data' => $student, 'html' => $html]);
