@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Board;
 use App\Models\Branch;
 use App\Models\Parents;
-use App\Models\StudentSubject;
+use App\Models\EnquirySubject;
 use App\Models\studentUpload;
 use App\Models\InvoiceSubject;
 use App\Models\KeyStage;
@@ -70,7 +70,7 @@ class StudentsController extends Controller
      */
     public function create()
     {
-        $studentSubject = StudentSubject::where('student_id', null)->where('student_id', null)->delete();
+        $EnquirySubject = EnquirySubject::where('student_id', null)->where('student_id', null)->delete();
         return view('student.add');
     }
 
@@ -192,7 +192,7 @@ class StudentsController extends Controller
                 $student->parents()->attach([$parent->id]);
             }
         }
-        $subject = $student->studentSubject()->pluck('id')->toArray();
+        $subject = $student->EnquirySubject()->pluck('id')->toArray();
         // dd($subject);
         $invoice = StudentInvoice::create([
             'student_id' => $student->id,
@@ -215,10 +215,10 @@ class StudentsController extends Controller
             'from_date' => auth()->user()->session()->start_date,
             'to_date' => auth()->user()->session()->end_date
         ]);
-        $subject = studentSubject::whereIn('id', $data1['student_subject'])->update([
+        $subject = EnquirySubject::whereIn('id', $data1['student_subject'])->update([
             'student_id' => $student->id
         ]);
-        foreach ($student->studentSubject as $key => $value) {
+        foreach ($student->EnquirySubject as $key => $value) {
             // if ($value->subject->lesson_type_id == 1) {
 
             InvoiceSubject::create([
@@ -235,7 +235,7 @@ class StudentsController extends Controller
 
 
 
-        // $subject = studentSubject::whereIn('id', $data1['student_subject'])->update([
+        // $subject = EnquirySubject::whereIn('id', $data1['student_subject'])->update([
         //     'student_id' => $student->id
         // ]);
 
@@ -425,7 +425,7 @@ class StudentsController extends Controller
         $student = Student::with('branch', 'year')->find($id);
         // dd($student->year->name);
         $html = '<option value="">-</option>';
-        foreach ($student->studentSubject as $key => $value) {
+        foreach ($student->EnquirySubject as $key => $value) {
             $html .= "<option value='" . $value->id . "'>" . $value->subject->name . "</option>";
         }
         return response()->json(['data' => $student, 'html' => $html]);
