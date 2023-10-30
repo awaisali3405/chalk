@@ -433,6 +433,7 @@
                     </div>
                     @if (auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'super admin')
                         <div class="col-12">
+
                             <div class="row">
                                 <div class="col-xl-12 col-xxl-12 col-sm-12">
                                     <div class="card">
@@ -444,7 +445,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="form-label">Branch</label>
-                                                        <select class="form-control" name="branch_id">
+                                                        <select class="form-control branch" name="branch_id">
                                                             <option value="">Select Branch</option>
                                                             @foreach ($branch as $value)
                                                                 <option value="{{ $value->id }}"
@@ -473,6 +474,37 @@
 
                                                     </div>
                                                 </div>
+                                                <div class="col-3">
+
+                                                </div>
+                                                <div class="col-6 ">
+
+                                                    <h4 class="hr-lines">Tax Calculate</h4>
+                                                </div>
+                                                <div class="col-3">
+
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group">
+                                                        <label for="" class="form-label">Tax</label>
+                                                        <input type="text" name="tax" id=""
+                                                            class="form-control tax" value="0">
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group">
+                                                        <label for="" class="form-label">Fee Tax</label>
+                                                        <input type="text" name="fee_tax" id=""
+                                                            class="form-control fee-tax" value="0" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group">
+                                                        <label for="" class="form-label">Registration Tax</label>
+                                                        <input type="text" name="reg_tax" id="reg_tax"
+                                                            id="" class="form-control" value="0" readonly>
+                                                    </div>
+                                                </div>
 
                                                 @if (auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'super admin')
                                                     <div class="row card-body">
@@ -497,7 +529,8 @@
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
                                                                     <input type="text" class="form-control"
-                                                                        value="20" name="registration_fee">
+                                                                        value="20" name="registration_fee"
+                                                                        id="registration_fee">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -542,13 +575,13 @@
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
-                                                                <label class="form-label">Fee</label>
+                                                                <label class="form-label">Sub total Fee</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
-                                                                    <input type="text" class="form-control"
-                                                                        value="0" name="fee">
+                                                                    <input type="text" class="form-control fee"
+                                                                        value="0" name="fee" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -560,7 +593,21 @@
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
                                                                     <input type="text" class="form-control"
-                                                                        value="0" name="fee_discount">
+                                                                        value="0" name="fee_discount"
+                                                                        id="fee_discount">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Total Fee</label>
+                                                                <div class="input-group mb-2">
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">£</div>
+                                                                    </div>
+                                                                    <input type="text" class="form-control fee-total"
+                                                                        value="0" name="total_fee" id="total_fee"
+                                                                        readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1500,8 +1547,8 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Do you have any comments or feedback?</label>
-                                            <input type="text" class="form-control" name="feedback" id=""
-                                                value="{{ old('feedback') }}">
+                                            <input type="text" class="form-control" name="feedback"
+                                                id="" value="{{ old('feedback') }}">
 
 
                                         </div>

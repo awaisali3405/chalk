@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Branch;
+use App\Models\Department;
 use Illuminate\Http\Request;
 
-class BranchController extends Controller
+class DepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $branch = Branch::all();
-        return view('branch.index', compact('branch'));
+        $department = Department::all();
+        return view('department.index', compact('department'));
     }
 
     /**
@@ -21,7 +21,7 @@ class BranchController extends Controller
      */
     public function create()
     {
-        return view('branch.add');
+        return view('department.add');
     }
 
     /**
@@ -30,8 +30,8 @@ class BranchController extends Controller
     public function store(Request $request)
     {
         $data = $request->except('_token');
-        Branch::create($data);
-        return redirect()->route('branch.index')->with('success', 'Branch Created Successfully');
+        Department::create($data);
+        return redirect()->route('department.index')->with('success', 'department Created Successfully');
     }
 
     /**
@@ -47,8 +47,8 @@ class BranchController extends Controller
      */
     public function edit(string $id)
     {
-        $branch = Branch::find($id);
-        return view('branch.edit', compact('branch'));
+        $department = Department::find($id);
+        return view('department.edit', compact('department'));
     }
 
     /**
@@ -57,8 +57,8 @@ class BranchController extends Controller
     public function update(Request $request, string $id)
     {
         $data = $request->except('_token', 'method');
-        Branch::find($id)->update($data);
-        return redirect()->route('branch.index')->with('success', 'Branch Updated Successfully');
+        Department::find($id)->update($data);
+        return redirect()->route('department.index')->with('success', 'Branch Updated Successfully');
     }
 
     /**
@@ -67,12 +67,5 @@ class BranchController extends Controller
     public function destroy(string $id)
     {
         //
-    }
-    public function getBranch($id)
-    {
-        $branch = Branch::find($id);
-        return response()->json([
-            'data' => $branch
-        ]);
     }
 }

@@ -101,7 +101,6 @@ class StudentsController extends Controller
             'payment_period' => 'required',
             'year_id' => 'required',
             'key_stage_id' => 'required',
-            // 'lesson_type' => 'required',
             'admission_date' => 'nullable',
             'deposit' => 'nullable',
             'registration_fee' => 'nullable',
@@ -110,9 +109,7 @@ class StudentsController extends Controller
             'exercise_book_fee' => 'nullable',
             'fee' => 'nullable',
             'fee_discount' => 'nullable',
-
-            // 'ethic_group' => 'nullable',
-            // 'religion' => 'nullable',
+            'total_fee' => 'nullable',
             'o_full_name_1' => 'nullable',
             'o_work_phone_1' => 'nullable',
             'o_relationship_1' => 'nullable',
@@ -140,6 +137,7 @@ class StudentsController extends Controller
             'feedback' => 'nullable',
             'parent_id' => 'required'
         ]);
+        // dd($data1);
         if (isset($request->profile_pic)) {
             $data['profile_pic'] =   $this->saveImage($request->profile_pic);
         } else {
@@ -215,7 +213,7 @@ class StudentsController extends Controller
             'from_date' => auth()->user()->session()->start_date,
             'to_date' => auth()->user()->session()->end_date
         ]);
-        $subject = EnquirySubject::whereIn('id', $data1['student_subject'])->update([
+        $subject = EnquirySubject::whereIn('id', $data1['enquiry_subject'])->update([
             'student_id' => $student->id
         ]);
         foreach ($student->EnquirySubject as $key => $value) {

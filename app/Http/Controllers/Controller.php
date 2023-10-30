@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Board;
 use App\Models\Branch;
+use App\Models\Department;
 use App\Models\Enquiry;
 use App\Models\ExpenseAccountType;
 use App\Models\KeyStage;
@@ -54,5 +55,7 @@ class Controller extends BaseController
         View::share('expenseTypeAccount', $expenseTypeAccount);
         $currentShool = Enquiry::distinct('current_school_name')->pluck('current_school_name');
         View::share('currentShool', $currentShool);
+        $department = Department::all();
+        View::share('department', $department);
     }
 }

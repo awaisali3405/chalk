@@ -119,6 +119,25 @@
                                                 class="form-control" name="res_postal_code">
                                         </div>
                                     </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label"> Tax</label>
+                                            <select name="tax_type" id="tax_type" class="form-control" id="">
+                                                <option value="vat" {{ $branch->tax_type == 'vat' ? 'selected' : '' }}>
+                                                    Standard Vat Tax</option>
+                                                <option value="no_vat"
+                                                    {{ $branch->tax_type == 'no_vat' ? 'selected' : '' }}>Non
+                                                    Vat Tax</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 tax">
+                                        <div class="form-group">
+                                            <label class="form-label"> Tax %</label>
+                                            <input type="text" id="" class="form-control tax-input"
+                                                name="tax" value='{{ $branch->tax }}'>
+                                        </div>
+                                    </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                         <button type="submit" class="btn btn-light">Cencel</button>

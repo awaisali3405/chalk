@@ -168,6 +168,15 @@
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-home"></i>
+                        <span class="nav-text">Department</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('department.index') }}">All Department</a></li>
+                        <li><a href="{{ route('department.create') }}">Add Department</a></li>
+                    </ul>
+                </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-home"></i>
                         <span class="nav-text">Paper</span>
                     </a>
                     <ul aria-expanded="false">

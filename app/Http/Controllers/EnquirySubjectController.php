@@ -38,7 +38,7 @@ class EnquirySubjectController extends Controller
         $enquirySubject = EnquirySubject::whereId($id)->first();
         $enquirySubject->delete();
         return response()->json([
-            'message' => 'success', 'data' => $enquirySubject->subject
+            'message' => 'success', 'data' => $enquirySubject->subject, 'enquiry' => $enquirySubject
         ]);
     }
 }

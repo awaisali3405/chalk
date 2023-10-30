@@ -142,7 +142,7 @@ class InvoiceController extends Controller
             foreach ($request->student as $value) {
                 $student = Student::find($value);
                 if ($student->payment_period == "Weekly") {
-                    $amount = ($student->enquirySubject->sum('amount')) * $weeks;
+                    $amount = (($student->enquirySubject->sum('amount')) * $weeks);
                     $invoice = StudentInvoice::create([
                         'student_id' => $student->id,
                         'type' => 'Weekly Fee',

@@ -23,6 +23,8 @@ class Branch extends Model
         'res_town',
         'res_country',
         'res_postal_code',
-        'company_number'
+        'company_number',
+        'tax_type',
+        'tax'
     ];
 }

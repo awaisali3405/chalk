@@ -40,6 +40,35 @@
     .border td {
         border: 1px solid black;
     }
+
+    .hr-lines:before {
+        content: " ";
+        display: block;
+        height: 1px;
+        width: 35%;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        background: rgb(0, 0, 0);
+    }
+
+    .hr-lines {
+        position: relative;
+        /*  new lines  */
+        max-width: 500px;
+        text-align: center;
+    }
+
+    .hr-lines:after {
+        content: " ";
+        height: 1px;
+        width: 35%;
+        background: rgb(0, 0, 0);
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 0;
+    }
 </style>
 
 <body>
@@ -247,6 +276,18 @@
                                             <a class="delete-subject" href="javascript:void(0);"><i class=" fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>`;
+
+
+                        // total = parseFloat($('.fee-total').val());
+                        discount = parseFloat($('#fee_discount').val());
+                        total = parseFloat($('.fee').val());
+                        $('.fee-total').val(parseFloat((total + parseFloat(success.data.amount)) -
+                            discount))
+                        $('.fee').val(parseFloat(total + +success.data.amount))
+
+                        total = parseFloat($('.fee-total').val())
+                        fee_tax = calculateFeeTax(total, $('.tax').val())
+                        $('.fee-tax').val(fee_tax);
                         console.log(x);
                         // if (success.data.lesson_type_id == 1) {
 
@@ -365,9 +406,19 @@
 
                         $('#exercise_book').val(e_price)
                     }
+                    // total = parseFloat($('.fee-total').val());
+                    discount = parseFloat($('#fee_discount').val());
+                    total = parseFloat($('.fee').val());
+                    $('.fee').val(parseFloat(total - +success.enquiry.amount))
+                    $('.fee-total').val(parseFloat((total - parseFloat(success.enquiry.amount)) -
+                        discount))
+                    total = parseFloat($('.fee-total').val())
+                    fee_tax = calculateFeeTax(total, $('.tax').val())
+                    $('.fee-tax').val(fee_tax);
 
                 }
             })
+
             $(this).parent().parent().remove()
         });
         $(document).on("click", ".remove-parent", function() {
@@ -770,7 +821,7 @@
                                                     <input type="hidden" name="rate[]" value="${rate}">
                                                     </td>
                                                     <td>
-                                                        <input type="hidden" name="amount[]" value="${amount}">
+                                                        <input type="hidden" name="amount[]"  value="${amount}">
                                                         ${amount}</td>
 
                                         <td>
@@ -779,6 +830,7 @@
                                         </td>
                                     </tr>
                     `;
+
                 $('.subject-resource').append(x);
             }
 
@@ -826,11 +878,108 @@
 
 
 
+    {{-- Teacher Enquiry --}}
+    <script>
+        $('.teacher-subject-add').on('click', function() {
+            var subject_id = $('.subject').val();
+            var subject = $('.subject option:selected').text();
+            console.log(subject, subject_id);
+            x = `<tr>
+                                                            <input type="hidden" name="subject[]" value='${subject_id}'>
+
+                                                            <td>${subject}</td>
+                                                            <td><span
+                                                                    class="delete-teacher-subject btn btn-primary">x</span>
+                                                            </td>
+                                                        </tr>`;
+            $('.teacher_subject').append(x);
+        })
+        $('.teacher_subject').on('click', '.delete-teacher-subject', function() {
+            $(this).parent().parent().remove();
+        });
+    </script>
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {{-- Branch --}}
+    <script>
+        $('#tax_type').on('click ready', function() {
+            tax_type = $(this).val()
+            if (tax_type == 'vat') {
+                $('.tax').show();
+            } else {
+                $('.tax').hide();
+                $('.tax-input').val(0);
+            }
+        });
+
+        $('.branch').on('change', function() {
+            branch_id = $(this).val();
+
+            $.ajax({
+                url: `/api/get/branch/${branch_id}`,
+                method: 'GET',
+                success: function(data) {
+                    console.log(data);
+                    $('.tax').val(data.data.tax)
+                    total = parseFloat($('.fee-total').val())
+                    fee_tax = calculateFeeTax(total, $('.tax').val())
+                    $('.fee-tax').val(fee_tax);
+                    reg_total = parseFloat($('#registration_fee').val())
+                    reg_tax = calculateFeeTax(reg_total, $('.tax').val())
+                    $('#reg_tax').val(reg_tax)
+                }
+
+            })
+        })
+
+        function calculateFeeTax(total, tax) {
+            return parseFloat(total - parseFloat(total / (100 + parseFloat(tax))) *
+                100).toFixed(2);
+        }
+        $('.tax').on('change keyup', function() {
+            total = parseFloat($('.fee-total').val())
+            fee_tax = calculateFeeTax(total, $('.tax').val())
+            $('.fee-tax').val(fee_tax);
+            reg_total = parseFloat($('#registration_fee').val())
+            reg_tax = calculateFeeTax(reg_total, $('.tax').val())
+            $('#reg_tax').val(reg_tax)
+        })
+        $('#registration_fee').on('change keyup', function() {
+            reg_total = $(this).val()
+            reg_tax = calculateFeeTax(reg_total, $('.tax').val())
+            $('#reg_tax').val(reg_tax)
+        })
+        $('#fee_discount').on('change keyup', function() {
+            discount = parseFloat($(this).val())
+            fee = parseFloat($('.fee').val())
+            $('.fee-total').val(parseFloat(fee - discount))
+            total = parseFloat($('.fee-total').val())
+            fee_tax = calculateFeeTax(total, $('.tax').val())
+            $('.fee-tax').val(fee_tax);
+        })
+
+        // function branch() {
+
+        // }
+    </script>
 
     {{--
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>

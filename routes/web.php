@@ -5,6 +5,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\BalanceSheetController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\ExpenseAccountTypeController;
 use App\Http\Controllers\ExpenseController;
@@ -97,4 +98,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Teacher Enquiry
     Route::resource('enquiryTeacher', TeacherEnquiryController::class);
+
+    // Department
+    Route::resource('department', DepartmentController::class);
 });

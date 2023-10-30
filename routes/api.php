@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\EnquirySubjectController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ProductController;
@@ -33,3 +34,4 @@ Route::get('/get/student/{id}', [StudentsController::class, 'getStudent']);
 Route::get('/get/student/data/{id}', [StudentsController::class, 'getStudentData']);
 Route::get('/get/parent/data/{id}', [ParentController::class, 'getParentData']);
 Route::get('/get/product/{year}/{branch}', [ProductController::class, 'getProduct']);
+Route::get('/get/branch/{id}', [BranchController::class, 'getBranch']);
