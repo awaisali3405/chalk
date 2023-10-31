@@ -925,6 +925,11 @@
             tax_type = $(this).val()
             if (tax_type == 'vat') {
                 $('.tax').show();
+                $('.tax-input').val(0);
+            } else if (tax_type == 'flat') {
+
+                $('.tax').show();
+                $('.tax-input').val(0);
             } else {
                 $('.tax').hide();
                 $('.tax-input').val(0);

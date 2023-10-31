@@ -112,6 +112,7 @@
                                             <select name="tax_type" id="tax_type" class="form-control" id="">
                                                 <option value="vat">Standard Vat Tax</option>
                                                 <option value="no_vat">Non Vat Tax</option>
+                                                <option value="flat">Flat</option>
                                             </select>
                                         </div>
                                     </div>

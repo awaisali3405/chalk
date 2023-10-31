@@ -107,12 +107,25 @@
                                                     <td>{{ $value->is_paid ? 'Paid' : 'Un Paid' }}</td>
                                                     <td>{{ $value->from_date }} - {{ $value->to_date }}</td>
                                                     <td>
-                                                        <a href="{{ route('receipt.show', $value->id) }}"
+                                                        {{-- <a href="{{ route('receipt.show', $value->id) }}"
                                                             class="btn btn-sm btn-primary">Recieve</a>
                                                         <a href="{{ route('invoice.print', $value->id) }}"
                                                             class="btn btn-sm btn-primary">Print</a>
                                                         <a href="{{ route('board.edit', $value->id) }}"
-                                                            class="btn btn-sm btn-primary">Delete</a>
+                                                            class="btn btn-sm btn-primary">Delete</a> --}}
+                                                        <button type="button" class="btn btn-primary dropdown-toggle"
+                                                            data-toggle="dropdown" aria-expanded="true">
+                                                            Action
+                                                        </button>
+                                                        <div class="dropdown-menu" x-placement="bottom-start"
+                                                            style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
+                                                            <a class="dropdown-item"
+                                                                href="{{ route('receipt.show', $value->id) }}">Recieve</a>
+                                                            <a class="dropdown-item"
+                                                                href="{{ route('invoice.print', $value->id) }}">Print</a>
+                                                            <a class="dropdown-item"
+                                                                href="{{ route('board.edit', $value->id) }}">Delete</a>
+                                                        </div>
                                                         {{-- <a href="{{ route('branch.show', $value->id) }}"
                                                                 class="btn btn-sm btn-danger"><i
                                                                     class="la la-trash-o"></i></a> --}}

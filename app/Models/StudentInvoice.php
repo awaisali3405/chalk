@@ -50,7 +50,12 @@ class StudentInvoice extends Model
     }
     public function totalAmount()
     {
-        return ($this->amount - ($this->receipt->sum('discount')));
+        if ($this->student->branch->tax_type == 'flat') {
+            return ($this->amount - ($this->receipt->sum('discount'))) + $this->receipt->sum('late_fee');
+        } else {
+
+            return ($this->amount - ($this->receipt->sum('discount')));
+        }
     }
     public function taxAmount()
     {

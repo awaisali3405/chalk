@@ -128,6 +128,8 @@
                                                 <option value="no_vat"
                                                     {{ $branch->tax_type == 'no_vat' ? 'selected' : '' }}>Non
                                                     Vat Tax</option>
+                                                <option value="flat"
+                                                    {{ $branch->tax_type == 'flat' ? 'selected' : '' }}>Flat</option>
                                             </select>
                                         </div>
                                     </div>
