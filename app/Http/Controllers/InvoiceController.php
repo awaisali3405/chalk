@@ -66,8 +66,9 @@ class InvoiceController extends Controller
         // dd($data, $amount);
 
         $invoice = StudentInvoice::create([
-            'student_id' => $data['student_id'],
+            'student_id' => $student->id,
             'amount' => $amount,
+            'tax' => $student->tax,
             'type' => $data['type'],
             'from_date' => $data['from_date'],
             'to_date' => $data['to_date']
@@ -142,25 +143,27 @@ class InvoiceController extends Controller
             foreach ($request->student as $value) {
                 $student = Student::find($value);
                 if ($student->payment_period == "Weekly") {
-                    $amount = (($student->enquirySubject->sum('amount')) * $weeks);
+                    $amount = (($student->enquirySubject->sum('amount') - $student->fee_discount) * $weeks);
                     $invoice = StudentInvoice::create([
                         'student_id' => $student->id,
                         'type' => 'Weekly Fee',
+                        'tax' => $student->tax,
                         'amount' => $amount,
                         'from_date' => $to,
                         'to_date' => $from,
                     ]);
                 } else {
                     if (str_contains($student->year->name, "11")) {
-                        $amount = (($student->enquirySubject->sum('amount')) * 40 / 9) * $months;
+                        $amount = (($student->enquirySubject->sum('amount') - $student->fee_discount) * 40 / 9) * $months;
                     } else {
 
-                        $amount = (($student->enquirySubject->sum('amount')) * 52 / 12) * $months;
+                        $amount = (($student->enquirySubject->sum('amount') - $student->fee_discount) * 52 / 12) * $months;
                     }
                     StudentInvoice::create([
                         'student_id' => $student->id,
                         'type' => 'Monthly Fee',
                         'amount' => $amount,
+                        'tax' => $student->tax,
                         'from_date' => $to,
                         'to_date' => $from,
                     ]);

@@ -17,7 +17,6 @@
 
     <style>
         @media print {
-            
             tr {
                 border: 1px solid;
             }

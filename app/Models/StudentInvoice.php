@@ -15,7 +15,7 @@ class StudentInvoice extends Model
         'type',
         'is_paid',
         'from_date',
-        'to_date'
+        'to_date', 'tax'
     ];
     public function student()
     {
@@ -43,5 +43,26 @@ class StudentInvoice extends Model
             'id',
             'id'
         );
+    }
+    public function remainingAmount()
+    {
+        return $this->amount - ($this->receipt->sum('discount') - $this->receipt->sum('late_fee')) - $this->receipt->sum('amount');
+    }
+    public function totalAmount()
+    {
+        return ($this->amount - ($this->receipt->sum('discount')));
+    }
+    public function taxAmount()
+    {
+        if ($this->type == "Refundable" || $this->type == "Resource Fee") {
+            return 0;
+        } else {
+
+            return $this->totalAmount() - (($this->totalAmount() / (100 + $this->tax)) * 100);
+        }
+    }
+    public function paidAmount()
+    {
+        return $this->receipt->sum('amount');
     }
 }

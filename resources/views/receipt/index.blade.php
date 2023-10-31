@@ -48,10 +48,28 @@
                                                 href="{{ route('invoice.show', $invoice->student->id) }}">{{ $invoice->id }}</a></strong>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Invoice
+                                            Type</span> <strong class="text-muted">{{ $invoice->type }}</strong>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Vat
+                                            Inclusive Tax %</span> <strong class="text-muted">{{ $invoice->tax }}%</strong>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Vat
+                                            Inclusive Tax </span> <strong class="text-muted">{{ $invoice->tax }}%</strong>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Invoice
                                             Amount</span> <strong class="text-muted">£{{ $invoice->amount }}</strong></li>
+
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Invoice
                                             Remaining </span> <strong
-                                            class="text-muted">£{{ $invoice->amount - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount') }}</strong>
+                                            class="text-muted">£{{ $invoice->remainingAmount() }}</strong>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Paid
+                                            Amount </span> <strong
+                                            class="text-muted">£{{ number_format($invoice->paidAmount(), 2) }}</strong>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Tax
+                                            Amount </span> <strong
+                                            class="text-muted">£{{ number_format($invoice->taxAmount(), 2) }}</strong>
                                     </li>
                                 </ul>
 
@@ -164,7 +182,8 @@
                                                                     </div>
                                                                     <input type="text" class="form-control"
                                                                         id="discount" name="discount" value="0"
-                                                                        placeholder="" required>
+                                                                        placeholder=""
+                                                                        {{ $invoice->type == 'Refundable' ? 'readonly' : 'required' }}>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -177,7 +196,8 @@
                                                                     </div>
                                                                     <input type="text" class="form-control"
                                                                         id="late_fee" name="late_fee" value="0"
-                                                                        placeholder="" required>
+                                                                        {{ $invoice->type == 'Refundable' ? 'readonly' : 'required' }}
+                                                                        placeholder="">
                                                                 </div>
                                                             </div>
                                                         </div>

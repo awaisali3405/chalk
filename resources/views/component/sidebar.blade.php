@@ -61,8 +61,8 @@
                         <span class="nav-text">Invoice</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="{{ route('invoice.index') }}">All Invoice</a></li>
-                        <li><a href="{{ route('invoice.create') }}">Add Invoice</a></li>
+                        <li><a href="{{ route('invoice.create') }}">All Invoice</a></li>
+                        <li><a href="{{ route('invoice.index') }}">Add Invoice</a></li>
                     </ul>
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">

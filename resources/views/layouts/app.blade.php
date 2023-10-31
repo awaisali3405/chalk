@@ -578,6 +578,7 @@
                     $('#p_year').html(success.data.year.name)
                     $('#payment').html(success.data.payment_period)
                     $('#p_branch').html(success.data.branch.name)
+                    $('#tax').html(success.data.tax)
                     $('.subject').html(success.html);
                     console.log(success);
                 }
@@ -930,7 +931,7 @@
             }
         });
 
-        $('.branch').on('change', function() {
+        $('.branch_student').on('change', function() {
             branch_id = $(this).val();
 
             $.ajax({

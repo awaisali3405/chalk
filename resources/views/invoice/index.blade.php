@@ -40,11 +40,12 @@
                                     <li class="list-group-item d-flex justify-content-between"><span
                                             class="mb-0">Branch</span> <strong id="p_branch" class="text-muted"></strong>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between"><span
-                                            class="mb-0">Balance</span> <strong class="text-muted">0</strong></li>
+                                    {{-- <li class="list-group-item d-flex justify-content-between"><span
+                                            class="mb-0">Balance</span> <strong class="text-muted">0</strong></li> --}}
 
-                                    <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Invoice
-                                            Amount</span> <strong class="text-muted">£</strong></li>
+                                    <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Tax
+                                            %</span> <strong class="text-muted"><span id="tax"></span>%</strong>
+                                    </li>
                                 </ul>
 
                             </div>
@@ -243,7 +244,8 @@
                                                                             <div class="form-group pt-4">
 
                                                                                 <label class="form-label"></label>
-                                                                                <span class="btn btn-primary addition-subject "
+                                                                                <span
+                                                                                    class="btn btn-primary addition-subject "
                                                                                     id="">+
                                                                                 </span>
                                                                             </div>

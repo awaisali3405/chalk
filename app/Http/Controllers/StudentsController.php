@@ -108,6 +108,7 @@ class StudentsController extends Controller
             'resource_discount' => 'nullable',
             'exercise_book_fee' => 'nullable',
             'fee' => 'nullable',
+            'tax' => 'nullable',
             'fee_discount' => 'nullable',
             'total_fee' => 'nullable',
             'o_full_name_1' => 'nullable',
@@ -143,8 +144,8 @@ class StudentsController extends Controller
         } else {
             $data['profile_pic'] = 'images/avatar/1.png';
         }
-        // dd($data1);
         $student = Student::create($data);
+        // dd($data);
         if (auth()->user()->role == 'parent') {
             if ($data1['last_name1'][0]) {
 
@@ -196,6 +197,7 @@ class StudentsController extends Controller
             'student_id' => $student->id,
             'amount' => $student->deposit,
             'type' => 'Refundable',
+            'tax' => 0,
             'from_date' => auth()->user()->session()->start_date,
             'to_date' => auth()->user()->session()->end_date
         ]);
@@ -203,6 +205,7 @@ class StudentsController extends Controller
             'student_id' => $student->id,
             'amount' => $student->registration_fee,
             'type' => 'Registration',
+            'tax' => $data['tax'],
             'from_date' => auth()->user()->session()->start_date,
             'to_date' => auth()->user()->session()->end_date
         ]);
@@ -210,6 +213,7 @@ class StudentsController extends Controller
             'student_id' => $student->id,
             'amount' => $request->annual_resource_fee + $request->exercise_book_fee,
             'type' => 'Resource Fee',
+            'tax' => 0,
             'from_date' => auth()->user()->session()->start_date,
             'to_date' => auth()->user()->session()->end_date
         ]);

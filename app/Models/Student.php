@@ -68,7 +68,8 @@ class Student extends Model
         'signature_person',
         'know_about_us',
         'feedback',
-        'fee_total'
+        'total_fee',
+        'tax'
     ];
     public function year()
     {
