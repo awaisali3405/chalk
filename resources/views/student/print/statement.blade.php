@@ -224,21 +224,70 @@
                     $grandTotal = 0;
                     $debit = 0;
                     $credit = 0;
+                    $total = 0;
                 @endphp
                 @foreach ($student->invoice as $value)
                     @php
-                        $total = $value->amount;
+                        $total += $value->amount;
                         $debit += $value->amount;
                     @endphp
                     <tr>
-                        <td rowspan="{{ count($value->receipt) + 1 }}" class="text-center">{{ $value->id }}</td>
+                        @php
+                            $row = 1;
+
+                            if ($value->receipt) {
+                                foreach ($value->receipt as $key => $valueRecipt) {
+                                    if ($valueRecipt->amount > 0) {
+                                        $row++;
+                                    }
+                                    if ($valueRecipt->discount > 0) {
+                                        $row++;
+                                        // dd($row);
+                                    }
+                                    if ($valueRecipt->late_fee > 0) {
+                                        $row++;
+                                    }
+                                }
+                            }
+
+                        @endphp
+                        <td rowspan="{{ $row }}" class="text-center">{{ $value->id }}</td>
                         <td>{{ $value->created_at->toDateString() }}</td>
                         <td>{{ $value->type }}</td>
                         <td class="text-align-end"> £{{ $value->amount }}</td>
                         <td class="text-align-end"> £0</td>
-                        <td class="text-align-end"> £{{ $value->amount }}</td>
+                        <td class="text-align-end"> £{{ $total }}</td>
                     </tr>
                     @foreach ($value->receipt as $value1)
+                        @php
+                            $total = $total - $value1->discount;
+                            $credit += $value1->discount;
+                        @endphp
+                        @if ($value1->discount > 0)
+                            <tr>
+
+                                <td>{{ $value1->date }}</td>
+                                <td>Discount</td>
+                                <td class="text-align-end">£0</td>
+                                <td class="text-align-end">£{{ $value1->discount }}</td>
+                                <td class="text-align-end">£{{ $total }}</td>
+                            </tr>
+                        @endif
+                        @php
+                            $total = $total + $value1->late_fee;
+                            $debit += $value1->late_fee;
+
+                        @endphp
+                        @if ($value1->late_fee > 0)
+                            <tr>
+
+                                <td>{{ $value1->date }}</td>
+                                <td>Late Fee</td>
+                                <td class="text-align-end">£{{ $value1->late_fee }}</td>
+                                <td class="text-align-end">£0</td>
+                                <td class="text-align-end">£{{ $total }}</td>
+                            </tr>
+                        @endif
                         @php
                             $total = $total - $value1->amount;
 
@@ -249,10 +298,11 @@
                             <td>{{ $value1->description }} {{ $value1->mode }}</td>
                             <td class="text-align-end">£0</td>
                             <td class="text-align-end">£{{ $value1->amount }}</td>
-                            <td class="text-align-end">-£{{ $total }}</td>
+                            <td class="text-align-end">£{{ $total }}</td>
 
 
                         </tr>
+
                         @php
                             $grandTotal += $total;
                             $credit += $value1->amount;
@@ -278,12 +328,12 @@
 
         </table>
     </div>
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         window.print();
         window.onfocus = function() {
             window.close();
         }
-    </script>
+    </script> --}}
 </body>
 
 </html>

@@ -6,6 +6,7 @@ use App\Http\Controllers\BalanceSheetController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\ExpenseAccountTypeController;
 use App\Http\Controllers\ExpenseController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ScienceTypeController;
 
 
+use App\Http\Controllers\SMSController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\SupplierControlller;
@@ -101,4 +103,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Department
     Route::resource('department', DepartmentController::class);
+    // Email
+    Route::resource('email', EmailController::class);
+    // SMS
+    Route::resource('sms', SMSController::class);
 });

@@ -67,6 +67,16 @@
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-home"></i>
+                        <span class="nav-text">SMS/Email</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        {{-- <li><a href="{{ route('invoice.create') }}">All Invoice</a></li> --}}
+                        <li><a href="{{ route('email.index') }}">All Email</a></li>
+                        <li><a href="{{ route('sms.index') }}">All SMS</a></li>
+                    </ul>
+                </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-home"></i>
                         <span class="nav-text">Purchase/Sale</span>
                     </a>
                     <ul aria-expanded="false">
