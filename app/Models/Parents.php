@@ -41,4 +41,8 @@ class Parents extends Model
     {
         return $this->belongsToMany(Student::class, 'student_parent', 'parent_id', 'student_id');
     }
+    public function name()
+    {
+        return $this->first_name . " " . $this->last_name;
+    }
 }

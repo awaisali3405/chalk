@@ -358,4 +358,9 @@ class User extends Authenticatable
         $date = Carbon::parse($this->session()->start_date)->addWeeks($week);
         return $date;
     }
+    public function calculateTax($tax, $price)
+    {
+        // dd($tax, $price);
+        return $price - ($price / (100 + $tax)) * 100;
+    }
 }

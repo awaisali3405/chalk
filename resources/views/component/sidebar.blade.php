@@ -133,6 +133,16 @@
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-university"></i>
+                        <span class="nav-text">Flow</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('cashFlow.index') }}">Cash Flow</a></li>
+                        <li><a href="{{ route('taxFlow.index') }}">Tax Flow</a></li>
+                        {{-- <li><a href="{{ route('branch.create') }}"></a></li> --}}
+                    </ul>
+                </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-university"></i>
                         <span class="nav-text">Student Deposit</span>
                     </a>
                     <ul aria-expanded="false">

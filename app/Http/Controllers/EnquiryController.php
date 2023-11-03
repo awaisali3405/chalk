@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Board;
 use App\Models\Branch;
+use App\Models\Email;
 use App\Models\Enquiry;
 use App\Models\EnquirySubject;
 use App\Models\EnquiryUpload;
@@ -13,7 +14,10 @@ use App\Models\ScienceType;
 use App\Models\Subject;
 use App\Models\Year;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
+
+use function PHPSTORM_META\type;
 
 class EnquiryController extends Controller
 {
@@ -86,6 +90,17 @@ class EnquiryController extends Controller
         $data = $request->except('_token');
         $data['subject'] = json_encode($data['subject']);
         $enquiry = Enquiry::create($data);
+        $email = Email::find(1);
+        // dd(gettype($email->template));
+        $email->template = str_replace('[Date]', $enquiry->assessment_date, $email->template);
+        $email->template = str_replace('[Time]', $enquiry->assessment_time, $email->template);
+
+        $email->template = str_replace("[Student's Name]", $enquiry->first_name . " " . $enquiry->last_name, $email->template);
+        Mail::send('notification.enquiry', ['template' => $email->template], function ($message) use ($enquiry, $email) {
+            $message->to($enquiry->email);
+            $message->subject($email->name);
+        });
+
         // dd($data);
 
         return redirect()->route('enquiry.index')->with('success', 'enquiry Created Successfully');
@@ -163,5 +178,19 @@ class EnquiryController extends Controller
     {
         $enquiry = Enquiry::find($id);
         return view('enquiry.register', compact('enquiry'));
+    }
+    // Test
+    public function test()
+    {
+        $email = Email::find(1);
+        // dd(($email->template));
+        $template = str_replace('[Date]', "2012-2-12", $email->template);
+        $template = str_replace('[Time]', "23:00", $template);
+        $template = str_replace("[Student's Name]", "Awais Ali", $template);
+        dd($template);
+        Mail::send('notification.enquiry', ['template' => $template], function ($message) {
+            $message->to("awaisali3405@gmail.com");
+            $message->subject('Enquiry Email');
+        });
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AcademicCalender;
 use App\Models\Board;
 use App\Models\Branch;
 use App\Models\Department;
@@ -57,5 +58,7 @@ class Controller extends BaseController
         View::share('currentShool', $currentShool);
         $department = Department::all();
         View::share('department', $department);
+        $academicCalender = AcademicCalender::all();
+        View::share('academicCalender', $academicCalender);
     }
 }

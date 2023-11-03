@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Refund;
 use App\Models\StudentInvoice;
 use App\Models\StudentInvoiceReceipt;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class ReceiptController extends Controller
@@ -38,6 +39,14 @@ class ReceiptController extends Controller
         $data = $request->except('_token');
         $data = StudentInvoiceReceipt::create($data);
         $invoice = StudentInvoice::find($request->invoice_id);
+        // Transaction::create([
+        //     'branch_id' => $invoice->student->branch_id,
+        //     'year_id' => $invoice->student->year_id,
+        //     'cash_out' => false,
+        //     'amount' => $data['amount'],
+        //     'description'=>$invoice->student->first_name." ",
+        //     'date'
+        // ]);
         if ($invoice->amount - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount') <= 0) {
             $invoice->update([
                 'is_paid' => 1

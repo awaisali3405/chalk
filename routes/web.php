@@ -5,6 +5,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\BalanceSheetController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\CashFlowController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\EnquiryController;
@@ -26,6 +27,7 @@ use App\Http\Controllers\SMSController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\SupplierControlller;
+use App\Http\Controllers\TaxFlowController;
 use App\Http\Controllers\TeacherEnquiryController;
 use App\Http\Controllers\YearController;
 use App\Models\ExpenseAccountType;
@@ -107,4 +109,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('email', EmailController::class);
     // SMS
     Route::resource('sms', SMSController::class);
+    // Cash Flow
+    Route::resource('cashFlow', CashFlowController::class);
+    // Tax
+    Route::resource('taxFlow', TaxFlowController::class);
 });
+
+Route::get('test', [EnquiryController::class, 'test']);

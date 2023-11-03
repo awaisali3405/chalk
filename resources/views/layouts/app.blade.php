@@ -168,6 +168,7 @@
     <!--**********************************
         Scripts
     ***********************************-->
+   
     <!-- Required vendors -->
     <script src="{{ asset('vendor/global/global.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
@@ -636,6 +637,7 @@
                     $('#p_emp_status').val(success.data.emp_status)
                     $('#p_company_name').val(success.data.company_name)
                     $('#p_work').val(success.data.work_phone_name)
+                    $('#p_email').val(success.data.email)
                     $('#p_mobile').val(success.data.mobile_number)
                     $('#formatted_address_0').val(success.data.res_address)
                     $('#formatted_address_1').val(success.data.res_second_address)

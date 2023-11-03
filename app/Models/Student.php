@@ -71,6 +71,11 @@ class Student extends Model
         'total_fee',
         'tax'
     ];
+    public function name()
+    {
+        return $this->first_name . " " . $this->last_name;
+    }
+
     public function year()
     {
         return $this->belongsTo(Year::class, 'year_id');

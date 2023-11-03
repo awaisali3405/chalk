@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class StudentRegistration extends Mailable
+class EnquiryMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -27,7 +27,7 @@ class StudentRegistration extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Student Registration',
+            subject: 'Enquiry Mail',
         );
     }
 
@@ -37,7 +37,7 @@ class StudentRegistration extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.email.student.registration',
+            view: 'view.name',
         );
     }
 

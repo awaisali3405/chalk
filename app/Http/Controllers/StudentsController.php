@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Board;
 use App\Models\Branch;
+use App\Models\Email;
 use App\Models\Parents;
 use App\Models\EnquirySubject;
 use App\Models\studentUpload;
@@ -14,9 +15,11 @@ use App\Models\ScienceType;
 use App\Models\Student;
 use App\Models\StudentInvoice;
 use App\Models\Subject;
+use App\Models\Transaction;
 use App\Models\Year;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 
 class StudentsController extends Controller
@@ -146,6 +149,7 @@ class StudentsController extends Controller
         }
         $student = Student::create($data);
         // dd($data);
+
         if (auth()->user()->role == 'parent') {
             if ($data1['last_name1'][0]) {
 
@@ -201,6 +205,7 @@ class StudentsController extends Controller
             'from_date' => auth()->user()->session()->start_date,
             'to_date' => auth()->user()->session()->end_date
         ]);
+
         $invoice = StudentInvoice::create([
             'student_id' => $student->id,
             'amount' => $student->registration_fee,
@@ -235,7 +240,19 @@ class StudentsController extends Controller
         //     'amount' =>
         // ]);
 
+        $email = Email::find(2);
+        // dd(gettype($email->template));
+        $email->name = str_replace("[Student's Name]", $student->first_name . " " . $student->last_name, $email->name);
+        $email->template = str_replace("[Parent/Guardian's Name]", $student->parents[0]->given_name, $email->template);
+        $email->template = str_replace("[Student's Name]", $student->name(), $email->template);
+        $email->template = str_replace("[year]", $student->year->name, $email->template);
+        $email->template = str_replace("[Start Date]", $student->admission_date, $email->template);
 
+        // $template = str_replace("[Student's Name]", $enquiry->first_name . " " . $enquiry->last_name, $template);
+        Mail::send('notification.enquiry', ['template' => $email->template], function ($message) use ($student, $email) {
+            $message->to($student->parents[0]->email);
+            $message->subject($email->name);
+        });
 
         // $subject = EnquirySubject::whereIn('id', $data1['student_subject'])->update([
         //     'student_id' => $student->id
