@@ -122,14 +122,10 @@
                                                             <td>{{ $total }}</td>
                                                         </tr>
                                                     @endforeach
-                                                    {{-- @foreach ($value->expense() as $value1)
+                                                    @foreach ($value->expense() as $value1)
                                                         @php
-                                                            $total -= auth()
-                                                                ->user()
-                                                                ->calculateTax($value1->invoice->tax, $value1->amount);
-                                                            $out += auth()
-                                                                ->user()
-                                                                ->calculateTax($value1->invoice->tax, $value1->amount);
+                                                            $total -= $value1->tax;
+                                                            $out += $value1->tax;
                                                         @endphp
                                                         <tr>
                                                             <td>{{ $sr++ }}</td>
@@ -140,12 +136,14 @@
                                                             <td>{{ auth()->user()->week($value1->date) }}
                                                             </td>
                                                             <td>{{ $value1->description }}</td>
-                                                            <td>{{ auth()->user()->calculateTax($value1->invoice->tax, $value1->amount) }}
+                                                            <td>{{ $value1->amount }}
+                                                            </td>
+                                                            <td>{{ $value1->tax }}
                                                             </td>
                                                             <td></td>
                                                             <td>{{ $total }}</td>
                                                         </tr>
-                                                    @endforeach --}}
+                                                    @endforeach
                                                     {{-- @foreach ($value->purchaseTax() as $value1)
                                                         @php
                                                             $total -= $value1->amount;

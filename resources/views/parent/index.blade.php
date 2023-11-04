@@ -54,6 +54,19 @@
                                                             <a href="{{ route('parent.edit', $value->id) }}"
                                                                 class="btn btn-sm btn-primary"><i
                                                                     class="la la-pencil"></i></a>
+                                                            <button type="button" class="btn btn-primary dropdown-toggle"
+                                                                data-toggle="dropdown" aria-expanded="true">
+                                                                Action
+                                                            </button>
+                                                            <div class="dropdown-menu" x-placement="bottom-start"
+                                                                style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
+                                                                <a class="dropdown-item"
+                                                                    href="{{ route('parent.edit', $value->id) }}">Edit</a>
+
+                                                                <a class="dropdown-item"
+                                                                    href="{{ route('parent.show', $value->id) }}">Show</a>
+
+                                                            </div>
                                                             {{-- <a href="{{ route('year.show', $value->id) }}"
                                                                 class="btn btn-sm btn-danger"><i
                                                                     class="la la-trash-o"></i></a> --}}

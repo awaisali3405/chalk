@@ -30,6 +30,7 @@
                                                 <tr>
                                                     <th>Sr</th>
                                                     <th>Name</th>
+                                                    <th>Tax</th>
 
                                                     <th>Action</th>
                                                 </tr>
@@ -40,6 +41,7 @@
                                                         <td>{{ $key + 1 }}</td>
 
                                                         <td>{{ $value->name }}</td>
+                                                        <td>{{ $value->tax_type }} ({{ $value->tax }}%) </td>
                                                         <td>
                                                             <a href="{{ route('branch.edit', $value->id) }}"
                                                                 class="btn btn-sm btn-primary"><i
@@ -56,7 +58,7 @@
                                 </div>
                             </div>
                         </div>
-                       
+
                     </div>
                 </div>
             </div>

@@ -17,6 +17,7 @@
 
                 <div class="col-lg-12">
                     <div class="row tab-content">
+
                         <div id="list-view" class="tab-pane fade active show col-lg-12">
                             <form action="{{ route('enquiry.index') }}" method="GET">
                                 {{-- @csrf --}}
@@ -142,6 +143,7 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($enquiry as $key => $value)
+                                                {{-- @dd($value->caller_name) --}}
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
 
@@ -171,8 +173,18 @@
                                                                 href="{{ route('enquiry.upload', $value->id) }}">Upload</a>
                                                             <a class="dropdown-item"
                                                                 href="{{ route('enquiry.register', $value->id) }}">Register</a>
-                                                            <a class="dropdown-item"
-                                                                href="{{ route('enquiry.edit', $value->id) }}">Delete</a>
+                                                            {{-- <a class="dropdown-item"
+                                                                href="{{ route('enquiry.delete', $value->id) }}">Delete</a> --}}
+                                                            <a class="dropdown-item" href="javascript:void(0);"
+                                                                onclick="event.preventDefault(); document.getElementById('delete').submit();">
+                                                                Delete
+                                                            </a>
+                                                            <form method="POST" id="delete"
+                                                                action="{{ route('enquiry.destroy', $value->id) }}">
+                                                                @csrf
+                                                                <input name="_method" type="hidden" value="DELETE">
+
+                                                            </form>
                                                         </div>
                                                         {{-- <a title="edit" class="btn btn-sm btn-primary"><i
                                                                     class="la la-pencil"></i></a>
@@ -202,6 +214,5 @@
             </div>
         </div>
 
-    </div>
     </div>
 @endsection

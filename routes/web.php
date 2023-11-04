@@ -60,10 +60,27 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('paper', PaperController::class);
     Route::resource('scienceType', ScienceTypeController::class);
     Route::resource('academicCalender', AcademicCalenderController::class);
+    // Student
     Route::resource('student', StudentsController::class);
     Route::get('student/statement/{id}', [StudentsController::class, 'statementPrint'])->name('student.statement');
-
+    Route::get('student/{id}/attendance', [StudentsController::class, 'show'])->name('attendance.student.detail');
+    Route::get('/student/{id}/note', [StudentsController::class, 'note'])->name('student.note');
+    Route::get('/student/{id}/upload', [StudentsController::class, 'upload'])->name('student.upload');
+    Route::get('/student/{id}/upload/delete', [StudentsController::class, 'uploadDelete'])->name('student.upload.delete');
+    Route::get('/student/{id}/note', [StudentsController::class, 'note'])->name('student.note');
+    Route::post('/student/{id}/note', [StudentsController::class, 'noteStore'])->name('student.note.store');
+    Route::post('/student/upload', [StudentsController::class, 'uploadStore'])->name('student.upload.store');
+    Route::get('/student/request/parent', [StudentsController::class, 'request'])->name('student.request');
+    // Enquiry
     Route::resource('enquiry', EnquiryController::class);
+    Route::get('/enquiry/{id}/note', [EnquiryController::class, 'note'])->name('enquiry.note');
+    Route::get('/enquiry/{id}/upload', [EnquiryController::class, 'upload'])->name('enquiry.upload');
+    Route::get('/enquiry/{id}/upload/delete', [EnquiryController::class, 'uploadDelete'])->name('enquiry.upload.delete');
+    Route::get('/enquiry/{id}/note', [EnquiryController::class, 'note'])->name('enquiry.note');
+    Route::get('/enquiry/{id}/register', [EnquiryController::class, 'register'])->name('enquiry.register');
+    Route::post('/enquiry/{id}/note', [EnquiryController::class, 'noteStore'])->name('enquiry.note.store');
+    Route::post('/enquiry/upload', [EnquiryController::class, 'uploadStore'])->name('enquiry.upload.store');
+    // Invoice
     Route::resource('invoice', InvoiceController::class);
     Route::post('invoice/group/generate', [InvoiceController::class, 'groupInvoice'])->name('group.invoice');
     Route::get('invoice/pdf/{id}', [InvoiceController::class, 'print'])->name('invoice.print');
@@ -76,20 +93,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('parent', ParentController::class);
     Route::resource('attendance', AttendanceController::class);
     Route::resource('balanceSheet', BalanceSheetController::class);
-    Route::get('student/{id}/attendance', [StudentsController::class, 'show'])->name('attendance.student.detail');
-    Route::get('/enquiry/{id}/note', [EnquiryController::class, 'note'])->name('enquiry.note');
-    Route::get('/enquiry/{id}/upload', [EnquiryController::class, 'upload'])->name('enquiry.upload');
-    Route::get('/enquiry/{id}/upload/delete', [EnquiryController::class, 'uploadDelete'])->name('enquiry.upload.delete');
-    Route::get('/enquiry/{id}/note', [EnquiryController::class, 'note'])->name('enquiry.note');
-    Route::get('/enquiry/{id}/register', [EnquiryController::class, 'register'])->name('enquiry.register');
-    Route::post('/enquiry/{id}/note', [EnquiryController::class, 'noteStore'])->name('enquiry.note.store');
-    Route::post('/enquiry/upload', [EnquiryController::class, 'uploadStore'])->name('enquiry.upload.store');
-    Route::get('/student/{id}/note', [StudentsController::class, 'note'])->name('student.note');
-    Route::get('/student/{id}/upload', [StudentsController::class, 'upload'])->name('student.upload');
-    Route::get('/student/{id}/upload/delete', [StudentsController::class, 'uploadDelete'])->name('student.upload.delete');
-    Route::get('/student/{id}/note', [StudentsController::class, 'note'])->name('student.note');
-    Route::post('/student/{id}/note', [StudentsController::class, 'noteStore'])->name('student.note.store');
-    Route::post('/student/upload', [StudentsController::class, 'uploadStore'])->name('student.upload.store');
+
+
     Route::resource('refund', RefundController::class);
     Route::get('/paid-by-cash/{id}', [RefundController::class, 'paidByBank'])->name('refund.paid.bank');
     Route::get('/paid-by-bank/{id}', [RefundController::class, 'paidByCash'])->name('refund.paid.cash');

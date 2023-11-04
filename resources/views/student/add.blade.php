@@ -247,7 +247,9 @@
                                                             <label class="form-label">Year</label>
 
 
-                                                            <select class="form-control year" name="year_id" required>
+                                                            <select
+                                                                class="form-control year {{ auth()->user()->role->name == 'parent' ? 'year_enquiry' : '' }} "
+                                                                name="year_id" required>
 
                                                             </select>
 
@@ -256,164 +258,20 @@
                                                     </div>
 
 
-
-                                                    <div class="col-12" style="">
-                                                        <div class="card">
-                                                            <div class="card-header">
-
+                                                    @if (auth()->user()->role->name == 'parent')
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Subjects</label>
                                                             </div>
-                                                            <div class="card-body">
-                                                                <div class="row">
-                                                                    <div class="col-2">
-                                                                        <div class="form-group">
-                                                                            <label class="form-label">Lesson Type</label>
-
-                                                                            <select class="form-control"
-                                                                                id="lesson_type_id">
-                                                                                @foreach ($lessonType as $value)
-                                                                                    <option value="{{ $value->id }}">
-                                                                                        {{ $value->name }}
-                                                                                    </option>
-                                                                                @endforeach
-                                                                            </select>
-
-                                                                        </div>
-
-                                                                    </div>
-                                                                    <div class="col-2">
-                                                                        <div class="form-group">
-                                                                            <label class="form-label">Subject</label>
-
-                                                                            <select class="form-control subject"
-                                                                                id="subject_id">
+                                                            <div class=" pl-3">
+                                                                <div class="row checkbox">
 
 
-
-                                                                            </select>
-
-                                                                        </div>
-
-                                                                    </div>
-                                                                    <div class="col-1">
-                                                                        <div class="form-group">
-                                                                            <label class="form-label">Board</label>
-
-                                                                            <select class="form-control" id="board_id">
-                                                                                <option value="">-</option>
-                                                                                @foreach ($board as $value)
-                                                                                    <option value="{{ $value->id }}">
-                                                                                        {{ $value->name }}</option>
-                                                                                @endforeach
-
-                                                                            </select>
-
-                                                                        </div>
-
-                                                                    </div>
-                                                                    <div class="col-1">
-                                                                        <div class="form-group">
-                                                                            <label class="form-label">Paper</label>
-
-                                                                            <select class="form-control" id="paper_id">
-                                                                                <option value="">-</option>
-                                                                                @foreach ($paper as $value)
-                                                                                    <option value="{{ $value->id }}">
-                                                                                        {{ $value->name }}</option>
-                                                                                @endforeach
-
-                                                                            </select>
-
-                                                                        </div>
-
-                                                                    </div>
-                                                                    <div class="col-2">
-                                                                        <div class="form-group">
-
-                                                                            <label class="form-label">Science Type</label>
-                                                                            <select class="form-control"
-                                                                                id="science_type_id">
-                                                                                <option value="">-</option>
-                                                                                @foreach ($scienceType as $value)
-                                                                                    <option value="{{ $value->id }}">
-                                                                                        {{ $value->name }}</option>
-                                                                                @endforeach
-
-                                                                            </select>
-
-                                                                        </div>
-
-                                                                    </div>
-                                                                    <div class="col-1">
-                                                                        <div class="form-group">
-
-                                                                            <label class="form-label">Rate</label>
-                                                                            <input type="text" name="per_hour_rate"
-                                                                                id="rate" class="form-control">
-
-
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-1">
-                                                                        <div class="form-group">
-
-                                                                            <label class="form-label">Hours
-                                                                            </label>
-                                                                            <input type="text" name="no_of_hr"
-                                                                                id="hours" class="form-control">
-
-
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-1">
-                                                                        <div class="form-group">
-
-                                                                            <label class="form-label">Amount
-                                                                            </label>
-                                                                            <input type="text" name="amount"
-                                                                                id="amount" class="form-control">
-
-
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="col-1 pt-4">
-                                                                        <div class="form-group">
-
-                                                                            <label class="form-label"></label>
-                                                                            <span type="button" class="btn btn-primary "
-                                                                                id="add-subject">+
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="">
-                                                                    <table id="" class="display"
-                                                                        style="width:100%;">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th>Lesson Type</th>
-                                                                                <th>Subject</th>
-                                                                                <th>Board</th>
-                                                                                <th>Paper</th>
-                                                                                <th>Science Type</th>
-                                                                                <th>Rate</th>
-                                                                                <th>Hours</th>
-                                                                                <th>Amount</th>
-
-
-                                                                                <th>Action</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody id="subject">
-
-                                                                        </tbody>
-                                                                    </table>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    @endif
 
-                                                    </div>
 
                                                     {{-- <div class="col-lg-12 col-md-12 col-sm-12">
                                                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -442,10 +300,166 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
+                                                <div class="col-12" style="">
+                                                    <div class="card">
+                                                        <div class="card-header">
+
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-2">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label">Lesson Type</label>
+
+                                                                        <select class="form-control" id="lesson_type_id">
+                                                                            @foreach ($lessonType as $value)
+                                                                                <option value="{{ $value->id }}">
+                                                                                    {{ $value->name }}
+                                                                                </option>
+                                                                            @endforeach
+                                                                        </select>
+
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-2">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label">Subject</label>
+
+                                                                        <select class="form-control subject"
+                                                                            id="subject_id">
+
+
+
+                                                                        </select>
+
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-1">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label">Board</label>
+
+                                                                        <select class="form-control" id="board_id">
+                                                                            <option value="">-</option>
+                                                                            @foreach ($board as $value)
+                                                                                <option value="{{ $value->id }}">
+                                                                                    {{ $value->name }}</option>
+                                                                            @endforeach
+
+                                                                        </select>
+
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-1">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label">Paper</label>
+
+                                                                        <select class="form-control" id="paper_id">
+                                                                            <option value="">-</option>
+                                                                            @foreach ($paper as $value)
+                                                                                <option value="{{ $value->id }}">
+                                                                                    {{ $value->name }}</option>
+                                                                            @endforeach
+
+                                                                        </select>
+
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-2">
+                                                                    <div class="form-group">
+
+                                                                        <label class="form-label">Science Type</label>
+                                                                        <select class="form-control" id="science_type_id">
+                                                                            <option value="">-</option>
+                                                                            @foreach ($scienceType as $value)
+                                                                                <option value="{{ $value->id }}">
+                                                                                    {{ $value->name }}</option>
+                                                                            @endforeach
+
+                                                                        </select>
+
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-1">
+                                                                    <div class="form-group">
+
+                                                                        <label class="form-label">Rate</label>
+                                                                        <input type="text" name="per_hour_rate"
+                                                                            id="rate" class="form-control">
+
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-1">
+                                                                    <div class="form-group">
+
+                                                                        <label class="form-label">Hours
+                                                                        </label>
+                                                                        <input type="text" name="no_of_hr"
+                                                                            id="hours" class="form-control">
+
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-1">
+                                                                    <div class="form-group">
+
+                                                                        <label class="form-label">Amount
+                                                                        </label>
+                                                                        <input type="text" name="amount"
+                                                                            id="amount" class="form-control">
+
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-1 pt-4">
+                                                                    <div class="form-group">
+
+                                                                        <label class="form-label"></label>
+                                                                        <span type="button" class="btn btn-primary "
+                                                                            id="add-subject">+
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="">
+                                                                <table id="" class="display"
+                                                                    style="width:100%;">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Lesson Type</th>
+                                                                            <th>Subject</th>
+                                                                            <th>Board</th>
+                                                                            <th>Paper</th>
+                                                                            <th>Science Type</th>
+                                                                            <th>Rate</th>
+                                                                            <th>Hours</th>
+                                                                            <th>Amount</th>
+
+
+                                                                            <th>Action</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="subject">
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="form-label">Branch</label>
-                                                        <select class="form-control branch_student" name="branch_id">
+                                                        <select class="form-control branch_student" name="branch_id"
+                                                            required>
                                                             <option value="">Select Branch</option>
                                                             @foreach ($branch as $value)
                                                                 <option value="{{ $value->id }}"
@@ -920,7 +934,7 @@
                                                             <div class="form-check">
 
                                                                 <input type="radio" class="form-check-input"
-                                                                    id="p_male" value="male" name="gender1[]"
+                                                                    id="p_male" value="male" name="gender1"
                                                                     disabled>
                                                                 <label class="form-check-label"
                                                                     for="male">Male</label>
@@ -930,7 +944,7 @@
                                                             <div class="form-check">
 
                                                                 <input type="radio" class="form-check-input"
-                                                                    id="p_female" value="female" name="gender1[]"
+                                                                    id="p_female" value="female" name="gender1"
                                                                     disabled>
                                                                 <label class="form-check-label"
                                                                     for="female">Female</label>
@@ -941,7 +955,7 @@
                                                             <div class="form-check">
 
                                                                 <input type="radio" class="form-check-input"
-                                                                    id="p_other" value="other" name="gender1[]"
+                                                                    id="p_other" value="other" name="gender1"
                                                                     disabled>
                                                                 <label class="form-check-label"
                                                                     for="other">Other</label>
@@ -1071,21 +1085,21 @@
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Mr./Mrs./Ms./Other</label>
-                                                    <input type="text" class="form-control" name="first_name1[]">
+                                                    <input type="text" class="form-control" name="first_name1">
 
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Family Name</label>
-                                                    <input type="text" class="form-control" name="last_name1[]">
+                                                    <input type="text" class="form-control" name="last_name1">
 
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Given Name</label>
-                                                    <input type="text" class="form-control" name="given_name1[]">
+                                                    <input type="text" class="form-control" name="given_name1">
 
                                                 </div>
                                             </div>
@@ -1098,7 +1112,7 @@
                                                             <div class="form-check">
 
                                                                 <input type="radio" class="form-check-input"
-                                                                    id="male" value="male" name="gender1[]">
+                                                                    id="male" value="male" name="gender1">
                                                                 <label class="form-check-label"
                                                                     for="male">Male</label>
                                                             </div>
@@ -1107,7 +1121,7 @@
                                                             <div class="form-check">
 
                                                                 <input type="radio" class="form-check-input"
-                                                                    id="female" value="female" name="gender1[]">
+                                                                    id="female" value="female" name="gender1">
                                                                 <label class="form-check-label"
                                                                     for="female">Female</label>
                                                             </div>
@@ -1117,7 +1131,7 @@
                                                             <div class="form-check">
 
                                                                 <input type="radio" class="form-check-input"
-                                                                    id="other" value="other" name="gender1[]">
+                                                                    id="other" value="other" name="gender1">
                                                                 <label class="form-check-label"
                                                                     for="other">Other</label>
                                                             </div>
@@ -1131,7 +1145,7 @@
                                                     <label class="form-label">Relationship to Student</label>
 
                                                     <input type="text" list="parent" class="form-control"
-                                                        name="relationship1[]">
+                                                        name="relationship1">
                                                     <datalist id="parent">
                                                         <option>Father</option>
                                                         <option>Mother</option>
@@ -1142,33 +1156,32 @@
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Employment Status</label>
-                                                    <input type="text" class="form-control" name="emp_status1[]">
+                                                    <input type="text" class="form-control" name="emp_status1">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Company Name</label>
-                                                    <input type="text" class="form-control" name="company_name1[]">
+                                                    <input type="text" class="form-control" name="company_name1">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Work Phone Number</label>
-                                                    <input type="text" class="form-control"
-                                                        name="work_phone_number1[]">
+                                                    <input type="text" class="form-control" name="work_phone_number1">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Mobile Number</label>
-                                                    <input type="text" class="form-control" name="mobile_number1[]">
+                                                    <input type="text" class="form-control" name="mobile_number1">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Email Address
                                                     </label>
-                                                    <input type="text" class="form-control" name="email1[]">
+                                                    <input type="text" class="form-control" name="email1">
                                                 </div>
                                             </div>
 
@@ -1487,7 +1500,8 @@
                                                     <div class="form-check">
 
                                                         <input type="radio" class="form-check-input"
-                                                            id="is_disorder_not" value="0" name="is_disable">
+                                                            id="is_disorder_not" value="0" name="is_disable"
+                                                            checked>
                                                         <label class="form-check-label" for="is_disorder_not">No</label>
                                                     </div>
                                                 </div>

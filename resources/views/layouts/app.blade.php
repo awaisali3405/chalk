@@ -168,7 +168,7 @@
     <!--**********************************
         Scripts
     ***********************************-->
-   
+
     <!-- Required vendors -->
     <script src="{{ asset('vendor/global/global.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
@@ -200,7 +200,8 @@
     <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('js/plugins-init/datatables.init.js') }}"></script>
 
-
+    {{-- Calender --}}
+    <script src="{{ asset('js/plugins-init/fullcalendar-init.js') }}"></script>
     <script src="https://cdn.getaddress.io/scripts/getaddress-autocomplete-1.1.3.min.js"></script>
 
     <!-- after your form -->
@@ -208,6 +209,17 @@
         getAddress.autocomplete('formatted_address_0', 'uIIn_5Plkk2X3bCt-L3Cjw40707');
     </script>
     {{-- Stock JS --}}
+
+
+
+    {{-- Filter --}}
+    <script>
+        $('#filter').on('click', function() {
+            $('#filter-form').removeClass('d-none');
+        })
+    </script>
+
+    {{-- Student --}}
     <script>
         $('#check_all_agreemnet').on('change keyup', function() {
             $('input:checkbox').prop('checked', this.checked);
@@ -292,11 +304,13 @@
                         console.log(x);
                         // if (success.data.lesson_type_id == 1) {
 
-                        price = parseFloat($("#annual_resource_fee").val()) + +success.data.subject
-                            .rate
-                        e_price = parseFloat($("#exercise_book").val()) + +success.data.subject
-                            .book_rate
-                        console.log(price);
+                        price = parseFloat($("#annual_resource_fee").val()) + parseFloat(success.data
+                            .subject
+                            .rate)
+                        e_price = parseFloat($("#exercise_book").val()) + parseFloat(success.data
+                            .subject
+                            .book_rate)
+                        console.log(price, e_price);
                         $('#annual_resource_fee').val(price)
                         $('#exercise_book').val(e_price)
                         // }
@@ -877,6 +891,17 @@
                 }
             })
         })
+        $('#veiw-enquiry-list').on('click', function() {
+
+            if ($(this).text() == 'Hide Subject') {
+                $('.enquiry-subject-list').addClass('d-none');
+                $(this).text('View Subject');
+
+            } else {
+                $('.enquiry-subject-list').removeClass('d-none');
+                $(this).text('Hide Subject');
+            }
+        })
     </script>
 
 
@@ -962,6 +987,14 @@
             return parseFloat(total - parseFloat(total / (100 + parseFloat(tax))) *
                 100).toFixed(2);
         }
+        $(document).ready(function() {
+            total = parseFloat($('.fee-total').val())
+            fee_tax = calculateFeeTax(total, $('.tax').val())
+            $('.fee-tax').val(fee_tax);
+            reg_total = parseFloat($('#registration_fee').val())
+            reg_tax = calculateFeeTax(reg_total, $('.tax').val())
+            $('#reg_tax').val(reg_tax)
+        })
         $('.tax').on('change keyup', function() {
             total = parseFloat($('.fee-total').val())
             fee_tax = calculateFeeTax(total, $('.tax').val())

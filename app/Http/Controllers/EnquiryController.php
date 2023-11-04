@@ -70,6 +70,7 @@ class EnquiryController extends Controller
 
             $enquiry = Enquiry::all();
         }
+        // dd($enquiry);
         return view('enquiry.index', compact('enquiry'));
     }
 
@@ -89,6 +90,7 @@ class EnquiryController extends Controller
     {
         $data = $request->except('_token');
         $data['subject'] = json_encode($data['subject']);
+        dd($data);
         $enquiry = Enquiry::create($data);
         $email = Email::find(1);
         // dd(gettype($email->template));
@@ -138,7 +140,8 @@ class EnquiryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Enquiry::find($id)->delete();
+        return redirect()->route('enquiry.index')->with('success', 'Enquiry Deleted Successfully');
     }
     public function note($id)
     {

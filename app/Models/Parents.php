@@ -41,8 +41,42 @@ class Parents extends Model
     {
         return $this->belongsToMany(Student::class, 'student_parent', 'parent_id', 'student_id');
     }
+    public function invoice()
+    {
+        $invoice = array();
+        foreach ($this->student as $value) {
+            $invoice = array_push($invoice, $value->invoice);
+        }
+        // dd($invoice);
+        return $invoice;
+    }
     public function name()
     {
         return $this->first_name . " " . $this->last_name;
+    }
+    public function address()
+    {
+        $address = "";
+        if ($this->res_postal_code) {
+            $address .= $this->res_postal_code . ", ";
+        }
+        if ($this->res_address) {
+            $address .= $this->res_address . ", ";
+        }
+        if ($this->res_second_address) {
+            $address .= $this->res_second_address . ", ";
+        }
+        if ($this->res_third_address) {
+            $address .= $this->res_third_address . ", ";
+        }
+        if ($this->res_town) {
+            $address .= $this->res_town . ", ";
+        }
+        if ($this->res_country) {
+            $address .= $this->res_country;
+        }
+
+
+        return $address;
     }
 }

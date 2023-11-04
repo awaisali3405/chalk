@@ -52,14 +52,15 @@ class StudentsController extends Controller
                 if ($request->input('to_week')) {
                     $student = $student->where('admission_date', '<=', auth()->user()->dateWeek($request->input('to_week')));
                 }
-                $student = $student->get();
+                $student = $student->where('active', true)->get();
             } else {
-                $student = Student::all();
+                $student = Student::where('active', true)->get();
             }
         } else if (auth()->user()->role->name == 'parent') {
             $student = Parents::where('user_id', auth()->user()->id)->first();
             if ($student) {
                 $student = $student->student;
+                // dd($student);
             } else {
                 $student = array();
             }
@@ -100,8 +101,8 @@ class StudentsController extends Controller
             'dob' => 'required',
             'current_school_name' => 'required',
             'current_year' => 'required',
-            'branch_id' => 'required',
-            'payment_period' => 'required',
+            'branch_id' => 'nullable',
+            'payment_period' => 'nullable',
             'year_id' => 'required',
             'key_stage_id' => 'required',
             'admission_date' => 'nullable',
@@ -139,7 +140,7 @@ class StudentsController extends Controller
             'signature_person' => 'nullable',
             'know_about_us' => 'nullable',
             'feedback' => 'nullable',
-            'parent_id' => 'required'
+            'parent_id' => 'nullable'
         ]);
         // dd($data1);
         if (isset($request->profile_pic)) {
@@ -147,112 +148,124 @@ class StudentsController extends Controller
         } else {
             $data['profile_pic'] = 'images/avatar/1.png';
         }
+        // dd($data1, $data);
+        if (auth()->user()->role->name == 'parent' && isset($data1['subject'])) {
+            $data['parent_subject'] = json_encode($data1['subject']);
+        }
+        if (auth()->user()->role->name != 'parent') {
+            $data['active'] = true;
+        }
         $student = Student::create($data);
-        // dd($data);
 
-        if (auth()->user()->role == 'parent') {
-            if ($data1['last_name1'][0]) {
+        // dd($student);
+        if (auth()->user()->role->name == 'parent') {
+            $student->parents()->attach([auth()->user()->parent->id]);
+            if ($data1['last_name1']) {
 
                 $parent = Parents::create([
-                    'last_name' => $data1['last_name1'][0],
-                    'first_name' => $data1['first_name1'][0],
-                    'given_name' => $data1['given_name1'][0],
-                    'gender' => $data1['gender1'][0],
-                    'relationship' => $data1['relationship1'][0],
-                    'emp_status' => $data1['emp_status1'][0],
-                    'company_name' => $data1['company_name1'][0],
-                    'work_phone_number' => $data1['work_phone_number1'][0],
-                    'mobile_number' => $data1['mobile_number1'][0],
-                    'email' => $data1['email1'][0],
-                    'signature' => $data1['signature1'][0],
-                    'signature_date' => $data1['signature_date1'][0],
-                    'mail_address' => $data1['mail_address1'][0],
-                    'res_address' => $data1['res_address1'][0],
+                    'last_name' => $data1['last_name1'],
+                    'first_name' => $data1['first_name1'],
+                    'given_name' => $data1['given_name1'],
+                    'gender' => $data1['gender1'],
+                    'relationship' => $data1['relationship1'],
+                    'emp_status' => $data1['emp_status1'],
+                    'company_name' => $data1['company_name1'],
+                    'work_phone_number' => $data1['work_phone_number1'],
+                    'mobile_number' => $data1['mobile_number1'],
+                    'email' => $data1['email1'],
+
                 ]);
                 $student->parents()->attach([$parent->id]);
             }
+            // dd($student->parents, auth()->user()->parent->student, auth()->user()->parent, auth()->user()->id);
         } else {
-
+            $student->update([
+                'active' => true
+            ]);
             $student->parents()->attach($data1['parent_id']);
-            if ($data1['last_name1'][0]) {
+            if ($data1['last_name1']) {
 
                 $parent = Parents::create([
-                    'last_name' => $data1['last_name1'][0],
-                    'first_name' => $data1['first_name1'][0],
-                    'given_name' => $data1['given_name1'][0],
-                    'gender' => $data1['gender1'][0],
-                    'relationship' => $data1['relationship1'][0],
-                    'emp_status' => $data1['emp_status1'][0],
-                    'company_name' => $data1['company_name1'][0],
-                    'work_phone_number' => $data1['work_phone_number1'][0],
-                    'mobile_number' => $data1['mobile_number1'][0],
-                    'email' => $data1['email1'][0],
-                    'signature' => $data1['signature1'][0],
-                    'signature_date' => $data1['signature_date1'][0],
-                    'mail_address' => $data1['mail_address1'][0],
-                    'res_address' => $data1['res_address1'][0],
+                    'last_name' => $data1['last_name1'],
+                    'first_name' => $data1['first_name1'],
+                    'given_name' => $data1['given_name1'],
+                    'gender' => $data1['gender1'],
+                    'relationship' => $data1['relationship1'],
+                    'emp_status' => $data1['emp_status1'],
+                    'company_name' => $data1['company_name1'],
+                    'work_phone_number' => $data1['work_phone_number1'],
+                    'mobile_number' => $data1['mobile_number1'],
+                    'email' => $data1['email1'],
+                    'signature' => $data1['signature1'],
+                    'signature_date' => $data1['signature_date1'],
+                    'mail_address' => $data1['mail_address1'],
+                    'res_address' => $data1['res_address1'],
                 ]);
                 $student->parents()->attach([$parent->id]);
             }
-        }
-        $subject = $student->EnquirySubject()->pluck('id')->toArray();
-        // dd($subject);
-        $invoice = StudentInvoice::create([
-            'student_id' => $student->id,
-            'amount' => $student->deposit,
-            'type' => 'Refundable',
-            'tax' => 0,
-            'from_date' => auth()->user()->session()->start_date,
-            'to_date' => auth()->user()->session()->end_date
-        ]);
 
-        $invoice = StudentInvoice::create([
-            'student_id' => $student->id,
-            'amount' => $student->registration_fee,
-            'type' => 'Registration',
-            'tax' => $data['tax'],
-            'from_date' => auth()->user()->session()->start_date,
-            'to_date' => auth()->user()->session()->end_date
-        ]);
-        $invoice = StudentInvoice::create([
-            'student_id' => $student->id,
-            'amount' => $request->annual_resource_fee + $request->exercise_book_fee,
-            'type' => 'Resource Fee',
-            'tax' => 0,
-            'from_date' => auth()->user()->session()->start_date,
-            'to_date' => auth()->user()->session()->end_date
-        ]);
-        $subject = EnquirySubject::whereIn('id', $data1['enquiry_subject'])->update([
-            'student_id' => $student->id
-        ]);
-        foreach ($student->EnquirySubject as $key => $value) {
-            // if ($value->subject->lesson_type_id == 1) {
-
-            InvoiceSubject::create([
-                'invoice_id' => $invoice->id,
-                'subject_name' => $value->subject->name,
-                'subject_rate' => $value->subject->rate,
-                'subject_book_fee' => $value->subject->book_rate
+            $subject = $student->EnquirySubject()->pluck('id')->toArray();
+            // dd($subject);
+            $invoice = StudentInvoice::create([
+                'student_id' => $student->id,
+                'amount' => $student->deposit,
+                'type' => 'Refundable',
+                'tax' => 0,
+                'from_date' => auth()->user()->session()->start_date,
+                'to_date' => auth()->user()->session()->end_date
             ]);
-            // }
+
+            $invoice = StudentInvoice::create([
+                'student_id' => $student->id,
+                'amount' => $student->registration_fee,
+                'type' => 'Registration',
+                'tax' => $data['tax'],
+                'from_date' => auth()->user()->session()->start_date,
+                'to_date' => auth()->user()->session()->end_date
+            ]);
+            $invoice = StudentInvoice::create([
+                'student_id' => $student->id,
+                'amount' => $request->annual_resource_fee + $request->exercise_book_fee,
+                'type' => 'Resource Fee',
+                'tax' => 0,
+                'from_date' => auth()->user()->session()->start_date,
+                'to_date' => auth()->user()->session()->end_date
+            ]);
+            if (isset($data1['enquiry_subject'])) {
+
+                $subject = EnquirySubject::whereIn('id', $data1['enquiry_subject'])->update([
+                    'student_id' => $student->id
+                ]);
+            }
+            foreach ($student->EnquirySubject as $key => $value) {
+                // if ($value->subject->lesson_type_id == 1) {
+
+                InvoiceSubject::create([
+                    'invoice_id' => $invoice->id,
+                    'subject_name' => $value->subject->name,
+                    'subject_rate' => $value->subject->rate,
+                    'subject_book_fee' => $value->subject->book_rate
+                ]);
+                // }
+            }
+            // $invoice->update([
+            //     'amount' =>
+            // ]);
+
+            $email = Email::find(2);
+            // dd(gettype($email->template));
+            $email->name = str_replace("[Student's Name]", $student->first_name . " " . $student->last_name, $email->name);
+            $email->template = str_replace("[Parent/Guardian's Name]", $student->parents[0]->given_name, $email->template);
+            $email->template = str_replace("[Student's Name]", $student->name(), $email->template);
+            $email->template = str_replace("[year]", $student->year->name, $email->template);
+            $email->template = str_replace("[Start Date]", $student->admission_date, $email->template);
+
+            // $template = str_replace("[Student's Name]", $enquiry->first_name . " " . $enquiry->last_name, $template);
+            Mail::send('notification.enquiry', ['template' => $email->template], function ($message) use ($student, $email) {
+                $message->to($student->parents[0]->email);
+                $message->subject($email->name);
+            });
         }
-        // $invoice->update([
-        //     'amount' =>
-        // ]);
-
-        $email = Email::find(2);
-        // dd(gettype($email->template));
-        $email->name = str_replace("[Student's Name]", $student->first_name . " " . $student->last_name, $email->name);
-        $email->template = str_replace("[Parent/Guardian's Name]", $student->parents[0]->given_name, $email->template);
-        $email->template = str_replace("[Student's Name]", $student->name(), $email->template);
-        $email->template = str_replace("[year]", $student->year->name, $email->template);
-        $email->template = str_replace("[Start Date]", $student->admission_date, $email->template);
-
-        // $template = str_replace("[Student's Name]", $enquiry->first_name . " " . $enquiry->last_name, $template);
-        Mail::send('notification.enquiry', ['template' => $email->template], function ($message) use ($student, $email) {
-            $message->to($student->parents[0]->email);
-            $message->subject($email->name);
-        });
 
         // $subject = EnquirySubject::whereIn('id', $data1['student_subject'])->update([
         //     'student_id' => $student->id
@@ -284,6 +297,8 @@ class StudentsController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $data1 = $request->except('_token');
+        // dd($data);
         $data = $request->validate([
             'student_id' => 'nullable',
             'profile_pic' => 'nullable',
@@ -299,11 +314,10 @@ class StudentsController extends Controller
             'dob' => 'required',
             'current_school_name' => 'required',
             'current_year' => 'required',
-            'branch_id' => 'required',
-            'payment_period' => 'required',
+            'branch_id' => 'nullable',
+            'payment_period' => 'nullable',
             'year_id' => 'required',
             'key_stage_id' => 'required',
-            'lesson_type' => 'required',
             'admission_date' => 'nullable',
             'deposit' => 'nullable',
             'registration_fee' => 'nullable',
@@ -311,10 +325,9 @@ class StudentsController extends Controller
             'resource_discount' => 'nullable',
             'exercise_book_fee' => 'nullable',
             'fee' => 'nullable',
+            'tax' => 'nullable',
             'fee_discount' => 'nullable',
-
-            // 'ethic_group' => 'nullable',
-            // 'religion' => 'nullable',
+            'total_fee' => 'nullable',
             'o_full_name_1' => 'nullable',
             'o_work_phone_1' => 'nullable',
             'o_relationship_1' => 'nullable',
@@ -340,16 +353,154 @@ class StudentsController extends Controller
             'signature_person' => 'nullable',
             'know_about_us' => 'nullable',
             'feedback' => 'nullable',
-            'parent_id' => 'required'
+            'parent_id' => 'nullable'
         ]);
         // $data = $request->except('_token', 'method');
         if (isset($request->profile_pic)) {
             $data['profile_pic'] =   $this->saveImage($request->profile_pic);
         }
-
+        if(auth()->user()->role->name!='parent'){
+            $data['active']=true;
+        }
         $student = Student::find($id);
         $student->update($data);
+        if (auth()->user()->role->name == 'parent') {
+            $student->parents()->detach();
+            if ($data1['last_name1']) {
+                $student->parents()->attach([auth()->user()->parent->id]);
+                if ($student->parents->count() > 1) {
+                    $parent = Parents::find($student->parents[1]->id);
+                    $parent->update([
+                        'last_name' => $data1['last_name1'],
+                        'first_name' => $data1['first_name1'],
+                        'given_name' => $data1['given_name1'],
+                        'gender' => $data1['gender1'],
+                        'relationship' => $data1['relationship1'],
+                        'emp_status' => $data1['emp_status1'],
+                        'company_name' => $data1['company_name1'],
+                        'work_phone_number' => $data1['work_phone_number1'],
+                        'mobile_number' => $data1['mobile_number1'],
+                        'email' => $data1['email1'],
+                    ]);
+                } else {
 
+                    $parent = Parents::create([
+                        'last_name' => $data1['last_name1'],
+                        'first_name' => $data1['first_name1'],
+                        'given_name' => $data1['given_name1'],
+                        'gender' => $data1['gender1'],
+                        'relationship' => $data1['relationship1'],
+                        'emp_status' => $data1['emp_status1'],
+                        'company_name' => $data1['company_name1'],
+                        'work_phone_number' => $data1['work_phone_number1'],
+                        'mobile_number' => $data1['mobile_number1'],
+                        'email' => $data1['email1'],
+                    ]);
+                }
+                $student->parents()->attach([$parent->id]);
+            }
+        } else {
+
+
+            if ($data1['last_name1']) {
+                if ($student->parents->count() > 1) {
+                    $parent = Parents::find($student->parents[1]->id);
+                    $parent->update([
+                        'last_name' => $data1['last_name1'],
+                        'first_name' => $data1['first_name1'],
+                        'given_name' => $data1['given_name1'],
+                        'gender' => $data1['gender1'],
+                        'relationship' => $data1['relationship1'],
+                        'emp_status' => $data1['emp_status1'],
+                        'company_name' => $data1['company_name1'],
+                        'work_phone_number' => $data1['work_phone_number1'],
+                        'mobile_number' => $data1['mobile_number1'],
+                        'email' => $data1['email1'],
+                    ]);
+                } else {
+
+                    $parent = Parents::create([
+                        'last_name' => $data1['last_name1'],
+                        'first_name' => $data1['first_name1'],
+                        'given_name' => $data1['given_name1'],
+                        'gender' => $data1['gender1'],
+                        'relationship' => $data1['relationship1'],
+                        'emp_status' => $data1['emp_status1'],
+                        'company_name' => $data1['company_name1'],
+                        'work_phone_number' => $data1['work_phone_number1'],
+                        'mobile_number' => $data1['mobile_number1'],
+                        'email' => $data1['email1'],
+                    ]);
+                }
+                $student->parents()->detach();
+                // dd($student->parents->count());
+                $student->parents()->attach($data1['parent_id']);
+                $student->parents()->attach([$parent->id]);
+            }
+            if($student->active){
+                $subject = $student->EnquirySubject()->pluck('id')->toArray();
+                // dd($subject);
+                $invoice = StudentInvoice::create([
+                    'student_id' => $student->id,
+                    'amount' => $student->deposit,
+                    'type' => 'Refundable',
+                    'tax' => 0,
+                    'from_date' => auth()->user()->session()->start_date,
+                    'to_date' => auth()->user()->session()->end_date
+                ]);
+
+                $invoice = StudentInvoice::create([
+                    'student_id' => $student->id,
+                    'amount' => $student->registration_fee,
+                    'type' => 'Registration',
+                    'tax' => $data['tax'],
+                    'from_date' => auth()->user()->session()->start_date,
+                    'to_date' => auth()->user()->session()->end_date
+                ]);
+                $invoice = StudentInvoice::create([
+                    'student_id' => $student->id,
+                    'amount' => $request->annual_resource_fee + $request->exercise_book_fee,
+                    'type' => 'Resource Fee',
+                    'tax' => 0,
+                    'from_date' => auth()->user()->session()->start_date,
+                    'to_date' => auth()->user()->session()->end_date
+                ]);
+                if (isset($data1['enquiry_subject'])) {
+
+                    $subject = EnquirySubject::whereIn('id', $data1['enquiry_subject'])->update([
+                        'student_id' => $student->id
+                    ]);
+                }
+                foreach ($student->EnquirySubject as $key => $value) {
+                    // if ($value->subject->lesson_type_id == 1) {
+
+                    InvoiceSubject::create([
+                        'invoice_id' => $invoice->id,
+                        'subject_name' => $value->subject->name,
+                        'subject_rate' => $value->subject->rate,
+                        'subject_book_fee' => $value->subject->book_rate
+                    ]);
+                    // }
+                }
+                // $invoice->update([
+                //     'amount' =>
+                // ]);
+
+                $email = Email::find(2);
+                // dd(gettype($email->template));
+                $email->name = str_replace("[Student's Name]", $student->first_name . " " . $student->last_name, $email->name);
+                $email->template = str_replace("[Parent/Guardian's Name]", $student->parents[0]->given_name, $email->template);
+                $email->template = str_replace("[Student's Name]", $student->name(), $email->template);
+                $email->template = str_replace("[year]", $student->year->name, $email->template);
+                $email->template = str_replace("[Start Date]", $student->admission_date, $email->template);
+
+                // $template = str_replace("[Student's Name]", $enquiry->first_name . " " . $enquiry->last_name, $template);
+                Mail::send('notification.enquiry', ['template' => $email->template], function ($message) use ($student, $email) {
+                    $message->to($student->parents[0]->email);
+                    $message->subject($email->name);
+                });
+            }
+        }
         // $student->parents()->detach();
         // foreach ($data['first_name1'] as $key => $value) {
         //     $parent = Parents::where('first_name', $data['first_name1'][$key])->first();
@@ -426,6 +577,45 @@ class StudentsController extends Controller
     {
         $student = studentUpload::find($id)->delete();
         return redirect()->back()->with('success', 'Deleted Successfully');
+    }
+    public function request(Request $request)
+    {
+        if (auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'super admin') {
+
+            if ($request->input()) {
+                $student = new Student();
+                if ($request->input('branch_id')) {
+                    $student = $student->where('branch_id', $request->input('branch_id'));
+                }
+                if ($request->input('from_date')) {
+                    $student = $student->where('admission_date', '>=', $request->input('from_date'));
+                }
+                if ($request->input('to_date')) {
+                    $student = $student->where('admission_date', '<=', $request->input('to_date'));
+                }
+                if ($request->input('current_school')) {
+                    $student = $student->where('current_school_name', $request->input('current_school'));
+                }
+                if ($request->input('from_week')) {
+                    $student = $student->where('admission_date', '>=', auth()->user()->dateWeek($request->input('from_week')));
+                }
+                if ($request->input('to_week')) {
+                    $student = $student->where('admission_date', '<=', auth()->user()->dateWeek($request->input('to_week')));
+                }
+                $student = $student->where('active', false)->get();
+            } else {
+                $student = Student::where('active', false)->get();
+            }
+        } else if (auth()->user()->role->name == 'parent') {
+            $student = Parents::where('user_id', auth()->user()->id)->first();
+            if ($student) {
+                $student = $student->student;
+            } else {
+                $student = array();
+            }
+        }
+
+        return view('student.index', compact('student'));
     }
     public function getStudent($id)
     {

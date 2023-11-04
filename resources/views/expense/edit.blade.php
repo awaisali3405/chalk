@@ -65,11 +65,25 @@
                                                 value="{{ $expense->description }}" required>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="col-lg-4 col-md-4 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Amount</label>
-                                            <input type="number" name="amount" value="{{ $expense->amount }}"
-                                                id="" class="form-control" required>
+                                            <input type="number" name="amount" id="" class="form-control"
+                                                value="{{ $expense->amount }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Tax</label>
+                                            <input type="text" name="tax" id="" class="form-control"
+                                                value="{{ $expense->tax }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Net Amount</label>
+                                            <input type="text" name="net" id="" class="form-control"
+                                                value="{{ $expense->net }}" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">

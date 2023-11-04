@@ -24,12 +24,13 @@
 
             <form action="{{ route('student.update', $student->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
+                @method('put')
                 <div class="text-center p-3 bg-white" style="">
                     <div class="profile-photo">
                         <img id="img" src="{{ asset($student->profile_pic) }}" width="100" height="100"
                             class="img-fluid rounded-circle" alt="">
                     </div>
-                    <label for="upload" class="mt-3 mb-1 text-bold"> Upload Image Here</label>
+                    <label for="upload" class="mt-3 mb-1 text-bold"> Upload profile pic Here</label>
                 </div>
 
                 <div class="row">
@@ -82,7 +83,7 @@
                                                         <div class="col-4">
 
                                                             <div class="form-check">
-
+                                                                {{-- @dd($student->gender) --}}
                                                                 <input type="radio" class="form-check-input"
                                                                     id="male" value="male" name="gender"
                                                                     {{ old('gender', $student->gender) == 'male' ? 'checked' : '' }}>
@@ -168,65 +169,6 @@
                                                         required>
                                                 </div>
                                             </div>
-
-                                            <div class="col-lg-12 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Lesson Type</label>
-                                                    <div class="row">
-                                                        <div class="col-3 ">
-
-                                                            <div class="form-check">
-
-                                                                <input type="radio" name="lesson_type"
-                                                                    value="Normal Group" id="Normal Group"
-                                                                    {{ old('lesson_type', $student->lesson_type) == 'Normal Group' ? 'checked' : '' }}
-                                                                    required>
-                                                                <label class="form-check-label" for="Normal Group">Normal
-                                                                    Group</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-3 ">
-
-                                                            <div class="form-check">
-
-                                                                <input type="radio" name="lesson_type"
-                                                                    value="Small Group" id="Small Group"
-                                                                    {{ old('lesson_type', $student->lesson_type) == 'Small Group' ? 'checked' : '' }}
-                                                                    required>
-                                                                <label class="form-check-label" for="Small Group">Small
-                                                                    Group</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-3 ">
-
-                                                            <div class="form-check">
-
-                                                                <input type="radio" name="lesson_type"
-                                                                    value="One - One" id="One - One"
-                                                                    {{ old('lesson_type', $student->lesson_type) == 'One - One' ? 'checked' : '' }}
-                                                                    required>
-                                                                <label class="form-check-label" for="One - One">One -
-                                                                    One</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-3 ">
-
-                                                            <div class="form-check">
-
-                                                                <input type="radio" name="lesson_type"
-                                                                    value="H/W Help Group" id="H/W Help Group"
-                                                                    {{ old('lesson_type', $student->lesson_type) == 'H/W Help Group' ? 'checked' : '' }}
-                                                                    required>
-                                                                <label class="form-check-label" for="H/W Help Group">H/W
-                                                                    Help Group</label>
-                                                            </div>
-                                                        </div>
-
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
                                             <div class="col-12">
 
                                                 <div class="row">
@@ -252,132 +194,268 @@
 
 
                                                             <select class="form-control year" name="year_id" required>
-
+                                                                <option value="{{ $student->year_id }}">
+                                                                    {{ $student->year->name }}</option>
                                                             </select>
 
 
                                                         </div>
                                                     </div>
-
-
-
-                                                    <div class="col-12" style="">
-                                                        <div class="card">
-                                                            <div class="card-header">
-
+                                                    @if (auth()->user()->role->name == 'parent')
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Subjects</label>
                                                             </div>
-                                                            <div class="card-body">
-                                                                <div class="row">
-                                                                    <div class="col-3">
-                                                                        <div class="form-group">
-                                                                            <label class="form-label">Subject</label>
-
-                                                                            <select class="form-control subject"
-                                                                                id="subject_id">
-
-
-
-                                                                            </select>
-
+                                                            <div class=" pl-3">
+                                                                <div class="row checkbox">
+                                                                    @foreach ($student->year->subject as $value)
+                                                                        <div class="col-lg-2 col-md-2 col-sm-6">
+                                                                            <input type="checkbox" name="subject[]"
+                                                                                value="{{ $value->name }}"
+                                                                                id=""
+                                                                                {{ $student->parent_subject ? (in_array($value->name, json_decode($student->parent_subject)) ? 'checked' : '') : '' }}>
+                                                                            <label
+                                                                                class="">{{ $value->name }}</label>
                                                                         </div>
+                                                                    @endforeach
 
-                                                                    </div>
-                                                                    <div class="col-3">
-                                                                        <div class="form-group">
-                                                                            <label class="form-label">Board</label>
-
-                                                                            <select class="form-control" id="board_id">
-                                                                                <option value="">-</option>
-                                                                                @foreach ($board as $value)
-                                                                                    <option value="{{ $value->id }}">
-                                                                                        {{ $value->name }}</option>
-                                                                                @endforeach
-
-                                                                            </select>
-
-                                                                        </div>
-
-                                                                    </div>
-                                                                    <div class="col-3">
-                                                                        <div class="form-group">
-                                                                            <label class="form-label">Paper</label>
-
-                                                                            <select class="form-control" id="paper_id">
-                                                                                <option value="">-</option>
-                                                                                @foreach ($paper as $value)
-                                                                                    <option value="{{ $value->id }}">
-                                                                                        {{ $value->name }}</option>
-                                                                                @endforeach
-
-                                                                            </select>
-
-                                                                        </div>
-
-                                                                    </div>
-                                                                    <div class="col-2">
-                                                                        <div class="form-group">
-
-                                                                            <label class="form-label">Science Type</label>
-                                                                            <select class="form-control"
-                                                                                id="science_type_id">
-                                                                                <option value="">-</option>
-                                                                                @foreach ($scienceType as $value)
-                                                                                    <option value="{{ $value->id }}">
-                                                                                        {{ $value->name }}</option>
-                                                                                @endforeach
-
-                                                                            </select>
-
-                                                                        </div>
-
-                                                                    </div>
-                                                                    <div class="col-1 pt-4">
-                                                                        <div class="form-group">
-
-                                                                            <label class="form-label"></label>
-                                                                            <span type="button" class="btn btn-primary "
-                                                                                id="add-subject">+
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="">
-                                                                    <table id="" class="display"
-                                                                        style="width:100%;">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th>Subject</th>
-                                                                                <th>Board</th>
-                                                                                <th>Paper</th>
-                                                                                <th>Science Type</th>
-
-
-                                                                                <th>Action</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody id="subject">
-                                                                            @foreach ($student->enquirySubject as $value)
-                                                                                <tr>
-                                                                                    <td>{{ $value->subject->name }}</td>
-                                                                                    <td>{{ $value->board->name }}</td>
-                                                                                    <td>{{ $value->paper->name }}</td>
-                                                                                    <td>{{ $value->scienceType->name }}
-                                                                                    </td>
-                                                                                </tr>
-                                                                            @endforeach
-                                                                        </tbody>
-                                                                    </table>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    @else
+                                                    @endif
 
-                                                    </div>
+                                                    @if (auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'super admin')
+                                                        <div class="col-12" style="">
+                                                            <div class="card">
+                                                                <div class="card-header">
 
-                                                    {{-- <div class="col-lg-12 col-md-12 col-sm-12">
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                        <button type="submit" class="btn btn-light">Cencel</button>
-                                                    </div> --}}
+
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <div class="row enquiry-subject-list d-none">
+                                                                        <div class="col-12">
+                                                                            <h4>Subject List</h4>
+                                                                            <ul>
+                                                                                @foreach (json_decode($student->parent_subject) as $value)
+                                                                                    <li>{{ $value }}</li>
+                                                                                @endforeach
+
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row pb-4">
+                                                                        <div class="col-12 d-flex justify-content-end">
+                                                                            <span class="btn btn-primary "
+                                                                                id="veiw-enquiry-list">View
+                                                                                Subject</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-2">
+                                                                            <div class="form-group">
+                                                                                <label class="form-label">Lesson
+                                                                                    Type</label>
+
+                                                                                <select class="form-control"
+                                                                                    id="lesson_type_id">
+                                                                                    @foreach ($lessonType as $value)
+                                                                                        <option
+                                                                                            value="{{ $value->id }}">
+                                                                                            {{ $value->name }}
+                                                                                        </option>
+                                                                                    @endforeach
+                                                                                </select>
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-2">
+                                                                            <div class="form-group">
+                                                                                <label class="form-label">Subject</label>
+
+                                                                                <select class="form-control subject"
+                                                                                    id="subject_id">
+                                                                                    <option value="">-</option>
+                                                                                    @foreach ($student->year->subject as $value)
+                                                                                        <option
+                                                                                            value="{{ $value->id }}">
+                                                                                            {{ $value->name }}</option>
+                                                                                    @endforeach
+
+
+                                                                                </select>
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-1">
+                                                                            <div class="form-group">
+                                                                                <label class="form-label">Board</label>
+
+                                                                                <select class="form-control"
+                                                                                    id="board_id">
+                                                                                    <option value="">-</option>
+                                                                                    @foreach ($board as $value)
+                                                                                        <option
+                                                                                            value="{{ $value->id }}">
+                                                                                            {{ $value->name }}</option>
+                                                                                    @endforeach
+
+                                                                                </select>
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-1">
+                                                                            <div class="form-group">
+                                                                                <label class="form-label">Paper</label>
+
+                                                                                <select class="form-control"
+                                                                                    id="paper_id">
+                                                                                    <option value="">-</option>
+                                                                                    @foreach ($paper as $value)
+                                                                                        <option
+                                                                                            value="{{ $value->id }}">
+                                                                                            {{ $value->name }}</option>
+                                                                                    @endforeach
+
+                                                                                </select>
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-2">
+                                                                            <div class="form-group">
+
+                                                                                <label class="form-label">Science
+                                                                                    Type</label>
+                                                                                <select class="form-control"
+                                                                                    id="science_type_id">
+                                                                                    <option value="">-</option>
+                                                                                    @foreach ($scienceType as $value)
+                                                                                        <option
+                                                                                            value="{{ $value->id }}">
+                                                                                            {{ $value->name }}</option>
+                                                                                    @endforeach
+
+                                                                                </select>
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-1">
+                                                                            <div class="form-group">
+
+                                                                                <label class="form-label">Rate</label>
+                                                                                <input type="text" name="per_hour_rate"
+                                                                                    id="rate" class="form-control">
+
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-1">
+                                                                            <div class="form-group">
+
+                                                                                <label class="form-label">Hours
+                                                                                </label>
+                                                                                <input type="text" name="no_of_hr"
+                                                                                    id="hours" class="form-control">
+
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-1">
+                                                                            <div class="form-group">
+
+                                                                                <label class="form-label">Amount
+                                                                                </label>
+                                                                                <input type="text" name="amount"
+                                                                                    id="amount" class="form-control">
+
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-1 pt-4">
+                                                                            <div class="form-group">
+
+                                                                                <label class="form-label"></label>
+                                                                                <span type="button"
+                                                                                    class="btn btn-primary "
+                                                                                    id="add-subject">+
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="">
+                                                                        <table id="" class="display"
+                                                                            style="width:100%;">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Lesson Type</th>
+                                                                                    <th>Subject</th>
+                                                                                    <th>Board</th>
+                                                                                    <th>Paper</th>
+                                                                                    <th>Science Type</th>
+                                                                                    <th>Rate</th>
+                                                                                    <th>Hours</th>
+                                                                                    <th>Amount</th>
+
+
+                                                                                    <th>Action</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody id="subject">
+                                                                                @foreach ($student->enquirySubject as $value)
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <a
+                                                                                                href="javascript:void(0);">{{ $value->lessonType->name }}</a>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <a
+                                                                                                href="javascript:void(0);">{{ $value->subject->name }}</a>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            {{ $value->board ? $value->board->name : '-' }}
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            {{ $value->paper ? $value->paper->name : '-' }}
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            {{ $value->scienceType ? $value->scienceType->name : '-' }}
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            {{ $value->rate_per_hr }}
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            {{ $value->no_hr_weekly }}
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            {{ $value->amount }}
+                                                                                        </td>
+
+                                                                                        <td>
+
+                                                                                            <input type="hidden"
+                                                                                                value="{{ $value->id }}"
+                                                                                                class="id"
+                                                                                                name="enquiry_subject[]">
+                                                                                            <a class="delete-subject"
+                                                                                                href="javascript:void(0);"><i
+                                                                                                    class=" fa fa-close color-danger"></i></a>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                @endforeach
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -392,6 +470,7 @@
                     </div>
                     @if (auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'super admin')
                         <div class="col-12">
+
                             <div class="row">
                                 <div class="col-xl-12 col-xxl-12 col-sm-12">
                                     <div class="card">
@@ -403,7 +482,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="form-label">Branch</label>
-                                                        <select class="form-control" name="branch_id">
+                                                        <select class="form-control branch_student" name="branch_id">
                                                             <option value="">Select Branch</option>
                                                             @foreach ($branch as $value)
                                                                 <option value="{{ $value->id }}"
@@ -432,6 +511,40 @@
 
                                                     </div>
                                                 </div>
+                                                <div class="col-3">
+
+                                                </div>
+                                                <div class="col-6 ">
+
+                                                    <h4 class="hr-lines">Tax Calculate</h4>
+                                                </div>
+                                                <div class="col-3">
+
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group">
+                                                        <label for="" class="form-label">Tax</label>
+                                                        <input type="text" name="tax" id=""
+                                                            class="form-control tax" value="{{ $student->tax }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group">
+                                                        <label for="" class="form-label">Fee Tax</label>
+                                                        <input type="text" name="fee_tax" id=""
+                                                            class="form-control fee-tax" value="{{ $student->fee_tax }}"
+                                                            readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group">
+                                                        <label for="" class="form-label">Registration Tax</label>
+                                                        <input type="text" name="reg_tax" id="reg_tax"
+                                                            id="" class="form-control"
+                                                            value="{{ $student->reg_tax ? $student->reg_tax : 0 }}"
+                                                            readonly>
+                                                    </div>
+                                                </div>
 
                                                 @if (auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'super admin')
                                                     <div class="row card-body">
@@ -443,7 +556,8 @@
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
                                                                     <input type="text" class="form-control"
-                                                                        value="40" name="deposit">
+                                                                        value="{{ $student->deposit ? $student->deposit : 40 }}"
+                                                                        name="deposit">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -456,7 +570,8 @@
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
                                                                     <input type="text" class="form-control"
-                                                                        value="20" name="registration_fee">
+                                                                        value="{{ $student->registration_fee ? $student->registration_fee : 20 }}"
+                                                                        name="registration_fee" id="registration_fee">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -468,7 +583,9 @@
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
                                                                     <input type="text" class="form-control"
-                                                                        value="0" name="annual_resource_fee">
+                                                                        value="{{ $student->annual_resource_fee ? $student->annual_resource_fee : 0 }}"
+                                                                        name="annual_resource_fee"
+                                                                        id="annual_resource_fee" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -479,8 +596,10 @@
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
-                                                                    <input type="text" class="form-control"
-                                                                        value="0" name="resource_discount">
+                                                                    <input type="text" id="resource_discount"
+                                                                        class="form-control"
+                                                                        value="{{ $student->resource_discount ? $student->resource_discount : 0 }}"
+                                                                        name="resource_discount">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -491,20 +610,23 @@
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
-                                                                    <input type="text" class="form-control"
-                                                                        value="0" name="exercise_book_fee">
+                                                                    <input type="text" id="exercise_book"
+                                                                        class="form-control"
+                                                                        value="{{ $student->exercise_book_fee ? $student->exercise_book_fee : 0 }}"
+                                                                        name="exercise_book_fee" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
-                                                                <label class="form-label">Fee</label>
+                                                                <label class="form-label">Sub total Fee</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
-                                                                    <input type="text" class="form-control"
-                                                                        value="0" name="fee">
+                                                                    <input type="text" class="form-control fee"
+                                                                        value="{{ $student->fee ? $student->fee : 0 }}"
+                                                                        name="fee" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -516,7 +638,21 @@
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
                                                                     <input type="text" class="form-control"
-                                                                        value="0" name="fee_discount">
+                                                                        value="{{ $student->fee_discount ? $student->fee_discount : 0 }}"
+                                                                        name="fee_discount" id="fee_discount">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Total Fee</label>
+                                                                <div class="input-group mb-2">
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">£</div>
+                                                                    </div>
+                                                                    <input type="text" class="form-control fee-total"
+                                                                        value="{{ $student->total_fee ? $student->total_fee : 0 }}"
+                                                                        name="total_fee" id="total_fee" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -527,7 +663,8 @@
 
 
                                                                     <input type="date" class="form-control"
-                                                                        value="" name="admission_date">
+                                                                        value="{{ $student->admission_date }}"
+                                                                        name="admission_date">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -787,7 +924,9 @@
                                                         required>
                                                         <option value="">-</option>
                                                         @foreach ($parent as $value)
-                                                            <option value="{{ $value->id }}">{{ $value->given_name }}
+                                                            <option value="{{ $value->id }}"
+                                                                {{ $value->id == $student->parents[0]->id ? 'selected' : '' }}>
+                                                                {{ $value->given_name }}
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -800,6 +939,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Mr./Mrs./Ms./Other</label>
                                                     <input type="text" class="form-control" id="p_first_name"
+                                                        value="{{ $student->parents[0]->first_name }}"
                                                         name="first_name[]" disabled>
 
                                                 </div>
@@ -808,7 +948,8 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Family Name</label>
                                                     <input type="text" class="form-control" id="p_last_name"
-                                                        name="last_name[]" disabled>
+                                                        value="{{ $student->parents[0]->last_name }}" name="last_name[]"
+                                                        disabled>
 
                                                 </div>
                                             </div>
@@ -816,7 +957,8 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Given Name</label>
                                                     <input type="text" class="form-control" id="p_given_name"
-                                                        name="given_name[]" disabled>
+                                                        value="{{ $student->parents[0]->last_name }}" name="given_name[]"
+                                                        disabled>
 
                                                 </div>
                                             </div>
@@ -829,7 +971,8 @@
                                                             <div class="form-check">
 
                                                                 <input type="radio" class="form-check-input"
-                                                                    id="p_male" value="male" name="gender1[]"
+                                                                    id="p_male" value="male" name="gender1"
+                                                                    {{ $student->parents[0]->gender == 'male' ? 'checked' : '' }}
                                                                     disabled>
                                                                 <label class="form-check-label"
                                                                     for="male">Male</label>
@@ -839,7 +982,8 @@
                                                             <div class="form-check">
 
                                                                 <input type="radio" class="form-check-input"
-                                                                    id="p_female" value="female" name="gender1[]"
+                                                                    id="p_female" value="female" name="gender1"
+                                                                    {{ $student->parents[0]->gender == 'female' ? 'checked' : '' }}
                                                                     disabled>
                                                                 <label class="form-check-label"
                                                                     for="female">Female</label>
@@ -850,7 +994,8 @@
                                                             <div class="form-check">
 
                                                                 <input type="radio" class="form-check-input"
-                                                                    id="p_other" value="other" name="gender1[]"
+                                                                    id="p_other" value="other" name="gender1"
+                                                                    {{ $student->parents[0]->gender == 'other' ? 'checked' : '' }}
                                                                     disabled>
                                                                 <label class="form-check-label"
                                                                     for="other">Other</label>
@@ -865,7 +1010,8 @@
                                                     <label class="form-label">Relationship to Student</label>
 
                                                     <input type="text" list="parent" class="form-control"
-                                                        id="p_relation" name="relationship[]" disabled>
+                                                        id="p_relation" name="relationship[]"
+                                                        value="{{ $student->parents[0]->relationship }}" disabled>
                                                     <datalist id="parent">
                                                         <option>Father</option>
                                                         <option>Mother</option>
@@ -877,6 +1023,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Employment Status</label>
                                                     <input type="text" class="form-control" id="p_emp_status"
+                                                        value="{{ $student->parents[0]->emp_status }}"
                                                         name="emp_status[]" disabled>
                                                 </div>
                                             </div>
@@ -884,6 +1031,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Company Name</label>
                                                     <input type="text" class="form-control" id="p_company_name"
+                                                        value="{{ $student->parents[0]->company_name }}"
                                                         name="company_name[]" disabled>
                                                 </div>
                                             </div>
@@ -891,6 +1039,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Work Phone Number</label>
                                                     <input type="text" class="form-control" id="p_work"
+                                                        value="{{ $student->parents[0]->work_phone_number }}"
                                                         name="work_phone_number[]" disabled>
                                                 </div>
                                             </div>
@@ -898,7 +1047,8 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Mobile Number</label>
                                                     <input type="text" class="form-control" name="mobile_number[]"
-                                                        id="p_mobile" disabled>
+                                                        value="{{ $student->parents[0]->mobile_number }}" id="p_mobile"
+                                                        disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -906,13 +1056,15 @@
                                                     <label class="form-label">Email Address
                                                     </label>
                                                     <input type="text" class="form-control" name="email[]"
-                                                        id="p_email" disabled>
+                                                        value="{{ $student->parents[0]->email }}" id="p_email"
+                                                        disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Address</label>
                                                     <input type="text" id="formatted_address_0" class="form-control"
+                                                        value="{{ $student->parents[0]->f_address_line }}"
                                                         name="f_address_line[]" disabled>
                                                 </div>
                                             </div>
@@ -920,6 +1072,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Second Address Line </label>
                                                     <input type="text" id="formatted_address_1" class="form-control"
+                                                        value="{{ $student->parents[0]->s_address_line }}"
                                                         name="s_address_line[]" disabled>
                                                 </div>
                                             </div>
@@ -927,6 +1080,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Third Address Line</label>
                                                     <input type="text" id="formatted_address_2" class="form-control"
+                                                        value="{{ $student->parents[0]->t_address_line }}"
                                                         name="t_address_line[]" disabled>
                                                 </div>
                                             </div>
@@ -934,21 +1088,23 @@
                                                 <div class="form-group">
                                                     <label class="form-label"> Town</label>
                                                     <input type="text" id="town_or_city" class="form-control"
-                                                        name="town[]" disabled>
+                                                        value="{{ $student->parents[0]->town }}" name="town[]" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label"> County </label>
                                                     <input type="text" id="county" class="form-control"
-                                                        name="county[]" disabled>
+                                                        value="{{ $student->parents[0]->county }}" name="county[]"
+                                                        disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label"> Postcode</label>
                                                     <input type="text" id="postcode" class="form-control"
-                                                        name="res_address1[]" disabled>
+                                                        value="{{ $student->parents[0]->res_postal_code }}"
+                                                        name="res_postal_code[]" disabled>
                                                 </div>
                                             </div>
 
@@ -966,135 +1122,288 @@
                                 </div>
                             </div>
                         @endif
-                        <div class="col-xl-6 col-xxl-6 col-sm-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title">Parent 2 /Guardian 2 Details</h5>
-                                </div>
+                        @if ($student->parents->count() > 1)
+                            <div class="col-xl-6 col-xxl-6 col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Parent 2 /Guardian 2 Details</h5>
+                                    </div>
 
-                                <div class="card-body " id="parent">
-                                    {{-- @dd($student->parents) --}}
                                     <div class="card-body " id="parent">
                                         {{-- @dd($student->parents) --}}
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Mr./Mrs./Ms./Other</label>
-                                                    <input type="text" class="form-control" name="first_name1[]">
+                                        <div class="card-body " id="parent">
+                                            {{-- @dd($student->parents) --}}
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Mr./Mrs./Ms./Other</label>
+                                                        <input type="text" class="form-control" name="first_name1"
+                                                            value="{{ $student->parents[1]->first_name }}">
 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Family Name</label>
-                                                    <input type="text" class="form-control" name="last_name1[]">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Family Name</label>
+                                                        <input type="text" class="form-control" name="last_name1"
+                                                            value="{{ $student->parents[1]->last_name }}">
 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Given Name</label>
-                                                    <input type="text" class="form-control" name="given_name1[]">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Given Name</label>
+                                                        <input type="text" class="form-control" name="given_name1"
+                                                            value="{{ $student->parents[1]->given_name }}">
 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Gender</label>
-                                                    <div class="row">
-                                                        <div class="col-4">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Gender</label>
+                                                        <div class="row">
+                                                            <div class="col-4">
 
-                                                            <div class="form-check">
+                                                                <div class="form-check">
 
-                                                                <input type="radio" class="form-check-input"
-                                                                    id="male" value="male" name="gender1[]">
-                                                                <label class="form-check-label"
-                                                                    for="male">Male</label>
+                                                                    <input type="radio" class="form-check-input"
+                                                                        id="male" value="male" name="gender1"
+                                                                        {{ $student->parents[1]->gender == 'male' ? 'checked' : '' }}>
+                                                                    <label class="form-check-label"
+                                                                        for="male">Male</label>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <div class="form-check">
+                                                            <div class="col-4">
+                                                                <div class="form-check">
 
-                                                                <input type="radio" class="form-check-input"
-                                                                    id="female" value="female" name="gender1[]">
-                                                                <label class="form-check-label"
-                                                                    for="female">Female</label>
+                                                                    <input type="radio" class="form-check-input"
+                                                                        id="female" value="female" name="gender1"
+                                                                        {{ $student->parents[1]->gender == 'female' ? 'checked' : '' }}>
+                                                                    <label class="form-check-label"
+                                                                        for="female">Female</label>
+                                                                </div>
+
                                                             </div>
+                                                            <div class="col-4">
+                                                                <div class="form-check">
 
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <div class="form-check">
+                                                                    <input type="radio" class="form-check-input"
+                                                                        {{ $student->parents[1]->gender == 'other' ? 'checked' : '' }}
+                                                                        id="other" value="other" name="gender1">
+                                                                    <label class="form-check-label"
+                                                                        for="other">Other</label>
+                                                                </div>
 
-                                                                <input type="radio" class="form-check-input"
-                                                                    id="other" value="other" name="gender1[]">
-                                                                <label class="form-check-label"
-                                                                    for="other">Other</label>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Relationship to Student</label>
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Relationship to Student</label>
 
-                                                    <input type="text" list="parent" class="form-control"
-                                                        name="relationship1[]">
-                                                    <datalist id="parent">
-                                                        <option>Father</option>
-                                                        <option>Mother</option>
-                                                        <option>Uncle</option>
-                                                    </datalist>
+                                                        <input type="text" list="parent" class="form-control"
+                                                            value="{{ $student->parents[1]->relationship }}"
+                                                            name="relationship1">
+                                                        <datalist id="parent">
+                                                            <option>Father</option>
+                                                            <option>Mother</option>
+                                                            <option>Uncle</option>
+                                                        </datalist>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Employment Status</label>
-                                                    <input type="text" class="form-control" name="emp_status1[]">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Employment Status</label>
+                                                        <input type="text" class="form-control" name="emp_status1"
+                                                            value="{{ $student->parents[1]->emp_status }}">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Company Name</label>
-                                                    <input type="text" class="form-control" name="company_name1[]">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Company Name</label>
+                                                        <input type="text" class="form-control"
+                                                            value="{{ $student->parents[1]->company_name }}"
+                                                            name="company_name1">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Work Phone Number</label>
-                                                    <input type="text" class="form-control"
-                                                        name="work_phone_number1[]">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Work Phone Number</label>
+                                                        <input type="text" class="form-control"
+                                                            value="{{ $student->parents[1]->work_phone_number }}"
+                                                            name="work_phone_number1">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Mobile Number</label>
-                                                    <input type="text" class="form-control" name="mobile_number1[]">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Mobile Number</label>
+                                                        <input type="text" class="form-control"
+                                                            value="{{ $student->parents[1]->mobile_number }}"
+                                                            name="mobile_number1">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Email Address
-                                                    </label>
-                                                    <input type="text" class="form-control" name="email1[]">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Email Address
+                                                        </label>
+                                                        <input type="text" class="form-control" name="email1"
+                                                            value="{{ $student->parents[1]->email }}">
+                                                    </div>
                                                 </div>
-                                            </div>
 
 
 
 
+
+
+                                            </div>
 
 
                                         </div>
 
 
                                     </div>
-
-
                                 </div>
                             </div>
-                        </div>
+                        @else
+                            <div class="col-xl-6 col-xxl-6 col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Parent 2 /Guardian 2 Details</h5>
+                                    </div>
+
+                                    <div class="card-body " id="parent">
+                                        {{-- @dd($student->parents) --}}
+                                        <div class="card-body " id="parent">
+                                            {{-- @dd($student->parents) --}}
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Mr./Mrs./Ms./Other</label>
+                                                        <input type="text" class="form-control" name="first_name1"
+                                                            value="">
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Family Name</label>
+                                                        <input type="text" class="form-control" name="last_name1"
+                                                            value="">
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Given Name</label>
+                                                        <input type="text" class="form-control" name="given_name1"
+                                                            value="">
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Gender</label>
+                                                        <div class="row">
+                                                            <div class="col-4">
+
+                                                                <div class="form-check">
+
+                                                                    <input type="radio" class="form-check-input"
+                                                                        id="male" value="male" name="gender1">
+                                                                    <label class="form-check-label"
+                                                                        for="male">Male</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div class="form-check">
+
+                                                                    <input type="radio" class="form-check-input"
+                                                                        id="female" value="female" name="gender1">
+                                                                    <label class="form-check-label"
+                                                                        for="female">Female</label>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div class="form-check">
+
+                                                                    <input type="radio" class="form-check-input"
+                                                                        id="other" value="other" name="gender1">
+                                                                    <label class="form-check-label"
+                                                                        for="other">Other</label>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Relationship to Student</label>
+
+                                                        <input type="text" list="parent" class="form-control"
+                                                            value="" name="relationship1">
+                                                        <datalist id="parent">
+                                                            <option>Father</option>
+                                                            <option>Mother</option>
+                                                            <option>Uncle</option>
+                                                        </datalist>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Employment Status</label>
+                                                        <input type="text" class="form-control" name="emp_status1[]"
+                                                            e="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Company Name</label>
+                                                        <input type="text" class="form-control" value=""
+                                                            name="company_name1[]">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Work Phone Number</label>
+                                                        <input type="text" class="form-control" value=""
+                                                            name="work_phone_number1[]">
+                                                    </div>
+                                                </div>
+                                                <div class="colg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Mobile Number</label>
+                                                        <input type="text" class="form-control" value=""
+                                                            name="mobile_number1[]">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div cls="form-group">
+                                                        <label class="form-label">Email Address
+                                                        </label>
+                                                        <input type="text" class="form-control" name="email1[]"
+                                                            value="">
+                                                    </div>
+                                                </div>
+
+
+
+
+
+
+                                            </div>
+
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                     <div class="col-12">
 
@@ -1390,8 +1699,9 @@
 
                                                     <div class="form-check">
 
-                                                        <input type="radio" class="form-check-input" id="is_disorder"
-                                                            value="1" name="is_disable">
+                                                        <input type="radio" class="form-check-input"
+                                                            id="is_disorder" value="1" name="is_disable"
+                                                            {{ $student->is_disable == 1 ? 'checked' : '' }}>
                                                         <label class="form-check-label" for="is_disable">Yes</label>
                                                     </div>
                                                 </div>
@@ -1400,7 +1710,8 @@
                                                     <div class="form-check">
 
                                                         <input type="radio" class="form-check-input"
-                                                            id="is_disorder_not" value="0" name="is_disable">
+                                                            id="is_disorder_not" value="0" name="is_disable"
+                                                            {{ $student->is_disable == 0 ? 'checked' : '' }}>
                                                         <label class="form-check-label" for="is_disorder_not">No</label>
                                                     </div>
                                                 </div>
@@ -1435,7 +1746,8 @@
                                                 <label class="form-label">Signature Person</label>
 
                                                 <input type="text" class="form-control" name="signature_person"
-                                                    value="{{ auth()->user()->parent->given_name }}" id="">
+                                                    value="{{ auth()->user()->parent->given_name }}" id=""
+                                                    required>
 
 
                                             </div>
@@ -1447,7 +1759,7 @@
 
                                             <input list="browsers" name="know_about_us" id="browser"
                                                 value="{{ old('know_about_us', $student->know_about_us) }}"
-                                                class="form-control" required>
+                                                class="form-control">
                                             <datalist id="browsers">
                                                 <option value="Leaflet">
                                                 <option value="Google">
@@ -1461,8 +1773,8 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Do you have any comments or feedback?</label>
-                                            <input type="text" class="form-control" name="feedback" id=""
-                                                value="{{ old('feedback', $student->feedback) }}">
+                                            <input type="text" class="form-control" name="feedback"
+                                                id="" value="{{ old('feedback', $student->feedback) }}">
 
 
                                         </div>

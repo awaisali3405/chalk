@@ -69,7 +69,10 @@ class Student extends Model
         'know_about_us',
         'feedback',
         'total_fee',
-        'tax'
+        'tax',
+        'place_of_birth',
+        'parent_subject',
+        'active'
     ];
     public function name()
     {
