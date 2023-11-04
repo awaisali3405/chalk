@@ -90,7 +90,7 @@ class EnquiryController extends Controller
     {
         $data = $request->except('_token');
         $data['subject'] = json_encode($data['subject']);
-        dd($data);
+
         $enquiry = Enquiry::create($data);
         $email = Email::find(1);
         // dd(gettype($email->template));
