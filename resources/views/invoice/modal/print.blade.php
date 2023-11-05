@@ -564,7 +564,7 @@
                                                 <h5 class="font-weight-bolder"></h5>
                                             </td>
                                             <td class="bg-grey">
-                                                <h5 class="font-weight-bolder"></h5>
+                                                <h5 class="font-weight-bolder">0%</h5>
                                             </td>
                                             <td class="bg-grey text-align-end">
                                                 <h5 class="font-weight-bolder">
@@ -596,7 +596,7 @@
                                                 <h5 class="font-weight-bolder"></h5>
                                             </td>
                                             <td class="bg-grey">
-                                                <h5 class="font-weight-bolder"></h5>
+                                                <h5 class="font-weight-bolder">{{ $invoice->tax }}%</h5>
                                             </td>
                                             <td class="bg-grey text-align-end">
                                                 <h5 class="font-weight-bolder">
@@ -632,7 +632,7 @@
                                             <td class="bg-grey text-align-end">
                                                 <h5 class="font-weight-bolder">
 
-                                                    £{{ $value->late_fee + $invoice->amount - $value->discount }}
+                                                    £{{ number_format($value->late_fee + $invoice->amount - $value->discount, 2) }}
                                                 </h5>
                                             </td>
                                         </tr>
