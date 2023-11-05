@@ -613,28 +613,30 @@
                                             <td></td>
                                         </tr> --}}
                                     @endif
-                                    <tr class="bg-grey">
-                                        <td class=" text-center">
-                                            <h5 class="font-weight-bolder">
+                                    @if ($value->discount > 0 && $value->late_fee > 0)
+                                        <tr class="bg-grey">
+                                            <td class=" text-center">
+                                                <h5 class="font-weight-bolder">
 
-                                            </h5>
-                                        </td>
-                                        <td class="pl-2">
-                                            <h5 class="font-weight-bolder"></h5>
-                                        </td>
-                                        <td class="bg-grey">
-                                            <h5 class="font-weight-bolder"></h5>
-                                        </td>
-                                        <td class="bg-grey">
-                                            <h5 class="font-weight-bolder">Total</h5>
-                                        </td>
-                                        <td class="bg-grey text-align-end">
-                                            <h5 class="font-weight-bolder">
+                                                </h5>
+                                            </td>
+                                            <td class="pl-2">
+                                                <h5 class="font-weight-bolder"></h5>
+                                            </td>
+                                            <td class="bg-grey">
+                                                <h5 class="font-weight-bolder"></h5>
+                                            </td>
+                                            <td class="bg-grey">
+                                                <h5 class="font-weight-bolder">Total</h5>
+                                            </td>
+                                            <td class="bg-grey text-align-end">
+                                                <h5 class="font-weight-bolder">
 
-                                                £{{ $value->late_fee + $invoice->amount - $value->discount }}
-                                            </h5>
-                                        </td>
-                                    </tr>
+                                                    £{{ $value->late_fee + $invoice->amount - $value->discount }}
+                                                </h5>
+                                            </td>
+                                        </tr>
+                                    @endif
 
                                     <tr class="bg-grey">
                                         <td class=" text-center">
