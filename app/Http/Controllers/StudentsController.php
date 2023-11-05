@@ -196,10 +196,7 @@ class StudentsController extends Controller
                     'work_phone_number' => $data1['work_phone_number1'],
                     'mobile_number' => $data1['mobile_number1'],
                     'email' => $data1['email1'],
-                    'signature' => $data1['signature1'],
-                    'signature_date' => $data1['signature_date1'],
-                    'mail_address' => $data1['mail_address1'],
-                    'res_address' => $data1['res_address1'],
+
                 ]);
                 $student->parents()->attach([$parent->id]);
             }
@@ -359,8 +356,8 @@ class StudentsController extends Controller
         if (isset($request->profile_pic)) {
             $data['profile_pic'] =   $this->saveImage($request->profile_pic);
         }
-        if(auth()->user()->role->name!='parent'){
-            $data['active']=true;
+        if (auth()->user()->role->name != 'parent') {
+            $data['active'] = true;
         }
         $student = Student::find($id);
         $student->update($data);
@@ -437,7 +434,7 @@ class StudentsController extends Controller
                 $student->parents()->attach($data1['parent_id']);
                 $student->parents()->attach([$parent->id]);
             }
-            if($student->active){
+            if ($student->active) {
                 $subject = $student->EnquirySubject()->pluck('id')->toArray();
                 // dd($subject);
                 $invoice = StudentInvoice::create([
