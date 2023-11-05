@@ -153,13 +153,16 @@
                                 <th style="width: 5%;">
 
                                 </th>
-                                <th class="text-center" style="width: 60%;">
+                                <th class="" style="width: 60%;">
                                     <h5 class="font-weight-bolder"> Description</h5>
                                 </th>
-                                <th class="text-center" style="width: 20%;">
+                                <th class="" style="width: 20%;">
                                     <h5 class="font-weight-bolder">Rate</h5>
                                 </th>
-                                <th class="text-center" style="width: 20%;">
+                                <th>
+                                    <h5 class="font-weight-bolder"> Tax</h5>
+                                </th>
+                                <th class="" style="width: 20%;">
                                     <h5 class="font-weight-bolder">Amount</h5>
                                 </th>
                             </tr>
@@ -192,6 +195,7 @@
                                     </td>
                                     <td class="bg-grey"></td>
                                     <td class="bg-grey"></td>
+                                    <td class="bg-grey"></td>
                                 </tr>
                             @elseif (str_contains($invoice->type, 'Sale Invoice'))
                                 <tr>
@@ -203,6 +207,7 @@
                                     </td>
                                     <td class="bg-grey"></td>
                                     <td class="bg-grey"></td>
+                                    <td class="bg-grey"></td>
                                 </tr>
                             @elseif(str_contains($invoice->type, 'Week'))
                                 <tr>
@@ -211,6 +216,7 @@
                                         <h5 class="font-weight-bolder">{{ $weeks }} Week</h5>
                                     </td>
 
+                                    <td class="bg-grey"></td>
                                     <td class="bg-grey"></td>
                                     <td class="bg-grey"></td>
                                 </tr>
@@ -225,6 +231,7 @@
 
                                     <td class="bg-grey"></td>
                                     <td class="bg-grey"></td>
+                                    <td class="bg-grey"></td>
                                 </tr>
                             @else
                                 <tr>
@@ -234,6 +241,7 @@
                                             Month{{ $months > 1 ? 's' : '' }}</h5>
                                     </td>
 
+                                    <td class="bg-grey"></td>
                                     <td class="bg-grey"></td>
                                     <td class="bg-grey"></td>
                                 </tr>
@@ -251,6 +259,9 @@
                                         <h5 class="font-weight-bolder">£{{ $invoice->amount }}</h5>
                                     </td>
                                     <td class="text-align-end bg-grey">
+                                        <h5 class="font-weight-bolder">{{ $invoice->tax }}%</h5>
+                                    </td>
+                                    <td class="text-align-end bg-grey">
                                         <h5 class="font-weight-bolder">£{{ $invoice->amount }}</h5>
                                     </td>
                                 </tr>
@@ -259,6 +270,7 @@
                                     <td class="pl-2">
                                         <h5 class="">Until {{ $invoice->to_date }} </h5>
                                     </td>
+                                    <td class="bg-grey"></td>
                                     <td class="bg-grey"></td>
                                     <td class="bg-grey"></td>
                                 </tr>
@@ -277,6 +289,9 @@
                                         <td class="text-center bg-grey">
                                             <h5 class="font-weight-bolder">£{{ $value->rate }}</h5>
                                         </td>
+                                        <td class="text-center bg-grey">
+                                            <h5 class="font-weight-bolder">{{ $invoice->tax }}%</h5>
+                                        </td>
                                         <td class="text-align-end bg-grey">
                                             <h5 class="font-weight-bolder">£{{ $value->amount }}</h5>
                                         </td>
@@ -289,6 +304,7 @@
                                             <h5 class="">{{ $value->quantity }} Qty </h5>
 
                                         </td>
+                                        <td class="bg-grey"></td>
                                         <td class="bg-grey"></td>
                                     </tr>
                                 @endforeach
@@ -307,6 +323,9 @@
                                         <td class="text-align-end text-center">
                                             <h5 class="font-weight-bolder">£{{ $value->subject_rate }}</h5>
                                         </td>
+                                        <td class="text-align-end text-center">
+                                            <h5 class="font-weight-bolder">{{ $invoice->tax }}%</h5>
+                                        </td>
                                         <td class="text-align-end bg-grey">
                                             <h5 class="font-weight-bolder">£{{ $value->subject_amount }}</h5>
                                         </td>
@@ -320,6 +339,7 @@
                                             <h5 class=" text-center"> {{ $value->subject_hr }} hr</h5>
 
                                         </td>
+                                        <td class="bg-grey"></td>
                                         <td class="bg-grey"></td>
                                     </tr>
                                     @php
@@ -338,6 +358,9 @@
                                         <h5 class="font-weight-bolder">£{{ $invoice->amount }}</h5>
                                     </td>
                                     <td class="text-align-end bg-grey">
+                                        <h5 class="font-weight-bolder">{{ $invoice->tax }}%</h5>
+                                    </td>
+                                    <td class="text-align-end bg-grey">
                                         <h5 class="font-weight-bolder">£{{ $invoice->amount }}</h5>
                                     </td>
                                 </tr>
@@ -346,6 +369,7 @@
                                     <td class="pl-2">
                                         <h5 class="">Until {{ $invoice->to_date }} </h5>
                                     </td>
+                                    <td class="bg-grey"></td>
                                     <td class="bg-grey"></td>
                                     <td class="bg-grey"></td>
                                 </tr>
@@ -363,6 +387,9 @@
                                         </td>
                                         <td class="text-align-end bg-grey">
                                             <h5 class="font-weight-bolder">£{{ $value->subject_rate }}</h5>
+                                        </td>
+                                        <td class="text-align-end bg-grey">
+                                            <h5 class="font-weight-bolder">{{ $invoice->tax }}%</h5>
                                         </td>
                                         <td class="text-align-end bg-grey">
                                             <h5 class="font-weight-bolder">£{{ $value->subject_rate }}</h5>
@@ -386,6 +413,9 @@
                                         <h5 class="font-weight-bolder"></h5>
                                     </td>
                                     <td class="text-align-end bg-grey">
+                                        <h5 class="font-weight-bolder"></h5>
+                                    </td>
+                                    <td class="text-align-end bg-grey">
                                         <h5 class="font-weight-bolder">
                                             £{{ $invoice->subject->sum('subject_book_fee') }}</h5>
                                     </td>
@@ -396,7 +426,7 @@
                                 @endphp
                             @elseif (str_contains($invoice->type, 'Fee'))
                                 {{-- @dd($invoice->student->enquirySubject) --}}
-                                @if (count($invoice->student->oneOnOneSubject()) > 0)
+                                @if (count($invoice->student->oneOnOneSubject()) < 1)
 
                                     <tr class="bg-grey">
                                         <td class="text-center">
@@ -414,6 +444,10 @@
                                         <td class="text-center bg-grey">
                                             <h5 class="">
                                                 £{{ $invoice->student->normalSubject()[0]->rate_per_hr }}</h5>
+                                        </td>
+                                        <td class="text-center bg-grey">
+                                            <h5 class="">
+                                                {{ $invoice->tax }}</h5>
                                         </td>
                                         <td class="text-align-end bg-grey">
                                             <h5 class="font-weight-bolder">
@@ -433,9 +467,10 @@
                                                 £{{ $invoice->student->normalSubject()->sum('amount') }} Weekly</h5>
                                         </td>
                                         <td class="bg-grey"></td>
+                                        <td class="bg-grey"></td>
                                     </tr>
 
-                                    <tr class="bg-grey">
+                                    {{-- <tr class="bg-grey">
                                         <td class="text-center">
                                             <h5 class="font-weight-bolder">2</h5>
                                         </td>
@@ -451,6 +486,10 @@
                                         <td class="text-center bg-grey">
                                             <h5 class="">
                                                 £{{ $invoice->student->oneOnOneSubject()[0]->rate_per_hr }}</h5>
+                                        </td>
+                                        <td class="text-center bg-grey">
+                                            <h5 class="">
+                                                {{ $invoice->tax }}%</h5>
                                         </td>
                                         <td class="text-align-end bg-grey">
                                             <h5 class="font-weight-bolder">
@@ -470,19 +509,22 @@
                                                 £{{ $invoice->student->oneOnOneSubject()->sum('amount') }} Weekly</h5>
                                         </td>
                                         <td class="bg-grey"></td>
-                                    </tr>
+                                    </tr> --}}
                                 @else
                                     <tr class="bg-grey">
                                         <td class="text-center">
                                             <h5 class="font-weight-bolder">1</h5>
                                         </td>
                                         <td class="pl-2 ">
-                                            <h5 class="font-weight-bolder"> 1 - 1 ( @foreach ($invoice->student->oneOnOneSubject() as $value)
+                                            <h5 class="font-weight-bolder"> 1 - 1( @foreach ($invoice->student->oneOnOneSubject() as $value)
                                                     {{ $value->subject->name }},
                                                 @endforeach ) </h5>
                                         </td>
                                         <td class="text-align-end bg-grey">
                                             <h5 class="font-weight-bolder">£{{ $invoice->amount }}</h5>
+                                        </td>
+                                        <td class="text-align-end bg-grey">
+                                            <h5 class="font-weight-bolder">{{ $invoice->tax }}%</h5>
                                         </td>
                                         <td class="text-align-end bg-grey">
                                             <h5 class="font-weight-bolder">£{{ $invoice->amount }}</h5>
@@ -493,6 +535,8 @@
                                         <td class="pl-2">
                                             <h5 class="">Until {{ $invoice->to_date }} </h5>
                                         </td>
+                                        <td class="bg-grey"></td>
+                                        <td class="bg-grey"></td>
                                         <td class="bg-grey"></td>
                                     </tr>
                                 @endif
@@ -515,6 +559,9 @@
                                             </td>
                                             <td class="pl-2">
                                                 <h5 class="font-weight-bolder">Discount</h5>
+                                            </td>
+                                            <td class="bg-grey">
+                                                <h5 class="font-weight-bolder"></h5>
                                             </td>
                                             <td class="bg-grey">
                                                 <h5 class="font-weight-bolder"></h5>
@@ -548,6 +595,9 @@
                                             <td class="bg-grey">
                                                 <h5 class="font-weight-bolder"></h5>
                                             </td>
+                                            <td class="bg-grey">
+                                                <h5 class="font-weight-bolder"></h5>
+                                            </td>
                                             <td class="bg-grey text-align-end">
                                                 <h5 class="font-weight-bolder">
 
@@ -577,6 +627,9 @@
                                         <td class="bg-grey">
                                             <h5 class="font-weight-bolder"></h5>
                                         </td>
+                                        <td class="bg-grey">
+                                            <h5 class="font-weight-bolder"></h5>
+                                        </td>
                                         <td class="bg-grey text-align-end">
                                             <h5 class="font-weight-bolder">
 
@@ -591,22 +644,35 @@
                                         </td>
                                         <td class="bg-grey"></td>
                                         <td class="bg-grey"></td>
+                                        <td class="bg-grey"></td>
                                     </tr>
                                 @endforeach
                             @endif
                             <tr>
-                                <th>
 
-                                </th>
                                 <th class="text-align-end">
 
                                 </th>
-                                <th class="bg-grey text-align-end">
-                                    <h5 class="font-weight-bolder">Total</h5>
+                                <th class="bg-grey text-align-end" colspan="3">
+                                    <h5 class="font-weight-bolder">Sub Total(Inclusive Vat)</h5>
                                 </th>
                                 <th class="bg-grey text-align-end">
                                     <h5 class="font-weight-bolder">
-                                        £{{ $invoice->amount - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount') }}
+                                        £{{ $invoice->totalAmount() }}
+                                    </h5>
+                                </th>
+                            </tr>
+                            <tr>
+
+                                <th class="text-align-end">
+
+                                </th>
+                                <th class="bg-grey text-align-end" colspan="3">
+                                    <h5 class="font-weight-bolder">Vat Inclusive</h5>
+                                </th>
+                                <th class="bg-grey text-align-end">
+                                    <h5 class="font-weight-bolder">
+                                        £{{ number_format($invoice->taxAmount(), 2) }}
                                     </h5>
                                 </th>
                             </tr>

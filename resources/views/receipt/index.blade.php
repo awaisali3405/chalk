@@ -82,7 +82,7 @@
                                     <h4 class="card-title">Address </h4>
                                 </div>
                                 <div class="card-body">
-                                    <p class="mb-0">{{ $invoice->student->parents[0]->address }}</p>
+                                    <p class="mb-0">{{ $invoice->student->parents[0]->address() }}</p>
                                 </div>
                             </div>
                         </div>

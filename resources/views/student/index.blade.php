@@ -159,7 +159,10 @@
                                                                 style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
                                                                 @if (auth()->user()->role->name != 'parent')
                                                                     <a class="dropdown-item"
-                                                                        href="{{ route('student.edit', $value->id) }}">Edit</a>
+                                                                        href="{{ route('student.edit', $value->id) }}">
+                                                                        {{ str_contains(url()->current(), 'request') ? 'Register' : 'Edit' }}
+
+                                                                    </a>
                                                                     <a class="dropdown-item"
                                                                         href="{{ route('student.note', $value->id) }}">Note</a>
                                                                     <a class="dropdown-item"

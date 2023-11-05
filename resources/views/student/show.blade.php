@@ -287,7 +287,7 @@
                                             </div>
                                         </div>
                                         <div id="attendance"
-                                            class="tab-pane fade {{ str_contains('attendance', url()->current()) ? 'active show' : '' }}">
+                                            class="tab-pane fade {{ str_contains(url()->current(), 'attendance') ? 'active show' : '' }}">
                                             <div class="my-post-content pt-3">
                                                 <div class="post-input">
                                                     <table id="example5" class="display" style="min-width: 845px">
@@ -296,6 +296,7 @@
                                                                 <th>Date</th>
                                                                 <th>Subject</th>
                                                                 <th>Status</th>
+                                                                <th>Note</th>
 
 
                                                                 {{-- <th>Action</th> --}}
@@ -308,6 +309,7 @@
 
                                                                     <td>{{ $value->subject->name }}</td>
                                                                     <td>{{ $value->statusName() }}</td>
+                                                                    <td>{{ $value->note }}</td>
 
 
 

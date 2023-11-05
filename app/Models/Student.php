@@ -137,7 +137,12 @@ class Student extends Model
     }
     public function totalAttendance($from, $to)
     {
-        return $this->attendance()->where('date', ">=", $from)->where('date', '<=', $to);
+        if ($from || $to) {
+
+            return $this->attendance()->where('date', ">=", $from)->where('date', '<=', $to);
+        } else {
+            return $this->attendance();
+        }
     }
     public function invoice()
     {
@@ -160,6 +165,7 @@ class Student extends Model
     }
     public function oneOnOneSubject()
     {
+
         return $this->enquirySubject()->where('lesson_type_id', 2)->get();
     }
     public function normalSubject()
@@ -176,5 +182,22 @@ class Student extends Model
         }
         // dd($paid);
         return $paid;
+    }
+    public function totalAmount()
+    {
+        return $this->invoice->sum('amount');
+    }
+    public function paid()
+    {
+        $paid = 0;
+        foreach ($this->invoice as $value) {
+            $paid += $value->paidAmount();
+        }
+        return $paid;
+    }
+    public function due()
+    {
+        $due = $this->totalAmount() - $this->paid();
+        return $due;
     }
 }

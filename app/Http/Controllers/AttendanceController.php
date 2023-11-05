@@ -25,7 +25,7 @@ class AttendanceController extends Controller
             }
             $student = $student->get();
         } else {
-            $student = array();
+            $student = Student::where('active', true)->get();
         }
         // dd($student);
         return view('attendance.index', compact('student'));

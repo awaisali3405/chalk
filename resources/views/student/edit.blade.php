@@ -233,24 +233,26 @@
 
                                                                 </div>
                                                                 <div class="card-body">
-                                                                    <div class="row enquiry-subject-list d-none">
-                                                                        <div class="col-12">
-                                                                            <h4>Subject List</h4>
-                                                                            <ul>
-                                                                                @foreach (json_decode($student->parent_subject) as $value)
-                                                                                    <li>{{ $value }}</li>
-                                                                                @endforeach
+                                                                    @if ($student->parent_subject)
+                                                                        <div class="row enquiry-subject-list d-none">
+                                                                            <div class="col-12">
+                                                                                <h4>Subject List</h4>
+                                                                                <ul>
+                                                                                    @foreach (json_decode($student->parent_subject) as $value)
+                                                                                        <li>{{ $value }}</li>
+                                                                                    @endforeach
 
-                                                                            </ul>
+                                                                                </ul>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="row pb-4">
-                                                                        <div class="col-12 d-flex justify-content-end">
-                                                                            <span class="btn btn-primary "
-                                                                                id="veiw-enquiry-list">View
-                                                                                Subject</span>
+                                                                        <div class="row pb-4">
+                                                                            <div class="col-12 d-flex justify-content-end">
+                                                                                <span class="btn btn-primary "
+                                                                                    id="veiw-enquiry-list">View
+                                                                                    Subject</span>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
+                                                                    @endif
                                                                     <div class="row">
                                                                         <div class="col-2">
                                                                             <div class="form-group">
