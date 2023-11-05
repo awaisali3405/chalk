@@ -677,11 +677,11 @@
 
                                 </th>
                                 <th class="bg-grey text-align-end" colspan="3">
-                                    <h5 class="font-weight-bolder">Sub Total(Inclusive Vat)</h5>
+                                    <h5 class="font-weight-bolder"> Total</h5>
                                 </th>
                                 <th class="bg-grey text-align-end">
                                     <h5 class="font-weight-bolder">
-                                        £{{ $invoice->totalAmount() }}
+                                        £{{ $invoice->remainingAmount() }}
                                     </h5>
                                 </th>
                             </tr>
