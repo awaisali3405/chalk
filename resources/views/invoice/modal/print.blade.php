@@ -679,7 +679,7 @@
 
                                 </th>
                                 <th class="bg-grey text-align-end" colspan="3">
-                                    <h5 class="font-weight-bolder"> Total</h5>
+                                    <h5 class="font-weight-bolder"> Balance</h5>
                                 </th>
                                 <th class="bg-grey text-align-end">
                                     <h5 class="font-weight-bolder">
