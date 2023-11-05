@@ -549,6 +549,38 @@
 
                             @if (count($invoice->receipt) > 0)
                                 @foreach ($invoice->receipt as $key => $value)
+                                    @if ($value->late_fee > 0)
+                                        <tr class="">
+                                            <td class=" text-center">
+                                                <h5 class="font-weight-bolder">
+                                                    {{ $sr++ }}
+
+                                                </h5>
+                                            </td>
+                                            <td class="pl-2">
+                                                <h5 class="font-weight-bolder">Late Payment Charges</h5>
+                                            </td>
+                                            <td class="bg-grey">
+                                                <h5 class="font-weight-bolder"></h5>
+                                            </td>
+                                            <td class="bg-grey">
+                                                <h5 class="font-weight-bolder"></h5>
+                                            </td>
+                                            <td class="bg-grey text-align-end">
+                                                <h5 class="font-weight-bolder">
+
+                                                    £{{ $value->late_fee }}
+                                                </h5>
+                                            </td>
+                                        </tr>
+                                        {{-- <tr>
+                                    <td></td>
+                                    <td class="pl-2">
+                                        <h5 class="text-white">{{ $value->date }}</h5>
+                                    </td>
+                                    <td></td>
+                                </tr> --}}
+                                    @endif
                                     @if ($value->discount > 0)
                                         <tr class="bg-grey">
                                             <td class=" text-center">
@@ -581,38 +613,29 @@
                                             <td></td>
                                         </tr> --}}
                                     @endif
-                                    @if ($value->late_fee > 0)
-                                        <tr class="">
-                                            <td class=" text-center">
-                                                <h5 class="font-weight-bolder">
-                                                    {{ $sr++ }}
+                                    <tr class="bg-grey">
+                                        <td class=" text-center">
+                                            <h5 class="font-weight-bolder">
 
-                                                </h5>
-                                            </td>
-                                            <td class="pl-2">
-                                                <h5 class="font-weight-bolder">Late Payment Charges</h5>
-                                            </td>
-                                            <td class="bg-grey">
-                                                <h5 class="font-weight-bolder"></h5>
-                                            </td>
-                                            <td class="bg-grey">
-                                                <h5 class="font-weight-bolder"></h5>
-                                            </td>
-                                            <td class="bg-grey text-align-end">
-                                                <h5 class="font-weight-bolder">
+                                            </h5>
+                                        </td>
+                                        <td class="pl-2">
+                                            <h5 class="font-weight-bolder"></h5>
+                                        </td>
+                                        <td class="bg-grey">
+                                            <h5 class="font-weight-bolder"></h5>
+                                        </td>
+                                        <td class="bg-grey">
+                                            <h5 class="font-weight-bolder">Total</h5>
+                                        </td>
+                                        <td class="bg-grey text-align-end">
+                                            <h5 class="font-weight-bolder">
 
-                                                    £{{ $value->late_fee }}
-                                                </h5>
-                                            </td>
-                                        </tr>
-                                        {{-- <tr>
-                                            <td></td>
-                                            <td class="pl-2">
-                                                <h5 class="text-white">{{ $value->date }}</h5>
-                                            </td>
-                                            <td></td>
-                                        </tr> --}}
-                                    @endif
+                                                £{{ $value->late_fee + $invoice->amount - $value->discount }}
+                                            </h5>
+                                        </td>
+                                    </tr>
+
                                     <tr class="bg-grey">
                                         <td class=" text-center">
                                             <h5 class="font-weight-bolder">
