@@ -126,15 +126,21 @@
                                                                 <a class="dropdown-item"
                                                                     href="{{ route('receipt.show', $value->id) }}">Recieve</a>
                                                                 <a class="dropdown-item btn-event"
-                                                                    href="{{ route('invoice.print') }}" data-toggle="modal"
+                                                                    href="{{ route('invoice.print', $value->id) }}"
+                                                                    data-toggle="modal"
                                                                     data-target="#print-{{ $value->id }}">Print</a>
                                                                 {{-- <a href="" class="btn btn-primary btn-event w-100">
                                                                     <span class="align-middle"><i
                                                                             class="ti-plus"></i></span> Create New
                                                                 </a> --}}
+                                                                <!-- Trigger the modal with a button -->
+
+
                                                                 <a class="dropdown-item"
                                                                     href="{{ route('board.edit', $value->id) }}">Delete</a>
                                                             @endif
+                                                            <!-- Vertically centered modal -->
+
                                                             {{-- <div class="modal fade none-border"
                                                                 id="print-{{ $value->id }}" aria-hidden="true">
                                                                 <div class="modal-dialog">
@@ -256,5 +262,9 @@
         </div>
 
     </div>
+    @foreach ($invoice as $key => $value)
+        @include('invoice.modal.print')
+    @endforeach
+
     </div>
 @endsection

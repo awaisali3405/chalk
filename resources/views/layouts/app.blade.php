@@ -28,6 +28,11 @@
 
 </head>
 <style>
+    .modal-dialog {
+        /* Width */
+        max-width: 50%;
+    }
+
     .unselectable {
         background-color: #f2f2f2;
         cursor: not-allowed;
@@ -69,6 +74,16 @@
         top: 50%;
         right: 0;
     }
+
+    @media print {
+        .no-printme {
+            display: none;
+        }
+
+        .printme {
+            display: block;
+        }
+    }
 </style>
 
 <body>
@@ -76,7 +91,7 @@
     <!--*******************
         Preloader start
     ********************-->
-    <div id="preloader">
+    <div id="preloader" class="no-print">
         <div class="sk-three-bounce">
             <div class="sk-child sk-bounce1"></div>
             <div class="sk-child sk-bounce2"></div>
@@ -209,6 +224,8 @@
         getAddress.autocomplete('formatted_address_0', 'uIIn_5Plkk2X3bCt-L3Cjw40707');
     </script>
     {{-- Stock JS --}}
+
+
 
 
 
@@ -1021,6 +1038,25 @@
 
         // }
     </script>
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.codehim.com/demo/jquery-printthis/printThis.js"></script>
+
+    {{-- Invoice --}}
+    <script>
+        $('.print-btn').on('click', function() {
+            id = $(this).data('id');
+            console.log(id);
+            print_div = `#print-${id}`;
+            html = $(print_div).html();
+            $(print_div).printThis({
+                importStyle: $(this).hasClass('importStyle')
+            });
+        })
+    </script>
+
+
 
     {{--
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
