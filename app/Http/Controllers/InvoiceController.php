@@ -64,7 +64,7 @@ class InvoiceController extends Controller
                 }
                 if ($request->status) {
                     $query->whereHas('invoice', function ($query) {
-                         $query->where('is_paid', true);
+                        $query->where('is_paid', true);
                     });
                 }
             })->get();

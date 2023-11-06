@@ -23,7 +23,7 @@
                         <div class="card-body">
                             <form action="{{ route('invoice.create') }}" method="GET">
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="col-lg-4 col-md-3 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Branch</label>
                                             <div class="input-group mb-2">
@@ -38,7 +38,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="col-lg-4 col-md-3 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Year</label>
                                             <div class="input-group mb-2">
@@ -53,7 +53,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="col-lg-4 col-md-3 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Payment</label>
                                             <div class="input-group mb-2">
@@ -70,7 +70,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                    {{-- <div class="col-lg-4 col-md-3 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Status</label>
                                             <div class="input-group mb-2">
@@ -86,7 +86,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
 
 

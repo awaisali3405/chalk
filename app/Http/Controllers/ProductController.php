@@ -79,4 +79,16 @@ class ProductController extends Controller
         }
         return response()->json(['data' => $string]);
     }
+    public function transfer($id)
+    {
+        $product = Product::find($id);
+        return view('product.transfer.index', compact('product'));
+    }
+    public function transferPost(Request $request,$id)
+    {
+        $product = Product::where('branch_id', $request->branch_id)->where('year_id', $request->year_id)->first();
+        if ($product) {
+            
+        }
+    }
 }

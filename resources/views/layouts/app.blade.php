@@ -27,6 +27,75 @@
 
 </head>
 <style>
+    /* Print Invoice */
+    .table-striped>tbody>tr:nth-child(odd)>td,
+    .table-striped>tbody>tr:nth-child(odd)>th {
+        background-color: white; // Choose your own color here
+    }
+
+    .table-striped>tbody>tr:nth-child(even)>td,
+    .table-striped>tbody>tr:nth-child(even)>th {
+        background-color: #EEEEEE; // Choose your own color here
+    }
+
+    .text-blue {
+        color: #5d9cec;
+    }
+
+    .text-align-end {
+        text-align: end !important;
+    }
+
+    .border-black {
+        border: 2px solid black !important;
+    }
+
+    .border-black-top-none {
+        border-top-style: none !important;
+    }
+
+    .border-grey {
+        border: 3px solid #EEEEEE;
+    }
+
+    .table-print {
+        width: 100%;
+    }
+
+    b {
+        padding-left: 2px;
+    }
+
+    .table-2 {
+        width: 100%;
+
+        border-collapse: collapse;
+    }
+
+
+    .table-2 thead tr {
+        background-color: rgb(127, 127, 127);
+        color: white;
+        text-align: center;
+
+    }
+
+    .bg-grey {
+        background-color: #EEEEEE !important;
+    }
+
+    .text-grey {
+        color: #EEEEEE !important;
+    }
+
+    tr.border-x-black td {
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+
+    /* Print End */
+
+
     .modal-dialog {
         /* Width */
         max-width: 50%;
@@ -226,6 +295,12 @@
 
 
 
+    {{-- Upper Case  --}}
+    <script>
+        $('.uppercase').on('keyup', function() {
+            $(this).val($(this).val().toUpperCase());
+        });
+    </script>
 
 
     {{-- Filter --}}

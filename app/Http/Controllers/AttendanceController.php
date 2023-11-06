@@ -71,7 +71,7 @@ class AttendanceController extends Controller
                         'note' => $data['note'][$student][$subject],
                     ]);
                 } else {
-
+                    
                     $attendance =  Attendance::create([
                         'student_id' => $student,
                         'subject_id' => $subject,

@@ -5,89 +5,118 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Invoice # {{ $value->id }}</h5>
-                <button type="button" class="close" data-dismiss="modal"><span>×</span>
-                </button>
+                <h5 class="modal-title">Invoice # {{ $value->id }}</b>
+                    <button type="button" class="close" data-dismiss="modal"><span>×</span>
+                    </button>
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-6">
-                        <h3 class="font-weight-bolder" style="font-size: 4rem;">
-                            {{ count($invoice->receipt) > 0 ? 'Receipt' : 'Invoice' }}</h3>
-                    </div>
-                    <div class="col-6 text-align-end">
+                    <div class="col-6 ">
 
 
                         <img src="{{ asset('images/logo.png') }}" width="300" alt="">
 
                     </div>
+                    <div class="col-6  text-center">
+                        <h4 class="font-weight-bolder p-0 text-blue " style="font-size: 4rem;">
+                            {{ count($invoice->receipt) > 0 ? 'Receipt' : 'Invoice' }}</h4>
+                    </div>
 
                 </div>
-                <div class="row pt-4">
-                    <div class="col-6">
-                        <div class="row">
-                            <div class="col-1">
+                <div class="row pt-4 pl-3">
+                    <div class="col-6 pr-4">
+                        <div class="row  border-black pl-3">
+                            <div class="col-1 p-0">
 
-                                <h5 class="font-weight-bolder">To:</h5>
+                                <h6>To:</h6>
                             </div>
-                            <div class="pr-4 col-10">
+                            <div class="pr-4 col-11">
 
-                                <h5 class="">{{ $invoice->student->first_name }}
-                                    {{ $invoice->student->last_name }}</h5>
-                                <h5 class="">{{ $invoice->student->branch->res_third_address }},
-                                    {{ $invoice->student->parents[0]->res_address }}</h5>
-                                <h5 class="">{{ $invoice->student->parents[0]->res_second_address }}</h5>
-                                <h5 class="">{{ $invoice->student->parents[0]->res_town }}</h5>
-                                <h5 class="">{{ $invoice->student->parents[0]->res_postal_code }}</h5>
+                                <h6>{{ $invoice->student->first_name }}
+                                    {{ $invoice->student->last_name }}</h6>
+                                <h6>{{ $invoice->student->branch->res_third_address }},{{ $invoice->student->parents[0]->res_second_address }},
+                                    {{ $invoice->student->parents[0]->res_address }}</h6>
+                                <h6>{{ $invoice->student->parents[0]->res_town }}</h6>
+                                <h6>
+                                    {{ $invoice->student->parents[0]->res_postal_code }}</h6>
+
+                                <h6>
+                                    Email:
+                                </h6>
+                                <h6 class="pb-4">
+                                    Phone:
+                                </h6>
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 text-align-end">
+                    <div class="col-6 pr-4">
+                        <div class="border-black row pl-3">
+                            <div class="col-1 p-0">
+
+                                <h6>From:</h6>
+                            </div>
+                            <div class="pr-4 col-11">
 
 
-                        <h5 class="">
-                            {{ $invoice->student->branch->res_address }}</h5>
-                        <h5 class="">{{ $invoice->student->branch->res_second_address }}
-                        </h5>
-                        <h5 class="">{{ $invoice->student->branch->res_postal_code }},
-                            {{ $invoice->student->branch->res_town }}
-                        </h5>
-                        <h5 class="">United Kingdom</h5>
 
+                                <h6>
+                                    {{ $invoice->student->branch->res_address }}</h6>
+                                <h6>{{ $invoice->student->branch->res_second_address }}
+                                    ,{{ $invoice->student->branch->res_third_address }}
+                                </h6>
+                                <h6>{{ $invoice->student->branch->res_postal_code }},
+                                    {{ $invoice->student->branch->res_town }}
+                                </h6>
+                                <h6>
+                                    email:
+                                </h6>
+                                <h6>
+                                    Phone:
+                                </h6>
+                                <h6>
+                                    Company No:
+                                </h6>
+                                <h6>
+                                    VAT reg No:
+                                </h6>
+
+                            </div>
+
+                        </div>
                     </div>
 
                 </div>
                 <div class="row pt-3">
                     <div class="col-6">
-                        <div class="row pl-3">
-                            <div class="col-4 p-0" style="width: 80%;">
-                                <h5 class="font-weight-bolder">Attention To:</h5>
-                            </div>
-                            <div class="col-6">
 
-                                <h5 class="font-weight-bolder">{{ $invoice->student->parents[0]->first_name }}
-                                    {{ $invoice->student->parents[0]->last_name }}</h5>
-                            </div>
-                        </div>
                         <div class="row pl-3">
 
                             <div class="col-12 p-0 table-responsive">
-                                <table class="table table-striped ">
+                                <table class="table-bordered table-print border-grey" style="">
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <h5 class="font-weight-bolder">Student ID</h5>
+                                                <b>Student Name</b>
                                             </td>
                                             <td>
-                                                <h5 class="font-weight-bolder">{{ $invoice->student->id }}</h5>
+                                                <b>{{ $invoice->student->name() }}</b>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <h5 class="font-weight-bolder">Student Year</h5>
+                                                <b>Student ID</b>
                                             </td>
                                             <td>
-                                                <h5 class="font-weight-bolder">{{ $invoice->student->year->name }}</h5>
+                                                <b>{{ $invoice->student->id }}</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Student Year</b>
+                                            </td>
+                                            <td>
+                                                <b>{{ $invoice->student->year->name }}
+                                                </b>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -95,32 +124,24 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 pl-2 p-0 table-responsive">
-                        <table class="table table-striped ">
+                    <div class="col-6 pl-2 pt-4 table-responsive">
+                        <table class="table-bordered table-print border-grey ">
                             <tbody>
                                 <tr>
                                     <td style="width: 40%">
-                                        <h5 class="font-weight-bolder">Roll No</h5>
+                                        <b>Invoice Date</b>
                                     </td>
-                                    <td class="text-align-end">
-                                        <h5 class="font-weight-bolder">{{ $invoice->student->id }}</h5>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 40%">
-                                        <h5 class="font-weight-bolder">Invoice Date</h5>
-                                    </td>
-                                    <td class="text-align-end">
-                                        <h5 class="font-weight-bolder">
-                                            {{ \Carbon\Carbon::parse($invoice->created_at)->format('j-F-Y') }}</h5>
+                                    <td class="text-center">
+                                        <b>
+                                            {{ \Carbon\Carbon::parse($invoice->created_at)->format('j-F-Y') }}</b>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="width: 40%">
-                                        <h5 class="font-weight-bolder">Invoice No</h5>
+                                        <b>Invoice No</b>
                                     </td>
-                                    <td class="text-align-end">
-                                        <h5 class="font-weight-bolder">{{ $invoice->id }}</h5>
+                                    <td class="text-center">
+                                        <b>{{ $invoice->id }}</b>
                                     </td>
                                 </tr>
 
@@ -133,593 +154,628 @@
 
 
                 </div>
-                <div class="row pt-3 text-align-end">
-                    <div class="col-9"></div>
-                    <div class="col-3 pr-2 bg-dark-grey d-flex justify-content-center " style="width: 80%;">
-                        <h5 class="font-weight-bolder text-white pt-2" style="">Final Payment Date</h5>
+                <div class="row pt-3 text-center">
+                    <div class="col-6">
+
                     </div>
-                </div>
-                <div class="row text-align-end">
-                    <div class="col-9"></div>
-                    <div class="col-3 p-0 border-grey d-flex justify-content-center border-grey"
-                        style="width: 80%; height: 40px;">
-                        <h5 class="font-weight-bolder " style=""></h5>
+                    <div class="col-6">
+
+                        <table class="table-striped table-bordered table-2">
+                            <thead>
+                                <tr>
+                                    <th>Payment Due by</th>
+                                    <th>Final Payment Due</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">
+                                        23-Sep-24
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
+
                 </div>
-                <div class="row table-responsive">
-                    <table class="table table-striped ">
-                        <thead>
-                            <tr class="bg-grey">
-                                <th style="width: 5%;">
+                <div class="">
+                    <div class="row  ">
+                        <div class="col-12 table-responsive ">
 
-                                </th>
-                                <th class="" style="width: 60%;">
-                                    <h5 class="font-weight-bolder"> Description</h5>
-                                </th>
-                                <th class="" style="width: 20%;">
-                                    <h5 class="font-weight-bolder">Rate</h5>
-                                </th>
-                                <th>
-                                    <h5 class="font-weight-bolder"> Tax</h5>
-                                </th>
-                                <th class="" style="width: 20%;">
-                                    <h5 class="font-weight-bolder">Amount</h5>
-                                </th>
-                            </tr>
-                        </thead>
-                        {{-- @php
-                            $description = '';
-                            if ($invoice->type == 'Refundable') {
-                                $description = '';
-                            }else if(str_contains($invoice->type,'Fee')){
-                                $description = 'Deposit (Refundable)';
-
-                            }
-                        @endphp --}}
-                        @php
-                            $to = \Carbon\Carbon::parse($invoice->from_date);
-                            $from = \Carbon\Carbon::parse($invoice->to_date);
-
-                            $weeks = $to->diffInWeeks($from->addDay(1));
-                            $months = $to->diffInMonths($from->addDay(1));
-                        @endphp
-                        <tbody>
-                            {{-- @dd($invoice->subject) --}}
-                            @if (str_contains($invoice->type, 'Resource Fee'))
-                                <tr>
-                                    <td></td>
-                                    <td class="text-center">
-                                        <h4 class="">Resource Invoice - Academaic year
-                                            {{ date('Y', strtotime($invoice->from_date)) }}/{{ date('Y', strtotime($invoice->to_date)) }}
-                                        </h4>
-                                    </td>
-                                    <td class="bg-grey"></td>
-                                    <td class="bg-grey"></td>
-                                    <td class="bg-grey"></td>
-                                </tr>
-                            @elseif (str_contains($invoice->type, 'Sale Invoice'))
-                                <tr>
-                                    <td></td>
-                                    <td class="text-center">
-                                        <h4 class="">Sale Invoice
-                                            {{ date('Y', strtotime($invoice->from_date)) }}/{{ date('Y', strtotime($invoice->to_date)) }}
-                                        </h4>
-                                    </td>
-                                    <td class="bg-grey"></td>
-                                    <td class="bg-grey"></td>
-                                    <td class="bg-grey"></td>
-                                </tr>
-                            @elseif(str_contains($invoice->type, 'Week'))
-                                <tr>
-                                    <td></td>
-                                    <td class="text-center">
-                                        <h5 class="font-weight-bolder">{{ $weeks }} Week</h5>
-                                    </td>
-
-                                    <td class="bg-grey"></td>
-                                    <td class="bg-grey"></td>
-                                    <td class="bg-grey"></td>
-                                </tr>
-                            @elseif (str_contains($invoice->type, 'Addition Invoice'))
-                                <tr>
-                                    <td></td>
-                                    <td class="text-center">
-                                        <h5 class="font-weight-bolder">Additional Invoice ({{ $invoice->from_date }} -
-                                            {{ $invoice->to_date }})
-                                        </h5>
-                                    </td>
-
-                                    <td class="bg-grey"></td>
-                                    <td class="bg-grey"></td>
-                                    <td class="bg-grey"></td>
-                                </tr>
-                            @else
-                                <tr>
-                                    <td></td>
-                                    <td class="text-center">
-                                        <h5 class="font-weight-bolder">{{ $months }}
-                                            Month{{ $months > 1 ? 's' : '' }}</h5>
-                                    </td>
-
-                                    <td class="bg-grey"></td>
-                                    <td class="bg-grey"></td>
-                                    <td class="bg-grey"></td>
-                                </tr>
-                            @endif
-                            @if ($invoice->type == 'Refundable')
-
-                                <tr class="bg-grey">
-                                    <td class="text-center">
-                                        <h5 class="font-weight-bolder">1</h5>
-                                    </td>
-                                    <td class="pl-2 ">
-                                        <h5 class="font-weight-bolder"> Deposit (Refundable)</h5>
-                                    </td>
-                                    <td class="text-align-end bg-grey">
-                                        <h5 class="font-weight-bolder">£{{ $invoice->amount }}</h5>
-                                    </td>
-                                    <td class="text-align-end bg-grey">
-                                        <h5 class="font-weight-bolder">{{ $invoice->tax }}%</h5>
-                                    </td>
-                                    <td class="text-align-end bg-grey">
-                                        <h5 class="font-weight-bolder">£{{ $invoice->amount }}</h5>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td class="pl-2">
-                                        <h5 class="">Until {{ $invoice->to_date }} </h5>
-                                    </td>
-                                    <td class="bg-grey"></td>
-                                    <td class="bg-grey"></td>
-                                    <td class="bg-grey"></td>
-                                </tr>
-                                @php
-                                    $sr = 2;
-                                @endphp
-                            @elseif (str_contains($invoice->type, 'Sale Invoice'))
-                                @foreach ($invoice->saleProduct as $key => $value)
-                                    <tr class="bg-grey">
-                                        <td class="text-center">
-                                            <h5 class="font-weight-bolder">{{ $key + 1 }}</h5>
-                                        </td>
-                                        <td class="pl-2 ">
-                                            <h5 class="font-weight-bolder"> {{ $value->product->name }}</h5>
-                                        </td>
-                                        <td class="text-center bg-grey">
-                                            <h5 class="font-weight-bolder">£{{ $value->rate }}</h5>
-                                        </td>
-                                        <td class="text-center bg-grey">
-                                            <h5 class="font-weight-bolder">{{ $invoice->tax }}%</h5>
-                                        </td>
-                                        <td class="text-align-end bg-grey">
-                                            <h5 class="font-weight-bolder">£{{ $value->amount }}</h5>
-                                        </td>
-                                    </tr>
+                            <table class="table-2 table-striped  table-bordered border-black">
+                                <thead>
                                     <tr>
-                                        <td></td>
-                                        <td class="pl-2">
-                                        </td>
-                                        <td class="bg-grey text-center">
-                                            <h5 class="">{{ $value->quantity }} Qty </h5>
+                                        <th>
 
-                                        </td>
-                                        <td class="bg-grey"></td>
-                                        <td class="bg-grey"></td>
+                                        </th>
+                                        <th class="">
+                                            <b> Description</b>
+                                        </th>
+                                        <th class="">
+                                            <b>Rate</b>
+                                        </th>
+                                        <th>
+                                            <b> Tax</b>
+                                        </th>
+                                        <th class="">
+                                            <b>Amount</b>
+                                        </th>
                                     </tr>
-                                @endforeach
+                                </thead>
+                                {{-- @php
+                                    $description = '';
+                                    if ($invoice->type == 'Refundable') {
+                                        $description = '';
+                                    }else if(str_contains($invoice->type,'Fee')){
+                                        $description = 'Deposit (Refundable)';
+
+                                    }
+                                @endphp --}}
                                 @php
-                                    $sr = $key + 2;
+                                    $to = \Carbon\Carbon::parse($invoice->from_date);
+                                    $from = \Carbon\Carbon::parse($invoice->to_date);
+
+                                    $weeks = $to->diffInWeeks($from->addDay(1));
+                                    $months = $to->diffInMonths($from->addDay(1));
                                 @endphp
-                            @elseif (str_contains($invoice->type, 'Addition Invoice'))
-                                @foreach ($invoice->subject as $key => $value)
-                                    <tr class="bg-grey">
-                                        <td class="text-center">
-                                            <h5 class="font-weight-bolder">{{ $key + 1 }}</h5>
-                                        </td>
-                                        <td class="pl-2 ">
-                                            <h5 class="font-weight-bolder"> {{ $value->subject_name }}</h5>
-                                        </td>
-                                        <td class="text-align-end text-center">
-                                            <h5 class="font-weight-bolder">£{{ $value->subject_rate }}</h5>
-                                        </td>
-                                        <td class="text-align-end text-center">
-                                            <h5 class="font-weight-bolder">{{ $invoice->tax }}%</h5>
-                                        </td>
-                                        <td class="text-align-end bg-grey">
-                                            <h5 class="font-weight-bolder">£{{ $value->subject_amount }}</h5>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="pl-2">
-                                            {{-- <h5 class="">Until {{ $invoice->to_date }} </h5> --}}
-                                        </td>
-                                        <td class="bg-grey">
-                                            <h5 class=" text-center"> {{ $value->subject_hr }} hr</h5>
+                                <tbody>
+                                    {{-- @dd($invoice->subject) --}}
+                                    @if (str_contains($invoice->type, 'Resource Fee'))
+                                        <tr>
+                                            <td></td>
+                                            <td class="text-center">
+                                                <b>Resource Invoice - Academaic year
+                                                    {{ date('Y', strtotime($invoice->from_date)) }}/{{ date('Y', strtotime($invoice->to_date)) }}
+                                                </b>
+                                            </td>
+                                            <td class="bg-grey"></td>
+                                            <td class="bg-grey"></td>
+                                            <td class="bg-grey"></td>
+                                        </tr>
+                                    @elseif (str_contains($invoice->type, 'Sale Invoice'))
+                                        <tr>
+                                            <td></td>
+                                            <td class="text-center">
+                                                <b>Sale Invoice
+                                                    {{ date('Y', strtotime($invoice->from_date)) }}/{{ date('Y', strtotime($invoice->to_date)) }}
+                                                </b>
+                                            </td>
+                                            <td class="bg-grey"></td>
+                                            <td class="bg-grey"></td>
+                                            <td class="bg-grey"></td>
+                                        </tr>
+                                    @elseif(str_contains($invoice->type, 'Week'))
+                                        <tr>
+                                            <td></td>
+                                            <td class="text-center">
+                                                <b>{{ $weeks }} Week</b>
+                                            </td>
 
-                                        </td>
-                                        <td class="bg-grey"></td>
-                                        <td class="bg-grey"></td>
-                                    </tr>
-                                    @php
-                                        $sr = $key + 1;
-                                    @endphp
-                                @endforeach
-                            @elseif(str_contains($invoice->type, 'Registration'))
-                                <tr class="bg-grey">
-                                    <td class="text-center">
-                                        <h5 class="font-weight-bolder">1</h5>
-                                    </td>
-                                    <td class="pl-2 ">
-                                        <h5 class="font-weight-bolder"> Registration (Non-Refundable)</h5>
-                                    </td>
-                                    <td class="text-align-end bg-grey">
-                                        <h5 class="font-weight-bolder">£{{ $invoice->amount }}</h5>
-                                    </td>
-                                    <td class="text-align-end bg-grey">
-                                        <h5 class="font-weight-bolder">{{ $invoice->tax }}%</h5>
-                                    </td>
-                                    <td class="text-align-end bg-grey">
-                                        <h5 class="font-weight-bolder">£{{ $invoice->amount }}</h5>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td class="pl-2">
-                                        <h5 class="">Until {{ $invoice->to_date }} </h5>
-                                    </td>
-                                    <td class="bg-grey"></td>
-                                    <td class="bg-grey"></td>
-                                    <td class="bg-grey"></td>
-                                </tr>
-                                @php
-                                    $sr = 2;
-                                @endphp
-                            @elseif (str_contains($invoice->type, 'Resource Fee'))
-                                @foreach ($invoice->subject as $key => $value)
-                                    <tr class="">
-                                        <td class="text-center">
-                                            <h5 class="font-weight-bolder">{{ $key + 1 }}</h5>
-                                        </td>
-                                        <td class="pl-2 ">
-                                            <h5 class="font-weight-bolder">{{ $value->subject_name }} Resources</h5>
-                                        </td>
-                                        <td class="text-align-end bg-grey">
-                                            <h5 class="font-weight-bolder">£{{ $value->subject_rate }}</h5>
-                                        </td>
-                                        <td class="text-align-end bg-grey">
-                                            <h5 class="font-weight-bolder">{{ $invoice->tax }}%</h5>
-                                        </td>
-                                        <td class="text-align-end bg-grey">
-                                            <h5 class="font-weight-bolder">£{{ $value->subject_rate }}</h5>
-                                        </td>
-                                    </tr>
+                                            <td class="bg-grey"></td>
+                                            <td class="bg-grey"></td>
+                                            <td class="bg-grey"></td>
+                                        </tr>
+                                    @elseif (str_contains($invoice->type, 'Addition Invoice'))
+                                        <tr>
+                                            <td></td>
+                                            <td class="text-center">
+                                                <b>Additional Invoice
+                                                    ({{ $invoice->from_date }} -
+                                                    {{ $invoice->to_date }})
+                                                </b>
+                                            </td>
 
-                                    @php
-                                        $sr = $key + 1;
-                                    @endphp
-                                @endforeach
-                                <tr class="">
-                                    <td class="text-center">
-                                        <h5 class="font-weight-bolder">{{ $sr + 1 }}</h5>
-                                    </td>
-                                    <td class="pl-2 ">
-                                        <h5 class="font-weight-bolder">Exercise Book (Quantity x
-                                            {{ count($invoice->subject) }} )
-                                        </h5>
-                                    </td>
-                                    <td class="text-align-end bg-grey">
-                                        <h5 class="font-weight-bolder"></h5>
-                                    </td>
-                                    <td class="text-align-end bg-grey">
-                                        <h5 class="font-weight-bolder"></h5>
-                                    </td>
-                                    <td class="text-align-end bg-grey">
-                                        <h5 class="font-weight-bolder">
-                                            £{{ $invoice->subject->sum('subject_book_fee') }}</h5>
-                                    </td>
-                                </tr>
+                                            <td class="bg-grey"></td>
+                                            <td class="bg-grey"></td>
+                                            <td class="bg-grey"></td>
+                                        </tr>
+                                    @else
+                                        <tr>
+                                            <td></td>
+                                            <td class="text-center">
+                                                <b>{{ $months }}
+                                                    Month{{ $months > 1 ? 's' : '' }}</b>
+                                            </td>
 
-                                @php
-                                    $sr = 2;
-                                @endphp
-                            @elseif (str_contains($invoice->type, 'Fee'))
-                                {{-- @dd($invoice->student->enquirySubject) --}}
-                                @if (count($invoice->student->oneOnOneSubject()) < 1)
+                                            <td class="bg-grey"></td>
+                                            <td class="bg-grey"></td>
+                                            <td class="bg-grey"></td>
+                                        </tr>
+                                    @endif
+                                    @if ($invoice->type == 'Refundable')
 
-                                    <tr class="bg-grey">
-                                        <td class="text-center">
-                                            <h5 class="font-weight-bolder">1</h5>
-                                        </td>
-                                        <td class="pl-2 ">
-                                            <h5 class="font-weight-bolder"> Lesson ( @foreach ($invoice->student->normalSubject() as $key => $value)
-                                                    {{ $value->subject->name }}@if ($key + 1 != count($invoice->student->normalSubject()))
-                                                        ,
-                                                    @endif
-                                                @endforeach ) -
-                                                {{ $invoice->student->normalSubject()->sum('no_hr_weekly') }}
-                                                hours/week </h5>
-                                        </td>
-                                        <td class="text-center bg-grey">
-                                            <h5 class="">
-                                                £{{ $invoice->student->normalSubject()[0]->rate_per_hr }}</h5>
-                                        </td>
-                                        <td class="text-center bg-grey">
-                                            <h5 class="">
-                                                {{ $invoice->tax }}</h5>
-                                        </td>
-                                        <td class="text-align-end bg-grey">
-                                            <h5 class="font-weight-bolder">
+                                        <tr>
+                                            <td class="text-center">
+                                                <b>1</b>
+                                            </td>
+                                            <td class="pl-2 ">
+                                                <b> Deposit (Refundable)</b>
+                                            </td>
+                                            <td class="text-center bg-grey">
+                                                <b>£{{ $invoice->amount }}</b>
+                                            </td>
+                                            <td class="text-center bg-grey">
+                                                <b>{{ $invoice->tax }}%</b>
+                                            </td>
+                                            <td class="text-center bg-grey">
+                                                <b>£{{ $invoice->amount }}</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td class="pl-2">
+                                                <h6>Until {{ $invoice->to_date }} </h6>
+                                            </td>
+                                            <td class="bg-grey"></td>
+                                            <td class="bg-grey"></td>
+                                            <td class="bg-grey"></td>
+                                        </tr>
+                                        @php
+                                            $sr = 2;
+                                        @endphp
+                                    @elseif (str_contains($invoice->type, 'Sale Invoice'))
+                                        @foreach ($invoice->saleProduct as $key => $value)
+                                            <tr>
+                                                <td class="text-center">
+                                                    <b>{{ $key + 1 }}</b>
+                                                </td>
+                                                <td class="pl-2 ">
+                                                    <b> {{ $value->product->name }}</b>
+                                                </td>
+                                                <td class="text-center bg-grey">
+                                                    <b>£{{ $value->rate }}</b>
+                                                </td>
+                                                <td class="text-center bg-grey">
+                                                    <b>{{ $invoice->tax }}%</b>
+                                                </td>
+                                                <td class="text-center bg-grey">
+                                                    <b>£{{ $value->amount }}</b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td class="pl-2">
+                                                </td>
+                                                <td class="bg-grey text-centertext-center">
+                                                    <h6>{{ $value->quantity }} Qty </h6>
 
-                                                £{{ str_contains($invoice->type, 'Month') ? (str_contains($invoice->student->year->name, '11') ? number_format((($invoice->student->normalSubject()->sum('amount') * 40) / 9) * $months, 2) : number_format((($invoice->student->normalSubject()->sum('amount') * 52) / 12) * $months, 2)) : $invoice->student->normalSubject()->sum('amount') * $weeks }}
-                                            </h5>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="pl-2">
-                                            <h5 class="">Period {{ $invoice->from_date }} -
-                                                {{ $invoice->to_date }} </h5>
-                                        </td>
-                                        <td class="bg-grey text-center">
-                                            <h5 class="">
-                                                £{{ $invoice->student->normalSubject()->sum('amount') }} Weekly</h5>
-                                        </td>
-                                        <td class="bg-grey"></td>
-                                        <td class="bg-grey"></td>
-                                    </tr>
+                                                </td>
+                                                <td class="bg-grey"></td>
+                                                <td class="bg-grey"></td>
+                                            </tr>
+                                        @endforeach
+                                        @php
+                                            $sr = $key + 2;
+                                        @endphp
+                                    @elseif (str_contains($invoice->type, 'Addition Invoice'))
+                                        @foreach ($invoice->subject as $key => $value)
+                                            <tr>
+                                                <td class="text-center">
+                                                    <b>{{ $key + 1 }}</b>
+                                                </td>
+                                                <td class="pl-2 ">
+                                                    <b> {{ $value->subject_name }}</b>
+                                                </td>
+                                                <td class="text-center text-center">
+                                                    <b>£{{ $value->subject_rate }}</b>
+                                                </td>
+                                                <td class="text-center text-center">
+                                                    <b>{{ $invoice->tax }}%</b>
+                                                </td>
+                                                <td class="text-center bg-grey">
+                                                    <b>£{{ $value->subject_amount }}</b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td class="pl-2">
+                                                    {{-- <h6>Until {{ $invoice->to_date }} </h6> --}}
+                                                </td>
+                                                <td class="bg-grey">
+                                                    <h5 class=" text-center"> {{ $value->subject_hr }} hr</b>
 
-                                    {{-- <tr class="bg-grey">
-                                        <td class="text-center">
-                                            <h5 class="font-weight-bolder">2</h5>
-                                        </td>
-                                        <td class="pl-2 ">
-                                            <h5 class="font-weight-bolder"> 1 - 1 ( @foreach ($invoice->student->oneOnOneSubject() as $key => $value)
-                                                    {{ $value->subject->name }}@if ($key + 1 != count($invoice->student->oneOnOneSubject()))
-                                                        ,
-                                                    @endif
-                                                @endforeach ) -
-                                                {{ $invoice->student->oneOnOneSubject()->sum('no_hr_weekly') }}
-                                                hours/week</h5>
-                                        </td>
-                                        <td class="text-center bg-grey">
-                                            <h5 class="">
-                                                £{{ $invoice->student->oneOnOneSubject()[0]->rate_per_hr }}</h5>
-                                        </td>
-                                        <td class="text-center bg-grey">
-                                            <h5 class="">
-                                                {{ $invoice->tax }}%</h5>
-                                        </td>
-                                        <td class="text-align-end bg-grey">
-                                            <h5 class="font-weight-bolder">
+                                                </td>
+                                                <td class="bg-grey"></td>
+                                                <td class="bg-grey"></td>
+                                            </tr>
+                                            @php
+                                                $sr = $key + 1;
+                                            @endphp
+                                        @endforeach
+                                    @elseif(str_contains($invoice->type, 'Registration'))
+                                        <tr>
+                                            <td class="text-center">
+                                                <b>1</b>
+                                            </td>
+                                            <td class="pl-2 ">
+                                                <b> Registration (Non-Refundable)</b>
+                                            </td>
+                                            <td class="text-center bg-grey">
+                                                <b>£{{ $invoice->amount }}</b>
+                                            </td>
+                                            <td class="text-center bg-grey">
+                                                <b>{{ $invoice->tax }}%</b>
+                                            </td>
+                                            <td class="text-center bg-grey">
+                                                <b>£{{ $invoice->amount }}</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td class="pl-2">
+                                                <h6>Until {{ $invoice->to_date }} </h6>
+                                            </td>
+                                            <td class="bg-grey"></td>
+                                            <td class="bg-grey"></td>
+                                            <td class="bg-grey"></td>
+                                        </tr>
+                                        @php
+                                            $sr = 2;
+                                        @endphp
+                                    @elseif (str_contains($invoice->type, 'Resource Fee'))
+                                        @foreach ($invoice->subject as $key => $value)
+                                            <tr class="">
+                                                <td class="text-center">
+                                                    <b>{{ $key + 1 }}</b>
+                                                </td>
+                                                <td class="pl-2 ">
+                                                    <b>{{ $value->subject_name }} Resources
+                                                    </b>
+                                                </td>
+                                                <td class="text-center bg-grey">
+                                                    <b>£{{ $value->subject_rate }}</b>
+                                                </td>
+                                                <td class="text-center bg-grey">
+                                                    <b>{{ $invoice->tax }}%</b>
+                                                </td>
+                                                <td class="text-center bg-grey">
+                                                    <b>£{{ $value->subject_rate }}</b>
+                                                </td>
+                                            </tr>
 
-                                                £{{ str_contains($invoice->type, 'Month') ? (str_contains($invoice->student->year->name, '11') ? number_format((($invoice->student->oneOnOneSubject()->sum('amount') * 40) / 9) * $months, 2) : number_format((($invoice->student->oneOnOneSubject()->sum('amount') * 52) / 12) * $months, 2)) : $invoice->student->oneOnOneSubject()->sum('amount') * $weeks }}
-                                            </h5>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="pl-2">
-                                            <h5 class="">Period {{ $invoice->from_date }} -
-                                                {{ $invoice->to_date }} </h5>
-                                        </td>
-                                        <td class="bg-grey text-center">
-                                            <h5 class="">
-                                                £{{ $invoice->student->oneOnOneSubject()->sum('amount') }} Weekly</h5>
-                                        </td>
-                                        <td class="bg-grey"></td>
-                                    </tr> --}}
-                                @else
-                                    <tr class="bg-grey">
-                                        <td class="text-center">
-                                            <h5 class="font-weight-bolder">1</h5>
-                                        </td>
-                                        <td class="pl-2 ">
-                                            <h5 class="font-weight-bolder"> 1 - 1( @foreach ($invoice->student->oneOnOneSubject() as $value)
-                                                    {{ $value->subject->name }},
-                                                @endforeach ) </h5>
-                                        </td>
-                                        <td class="text-align-end bg-grey">
-                                            <h5 class="font-weight-bolder">£{{ $invoice->amount }}</h5>
-                                        </td>
-                                        <td class="text-align-end bg-grey">
-                                            <h5 class="font-weight-bolder">{{ $invoice->tax }}%</h5>
-                                        </td>
-                                        <td class="text-align-end bg-grey">
-                                            <h5 class="font-weight-bolder">£{{ $invoice->amount }}</h5>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="pl-2">
-                                            <h5 class="">Until {{ $invoice->to_date }} </h5>
-                                        </td>
-                                        <td class="bg-grey"></td>
-                                        <td class="bg-grey"></td>
-                                        <td class="bg-grey"></td>
-                                    </tr>
-                                @endif
-                                @php
-                                    $sr = 3;
-                                @endphp
-
-                            @endif
-
-
-                            @if (count($invoice->receipt) > 0)
-                                @foreach ($invoice->receipt as $key => $value)
-                                    @if ($value->late_fee > 0)
+                                            @php
+                                                $sr = $key + 1;
+                                            @endphp
+                                        @endforeach
                                         <tr class="">
-                                            <td class=" text-center">
-                                                <h5 class="font-weight-bolder">
-                                                    {{ $sr++ }}
-
-                                                </h5>
+                                            <td class="text-center">
+                                                <b>{{ $sr + 1 }}</b>
                                             </td>
-                                            <td class="pl-2">
-                                                <h5 class="font-weight-bolder">Late Payment Charges</h5>
+                                            <td class="pl-2 ">
+                                                <b>Exercise Book (Quantity x
+                                                    {{ count($invoice->subject) }} )
+                                                </b>
                                             </td>
-                                            <td class="bg-grey">
-                                                <h5 class="font-weight-bolder"></h5>
+                                            <td class="text-center bg-grey">
+                                                <b></b>
                                             </td>
-                                            <td class="bg-grey">
-                                                <h5 class="font-weight-bolder">0%</h5>
+                                            <td class="text-center bg-grey">
+                                                <b></b>
                                             </td>
-                                            <td class="bg-grey text-align-end">
-                                                <h5 class="font-weight-bolder">
-
-                                                    £{{ $value->late_fee }}
-                                                </h5>
+                                            <td class="text-center bg-grey">
+                                                <b>
+                                                    £{{ $invoice->subject->sum('subject_book_fee') }}</b>
                                             </td>
                                         </tr>
-                                        {{-- <tr>
-                                    <td></td>
-                                    <td class="pl-2">
-                                        <h5 class="text-white">{{ $value->date }}</h5>
-                                    </td>
-                                    <td></td>
-                                </tr> --}}
+
+                                        @php
+                                            $sr = 2;
+                                        @endphp
+                                    @elseif (str_contains($invoice->type, 'Fee'))
+                                        {{-- @dd($invoice->student->enquirySubject) --}}
+                                        @if (count($invoice->student->oneOnOneSubject()) < 1)
+
+                                            <tr>
+                                                <td class="text-center">
+                                                    <b>1</b>
+                                                </td>
+                                                <td class="pl-2 ">
+                                                    <b> Lesson ( @foreach ($invoice->student->normalSubject() as $key => $value)
+                                                            {{ $value->subject->name }}@if ($key + 1 != count($invoice->student->normalSubject()))
+                                                                ,
+                                                            @endif
+                                                        @endforeach ) -
+                                                        {{ $invoice->student->normalSubject()->sum('no_hr_weekly') }}
+                                                        hours/week </b>
+                                                </td>
+                                                <td class="text-center bg-grey">
+                                                    <h6>
+                                                        £{{ $invoice->student->normalSubject()[0]->rate_per_hr }}</h6>
+                                                </td>
+                                                <td class="text-center bg-grey">
+                                                    <h6>
+                                                        {{ $invoice->tax }}%</h6>
+                                                </td>
+                                                <td class="text-center bg-grey">
+                                                    <b>
+
+                                                        £{{ str_contains($invoice->type, 'Month') ? (str_contains($invoice->student->year->name, '11') ? number_format((($invoice->student->normalSubject()->sum('amount') * 40) / 9) * $months, 2) : number_format((($invoice->student->normalSubject()->sum('amount') * 52) / 12) * $months, 2)) : $invoice->student->normalSubject()->sum('amount') * $weeks }}
+                                                    </b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td class="pl-2">
+                                                    <h6>Period {{ $invoice->from_date }} -
+                                                        {{ $invoice->to_date }} </h6>
+                                                </td>
+                                                <td class="bg-grey text-centertext-center">
+                                                    <h6>
+                                                        £{{ $invoice->student->normalSubject()->sum('amount') }}
+                                                        Weekly</h6>
+                                                </td>
+                                                <td class="bg-grey"></td>
+                                                <td class="bg-grey"></td>
+                                            </tr>
+                                        @else
+                                            <tr>
+                                                <td class="text-center">
+                                                    <b>1</b>
+                                                </td>
+                                                <td class="pl-2 ">
+                                                    <b> 1 - 1( @foreach ($invoice->student->oneOnOneSubject() as $value)
+                                                            {{ $value->subject->name }},
+                                                        @endforeach ) </b>
+                                                </td>
+                                                <td class="text-center bg-grey">
+                                                    <b>£{{ $invoice->amount }}</b>
+                                                </td>
+                                                <td class="text-center bg-grey">
+                                                    <b>{{ $invoice->tax }}%</b>
+                                                </td>
+                                                <td class="text-center bg-grey">
+                                                    <b>£{{ $invoice->amount }}</b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td class="pl-2">
+                                                    <h6>Until {{ $invoice->to_date }} </h6>
+                                                </td>
+                                                <td class="bg-grey"></td>
+                                                <td class="bg-grey"></td>
+                                                <td class="bg-grey"></td>
+                                            </tr>
+                                        @endif
+                                        @php
+                                            $sr = 3;
+                                        @endphp
+
                                     @endif
-                                    @if ($value->discount > 0)
-                                        <tr class="bg-grey">
-                                            <td class=" text-center">
-                                                <h5 class="font-weight-bolder">
-                                                    {{ $sr++ }}
 
-                                                </h5>
-                                            </td>
-                                            <td class="pl-2">
-                                                <h5 class="font-weight-bolder">Discount</h5>
-                                            </td>
-                                            <td class="bg-grey">
-                                                <h5 class="font-weight-bolder"></h5>
-                                            </td>
-                                            <td class="bg-grey">
-                                                <h5 class="font-weight-bolder">{{ $invoice->tax }}%</h5>
-                                            </td>
-                                            <td class="bg-grey text-align-end">
-                                                <h5 class="font-weight-bolder">
 
-                                                    -£{{ $value->discount }}
-                                                </h5>
-                                            </td>
-                                        </tr>
-                                        {{-- <tr>
-                                            <td></td>
-                                            <td class="pl-2">
-                                                <h5 class="text-white">{{ $value->date }}</h5>
-                                            </td>
-                                            <td></td>
-                                        </tr> --}}
+                                    @if (count($invoice->receipt) > 0)
+                                        @if ($invoice->receipt->sum('late_fee') > 0)
+                                            <tr class="">
+                                                <td class=" text-center">
+                                                    <b>
+                                                        {{ $sr++ }}
+
+                                                    </b>
+                                                </td>
+                                                <td class="pl-2">
+                                                    <b>Late Payment Charges</b>
+                                                </td>
+                                                <td class="bg-grey">
+                                                    <b></b>
+                                                </td>
+                                                <td class="bg-grey text-center">
+                                                    <b>0%</b>
+                                                </td>
+                                                <td class="bg-grey text-center">
+                                                    <b>
+
+                                                        £{{ $invoice->receipt->sum('late_fee') }}
+                                                    </b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class=" text-center">
+
+                                                </td>
+                                                <td class="pl-2">
+                                                    (will be applied after 7 days of this receipt)
+                                                </td>
+                                                <td class="bg-grey">
+
+                                                </td>
+                                                <td class="bg-grey">
+
+                                                </td>
+                                                <td class="bg-grey text-center">
+
+                                                </td>
+                                            </tr>
+                                        @endif
+                                        @if ($invoice->receipt->sum('discount') > 0)
+                                            <tr>
+                                                <td class=" text-center">
+                                                    <b>
+                                                        {{ $sr++ }}
+
+                                                    </b>
+                                                </td>
+                                                <td class="pl-2">
+                                                    <b>Discount</b>
+                                                </td>
+                                                <td class="bg-grey">
+                                                    <b></b>
+                                                </td>
+                                                <td class="bg-grey text-center">
+                                                    <b>{{ $invoice->tax }}%</b>
+                                                </td>
+                                                <td class="bg-grey text-center">
+                                                    <b>
+
+                                                        -£{{ $invoice->receipt->sum('discount') }}
+                                                    </b>
+                                                </td>
+                                            </tr>
+                                            <tr class="border-x-black">
+                                                <td class=" text-center">
+
+                                                </td>
+                                                <td class="pl-2">
+
+                                                </td>
+                                                <td class="bg-grey text-grey">
+                                                    blanck
+                                                </td>
+                                                <td class="bg-grey text-center">
+                                                </td>
+                                                <td class="bg-grey text-center">
+
+                                                </td>
+                                            </tr>
+                                        @endif
+                                        @if ($invoice->receipt->sum('discount') > 0 || $invoice->receipt->sum('late_fee') > 0)
+                                            <tr class="border-x-black">
+                                                <td class=" text-center">
+
+                                                </td>
+                                                <td class="pl-2">
+                                                    <b>Total</b>
+                                                </td>
+                                                <td class="bg-grey">
+                                                    <b></b>
+                                                </td>
+                                                <td class="bg-grey text-center">
+                                                </td>
+                                                <td class="bg-grey text-center">
+                                                    <b>
+
+                                                        £{{ $invoice->amount - $invoice->receipt->sum('discount') + $invoice->receipt->sum('late_fee') }}
+                                                    </b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class=" text-center">
+
+                                                </td>
+                                                <td class="pl-2">
+
+                                                </td>
+                                                <td class="bg-grey text-grey">
+                                                    blanck
+                                                </td>
+                                                <td class="bg-grey text-center">
+                                                </td>
+                                                <td class="bg-grey text-center">
+
+                                                </td>
+                                            </tr>
+                                        @endif
+
+                                        @foreach ($invoice->receipt as $key => $value)
+                                            <tr>
+                                                <td class=" text-center">
+
+                                                </td>
+                                                <td class="pl-2">
+                                                    <b>{{ $value->description }}
+                                                        {{ $value->mode }}</b>
+                                                </td>
+                                                <td class="bg-grey">
+                                                    <b></b>
+                                                </td>
+                                                <td class="bg-grey">
+                                                    <b></b>
+                                                </td>
+                                                <td class="bg-grey text-center">
+                                                    <b>
+
+                                                        -£{{ $value->amount }}
+                                                    </b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td class="pl-2">
+                                                    <h6>{{ $value->date }}</h6>
+                                                </td>
+                                                <td class="bg-grey"></td>
+                                                <td class="bg-grey"></td>
+                                                <td class="bg-grey"></td>
+                                            </tr>
+                                        @endforeach
                                     @endif
-                                    @if ($value->discount > 0 && $value->late_fee > 0)
-                                        <tr class="bg-grey">
-                                            <td class=" text-center">
-                                                <h5 class="font-weight-bolder">
 
-                                                </h5>
-                                            </td>
-                                            <td class="pl-2">
-                                                <h5 class="font-weight-bolder"></h5>
-                                            </td>
-                                            <td class="bg-grey">
-                                                <h5 class="font-weight-bolder"></h5>
-                                            </td>
-                                            <td class="bg-grey">
-                                                <h5 class="font-weight-bolder">Total</h5>
-                                            </td>
-                                            <td class="bg-grey text-align-end">
-                                                <h5 class="font-weight-bolder">
+                                </tbody>
+                            </table>
 
-                                                    £{{ number_format($value->late_fee + $invoice->amount - $value->discount, 2) }}
-                                                </h5>
-                                            </td>
-                                        </tr>
-                                    @endif
+                        </div>
+                    </div>
+                    <div class="row pl-2">
+                        <div class="col-6">
 
-                                    <tr class="bg-grey">
-                                        <td class=" text-center">
-                                            <h5 class="font-weight-bolder">
-
-                                                {{ $sr++ }}
-                                            </h5>
-                                        </td>
-                                        <td class="pl-2">
-                                            <h5 class="font-weight-bolder">{{ $value->description }}
-                                                {{ $value->mode }}</h5>
-                                        </td>
-                                        <td class="bg-grey">
-                                            <h5 class="font-weight-bolder"></h5>
-                                        </td>
-                                        <td class="bg-grey">
-                                            <h5 class="font-weight-bolder"></h5>
-                                        </td>
-                                        <td class="bg-grey text-align-end">
-                                            <h5 class="font-weight-bolder">
-
-                                                -£{{ $value->amount }}
-                                            </h5>
+                        </div>
+                        <div class="col-6">
+                            <table class="table-2  border-black border-black-top-none">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2" class="text-center">
+                                            Invoice Summary
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td></td>
-                                        <td class="pl-2">
-                                            <h5 class="">{{ $value->date }}</h5>
+
+
+                                        <td class="">
+                                            Sub Total INCLUSIVE VAT
                                         </td>
-                                        <td class="bg-grey"></td>
-                                        <td class="bg-grey"></td>
-                                        <td class="bg-grey"></td>
+                                        <th class="text-center">
+
+                                            £{{ $invoice->totalAmount() }}
+
+                                        </th>
                                     </tr>
-                                @endforeach
-                            @endif
-                            <tr>
+                                    <tr>
 
-                                <th class="text-align-end">
 
-                                </th>
-                                <th class="bg-grey text-align-end" colspan="3">
-                                    <h5 class="font-weight-bolder"> Balance</h5>
-                                </th>
-                                <th class="bg-grey text-align-end">
-                                    <h5 class="font-weight-bolder">
-                                        £{{ $invoice->remainingAmount() }}
-                                    </h5>
-                                </th>
-                            </tr>
-                            <tr>
+                                        <td class="">
+                                            Balance
+                                        </td>
+                                        <th class="text-center">
 
-                                <th class="text-align-end">
+                                            £{{ $invoice->remainingAmount() }}
 
-                                </th>
-                                <th class="bg-grey text-align-end" colspan="3">
-                                    <h5 class="font-weight-bolder">Vat Inclusive</h5>
-                                </th>
-                                <th class="bg-grey text-align-end">
-                                    <h5 class="font-weight-bolder">
-                                        £{{ number_format($invoice->taxAmount(), 2) }}
-                                    </h5>
-                                </th>
-                            </tr>
-                        </tbody>
-                    </table>
+                                        </th>
+                                    </tr>
+                                    <tr>
+
+
+                                        <th class="" colspan="">
+                                            Vat Inclusive
+                                        </th>
+                                        <th class="text-center">
+
+                                            £{{ number_format($invoice->taxAmount(), 2) }}
+
+                                        </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
                 <div class="row pt-3">
                     <div class="col-12">
-                        <h5 class="font-weight-bolder">Term & Condition</h5>
-                        <p class="justify-end">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-                            debitis
-                            voluptatibus tempore enim
-                            voluptates dicta a ullam iste consequuntur placeat ratione est modi commodi nihil aliquam
-                            numquam,
-                            veritatis ipsam obcaecati? Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
-                            corporis
-                            recusandae eos atque quisquam fugiat, velit consequatur beatae id perspiciatis laborum
-                            aliquid rem
-                            doloremque quis blanditiis aperiam dolorem excepturi voluptas!</p>
+                        <b>Term & Condition</b>
+                        <p class="justify-end " style="font-size: x-small;">Once you pay your deposit, you have agreed
+                            to start your course with
+                            Chalk n Duster. If under any circumstances you change your mind or you're not able to
+                            continue without following 4-weeks of leaving procedure (notice period), your deposit will
+                            not be refunded and you'll liable to pay the fees for the next 4 weeks.Fees is always made
+                            upfront & should be paid as agreed or on the date this invoice is generated (5 days grace
+                            period is given for payment). Failure to comply with the company policies we may pass your
+                            account to the debt collection team. For full terms & conditions of business, refer to the
+                            application form.</p>
                     </div>
                 </div>
-                <div class="row border-black p-0 font-weight-bolder">
+                <div class="row border-black p-0 font-weight-bolder p-0">
                     <div class="col-12 p-0">
                         <p class="text-center mb-0">
 
@@ -738,16 +794,16 @@
                             please contact
                             us on
                             02085777077 or 07535050502 </p>
-                        <p class="font-weight-bolder text-center pt-4">Thank you for your business!</p>
-                        <p class="text-center font-weight-bolder">Company Registration Number:
+                        <p class="font-weight-bolder p-0 text-center pt-4">Thank you for your business!</p>
+                        <p class="text-center font-weight-bolder p-0">Company Registration Number:
                             {{ $invoice->student->branch->company_number }}</p>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary print-btn importStyle"
-                    data-id="{{ $value->id }}">Print</button>
+                <a href="{{ route('invoice.print', $invoice->id) }}" target="_blank"
+                    class="btn btn-primary  importStyle">Print</a>
             </div>
         </div>
     </div>

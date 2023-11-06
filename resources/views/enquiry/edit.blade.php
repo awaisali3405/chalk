@@ -28,7 +28,7 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Caller</label>
+                                            <label class="form-label">Caller Name</label>
                                             <input type="text" class="form-control" name="caller_name"
                                                 value="{{ $enquiry->caller_name }}" required>
                                         </div>
@@ -45,14 +45,14 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">First Name</label>
-                                            <input type="text" class="form-control" name="first_name"
+                                            <input type="text" class="form-control uppercase" name="first_name"
                                                 value="{{ $enquiry->first_name }}" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Last Name</label>
-                                            <input type="text" class="form-control" name="last_name"
+                                            <input type="text" class="form-control uppercase" name="last_name"
                                                 value="{{ $enquiry->last_name }}" required>
                                         </div>
                                     </div>
@@ -73,14 +73,14 @@
                                         <div class="form-group">
                                             <label class="form-label">Phone</label>
                                             <input type="text" class="form-control" name="phone_no"
-                                                value="{{ $enquiry->phone_no }}" required>
+                                                value="{{ $enquiry->phone_no }}">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Mobile</label>
                                             <input type="text" class="form-control" name="mobile_no"
-                                                value="{{ $enquiry->mobile_no }}" required>
+                                                value="{{ $enquiry->mobile_no }}">
                                         </div>
                                     </div>
                                     {{-- <div class="col-lg-6 col-md-6 col-sm-12">
@@ -130,7 +130,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Branch</label>
-                                            <select class="form-control" name="branch_id">
+                                            <select class="form-control" name="branch_id" required>
                                                 <option value="">Select Branch</option>
                                                 @foreach ($branch as $value)
                                                     <option value="{{ $value->id }}"
@@ -169,7 +169,7 @@
 
                                             <input list="browsers" name="know_about_us"
                                                 value="{{ $enquiry->know_about_us }}" id="browser"
-                                                class="form-control" required>
+                                                class="form-control">
                                             <datalist id="browsers">
                                                 <option value="Leaflet">
                                                 <option value="Google">

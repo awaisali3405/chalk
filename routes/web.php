@@ -86,7 +86,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('invoice/pdf/{id}', [InvoiceController::class, 'print'])->name('invoice.print');
 
     Route::resource('receipt', ReceiptController::class);
+    // Product
     Route::resource('product', ProductController::class);
+    Route::get('/product/transfer', [ProductController::class, 'transfer'])->name('product.transfer');
+
     Route::resource('purchase', PurchaseController::class);
     Route::resource('sale', SaleController::class);
     Route::resource('supplier', SupplierControlller::class);

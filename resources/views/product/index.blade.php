@@ -60,6 +60,8 @@
                                                             <a href="{{ route('product.edit', $value->id) }}"
                                                                 class="btn btn-sm btn-primary"><i
                                                                     class="la la-pencil"></i></a>
+                                                            <a href="{{ route('product.transfer', $value->id) }}"
+                                                                class="btn btn-primary">Transfer Porduct</a>
                                                             {{-- <a href="{{ route('year.show', $value->id) }}"
                                                                 class="btn btn-sm btn-danger"><i
                                                                     class="la la-trash-o"></i></a> --}}
