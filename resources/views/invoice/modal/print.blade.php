@@ -775,30 +775,7 @@
                             application form.</p>
                     </div>
                 </div>
-                <div class="row border-black p-0 font-weight-bolder p-0">
-                    <div class="col-12 p-0">
-                        <p class="text-center mb-0">
 
-                            Bank Details: Company Name:
-                            {{ $invoice->student->branch->name }} Acc No.
-                            {{ $invoice->student->branch->account_number }}
-                            Sort Code: {{ $invoice->student->branch->short_code }} Reference:
-                            {{ $invoice->student->parents[0]->first_name }}
-                            {{ $invoice->student->parents[0]->last_name }}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <p class="mb-0 text-center pt-5">Should you have any query converning this invoice/receipt,
-                            please contact
-                            us on
-                            02085777077 or 07535050502 </p>
-                        <p class="font-weight-bolder p-0 text-center pt-4">Thank you for your business!</p>
-                        <p class="text-center font-weight-bolder p-0">Company Registration Number:
-                            {{ $invoice->student->branch->company_number }}</p>
-                    </div>
-                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
