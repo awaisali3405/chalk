@@ -83,8 +83,7 @@
     }
 
     tr.border-x-black td {
-        border-top: 1px solid black;
-        border-bottom: 1px solid black;
+        border: 1px solid black;
     }
 
     * {
@@ -101,11 +100,11 @@
             <div class="col-6 ">
 
 
-                <img src="{{ asset('images/logo.png') }}" width="300" alt="">
+                <img src="{{ asset('images/logo.png') }}" width="400" alt="">
 
             </div>
             <div class="col-6  text-center">
-                <h4 class="font-weight-bolder p-0 text-blue " style="font-size: 4rem;">
+                <h5 class="font-weight-bolder p-0 text-blue " style="font-size: 4rem;">
                     {{ count($invoice->receipt) > 0 ? 'Receipt' : 'Invoice' }}</h4>
             </div>
 
@@ -130,7 +129,7 @@
                         <h6>
                             Email:
                         </h6>
-                        <h6 class="pb-4">
+                        <h6 class="pb-3">
                             Phone:
                         </h6>
                     </div>
@@ -851,7 +850,7 @@
         <div class="row pt-3">
             <div class="col-12">
                 <b>Term & Condition</b>
-                <p class="justify-end " style="font-size: x-small;">Once you pay your deposit, you have agreed
+                <p class="justify-end " style="font-size: small;">Once you pay your deposit, you have agreed
                     to start your course with
                     Chalk n Duster. If under any circumstances you change your mind or you're not able to
                     continue without following 4-weeks of leaving procedure (notice period), your deposit will
@@ -860,19 +859,6 @@
                     period is given for payment). Failure to comply with the company policies we may pass your
                     account to the debt collection team. For full terms & conditions of business, refer to the
                     application form.</p>
-            </div>
-        </div>
-        <div class="row border-black p-0 font-weight-bolder p-0">
-            <div class="col-12 p-0">
-                <p class="text-center mb-0">
-
-                    Bank Details: Company Name:
-                    {{ $invoice->student->branch->name }} Acc No.
-                    {{ $invoice->student->branch->account_number }}
-                    Sort Code: {{ $invoice->student->branch->short_code }} Reference:
-                    {{ $invoice->student->parents[0]->first_name }}
-                    {{ $invoice->student->parents[0]->last_name }}
-                </p>
             </div>
         </div>
         {{-- <div class="row">
