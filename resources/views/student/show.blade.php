@@ -151,14 +151,14 @@
                                 <div class="custom-tab-1">
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item"><a href="#about-me" data-toggle="tab"
-                                                class="nav-link {{ str_contains('attendance', url()->current()) ? '' : 'active show' }} ">About
+                                                class="nav-link {{ str_contains(url()->current(), 'attendance') ? '' : 'active show' }} ">About
                                                 Me</a></li>
                                         <li class="nav-item"><a href="#upload" data-toggle="tab" class="nav-link">Upload</a>
                                         </li>
                                         <li class="nav-item"><a href="#note" data-toggle="tab" class="nav-link">Notes</a>
                                         </li>
                                         <li class="nav-item"><a href="#attendance" data-toggle="tab"
-                                                class="nav-link {{ str_contains('attendance', url()->current()) ? 'active show' : '' }}">Attendance</a>
+                                                class="nav-link {{ str_contains(url()->current(), 'attendance') ? 'active show' : '' }}">Attendance</a>
                                         </li>
                                         <li class="nav-item"><a href="#statement" data-toggle="tab"
                                                 class="nav-link">Statement</a></li>
@@ -167,7 +167,7 @@
                                     </ul>
                                     <div class="tab-content">
                                         <div id="about-me"
-                                            class="tab-pane fade {{ str_contains('attendance', url()->current()) ? '' : 'active show' }}">
+                                            class="tab-pane fade {{ str_contains(url()->current(), 'attendance') ? '' : 'active show' }}">
                                             <div class="profile-personal-info pt-4">
                                                 <h4 class="text-primary mb-4">Personal Information</h4>
                                                 <div class="row mb-4">
@@ -307,7 +307,7 @@
                                                                 <tr>
                                                                     <td>{{ $value->date }}</td>
 
-                                                                    <td>{{ $value->subject->name }}</td>
+                                                                    <td>{{ $value->enquirySubject->subject->name }}</td>
                                                                     <td>{{ $value->statusName() }}</td>
                                                                     <td>{{ $value->note }}</td>
 

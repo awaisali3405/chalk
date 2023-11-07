@@ -20,9 +20,10 @@ class Attendance extends Model
     {
         return $this->belongsTo(Student::class, 'student_id');
     }
-    public function subject()
+
+    public function enquirySubject()
     {
-        return $this->belongsTo(Subject::class, 'subject_id');
+        return $this->belongsTo(EnquirySubject::class, 'subject_id');
     }
     /**
      * Summary of statusName

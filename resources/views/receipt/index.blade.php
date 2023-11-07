@@ -263,7 +263,45 @@
                                                 </div>
                                             </div> --}}
                                             </div>
-
+                                            <div class="row pt-5">
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Balance To Pay</label>
+                                                        <div class="input-group mb-2">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">£</div>
+                                                            </div>
+                                                            <input type="text" value="{{ $invoice->totalAmount() }}"
+                                                                id="total" class="form-control" placeholder=""
+                                                                readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Receiving Cash</label>
+                                                        <div class="input-group mb-2">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">£</div>
+                                                            </div>
+                                                            <input type="text" value="0" id="receiving_cash"
+                                                                class="form-control" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Change</label>
+                                                        <div class="input-group mb-2">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">£</div>
+                                                            </div>
+                                                            <input type="text" name="0" class="form-control"
+                                                                id="change" placeholder="" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div id="receipt-list" class="tab-pane  ">

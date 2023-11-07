@@ -47,7 +47,8 @@
                     </div>
                     <div>
 
-                        <label for="upload" class="mt-3 mb-1 text-bold"> Branch : {{ $student->branch->name }}</label>
+                        <label for="upload" class="mt-3 mb-1 text-bold"> Branch :
+                            {{ $student->branch ? $student->branch->name : '' }}</label>
                     </div>
                 </div>
 
@@ -120,8 +121,10 @@
                                                         <div class="dropdown-menu" x-placement="bottom-start"
                                                             style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
                                                             @if (auth()->user()->role->name == 'parent')
-                                                                <a class="dropdown-item"
-                                                                    href="{{ route('invoice.print', $value->id) }}">Print</a>
+                                                                <a class="dropdown-item btn-event"
+                                                                    href="{{ route('invoice.print', $value->id) }}"
+                                                                    data-toggle="modal"
+                                                                    data-target="#print-{{ $value->id }}">Print</a>
                                                             @else
                                                                 <a class="dropdown-item"
                                                                     href="{{ route('receipt.show', $value->id) }}">Recieve</a>

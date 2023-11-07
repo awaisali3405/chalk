@@ -1357,7 +1357,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="form-label">Employment Status</label>
-                                                        <input type="text" class="form-control" name="emp_status1[]"
+                                                        <input type="text" class="form-control" name="emp_status1"
                                                             e="">
                                                     </div>
                                                 </div>
@@ -1365,28 +1365,28 @@
                                                     <div class="form-group">
                                                         <label class="form-label">Company Name</label>
                                                         <input type="text" class="form-control" value=""
-                                                            name="company_name1[]">
+                                                            name="company_name1">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="form-label">Work Phone Number</label>
                                                         <input type="text" class="form-control" value=""
-                                                            name="work_phone_number1[]">
+                                                            name="work_phone_number1">
                                                     </div>
                                                 </div>
                                                 <div class="colg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="form-label">Mobile Number</label>
                                                         <input type="text" class="form-control" value=""
-                                                            name="mobile_number1[]">
+                                                            name="mobile_number1">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div cls="form-group">
                                                         <label class="form-label">Email Address
                                                         </label>
-                                                        <input type="text" class="form-control" name="email1[]"
+                                                        <input type="text" class="form-control" name="email1"
                                                             value="">
                                                     </div>
                                                 </div>

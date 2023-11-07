@@ -31,6 +31,10 @@ class Enquiry extends Model
         'note',
         'subject'
     ];
+    public function name()
+    {
+        return $this->first_name . " " . $this->last_name;
+    }
     public function year()
     {
         return $this->belongsTo(Year::class, 'year_id');

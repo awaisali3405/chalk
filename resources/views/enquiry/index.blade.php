@@ -134,6 +134,7 @@
                                             <tr>
                                                 <th>Sr</th>
                                                 <th>Caller</th>
+                                                <th>Name</th>
                                                 <th>Year</th>
                                                 <th>Date</th>
                                                 <th>Week</th>
@@ -148,8 +149,9 @@
                                                     <td>{{ $key + 1 }}</td>
 
                                                     <td>{{ $value->caller_name }}</td>
+                                                    <td>{{ $value->name() }}</td>
                                                     <td>{{ $value->year->name }}</td>
-                                                    <td>{{ $value->enquiry_date }}</td>
+                                                    <td>{{ auth()->user()->ukFormat($value->enquiry_date) }}</td>
                                                     <td>Week
                                                         {{-- @dd(
                                                             auth()->user()->session()->start_date,

@@ -44,6 +44,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function priceFormat($price)
+    {
+        return number_format($price) != $price ? $price : number_format($price);
+    }
+    public function ukFormat($date)
+    {
+        return Carbon::parse($date)->format('d/m/Y');
+    }
     public function session()
     {
         return AcademicCalender::where('active', true)->first();

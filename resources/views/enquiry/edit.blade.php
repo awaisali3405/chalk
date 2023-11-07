@@ -29,7 +29,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Caller Name</label>
-                                            <input type="text" class="form-control" name="caller_name"
+                                            <input type="text" class="form-control " name="caller_name"
                                                 value="{{ $enquiry->caller_name }}" required>
                                         </div>
                                     </div>

@@ -51,9 +51,7 @@
                                                         <td>{{ $value->relationship }}</td>
                                                         <td>{{ $value->email }}</td>
                                                         <td>
-                                                            <a href="{{ route('parent.edit', $value->id) }}"
-                                                                class="btn btn-sm btn-primary"><i
-                                                                    class="la la-pencil"></i></a>
+                                                  
                                                             <button type="button" class="btn btn-primary dropdown-toggle"
                                                                 data-toggle="dropdown" aria-expanded="true">
                                                                 Action

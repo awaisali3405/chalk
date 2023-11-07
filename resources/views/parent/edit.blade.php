@@ -43,11 +43,21 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Family Name</label>
+                                            <label class="form-label">First Name</label>
                                             <input type="text" class="form-control"
-                                                value="{{ old('last_name', $parent->last_name) }}" name="last_name"
-                                                required>
+                                                value="{{ old('last_name', $parent->last_name) }}" name="last_name" required>
                                             @error('last_name')
+                                                <span style="color:#ff3d71">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Last Name</label>
+                                            <input type="text" class="form-control"
+                                                value="{{ old('given_name', $parent->given_name) }}" name="given_name"
+                                                required>
+                                            @error('given_name')
                                                 <span style="color:#ff3d71">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -170,43 +180,46 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">First Address</label>
-                                            <input type="text" id="formatted_address_0" value="{{ $parent->res_address }}" class="form-control"
+                                            <input type="text" id="formatted_address_0"
+                                                value="{{ $parent->res_address }}" class="form-control"
                                                 name="res_address">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Second Address Line </label>
-                                            <input type="text" id="formatted_address_1" value="{{ $parent->res_second_address }}" class="form-control"
+                                            <input type="text" id="formatted_address_1"
+                                                value="{{ $parent->res_second_address }}" class="form-control"
                                                 name="res_second_address">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Third Address Line</label>
-                                            <input type="text" id="formatted_address_2" value="{{ $parent->res_third_address }}" class="form-control"
+                                            <input type="text" id="formatted_address_2"
+                                                value="{{ $parent->res_third_address }}" class="form-control"
                                                 name="res_third_address">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label"> Town</label>
-                                            <input type="text" id="town_or_city" value="{{ $parent->res_town }}" class="form-control"
-                                                name="res_town">
+                                            <input type="text" id="town_or_city" value="{{ $parent->res_town }}"
+                                                class="form-control" name="res_town">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label"> County </label>
-                                            <input type="text" id="county" value="{{ $parent->res_country }}" class="form-control"
-                                                name="res_country">
+                                            <input type="text" id="county" value="{{ $parent->res_country }}"
+                                                class="form-control" name="res_country">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label"> Postcode</label>
-                                            <input type="text" id="postcode" value="{{ $parent->res_postal_code }}" class="form-control"
-                                                name="res_postal_code">
+                                            <input type="text" id="postcode" value="{{ $parent->res_postal_code }}"
+                                                class="form-control" name="res_postal_code">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">

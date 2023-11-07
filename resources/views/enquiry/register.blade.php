@@ -67,7 +67,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Middle Name</label>
                                                     <input type="text" class="form-control" name="middle_name"
-                                                        value="{{ old('middle_name') }}" required>
+                                                        value="{{ old('middle_name') }}" >
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">

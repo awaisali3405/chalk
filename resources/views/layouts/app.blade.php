@@ -386,7 +386,7 @@
                         discount = parseFloat($('#fee_discount').val());
                         total = parseFloat($('.fee').val());
                         $('.fee-total').val(parseFloat((total + parseFloat(success.data.amount)) -
-                            discount))
+                            discount).toFixed(2))
                         $('.fee').val(parseFloat(total + +success.data.amount))
 
                         total = parseFloat($('.fee-total').val())
@@ -406,6 +406,8 @@
                         $('#exercise_book').val(e_price)
                         // }
                         $('#subject').append(x);
+                        monthly = (parseFloat($('.fee-total').val()) * 52) / 12;
+                        $('.monthly-fee').val(monthly)
                     },
                     error: function(e) {
                         console.log(e)
@@ -521,6 +523,8 @@
                     total = parseFloat($('.fee-total').val())
                     fee_tax = calculateFeeTax(total, $('.tax').val())
                     $('.fee-tax').val(fee_tax);
+                    monthly = parseFloat((parseFloat($('.fee-total').val()) * 52) / 12).toFixed(2);
+                    $('.monthly-fee').val(monthly)
 
                 }
             })
@@ -1076,6 +1080,8 @@
                     reg_total = parseFloat($('#registration_fee').val())
                     reg_tax = calculateFeeTax(reg_total, $('.tax').val())
                     $('#reg_tax').val(reg_tax)
+                    monthly = parseFloat($('.fee-total').val() * 52 / 12).toFixed(2);
+                    $('.monthly-fee').val(monthly)
                 }
 
             })
@@ -1093,28 +1099,48 @@
             reg_tax = calculateFeeTax(reg_total, $('.tax').val())
             $('#reg_tax').val(reg_tax)
         })
-        $('.tax').on('change keyup', function() {
+        $('.tax').add('#registration_fee').add('#fee_discount').on('change keyup', function() {
             total = parseFloat($('.fee-total').val())
             fee_tax = calculateFeeTax(total, $('.tax').val())
             $('.fee-tax').val(fee_tax);
             reg_total = parseFloat($('#registration_fee').val())
             reg_tax = calculateFeeTax(reg_total, $('.tax').val())
             $('#reg_tax').val(reg_tax)
-        })
-        $('#registration_fee').on('change keyup', function() {
-            reg_total = $(this).val()
-            reg_tax = calculateFeeTax(reg_total, $('.tax').val())
-            $('#reg_tax').val(reg_tax)
-        })
-        $('#fee_discount').on('change keyup', function() {
-            discount = parseFloat($(this).val())
+            discount = parseFloat($("#fee_discount").val())
             fee = parseFloat($('.fee').val())
             $('.fee-total').val(parseFloat(fee - discount))
-            total = parseFloat($('.fee-total').val())
-            fee_tax = calculateFeeTax(total, $('.tax').val())
-            $('.fee-tax').val(fee_tax);
+            monthly = parseFloat($('.fee-total').val() * 52 / 12).toFixed(2);
+            $('.monthly-fee').val(monthly)
+
+        })
+        // $('#registration_fee').on('change keyup', function() {
+        //     reg_total = $("#registration_fee").val()
+        //     reg_tax = calculateFeeTax(reg_total, $('.tax').val())
+        //     $('#reg_tax').val(reg_tax)
+        // })
+        // $('#fee_discount').on('change keyup', function() {
+        //     discount = parseFloat($("#fee_discount").val())
+        //     fee = parseFloat($('.fee').val())
+        //     $('.fee-total').val(parseFloat(fee - discount))
+        //     $('.monthly-fee').val(parseFloat(fee - discount))
+        //     total = parseFloat($('.fee-total').val())
+        //     fee_tax = calculateFeeTax(total, $('.tax').val())
+        //     $('.fee-tax').val(fee_tax);
+
+        // })
+        $('#payment-type').on('keyup change', function() {
+            type = $("#payment-type").val();
+            if (type != 'Weekly') {
+                $('#monthly-fee').removeClass('d-none')
+            } else {
+                $('#monthly-fee').addClass('d-none')
+                // $('.monthly-fee').val();
+            }
         })
 
+        function calculateMonthly() {
+
+        }
         // function branch() {
 
         // }
@@ -1137,6 +1163,34 @@
     </script>
 
 
+
+    {{-- File Format --}}
+    <script>
+        function upload_check() {
+            var upl = document.getElementById("file");
+            var max = 2048000;
+            console.log(upl.files[0].size);
+
+            if (upl.files[0].size > max) {
+                alert("File Should be less then 2MB");
+                upl.value = "";
+            }
+        };
+    </script>
+
+
+    {{-- Receiving Amount --}}
+
+    <script>
+        $("#receiving_cash").keyup(function() {
+            let total = parseFloat($("#total").val());
+            let receive = parseFloat($(this).val());
+            let change = receive - total;
+            $("#change").val(isNaN(change) ? "" : change);
+        });
+    </script>
+    })
+    </script>
 
     {{--
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>

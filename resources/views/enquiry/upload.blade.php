@@ -24,7 +24,7 @@
 
                                                 <option value="Student Admission Form">Student Admission Form</option>
                                                 <option value="Discussion Page">Discussion Page</option>
-                                                <option value="Addresss proof">Addresss proof</option>
+                                                {{-- <option value="Addresss proof">Addresss proof</option> --}}
                                                 <option value="Student Assessment">Student Assessment</option>
                                                 <option value="Other">Other</option>
 
@@ -40,7 +40,8 @@
 
 
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" name="file">
+                                                <input type="file" class="custom-file-input" id="file"
+                                                    name="file" onchange="upload_check()" required>
                                                 <label class="custom-file-label">Choose file</label>
                                             </div>
 

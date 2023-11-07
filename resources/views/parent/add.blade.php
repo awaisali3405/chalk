@@ -41,7 +41,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Family Name</label>
+                                            <label class="form-label">First Name</label>
                                             <input type="text" class="form-control" value="{{ old('last_name') }}"
                                                 name="last_name" required>
                                             @error('last_name')
@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Given Name</label>
+                                            <label class="form-label">Last Name</label>
                                             <input type="text" class="form-control" value="{{ old('given_name') }}"
                                                 name="given_name" required>
                                             @error('given_name')

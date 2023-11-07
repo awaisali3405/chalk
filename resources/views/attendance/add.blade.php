@@ -63,17 +63,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="col-lg-4 col-md-3 col-sm-12">
-                            <div class="form-group">
-                                <label class="form-label">Subject</label>
-                                <div class="input-group mb-2">
-                                    <select name="subject_id" class="form-control subject" required>
-
-
-                                    </select>
-                                </div>
-                            </div>
-                        </div> --}}
 
 
                         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -115,8 +104,8 @@
                                                         <th style="width: 3%">Roll</th>
                                                         <th style="width: 10%">Name</th>
                                                         <th style="width: 10%">Subject</th>
-                                                        <th style="width: 30%">Action</th>
-                                                        <th style="width: 20%">Note</th>
+                                                        <th style="width: 20%">Action</th>
+                                                        <th style="width: 30%">Note</th>
                                                         {{-- <th>Action</th> --}}
                                                     </tr>
                                                 </thead>
@@ -145,12 +134,44 @@
 
                                                                     <input type="hidden"
                                                                         name="subject_id[{{ $value->id }}][]"
-                                                                        value="{{ $value1->subject_id }}">
+                                                                        value="{{ $value1->id }}">
                                                                     <div class="row pt-4">
                                                                         <div class="col-lg-12 col-md-12 col-sm-12">
                                                                             <div class="form-group">
-
-                                                                                <div class="row">
+                                                                                <select
+                                                                                    name="status[{{ $value->id }}][{{ $value1->id }}]"
+                                                                                    id="" class="form-control">
+                                                                                    <option value="">-</option>
+                                                                                    <option value="1"
+                                                                                        {{ $value->attendanceStatus($value1->id, request()->get('date')) == 1 ? 'selected' : '' }}>
+                                                                                        Present</option>
+                                                                                    <option value="2"
+                                                                                        {{ $value->attendanceStatus($value1->id, request()->get('date')) == 2 ? 'selected' : '' }}>
+                                                                                        Absent</option>
+                                                                                    <option value="3"
+                                                                                        {{ $value->attendanceStatus($value1->id, request()->get('date')) == 3 ? 'selected' : '' }}>
+                                                                                        Unautorized
+                                                                                    </option>
+                                                                                    <option value="4"
+                                                                                        {{ $value->attendanceStatus($value1->id, request()->get('date')) == 4 ? 'selected' : '' }}>
+                                                                                        Additional Class
+                                                                                    </option>
+                                                                                    <option value="5"
+                                                                                        {{ $value->attendanceStatus($value1->id, request()->get('date')) == 5 ? 'selected' : '' }}>
+                                                                                        Cover Up</option>
+                                                                                </select>
+                                                                                {{-- if ($this->status == 1) {
+                                                                                return "Present";
+                                                                                } else if ($this->status == 2) {
+                                                                                return "Absent";
+                                                                                } else if ($this->status == 3) {
+                                                                                return "Unautorized";
+                                                                                } else if ($this->status == 4) {
+                                                                                return "Additional Class";
+                                                                                } else if ($this->status == 5) {
+                                                                                return "Cover Up";
+                                                                                } --}}
+                                                                                {{-- <div class="row">
                                                                                     <div class="col-1">
 
                                                                                         <div class="form-check">
@@ -223,15 +244,15 @@
                                                                                         </div>
 
                                                                                     </div>
-                                                                                </div>
+                                                                                </div> --}}
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </td>
                                                                 <td>
                                                                     <input type="text"
-                                                                        name="note[{{ $value->id }}][{{ $value1->subject_id }}]"
-                                                                        value="{{ $value->attendanceNote($value1->subject_id, request()->get('date')) }}"
+                                                                        name="note[{{ $value->id }}][{{ $value1->id }}]"
+                                                                        value="{{ $value->attendanceNote($value1->id, request()->get('date')) }}"
                                                                         id="">
                                                                 </td>
                                                             </tr>

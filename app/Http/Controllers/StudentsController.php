@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Board;
 use App\Models\Branch;
 use App\Models\Email;
+use App\Models\Enquiry;
 use App\Models\Parents;
 use App\Models\EnquirySubject;
 use App\Models\studentUpload;
@@ -156,23 +157,31 @@ class StudentsController extends Controller
             $data['active'] = true;
         }
         $student = Student::create($data);
-
-        // dd($student);
+        if (isset($request->enquiry_id)) {
+            $enquiry = Enquiry::find($request->enquiry_id);
+            $enquiry->upload()->update([
+                'student_id' => $student->id
+            ]);
+            $student->update([
+                'note' => $enquiry->note
+            ]);
+        }
+        // dd($student->upload);
         if (auth()->user()->role->name == 'parent') {
             $student->parents()->attach([auth()->user()->parent->id]);
             if ($data1['last_name1']) {
 
                 $parent = Parents::create([
                     'last_name' => $data1['last_name1'],
-                    'first_name' => $data1['first_name1'],
-                    'given_name' => $data1['given_name1'],
-                    'gender' => $data1['gender1'],
-                    'relationship' => $data1['relationship1'],
-                    'emp_status' => $data1['emp_status1'],
-                    'company_name' => $data1['company_name1'],
-                    'work_phone_number' => $data1['work_phone_number1'],
-                    'mobile_number' => $data1['mobile_number1'],
-                    'email' => $data1['email1'],
+                    'first_name' => isset($data1['first_name1']) ? $data1['first_name1'] : '',
+                    'given_name' => isset($data1['given_name1']) ? $data1['given_name1'] : '',
+                    'gender' => isset($data1['gender1']) ? $data1['gender1'] : '',
+                    'relationship' => isset($data1['relationship1']) ? $data1['relationship1'] : '',
+                    'emp_status' => isset($data1['emp_status1']) ? $data1['emp_status1'] : '',
+                    'company_name' => isset($data1['company_name1']) ? $data1['company_name1'] : '',
+                    'work_phone_number' => isset($data1['work_phone_number1']) ? $data1['work_phone_number1'] : '',
+                    'mobile_number' => isset($data1['mobile_number1']) ? $data1['mobile_number1'] : '',
+                    'email' => isset($data1['email1']) ? $data1['email1'] : '',
 
                 ]);
                 $student->parents()->attach([$parent->id]);
@@ -187,64 +196,29 @@ class StudentsController extends Controller
 
                 $parent = Parents::create([
                     'last_name' => $data1['last_name1'],
-                    'first_name' => $data1['first_name1'],
-                    'given_name' => $data1['given_name1'],
-                    'gender' => $data1['gender1'],
-                    'relationship' => $data1['relationship1'],
-                    'emp_status' => $data1['emp_status1'],
-                    'company_name' => $data1['company_name1'],
-                    'work_phone_number' => $data1['work_phone_number1'],
-                    'mobile_number' => $data1['mobile_number1'],
-                    'email' => $data1['email1'],
+                    'first_name' => isset($data1['first_name1']) ? $data1['first_name1'] : '',
+                    'given_name' => isset($data1['given_name1']) ? $data1['given_name1'] : '',
+                    'gender' => isset($data1['gender1']) ? $data1['gender1'] : '',
+                    'relationship' => isset($data1['relationship1']) ? $data1['relationship1'] : '',
+                    'emp_status' => isset($data1['emp_status1']) ? $data1['emp_status1'] : '',
+                    'company_name' => isset($data1['company_name1']) ? $data1['company_name1'] : '',
+                    'work_phone_number' => isset($data1['work_phone_number1']) ? $data1['work_phone_number1'] : '',
+                    'mobile_number' => isset($data1['mobile_number1']) ? $data1['mobile_number1'] : '',
+                    'email' => isset($data1['email1']) ? $data1['email1'] : '',
 
                 ]);
                 $student->parents()->attach([$parent->id]);
             }
 
             $subject = $student->EnquirySubject()->pluck('id')->toArray();
-            // dd($subject);
-            $invoice = StudentInvoice::create([
-                'student_id' => $student->id,
-                'amount' => $student->deposit,
-                'type' => 'Refundable',
-                'tax' => 0,
-                'from_date' => auth()->user()->session()->start_date,
-                'to_date' => auth()->user()->session()->end_date
-            ]);
-
-            $invoice = StudentInvoice::create([
-                'student_id' => $student->id,
-                'amount' => $student->registration_fee,
-                'type' => 'Registration',
-                'tax' => $data['tax'],
-                'from_date' => auth()->user()->session()->start_date,
-                'to_date' => auth()->user()->session()->end_date
-            ]);
-            $invoice = StudentInvoice::create([
-                'student_id' => $student->id,
-                'amount' => $request->annual_resource_fee + $request->exercise_book_fee,
-                'type' => 'Resource Fee',
-                'tax' => 0,
-                'from_date' => auth()->user()->session()->start_date,
-                'to_date' => auth()->user()->session()->end_date
-            ]);
+            $this->generateInvoice($student, $request);
             if (isset($data1['enquiry_subject'])) {
 
                 $subject = EnquirySubject::whereIn('id', $data1['enquiry_subject'])->update([
                     'student_id' => $student->id
                 ]);
             }
-            foreach ($student->EnquirySubject as $key => $value) {
-                // if ($value->subject->lesson_type_id == 1) {
 
-                InvoiceSubject::create([
-                    'invoice_id' => $invoice->id,
-                    'subject_name' => $value->subject->name,
-                    'subject_rate' => $value->subject->rate,
-                    'subject_book_fee' => $value->subject->book_rate
-                ]);
-                // }
-            }
             // $invoice->update([
             //     'amount' =>
             // ]);
@@ -356,10 +330,36 @@ class StudentsController extends Controller
         if (isset($request->profile_pic)) {
             $data['profile_pic'] =   $this->saveImage($request->profile_pic);
         }
-        if (auth()->user()->role->name != 'parent') {
-            $data['active'] = true;
-        }
         $student = Student::find($id);
+        if (auth()->user()->role->name != 'parent' && !$student->active) {
+            $data['active'] = true;
+            $this->generateInvoice($student, $request);
+            $subject = $student->EnquirySubject()->pluck('id')->toArray();
+            // dd($subject);
+
+
+
+            $email = Email::find(2);
+            // dd(gettype($email->template));
+            $email->name = str_replace("[Student's Name]", $student->first_name . " " . $student->last_name, $email->name);
+            $email->template = str_replace("[Parent/Guardian's Name]", $student->parents[0]->given_name, $email->template);
+            $email->template = str_replace("[Student's Name]", $student->name(), $email->template);
+            $email->template = str_replace("[year]", $student->year->name, $email->template);
+            $email->template = str_replace("[Start Date]", $student->admission_date, $email->template);
+
+            // $template = str_replace("[Student's Name]", $enquiry->first_name . " " . $enquiry->last_name, $template);
+            Mail::send('notification.enquiry', ['template' => $email->template], function ($message) use ($student, $email) {
+                $message->to($student->parents[0]->email);
+                $message->subject($email->name);
+            });
+        }
+
+        if (isset($data1['enquiry_subject'])) {
+
+            $subject = EnquirySubject::whereIn('id', $data1['enquiry_subject'])->update([
+                'student_id' => $student->id
+            ]);
+        }
         $student->update($data);
         if (auth()->user()->role->name == 'parent') {
             $student->parents()->detach();
@@ -404,29 +404,29 @@ class StudentsController extends Controller
                     $parent = Parents::find($student->parents[1]->id);
                     $parent->update([
                         'last_name' => $data1['last_name1'],
-                        'first_name' => $data1['first_name1'],
-                        'given_name' => $data1['given_name1'],
-                        'gender' => $data1['gender1'],
-                        'relationship' => $data1['relationship1'],
-                        'emp_status' => $data1['emp_status1'],
-                        'company_name' => $data1['company_name1'],
-                        'work_phone_number' => $data1['work_phone_number1'],
-                        'mobile_number' => $data1['mobile_number1'],
-                        'email' => $data1['email1'],
+                        'first_name' => isset($data1['first_name1']) ? $data1['first_name1'] : '',
+                        'given_name' => isset($data1['given_name1']) ? $data1['given_name1'] : '',
+                        'gender' => isset($data1['gender1']) ? $data1['gender1'] : '',
+                        'relationship' => isset($data1['relationship1']) ? $data1['relationship1'] : '',
+                        'emp_status' => isset($data1['emp_status1']) ? $data1['emp_status1'] : '',
+                        'company_name' => isset($data1['company_name1']) ? $data1['company_name1'] : '',
+                        'work_phone_number' => isset($data1['work_phone_number1']) ? $data1['work_phone_number1'] : '',
+                        'mobile_number' => isset($data1['mobile_number1']) ? $data1['mobile_number1'] : '',
+                        'email' => isset($data1['email1']) ? $data1['email1'] : '',
                     ]);
                 } else {
-
+                    // dd(isset($data1['email1']), $data1['email1']);
                     $parent = Parents::create([
                         'last_name' => $data1['last_name1'],
-                        'first_name' => $data1['first_name1'],
-                        'given_name' => $data1['given_name1'],
-                        'gender' => $data1['gender1'],
-                        'relationship' => $data1['relationship1'],
-                        'emp_status' => $data1['emp_status1'],
-                        'company_name' => $data1['company_name1'],
-                        'work_phone_number' => $data1['work_phone_number1'],
-                        'mobile_number' => $data1['mobile_number1'],
-                        'email' => $data1['email1'],
+                        'first_name' => isset($data1['first_name1']) ? $data1['first_name1'] : '',
+                        'given_name' => isset($data1['given_name1']) ? $data1['given_name1'] : '',
+                        'gender' => isset($data1['gender1']) ? $data1['gender1'] : '',
+                        'relationship' => isset($data1['relationship1']) ? $data1['relationship1'] : '',
+                        'emp_status' => isset($data1['emp_status1']) ? $data1['emp_status1'] : '',
+                        'company_name' => isset($data1['company_name1']) ? $data1['company_name1'] : '',
+                        'work_phone_number' => isset($data1['work_phone_number1']) ? $data1['work_phone_number1'] : '',
+                        'mobile_number' => isset($data1['mobile_number1']) ? $data1['mobile_number1'] : '',
+                        'email' => isset($data1['email1']) ? $data1['email1'] : '',
                     ]);
                 }
                 $student->parents()->detach();
@@ -435,67 +435,6 @@ class StudentsController extends Controller
                 $student->parents()->attach([$parent->id]);
             }
             if ($student->active) {
-                $subject = $student->EnquirySubject()->pluck('id')->toArray();
-                // dd($subject);
-                $invoice = StudentInvoice::create([
-                    'student_id' => $student->id,
-                    'amount' => $student->deposit,
-                    'type' => 'Refundable',
-                    'tax' => 0,
-                    'from_date' => auth()->user()->session()->start_date,
-                    'to_date' => auth()->user()->session()->end_date
-                ]);
-
-                $invoice = StudentInvoice::create([
-                    'student_id' => $student->id,
-                    'amount' => $student->registration_fee,
-                    'type' => 'Registration',
-                    'tax' => $data['tax'],
-                    'from_date' => auth()->user()->session()->start_date,
-                    'to_date' => auth()->user()->session()->end_date
-                ]);
-                $invoice = StudentInvoice::create([
-                    'student_id' => $student->id,
-                    'amount' => $request->annual_resource_fee + $request->exercise_book_fee,
-                    'type' => 'Resource Fee',
-                    'tax' => 0,
-                    'from_date' => auth()->user()->session()->start_date,
-                    'to_date' => auth()->user()->session()->end_date
-                ]);
-                if (isset($data1['enquiry_subject'])) {
-
-                    $subject = EnquirySubject::whereIn('id', $data1['enquiry_subject'])->update([
-                        'student_id' => $student->id
-                    ]);
-                }
-                foreach ($student->EnquirySubject as $key => $value) {
-                    // if ($value->subject->lesson_type_id == 1) {
-
-                    InvoiceSubject::create([
-                        'invoice_id' => $invoice->id,
-                        'subject_name' => $value->subject->name,
-                        'subject_rate' => $value->subject->rate,
-                        'subject_book_fee' => $value->subject->book_rate
-                    ]);
-                    // }
-                }
-                // $invoice->update([
-                //     'amount' =>
-                // ]);
-
-                $email = Email::find(2);
-                // dd(gettype($email->template));
-                $email->name = str_replace("[Student's Name]", $student->first_name . " " . $student->last_name, $email->name);
-                $email->template = str_replace("[Parent/Guardian's Name]", $student->parents[0]->given_name, $email->template);
-                $email->template = str_replace("[Student's Name]", $student->name(), $email->template);
-                $email->template = str_replace("[year]", $student->year->name, $email->template);
-                $email->template = str_replace("[Start Date]", $student->admission_date, $email->template);
-
-                // $template = str_replace("[Student's Name]", $enquiry->first_name . " " . $enquiry->last_name, $template);
-                Mail::send('notification.enquiry', ['template' => $email->template], function ($message) use ($student, $email) {
-                    $message->to($student->parents[0]->email);
-                    $message->subject($email->name);
-                });
             }
         }
         // $student->parents()->detach();
@@ -642,5 +581,33 @@ class StudentsController extends Controller
         // $pdf = Pdf::loadView('student.print.statement', ['student' => $student]);
         // return $pdf->stream('statement.pdf');
         return view('student.print.statement', compact('student'));
+    }
+    public function generateInvoice($student, $request)
+    {
+        $invoice = StudentInvoice::create([
+            'student_id' => $student->id,
+            'amount' => $student->deposit,
+            'type' => 'Refundable',
+            'tax' => 0,
+            'from_date' => auth()->user()->session()->start_date,
+            'to_date' => auth()->user()->session()->end_date
+        ]);
+
+        $invoice = StudentInvoice::create([
+            'student_id' => $student->id,
+            'amount' => $student->registration_fee,
+            'type' => 'Registration',
+            'tax' => $request->tax,
+            'from_date' => auth()->user()->session()->start_date,
+            'to_date' => auth()->user()->session()->end_date
+        ]);
+        $invoice = StudentInvoice::create([
+            'student_id' => $student->id,
+            'amount' => $request->annual_resource_fee + $request->exercise_book_fee,
+            'type' => 'Resource Fee',
+            'tax' => 0,
+            'from_date' => auth()->user()->session()->start_date,
+            'to_date' => auth()->user()->session()->end_date
+        ]);
     }
 }

@@ -60,29 +60,40 @@ class AttendanceController extends Controller
     public function store(Request $request)
     {
         // dd($request);
+
         $data = $request->except('_token');
+        // dd($data);
         // foreach ($data['student'] as $key => $student) {
         foreach ($data['subject_id'] as $student => $studentSubjects) {
-            foreach ($studentSubjects as $key => $subject) {
-                $attendance = Attendance::where('student_id', $student)->where('subject_id', $subject)->where('date', $data['date'])->first();
+            $data1 = Student::find($student)->enquirySubject;
+            foreach ($data1 as $key => $subject) {
+                $attendance = Attendance::where('student_id', $student)->where('subject_id', $subject->id)->where('date', $data['date'])->first();
                 if ($attendance) {
-                    $attendance->update([
-                        'status' => $data['status'][$student][$subject],
-                        'note' => $data['note'][$student][$subject],
-                    ]);
+                    if ($data['status'][$student][$subject->id]) {
+
+                        $attendance->update([
+                            'status' => $data['status'][$student][$subject->id],
+                            'note' => $data['note'][$student][$subject->id],
+                        ]);
+                    } else {
+                        $attendance->delete();
+                    }
                 } else {
-                    
-                    $attendance =  Attendance::create([
-                        'student_id' => $student,
-                        'subject_id' => $subject,
-                        'status' => $data['status'][$student][$subject],
-                        'date' => $data['date'],
-                        'note' => $data['note'][$student][$subject],
-                    ]);
+                    // dd($data['status'][$student]);
+                    if ($data['status'][$student][$subject->id]) {
+
+                        $attendance =  Attendance::create([
+                            'student_id' => $student,
+                            'subject_id' => $subject->id,
+                            'status' => $data['status'][$student][$subject->id],
+                            'date' => $data['date'],
+                            'note' => $data['note'][$student][$subject->id],
+                        ]);
+                    }
                 }
             }
         }
-        return redirect()->route('attendance.create')->with('success', 'Attendance Created Successfully');
+        return redirect()->back()->with('success', 'Attendance Created Successfully');
         // }
     }
 
