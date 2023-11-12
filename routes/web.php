@@ -24,6 +24,8 @@ use App\Http\Controllers\ScienceTypeController;
 
 
 use App\Http\Controllers\SMSController;
+use App\Http\Controllers\StaffAttendanceController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\SupplierControlller;
@@ -110,7 +112,19 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Teacher Enquiry
     Route::resource('enquiryTeacher', TeacherEnquiryController::class);
-
+    Route::get('enquiry/upload/{id}', [TeacherEnquiryController::class, 'upload'])->name('enquiryTeacher.upload');
+    Route::post('enquiry/upload/{id}', [TeacherEnquiryController::class, 'uploadStore'])->name('enquiryTeacher.upload.store');
+    Route::post('enquiry/staff/register/{id}', [TeacherEnquiryController::class, 'registerPost'])->name('staff.register');
+    Route::get('enquiry/registration/{id}', [TeacherEnquiryController::class, 'register'])->name('enquiryTeacher.registration');
+    Route::post('enquiry/interview/{id}/send', [TeacherEnquiryController::class, 'sendInterview'])->name('enquiry.send.interview');
+    // Staff
+    Route::resource('staff', StaffController::class);
+    Route::get('staff/attendance/{id}', [StaffController::class, 'attendance'])->name('staff.attendance.index');
+    Route::post('staff/{id}/attendance/create', [StaffController::class, 'attendanceStore'])->name('staff.attendance.store');
+    Route::post('staff/attendance/{id}/update', [StaffController::class, 'attendanceUpdate'])->name('staff.attendance.update');
+    Route::get('staff/pay/{id}', [StaffController::class, 'pay'])->name('staff.pay');
+    // Staff Attendance
+    Route::resource('staffAttendance', StaffAttendanceController::class);
     // Department
     Route::resource('department', DepartmentController::class);
     // Email

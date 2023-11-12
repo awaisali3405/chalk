@@ -44,6 +44,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function uploadDocument()
+    {
+        return UploadDocument::all();
+    }
+    public function timeFormat($time)
+    {
+        return Carbon::parse($time)->format('g:i A');
+    }
     public function priceFormat($price)
     {
         return number_format($price) != $price ? $price : number_format($price);

@@ -64,4 +64,12 @@ class TeacherEnquiry extends Model
     {
         return $this->hasMany(TeacherSubject::class, 'teacher_enquiry_id');
     }
+    public function upload()
+    {
+        return $this->hasMany(TeacherUpload::class, 'teacher_enquiry_id');
+    }
+    public function interview()
+    {
+        return $this->hasMany(TeacherEnquiryInterview::class, 'teacher_enquiry_id');
+    }
 }
