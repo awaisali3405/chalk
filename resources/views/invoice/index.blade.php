@@ -301,9 +301,6 @@
                                                 </div>
                                             </div> --}}
                                         </div>
-
-
-
                                         {{-- All  --}}
                                         <div id="receipt-list"
                                             class="tab-pane fade  {{ request()->all() ? 'show active' : '' }}">

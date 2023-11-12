@@ -11,8 +11,10 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\ExpenseAccountTypeController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\GenerateSalaryController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\KeyStageController;
+use App\Http\Controllers\LoanController;
 use App\Http\Controllers\PaperController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ProductController;
@@ -122,9 +124,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('staff/attendance/{id}', [StaffController::class, 'attendance'])->name('staff.attendance.index');
     Route::post('staff/{id}/attendance/create', [StaffController::class, 'attendanceStore'])->name('staff.attendance.store');
     Route::post('staff/attendance/{id}/update', [StaffController::class, 'attendanceUpdate'])->name('staff.attendance.update');
+    Route::get('staff/attendance/{id}/delete', [StaffController::class, 'attendanceDelete'])->name('staff.attendance.delete');
     Route::get('staff/pay/{id}', [StaffController::class, 'pay'])->name('staff.pay');
+    Route::get('staff/invoice/pay/{id}', [StaffController::class, 'invoicePay'])->name('staff.invoice.pay');
+    Route::post('staff/pay/store', [StaffController::class, 'payStore'])->name('staff.pay.store');
+    // Generate Salary
+    Route::resource('generateSalary', GenerateSalaryController::class);
     // Staff Attendance
     Route::resource('staffAttendance', StaffAttendanceController::class);
+    // loan
+    Route::resource('loan', LoanController::class);
     // Department
     Route::resource('department', DepartmentController::class);
     // Email

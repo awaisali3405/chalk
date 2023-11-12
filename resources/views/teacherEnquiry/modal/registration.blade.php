@@ -14,20 +14,21 @@
                             <div class="form-group">
                                 <label for="interview-text" class="form-label">Name</label>
                                 <input type="text" class="form-control" name="name"
-                                    value="{{ $value->first_name }} {{ $value->last_name }}" id="">
+                                    value="{{ $value->first_name }} {{ $value->last_name }}" id="" required>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="interview-time" class="form-label">Designation</label>
                                 <input type="text" class="form-control" name="designation"
-                                    value="{{ $value->designation }}" id="">
+                                    value="{{ $value->designation }}" id="" required>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="interview-time" class="form-label">Contact</label>
-                                <input type="text" class="form-control" name="contact_us" id="">
+                                <input type="text" class="form-control" value="{{ $value->phone }}" name="contact_us"
+                                    required id="">
                             </div>
                         </div>
                         <div class="col-6">
@@ -61,7 +62,8 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="interview-time" class="form-label">Salary</label>
-                                <input type="number" class="form-control" name="salary" value="10" id="">
+                                <input type="number" class="form-control" name="salary" value="10" id=""
+                                    required>
                             </div>
                         </div>
                         <div class="col-6">
@@ -77,19 +79,20 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="interview-time" class="form-label">Date of Join</label>
-                                <input type="date" class="form-control" name="date_of_join" id="">
+                                <input type="date" class="form-control" name="date_of_join" id="" required>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="interview-time" class="form-label">Email</label>
-                                <input type="text" class="form-control" name="email" id="">
+                                <input type="text" class="form-control" name="email" {{ $value->email }}
+                                    id="">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="interview-time" class="form-label">Password</label>
-                                <input type="text" class="form-control" name="password" id="">
+                                <input type="text" class="form-control" name="password" id="" required>
                             </div>
                         </div>
                         <div class="col-6">

@@ -121,8 +121,8 @@
                         <span class="nav-text">Teacher Enquiry</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="{{ route('enquiryTeacher.index') }}">All Teacher Enquiry</a></li>
-                        <li><a href="{{ route('enquiryTeacher.create') }}">Add Teacher Enquiry</a></li>
+                        <li><a href="{{ route('enquiryTeacher.index') }}">All Staff Enquiry</a></li>
+                        <li><a href="{{ route('enquiryTeacher.create') }}">Add Staff Enquiry</a></li>
                     </ul>
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -134,6 +134,25 @@
                         <li><a href="{{ route('staff.create') }}">Add Staff</a></li>
                     </ul>
                 </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-university"></i>
+                        <span class="nav-text">Loan </span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('loan.index') }}">All Loan</a></li>
+                        <li><a href="{{ route('loan.create') }}">Add Loan</a></li>
+                    </ul>
+                </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-university"></i>
+                        <span class="nav-text">Salary </span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('generateSalary.index') }}">Generate Salary</a></li>
+                        <li><a href="{{ route('generateSalary.create') }}">Show Generate Salary</a></li>
+                    </ul>
+                </li>
+
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-university"></i>
                         <span class="nav-text">Balance Sheet</span>

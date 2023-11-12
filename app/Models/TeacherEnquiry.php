@@ -72,4 +72,7 @@ class TeacherEnquiry extends Model
     {
         return $this->hasMany(TeacherEnquiryInterview::class, 'teacher_enquiry_id');
     }
+    // public function staff(){
+    //     return $this->hasOne();
+    // }
 }

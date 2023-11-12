@@ -42,29 +42,30 @@
 
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 col-md-6 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-label">Paid Hours</label>
-                                            <input type="number" class="form-control" name="paid_hour" value=""
-                                                required id="">
+                                    @if ($staff->salary_type == 'Hourly')
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">Paid Hours</label>
+                                                <input type="number" class="form-control" name="paid_hour" value=""
+                                                    required id="">
 
 
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-label">Rate</label>
-                                            <input type="number" class="form-control" name="paid_hour" value=""
-                                                required id="">
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">Rate</label>
+                                                <input type="number" class="form-control" name="rate"
+                                                    value="{{ $staff->salary }}" required id="">
 
 
+                                            </div>
                                         </div>
-                                    </div>
-
+                                    @endif
 
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                        <button type="submit" class="btn btn-light">Cencel</button>
+                                        <a href="{{ route('staff.index') }}" class="btn btn-light">Cencel</a>
                                     </div>
                                 </div>
                             </form>
@@ -91,10 +92,11 @@
                                                     <th>Date</th>
                                                     <th>Start Time</th>
                                                     <th>End Time</th>
-                                                    <th>Paid Hour</th>
-                                                    <th>Rate per Hour</th>
-                                                    <th>Amount</th>
-
+                                                    @if ($staff->salary_type == 'Hourly')
+                                                        <th>Paid Hour</th>
+                                                        <th>Rate per Hour</th>
+                                                        <th>Amount</th>
+                                                    @endif
 
                                                     <th>Action</th>
                                                 </tr>
@@ -103,15 +105,15 @@
                                                 @foreach ($staff->attendance as $key => $value)
                                                     <tr>
                                                         <td>{{ $key + 1 }}</td>
-
                                                         <td>{{ auth()->user()->ukFormat($value->date) }}</td>
                                                         <td>{{ auth()->user()->timeFormat($value->start_time) }}</td>
+
                                                         <td>{{ auth()->user()->timeFormat($value->end_time) }}</td>
-                                                        <td>{{ $value->paid_hour }}</td>
-                                                        <td>{{ $value->rate }}</td>
-                                                        <td>{{ $value->rate * $value->paid_hour }}</td>
-
-
+                                                        @if ($staff->salary_type == 'Hourly')
+                                                            <td>{{ $value->paid_hour }}</td>
+                                                            <td>{{ $value->rate }}</td>
+                                                            <td>{{ $value->rate * $value->paid_hour }}</td>
+                                                        @endif
                                                         <td>
                                                             {{-- <a href="{{ route('board.edit', $value->id) }}"
                                                                 class="btn btn-sm btn-primary"><i
@@ -119,6 +121,8 @@
                                                             <a class="btn-event btn btn-sm btn-primary" data-toggle="modal"
                                                                 data-target="#attendance-{{ $value->id }}"><i
                                                                     class="fa fa-pencil"></i></a>
+                                                            <a href="{{ route('staff.attendance.delete', $value->id) }}"
+                                                                class="btn btn-primary"><i class="fa fa-trash"></i></a>
                                                             {{-- <a href="{{ route('branch.show', $value->id) }}"
                                                                 class="btn btn-sm btn-danger"><i
                                                                     class="la la-trash-o"></i></a> --}}

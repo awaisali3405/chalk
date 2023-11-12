@@ -38,5 +38,25 @@ class Staff extends Model
     {
         return $this->hasMany(StaffAttendance::class, 'staff_id');
     }
- 
+    public function pay()
+    {
+        if ($this->salary_type == "Hourly") {
+            $attendance = $this->attendance;
+            $total = 0;
+            foreach ($attendance as $key => $value) {
+                $total += $value->amount();
+            }
+            return $total;
+        } else {
+            return $this->salary;
+        }
+    }
+    public function receipt()
+    {
+        return $this->hasMany(StaffReceipt::class, 'staff_id');
+    }
+    public function loan()
+    {
+        return $this->hasMany(StaffLoan::class, 'staff_id')->where('is_paid', false);
+    }
 }

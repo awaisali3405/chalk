@@ -4,6 +4,7 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\EnquirySubjectController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\YearController;
@@ -35,3 +36,5 @@ Route::get('/get/student/data/{id}', [StudentsController::class, 'getStudentData
 Route::get('/get/parent/data/{id}', [ParentController::class, 'getParentData']);
 Route::get('/get/product/{year}/{branch}', [ProductController::class, 'getProduct']);
 Route::get('/get/branch/{id}', [BranchController::class, 'getBranch']);
+Route::post('/get/salary', [StaffController::class, 'getAttendance']);
+Route::get('get/staff/{id}', [StaffController::class, 'getStaff']);

@@ -8,7 +8,7 @@
             </div>
 
             <div class="modal-body">
-                <form action="{{ route('staff.attendance.update', $staff->id) }}" method="post"
+                <form action="{{ route('staff.attendance.update', $value->id) }}" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="row">
@@ -39,24 +39,26 @@
 
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label class="form-label">Hour</label>
-                                <input type="number" class="form-control" name=""
-                                    value="{{ $value->end_time }}" id="">
+                        @if ($staff->salary_type == 'Hourly')
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Hour</label>
+                                    <input type="number" class="form-control" name="paid_hour"
+                                        value="{{ $value->paid_hour }}" id="">
 
 
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label class="form-label">End Time</label>
-                                <input type="time" class="form-control" name="end_time"
-                                    value="{{ $value->end_time }}" id="">
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">Rate Per Hour</label>
+                                    <input type="number" class="form-control" name="rate"
+                                        value="{{ $value->rate }}" id="">
 
 
+                                </div>
                             </div>
-                        </div>
+                        @endif
 
 
                         <div class="col-lg-12 col-md-12 col-sm-12">

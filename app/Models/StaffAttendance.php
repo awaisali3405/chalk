@@ -21,4 +21,12 @@ class StaffAttendance extends Model
     {
         return $this->belongsTo(Staff::class, 'staff_id');
     }
+    public function amount()
+    {
+        return $this->paid_hour * $this->rate;
+    }
+    public function period()
+    {
+        return  auth()->user()->timeFormat($this->start_time) . ' ' . auth()->user()->timeFormat($this->end_time);
+    }
 }
