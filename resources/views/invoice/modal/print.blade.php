@@ -572,7 +572,7 @@
                                                     <b></b>
                                                 </td>
                                                 <td class="bg-grey text-center">
-                                                    <b>0%</b>
+                                                    <b>{{ $invoice->student->branch->tax_type == 'flat' ? 0 : $invoice->student->branch->tax }}%</b>
                                                 </td>
                                                 <td class="bg-grey text-center">
                                                     <b>
