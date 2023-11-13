@@ -353,9 +353,14 @@ class User extends Authenticatable
     {
         return Expense::all();
     }
-    public function totalExpense()
+    public function totalExpense($branch, $academicYear)
     {
-        return $this->expense()->sum('amount');
+        if ($branch == -1) {
+
+            return $this->expense()->where('created_at', ">=", $this->getAcademicYear($academicYear)->start_date)->where('created_at', '<=', $this->getAcademicYear($academicYear))->sum('amount');
+        } else {
+            return $this->expense()->where('branch_id', $branch)->where('created_at', ">=", $this->getAcademicYear($academicYear)->start_date)->where('created_at', '<=', $this->getAcademicYear($academicYear))->sum('amount');
+        }
     }
 
 

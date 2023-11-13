@@ -123,7 +123,7 @@
                                                     <td class="text-left">Misc Expense(Bill,Rent,Others)</td>
                                                     <td class="text-left">
 
-                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->totalExpense(): 0 }}
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->totalExpense(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
 
                                                     </td>
                                                 </tr>
