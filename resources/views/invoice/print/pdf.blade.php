@@ -94,7 +94,7 @@
 </style>
 
 <body>
-    <div class="" style="background-color: white;">
+    <div class="" style="background-color:white;">
         <div class="row">
             <div class="col-6 ">
 
@@ -119,7 +119,13 @@
 
                         <h6>{{ $invoice->student->first_name }}
                             {{ $invoice->student->last_name }}</h6>
-                        <h6>{{ $invoice->student->branch->res_third_address }},{{ $invoice->student->parents[0]->res_second_address }},
+                        <h6>{{ $invoice->student->branch->res_third_address }},
+                        </h6>
+                        <h6>
+
+                            {{ $invoice->student->parents[0]->res_second_address }},
+                        </h6>
+                        <h6>
                             {{ $invoice->student->parents[0]->res_address }}</h6>
                         <h6>{{ $invoice->student->parents[0]->res_town }}</h6>
                         <h6>
@@ -128,7 +134,7 @@
                         <h6>
                             Email:
                         </h6>
-                        <h6 class="pb-4">
+                        <h6 class="">
                             Phone:
                         </h6>
                     </div>
@@ -306,8 +312,9 @@
 
                             $weeks = $to->diffInWeeks($from->addDay(1));
                             $months = $to->diffInMonths($from->addDay(1));
-                            $sr=0;
+                            $sr = 0;
                         @endphp
+
                         <tbody>
                             {{-- @dd($invoice->subject) --}}
                             @if (str_contains($invoice->type, 'Resource Fee'))
@@ -650,7 +657,7 @@
                                             <b></b>
                                         </td>
                                         <td class="bg-grey text-center">
-                                            <b>0%</b>
+                                            <b>{{ $invoice->student->branch->tax_type == 'flat' ? 0 : $invoice->student->branch->tax }}%</b>
                                         </td>
                                         <td class="bg-grey text-center">
                                             <b>

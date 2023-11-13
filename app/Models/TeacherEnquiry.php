@@ -50,7 +50,12 @@ class TeacherEnquiry extends Model
         'rule_responsibility_document',
         'passport_date',
         'visa_date',
-        'year_id'
+        'year_id',
+        'note',
+        'kin_name',
+        'kin_phone',
+        'kin_relation',
+        'kin_address',
     ];
     public function department()
     {
@@ -72,7 +77,13 @@ class TeacherEnquiry extends Model
     {
         return $this->hasMany(TeacherEnquiryInterview::class, 'teacher_enquiry_id');
     }
-    // public function staff(){
-    //     return $this->hasOne();
-    // }
+    // public function
+    public function staff()
+    {
+        return $this->hasOne(Staff::class, 'teacher_enquiry_id');
+    }
+    public function payroll()
+    {
+        return $this->hasMany(TeacherPayroll::class, 'teacher_enquiry_id');
+    }
 }

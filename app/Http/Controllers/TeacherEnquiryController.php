@@ -6,6 +6,7 @@ use App\Models\EnquiryUpload;
 use App\Models\Staff;
 use App\Models\TeacherEnquiry;
 use App\Models\TeacherEnquiryInterview;
+use App\Models\TeacherPayroll;
 use App\Models\TeacherSubject;
 use App\Models\TeacherUpload;
 use Illuminate\Http\Request;
@@ -130,14 +131,34 @@ class TeacherEnquiryController extends Controller
         TeacherEnquiryInterview::create($data);
         return  redirect()->back()->with('success', 'Interview Request Successfully');
     }
-    public function note($id){
-
-        return view('teacherEnquiry.note',compact('id'));
+    public function note($id)
+    {
+        $enquiry = TeacherEnquiry::find($id);
+        return view('teacherEnquiry.note', compact('enquiry'));
     }
-    public function notePost(Request $request,$id){
-        $data=$request->except('_token');
-        $data['teacher_enquiry_id']=$id;
-        TeacherEnquiry::find($id)->create($data);
-        return redirect()->route('teacherEnquiry.index')->with('success','Note Submit successfully.');
+    public function notePost(Request $request, $id)
+    {
+        $data = $request->except('_token');
+        TeacherEnquiry::find($id)->update([
+            'note' => $data['note']
+        ]);
+        return redirect()->route('enquiryTeacher.index')->with('success', 'Note Submit successfully.');
+    }
+    public function payroll($id)
+    {
+        $enquiry = TeacherEnquiry::find($id);
+        return view('teacherEnquiry.payroll', compact('enquiry'));
+    }
+    public function payrollStore($id, Request $request)
+    {
+        $data = $request->except('_token');
+        $data['teacher_enquiry_id'] = $id;
+        TeacherPayroll::create($data);
+        return redirect()->back()->with('success', 'Payroll Upload Created Successfully.');
+    }
+    public function payrollDelete($id)
+    {
+        TeacherPayroll::find($id)->delete();
+        return redirect()->route('enquiryTeacher.index')->with('success', 'Payroll Upload Deleted Successfully.');
     }
 }

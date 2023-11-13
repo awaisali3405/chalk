@@ -57,23 +57,25 @@
                                                             </button>
                                                             <div class="dropdown-menu" x-placement="bottom-start"
                                                                 style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
-                                                                @if ($value->staff)
-                                                                @endif
                                                                 <a class="dropdown-item"
                                                                     href="{{ route('enquiryTeacher.edit', $value->id) }}">Edit</a>
                                                                 <a class="dropdown-item btn-event" data-toggle="modal"
                                                                     data-target="#notification-{{ $value->id }}">Notification</a>
-                                                                <a class="dropdown-item btn-event" data-toggle="modal"
-                                                                    data-target="#registration-{{ $value->id }}">Registration</a>
+                                                                @if (!$value->staff)
+                                                                    <a class="dropdown-item btn-event" data-toggle="modal"
+                                                                        data-target="#registration-{{ $value->id }}">Registration</a>
+                                                                @endif
                                                                 <a class="dropdown-item"
                                                                     href="{{ route('enquiryTeacher.upload', $value->id) }}">Document</a>
                                                                 <a class="dropdown-item"
-                                                                    href="{{ route('enquiryTeacher.upload', $value->id) }}">Upload</a>
+                                                                    href="{{ route('enquiryTeacher.payroll', $value->id) }}">Upload</a>
                                                                 <a class="dropdown-item"
                                                                     href="{{ route('enquiryTeacher.note', $value->id) }}">Note</a>
 
-                                                                <a class="dropdown-item"
-                                                                    href="{{ route('enquiryTeacher.destroy', $value->id) }}">Delete</a>
+                                                                @if (!$value->staff)
+                                                                    <a class="dropdown-item"
+                                                                        href="{{ route('enquiryTeacher.destroy', $value->id) }}">Delete</a>
+                                                                @endif
                                                             </div>
                                                         </td>
                                                     </tr>

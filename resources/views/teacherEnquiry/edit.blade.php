@@ -221,6 +221,37 @@
                                                     </tbody>
                                                 </table>
                                             </div>
+                                            <div class="col-12 pt-5">
+                                                <h4 class="hr-lines">Kinship Detail</h4>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="name" class="form-label">Name</label>
+                                                            <input type="text" class="form-control" name="kin_name" value="{{ $enquiry->kin_name }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="name" class="form-label">Contact</label>
+                                                            <input type="text" class="form-control" name="kin_phone" value="{{ $enquiry->kin_phone }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="name" class="form-label">Relation</label>
+                                                            <input type="text" class="form-control" value="{{ $enquiry->kin_relation }}"
+                                                                name="kin_relation">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="name" class="form-label">Address</label>
+                                                            <input type="text" class="form-control" value="{{ $enquiry->kin_address }}"
+                                                                name="kin_address">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
 
                                         </div>
