@@ -119,6 +119,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('enquiry/staff/register/{id}', [TeacherEnquiryController::class, 'registerPost'])->name('staff.register');
     Route::get('enquiry/registration/{id}', [TeacherEnquiryController::class, 'register'])->name('enquiryTeacher.registration');
     Route::post('enquiry/interview/{id}/send', [TeacherEnquiryController::class, 'sendInterview'])->name('enquiry.send.interview');
+    Route::get('enquiry/note/{id}', [TeacherEnquiryController::class, 'note'])->name('enquiry.note');
+    Route::post('enquiry/note/{id}', [TeacherEnquiryController::class, 'notePost'])->name('enquiry.note.store');
     // Staff
     Route::resource('staff', StaffController::class);
     Route::get('staff/attendance/{id}', [StaffController::class, 'attendance'])->name('staff.attendance.index');

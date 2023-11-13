@@ -74,6 +74,11 @@ class Student extends Model
         'parent_subject',
         'active'
     ];
+    public function monthlyFee()
+    {
+        // dd(((int)$this->total_fee * str_contains($this->year->name, "11") ? 49 : 52) / 12, $this->total_fee * 52 / 12);
+        return number_format(($this->total_fee * (str_contains($this->year->name, "11") ? 49 : 52)) / 12, 2);
+    }
     public function name()
     {
         return $this->first_name . " " . $this->last_name;

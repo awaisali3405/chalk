@@ -644,11 +644,12 @@
                                                                         <div class="input-group-prepend">
                                                                             <div class="input-group-text">£</div>
                                                                         </div>
-                                                                        <input type="text" class="form-control monthly-fee"
+                                                                        <input type="text"
+                                                                            class="form-control monthly-fee"
                                                                             value="0" disabled>
                                                                     </div>
 
-                                                                   
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -824,60 +825,50 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Mailing Address </label>
-                                                    <input type="text" class="form-control"
-                                                        value="{{ auth()->user()->parent->mail_address }}"
-                                                        name="mail_address" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Resdential Adress </label>
-                                                    <input type="text" class="form-control"
-                                                        value="{{ auth()->user()->parent->res_address }}"
-                                                        name="res_address" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Mailing Address</label>
+                                                    <label class="form-label">Address</label>
                                                     <input type="text" id="formatted_address_0" class="form-control"
-                                                        name="f_address_line[]">
+                                                        name="f_address_line[]"
+                                                        value="{{ auth()->user()->parent->res_address }}" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Second Mailing Address Line </label>
+                                                    <label class="form-label">Second Address Line </label>
                                                     <input type="text" id="formatted_address_1" class="form-control"
-                                                        name="s_address_line[]">
+                                                        name="s_address_line[]"
+                                                        value="{{ auth()->user()->parent->res_second_address }}" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Third Mailing Address Line</label>
+                                                    <label class="form-label">Third Address Line</label>
                                                     <input type="text" id="formatted_address_2" class="form-control"
-                                                        name="t_address_line[]">
+                                                        name="t_address_line[]"
+                                                        value="{{ auth()->user()->parent->res_third_address }}" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label"> Mailing Town</label>
+                                                    <label class="form-label"> Town</label>
                                                     <input type="text" id="town_or_city" class="form-control"
-                                                        name="town[]">
+                                                        name="town[]" value="{{ auth()->user()->parent->res_town }}"
+                                                        disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label"> Mailing County </label>
+                                                    <label class="form-label"> County </label>
                                                     <input type="text" id="county" class="form-control"
-                                                        name="county[]">
+                                                        name="county[]" value="{{ auth()->user()->parent->res_country }}"
+                                                        disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label"> Mailing Postcode</label>
+                                                    <label class="form-label"> Postcode</label>
                                                     <input type="text" id="postcode" class="form-control"
-                                                        name="res_address1[]">
+                                                        name="res_address1[]"
+                                                        value="{{ auth()->user()->parent->res_postal }}" disabled>
                                                 </div>
                                             </div>
 

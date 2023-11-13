@@ -86,7 +86,8 @@
                                                                 {{-- @dd($student->gender) --}}
                                                                 <input type="radio" class="form-check-input"
                                                                     id="male" value="male" name="gender"
-                                                                    {{ old('gender', $student->gender) == 'male' ? 'checked' : '' }}>
+                                                                    {{ old('gender', $student->gender) == 'male' ? 'checked' : '' }}
+                                                                    required>
                                                                 <label class="form-check-label" for="male">Male</label>
                                                             </div>
                                                         </div>
@@ -95,7 +96,8 @@
 
                                                                 <input type="radio" class="form-check-input"
                                                                     id="female" value="female" name="gender"
-                                                                    {{ old('gender', $student->gender) == 'female' ? 'checked' : '' }}>
+                                                                    {{ old('gender', $student->gender) == 'female' ? 'checked' : '' }}
+                                                                    required>
                                                                 <label class="form-check-label"
                                                                     for="female">Female</label>
                                                             </div>
@@ -106,7 +108,8 @@
 
                                                                 <input type="radio" class="form-check-input"
                                                                     id="other" value="other" name="gender"
-                                                                    {{ old('gender', $student->gender) == 'other' ? 'checked' : '' }}>
+                                                                    {{ old('gender', $student->gender) == 'other' ? 'checked' : '' }}
+                                                                    required>
                                                                 <label class="form-check-label" for="other">Other</label>
                                                             </div>
 
@@ -484,7 +487,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="form-label">Branch</label>
-                                                        <select class="form-control branch_student" name="branch_id">
+                                                        <select class="form-control branch_student" name="branch_id" required   >
                                                             <option value="">Select Branch</option>
                                                             @foreach ($branch as $value)
                                                                 <option value="{{ $value->id }}"
@@ -500,7 +503,8 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="form-label">Payment Type</label>
-                                                        <select class="form-control" name="payment_period">
+                                                        <select class="form-control" name="payment_period"
+                                                            id="payment-type">
                                                             <option value="Weekly"
                                                                 {{ old('payment_period', $student->payment_period) == 'Weekly' ? 'selected' : '' }}>
                                                                 Weekly
@@ -658,6 +662,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
                                                                 <label class="form-label">Admission Date</label>
@@ -666,7 +671,24 @@
 
                                                                     <input type="date" class="form-control"
                                                                         value="{{ $student->admission_date }}"
-                                                                        name="admission_date">
+                                                                        name="admission_date" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-12 d-none" id="monthly-fee">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Monthly Fee</label>
+                                                                <div class="input-group mb-2">
+                                                                    <div class="input-group mb-2">
+                                                                        <div class="input-group-prepend">
+                                                                            <div class="input-group-text">£</div>
+                                                                        </div>
+                                                                        <input type="text"
+                                                                            class="form-control monthly-fee"
+                                                                            value="{{ $student->monthlyFee() ? $student->monthlyFee() : 0 }}" disabled>
+                                                                    </div>
+
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -751,7 +773,7 @@
                                                             <div class="form-check">
 
                                                                 <input type="radio" class="form-check-input"
-                                                                    id="male" value="male" name="gender"
+                                                                    id="male" value="male" name="gender_p"
                                                                     {{ auth()->user()->parent->gender == 'male' ? 'checked' : '' }}
                                                                     disabled>
                                                                 <label class="form-check-label"
@@ -762,7 +784,7 @@
                                                             <div class="form-check">
 
                                                                 <input type="radio" class="form-check-input"
-                                                                    id="female" value="female" name="gender"
+                                                                    id="female" value="female" name="gender_p"
                                                                     {{ auth()->user()->parent->gender == 'female' ? 'checked' : '' }}
                                                                     disabled>
                                                                 <label class="form-check-label"
@@ -774,7 +796,7 @@
                                                             <div class="form-check">
 
                                                                 <input type="radio" class="form-check-input"
-                                                                    id="other" value="other" name="gender"
+                                                                    id="other" value="other" name="gender_p"
                                                                     {{ auth()->user()->parent->gender == 'other' ? 'checked' : '' }}
                                                                     disabled>
                                                                 <label class="form-check-label"
@@ -842,60 +864,50 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Mailing Address </label>
-                                                    <input type="text" class="form-control"
-                                                        value="{{ auth()->user()->parent->mail_address }}"
-                                                        name="mail_address" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Resdential Adress </label>
-                                                    <input type="text" class="form-control"
-                                                        value="{{ auth()->user()->parent->res_address }}"
-                                                        name="res_address" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Mailing Address</label>
+                                                    <label class="form-label">Address</label>
                                                     <input type="text" id="formatted_address_0" class="form-control"
-                                                        name="f_address_line[]">
+                                                        name="f_address_line[]"
+                                                        value="{{ auth()->user()->parent->res_address }}" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Second Mailing Address Line </label>
+                                                    <label class="form-label">Second Address Line </label>
                                                     <input type="text" id="formatted_address_1" class="form-control"
-                                                        name="s_address_line[]">
+                                                        name="s_address_line[]"
+                                                        value="{{ auth()->user()->parent->res_second_address }}" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Third Mailing Address Line</label>
+                                                    <label class="form-label">Third Address Line</label>
                                                     <input type="text" id="formatted_address_2" class="form-control"
-                                                        name="t_address_line[]">
+                                                        name="t_address_line[]"
+                                                        value="{{ auth()->user()->parent->res_third_address }}" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label"> Mailing Town</label>
+                                                    <label class="form-label"> Town</label>
                                                     <input type="text" id="town_or_city" class="form-control"
-                                                        name="town[]">
+                                                        name="town[]" value="{{ auth()->user()->parent->res_town }}"
+                                                        disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label"> Mailing County </label>
+                                                    <label class="form-label"> County </label>
                                                     <input type="text" id="county" class="form-control"
-                                                        name="county[]">
+                                                        name="county[]" value="{{ auth()->user()->parent->res_country }}"
+                                                        disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label"> Mailing Postcode</label>
+                                                    <label class="form-label"> Postcode</label>
                                                     <input type="text" id="postcode" class="form-control"
-                                                        name="res_address1[]">
+                                                        name="res_address1[]"
+                                                        value="{{ auth()->user()->parent->res_postal }}" disabled>
                                                 </div>
                                             </div>
 
@@ -1253,15 +1265,7 @@
                                                             value="{{ $student->parents[1]->email }}">
                                                     </div>
                                                 </div>
-
-
-
-
-
-
                                             </div>
-
-
                                         </div>
 
 

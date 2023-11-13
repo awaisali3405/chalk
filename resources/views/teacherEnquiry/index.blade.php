@@ -57,6 +57,8 @@
                                                             </button>
                                                             <div class="dropdown-menu" x-placement="bottom-start"
                                                                 style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
+                                                                @if ($value->staff)
+                                                                @endif
                                                                 <a class="dropdown-item"
                                                                     href="{{ route('enquiryTeacher.edit', $value->id) }}">Edit</a>
                                                                 <a class="dropdown-item btn-event" data-toggle="modal"
@@ -68,7 +70,7 @@
                                                                 <a class="dropdown-item"
                                                                     href="{{ route('enquiryTeacher.upload', $value->id) }}">Upload</a>
                                                                 <a class="dropdown-item"
-                                                                    href="{{ route('enquiryTeacher.upload', $value->id) }}">Note</a>
+                                                                    href="{{ route('enquiryTeacher.note', $value->id) }}">Note</a>
 
                                                                 <a class="dropdown-item"
                                                                     href="{{ route('enquiryTeacher.destroy', $value->id) }}">Delete</a>

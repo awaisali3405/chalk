@@ -171,14 +171,16 @@ class InvoiceController extends Controller
                 $student = Student::find($value);
                 if ($student->payment_period == "Weekly") {
                     $amount = (($student->enquirySubject->sum('amount') - $student->fee_discount) * $weeks);
-                    $invoice = StudentInvoice::create([
-                        'student_id' => $student->id,
-                        'type' => 'Weekly Fee',
-                        'tax' => $student->tax,
-                        'amount' => $amount,
-                        'from_date' => $to,
-                        'to_date' => $from,
-                    ]);
+                    if ($amount > 0) {
+                        $invoice = StudentInvoice::create([
+                            'student_id' => $student->id,
+                            'type' => 'Weekly Fee',
+                            'tax' => $student->tax,
+                            'amount' => $amount,
+                            'from_date' => $to,
+                            'to_date' => $from,
+                        ]);
+                    }
                 } else {
                     if (str_contains($student->year->name, "11")) {
                         $amount = (($student->enquirySubject->sum('amount') - $student->fee_discount) * 40 / 9) * $months;
@@ -186,14 +188,17 @@ class InvoiceController extends Controller
 
                         $amount = (($student->enquirySubject->sum('amount') - $student->fee_discount) * 52 / 12) * $months;
                     }
-                    StudentInvoice::create([
-                        'student_id' => $student->id,
-                        'type' => 'Monthly Fee',
-                        'amount' => $amount,
-                        'tax' => $student->tax,
-                        'from_date' => $to,
-                        'to_date' => $from,
-                    ]);
+                    if ($amount > 0) {
+
+                        StudentInvoice::create([
+                            'student_id' => $student->id,
+                            'type' => 'Monthly Fee',
+                            'amount' => $amount,
+                            'tax' => $student->tax,
+                            'from_date' => $to,
+                            'to_date' => $from,
+                        ]);
+                    }
                 }
             }
             return redirect()->route('invoice.index')->with('success', "General Invoice Created Successfully");
