@@ -15,7 +15,8 @@ class StaffAttendance extends Model
         'end_time',
         'staff_id',
         'paid_hour',
-        'rate'
+        'rate',
+        'is_paid'
     ];
     public function staff()
     {

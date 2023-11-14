@@ -18,7 +18,8 @@ class Expense extends Model
         'description',
         'branch_id',
         'tax',
-        'net'
+        'net',
+        'file'
     ];
     public function accountType()
     {

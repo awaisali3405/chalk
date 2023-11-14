@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Purchase;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -84,11 +85,60 @@ class ProductController extends Controller
         $product = Product::find($id);
         return view('product.transfer.index', compact('product'));
     }
-    public function transferPost(Request $request,$id)
+    public function transferPost(Request $request, $id)
     {
+        $data = $request->except('_token');
+        $o_product = Product::find($id);
+
         $product = Product::where('branch_id', $request->branch_id)->where('year_id', $request->year_id)->first();
-        if ($product) {
-            
+        $transfer = false;
+        $remaining = $request->quantity;
+        foreach ($o_product->purchase as $value) {
+            if (!$transfer) {
+                if ($value->quantity >= $remaining) {
+                    $newQuantity = $value->quantity - $remaining;
+                    $value->update([
+                        'quantity' => $newQuantity
+                    ]);
+                    if ($product) {
+                        Purchase::create([
+                            'branch_id' => $request->branch_id,
+                            'supplier_id' => $value->supplier_id,
+                            'year_id' => $request->year_id,
+                            'key_stage_id' => $value->key_stage_id,
+                            'product_id' => $product->id,
+                            'quantity' => $data['quantity'],
+                            'rate' => $data['rate'],
+                            'amount' => $data['rate'] * $data['quantity'],
+                            'mode' => $value->mode,
+                            'date' => $o_product->purchase[0]->date,
+                        ]);
+                    } else {
+                        $product =  Product::create([
+                            'branch_id' => $request->branch_id,
+                            'year_id' => $request->year_id,
+                            'name' => $o_product->name
+                        ]);
+                        Purchase::create([
+                            'branch_id' => $request->branch_id,
+                            'supplier_id' => $o_product->purchase[0]->supplier_id,
+                            'year_id' => $request->year_id,
+                            'key_stage_id' => $o_product->purchase[0]->key_stage_id,
+                            'product_id' => $product->id,
+                            'quantity' => $data['quantity'],
+                            'rate' => $data['rate'],
+                            'amount' => $data['rate'] * $data['quantity'],
+                            'mode' => $o_product->purchase[0]->mode,
+                            'date' => $o_product->purchase[0]->date,
+                        ]);
+                    }
+                    $transfer = true;
+                } else {
+                    $remaining = $value->quantity - $remaining;
+                    $value->delete();
+                }
+            }
         }
+        return redirect()->route('product.index')->with('success', 'Transfer Completed Successfully.');
     }
 }

@@ -20,7 +20,7 @@
                             <h5 class="card-title">Expense</h5>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('expense.store') }}" method="post">
+                            <form action="{{ route('expense.store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
@@ -91,6 +91,13 @@
                                         <div class="form-group">
                                             <label class="form-label">Date</label>
                                             <input type="date" name="date" id="" class="form-control"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">File</label>
+                                            <input type="file" name="file" id="" class="form-control"
                                                 required>
                                         </div>
                                     </div>

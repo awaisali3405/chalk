@@ -1212,14 +1212,30 @@
                     success: function(success) {
                         console.log(success);
                         $('#salary').val(success.salary);
-                        $('#total').val(success.salary);
+                        var salary = $('#salary').val();
+
+                        var tax = $("#tax").val() == "" ? 0 : $("#tax").val();
+                        var ssp = $("#ssp").val() == "" ? 0 : $("#ssp").val();
+                        var ni = $("#ni").val() == "" ? 0 : $("#ni").val();
+                        var dbs = $("#dbs").val() == "" ? 0 : $("#dbs").val();
+                        var bonus = $("#bonus").val() == "" ? 0 : $("#bonus").val();
+                        var pension = $("#pension").val() == "" ? 0 : $("#pension").val();
+                        var deduction = $("#deduction").val() == "" ? 0 : $("#deduction").val();
+                        var loan = $("#loan").val() == "" ? 0 : $("#loan").val();
+                        var net = (parseFloat(salary) + parseFloat(ssp) + parseFloat(bonus)) - (
+                            parseFloat(deduction) +
+                            parseFloat(loan) +
+                            parseFloat(ni) + parseFloat(dbs) + parseFloat(tax) + parseFloat(pension)
+                        );
+                        $('#total').val(net);
                         $('#hour').html(success.paid_hour)
                     }
 
                 })
             }
         })
-        $('#deduction').add('#tax').add("#ssp").add("#ni").add("#dbs").add("#bonus").add('#pension').on('change keyup',
+        $('#deduction').add('#tax').add("#ssp").add("#ni").add("#dbs").add("#bonus").add('#pension').add("#loan").on(
+            'change keyup',
             function() {
                 var salary = $('#salary').val();
 
@@ -1230,7 +1246,9 @@
                 var bonus = $("#bonus").val() == "" ? 0 : $("#bonus").val();
                 var pension = $("#pension").val() == "" ? 0 : $("#pension").val();
                 var deduction = $("#deduction").val() == "" ? 0 : $("#deduction").val();
+                var loan = $("#loan").val() == "" ? 0 : $("#loan").val();
                 var net = (parseFloat(salary) + parseFloat(ssp) + parseFloat(bonus)) - (parseFloat(deduction) +
+                    parseFloat(loan) +
                     parseFloat(ni) + parseFloat(dbs) + parseFloat(tax) + parseFloat(pension));
                 $('#total').val(net);
             })
@@ -1261,6 +1279,17 @@
 
             $('#installment').val(total);
         });
+    </script>
+
+
+    {{-- Transfer Product --}}
+    <script>
+        $('#t-quantity').add('#t-rate').on('keyup change', function() {
+            quantity = $('#t-quantity').val() == '' ? 0 : $("#t-quantity").val();
+            rate = $("#t-rate").val() == '' ? 0 : $("#t-rate").val();
+            total = (parseFloat(quantity) * parseFloat(rate));
+            $('#t-total').val(total);
+        })
     </script>
 
     {{--

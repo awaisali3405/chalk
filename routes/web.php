@@ -92,7 +92,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('receipt', ReceiptController::class);
     // Product
     Route::resource('product', ProductController::class);
-    Route::get('/product/transfer', [ProductController::class, 'transfer'])->name('product.transfer');
+    Route::get('/product/transfer/{id}', [ProductController::class, 'transfer'])->name('product.transfer');
+    Route::post('/product/transfer/{id}/store', [ProductController::class, 'transferPost'])->name('product.transfer.store');
 
     Route::resource('purchase', PurchaseController::class);
     Route::resource('sale', SaleController::class);

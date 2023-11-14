@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SalaryInvoice;
 use App\Models\Staff;
 use App\Models\StaffAttendance;
+use App\Models\StaffLoan;
 use App\Models\StaffReceipt;
 use Illuminate\Http\Request;
 
@@ -104,6 +105,18 @@ class StaffController extends Controller
     {
         $data = $request->except('_token');
         StaffReceipt::create($data);
+        StaffAttendance::where('date', '>=', $request->from_date)->where('date', '<=', $request->to_date)->where('staff_id', $request->staff_id)->update([
+            'is_paid' => true
+        ]);
+        $staff = Staff::find($request->staff_id);
+        if (count($staff->loan) > 0 && $staff->loan[0]->remaining() <= 0) {
+            $loanId =  $staff->loan[0]->id;
+            StaffLoan::find($loanId)->update([
+                'is_paid' => true
+            ]);
+            // dd($staff->loan[0]->is_paid);
+        }
+        // dd($data);
         if (isset($request->invoice_id)) {
             SalaryInvoice::find($request->invoice_id)->update([
                 'is_paid' => true
@@ -120,7 +133,7 @@ class StaffController extends Controller
     public function getAttendance(Request $request)
     {
         $staff = Staff::find($request->staff);
-        $attendance = StaffAttendance::where('staff_id', $request->staff)->where('date', '>=', $request->from)->where('date', '<=', $request->to)->get();
+        $attendance = StaffAttendance::where('staff_id', $request->staff)->where('date', '>=', $request->from)->where('date', '<=', $request->to)->where('is_paid', false)->get();
         if ($staff->salary_type == "Hourly") {
             $salary = 0;
             foreach ($attendance as $value) {

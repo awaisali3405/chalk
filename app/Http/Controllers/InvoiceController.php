@@ -201,9 +201,9 @@ class InvoiceController extends Controller
                     }
                 }
             }
-            return redirect()->route('invoice.index')->with('success', "General Invoice Created Successfully");
+            return redirect()->back()->with('success', "General Invoice Created Successfully");
         } else {
-            return redirect()->route('invoice.index')->with('error', "Select Student");
+            return redirect()->back()->with('error', "Select Student");
         }
     }
     public function print($id)

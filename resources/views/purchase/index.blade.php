@@ -35,7 +35,11 @@
                                                     <th>
                                                         Branch
                                                     </th>
+                                                    <th>
+                                                        Product
+                                                    </th>
                                                     <th>Amount</th>
+                                                    <th>Quantity</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -46,7 +50,9 @@
 
                                                         <td>{{ $value->year->name }}</td>
                                                         <td>{{ $value->branch->name }}</td>
+                                                        <td>{{ $value->product->name }}</td>
                                                         <td>{{ $value->amount }}</td>
+                                                        <td>{{ $value->quantity }}</td>
                                                         <td>
                                                             <a href="{{ route('purchase.edit', $value->id) }}"
                                                                 class="btn btn-sm btn-primary"><i

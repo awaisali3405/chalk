@@ -20,7 +20,8 @@
                             <h5 class="card-title">Expense </h5>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('expense.update', $expense->id) }}" method="post">
+                            <form action="{{ route('expense.update', $expense->id) }}" method="post"
+                                enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
@@ -105,7 +106,15 @@
                                                 value="{{ $expense->date }}" required>
                                         </div>
                                     </div>
-
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">File</label>
+                                            <input type="file" name="file" id="" class="form-control">
+                                            @if ($expense->file)
+                                                <a href="{{ asset($expense->file) }}" target="_blank">File</a>
+                                            @endif
+                                        </div>
+                                    </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                         <a href="{{ route('expense.index') }}" class="btn btn-light">Cencel</a>

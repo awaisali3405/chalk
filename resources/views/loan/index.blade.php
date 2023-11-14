@@ -48,8 +48,8 @@
                                                         <td>{{ $value->branch->name }}</td>
                                                         <td>{{ $value->staff->department->name }}</td>
                                                         <td>{{ $value->amount }}</td>
-                                                        <td></td>
-                                                        <td></td>
+                                                        <td>{{ $value->paid() }}</td>
+                                                        <td>{{ $value->remaining() }}</td>
 
 
                                                         <td></td>

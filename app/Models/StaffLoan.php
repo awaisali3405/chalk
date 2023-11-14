@@ -15,6 +15,7 @@ class StaffLoan extends Model
         'amount',
         'partition',
         'mode',
+        'is_paid'
     ];
     public function branch()
     {
@@ -27,5 +28,13 @@ class StaffLoan extends Model
     public function installment()
     {
         return number_format($this->amount / $this->partition);
+    }
+    public function remaining()
+    {
+        return $this->amount - $this->staff->receipt->sum('loan');
+    }
+    public function paid()
+    {
+        return  $this->staff->receipt->sum('loan');
     }
 }

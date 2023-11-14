@@ -29,7 +29,6 @@
                         <div class="card-body">
                             <form action="{{ route('product.transfer.store', $product->id) }}" method="post">
                                 @csrf
-                                @method('PUT')
                                 <div class="row">
                                     <div class="col-6">
                                         Orginal Stock
@@ -85,11 +84,9 @@
                                                 @foreach ($branch as $value)
                                                     <option value="{{ $value->id }}">{{ $value->name }}</option>
                                                 @endforeach
-
                                             </select>
                                         </div>
                                     </div>
-
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Quantity</label>
@@ -100,14 +97,34 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Quantity</label>
-                                            <input type="number" class="form-control" name="quantity" id="quantity"
-                                                max="{{ $product->purchase->sum('quantity') }}">
-                                            <span class="alert text-danger d-none" id="alert-quantity"> Your quantiy is
-                                                greater then stock
-                                                Quantity</span>
+                                            <input type="number" class="form-control" name="quantity" id="t-quantity"
+                                                max="{{ $product->purchase->sum('quantity') }}" value="0">
                                         </div>
                                     </div>
-
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Rate</label>
+                                            <input type="number" class="form-control" name="rate"
+                                                value="{{ count($product->purchase) > 0 ? number_format($product->purchase[0]->rate) : 0 }}"
+                                                disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Rate</label>
+                                            <input type="number" class="form-control" name="rate" id="t-rate"
+                                                value="0">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Total</label>
+                                            <input type="number" class="form-control" name="total" id="t-total"
+                                                value="0" disabled>
+                                        </div>
+                                    </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                         <a href="{{ route('product.index') }}" class="btn btn-light">Cencel</a>

@@ -33,8 +33,10 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $data = $request->except('_token');
+        if (isset($data['file'])) {
+            $data['file'] = $this->saveImage($data['file']);
+        }
         Expense::create($data);
         return redirect()->route('expense.index')->with('success', 'Expense Created Successfully');
     }
@@ -52,6 +54,7 @@ class ExpenseController extends Controller
     public function edit(string $id)
     {
         $expense = Expense::find($id);
+
         return view('expense.edit', compact('expense'));
     }
 
@@ -61,6 +64,9 @@ class ExpenseController extends Controller
     public function update(Request $request, string $id)
     {
         $data = $request->except('_token');
+        if (isset($data['file'])) {
+            $data['file'] = $this->saveImage($data['file']);
+        }
         Expense::find($id)->update($data);
         return redirect()->route('expense.index')->with('success', 'Expense Updated Successfully');
     }
