@@ -52,13 +52,13 @@
                                                             <div class="dropdown-menu" x-placement="bottom-start"
                                                                 style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
                                                                 <a class="dropdown-item"
+                                                                    href="{{ route('staff.show', $value->id) }}">Show</a>
+                                                                <a class="dropdown-item"
                                                                     href="{{ route('staff.edit', $value->id) }}">Edit</a>
                                                                 <a class="dropdown-item"
                                                                     href="{{ route('staff.attendance.index', $value->id) }}">Attendance</a>
                                                                 <a class="dropdown-item"
                                                                     href="{{ route('staff.pay', $value->id) }}">Pay</a>
-
-
                                                             </div>
                                                             {{-- <a href="{{ route('branch.show', $value->id) }}"
                                                                 class="btn btn-sm btn-danger"><i

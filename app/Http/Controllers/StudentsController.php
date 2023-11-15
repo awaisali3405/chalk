@@ -9,19 +9,11 @@ use App\Models\Enquiry;
 use App\Models\Parents;
 use App\Models\EnquirySubject;
 use App\Models\studentUpload;
-use App\Models\InvoiceSubject;
-use App\Models\KeyStage;
-use App\Models\Paper;
-use App\Models\ScienceType;
 use App\Models\Student;
 use App\Models\StudentInvoice;
-use App\Models\Subject;
-use App\Models\Transaction;
 use App\Models\Year;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\View;
 
 class StudentsController extends Controller
 {

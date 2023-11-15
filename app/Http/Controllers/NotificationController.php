@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Staff;
-use App\Models\StaffLoan;
 use Illuminate\Http\Request;
 
-class LoanController extends Controller
+class NotificationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $loan = StaffLoan::all();
-        return view('loan.index', compact('loan'));
+
+        return view('generalNotification.send');
     }
 
     /**
@@ -22,7 +20,7 @@ class LoanController extends Controller
      */
     public function create()
     {
-        return view('loan.add');
+        //
     }
 
     /**
@@ -30,9 +28,7 @@ class LoanController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->except('_token');
-        $loan = StaffLoan::create($data);
-        return redirect()->route('loan.index')->with('success', 'Loan Created Successfully.');
+        //
     }
 
     /**
@@ -48,6 +44,7 @@ class LoanController extends Controller
      */
     public function edit(string $id)
     {
+        //
     }
 
     /**
@@ -64,16 +61,5 @@ class LoanController extends Controller
     public function destroy(string $id)
     {
         //
-    }
-    public function getStaff($id)
-    {
-        $staff = Staff::where('branch_id', $id)->get();
-        $string = '<option value="">-</option>';
-        foreach ($staff as $value) {
-            $string .= '<option value="' . $value->id . '">' . $value->name . '</option>';
-        }
-        return response()->json([
-            'html' => $string
-        ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Email;
 use App\Models\EnquiryUpload;
 use App\Models\Staff;
 use App\Models\TeacherEnquiry;
@@ -10,6 +11,7 @@ use App\Models\TeacherPayroll;
 use App\Models\TeacherSubject;
 use App\Models\TeacherUpload;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class TeacherEnquiryController extends Controller
 {
@@ -128,6 +130,18 @@ class TeacherEnquiryController extends Controller
     {
         $data = $request->except('_token');
         $data['teacher_enquiry_id'] = $id;
+        $enquiry = TeacherEnquiry::find($id);
+        $email = Email::find(7);
+        // dd(gettype($email->template));
+        $email->template = str_replace("[Name]", $enquiry->first_name . " " . $enquiry->last_name, $email->template);
+        $email->template = str_replace("[Date]", auth()->user()->ukFormat($data['date']), $email->template);
+        $email->template = str_replace("[Time]", auth()->user()->timeFormat($data['time']), $email->template);
+
+        // $template = str_replace("[Student's Name]", $enquiry->first_name . " " . $enquiry->last_name, $template);
+        Mail::send('notification.enquiry', ['template' => $email->template], function ($message) use ($enquiry, $email) {
+            $message->to($enquiry->email);
+            $message->subject($email->name);
+        });
         TeacherEnquiryInterview::create($data);
         return  redirect()->back()->with('success', 'Interview Request Successfully');
     }
