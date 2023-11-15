@@ -1292,6 +1292,26 @@
         })
     </script>
 
+
+
+    {{-- General Notification --}}
+    <script>
+        $('#people').on('change keyup', function() {
+            people = $(this).val();
+            if (people >= 1) {
+                $.ajax({
+                    method: 'GET',
+                    url: `/api/get/people/${people}`,
+                    success: function(success) {
+                        $('#people-list').html(success.html);
+
+                    }
+
+                })
+            }
+        });
+    </script>
+
     {{--
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"

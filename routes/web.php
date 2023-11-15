@@ -15,6 +15,7 @@ use App\Http\Controllers\GenerateSalaryController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\KeyStageController;
 use App\Http\Controllers\LoanController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PaperController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ProductController;
@@ -136,6 +137,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('staff/pay/store', [StaffController::class, 'payStore'])->name('staff.pay.store');
     // Generate Salary
     Route::resource('generateSalary', GenerateSalaryController::class);
+    // General Notification
+    Route::resource('generalNotification',NotificationController::class);
     // Staff Attendance
     Route::resource('staffAttendance', StaffAttendanceController::class);
     // loan

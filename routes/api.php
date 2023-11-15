@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\EnquirySubjectController;
+use App\Http\Controllers\LoanController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StaffController;
@@ -37,4 +39,6 @@ Route::get('/get/parent/data/{id}', [ParentController::class, 'getParentData']);
 Route::get('/get/product/{year}/{branch}', [ProductController::class, 'getProduct']);
 Route::get('/get/branch/{id}', [BranchController::class, 'getBranch']);
 Route::post('/get/salary', [StaffController::class, 'getAttendance']);
-Route::get('get/staff/{id}', [StaffController::class, 'getStaff']);
+Route::get('get/staff/{id}/general', [StaffController::class, 'getStaff']);
+Route::get('get/staff/{id}', [LoanController::class, 'getStaff']);
+Route::get('get/people/{id}', [NotificationController::class, 'getPeople']);    

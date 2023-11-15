@@ -103,7 +103,7 @@
                                                                 {{ $value1->invoice->student->last_name }}
                                                                 {{ $value1->description }} {{ $value1->mode }}</td>
                                                             <td>{{ $value1->amount }}</td>
-                                                            <td></td>
+                                                            <td>0</td>
                                                             <td>{{ $total }}</td>
                                                         </tr>
                                                     @endforeach
@@ -121,7 +121,7 @@
                                                             <td>{{ auth()->user()->week($value1->date) }}
                                                             </td>
                                                             <td>{{ $value1->description }}</td>
-                                                            <td></td>
+                                                            <td>0</td>
                                                             <td>{{ $value1->amount }}</td>
                                                             <td>{{ $total }}</td>
                                                         </tr>
@@ -141,7 +141,7 @@
                                                             <td>{{ auth()->user()->week($value1->date) }}
                                                             </td>
                                                             <td>{{ $value1->description }}</td>
-                                                            <td></td>
+                                                            <td>0</td>
                                                             <td>{{ $value1->amount }}</td>
                                                             <td>{{ $total }}</td>
                                                         </tr>

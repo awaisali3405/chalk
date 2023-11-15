@@ -70,7 +70,10 @@ class LoanController extends Controller
         $staff = Staff::where('branch_id', $id)->get();
         $string = '<option value="">-</option>';
         foreach ($staff as $value) {
-            $string .= '<option value="' . $value->id . '">' . $value->name . '</option>';
+            if (count($staff->loan) <= 0) {
+
+                $string .= '<option value="' . $value->id . '">' . $value->name . '</option>';
+            }
         }
         return response()->json([
             'html' => $string

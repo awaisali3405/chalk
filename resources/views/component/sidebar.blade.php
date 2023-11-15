@@ -169,6 +169,7 @@
                     <ul aria-expanded="false">
                         <li><a href="{{ route('cashFlow.index') }}">Cash Flow</a></li>
                         <li><a href="{{ route('taxFlow.index') }}">Tax Flow</a></li>
+                        <li><a href="">Loan Flow(soon)</a></li>
                         {{-- <li><a href="{{ route('branch.create') }}"></a></li> --}}
                     </ul>
                 </li>
@@ -224,6 +225,15 @@
                     <ul aria-expanded="false">
                         <li><a href="{{ route('department.index') }}">All Department</a></li>
                         <li><a href="{{ route('department.create') }}">Add Department</a></li>
+                    </ul>
+                </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-home"></i>
+                        <span class="nav-text">Notification</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('generalNotification.index') }}">Send Notification</a></li>
+                        <li><a href="{{ route('generalNotification.create') }}">History Notification</a></li>
                     </ul>
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">

@@ -83,16 +83,7 @@
                                         <li class="nav-item"><a href="#receipt-list" data-toggle="tab"
                                                 class="nav-link general {{ request()->all() ? 'show active' : '' }}">All
                                                 Invoice</a></li>
-                                        {{-- <li class="nav-item"><a href="#upload" data-toggle="tab" class="nav-link">Upload</a>
-                                        </li>
-                                        <li class="nav-item"><a href="#note" data-toggle="tab" class="nav-link">Notes</a>
-                                        </li>
-                                        <li class="nav-item"><a href="#attandence" data-toggle="tab"
-                                                class="nav-link">Attendance</a></li>
-                                        <li class="nav-item"><a href="#statement" data-toggle="tab"
-                                                class="nav-link">Statement</a></li>
-                                        <li class="nav-item"><a href="#parent" data-toggle="tab" class="nav-link">Parent
-                                                Detail</a></li> --}}
+                          
                                     </ul>
                                     <div class="tab-content">
                                         <div id="additional"
