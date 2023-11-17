@@ -19,6 +19,8 @@
     <!-- Datatable -->
     <link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 
+    {{-- Full Calender --}}
+    <link href="vendor/fullcalendar/css/fullcalendar.min.css" rel="stylesheet">
     {{-- Select 2 --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
@@ -1326,6 +1328,23 @@
     <script src="{{ asset('vendor/summernote/js/summernote.min.js') }}"></script>
     <!-- Summernote init -->
     <script src="{{ asset('js/plugins-init/summernote-init.js') }}"></script>
+
+
+    <!-- Required vendors -->
+    <script src="vendor/global/global.min.js"></script>
+    <script src="vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    {{-- <script src="js/custom.min.js"></script>
+    <script src="js/dlabnav-init.js"></script> --}}
+
+    <!-- Svganimation scripts -->
+    <script src="{{ asset('vendor/svganimation/vivus.min.js') }}"></script>
+    <script src="{{ asset('vendor/svganimation/svg.animation.js') }}"></script>
+    <script src="{{ asset('js/styleSwitcher.js') }}"></script>
+
+    <script src="{{ asset('vendor/jqueryui/js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('vendor/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('vendor/fullcalendar/js/fullcalendar.min.js') }}"></script>
+    <script src="{{ asset('js/plugins-init/fullcalendar-init.js') }}"></script>
 </body>
 
 

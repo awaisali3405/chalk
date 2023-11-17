@@ -16,6 +16,7 @@ use App\Models\ScienceType;
 use App\Models\Subject;
 use App\Models\Supplier;
 use App\Models\Year;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
@@ -60,5 +61,9 @@ class Controller extends BaseController
         View::share('department', $department);
         $academicCalender = AcademicCalender::all();
         View::share('academicCalender', $academicCalender);
+    }
+    public function ukFormat($date)
+    {
+        return Carbon::parse($date)->format('d/m/Y');
     }
 }

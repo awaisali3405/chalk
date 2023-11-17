@@ -36,20 +36,9 @@
                                     <li class="list-group-item d-flex justify-content-between"><span
                                             class="mb-0">Branch</span> <strong
                                             class="text-muted">{{ $staff->branch->name }}</strong></li>
-                                    <li class="list-group-item d-flex justify-content-between"><span class="mb-0"></span>
-                                        <strong class="text-muted">£ {{ $staff->salary }}</strong>
-                                    </li>
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Staff
                                             {{ $staff->salary_type }}
                                             Salary</span> <strong class="text-muted">£ {{ $staff->salary }}</strong></li>
-                                    <li class="list-group-item d-flex justify-content-between"><span
-                                            class="mb-0">Hours</span> <strong class="text-muted" id="hour"></strong>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Staff
-                                            Salary Paid</span> <strong class="text-muted"></strong></li>
-
-
-
                                 </ul>
 
                             </div>
@@ -69,6 +58,8 @@
                                                 List</a></li>
                                         <li class="nav-item"><a href="#attendance-list" data-toggle="tab"
                                                 class="nav-link ">Attendance List</a></li>
+                                        <li class="nav-item"><a href="#upload-list" data-toggle="tab"
+                                                class="nav-link ">Upload List</a></li>
                                         {{-- <li class="nav-item"><a href="#upload" data-toggle="tab" class="nav-link">Upload</a>
                                         </li>
                                         <li class="nav-item"><a href="#note" data-toggle="tab" class="nav-link">Notes</a>
@@ -118,22 +109,7 @@
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                {{-- <h4 class="text-primary mb-4">Personal Information</h4> --}}
 
-                                                {{-- <div class="profile-about-me">
-                                                <div class="border-bottom-1 pb-4">
-                                                    <p>A wonderful serenity has taken possession of my entire soul, like
-                                                        these sweet mornings of spring which I enjoy with my whole heart. I
-                                                        am alone, and feel the charm of existence was created for the bliss
-                                                        of souls like mine.I am so happy, my dear friend, so absorbed in the
-                                                        exquisite sense of mere tranquil existence, that I neglect my
-                                                        talents.</p>
-                                                    <p>A collection of textile samples lay spread out on the table - Samsa
-                                                        was a travelling salesman - and above it there hung a picture that
-                                                        he had recently cut out of an illustrated magazine and housed in a
-                                                        nice, gilded frame.</p>
-                                                </div>
-                                            </div> --}}
                                             </div>
 
                                         </div>
@@ -177,6 +153,37 @@
                                                         nice, gilded frame.</p>
                                                 </div>
                                             </div> --}}
+                                            </div>
+
+                                        </div>
+                                        <div id="upload-list" class="tab-pane  ">
+                                            <div class="profile-personal-info pt-4">
+                                                <div class="table-responsive">
+                                                    <table id="example5" class="display">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sr</th>
+                                                                <th>Document Name</th>
+                                                                <th>File Name</th>
+                                                                <th>Date</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($staff->teacherEnquiry->upload as $key => $value)
+                                                                <tr>
+                                                                    <td>{{ $key + 1 }}</td>
+                                                                    <td>{{ $value->document_name }}</td>
+                                                                    <td><a href="{{ asset($value->file_name) }}"
+                                                                            target="_blank" rel="noopener noreferrer">
+                                                                            {{ $value->file_name }}</td>
+                                                                    </a>
+                                                                    <td>{{ auth()->user()->ukFormat($value->date) }}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
                                             </div>
 
                                         </div>

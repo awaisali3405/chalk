@@ -9,6 +9,7 @@ use App\Http\Controllers\CashFlowController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\EnquiryController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\ExpenseAccountTypeController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\GenerateSalaryController;
@@ -135,10 +136,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('staff/pay/{id}', [StaffController::class, 'pay'])->name('staff.pay');
     Route::get('staff/invoice/pay/{id}', [StaffController::class, 'invoicePay'])->name('staff.invoice.pay');
     Route::post('staff/pay/store', [StaffController::class, 'payStore'])->name('staff.pay.store');
+
+    // Event Calender
+    Route::resource('eventCalender', EventController::class);
     // Generate Salary
     Route::resource('generateSalary', GenerateSalaryController::class);
     // General Notification
-    Route::resource('generalNotification',NotificationController::class);
+    Route::resource('generalNotification', NotificationController::class);
     // Staff Attendance
     Route::resource('staffAttendance', StaffAttendanceController::class);
     // loan
