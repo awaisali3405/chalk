@@ -54,7 +54,7 @@ class User extends Authenticatable
     }
     public function priceFormat($price)
     {
-        return number_format($price) != $price ? $price : number_format($price);
+        return number_format($price) != $price ?  number_format($price) : $price;
     }
     public function ukFormat($date)
     {

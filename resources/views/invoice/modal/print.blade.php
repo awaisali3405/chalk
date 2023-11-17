@@ -212,15 +212,7 @@
                                         </th>
                                     </tr>
                                 </thead>
-                                {{-- @php
-                                    $description = '';
-                                    if ($invoice->type == 'Refundable') {
-                                        $description = '';
-                                    }else if(str_contains($invoice->type,'Fee')){
-                                        $description = 'Deposit (Refundable)';
-
-                                    }
-                                @endphp --}}
+                                
                                 @php
                                     $to = \Carbon\Carbon::parse($invoice->from_date);
                                     $from = \Carbon\Carbon::parse($invoice->to_date);
