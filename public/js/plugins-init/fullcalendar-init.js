@@ -54,30 +54,30 @@
         this.enableDrag();
         var data;
         $.ajax({
-            method:"GET",
-            url:"/api/get/event",
-            success:function(res){
+            method: "GET",
+            url: "/api/get/event",
+            success: function (res) {
                 console.log(res);
-                data=res.data;
+                data = res.data;
             }
         });
         var t = new Date("11/1/2023");
-           var n = (t.getDate(), t.getMonth(), t.getFullYear(), new Date(e.now()));
-           a;
-           
-            a = [{
-                title: "asdasd",
-                start: new Date(e.now() + 158e6),
-                className: "bg-dark"
-            }, {
-                title: "asdasda",
-                start: t,
-                className: "bg-danger"
-            }, {
-                title: "asasa",
-                start: new Date(e.now() + 338e6),
-                className: "bg-primary"
-            }],
+        var n = (t.getDate(), t.getMonth(), t.getFullYear(), new Date(e.now()));
+        //    a;
+
+        var a = [{
+            title: "asdasd",
+            start: new Date(e.now() + 158e6),
+            className: "bg-dark"
+        }, {
+            title: "asdasda",
+            start: t,
+            className: "bg-danger"
+        }, {
+            title: "asasa",
+            start: new Date(e.now() + 338e6),
+            className: "bg-primary"
+        }],
             o = this;
         console.log(a, e.now(), n, t);
         o.$calendarObj = o.$calendar.fullCalendar({

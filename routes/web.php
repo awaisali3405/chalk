@@ -135,6 +135,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('staff/attendance/{id}/delete', [StaffController::class, 'attendanceDelete'])->name('staff.attendance.delete');
     Route::get('staff/pay/{id}', [StaffController::class, 'pay'])->name('staff.pay');
     Route::get('staff/invoice/pay/{id}', [StaffController::class, 'invoicePay'])->name('staff.invoice.pay');
+    Route::get('staff/statement/{id}', [StaffController::class, 'statement'])->name('staff.statement');
     Route::post('staff/pay/store', [StaffController::class, 'payStore'])->name('staff.pay.store');
 
     // Event Calender
@@ -146,6 +147,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Staff Attendance
     Route::resource('staffAttendance', StaffAttendanceController::class);
     // loan
+    Route::get('loan/flow', [LoanController::class, 'flow'])->name('loan.flow');
     Route::resource('loan', LoanController::class);
     // Department
     Route::resource('department', DepartmentController::class);

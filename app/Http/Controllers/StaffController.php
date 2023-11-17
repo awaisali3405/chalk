@@ -41,8 +41,8 @@ class StaffController extends Controller
      */
     public function show(string $id)
     {
-        $staff=Staff::find($id);
-        return view('staff.show',compact('staff'));
+        $staff = Staff::find($id);
+        return view('staff.show', compact('staff'));
     }
 
     /**
@@ -165,5 +165,10 @@ class StaffController extends Controller
         return response()->json([
             'html' => $string
         ]);
+    }
+    public function statement($id)
+    {
+        $staff = Staff::find($id);
+        return view('staff.statement', compact('staff'));
     }
 }

@@ -169,7 +169,7 @@
                     <ul aria-expanded="false">
                         <li><a href="{{ route('cashFlow.index') }}">Cash Flow</a></li>
                         <li><a href="{{ route('taxFlow.index') }}">Tax Flow</a></li>
-                        <li><a href="">Loan Flow(soon)</a></li>
+                        <li><a href="{{ route('loan.flow') }}">Loan Flow</a></li>
                         {{-- <li><a href="{{ route('branch.create') }}"></a></li> --}}
                     </ul>
                 </li>

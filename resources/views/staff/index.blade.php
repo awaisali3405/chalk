@@ -59,6 +59,8 @@
                                                                     href="{{ route('staff.attendance.index', $value->id) }}">Attendance</a>
                                                                 <a class="dropdown-item"
                                                                     href="{{ route('staff.pay', $value->id) }}">Pay</a>
+                                                                <a class="dropdown-item"
+                                                                    href="{{ route('staff.statement', $value->id) }}">Statement</a>
                                                             </div>
                                                             {{-- <a href="{{ route('branch.show', $value->id) }}"
                                                                 class="btn btn-sm btn-danger"><i
