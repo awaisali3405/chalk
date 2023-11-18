@@ -73,7 +73,8 @@ class Student extends Model
         'place_of_birth',
         'parent_subject',
         'active',
-        'promotion_date'
+        'promotion_date',
+        'is_promoted'
     ];
     public function promotionDetail()
     {

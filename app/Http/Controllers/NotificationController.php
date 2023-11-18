@@ -25,7 +25,8 @@ class NotificationController extends Controller
      */
     public function create()
     {
-        //
+        $notification = GeneralNotification::all();
+        return view('generalNotification.history', compact('notification'));
     }
 
     /**

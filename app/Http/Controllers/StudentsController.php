@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AcademicCalender;
 use App\Models\Board;
 use App\Models\Branch;
 use App\Models\Email;
 use App\Models\Enquiry;
 use App\Models\Parents;
 use App\Models\EnquirySubject;
-use App\Models\studentUpload;
+use App\Models\EnquiryUpload;
 use App\Models\Student;
 use App\Models\StudentInvoice;
 use App\Models\StudentPromotionDetail;
@@ -512,12 +513,12 @@ class StudentsController extends Controller
         $data['file'] = $this->saveImage($request->file);
         $data['file_name'] = $request->file->getClientOriginalName();
         // dd($data);
-        studentUpload::create($data);
+        EnquiryUpload::create($data);
         return redirect()->back()->with('success', 'Created Successfully');
     }
     public function uploadDelete($id)
     {
-        $student = studentUpload::find($id)->delete();
+        $student = EnquiryUpload::find($id)->delete();
         return redirect()->back()->with('success', 'Deleted Successfully');
     }
     public function request(Request $request)
@@ -628,9 +629,19 @@ class StudentsController extends Controller
     public function promote($id, Request $request)
     {
         $student = Student::find($id);
-        // $student->update([
-        //     'year_id'
-        // ]);
+        $student->update([
+            'is_promoted' => true,
+            'promotion_date' => AcademicCalender::find($request->academic_year_id)->start_date,
+            'total_fee' => 0,
+            'tax' => 0,
+            'deposit' => 0,
+            'registration_fee' => 0,
+            'annual_resource_fee' => 0,
+            'resource_discount' => 0,
+            'exercise_book_fee' => 0,
+            'fee' => 0,
+            'fee_discount' => 0,
+        ]);
         StudentPromotionDetail::create([
             'student_id' => $student->id,
             'from_year_id' => $student->year_id,

@@ -1337,9 +1337,9 @@
     <script src="js/dlabnav-init.js"></script> --}}
 
     <!-- Svganimation scripts -->
-    <script src="{{ asset('vendor/svganimation/vivus.min.js') }}"></script>
+    {{-- <script src="{{ asset('vendor/svganimation/vivus.min.js') }}"></script>
     <script src="{{ asset('vendor/svganimation/svg.animation.js') }}"></script>
-    <script src="{{ asset('js/styleSwitcher.js') }}"></script>
+    <script src="{{ asset('js/styleSwitcher.js') }}"></script> --}}
 
     <script src="{{ asset('vendor/jqueryui/js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('vendor/moment/moment.min.js') }}"></script>

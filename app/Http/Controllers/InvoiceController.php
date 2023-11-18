@@ -170,7 +170,7 @@ class InvoiceController extends Controller
             foreach ($request->student as $value) {
                 $student = Student::find($value);
                 if ($student->payment_period == "Weekly") {
-                    $amount = (($student->enquirySubject->sum('amount') - $student->fee_discount) * $weeks);
+                    $amount = (($student->yearSubject->sum('amount') - $student->fee_discount) * $weeks);
                     if ($amount > 0) {
                         $invoice = StudentInvoice::create([
                             'student_id' => $student->id,
@@ -179,14 +179,16 @@ class InvoiceController extends Controller
                             'amount' => $amount,
                             'from_date' => $to,
                             'to_date' => $from,
+                            'branch_id' => $student->branch_id,
+                            'year_id' => $student->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()->toYear->id
                         ]);
                     }
                 } else {
                     if (str_contains($student->year->name, "11")) {
-                        $amount = (($student->enquirySubject->sum('amount') - $student->fee_discount) * 40 / 9) * $months;
+                        $amount = (($student->yearSubject->sum('amount') - $student->fee_discount) * 40 / 9) * $months;
                     } else {
 
-                        $amount = (($student->enquirySubject->sum('amount') - $student->fee_discount) * 52 / 12) * $months;
+                        $amount = (($student->yearSubject->sum('amount') - $student->fee_discount) * 52 / 12) * $months;
                     }
                     if ($amount > 0) {
 
@@ -197,6 +199,8 @@ class InvoiceController extends Controller
                             'tax' => $student->tax,
                             'from_date' => $to,
                             'to_date' => $from,
+                            'branch_id' => $student->branch_id,
+                            'year_id' => $student->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()->toYear->id
                         ]);
                     }
                 }
