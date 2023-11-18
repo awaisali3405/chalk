@@ -36,4 +36,5 @@ class StaffReceipt extends Model
     {
         return ($this->salary + $this->ssp + $this->bonus) - ($this->tax + $this->pension + $this->dbs + $this->ni + $this->loan + $this->deduction);
     }
+    
 }

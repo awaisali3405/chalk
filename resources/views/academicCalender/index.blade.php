@@ -49,8 +49,10 @@
                                                             <a href="{{ route('academicCalender.edit', $value->id) }}"
                                                                 class="btn btn-sm btn-primary"><i
                                                                     class="la la-pencil"></i></a>
-                                                            <a href="{{ route('academicCalender.show', $value->id) }}"
-                                                                class="btn btn-sm btn-primary">{{ $value->active ? 'De Active' : 'Active' }}</a>
+                                                            @if (!$value->active)
+                                                                <a href="{{ route('academicCalender.show', $value->id) }}"
+                                                                    class="btn btn-sm btn-primary"> Active</a>
+                                                            @endif
                                                             {{-- <a href="{{ route('branch.show', $value->id) }}"
                                                                 class="btn btn-sm btn-danger"><i
                                                                     class="la la-trash-o"></i></a> --}}

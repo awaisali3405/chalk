@@ -37,7 +37,8 @@
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Roll
                                             No</span> <strong class="text-muted">{{ $student->id }}</strong></li>
                                     <li class="list-group-item d-flex justify-content-between"><span
-                                            class="mb-0">Year</span> <strong class="text-muted">{{ $student->year->name }}
+                                            class="mb-0">Year</span> <strong
+                                            class="text-muted">{{ $student->promotionDetail()->where('academic_year_id',auth()->user()->session()->id)->first()->toYear->name }}
                                         </strong></li>
                                     <li class="list-group-item d-flex justify-content-between"><span
                                             class="mb-0">Payment</span> <strong
@@ -95,52 +96,15 @@
                                 </div>
                             </div>
                         </div> --}}
-                        <div class="col-lg-12">
-                            <div class="card">
-                                <div class="card-header d-block">
-                                    <h4 class="card-title">Address </h4>
-                                </div>
-                                <div class="card-body">
-                                    <p class="mb-0">Demo Address #8901 Marmora Road Chi Minh City, Vietnam</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
+
+                        {{-- <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header d-block">
                                     <h4 class="card-title">Parent Login Detail </h4>
                                 </div>
-                                {{-- <div class="card-body">
-                                    <h6>Photoshop
-                                        <span class="pull-right">85%</span>
-                                    </h6>
-                                    <div class="progress ">
-                                        <div class="progress-bar bg-danger progress-animated"
-                                            style="width: 85%; height:6px;" role="progressbar">
-                                            <span class="sr-only">60% Complete</span>
-                                        </div>
-                                    </div>
-                                    <h6 class="mt-4">Code editor
-                                        <span class="pull-right">90%</span>
-                                    </h6>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-info progress-animated" style="width: 90%; height:6px;"
-                                            role="progressbar">
-                                            <span class="sr-only">60% Complete</span>
-                                        </div>
-                                    </div>
-                                    <h6 class="mt-4">Illustrator
-                                        <span class="pull-right">65%</span>
-                                    </h6>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-success progress-animated"
-                                            style="width: 65%; height:6px;" role="progressbar">
-                                            <span class="sr-only">60% Complete</span>
-                                        </div>
-                                    </div>
-                                </div> --}}
+
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 {{-- @dd(str_contains('/attendance', url()->current())) --}}

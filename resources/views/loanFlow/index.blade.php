@@ -64,7 +64,7 @@
                                                             ->get();
                                                         $query = $value->staff->receipt();
                                                         if (count($other) > 0) {
-                                                            $query = $query->where('created_at', '<', $other[0]->created_at)->where('created_at', '>', $value->created_at);
+                                                            $query = $query->where('created_at', '<=', $other[0]->created_at)->where('created_at', '>', $value->created_at);
                                                         } else {
                                                             $query = $query->where('created_at', '>', $value->created_at);
                                                         }

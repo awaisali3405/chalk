@@ -36,6 +36,9 @@
                                     <li class="list-group-item d-flex justify-content-between"><span
                                             class="mb-0">Branch</span> <strong
                                             class="text-muted">{{ $staff->branch->name }}</strong></li>
+                                    <li class="list-group-item d-flex justify-content-between"><span
+                                            class="mb-0">Department</span> <strong
+                                            class="text-muted">{{ $staff->department->name }}</strong></li>
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Staff
                                             {{ $staff->salary_type }}
                                             Salary</span> <strong class="text-muted">£ {{ $staff->salary }}</strong></li>
@@ -72,7 +75,49 @@
                                                 Detail</a></li> --}}
                                     </ul>
                                     <div class="tab-content">
-                                        <div id="about-me" class="tab-pane fade active show pt-3">
+                                        <div id="about-me" class="tab-pane fade active show">
+                                            <div class="profile-personal-info pt-4">
+                                                <h4 class="text-primary mb-4">Personal Information</h4>
+                                                <div class="row mb-4">
+                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                                        <h5 class="f-w-500">Name <span class="pull-right">:</span>
+
+                                                        </h5>
+                                                    </div>
+                                                    <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>
+                                                            {{ $staff->name }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-4">
+                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                                        <h5 class="f-w-500">Email <span class="pull-right">:</span>
+                                                        </h5>
+                                                    </div>
+                                                    <div class="col-lg-9 col-md-8 col-sm-6 col-6">
+                                                        <span>{{ $staff->email }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-4">
+                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                                        <h5 class="f-w-500">Date Of Birth <span class="pull-right">:</span>
+
+                                                        </h5>
+                                                    </div>
+                                                    <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>
+                                                            {{ $staff->teacherEnquiry->dob }}</span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="profile-skills pt-2 border-bottom-1 pb-2">
+                                                <h4 class="text-primary mb-4">Subject</h4>
+                                                @foreach ($staff->teacherEnquiry->subject as $value)
+                                                    <a href="javascript:void()"
+                                                        class="btn btn-outline-dark btn-rounded px-4 my-3 my-sm-0 mr-3 m-b-10">{{ $value->subject->name }}</a>
+                                                @endforeach
+
+                                            </div>
+
 
                                         </div>
 

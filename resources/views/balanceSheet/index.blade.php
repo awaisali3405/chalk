@@ -91,7 +91,10 @@
                                                     {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->feeReceived(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
                                                 </td>
                                                 <td class="text-left">Salaries Paid</td>
-                                                <td class="text-left"></td>
+                                                <td class="text-left">
+                                                    {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->totalSalaryPaid(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+
+                                                </td>
                                                 </td>
                                                 <tr>
                                                     <td class="text-left">Fee Due</td>
@@ -100,7 +103,10 @@
 
                                                     </td>
                                                     <td class="text-left">Salaries Payable</td>
-                                                    <td class="text-left"></td>
+                                                    <td class="text-left">
+
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->totalSalary(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left">Deposit Received</td>
@@ -134,7 +140,9 @@
                                                         {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->resourceFeeReceived(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
                                                     </td>
                                                     <td class="text-left">Deposit Refunded Amount</td>
-                                                    <td class="text-left"></td>
+                                                    <td class="text-left">
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->totalRefunded(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left">Yearly Resource Due</td>
@@ -154,8 +162,11 @@
 
                                                         {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->resourceReceived(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
                                                     </td>
-                                                    <td class="text-left"></td>
-                                                    <td class="text-left"></td>
+                                                    <td class="text-left">Loan Due</td>
+                                                    <td class="text-left">
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->remainingLoan(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left">Addition Resource Due</td>
@@ -170,6 +181,15 @@
                                                     <td class="text-left">Available Stock</td>
                                                     <td class="text-left">
                                                         {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->availableStock(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+
+                                                    </td>
+
+                                                    <td colspan="2" class="text-left"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Loan Received</td>
+                                                    <td class="text-left">
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->totalSalaryLoan(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
 
                                                     </td>
 

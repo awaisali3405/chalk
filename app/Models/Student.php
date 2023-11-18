@@ -72,8 +72,13 @@ class Student extends Model
         'tax',
         'place_of_birth',
         'parent_subject',
-        'active'
+        'active',
+        'promotion_date'
     ];
+    public function promotionDetail()
+    {
+        return $this->hasMany(StudentPromotionDetail::class, 'student_id');
+    }
     public function monthlyFee()
     {
         // dd(((int)$this->total_fee * str_contains($this->year->name, "11") ? 49 : 52) / 12, $this->total_fee * 52 / 12);
@@ -110,6 +115,10 @@ class Student extends Model
     public function enquirySubject(): HasMany
     {
         return $this->hasMany(EnquirySubject::class, 'student_id');
+    }
+    public function yearSubject()
+    {
+        return $this->hasMany(EnquirySubject::class, 'student_id')->where('year_id', $this->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()->to_year_id);
     }
     /**
      * Get all of the upload for the Enquiry

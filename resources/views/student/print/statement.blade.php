@@ -178,7 +178,7 @@
                         </td>
                         <td class="">
                             <h3 class="font-weight-bolder">
-                                {{ $student->year->name }}</h3>
+                                {{ $student->promotionDetail()->where('academic_year_id',auth()->user()->session()->id)->first()->toYear->name }}h3>
                         </td>
                     </tr>
 

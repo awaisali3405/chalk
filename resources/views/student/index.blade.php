@@ -120,7 +120,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table id="example5" class="display" style="min-width: 845px">
+                                        <table id="example5" class="display pb-5">
                                             <thead>
                                                 <tr>
                                                     <th>Sr</th>
@@ -140,76 +140,64 @@
 
 
                                                 @forelse ($student as $key => $value)
-                                                    <tr>
-                                                        <td>{{ $key + 1 }}</td>
+                                                    @if (
+                                                        $value->promotionDetail()->where(
+                                                                'academic_year_id',
+                                                                auth()->user()->session()->id)->first())
+                                                        <tr>
+                                                            <td>{{ $key + 1 }}</td>
 
-                                                        <td>{{ $value->id }}</td>
-                                                        <td>{{ $value->first_name }} {{ $value->last_name }} </td>
-                                                        <td>{{ $value->year->name }}</td>
-                                                        <td>{{ $value->admission_date }}</td>
-                                                        <td>Week
-                                                            {{ \Carbon\Carbon::parse(auth()->user()->session()->start_date)->diffInWeeks(\Carbon\Carbon::parse($value->admission_date)->addDay(1)) }}
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-primary dropdown-toggle"
-                                                                data-toggle="dropdown" aria-expanded="true">
-                                                                Action
-                                                            </button>
-                                                            <div class="dropdown-menu" x-placement="bottom-start"
-                                                                style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
-                                                                @if (auth()->user()->role->name != 'parent')
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ route('student.edit', $value->id) }}">
-                                                                        {{ str_contains(url()->current(), 'request') ? 'Register' : 'Edit' }}
-
-                                                                    </a>
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ route('student.note', $value->id) }}">Note</a>
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ route('student.upload', $value->id) }}">Upload</a>
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ route('student.show', $value->id) }}">Show</a>
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ route('invoice.show', $value->id) }}">Invoice</a>
-                                                                    <a class="dropdown-item" target="_blank"
-                                                                        href="{{ route('student.statement', $value->id) }}">Statement</a>
-                                                                @else
-                                                                    @if (!$value->active)
+                                                            <td>{{ $value->id }}</td>
+                                                            <td>{{ $value->first_name }} {{ $value->last_name }} </td>
+                                                            <td> {{ $value->promotionDetail()->where('academic_year_id',auth()->user()->session()->id)->first()->toYear->name }}
+                                                            </td>
+                                                            <td>{{ $value->admission_date }}</td>
+                                                            <td>Week
+                                                                {{ \Carbon\Carbon::parse(auth()->user()->session()->start_date)->diffInWeeks(\Carbon\Carbon::parse($value->promotion_date)->addDay(1)) }}
+                                                            </td>
+                                                            <td>
+                                                                <button type="button"
+                                                                    class="btn btn-primary dropdown-toggle"
+                                                                    data-toggle="dropdown" aria-expanded="true">
+                                                                    Action
+                                                                </button>
+                                                                <div class="dropdown-menu" x-placement="bottom-start"
+                                                                    style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
+                                                                    @if (auth()->user()->role->name != 'parent')
                                                                         <a class="dropdown-item"
-                                                                            href="{{ route('student.edit', $value->id) }}">Edit</a>
+                                                                            href="{{ route('student.edit', $value->id) }}">
+                                                                            {{ str_contains(url()->current(), 'request') ? 'Register' : 'Edit' }}
+
+                                                                        </a>
+                                                                        <a class="dropdown-item"
+                                                                            href="{{ route('student.note', $value->id) }}">Note</a>
+                                                                        <a class="dropdown-item"
+                                                                            href="{{ route('student.upload', $value->id) }}">Upload</a>
+                                                                        <a class="dropdown-item"
+                                                                            href="{{ route('student.show', $value->id) }}">Show</a>
+                                                                        <a class="dropdown-item"
+                                                                            href="{{ route('invoice.show', $value->id) }}">Invoice</a>
+                                                                        <a class="dropdown-item" target="_blank"
+                                                                            href="{{ route('student.statement', $value->id) }}">Statement</a>
+                                                                        <a class="dropdown-item " data-toggle="modal"
+                                                                            data-target="#promotion-{{ $value->id }}">Promotion</a>
+                                                                    @else
+                                                                        @if (!$value->active)
+                                                                            <a class="dropdown-item"
+                                                                                href="{{ route('student.edit', $value->id) }}">Edit</a>
+                                                                        @endif
+                                                                        <a class="dropdown-item"
+                                                                            href="{{ route('student.show', $value->id) }}">Show</a>
+                                                                        <a class="dropdown-item"
+                                                                            href="{{ route('invoice.show', $value->id) }}">Invoice</a>
+
+                                                                        <a class="dropdown-item" target="_blank"
+                                                                            href="{{ route('student.statement', $value->id) }}">Statement</a>
                                                                     @endif
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ route('student.show', $value->id) }}">Show</a>
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ route('invoice.show', $value->id) }}">Invoice</a>
-                                                                    <a class="dropdown-item" target="_blank"
-                                                                        href="{{ route('student.statement', $value->id) }}">Statement</a>
-                                                                @endif
-                                                            </div>
-                                                            {{-- <a href="{{ route('student.edit', $value->id) }}"
-                                                                title="edit" class="btn btn-sm btn-primary"><i
-                                                                    class="la la-pencil"></i></a>
-                                                            <a href="{{ route('student.note', $value->id) }}"
-                                                                title="note" class="btn btn-sm btn-secondary"><i
-                                                                    class="la la-sticky-note"></i></a>
-                                                            <a href="{{ route('student.upload', $value->id) }}"
-                                                                title="upload" class="btn btn-sm btn-info"><i
-                                                                    class="la la-arrow-circle-up"></i></a>
-                                                            <a href="{{ route('student.show', $value->id) }}"
-                                                                title="upload" class="btn btn-sm btn-info"><i
-                                                                    class="la la-eye"></i></a>
-                                                            <a href="{{ route('invoice.show', $value->id) }}"
-                                                                title="upload" class="btn btn-sm btn-info">Invoice</a> --}}
-
-
-                                                            {{-- <a href="{{ route('student.destory', $value->id) }}"
-                                                                title="note" class="btn btn-sm btn-danger"><i
-                                                                    class="la la-trash-o"></i></a> --}}
-                                                            {{-- <a href="{{ route('branch.show', $value->id) }}"
-                                                                class="btn btn-sm btn-danger"><i
-                                                                    class="la la-trash-o"></i></a> --}}
-                                                        </td>
-                                                    </tr>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endif
                                                 @empty
                                                     <tr>
                                                         <td colspan="6">No data</td>
@@ -228,4 +216,7 @@
 
         </div>
     </div>
+    @foreach ($student as $value)
+        @include('student.promotion')
+    @endforeach
 @endsection

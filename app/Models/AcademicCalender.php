@@ -15,4 +15,8 @@ class AcademicCalender extends Model
         'end_date',
         'active'
     ];
+    public function period()
+    {
+        return $this->start_date . ' - ' . $this->end_date;
+    }
 }

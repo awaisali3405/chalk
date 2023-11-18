@@ -11,6 +11,7 @@ use App\Models\EnquirySubject;
 use App\Models\studentUpload;
 use App\Models\Student;
 use App\Models\StudentInvoice;
+use App\Models\StudentPromotionDetail;
 use App\Models\Year;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -40,10 +41,10 @@ class StudentsController extends Controller
                     $student = $student->where('current_school_name', $request->input('current_school'));
                 }
                 if ($request->input('from_week')) {
-                    $student = $student->where('admission_date', '>=', auth()->user()->dateWeek($request->input('from_week')));
+                    $student = $student->where('promotion_date', '>=', auth()->user()->dateWeek($request->input('from_week')));
                 }
                 if ($request->input('to_week')) {
-                    $student = $student->where('admission_date', '<=', auth()->user()->dateWeek($request->input('to_week')));
+                    $student = $student->where('promotion_date', '<=', auth()->user()->dateWeek($request->input('to_week')));
                 }
                 $student = $student->where('active', true)->get();
             } else {
@@ -147,6 +148,7 @@ class StudentsController extends Controller
         }
         if (auth()->user()->role->name != 'parent') {
             $data['active'] = true;
+            $data['promotion_date'] = $data['admission_date'];
         }
         $student = Student::create($data);
         if (isset($request->enquiry_id)) {
@@ -207,9 +209,16 @@ class StudentsController extends Controller
             if (isset($data1['enquiry_subject'])) {
 
                 $subject = EnquirySubject::whereIn('id', $data1['enquiry_subject'])->update([
-                    'student_id' => $student->id
+                    'student_id' => $student->id,
+                    'year_id' => $student->year_id
                 ]);
             }
+            StudentPromotionDetail::create([
+                'student_id' => $student->id,
+                'from_year_id' => 0,
+                'to_year_id' => $student->year_id,
+                'academic_year_id' => auth()->user()->session()->id
+            ]);
 
             // $invoice->update([
             //     'amount' =>
@@ -349,7 +358,14 @@ class StudentsController extends Controller
         if (isset($data1['enquiry_subject'])) {
 
             $subject = EnquirySubject::whereIn('id', $data1['enquiry_subject'])->update([
-                'student_id' => $student->id
+                'student_id' => $student->id,
+                'year_id' => $student->year_id
+            ]);
+            StudentPromotionDetail::create([
+                'student_id' => $student->id,
+                'from_year_id' => 0,
+                'to_year_id' => $student->year_id,
+                'academic_year_id' => auth()->user()->session()->id
             ]);
         }
         $student->update($data);
@@ -425,8 +441,6 @@ class StudentsController extends Controller
                 // dd($student->parents->count());
                 $student->parents()->attach($data1['parent_id']);
                 $student->parents()->attach([$parent->id]);
-            }
-            if ($student->active) {
             }
         }
         // $student->parents()->detach();
@@ -582,7 +596,9 @@ class StudentsController extends Controller
             'type' => 'Refundable',
             'tax' => 0,
             'from_date' => auth()->user()->session()->start_date,
-            'to_date' => auth()->user()->session()->end_date
+            'to_date' => auth()->user()->session()->end_date,
+            'branch_id' => $student->branch_id,
+            'year_id' => $student->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()->toYear->id
         ]);
 
         $invoice = StudentInvoice::create([
@@ -591,7 +607,9 @@ class StudentsController extends Controller
             'type' => 'Registration',
             'tax' => $request->tax,
             'from_date' => auth()->user()->session()->start_date,
-            'to_date' => auth()->user()->session()->end_date
+            'to_date' => auth()->user()->session()->end_date,
+            'branch_id' => $student->branch_id,
+            'year_id' => $student->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()->toYear->id
         ]);
         if ($request->annual_resource_fee + $request->exercise_book_fee) {
 
@@ -601,8 +619,24 @@ class StudentsController extends Controller
                 'type' => 'Resource Fee',
                 'tax' => 0,
                 'from_date' => auth()->user()->session()->start_date,
-                'to_date' => auth()->user()->session()->end_date
+                'to_date' => auth()->user()->session()->end_date,
+                'branch_id' => $student->branch_id,
+                'year_id' => $student->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()->toYear->id
             ]);
         }
+    }
+    public function promote($id, Request $request)
+    {
+        $student = Student::find($id);
+        // $student->update([
+        //     'year_id'
+        // ]);
+        StudentPromotionDetail::create([
+            'student_id' => $student->id,
+            'from_year_id' => $student->year_id,
+            'to_year_id' => $request->year_id,
+            'academic_year_id' => $request->academic_year_id
+        ]);
+        return redirect()->back()->with('success', 'Student Promoted Successfully.');
     }
 }

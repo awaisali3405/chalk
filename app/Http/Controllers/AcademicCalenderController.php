@@ -41,7 +41,10 @@ class AcademicCalenderController extends Controller
     {
         $calender = AcademicCalender::find($id);
         $calender->update([
-            'active' => !$calender->active
+            'active' => true
+        ]);
+        $other = AcademicCalender::where('id', '!=', $id)->update([
+            'active' => false
         ]);
 
         if ($calender->active) {

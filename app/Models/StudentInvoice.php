@@ -15,8 +15,18 @@ class StudentInvoice extends Model
         'type',
         'is_paid',
         'from_date',
-        'to_date', 'tax'
+        'to_date', 'tax',
+        'branch_id',
+        'year_id'
     ];
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class, 'branch_id');
+    }
+    public function year()
+    {
+        return $this->belongsTo(Year::class, 'year_id');
+    }
     public function student()
     {
         return $this->belongsTo(Student::class, 'student_id');

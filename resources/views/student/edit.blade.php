@@ -179,7 +179,7 @@
                                                         <div class="form-group">
                                                             <label class="form-label">Key Stage</label>
 
-                                                            <select class="form-control keyStage" name="key_stage_id"
+                                                            <select class="form-control keyStage" name="key_stage_id" disabled
                                                                 required>
                                                                 <option value="">Select Key Stage</option>
                                                                 @foreach ($keyStage as $value)
@@ -196,9 +196,11 @@
                                                             <label class="form-label">Year</label>
 
 
-                                                            <select class="form-control year" name="year_id" required>
-                                                                <option value="{{ $student->year_id }}">
-                                                                    {{ $student->year->name }}</option>
+                                                            <select class="form-control year" name="year_id" required disabled>
+                                                                <option
+                                                                    value="{{ $student->promotionDetail()->where('academic_year_id',auth()->user()->session()->id)->first()->to_year_id }}">
+                                                                    {{ $student->promotionDetail()->where('academic_year_id',auth()->user()->session()->id)->first()->toYear->name }}
+                                                                </option>
                                                             </select>
 
 
@@ -282,7 +284,10 @@
                                                                                 <select class="form-control subject"
                                                                                     id="subject_id">
                                                                                     <option value="">-</option>
-                                                                                    @foreach ($student->year->subject as $value)
+                                                                                    @foreach ($student->promotionDetail()->where(
+                'academic_year_id',
+                auth()->user()->session()->id,
+            )->first()->toYear->subject as $value)
                                                                                         <option
                                                                                             value="{{ $value->id }}">
                                                                                             {{ $value->name }}</option>
@@ -413,7 +418,7 @@
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody id="subject">
-                                                                                @foreach ($student->enquirySubject as $value)
+                                                                                @foreach ($student->yearSubject as $value)
                                                                                     <tr>
                                                                                         <td>
                                                                                             <a
@@ -487,7 +492,8 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="form-label">Branch</label>
-                                                        <select class="form-control branch_student" name="branch_id" required   >
+                                                        <select class="form-control branch_student" name="branch_id"
+                                                            required>
                                                             <option value="">Select Branch</option>
                                                             @foreach ($branch as $value)
                                                                 <option value="{{ $value->id }}"
@@ -685,7 +691,8 @@
                                                                         </div>
                                                                         <input type="text"
                                                                             class="form-control monthly-fee"
-                                                                            value="{{ $student->monthlyFee() ? $student->monthlyFee() : 0 }}" disabled>
+                                                                            value="{{ $student->monthlyFee() ? $student->monthlyFee() : 0 }}"
+                                                                            disabled>
                                                                     </div>
 
 

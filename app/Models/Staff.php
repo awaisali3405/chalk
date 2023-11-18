@@ -59,4 +59,9 @@ class Staff extends Model
     {
         return $this->hasMany(StaffLoan::class, 'staff_id')->where('is_paid', false);
     }
+    public function invoice()
+    {
+        return $this->hasMany(SalaryInvoice::class, 'staff_id');
+    }
+    
 }

@@ -23,6 +23,7 @@ class EnquirySubject extends Model
         'rate_per_hr',
         'no_hr_weekly',
         'amount',
+        'year_id'
     ];
     /**
      * Get the subject that owns the EnquirySubject
@@ -72,5 +73,9 @@ class EnquirySubject extends Model
     public function lessonType()
     {
         return $this->belongsTo(LessonType::class, 'lesson_type_id');
+    }
+    public function year()
+    {
+        return $this->belongsTo(Year::class, 'year_id');
     }
 }
