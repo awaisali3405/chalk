@@ -32,7 +32,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Branch</label>
-                                            <select class="form-control branch" name="branch_id" required>
+                                            <select class="form-control branch" name="branch_id" id="branch_id" required>
                                                 <option value="">Select Branch</option>
                                                 @foreach ($branch as $value)
                                                     <option value="{{ $value->id }}">{{ $value->name }}</option>
