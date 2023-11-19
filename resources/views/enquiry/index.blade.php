@@ -173,14 +173,17 @@
                                                                 href="{{ route('enquiry.note', $value->id) }}">Note</a>
                                                             <a class="dropdown-item"
                                                                 href="{{ route('enquiry.upload', $value->id) }}">Upload</a>
-                                                            <a class="dropdown-item"
-                                                                href="{{ route('enquiry.register', $value->id) }}">Register</a>
-                                                            {{-- <a class="dropdown-item"
+                                                            @if (!$value->student)
+                                                                <a class="dropdown-item"
+                                                                    href="{{ route('enquiry.register', $value->id) }}">Register</a>
+                                                                {{-- <a class="dropdown-item"
                                                                 href="{{ route('enquiry.delete', $value->id) }}">Delete</a> --}}
-                                                            <a class="dropdown-item" href="javascript:void(0);"
-                                                                onclick="event.preventDefault(); document.getElementById('delete').submit();">
-                                                                Delete
-                                                            </a>
+
+                                                                <a class="dropdown-item" href="javascript:void(0);"
+                                                                    onclick="event.preventDefault(); document.getElementById('delete').submit();">
+                                                                    Delete
+                                                                </a>
+                                                            @endif
                                                             <form method="POST" id="delete"
                                                                 action="{{ route('enquiry.destroy', $value->id) }}">
                                                                 @csrf

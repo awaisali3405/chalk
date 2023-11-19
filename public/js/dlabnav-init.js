@@ -1,3 +1,5 @@
+const { loadConfigFromFile } = require("vite");
+
 (function ($) {
 
     var direction = getUrlParams('dir');
@@ -7,9 +9,9 @@
         typography: "roboto",
         version: "light",
         layout: "Vertical",
-        headerBg: "color_1",
-        navheaderBg: "color_11",
-        sidebarBg: "color_1",
+        headerBg: "color_4",
+        navheaderBg: "color_1",
+        sidebarBg: "color_4",
         sidebarStyle: "full",
         sidebarPosition: "fixed",
         headerPosition: "fixed",

@@ -675,8 +675,8 @@
 
 
                                                                     <input type="date" class="form-control"
-                                                                        value="{{ $student->admission_date }}"
-                                                                        name="admission_date" required>
+                                                                        value="{{ $student->promotion_date }}"
+                                                                        name="admission_date" required readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1084,7 +1084,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Address</label>
                                                     <input type="text" id="formatted_address_0" class="form-control"
-                                                        value="{{ $student->parents[0]->f_address_line }}"
+                                                        value="{{ $student->parents[0]->res_address }}"
                                                         name="f_address_line[]" disabled>
                                                 </div>
                                             </div>
@@ -1092,7 +1092,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Second Address Line </label>
                                                     <input type="text" id="formatted_address_1" class="form-control"
-                                                        value="{{ $student->parents[0]->s_address_line }}"
+                                                        value="{{ $student->parents[0]->res_second_address }}"
                                                         name="s_address_line[]" disabled>
                                                 </div>
                                             </div>
@@ -1100,7 +1100,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Third Address Line</label>
                                                     <input type="text" id="formatted_address_2" class="form-control"
-                                                        value="{{ $student->parents[0]->t_address_line }}"
+                                                        value="{{ $student->parents[0]->res_third_address }}"
                                                         name="t_address_line[]" disabled>
                                                 </div>
                                             </div>
@@ -1108,14 +1108,15 @@
                                                 <div class="form-group">
                                                     <label class="form-label"> Town</label>
                                                     <input type="text" id="town_or_city" class="form-control"
-                                                        value="{{ $student->parents[0]->town }}" name="town[]" disabled>
+                                                        value="{{ $student->parents[0]->res_town }}" name="town[]"
+                                                        disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label"> County </label>
+                                                    <label class="form-label"> Country </label>
                                                     <input type="text" id="county" class="form-control"
-                                                        value="{{ $student->parents[0]->county }}" name="county[]"
+                                                        value="{{ $student->parents[0]->res_country }}" name="county[]"
                                                         disabled>
                                                 </div>
                                             </div>

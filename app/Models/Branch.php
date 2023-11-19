@@ -28,6 +28,10 @@ class Branch extends Model
         'tax_type',
         'tax'
     ];
+    public function loan()
+    {
+        return $this->hasMany(StaffLoan::class, "branch_id");
+    }
     public function receipt()
     {
         $id = $this->id;

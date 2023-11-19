@@ -333,9 +333,8 @@ class StudentsController extends Controller
             $data['profile_pic'] =   $this->saveImage($request->profile_pic);
         }
         $student = Student::find($id);
-        if (auth()->user()->role->name != 'parent' && !$student->active && $student->is_promoted) {
+        if (auth()->user()->role->name != 'parent' && !$student->active) {
             $data['active'] = true;
-            $data['is_promoted'] = false;
             StudentPromotionDetail::create([
                 'student_id' => $student->id,
                 'from_year_id' => 0,
@@ -362,9 +361,11 @@ class StudentsController extends Controller
                 $message->subject($email->name);
             });
         }
-
+        if ($student->is_promoted) {
+            $data['is_promoted'] = false;
+            $this->generateInvoice($student, $request);
+        }
         if (isset($data1['enquiry_subject'])) {
-
             $subject = EnquirySubject::whereIn('id', $data1['enquiry_subject'])->update([
                 'student_id' => $student->id,
                 'year_id' => $student->year_id
@@ -627,7 +628,7 @@ class StudentsController extends Controller
                 'year_id' => $student->currentYear()->id
             ]);
         }
-        if ($request->registration_fee) {
+        if ($request->registration_fee > 0) {
 
 
             $invoice = StudentInvoice::create([
@@ -641,7 +642,7 @@ class StudentsController extends Controller
                 'year_id' => $student->currentYear()->id
             ]);
         }
-        if ($request->annual_resource_fee + $request->exercise_book_fee) {
+        if ($request->annual_resource_fee + $request->exercise_book_fee > 0) {
 
             $invoice = StudentInvoice::create([
                 'student_id' => $student->id,

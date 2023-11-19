@@ -71,4 +71,8 @@ class Enquiry extends Model
     {
         return $this->hasMany(EnquiryUpload::class, 'enquiry_id');
     }
+    public function student()
+    {
+        return $this->hasOne(Student::class, 'enquiry_id');
+    }
 }

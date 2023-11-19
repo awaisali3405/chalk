@@ -14,7 +14,7 @@
             </div>
 
             <div class="profile-personal-info pt-4">
-                <form action="{{ route('balanceSheet.index') }}" method="get">
+                <form action="{{ route('cashFlow.index') }}" method="get">
                     <div class="row">
                         <div class="col-lg-4 col-md-3 col-sm-12">
                             <div class="form-group">
@@ -95,10 +95,12 @@
                                                         @endphp
                                                         <tr>
                                                             <td>{{ $sr++ }}</td>
-                                                            <td>{{ $value1->date }}</td>
+                                                            <td>{{ auth()->user()->ukFormat($value1->date) }}</td>
                                                             <td>{{ $value->name }}</td>
                                                             <td>{{ $value1->invoice->student->year->name }}</td>
-                                                            <td>{{ auth()->user()->week($value1->invoice->student->admission_date) }}
+                                                            <td>W
+                                                                eek
+                                                                {{ auth()->user()->week($value1->invoice->student->admission_date) }}
                                                             </td>
                                                             <td>{{ $value1->invoice->student->first_name }}
                                                                 {{ $value1->invoice->student->last_name }}
@@ -117,10 +119,11 @@
                                                         <tr>
                                                             <td>{{ $sr++ }}</td>
 
-                                                            <td>{{ $value1->date }}</td>
+                                                            <td>{{ auth()->user()->ukFormat($value1->date) }}</td>
                                                             <td>{{ $value->name }}</td>
                                                             <td>-</td>
-                                                            <td>{{ auth()->user()->week($value1->date) }}
+                                                            <td>
+                                                                Week {{ auth()->user()->week($value1->date) }}
                                                             </td>
                                                             <td>{{ $value1->description }}</td>
                                                             <td>Expense</td>
@@ -129,6 +132,7 @@
                                                             <td>{{ $total }}</td>
                                                         </tr>
                                                     @endforeach
+                                                    {{-- Purchase --}}
                                                     @foreach ($value->purchase() as $value1)
                                                         @php
                                                             $total -= $value1->amount;
@@ -138,18 +142,21 @@
                                                         <tr>
                                                             <td>{{ $sr++ }}</td>
 
-                                                            <td>{{ $value1->date }}</td>
+                                                            <td>{{ auth()->user()->ukFormat($value1->date) }}</td>
                                                             <td>{{ $value->name }}</td>
                                                             <td>-</td>
-                                                            <td>{{ auth()->user()->week($value1->date) }}
+                                                            <td>
+                                                                Week {{ auth()->user()->week($value1->date) }}
                                                             </td>
-                                                            <td>Qty({{ $value->quantity }})</td>
-                                                            <td>0</td>
+                                                            <td>Qty({{ $value1->quantity }}) Paid by {{ $value1->mode }}
+                                                            </td>
                                                             <td>Purchase</td>
+                                                            <td>0</td>
                                                             <td>{{ $value1->amount }}</td>
                                                             <td>{{ $total }}</td>
                                                         </tr>
                                                     @endforeach
+                                                    {{-- Sale --}}
                                                     @foreach ($value->sale() as $value1)
                                                         @php
                                                             $total += $value1->amount;
@@ -159,17 +166,81 @@
                                                         <tr>
                                                             <td>{{ $sr++ }}</td>
 
-                                                            <td>{{ $value1->date }}</td>
+                                                            <td>{{ auth()->user() - ukFormat($value1->date) }}</td>
                                                             <td>{{ $value->name }}</td>
                                                             <td>-</td>
-                                                            <td>{{ auth()->user()->week($value1->date) }}
+                                                            <td>
+                                                                Week {{ auth()->user()->week($value1->date) }}
                                                             </td>
-                                                            <td>Qty{{ $value->quantity() }}</td>
-                                                            <td>0</td>
+                                                            <td>Qty{{ $value->quantity() }} </td>
                                                             <td>Sale</td>
+                                                            <td>0</td>
                                                             <td>{{ $value1->productSum() }}</td>
                                                             <td>{{ $total }}</td>
                                                         </tr>
+                                                    @endforeach
+                                                    {{-- @dd($value->loan()) --}}
+                                                    @foreach ($value->loan()->get() as $value1)
+                                                        @php
+                                                            $total -= $value1->amount;
+                                                            $out += $value1->amount;
+
+                                                        @endphp
+                                                        <tr>
+                                                            <td>{{ $sr++ }}</td>
+
+                                                            <td>{{ auth()->user()->ukFormat($value1->created_at) }}</td>
+                                                            <td>{{ $value->name }}</td>
+                                                            <td>-</td>
+                                                            <td>
+                                                                Week {{ auth()->user()->week($value1->created_at) }}
+                                                            </td>
+                                                            <td>Loan given to {{ $value1->staff->name }}</td>
+                                                            <td>Loan</td>
+                                                            <td>0</td>
+                                                            <td>{{ $value1->amount }}</td>
+                                                            <td>{{ $total }}</td>
+                                                        </tr>
+                                                        @php
+                                                            // dd();
+                                                            $other = $value1->staff
+                                                                ->loan()
+                                                                ->where('id', '!=', $value->id)
+                                                                ->get();
+                                                            $query = $value1->staff->receipt();
+                                                            if (count($other) > 0) {
+                                                                $query = $query->where('created_at', '<=', $other[0]->created_at)->where('created_at', '>', $value1->created_at);
+                                                            } else {
+                                                                $query = $query->where('created_at', '>', $value1->created_at);
+                                                            }
+                                                            $query = $query->get();
+                                                        @endphp
+                                                        @if (count($value1->staff->receipt) > 0)
+                                                            @foreach ($query as $value2)
+                                                                @php
+                                                                    $sr++;
+                                                                    $total += $value2->loan;
+                                                                    $in += $value2->loan;
+                                                                @endphp
+                                                                <tr>
+                                                                    <td>{{ $sr++ }}</td>
+
+                                                                    <td>{{ auth()->user()->ukFormat($value2->created_at) }}
+                                                                    </td>
+                                                                    <td>{{ $value->name }}</td>
+                                                                    <td>-</td>
+                                                                    <td>Week
+
+                                                                        {{ auth()->user()->week($value2->created_at) }}
+                                                                    </td>
+                                                                    <td>Loan received by {{ $value1->staff->name }}</td>
+                                                                    <td>Loan</td>
+                                                                    <td>{{ $value2->loan }}</td>
+                                                                    <td>0</td>
+                                                                    <td>{{ $total }}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        @endif
                                                     @endforeach
                                                 @endforeach
                                             </tbody>

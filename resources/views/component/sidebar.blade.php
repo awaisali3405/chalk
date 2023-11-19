@@ -1,17 +1,13 @@
 <div class="dlabnav">
     <div class="dlabnav-scroll mm-active ps ps--active-y">
+        <div class="d-flex justify-content-center text-white pt-3">
+            {{ auth()->user()->session()->period() }}
+        </div>
+        <div class="d-flex justify-content-center text-white">
+            Session
+        </div>
         <ul class="metismenu mm-show" id="menu">
             <li class="nav-label first">Main Menu</li>
-            {{-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="la la-home"></i>
-                    <span class="nav-text">Dashboard</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="index.html">Dashboard 1</a></li>
-                    <li><a href="index-2.html">Dashboard 2</a></li>
-                    <li><a href="index-3.html">Dashboard 3</a></li>
-                </ul>
-            </li> --}}
             @if (auth()->user()->role->name == 'super admin' || auth()->user()->role->name == 'admin')
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-headphones"></i>
