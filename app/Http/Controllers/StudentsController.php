@@ -505,6 +505,7 @@ class StudentsController extends Controller
         Student::find($id)->update([
             'note' => $request->note
         ]);
+        
         return redirect()->route('student.index')->with('success', 'Branch Updated Successfully');
     }
     public function upload($id)

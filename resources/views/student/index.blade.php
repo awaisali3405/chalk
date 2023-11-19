@@ -167,6 +167,8 @@
                                                                 <div class="dropdown-menu" x-placement="bottom-start"
                                                                     style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
                                                                     @if (auth()->user()->role->name != 'parent')
+                                                                        @if ($value->active)
+                                                                        @endif
                                                                         <a class="dropdown-item"
                                                                             href="{{ route('student.edit', $value->id) }}">
                                                                             {{ str_contains(url()->current(), 'request') ? 'Register' : 'Edit' }}
@@ -176,14 +178,16 @@
                                                                             href="{{ route('student.note', $value->id) }}">Note</a>
                                                                         <a class="dropdown-item"
                                                                             href="{{ route('student.upload', $value->id) }}">Upload</a>
-                                                                        <a class="dropdown-item"
-                                                                            href="{{ route('student.show', $value->id) }}">Show</a>
-                                                                        <a class="dropdown-item"
-                                                                            href="{{ route('invoice.show', $value->id) }}">Invoice</a>
-                                                                        <a class="dropdown-item" target="_blank"
-                                                                            href="{{ route('student.statement', $value->id) }}">Statement</a>
-                                                                        <a class="dropdown-item " data-toggle="modal"
-                                                                            data-target="#promotion-{{ $value->id }}">Promotion</a>
+                                                                        @if ($value->active)
+                                                                            <a class="dropdown-item"
+                                                                                href="{{ route('student.show', $value->id) }}">Show</a>
+                                                                            <a class="dropdown-item"
+                                                                                href="{{ route('invoice.show', $value->id) }}">Invoice</a>
+                                                                            <a class="dropdown-item" target="_blank"
+                                                                                href="{{ route('student.statement', $value->id) }}">Statement</a>
+                                                                            <a class="dropdown-item " data-toggle="modal"
+                                                                                data-target="#promotion-{{ $value->id }}">Promotion</a>
+                                                                        @endif
                                                                     @else
                                                                         @if (!$value->active)
                                                                             <a class="dropdown-item"
