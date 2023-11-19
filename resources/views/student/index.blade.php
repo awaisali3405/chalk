@@ -143,7 +143,9 @@
                                                     @if (
                                                         $value->promotionDetail()->where(
                                                                 'academic_year_id',
-                                                                auth()->user()->session()->id)->first() || auth()->user()->role->name == 'parent')
+                                                                auth()->user()->session()->id)->first() ||
+                                                            auth()->user()->role->name == 'parent' ||
+                                                            str_contains(url()->current(), 'request'))
                                                         <tr>
                                                             <td>{{ $key + 1 }}</td>
 
