@@ -39,7 +39,8 @@
                                         <option value="">-</option>
                                         @foreach ($academicCalender as $value)
                                             <option value="{{ $value->id }}"
-                                                {{ request()->get('academic_year_id') == $value->id ? 'selected' : '' }}>
+                                                {{ request()->get('academic_year_id') == $value->id ? 'selected' : '' }}
+                                                {{ auth()->user()->session()->id == $value->id? 'selected': '' }}>
                                                 {{ $value->start_date }} - {{ $value->end_date }}</option>
                                         @endforeach
                                     </select>
@@ -62,10 +63,6 @@
                     <div class="row tab-content">
                         <div id="list-view" class="tab-pane fade active show col-lg-12">
                             <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Student </h4>
-                                    <button type="submit" class="btn btn-primary">Save</button>
-                                </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table id="example5" class="display" style="min-width: 845px">

@@ -20,7 +20,7 @@ class Year extends Model
     }
     public function student()
     {
-        return $this->hasMany(Student::class, 'year_id');
+        return $this->belongsToMany(Student::class, 'student_promotion_detail', 'to_year_id', 'parent_id');
     }
     public function subject()
     {

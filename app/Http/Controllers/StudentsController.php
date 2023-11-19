@@ -505,9 +505,17 @@ class StudentsController extends Controller
         Student::find($id)->update([
             'note' => $request->note
         ]);
-        
+        // if(){
+
+        // }
+
         return redirect()->route('student.index')->with('success', 'Branch Updated Successfully');
     }
+    // public function redirect($message){
+    //     if(str_contain(url()->)){
+
+    //     }
+    // }
     public function upload($id)
     {
 
@@ -574,6 +582,7 @@ class StudentsController extends Controller
         $string = '<option value="">-</option>';
         // dd($year);
         foreach ($year->student as $key => $value) {
+
             $string .= "<option value='" . $value->id . "'>" . $value->first_name . "</option>";
         }
         return response()->json(['data' => $string]);
