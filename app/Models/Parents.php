@@ -41,6 +41,10 @@ class Parents extends Model
     {
         return $this->belongsToMany(Student::class, 'student_parent', 'parent_id', 'student_id');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
     public function invoice()
     {
         $invoice = array();

@@ -44,7 +44,7 @@
 
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                        <button type="submit" class="btn btn-light">Cencel</button>
+                                        <a href="{{ route('academicCalender.index') }}" class="btn btn-light">Cancel</a>
                                     </div>
                                 </div>
                             </form>

@@ -51,7 +51,7 @@
                                                         <td>{{ $value->relationship }}</td>
                                                         <td>{{ $value->email }}</td>
                                                         <td>
-                                                  
+
                                                             <button type="button" class="btn btn-primary dropdown-toggle"
                                                                 data-toggle="dropdown" aria-expanded="true">
                                                                 Action
@@ -65,9 +65,16 @@
                                                                     href="{{ route('parent.show', $value->id) }}">Show</a>
 
                                                             </div>
-                                                            {{-- <a href="{{ route('year.show', $value->id) }}"
-                                                                class="btn btn-sm btn-danger"><i
-                                                                    class="la la-trash-o"></i></a> --}}
+                                                            @if (count($value->student) == 0 && !$value->user)
+                                                                <form action="{{ route('parent.destroy', $value->id) }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    @method('delete')
+
+                                                                    <button type="submit"
+                                                                        class="btn btn-danger">Delete</button>
+                                                                </form>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach

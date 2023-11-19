@@ -33,7 +33,8 @@ class ParentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'email' => 'unique:parent,email'
+            'email' => 'unique:parent,email',
+            'mobile_number' => 'required|unique:parent,mobile_number'
         ]);
         $data = $request->except('_token');
         $parent = Parents::create($data);
@@ -77,10 +78,32 @@ class ParentController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'email' => 'required|unique:parent,email,' . $id
+            'email' => 'required|unique:parent,email,' . $id,
+            'mobile_number' => 'required|unique:parent,mobile_number,' . $id,
         ]);
         $data = $request->except('_token');
-        Parents::find($id)->update($data);
+        $parent = Parents::find($id);
+        $parent->update($data);
+        if (isset($data['password'])) {
+            if (!$parent->user) {
+
+                $user = User::create([
+                    'email' => $data['email'],
+                    'name' => $data['given_name'],
+                    'password' => Hash::make($data['password']),
+                    'role_id' => 1
+                ]);
+                $parent->update([
+                    'user_id' => $user->id
+                ]);
+            } else {
+                $parent->user->update(
+                    [
+                        'password' => Hash::make($data['password'])
+                    ]
+                );
+            }
+        }
         return redirect()->route('parent.index')->with('success', 'Parent Updated Successfully');
     }
 
