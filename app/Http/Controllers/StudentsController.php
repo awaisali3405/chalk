@@ -483,7 +483,11 @@ class StudentsController extends Controller
         // }
 
         // dd($data, $student->parent);
-        return redirect()->route('student.index')->with('success', 'Branch Updated Successfully');
+        if (str_contains(url()->current(), 'request')) {
+            return redirect()->route('student.request')->with('success', 'Student Updated Successfully');
+        } else {
+            return redirect()->route('student.index')->with('success', 'Student Updated Successfully');
+        }
     }
 
     /**
@@ -505,11 +509,12 @@ class StudentsController extends Controller
         Student::find($id)->update([
             'note' => $request->note
         ]);
-        // if(){
+        if (str_contains(url()->current(), 'request')) {
 
-        // }
-
-        return redirect()->route('student.index')->with('success', 'Branch Updated Successfully');
+            return redirect()->route('student.request')->with('success', 'Branch Updated Successfully');
+        } else {
+            return redirect()->route('student.index')->with('success', 'Branch Updated Successfully');
+        }
     }
     // public function redirect($message){
     //     if(str_contain(url()->)){
@@ -582,7 +587,7 @@ class StudentsController extends Controller
         $string = '<option value="">-</option>';
         // dd($year);
         foreach ($year->student as $key => $value) {
-            
+
             $string .= "<option value='" . $value->id . "'>" . $value->first_name . "</option>";
         }
         return response()->json(['data' => $string]);
@@ -647,6 +652,7 @@ class StudentsController extends Controller
     {
         $student = Student::find($id);
         $student->update([
+            'year_id' => $request->year_id,
             'is_promoted' => true,
             'promotion_date' => AcademicCalender::find($request->academic_year_id)->start_date,
             'total_fee' => 0,
