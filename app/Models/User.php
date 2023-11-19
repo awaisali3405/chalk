@@ -261,6 +261,7 @@ class User extends Authenticatable
     public function availableStock($branch, $academicYear)
     {
         $purchase = $this->purchaseProduct($branch, $academicYear)->sum('amount');
+        $purchaseQuantity = $this->purchaseProduct($branch, $academicYear)->sum('quantity');
         $saleTotal = $this->resourceSale($branch, $academicYear);
         // dd();
         return $purchase - $saleTotal;
@@ -508,5 +509,9 @@ class User extends Authenticatable
         } else {
             return StaffLoan::where('created_at', ">=", $this->getAcademicYear($academicYear)->start_date)->where('created_at', '<=', $this->getAcademicYear($academicYear)->end_date)->get()->sum('amount');
         }
+    }
+    public function studentRequest()
+    {
+        return Student::where('active', false)->get();
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AcademicCalender;
 use App\Models\Branch;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 
 class BalanceSheetController extends Controller
@@ -25,8 +26,9 @@ class BalanceSheetController extends Controller
             $branch_id = $request->input('branch_id');
             $academicYear = $request->input('academic_year_id');
         } else {
-            $branch_id =  session()->put('branch_id', -1);
-            $academicYear = session()->put('academic_year_id', auth()->user()->id);
+
+            $branch_id =  0;
+            $academicYear = 0;
         }
         return view("balanceSheet.index", compact('branch_id', 'academicYear'));
     }

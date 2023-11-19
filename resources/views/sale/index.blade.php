@@ -36,6 +36,7 @@
                                                         Branch
                                                     </th>
                                                     <th>Amount</th>
+                                                    <th>Quantity</th>
                                                     <th>Student</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -48,6 +49,7 @@
                                                         <td>{{ $value->year->name }}</td>
                                                         <td>{{ $value->branch->name }}</td>
                                                         <td>{{ $value->invoice->amount }}</td>
+                                                        <td>{{ $value->invoice->quantity }}</td>
                                                         <td>{{ $value->invoice->student->first_name }}
                                                             {{ $value->invoice->student->last_name }}</td>
                                                         <td>

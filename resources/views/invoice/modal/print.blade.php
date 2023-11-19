@@ -4,10 +4,13 @@
 <div class="modal fade print printme" id="print-{{ $value->id }}" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Invoice # {{ $value->id }}</b>
-                    <button type="button" class="close" data-dismiss="modal"><span>×</span>
-                    </button>
+            <div class="modal-header justify-between">
+                <h5 class="modal-title">Invoice # {{ $value->id }}</b></h5>
+
+                <a href="{{ route('invoice.print', $invoice->id) }}" target="_blank"
+                    class="btn btn-primary  importStyle">Print</a>
+                {{-- <button type="button" class="close" data-dismiss="modal"><span>×</span>
+                </button> --}}
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -212,7 +215,7 @@
                                         </th>
                                     </tr>
                                 </thead>
-                                
+
                                 @php
                                     $to = \Carbon\Carbon::parse($invoice->from_date);
                                     $from = \Carbon\Carbon::parse($invoice->to_date);
@@ -525,7 +528,7 @@
                                                     <b>£{{ auth()->user()->priceFormat($invoice->amount) }}</b>
                                                 </td>
                                                 <td class="text-center bg-grey">
-                                                    <b>{{ number_format(auth()->user()->priceFormat($invoice->tax)) }}%</b>
+                                                    <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
                                                 </td>
                                                 <td class="text-center bg-grey">
                                                     <b>£{{ auth()->user()->priceFormat($invoice->amount) }}</b>
@@ -780,8 +783,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <a href="{{ route('invoice.print', $invoice->id) }}" target="_blank"
-                    class="btn btn-primary  importStyle">Print</a>
+
             </div>
         </div>
     </div>

@@ -183,7 +183,7 @@
                                                                     <input type="text" class="form-control"
                                                                         id="discount" name="discount" value="0"
                                                                         placeholder=""
-                                                                        {{ $invoice->type == 'Refundable' ? 'readonly' : 'required' }}>
+                                                                        {{ $invoice->type == 'Refundable'|| $invoice->type == 'Registration' ? 'readonly' : 'required' }}>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -196,7 +196,7 @@
                                                                     </div>
                                                                     <input type="text" class="form-control"
                                                                         id="late_fee" name="late_fee" value="0"
-                                                                        {{ $invoice->type == 'Refundable' ? 'readonly' : 'required' }}
+                                                                        {{ $invoice->type == 'Refundable'|| $invoice->type == 'Registration'  ? 'readonly' : 'required' }}
                                                                         placeholder="">
                                                                 </div>
                                                             </div>

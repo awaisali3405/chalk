@@ -39,8 +39,7 @@
                                         <option value="">-</option>
                                         @foreach ($academicCalender as $value)
                                             <option value="{{ $value->id }}"
-                                                {{ request()->get('academic_year_id') == $value->id ? 'selected' : '' }}
-                                                {{ auth()->user()->session()->id == $value->id? 'selected': '' }}>
+                                                {{ request()->get('academic_year_id') == $value->id ? 'selected' : '' }}>
                                                 {{ $value->start_date }} - {{ $value->end_date }}</option>
                                         @endforeach
                                     </select>

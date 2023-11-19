@@ -220,4 +220,5 @@ class Student extends Model
         $due = $this->totalAmount() - $this->paid();
         return $due;
     }
+
 }

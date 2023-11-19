@@ -44,7 +44,8 @@
                         <li><a href="{{ route('student.index') }}">All Student</a></li>
                         <li><a href="{{ route('student.create') }}">Add Student</a></li>
                         @if (auth()->user()->role->name != 'parent')
-                            <li><a href="{{ route('student.request') }}">Student Request</a></li>
+                            <li><a href="{{ route('student.request') }}">Student Request
+                                    ({{ auth()->user()->studentRequest()->count() }})</a></li>
                         @endif
                     </ul>
                 </li>
