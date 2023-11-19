@@ -335,6 +335,12 @@ class StudentsController extends Controller
         $student = Student::find($id);
         if (auth()->user()->role->name != 'parent' && !$student->active) {
             $data['active'] = true;
+            StudentPromotionDetail::create([
+                'student_id' => $student->id,
+                'from_year_id' => 0,
+                'to_year_id' => $student->year_id,
+                'academic_year_id' => auth()->user()->session()->id
+            ]);
             $this->generateInvoice($student, $request);
             $subject = $student->EnquirySubject()->pluck('id')->toArray();
             // dd($subject);

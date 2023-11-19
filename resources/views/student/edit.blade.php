@@ -179,8 +179,8 @@
                                                         <div class="form-group">
                                                             <label class="form-label">Key Stage</label>
 
-                                                            <select class="form-control keyStage" name="key_stage_id" disabled
-                                                                required>
+                                                            <select class="form-control keyStage" name="key_stage_id"
+                                                                required @readonly(true)>
                                                                 <option value="">Select Key Stage</option>
                                                                 @foreach ($keyStage as $value)
                                                                     <option value="{{ $value->id }}"
@@ -196,10 +196,10 @@
                                                             <label class="form-label">Year</label>
 
 
-                                                            <select class="form-control year" name="year_id" required disabled>
-                                                                <option
-                                                                    value="{{ $student->promotionDetail()->where('academic_year_id',auth()->user()->session()->id)->first()->to_year_id }}">
-                                                                    {{ $student->promotionDetail()->where('academic_year_id',auth()->user()->session()->id)->first()->toYear->name }}
+                                                            <select class="form-control year" name="year_id" required
+                                                                @readonly(true)>
+                                                                <option value="{{ $student->currentYear()->id }}">
+                                                                    {{ $student->currentYear()->name }}
                                                                 </option>
                                                             </select>
 
@@ -284,10 +284,7 @@
                                                                                 <select class="form-control subject"
                                                                                     id="subject_id">
                                                                                     <option value="">-</option>
-                                                                                    @foreach ($student->promotionDetail()->where(
-                'academic_year_id',
-                auth()->user()->session()->id,
-            )->first()->toYear->subject as $value)
+                                                                                    @foreach ($student->currentYear()->subject as $value)
                                                                                         <option
                                                                                             value="{{ $value->id }}">
                                                                                             {{ $value->name }}</option>
@@ -418,47 +415,49 @@
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody id="subject">
-                                                                                @foreach ($student->yearSubject as $value)
-                                                                                    <tr>
-                                                                                        <td>
-                                                                                            <a
-                                                                                                href="javascript:void(0);">{{ $value->lessonType->name }}</a>
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <a
-                                                                                                href="javascript:void(0);">{{ $value->subject->name }}</a>
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            {{ $value->board ? $value->board->name : '-' }}
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            {{ $value->paper ? $value->paper->name : '-' }}
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            {{ $value->scienceType ? $value->scienceType->name : '-' }}
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            {{ $value->rate_per_hr }}
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            {{ $value->no_hr_weekly }}
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            {{ $value->amount }}
-                                                                                        </td>
+                                                                                @if ($student->active)
+                                                                                    @foreach ($student->yearSubject as $value)
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <a
+                                                                                                    href="javascript:void(0);">{{ $value->lessonType->name }}</a>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <a
+                                                                                                    href="javascript:void(0);">{{ $value->subject->name }}</a>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                {{ $value->board ? $value->board->name : '-' }}
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                {{ $value->paper ? $value->paper->name : '-' }}
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                {{ $value->scienceType ? $value->scienceType->name : '-' }}
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                {{ $value->rate_per_hr }}
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                {{ $value->no_hr_weekly }}
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                {{ $value->amount }}
+                                                                                            </td>
 
-                                                                                        <td>
+                                                                                            <td>
 
-                                                                                            <input type="hidden"
-                                                                                                value="{{ $value->id }}"
-                                                                                                class="id"
-                                                                                                name="enquiry_subject[]">
-                                                                                            <a class="delete-subject"
-                                                                                                href="javascript:void(0);"><i
-                                                                                                    class=" fa fa-close color-danger"></i></a>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                @endforeach
+                                                                                                <input type="hidden"
+                                                                                                    value="{{ $value->id }}"
+                                                                                                    class="id"
+                                                                                                    name="enquiry_subject[]">
+                                                                                                <a class="delete-subject"
+                                                                                                    href="javascript:void(0);"><i
+                                                                                                        class=" fa fa-close color-danger"></i></a>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    @endforeach
+                                                                                @endif
                                                                             </tbody>
                                                                         </table>
                                                                     </div>

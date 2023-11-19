@@ -76,6 +76,11 @@ class Student extends Model
         'promotion_date',
         'is_promoted'
     ];
+    public function currentYear()
+    {
+        // dd(!is_null($this->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()) ? $this->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()->toYear : $this->year->name);
+        return !is_null($this->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()) ? $this->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()->toYear : $this->year;
+    }
     public function promotionDetail()
     {
         return $this->hasMany(StudentPromotionDetail::class, 'student_id');
@@ -119,7 +124,7 @@ class Student extends Model
     }
     public function yearSubject()
     {
-        return $this->hasMany(EnquirySubject::class, 'student_id')->where('year_id', $this->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()->to_year_id);
+        return $this->hasMany(EnquirySubject::class, 'student_id')->where('year_id', $this->currentYear()->id);
     }
     /**
      * Get all of the upload for the Enquiry
