@@ -89,7 +89,9 @@ class EnquiryController extends Controller
     public function store(Request $request)
     {
         $data = $request->except('_token');
-        $data['subject'] = json_encode($data['subject']);
+        if (isset($data['subject'])) {
+            $data['subject'] = json_encode($data['subject']);
+        }
 
         $enquiry = Enquiry::create($data);
         $email = Email::find(1);

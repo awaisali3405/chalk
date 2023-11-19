@@ -74,6 +74,7 @@
                                                     <th class="">Year </th>
                                                     <th class="">Week</th>
                                                     <th class="">Description</th>
+                                                    <th class="">Type</th>
                                                     <th class="">IN</th>
                                                     <th class="">OUT</th>
                                                     <th class="">Balance</th>
@@ -102,6 +103,7 @@
                                                             <td>{{ $value1->invoice->student->first_name }}
                                                                 {{ $value1->invoice->student->last_name }}
                                                                 {{ $value1->description }} {{ $value1->mode }}</td>
+                                                            <td>Fee</td>
                                                             <td>{{ $value1->amount }}</td>
                                                             <td>0</td>
                                                             <td>{{ $total }}</td>
@@ -121,6 +123,7 @@
                                                             <td>{{ auth()->user()->week($value1->date) }}
                                                             </td>
                                                             <td>{{ $value1->description }}</td>
+                                                            <td>Expense</td>
                                                             <td>0</td>
                                                             <td>{{ $value1->amount }}</td>
                                                             <td>{{ $total }}</td>
@@ -140,9 +143,31 @@
                                                             <td>-</td>
                                                             <td>{{ auth()->user()->week($value1->date) }}
                                                             </td>
-                                                            <td>{{ $value1->description }}</td>
+                                                            <td>Qty({{ $value->quantity }})</td>
                                                             <td>0</td>
+                                                            <td>Purchase</td>
                                                             <td>{{ $value1->amount }}</td>
+                                                            <td>{{ $total }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                    @foreach ($value->sale() as $value1)
+                                                        @php
+                                                            $total += $value1->amount;
+                                                            $in += $value1->productSum();
+
+                                                        @endphp
+                                                        <tr>
+                                                            <td>{{ $sr++ }}</td>
+
+                                                            <td>{{ $value1->date }}</td>
+                                                            <td>{{ $value->name }}</td>
+                                                            <td>-</td>
+                                                            <td>{{ auth()->user()->week($value1->date) }}
+                                                            </td>
+                                                            <td>Qty{{ $value->quantity() }}</td>
+                                                            <td>0</td>
+                                                            <td>Sale</td>
+                                                            <td>{{ $value1->productSum() }}</td>
                                                             <td>{{ $total }}</td>
                                                         </tr>
                                                     @endforeach
@@ -151,6 +176,7 @@
                                             <thead>
 
                                                 <tr>
+                                                    <th></th>
                                                     <th></th>
                                                     <th></th>
                                                     <th></th>

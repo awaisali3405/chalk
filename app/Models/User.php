@@ -398,6 +398,7 @@ class User extends Authenticatable
     public function totalExpense($branch, $academicYear)
     {
         if ($branch == -1) {
+            dd();
 
             return $this->expense()->where('created_at', ">=", $this->getAcademicYear($academicYear)->start_date)->where('created_at', '<=', $this->getAcademicYear($academicYear))->sum('amount');
         } else {

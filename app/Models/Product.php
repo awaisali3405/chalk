@@ -26,4 +26,8 @@ class Product extends Model
     {
         return $this->hasMany(Purchase::class, 'product_id');
     }
+    public function remaining()
+    {
+        $total = 0;
+    }
 }

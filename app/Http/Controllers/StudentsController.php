@@ -333,8 +333,9 @@ class StudentsController extends Controller
             $data['profile_pic'] =   $this->saveImage($request->profile_pic);
         }
         $student = Student::find($id);
-        if (auth()->user()->role->name != 'parent' && !$student->active) {
+        if (auth()->user()->role->name != 'parent' && !$student->active && $student->is_promoted) {
             $data['active'] = true;
+            $data['is_promoted'] = false;
             StudentPromotionDetail::create([
                 'student_id' => $student->id,
                 'from_year_id' => 0,
@@ -613,27 +614,33 @@ class StudentsController extends Controller
     }
     public function generateInvoice($student, $request)
     {
-        $invoice = StudentInvoice::create([
-            'student_id' => $student->id,
-            'amount' => $request->deposit,
-            'type' => 'Refundable',
-            'tax' => 0,
-            'from_date' => auth()->user()->session()->start_date,
-            'to_date' => auth()->user()->session()->end_date,
-            'branch_id' => $student->branch_id,
-            'year_id' => $student->currentYear()->id
-        ]);
+        if ($request->deposit > 0) {
 
-        $invoice = StudentInvoice::create([
-            'student_id' => $student->id,
-            'amount' => $request->registration_fee,
-            'type' => 'Registration',
-            'tax' => $request->tax,
-            'from_date' => auth()->user()->session()->start_date,
-            'to_date' => auth()->user()->session()->end_date,
-            'branch_id' => $student->branch_id,
-            'year_id' => $student->currentYear()->id
-        ]);
+            $invoice = StudentInvoice::create([
+                'student_id' => $student->id,
+                'amount' => $request->deposit,
+                'type' => 'Refundable',
+                'tax' => 0,
+                'from_date' => auth()->user()->session()->start_date,
+                'to_date' => auth()->user()->session()->end_date,
+                'branch_id' => $student->branch_id,
+                'year_id' => $student->currentYear()->id
+            ]);
+        }
+        if ($request->registration_fee) {
+
+
+            $invoice = StudentInvoice::create([
+                'student_id' => $student->id,
+                'amount' => $request->registration_fee,
+                'type' => 'Registration',
+                'tax' => $request->tax,
+                'from_date' => auth()->user()->session()->start_date,
+                'to_date' => auth()->user()->session()->end_date,
+                'branch_id' => $student->branch_id,
+                'year_id' => $student->currentYear()->id
+            ]);
+        }
         if ($request->annual_resource_fee + $request->exercise_book_fee) {
 
             $invoice = StudentInvoice::create([
