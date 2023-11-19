@@ -621,7 +621,7 @@ class StudentsController extends Controller
             'from_date' => auth()->user()->session()->start_date,
             'to_date' => auth()->user()->session()->end_date,
             'branch_id' => $student->branch_id,
-            'year_id' => $student->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()->toYear->id
+            'year_id' => $student->currentYear()->id
         ]);
 
         $invoice = StudentInvoice::create([
@@ -632,7 +632,7 @@ class StudentsController extends Controller
             'from_date' => auth()->user()->session()->start_date,
             'to_date' => auth()->user()->session()->end_date,
             'branch_id' => $student->branch_id,
-            'year_id' => $student->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()->toYear->id
+            'year_id' => $student->currentYear()->id
         ]);
         if ($request->annual_resource_fee + $request->exercise_book_fee) {
 
@@ -644,7 +644,7 @@ class StudentsController extends Controller
                 'from_date' => auth()->user()->session()->start_date,
                 'to_date' => auth()->user()->session()->end_date,
                 'branch_id' => $student->branch_id,
-                'year_id' => $student->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()->toYear->id
+                'year_id' => $student->currentYear()->id
             ]);
         }
     }

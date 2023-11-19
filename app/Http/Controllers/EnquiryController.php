@@ -94,10 +94,10 @@ class EnquiryController extends Controller
         $enquiry = Enquiry::create($data);
         $email = Email::find(1);
         // dd(gettype($email->template));
-        $email->template = str_replace('[Date]', $enquiry->assessment_date, $email->template);
+        $email->template = str_replace('[Date]', auth()->user()->ukFormat($enquiry->assessment_date), $email->template);
         $email->template = str_replace('[Time]', $enquiry->assessment_time, $email->template);
 
-        $email->template = str_replace("[Student's Name]", $enquiry->first_name . " " . $enquiry->last_name, $email->template);
+        $email->template = str_replace("[Parent's Name]", $enquiry->first_name . " " . $enquiry->last_name, $email->template);
         Mail::send('notification.enquiry', ['template' => $email->template], function ($message) use ($enquiry, $email) {
             $message->to($enquiry->email);
             $message->subject($email->name);
