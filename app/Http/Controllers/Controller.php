@@ -61,7 +61,7 @@ class Controller extends BaseController
         View::share('department', $department);
         $academicCalender = AcademicCalender::all();
         View::share('academicCalender', $academicCalender);
-        $studentRequest=
+        // $studentRequest=
     }
     public function ukFormat($date)
     {
