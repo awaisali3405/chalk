@@ -558,6 +558,7 @@ class StudentsController extends Controller
             }
         }
 
+
         return view('student.index', compact('student'));
     }
     public function getStudent($id)

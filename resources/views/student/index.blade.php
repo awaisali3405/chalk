@@ -143,13 +143,14 @@
                                                     @if (
                                                         $value->promotionDetail()->where(
                                                                 'academic_year_id',
-                                                                auth()->user()->session()->id)->first())
+                                                                auth()->user()->session()->id)->first() || auth()->user()->role->name == 'parent')
                                                         <tr>
                                                             <td>{{ $key + 1 }}</td>
 
                                                             <td>{{ $value->id }}</td>
                                                             <td>{{ $value->first_name }} {{ $value->last_name }} </td>
-                                                            <td> {{ $value->promotionDetail()->where('academic_year_id',auth()->user()->session()->id)->first()->toYear->name }}
+
+                                                            <td> {{ $value->promotionDetail()->where('academic_year_id',auth()->user()->session()->id)->first()? $value->promotionDetail()->where('academic_year_id',auth()->user()->session()->id)->first()->toYear->name: $value->year->name }}
                                                             </td>
                                                             <td>{{ $value->admission_date }}</td>
                                                             <td>Week
@@ -185,14 +186,15 @@
                                                                         @if (!$value->active)
                                                                             <a class="dropdown-item"
                                                                                 href="{{ route('student.edit', $value->id) }}">Edit</a>
-                                                                        @endif
-                                                                        <a class="dropdown-item"
-                                                                            href="{{ route('student.show', $value->id) }}">Show</a>
-                                                                        <a class="dropdown-item"
-                                                                            href="{{ route('invoice.show', $value->id) }}">Invoice</a>
+                                                                        @else
+                                                                            <a class="dropdown-item"
+                                                                                href="{{ route('student.show', $value->id) }}">Show</a>
+                                                                            <a class="dropdown-item"
+                                                                                href="{{ route('invoice.show', $value->id) }}">Invoice</a>
 
-                                                                        <a class="dropdown-item" target="_blank"
-                                                                            href="{{ route('student.statement', $value->id) }}">Statement</a>
+                                                                            <a class="dropdown-item" target="_blank"
+                                                                                href="{{ route('student.statement', $value->id) }}">Statement</a>
+                                                                        @endif
                                                                     @endif
                                                                 </div>
                                                             </td>
