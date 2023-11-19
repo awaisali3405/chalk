@@ -31,7 +31,7 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Mr./Mrs./Ms./Other</label>
+                                            <label class="form-label">Mr./Mrs./Ms./Other *</label>
                                             <input type="text" class="form-control" value="{{ old('first_name') }}"
                                                 name="first_name" required>
                                             @error('first_name')
@@ -41,7 +41,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">First Name</label>
+                                            <label class="form-label">First Name *</label>
                                             <input type="text" class="form-control" value="{{ old('last_name') }}"
                                                 name="last_name" required>
                                             @error('last_name')
@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Last Name</label>
+                                            <label class="form-label">Last Name *</label>
                                             <input type="text" class="form-control" value="{{ old('given_name') }}"
                                                 name="given_name" required>
                                             @error('given_name')
@@ -61,14 +61,14 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Gender</label>
+                                            <label class="form-label">Gender *</label>
                                             <div class="row">
                                                 <div class="col-4">
 
                                                     <div class="form-check">
 
                                                         <input type="radio" class="form-check-input" id="male"
-                                                            value="male" name="gender">
+                                                            value="male" name="gender" checked>
                                                         <label class="form-check-label" for="male">Male</label>
                                                     </div>
                                                 </div>
@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Relationship to Student</label>
+                                            <label class="form-label">Relationship to Student *</label>
 
                                             <input type="text" list="parent" value="{{ old('relationship') }}"
                                                 class="form-control" name="relationship" required>
@@ -123,62 +123,77 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Work Phone Number</label>
-                                            <input type="text" class="form-control" name="work_phone_number">
+                                            <input type="text" class="form-control" name="work_phone_number"
+                                                value="{{ old('work_phone_number') }}">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Mobile Number</label>
-                                            <input type="text" class="form-control" name="mobile_number">
+                                            <label class="form-label">Mobile Number *</label>
+                                            <input type="text"
+                                                class="form-control @error('mobile_number') is-invalid @enderror""
+                                                name="mobile_number" value="{{ old('mobile_number') }}" required>
+                                            @error('mobile_number')
+                                                <span style="color:#ff3d71" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Email Address
                                             </label>
-                                            <input type="text" class="form-control" name="email">
+                                            <input type="text" class="form-control"
+                                                @error('email') is-invalid @enderror" value="" name="email"
+                                                required>
+                                            @error('email')
+                                                <span style="color:#ff3d71" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">First Address</label>
+                                            <label class="form-label">First Address *</label>
                                             <input type="text" id="formatted_address_0" class="form-control"
-                                                name="res_address">
+                                                value="{{ old('formatted_address_0') }}" name="res_address" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Second Address Line </label>
                                             <input type="text" id="formatted_address_1" class="form-control"
-                                                name="res_second_address">
+                                                value="{{ old('res_second_address') }}" name="res_second_address">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Third Address Line</label>
                                             <input type="text" id="formatted_address_2" class="form-control"
-                                                name="res_third_address">
+                                                value="{{ old('res_third_address') }}" name="res_third_address">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label"> Town</label>
-                                            <input type="text" id="town_or_city" class="form-control"
-                                                name="res_town">
+                                            <input type="text" id="town_or_city" class="form-control" name="res_town"
+                                                value="{{ old('res_town') }}" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label"> County </label>
                                             <input type="text" id="county" class="form-control"
-                                                name="res_country">
+                                                value="{{ old('postcode') }}" name="res_country"required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label"> Postcode</label>
                                             <input type="text" id="postcode" class="form-control"
-                                                name="res_postal_code">
+                                                value="{{ old('postcode') }}" name="res_postal_code" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">

@@ -32,7 +32,7 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Mr./Mrs./Ms./Other</label>
+                                            <label class="form-label">Mr./Mrs./Ms./Other *</label>
                                             <input type="text" class="form-control"
                                                 value="{{ old('first_name', $parent->first_name) }}" name="first_name"
                                                 required>
@@ -43,9 +43,10 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">First Name</label>
+                                            <label class="form-label">First Name *</label>
                                             <input type="text" class="form-control"
-                                                value="{{ old('last_name', $parent->last_name) }}" name="last_name" required>
+                                                value="{{ old('last_name', $parent->last_name) }}" name="last_name"
+                                                required>
                                             @error('last_name')
                                                 <span style="color:#ff3d71">{{ $message }}</span>
                                             @enderror
@@ -53,7 +54,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Last Name</label>
+                                            <label class="form-label">Last Name * </label>
                                             <input type="text" class="form-control"
                                                 value="{{ old('given_name', $parent->given_name) }}" name="given_name"
                                                 required>
@@ -64,7 +65,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Gender</label>
+                                            <label class="form-label">Gender *</label>
                                             <div class="row">
                                                 <div class="col-4">
 
@@ -99,31 +100,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <div class="col-lg-6 col-md-6 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-label">Gender</label>
-                                            <div class="row">
-                                                <div class="col-4">
 
-                                                    <input type="radio" class="form-control" id="male" value="male"
-                                                        name="gender" >
-                                                    <label for="male">Male</label>
-                                                </div>
-                                                <div class="col-4">
-                                                    <input type="radio" class="form-control" id="female" value="female"
-                                                        name="gender" {{ $parent->gender == 'female' ? 'checked' : '' }}>
-                                                    <label for="female">Female</label>
-
-                                                </div>
-                                                <div class="col-4">
-                                                    <input type="radio" class="form-control" id="other" value="other"
-                                                        name="gender" {{ $parent->gender == 'other' ? 'checked' : '' }}>
-                                                    <label for="other">Other</label>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Relationship to Student</label>
@@ -166,23 +143,33 @@
                                             <label class="form-label">Mobile Number</label>
                                             <input type="text" class="form-control"
                                                 value="{{ old('mobile_number', $parent->mobile_number) }}"
-                                                name="mobile_number">
+                                                name="mobile_number" required>
+                                            @error('mobile_number')
+                                                <span style="color:#ff3d71" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Email Address
+                                            <label class="form-label">Email Address *
                                             </label>
                                             <input type="text" class="form-control"
                                                 value="{{ old('email', $parent->email) }}" name="email">
+                                            @error('email')
+                                                <span style="color:#ff3d71" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">First Address</label>
+                                            <label class="form-label">First Address *</label>
                                             <input type="text" id="formatted_address_0"
                                                 value="{{ $parent->res_address }}" class="form-control"
-                                                name="res_address">
+                                                name="res_address" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">

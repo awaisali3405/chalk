@@ -32,6 +32,9 @@ class ParentController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'email' => 'unique:parent,email'
+        ]);
         $data = $request->except('_token');
         $parent = Parents::create($data);
         if (isset($data['password'])) {
@@ -73,6 +76,9 @@ class ParentController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'email' => 'required|unique:parent,email,' . $id
+        ]);
         $data = $request->except('_token');
         Parents::find($id)->update($data);
         return redirect()->route('parent.index')->with('success', 'Parent Updated Successfully');
