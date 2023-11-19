@@ -166,16 +166,16 @@
                                                         <tr>
                                                             <td>{{ $sr++ }}</td>
 
-                                                            <td>{{ auth()->user() - ukFormat($value1->date) }}</td>
+                                                            <td>{{ auth()->user()->ukFormat($value1->date) }}</td>
                                                             <td>{{ $value->name }}</td>
                                                             <td>-</td>
                                                             <td>
                                                                 Week {{ auth()->user()->week($value1->date) }}
                                                             </td>
-                                                            <td>Qty{{ $value->quantity() }} </td>
+                                                            <td>Qty{{ $value1->product()->sum('quantity') }} </td>
                                                             <td>Sale</td>
-                                                            <td>0</td>
                                                             <td>{{ $value1->productSum() }}</td>
+                                                            <td>0</td>
                                                             <td>{{ $total }}</td>
                                                         </tr>
                                                     @endforeach

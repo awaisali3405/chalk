@@ -42,4 +42,5 @@ class Sale extends Model
     {
         return $this->belongsTo(KeyStage::class, 'key_stage_id');
     }
+    
 }

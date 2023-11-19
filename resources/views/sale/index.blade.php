@@ -49,7 +49,7 @@
                                                         <td>{{ $value->year->name }}</td>
                                                         <td>{{ $value->branch->name }}</td>
                                                         <td>{{ $value->invoice->amount }}</td>
-                                                        <td>{{ $value->quantity }}</td>
+                                                        <td>{{ $value->product()->sum('quantity') }}</td>
                                                         <td>{{ $value->invoice->student->first_name }}
                                                             {{ $value->invoice->student->last_name }}</td>
                                                         <td>
