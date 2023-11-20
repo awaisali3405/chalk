@@ -64,7 +64,7 @@
 
 
 
-                                <h6>
+                                <h6 class="">
                                     From: {{ $invoice->student->branch->res_address }}</h6>
                                 <h6>{{ $invoice->student->branch->res_second_address }}
                                     ,{{ $invoice->student->branch->res_third_address }}
@@ -481,13 +481,16 @@
                                         @endphp
                                     @elseif (str_contains($invoice->type, 'Fee'))
                                         {{-- @dd($invoice->student->enquirySubject) --}}
+                                        @php
+                                            $sr++;
+                                        @endphp
                                         @if (count($invoice->student->normalSubject()) > 0)
 
                                             <tr>
                                                 <td class="text-center">
                                                     <b>{{ $sr++ }}</b>
                                                 </td>
-                                                <td class="pl-2 text-center">
+                                                <td class="pl-2">
                                                     <b> Lesson ( @foreach ($invoice->student->normalSubject() as $key => $value)
                                                             {{ $value->subject->name }}@if ($key + 1 != count($invoice->student->normalSubject()))
                                                                 ,
@@ -520,7 +523,7 @@
                                                     <h6>Period {{ auth()->user()->ukFormat($invoice->from_date) }} -
                                                         {{ auth()->user()->ukFormat($invoice->to_date) }} </h6>
                                                 </td>
-                                                <td class="bg-grey text-centertext-center">
+                                                <td class="bg-grey text-center">
                                                     <h6>
                                                         £{{ $invoice->student->normalSubject()->sum('amount') }}
                                                         Weekly</h6>
@@ -530,9 +533,7 @@
                                             </tr>
                                         @endif
                                         @if (count($invoice->student->oneOnOneSubject()) > 0)
-                                            @php
-                                                $sr++;
-                                            @endphp
+
                                             <tr>
                                                 <td class="text-center">
                                                     <b>{{ $sr++ }}</b>
@@ -568,7 +569,47 @@
                                         @endphp
 
                                     @endif
+                                    @if ($invoice->student->fee_discount > 0)
+                                        <tr>
+                                            <td class=" text-center">
+                                                <b>
+                                                    {{ $sr++ }}
 
+                                                </b>
+                                            </td>
+                                            <td class="pl-2">
+                                                <b>Discount</b>
+                                            </td>
+                                            <td class="bg-grey">
+                                                <b></b>
+                                            </td>
+                                            <td class="bg-grey text-center">
+                                                <b>{{ number_format(auth()->user()->priceFormat($invoice->tax)) }}%</b>
+                                            </td>
+                                            <td class="bg-grey text-center">
+                                                <b>
+
+                                                    -£{{ $invoice->student->fee_discount }}
+                                                </b>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-x-black">
+                                            <td class=" text-center">
+
+                                            </td>
+                                            <td class="pl-2">
+
+                                            </td>
+                                            <td class="bg-grey text-grey">
+                                                blanck
+                                            </td>
+                                            <td class="bg-grey text-center">
+                                            </td>
+                                            <td class="bg-grey text-center">
+
+                                            </td>
+                                        </tr>
+                                    @endif
 
                                     @if (count($invoice->receipt) > 0)
                                         @if ($invoice->receipt->sum('late_fee') > 0)
