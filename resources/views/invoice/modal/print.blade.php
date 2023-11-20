@@ -60,7 +60,7 @@
                     <div class="col-6 pr-4">
                         <div class="border-black row pl-3">
 
-                            <div class="pr-0 col-12 ">
+                            <div class="pr-1 col-12">
 
 
 
@@ -586,7 +586,7 @@
                                                 <b></b>
                                             </td>
                                             <td class="bg-grey text-center">
-                                                <b>{{ number_format(auth()->user()->priceFormat($invoice->tax)) }}%</b>
+                                                <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
                                             </td>
                                             <td class="bg-grey text-center">
                                                 <b>
