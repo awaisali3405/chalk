@@ -41,13 +41,13 @@
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Subject</label>
-                                                    <input type="text" class="form-control" name="subject">
+                                                    <input type="text" class="form-control" name="subject" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Message</label>
-                                                    <textarea name="message" class="summernote" id=""></textarea>
+                                                    <textarea name="message" class="summernote" id="" required></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12">
