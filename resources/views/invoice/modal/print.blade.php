@@ -450,7 +450,7 @@
                                             </td>
                                             <td class="pl-2 ">
                                                 <b>Exercise Book (Quantity x
-                                                    {{ count($invoice->subject) }} )
+                                                    {{ count($invoice->student->enquirySubject) }} )
                                                 </b>
                                             </td>
                                             <td class="text-center bg-grey">
@@ -461,7 +461,7 @@
                                             </td>
                                             <td class="text-center bg-grey">
                                                 <b>
-                                                    £{{ $invoice->subject->sum('subject_book_fee') }}</b>
+                                                    £{{ auth()->user()->priceFormat($invoice->amount) }}</b>
                                             </td>
                                         </tr>
 
