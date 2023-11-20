@@ -420,26 +420,41 @@
                                             $sr = 2;
                                         @endphp
                                     @elseif (str_contains($invoice->type, 'Resource Fee'))
-                                        @foreach ($invoice->subject as $key => $value)
+                                        @foreach ($invoice->student->enquirySubject as $key => $value)
                                             <tr class="">
                                                 <td class="text-center">
                                                     <b>{{ $key + 1 }}</b>
                                                 </td>
                                                 <td class="pl-2 ">
-                                                    <b>{{ $value->subject_name }} Resources
+                                                    <b>{{ $value->subject->name }} Resources
                                                     </b>
                                                 </td>
                                                 <td class="text-center bg-grey">
-                                                    <b>£{{ auth()->user()->priceFormat($value->subject_rate) }}</b>
+                                                    <b>£{{ auth()->user()->priceFormat($value->subject->rate) }}</b>
                                                 </td>
                                                 <td class="text-center bg-grey">
                                                     <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
                                                 </td>
                                                 <td class="text-center bg-grey">
-                                                    <b>£{{ auth()->user()->priceFormat($value->subject_rate) }}</b>
+                                                    <b>£{{ auth()->user()->priceFormat($value->subject->rate) }}</b>
                                                 </td>
                                             </tr>
+                                            <tr class="">
+                                                <td class=" text-center">
 
+                                                </td>
+                                                <td class="pl-2">
+
+                                                </td>
+                                                <td class="bg-grey text-grey">
+                                                    blanck
+                                                </td>
+                                                <td class="bg-grey text-center">
+                                                </td>
+                                                <td class="bg-grey text-center">
+
+                                                </td>
+                                            </tr>
                                             @php
                                                 $sr = $key + 1;
                                             @endphp

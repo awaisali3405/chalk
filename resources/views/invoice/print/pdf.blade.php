@@ -437,6 +437,7 @@
                                     $sr = $key + 2;
                                 @endphp
                             @elseif (str_contains($invoice->type, 'Addition Invoice'))
+                                {{-- Additional INvoice --}}
                                 @foreach ($invoice->subject as $key => $value)
                                     <tr>
                                         <td class="text-center">
@@ -552,7 +553,7 @@
                                 @endphp
                             @elseif (str_contains($invoice->type, 'Fee'))
                                 {{-- @dd($invoice->student->enquirySubject) --}}
-                                @if (count($invoice->student->oneOnOneSubject()) < 1)
+                                @if (count($invoice->student->normalSubject()) > 0)
 
                                     <tr>
                                         <td class="text-center">
@@ -596,7 +597,8 @@
                                         <td class="bg-grey"></td>
                                         <td class="bg-grey"></td>
                                     </tr>
-                                @else
+                                @endif
+                                @if (count($invoice->student->oneOnOneSubject()) > 0)
                                     <tr>
                                         <td class="text-center">
                                             <b>1</b>

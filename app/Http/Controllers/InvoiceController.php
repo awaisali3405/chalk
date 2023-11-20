@@ -185,10 +185,10 @@ class InvoiceController extends Controller
                     }
                 } else {
                     if (str_contains($student->year->name, "11")) {
-                        $amount = (($student->yearSubject->sum('amount') - $student->fee_discount) * 40 / 9) * $months;
+                        $amount = (($student->yearSubject->sum('amount')) * 40 / 9) * $months - $student->fee_discount;
                     } else {
 
-                        $amount = (($student->yearSubject->sum('amount') - $student->fee_discount) * 52 / 12) * $months;
+                        $amount = (($student->yearSubject->sum('amount')) * 52 / 12) * $months - $student->fee_discount;
                     }
                     if ($amount > 0) {
 
