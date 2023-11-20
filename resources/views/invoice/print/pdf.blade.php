@@ -609,13 +609,13 @@
                                                 @endforeach ) </b>
                                         </td>
                                         <td class="text-center bg-grey">
-                                            <b>£{{ auth()->user()->priceFormat($invoice->amount) }}</b>
+                                            <b>£{{ auth()->user()->priceFormat($invoice->student->oneOnOneSubject()[0]->rate_per_hr) }}</b>
                                         </td>
                                         <td class="text-center bg-grey">
                                             <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
                                         </td>
                                         <td class="text-center bg-grey">
-                                            <b>£{{ auth()->user()->priceFormat($invoice->amount) }}</b>
+                                            <b>£{{ str_contains($invoice->type, 'Month') ? (str_contains($invoice->student->year->name, '11') ? number_format((($invoice->student->oneOnOneSubject()->sum('amount') * 40) / 9) * $months, 2) : number_format((($invoice->student->oneOnOneSubject()->sum('amount') * 52) / 12) * $months, 2)) : $invoice->student->oneOnOneSubject()->sum('amount') * $weeks }}</b>
                                         </td>
                                     </tr>
                                     <tr>

@@ -83,7 +83,7 @@
                                         <li class="nav-item"><a href="#receipt-list" data-toggle="tab"
                                                 class="nav-link general {{ request()->all() ? 'show active' : '' }}">All
                                                 Invoice</a></li>
-                          
+
                                     </ul>
                                     <div class="tab-content">
                                         <div id="additional"
@@ -440,7 +440,7 @@
                                                                                             </td>
                                                                                             <td>{{ $value->branch->name }}
                                                                                             </td>
-                                                                                            <td>{{ $value->fee }}
+                                                                                            <td>{{ $value->payment_period == 'Monthly'? (str_contains('11', $value->year->name)? auth()->user()->priceFormat(($value->fee * 49) / 12 - $value->fee_discount): auth()->user()->priceFormat(($value->fee * 52) / 12 - $value->fee_discount)): $value->fee - $value->fee_discount }}
                                                                                             </td>
                                                                                             <td>
                                                                                                 <a class="btn btn-primary"
