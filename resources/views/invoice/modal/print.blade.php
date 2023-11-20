@@ -40,8 +40,7 @@
                                 <h6>{{ $invoice->student->branch->res_third_address }},
                                 </h6>
                                 <h6>
-
-                                    {{ $invoice->student->parents[0]->res_second_address }},
+                                    {{ $invoice->student->parents[0]->res_second_address }}
                                 </h6>
                                 <h6>
                                     {{ $invoice->student->parents[0]->res_address }}</h6>
@@ -60,16 +59,13 @@
                     </div>
                     <div class="col-6 pr-4">
                         <div class="border-black row pl-3">
-                            <div class="col-1 p-0">
 
-                                <h6>From:</h6>
-                            </div>
-                            <div class="pr-4 col-11">
+                            <div class="pr-4 col-12 ">
 
 
 
                                 <h6>
-                                    {{ $invoice->student->branch->res_address }}</h6>
+                                    From: {{ $invoice->student->branch->res_address }}</h6>
                                 <h6>{{ $invoice->student->branch->res_second_address }}
                                     ,{{ $invoice->student->branch->res_third_address }}
                                 </h6>
@@ -266,7 +262,7 @@
                                         <tr>
                                             <td></td>
                                             <td class="text-center">
-                                                <b>Additional Invoice
+                                                <b>Fee
                                                     ({{ auth()->user()->ukFormat($invoice->from_date) }} -
                                                     {{ auth()->user()->ukFormat($invoice->to_date) }})
                                                 </b>
@@ -489,7 +485,7 @@
 
                                             <tr>
                                                 <td class="text-center">
-                                                    <b>1</b>
+                                                    <b>{{ $sr++ }}</b>
                                                 </td>
                                                 <td class="pl-2 ">
                                                     <b> Lesson ( @foreach ($invoice->student->normalSubject() as $key => $value)
@@ -533,7 +529,7 @@
                                         @if (count($invoice->student->oneOnOneSubject()) > 0)
                                             <tr>
                                                 <td class="text-center">
-                                                    <b>1</b>
+                                                    <b>{{ $sr++ }}</b>
                                                 </td>
                                                 <td class="pl-2 ">
                                                     <b> 1 - 1( @foreach ($invoice->student->oneOnOneSubject() as $value)
@@ -553,7 +549,8 @@
                                             <tr>
                                                 <td></td>
                                                 <td class="pl-2">
-                                                    <h6>Until {{ auth()->user()->ukFormat($invoice->to_date) }} </h6>
+                                                    <h6>Period {{ auth()->user()->ukFormat($invoice->from_date) }} -
+                                                        {{ auth()->user()->ukFormat($invoice->to_date) }} </h6>
                                                 </td>
                                                 <td class="bg-grey"></td>
                                                 <td class="bg-grey"></td>
@@ -748,7 +745,7 @@
                                         </td>
                                         <th class="text-center">
 
-                                            £{{ $invoice->totalAmount() }}
+                                            £{{ auth()->user()->priceFormat($invoice->amount) -$invoice->receipt->sum('discount') +$invoice->receipt->sum('late_fee') }}
 
                                         </th>
                                     </tr>
