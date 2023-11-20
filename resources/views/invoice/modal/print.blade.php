@@ -64,24 +64,24 @@
 
 
 
-                                <h6 class="">
+                                <h6 style="text-align: end;">
                                     From: {{ $invoice->student->branch->res_address }}</h6>
-                                <h6>{{ $invoice->student->branch->res_second_address }}
+                                <h6 style="text-align: end;">{{ $invoice->student->branch->res_second_address }}
                                     ,{{ $invoice->student->branch->res_third_address }}
-                                </h6>
-                                <h6>{{ $invoice->student->branch->res_postal_code }},
+                                </h6 style="text-align: end;">
+                                <h6 style="text-align: end;">{{ $invoice->student->branch->res_postal_code }},
                                     {{ $invoice->student->branch->res_town }}
-                                </h6>
-                                <h6>
+                                </h6 style="text-align: end;">
+                                <h6 style="text-align: end;">
                                     email:
                                 </h6>
-                                <h6>
+                                <h6 style="text-align: end;">
                                     Phone:
                                 </h6>
-                                <h6>
+                                <h6 style="text-align: end;">
                                     Company No:
                                 </h6>
-                                <h6>
+                                <h6 style="text-align: end;">
                                     VAT reg No:
                                 </h6>
 
@@ -540,7 +540,9 @@
                                                 </td>
                                                 <td class="pl-2 ">
                                                     <b> 1 - 1( @foreach ($invoice->student->oneOnOneSubject() as $value)
-                                                            {{ $value->subject->name }}
+                                                            {{ $value->subject->name }}@if ($key + 1 != count($invoice->student->oneOnOneSubject()))
+                                                                ,
+                                                            @endif
                                                         @endforeach ) </b>
                                                 </td>
                                                 <td class="text-center bg-grey">
