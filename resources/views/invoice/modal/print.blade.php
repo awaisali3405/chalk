@@ -485,7 +485,7 @@
                                         @endphp
                                     @elseif (str_contains($invoice->type, 'Fee'))
                                         {{-- @dd($invoice->student->enquirySubject) --}}
-                                        @if (count($invoice->student->oneOnOneSubject()) < 1)
+                                        @if (count($invoice->student->normalSubject()) > 0)
 
                                             <tr>
                                                 <td class="text-center">
@@ -529,7 +529,8 @@
                                                 <td class="bg-grey"></td>
                                                 <td class="bg-grey"></td>
                                             </tr>
-                                        @else
+                                        @endif
+                                        @if (count($invoice->student->oneOnOneSubject()) > 0)
                                             <tr>
                                                 <td class="text-center">
                                                     <b>1</b>
@@ -540,13 +541,13 @@
                                                         @endforeach ) </b>
                                                 </td>
                                                 <td class="text-center bg-grey">
-                                                    <b>£{{ auth()->user()->priceFormat($invoice->amount) }}</b>
+                                                    <b>£{{ auth()->user()->priceFormat($invoice->student->oneOnOneSubject()[0]->rate_per_hr) }}</b>
                                                 </td>
                                                 <td class="text-center bg-grey">
                                                     <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
                                                 </td>
                                                 <td class="text-center bg-grey">
-                                                    <b>£{{ auth()->user()->priceFormat($invoice->amount) }}</b>
+                                                    <b>£{{ str_contains($invoice->type, 'Month') ? (str_contains($invoice->student->year->name, '11') ? number_format((($invoice->student->oneOnOneSubject()->sum('amount') * 40) / 9) * $months, 2) : number_format((($invoice->student->oneOnOneSubject()->sum('amount') * 52) / 12) * $months, 2)) : $invoice->student->oneOnOneSubject()->sum('amount') * $weeks }}</b>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -582,7 +583,7 @@
                                                     <b></b>
                                                 </td>
                                                 <td class="bg-grey text-center">
-                                                    <b>{{ $invoice->student->branch->tax_type == 'flat' ? 0 : $invoice->student->branch->tax }}%</b>
+                                                    <b>{{ $invoice->student->branch->tax_type == 'flat'? auth()->user()->priceFormat($invoice->student->branch->tax): 0 }}%</b>
                                                 </td>
                                                 <td class="bg-grey text-center">
                                                     <b>
