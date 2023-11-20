@@ -60,7 +60,7 @@
                     <div class="col-6 pr-4">
                         <div class="border-black row pl-3">
 
-                            <div class="pr-4 col-12 ">
+                            <div class="pr-0 col-12 ">
 
 
 
@@ -539,7 +539,7 @@
                                                     <b>{{ $sr++ }}</b>
                                                 </td>
                                                 <td class="pl-2 ">
-                                                    <b> 1 - 1( @foreach ($invoice->student->oneOnOneSubject() as $value)
+                                                    <b> 1 - 1( @foreach ($invoice->student->oneOnOneSubject() as $key => $value)
                                                             {{ $value->subject->name }}@if ($key + 1 != count($invoice->student->oneOnOneSubject()))
                                                                 ,
                                                             @endif
@@ -804,7 +804,7 @@
                                         <td class="">
                                             Balance
                                         </td>
-                                        <th class="text-center">
+                                        <th class="text-center" style="color:red;">
 
                                             £{{ $invoice->remainingAmount() }}
 

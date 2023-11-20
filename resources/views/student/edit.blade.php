@@ -676,7 +676,9 @@
 
                                                                     <input type="date" class="form-control"
                                                                         value="{{ $student->promotion_date }}"
-                                                                        name="admission_date" required readonly>
+                                                                        name="admission_date" required @if (!$student->is_active)
+                                                                        required
+                                                                        @endif>
                                                                 </div>
                                                             </div>
                                                         </div>
