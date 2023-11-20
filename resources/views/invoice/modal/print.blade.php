@@ -37,10 +37,10 @@
 
                                 <h6>{{ $invoice->student->first_name }}
                                     {{ $invoice->student->last_name }}</h6>
-                                <h6>{{ $invoice->student->parents[0]->res_third_address }},
-                                </h6>
                                 <h6>
                                     {{ $invoice->student->parents[0]->res_second_address }}
+                                </h6>
+                                <h6>{{ $invoice->student->parents[0]->res_third_address }}
                                 </h6>
                                 <h6>
                                     {{ $invoice->student->parents[0]->res_address }}</h6>
