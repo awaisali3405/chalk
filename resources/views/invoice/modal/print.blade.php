@@ -37,7 +37,7 @@
 
                                 <h6>{{ $invoice->student->first_name }}
                                     {{ $invoice->student->last_name }}</h6>
-                                <h6>{{ $invoice->student->branch->res_third_address }},
+                                <h6>{{ $invoice->student->parents[0]->res_third_address }},
                                 </h6>
                                 <h6>
                                     {{ $invoice->student->parents[0]->res_second_address }}
@@ -520,8 +520,8 @@
                                             <tr>
                                                 <td></td>
                                                 <td class="pl-2">
-                                                    <h6>Period {{ auth()->user()->ukFormat($invoice->from_date) }} -
-                                                        {{ auth()->user()->ukFormat($invoice->to_date) }} </h6>
+                                                    <h6>Period( {{ auth()->user()->ukFormat($invoice->from_date) }} -
+                                                        {{ auth()->user()->ukFormat($invoice->to_date) }}) </h6>
                                                 </td>
                                                 <td class="bg-grey text-center">
                                                     <h6>
@@ -540,7 +540,7 @@
                                                 </td>
                                                 <td class="pl-2 ">
                                                     <b> 1 - 1( @foreach ($invoice->student->oneOnOneSubject() as $value)
-                                                            {{ $value->subject->name }},
+                                                            {{ $value->subject->name }}
                                                         @endforeach ) </b>
                                                 </td>
                                                 <td class="text-center bg-grey">
@@ -556,8 +556,8 @@
                                             <tr>
                                                 <td></td>
                                                 <td class="pl-2">
-                                                    <h6>Period {{ auth()->user()->ukFormat($invoice->from_date) }} -
-                                                        {{ auth()->user()->ukFormat($invoice->to_date) }} </h6>
+                                                    <h6>Period( {{ auth()->user()->ukFormat($invoice->from_date) }} -
+                                                        {{ auth()->user()->ukFormat($invoice->to_date) }} )</h6>
                                                 </td>
                                                 <td class="bg-grey"></td>
                                                 <td class="bg-grey"></td>
