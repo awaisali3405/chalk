@@ -198,16 +198,16 @@
 
                                         </th>
                                         <th class="">
-                                            <b> Description</b>
+                                            Description
                                         </th>
                                         <th class="">
-                                            <b>Rate</b>
+                                            Rate
                                         </th>
                                         <th>
-                                            <b> Tax</b>
+                                            Tax
                                         </th>
                                         <th class="">
-                                            <b>Amount</b>
+                                            Amount
                                         </th>
                                     </tr>
                                 </thead>
@@ -487,7 +487,7 @@
                                                 <td class="text-center">
                                                     <b>{{ $sr++ }}</b>
                                                 </td>
-                                                <td class="pl-2 ">
+                                                <td class="pl-2 text-center">
                                                     <b> Lesson ( @foreach ($invoice->student->normalSubject() as $key => $value)
                                                             {{ $value->subject->name }}@if ($key + 1 != count($invoice->student->normalSubject()))
                                                                 ,
@@ -498,11 +498,14 @@
                                                 </td>
                                                 <td class="text-center bg-grey">
                                                     <h6>
-                                                        £{{ $invoice->student->normalSubject()[0]->rate_per_hr }}</h6>
+                                                        <b> £{{ $invoice->student->normalSubject()[0]->rate_per_hr }}
+                                                        </b>
+                                                    </h6>
                                                 </td>
                                                 <td class="text-center bg-grey">
                                                     <h6>
-                                                        {{ auth()->user()->priceFormat($invoice->tax) }}%</h6>
+                                                        <b> {{ auth()->user()->priceFormat($invoice->tax) }}% </b>
+                                                    </h6>
                                                 </td>
                                                 <td class="text-center bg-grey">
                                                     <b>
@@ -527,6 +530,9 @@
                                             </tr>
                                         @endif
                                         @if (count($invoice->student->oneOnOneSubject()) > 0)
+                                            @php
+                                                $sr++;
+                                            @endphp
                                             <tr>
                                                 <td class="text-center">
                                                     <b>{{ $sr++ }}</b>
