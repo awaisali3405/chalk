@@ -181,16 +181,16 @@ class Student extends Model
     }
     public function hasOneOnOne()
     {
-        return $this->enquirySubject->where("lesson_type_id ", 2)->count() > 0 ? true : false;
+        return $this->yearSubject->where("lesson_type_id ", 2)->count() > 0 ? true : false;
     }
     public function oneOnOneSubject()
     {
 
-        return $this->enquirySubject()->where('lesson_type_id', 2)->get();
+        return $this->yearSubject()->where('lesson_type_id', 2)->get();
     }
     public function normalSubject()
     {
-        return $this->enquirySubject()->where('lesson_type_id', 1)->get();
+        return $this->yearSubject()->where('lesson_type_id', 1)->get();
     }
     public function isFullyPaid()
     {
@@ -220,5 +220,4 @@ class Student extends Model
         $due = $this->totalAmount() - $this->paid();
         return $due;
     }
-
 }

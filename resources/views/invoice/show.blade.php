@@ -97,7 +97,7 @@
                                                 @endphp
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $value->created_at->toDateString() }}</td>
+                                                    <td>{{ auth()->user()->ukFormat($value->created_at) }}</td>
                                                     <td>{{ $value->type == 'Refundable' ? 'Deposit' : $value->type }}</td>
                                                     <td>{{ $value->amount }}</td>
                                                     <td>{{ $value->tax }}</td>

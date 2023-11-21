@@ -17,8 +17,13 @@ class StudentInvoice extends Model
         'from_date',
         'to_date', 'tax',
         'branch_id',
-        'year_id'
+        'year_id',
+        'academic_year_id'
     ];
+    public function academicYear()
+    {
+        return $this->belongsTo(AcademicCalender::class, 'academic_year_id');
+    }
     public function branch()
     {
         return $this->belongsTo(Branch::class, 'branch_id');
