@@ -44,14 +44,14 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">First Name</label>
+                                            <label class="form-label">Student First Name</label>
                                             <input type="text" class="form-control uppercase" name="first_name"
                                                 value="{{ $enquiry->first_name }}" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Last Name</label>
+                                            <label class="form-label">Student Last Name</label>
                                             <input type="text" class="form-control uppercase" name="last_name"
                                                 value="{{ $enquiry->last_name }}" required>
                                         </div>
@@ -215,7 +215,7 @@
 
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <button type="submit" class="btn btn-primary">Submit</button>
-                                    <button type="submit" class="btn btn-light">Cencel</button>
+                                    <a href="{{ route('enquiry.index') }}" class="btn btn-light">Back</a>
                                 </div>
                         </div>
                         </form>

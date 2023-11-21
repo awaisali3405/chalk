@@ -67,7 +67,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Middle Name</label>
                                                     <input type="text" class="form-control" name="middle_name"
-                                                        value="{{ old('middle_name') }}" >
+                                                        value="{{ old('middle_name') }}">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -161,11 +161,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Current Year</label>
-                                                    <input type="date" class="form-control" name="current_year"
-                                                        value="{{ old('current_year') }}" required>
-                                                </div>
+
                                             </div>
 
 
@@ -640,7 +636,7 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Family
+                                                    <label class="form-label">First
                                                         Name</label>
                                                     <input type="text" class="form-control" id="p_last_name"
                                                         name="last_name[]" disabled>
@@ -649,7 +645,7 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Given
+                                                    <label class="form-label">Last
                                                         Name</label>
                                                     <input type="text" class="form-control" id="p_given_name"
                                                         name="given_name[]" disabled>

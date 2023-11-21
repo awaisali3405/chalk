@@ -231,7 +231,7 @@ class StudentsController extends Controller
             $email->template = str_replace("[Parent/Guardian's Name]", $student->parents[0]->given_name, $email->template);
             $email->template = str_replace("[Student's Name]", $student->name(), $email->template);
             $email->template = str_replace("[year]", $student->year->name, $email->template);
-            $email->template = str_replace("[Start Date]", $student->admission_date, $email->template);
+            $email->template = str_replace("[Start Date]", auth()->user()->ukFormat($student->admission_date), $email->template);
 
             // $template = str_replace("[Student's Name]", $enquiry->first_name . " " . $enquiry->last_name, $template);
             Mail::send('notification.enquiry', ['template' => $email->template], function ($message) use ($student, $email) {

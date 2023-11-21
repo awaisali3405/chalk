@@ -158,11 +158,11 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
+                                                {{-- <div class="form-group">
                                                     <label class="form-label">Current Year</label>
                                                     <input type="date" class="form-control" name="current_year"
                                                         value="{{ old('current_year') }}" required>
-                                                </div>
+                                                </div> --}}
                                             </div>
 
                                             {{-- <div class="col-lg-12 col-md-6 col-sm-12">
@@ -589,7 +589,7 @@
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
-                                                                <label class="form-label">Sub total Fee</label>
+                                                                <label class="form-label">Gross Fee</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
@@ -614,7 +614,7 @@
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
-                                                                <label class="form-label">Total Fee</label>
+                                                                <label class="form-label">Net Fee</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
@@ -709,7 +709,7 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Family Name</label>
+                                                    <label class="form-label">First Name</label>
                                                     <input type="text" class="form-control"
                                                         value="{{ auth()->user()->parent->last_name }}" name="last_name"
                                                         disabled>
@@ -718,7 +718,7 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Given Name</label>
+                                                    <label class="form-label">Last Name</label>
                                                     <input type="text" class="form-control"
                                                         value="{{ auth()->user()->parent->given_name }}"
                                                         name="given_name" disabled>
@@ -918,7 +918,7 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Family Name</label>
+                                                    <label class="form-label">First Name</label>
                                                     <input type="text" class="form-control" id="p_last_name"
                                                         name="last_name[]" disabled>
 
@@ -926,7 +926,7 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Given Name</label>
+                                                    <label class="form-label">Last Name</label>
                                                     <input type="text" class="form-control" id="p_given_name"
                                                         name="given_name[]" disabled>
 
@@ -1098,14 +1098,14 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Family Name</label>
+                                                    <label class="form-label">First Name</label>
                                                     <input type="text" class="form-control" name="last_name1">
 
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Given Name</label>
+                                                    <label class="form-label">Last Name</label>
                                                     <input type="text" class="form-control" name="given_name1">
 
                                                 </div>

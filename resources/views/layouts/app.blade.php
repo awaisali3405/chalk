@@ -385,13 +385,13 @@
 
 
                         // total = parseFloat($('.fee-total').val());
-                        discount = parseFloat($('#fee_discount').val());
-                        total = parseFloat($('.fee').val());
+                        discount = parseFloat($('#fee_discount').val()).toFixed(2);
+                        total = parseFloat($('.fee').val()).toFixed(2);
                         $('.fee-total').val(parseFloat((total + parseFloat(success.data.amount)) -
                             discount).toFixed(2))
-                        $('.fee').val(parseFloat(total + +success.data.amount))
+                        $('.fee').val(parseFloat(total + +success.data.amount).toFixed(2))
 
-                        total = parseFloat($('.fee-total').val())
+                        total = parseFloat($('.fee-total').val()).toFixed(2)
                         fee_tax = calculateFeeTax(total, $('.tax').val())
                         $('.fee-tax').val(fee_tax);
                         console.log(x);
@@ -399,16 +399,16 @@
 
                         price = parseFloat($("#annual_resource_fee").val()) + parseFloat(success.data
                             .subject
-                            .rate)
+                            .rate).toFixed(2)
                         e_price = parseFloat($("#exercise_book").val()) + parseFloat(success.data
                             .subject
-                            .book_rate)
+                            .book_rate).toFixed(2)
                         console.log(price, e_price);
                         $('#annual_resource_fee').val(price)
                         $('#exercise_book').val(e_price)
                         // }
                         $('#subject').append(x);
-                        monthly = (parseFloat($('.fee-total').val()) * 52) / 12;
+                        monthly = parseFloat((parseFloat($('.fee-total').val()) * 52) / 12).toFixed(2);
                         $('.monthly-fee').val(monthly)
                     },
                     error: function(e) {
@@ -500,14 +500,14 @@
                     // if (success.message == 'success') {
                     console.log(success, $(this).parent().parent());
                     // }
-                    price = parseFloat($('#annual_resource_fee').val()) - +success.data.rate
+                    price = parseFloat($('#annual_resource_fee').val()).toFixed(2) - +success.data.rate
                     if (price && price < 0) {
 
                         $('#annual_resource_fee').val(0)
                     } else {
                         $('#annual_resource_fee').val(price)
                     }
-                    e_price = parseFloat($('#exercise_book').val()) - +success.data.book_rate
+                    e_price = parseFloat($('#exercise_book').val()).toFixed(2) - +success.data.book_rate
                     console.log(e_price);
                     if (e_price && e_price < 0) {
 
@@ -517,13 +517,13 @@
                         $('#exercise_book').val(e_price)
                     }
                     // total = parseFloat($('.fee-total').val());
-                    discount = parseFloat($('#fee_discount').val());
-                    total = parseFloat($('.fee').val());
-                    $('.fee').val(parseFloat(total - +success.enquiry.amount))
+                    discount = parseFloat($('#fee_discount').val()).toFixed(2);
+                    total = parseFloat($('.fee').val()).toFixed(2);
+                    $('.fee').val(parseFloat(total - +success.enquiry.amount).toFixed(2))
                     $('.fee-total').val(parseFloat((total - parseFloat(success.enquiry.amount)) -
-                        discount))
-                    total = parseFloat($('.fee-total').val())
-                    fee_tax = calculateFeeTax(total, $('.tax').val())
+                        discount).toFixed(2))
+                    total = parseFloat($('.fee-total').val()).toFixed(2)
+                    fee_tax = calculateFeeTax(total, $('.tax').val()).toFixed(2)
                     $('.fee-tax').val(fee_tax);
                     monthly = parseFloat((parseFloat($('.fee-total').val()) * 52) / 12).toFixed(2);
                     $('.monthly-fee').val(monthly)
@@ -832,13 +832,13 @@
     {{-- Student Subject Amount --}}
     <script>
         $('#rate').on('keyup', function() {
-            let rate = parseFloat($('#rate').val()) || 0;
-            let hours = parseFloat($('#hours').val()) || 0;
+            let rate = parseFloat($('#rate').val()).toFixed(2) || 0;
+            let hours = parseFloat($('#hours').val()).toFixed(2) || 0;
             $('#amount').val(rate * hours);
         })
         $('#hours').on('keyup', function() {
-            let rate = parseFloat($('#rate').val()) || 0;
-            let hours = parseFloat($('#hours').val()) || 0;
+            let rate = parseFloat($('#rate').val()).toFixed(2) || 0;
+            let hours = parseFloat($('#hours').val()).toFixed(2) || 0;
             $('#amount').val(rate * hours);
         })
     </script>
@@ -852,9 +852,9 @@
             // var subject = '';
             subject_id = $(".subject option:selected").val()
             subject = $(".subject option:selected").text()
-            hours = parseFloat($(".hours").val())
-            rate = parseFloat($(".rate").val())
-            amount = parseFloat($("#amount").val())
+            hours = parseFloat($(".hours").val()).toFixed(2)
+            rate = parseFloat($(".rate").val()).toFixed(2)
+            amount = parseFloat($("#amount").val()).toFixed(2)
             console.log(subject, hours, rate, amount)
             if (subject && hours && rate && amount) {
                 x = `<tr>
@@ -1076,10 +1076,10 @@
                 success: function(data) {
                     console.log(data);
                     $('.tax').val(data.data.tax)
-                    total = parseFloat($('.fee-total').val())
+                    total = parseFloat($('.fee-total').val()).toFixed(2)
                     fee_tax = calculateFeeTax(total, $('.tax').val())
                     $('.fee-tax').val(fee_tax);
-                    reg_total = parseFloat($('#registration_fee').val())
+                    reg_total = parseFloat($('#registration_fee').val()).toFixed(2)
                     reg_tax = calculateFeeTax(reg_total, $('.tax').val())
                     $('#reg_tax').val(reg_tax)
                     monthly = parseFloat($('.fee-total').val() * 52 / 12).toFixed(2);
@@ -1094,22 +1094,22 @@
                 100).toFixed(2);
         }
         $(document).ready(function() {
-            total = parseFloat($('.fee-total').val())
+            total = parseFloat($('.fee-total').val()).toFixed(2)
             fee_tax = calculateFeeTax(total, $('.tax').val())
             $('.fee-tax').val(fee_tax);
-            reg_total = parseFloat($('#registration_fee').val())
+            reg_total = parseFloat($('#registration_fee').val()).toFixed(2)
             reg_tax = calculateFeeTax(reg_total, $('.tax').val())
             $('#reg_tax').val(reg_tax)
         })
         $('.tax').add('#registration_fee').add('#fee_discount').on('change keyup', function() {
-            total = parseFloat($('.fee-total').val())
+            total = parseFloat($('.fee-total').val()).toFixed(2)
             fee_tax = calculateFeeTax(total, $('.tax').val())
             $('.fee-tax').val(fee_tax);
-            reg_total = parseFloat($('#registration_fee').val())
+            reg_total = parseFloat($('#registration_fee').val()).toFixed(2)
             reg_tax = calculateFeeTax(reg_total, $('.tax').val())
             $('#reg_tax').val(reg_tax)
-            discount = parseFloat($("#fee_discount").val())
-            fee = parseFloat($('.fee').val())
+            discount = parseFloat($("#fee_discount").val()).toFixed(2)
+            fee = parseFloat($('.fee').val()).toFixed(2)
             $('.fee-total').val(parseFloat(fee - discount))
             monthly = parseFloat($('.fee-total').val() * 52 / 12).toFixed(2);
             $('.monthly-fee').val(monthly)
@@ -1185,8 +1185,8 @@
 
     <script>
         $("#receiving_cash").keyup(function() {
-            let total = parseFloat($("#total").val());
-            let receive = parseFloat($(this).val());
+            let total = parseFloat($("#total").val()).toFixed(2);
+            let receive = parseFloat($(this).val()).toFixed(2);
             let change = receive - total;
             $("#change").val(isNaN(change) ? "" : change);
         });
@@ -1223,7 +1223,7 @@
                         var bonus = $("#bonus").val() == "" ? 0 : $("#bonus").val();
                         var pension = $("#pension").val() == "" ? 0 : $("#pension").val();
                         var deduction = $("#deduction").val() == "" ? 0 : $("#deduction").val();
-                        var loan = $("#loan").val() == "" ? 0 : $("#loan").val();
+                        var loan = $("#loan").val() == "" ? 0 : parseFloat($("#loan").val()).toFixed(2);
                         var net = (parseFloat(salary) + parseFloat(ssp) + parseFloat(bonus)) - (
                             parseFloat(deduction) +
                             parseFloat(loan) +
@@ -1248,7 +1248,7 @@
                 var bonus = $("#bonus").val() == "" ? 0 : $("#bonus").val();
                 var pension = $("#pension").val() == "" ? 0 : $("#pension").val();
                 var deduction = $("#deduction").val() == "" ? 0 : $("#deduction").val();
-                var loan = $("#loan").val() == "" ? 0 : $("#loan").val();
+                var loan = $("#loan").val() == "" ? 0 : parseFloat($("#loan").val()).toFixed(2);
                 var net = (parseFloat(salary) + parseFloat(ssp) + parseFloat(bonus)) - (parseFloat(deduction) +
                     parseFloat(loan) +
                     parseFloat(ni) + parseFloat(dbs) + parseFloat(tax) + parseFloat(pension));
@@ -1277,7 +1277,7 @@
             amount = $('#amount').val() == '' ? 0 : $('#amount').val();
             patition = $("#partition").val() == '' ? 0 : $("#partition").val();
             console.log(amount, patition);
-            total = parseFloat(amount) / parseFloat(patition);
+            total = parseFloat(amount) / parseFloat(patition).toFixed(2);
 
             $('#installment').val(total);
         });
@@ -1289,7 +1289,7 @@
         $('#t-quantity').add('#t-rate').on('keyup change', function() {
             quantity = $('#t-quantity').val() == '' ? 0 : $("#t-quantity").val();
             rate = $("#t-rate").val() == '' ? 0 : $("#t-rate").val();
-            total = (parseFloat(quantity) * parseFloat(rate));
+            total = parseFloat(parseFloat(quantity) * parseFloat(rate)).toFixed(2);
             $('#t-total').val(total);
         })
     </script>

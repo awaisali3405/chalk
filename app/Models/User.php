@@ -411,10 +411,20 @@ class User extends Authenticatable
     // Week
     public function week($date)
     {
-        $year = AcademicCalender::where('start_date', '<=', $date)->where('end_date', '>=', $date)->first();
-        // dd($year);
-        if ($year) {
-            return Carbon::parse($year->start_date)->diffInWeeks(Carbon::parse($date)) + 1;
+
+
+        // dd($date);
+        if ($date) {
+
+            $year = AcademicCalender::whereDate('start_date', '<=', $date)->whereDate('end_date', '>=', $date)->first();
+            if ($year) {
+                return Carbon::parse($year->start_date)->diffInWeeks(Carbon::parse($date)) + 1;
+            } else {
+
+                return 0;
+            }
+        } else {
+            return 0;
         }
     }
     public function dateWeek($week)

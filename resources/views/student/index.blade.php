@@ -156,7 +156,7 @@
                                                             </td>
                                                             <td>{{ $value->admission_date }}</td>
                                                             <td>Week
-                                                                {{ \Carbon\Carbon::parse(auth()->user()->session()->start_date)->diffInWeeks(\Carbon\Carbon::parse($value->promotion_date)->addDay(1)) }}
+                                                                {{ auth()->user()->week($value->promotion_date) }}
                                                             </td>
                                                             <td>
                                                                 <button type="button"

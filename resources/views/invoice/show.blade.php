@@ -98,7 +98,7 @@
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ $value->created_at->toDateString() }}</td>
-                                                    <td>{{ $value->type }}</td>
+                                                    <td>{{ $value->type == 'Refundable' ? 'Deposit' : $value->type }}</td>
                                                     <td>{{ $value->amount }}</td>
                                                     <td>{{ $value->tax }}</td>
                                                     <td>{{ $value->receipt->sum('discount') }}</td>
@@ -107,7 +107,7 @@
                                                     </td>
                                                     <td>{{ $value->amount - ($value->receipt->sum('discount') - $value->receipt->sum('late_fee')) - $value->receipt->sum('amount') }}
                                                     </td>
-                                                    <td>{{ $value->is_paid ? 'Paid' : 'Un Paid' }}</td>
+                                                    <td>{{ $value->is_paid ? 'Paid' : 'Unpaid' }}</td>
                                                     <td>{{ $value->from_date }} - {{ $value->to_date }}</td>
                                                     <td>
                                                         {{-- <a href="{{ route('receipt.show', $value->id) }}"

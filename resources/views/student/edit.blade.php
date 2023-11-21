@@ -165,12 +165,12 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
+                                                {{-- <div class="form-group">
                                                     <label class="form-label">Current Year</label>
                                                     <input type="date" class="form-control" name="current_year"
                                                         value="{{ old('current_year', $student->current_year) }}"
                                                         required>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             <div class="col-12">
 
@@ -676,9 +676,8 @@
 
                                                                     <input type="date" class="form-control"
                                                                         value="{{ $student->promotion_date }}"
-                                                                        name="admission_date" required @if (!$student->is_active)
-                                                                        required
-                                                                        @endif>
+                                                                        name="admission_date" required
+                                                                        @if (!$student->is_active) required @endif>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -739,6 +738,9 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <h5 class="card-title">Parent 1 /Guardian 1 Details</h5>
+                                        <div>
+
+                                        </div>
                                     </div>
 
                                     <div class="card-body " id="parent">
@@ -756,7 +758,7 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Family Name</label>
+                                                    <label class="form-label">First Name</label>
                                                     <input type="text" class="form-control"
                                                         value="{{ auth()->user()->parent->last_name }}" name="last_name"
                                                         disabled>
@@ -765,7 +767,7 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Given Name</label>
+                                                    <label class="form-label">Last Name</label>
                                                     <input type="text" class="form-control"
                                                         value="{{ auth()->user()->parent->given_name }}"
                                                         name="given_name" disabled>
@@ -935,6 +937,9 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <h5 class="card-title">Parent 1 /Guardian 1 Details</h5>
+                                        <div>
+
+                                        </div>
                                     </div>
 
                                     <div class="card-body " id="parent">
@@ -968,7 +973,7 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Family Name</label>
+                                                    <label class="form-label">First Name</label>
                                                     <input type="text" class="form-control" id="p_last_name"
                                                         value="{{ $student->parents[0]->last_name }}" name="last_name[]"
                                                         disabled>
@@ -977,7 +982,7 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Given Name</label>
+                                                    <label class="form-label">Last Name</label>
                                                     <input type="text" class="form-control" id="p_given_name"
                                                         value="{{ $student->parents[0]->last_name }}" name="given_name[]"
                                                         disabled>
@@ -1167,7 +1172,7 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
-                                                        <label class="form-label">Family Name</label>
+                                                        <label class="form-label">First Name</label>
                                                         <input type="text" class="form-control" name="last_name1"
                                                             value="{{ $student->parents[1]->last_name }}">
 
@@ -1175,7 +1180,7 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
-                                                        <label class="form-label">Given Name</label>
+                                                        <label class="form-label">Last Name</label>
                                                         <input type="text" class="form-control" name="given_name1"
                                                             value="{{ $student->parents[1]->given_name }}">
 
@@ -1303,7 +1308,7 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
-                                                        <label class="form-label">Family Name</label>
+                                                        <label class="form-label">First Name</label>
                                                         <input type="text" class="form-control" name="last_name1"
                                                             value="">
 
@@ -1311,7 +1316,7 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
-                                                        <label class="form-label">Given Name</label>
+                                                        <label class="form-label">Last Name</label>
                                                         <input type="text" class="form-control" name="given_name1"
                                                             value="">
 

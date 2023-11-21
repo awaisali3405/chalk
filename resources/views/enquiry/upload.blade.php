@@ -8,7 +8,7 @@
                 <div class="col-xl-12 col-xxl-12 col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Basic Info</h5>
+                            <h5 class="card-title">Upload Document</h5>
                         </div>
                         <div class="card-body">
                             <form action="{{ route('enquiry.upload.store') }}" method="post" enctype="multipart/form-data">
@@ -22,7 +22,7 @@
 
                                             <select class="form-control" name="document_name">
 
-                                                <option value="Student Admission Form">Student Admission Form</option>
+                                                {{-- <option value="Student Admission Form">Student Admission Form</option> --}}
                                                 <option value="Discussion Page">Discussion Page</option>
                                                 {{-- <option value="Addresss proof">Addresss proof</option> --}}
                                                 <option value="Student Assessment">Student Assessment</option>
@@ -51,7 +51,7 @@
 
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                        <button type="submit" class="btn btn-light">Cencel</button>
+                                        <a href="{{ route('enquiry.index') }}" class="btn btn-light">Back</a>
                                     </div>
                                 </div>
                             </form>

@@ -15,10 +15,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-6 ">
-
-
                         <img src="{{ asset('images/logo.png') }}" width="300" alt="">
-
                     </div>
                     <div class="col-6  text-center">
                         <h4 class="font-weight-bolder p-0 text-blue " style="font-size: 4rem;">
@@ -138,7 +135,7 @@
                                     </td>
                                     <td class="text-center">
                                         <b>
-                                            {{ \Carbon\Carbon::parse($invoice->created_at)->format('d/m/Y') }}</b>
+                                            {{ auth()->user()->ukFormat($invoice->created_at) }}</b>
                                     </td>
                                 </tr>
                                 <tr>
