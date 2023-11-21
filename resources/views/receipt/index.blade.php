@@ -168,7 +168,7 @@
                                                                         value="{{ $invoice->amount - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount') }}">
                                                                     <input type="text" class="form-control"
                                                                         id="pay_amount"
-                                                                        value="{{ $invoice->amount - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount') }}"
+                                                                        value="{{ auth()->user()->priceFormat($invoice->amount - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount')) }}"
                                                                         name="amount" required>
                                                                 </div>
                                                             </div>
@@ -183,7 +183,7 @@
                                                                     <input type="text" class="form-control"
                                                                         id="discount" name="discount" value="0"
                                                                         placeholder=""
-                                                                        {{ $invoice->type == 'Refundable'|| $invoice->type == 'Registration' ? 'readonly' : 'required' }}>
+                                                                        {{ $invoice->type == 'Refundable' || $invoice->type == 'Registration' ? 'readonly' : 'required' }}>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -196,7 +196,7 @@
                                                                     </div>
                                                                     <input type="text" class="form-control"
                                                                         id="late_fee" name="late_fee" value="0"
-                                                                        {{ $invoice->type == 'Refundable'|| $invoice->type == 'Registration'  ? 'readonly' : 'required' }}
+                                                                        {{ $invoice->type == 'Refundable' || $invoice->type == 'Registration' ? 'readonly' : 'required' }}
                                                                         placeholder="">
                                                                 </div>
                                                             </div>
@@ -263,6 +263,11 @@
                                                 </div>
                                             </div> --}}
                                             </div>
+                                            <div class="row">
+                                                <div class="col-12 justify-content-center d-flex">
+                                                    <h4>Calculator</h4>
+                                                </div>
+                                            </div>
                                             <div class="row pt-5">
                                                 <div class="col-4">
                                                     <div class="form-group">
@@ -272,7 +277,7 @@
                                                                 <div class="input-group-text">£</div>
                                                             </div>
                                                             <input type="text" value="{{ $invoice->totalAmount() }}"
-                                                                id="total" class="form-control" placeholder=""
+                                                                id="pay_amount" class="form-control" placeholder=""
                                                                 readonly>
                                                         </div>
                                                     </div>

@@ -81,7 +81,7 @@
                                                 class="nav-link {{ !request()->all() ? 'show active' : '' }} individual">Additional
                                                 Invoice</a></li>
                                         <li class="nav-item"><a href="#receipt-list" data-toggle="tab"
-                                                class="nav-link general {{ request()->all() ? 'show active' : '' }}">All
+                                                class="nav-link general {{ request()->all() ? 'show active' : '' }}">Bulk
                                                 Invoice</a></li>
 
                                     </ul>

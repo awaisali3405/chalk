@@ -154,7 +154,7 @@
 
                                                             <td> {{ $value->promotionDetail()->where('academic_year_id',auth()->user()->session()->id)->first()? $value->promotionDetail()->where('academic_year_id',auth()->user()->session()->id)->first()->toYear->name: $value->year->name }}
                                                             </td>
-                                                            <td>{{ $value->admission_date }}</td>
+                                                            <td>{{ auth()->user()->ukFormat($value->promotion_date) }}</td>
                                                             <td>Week
                                                                 {{ auth()->user()->week($value->promotion_date) }}
                                                             </td>

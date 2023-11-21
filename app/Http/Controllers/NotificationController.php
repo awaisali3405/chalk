@@ -41,18 +41,23 @@ class NotificationController extends Controller
             'subject' => $data['subject'],
             'message' => $data['message']
         ]);
-        foreach ($data['checkbox'] as $key => $value) {
-            GeneralNotificationPeople::create([
-                'general_notification_id' => $notification->id,
-                'name' => $data['name'][$key],
-                'type' => $data['type'][$key]
-            ]);
-            Mail::send('notification.enquiry', ['template' => $data['message']], function ($message) use ($data, $key) {
-                $message->to($data['email'][$key]);
-                $message->subject($data['subject']);
-            });
+        if ($data['checkbox']) {
+
+            foreach ($data['checkbox'] as $key => $value) {
+                GeneralNotificationPeople::create([
+                    'general_notification_id' => $notification->id,
+                    'name' => $data['name'][$key],
+                    'type' => $data['type'][$key]
+                ]);
+                Mail::send('notification.enquiry', ['template' => $data['message']], function ($message) use ($data, $key) {
+                    $message->to($data['email'][$key]);
+                    $message->subject($data['subject']);
+                });
+            }
+            return redirect()->back()->with('success', 'Notification Send Successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Please Select At Least One Person To Notify.');
         }
-        return redirect()->back()->with('success', 'Notification Send Successfully.');
     }
 
     /**
