@@ -63,12 +63,10 @@ return new class extends Migration
         Schema::table('student', function (Blueprint $table) {
             $table->integer('academic_year_id')->default(1);
         });
-        Schema::table('student_invoice', function (Blueprint $table) {
-            $table->integer('academic_year_id')->default(1);
-        });
-        Schema::table('student_invoice_receipt', function (Blueprint $table) {
-            $table->integer('academic_year_id')->default(1);
-        });
+        // Schema::table('student_invoice', function (Blueprint $table) {
+        //     $table->integer('academic_year_id')->default(1);
+        // });
+
         Schema::table('student_invoice_subject', function (Blueprint $table) {
             $table->integer('academic_year_id')->default(1);
         });

@@ -11,17 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('student_invoice', function (Blueprint $table) {
+        Schema::table('student_invoice_receipt', function (Blueprint $table) {
             $table->integer('academic_year_id')->default(1);
         });
     }
-//
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::table('student_invoice', function (Blueprint $table) {
+        Schema::table('student_invoice_receipt', function (Blueprint $table) {
             //
         });
     }
