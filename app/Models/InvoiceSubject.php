@@ -16,7 +16,12 @@ class InvoiceSubject extends Model
         'subject_book_fee',
         'subject_hr',
         'subject_amount',
+        'academic_year_id'
     ];
+    public function academicYear()
+    {
+        return $this->belongsTo(AcademicCalender::class, 'academic_year_id');
+    }
     public function invoice()
     {
         return $this->belongsTo(StudentInvoice::class, 'invoice_id');

@@ -16,8 +16,13 @@ class StaffAttendance extends Model
         'staff_id',
         'paid_hour',
         'rate',
-        'is_paid'
+        'is_paid',
+        'academic_year_id'
     ];
+    public function academicYear()
+    {
+        return $this->belongsTo(AcademicCalender::class, 'academic_year_id');
+    }
     public function staff()
     {
         return $this->belongsTo(Staff::class, 'staff_id');
@@ -28,6 +33,6 @@ class StaffAttendance extends Model
     }
     public function period()
     {
-        return  auth()->user()->timeFormat($this->start_time) . ' ' . auth()->user()->timeFormat($this->end_time);
+        return  auth()->user()->timeFormat($this->start_time) . ' - ' . auth()->user()->timeFormat($this->end_time);
     }
 }

@@ -29,8 +29,13 @@ class Enquiry extends Model
         'assessment_time',
         'know_about_us',
         'note',
-        'subject'
+        'subject',
+        'academic_year_id'
     ];
+    public function academicYear()
+    {
+        return $this->belongsTo(AcademicCalender::class, 'academic_year_id');
+    }
     public function name()
     {
         return $this->first_name . " " . $this->last_name;

@@ -31,6 +31,7 @@ class PurchaseController extends Controller
     {
         $data = $request->except('_token');
         // dd($data);
+        $data['academic_year_id'] = auth()->user()->session()->id;
         Purchase::create($data);
         return redirect()->route('purchase.index')->with('success', 'Purchase Created Successfully');
     }

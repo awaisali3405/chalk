@@ -27,7 +27,13 @@ class StaffReceipt extends Model
         'date',
         'note',
         'mode',
+        'academic_year_id'
     ];
+
+    public function academicYear()
+    {
+        return $this->belongsTo(AcademicCalender::class, 'academic_year_id');
+    }
     public function staff()
     {
         return $this->belongsTo(Staff::class, 'staff_id');
@@ -36,5 +42,4 @@ class StaffReceipt extends Model
     {
         return ($this->salary + $this->ssp + $this->bonus) - ($this->tax + $this->pension + $this->dbs + $this->ni + $this->loan + $this->deduction);
     }
-    
 }

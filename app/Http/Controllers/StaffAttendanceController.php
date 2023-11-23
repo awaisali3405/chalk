@@ -30,6 +30,7 @@ class StaffAttendanceController extends Controller
     public function store(Request $request)
     {
         $data = $request->except('_token');
+        $data['academic_year_id'] = auth()->user()->session()->id;
         Staff::create($data);
         return redirect()->route('staffAttendance.index')->with('success', 'Staff Attendance Created Successfully.');
     }

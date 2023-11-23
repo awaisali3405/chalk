@@ -37,6 +37,7 @@ class ReceiptController extends Controller
     public function store(Request $request)
     {
         $data = $request->except('_token');
+        $data['academic_year_id'] = auth()->user()->session()->id;
         $data = StudentInvoiceReceipt::create($data);
         $invoice = StudentInvoice::find($request->invoice_id);
         // Transaction::create([
@@ -53,6 +54,7 @@ class ReceiptController extends Controller
             ]);
             if ($invoice->type == "Refundable") {
                 Refund::create([
+                    'academic_year_id' => auth()->user()->session()->id,
                     'invoice_id' => $invoice->id
                 ]);
             }

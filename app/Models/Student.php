@@ -124,7 +124,7 @@ class Student extends Model
     }
     public function yearSubject()
     {
-        return $this->hasMany(EnquirySubject::class, 'student_id')->where('year_id', $this->currentYear()->id);
+        return $this->hasMany(EnquirySubject::class, 'student_id')->where('year_id', $this->currentYear()->id)->where('academic_year_id', auth()->user()->session()->id);
     }
     /**
      * Get all of the upload for the Enquiry
@@ -166,7 +166,7 @@ class Student extends Model
     }
     public function invoice()
     {
-        return $this->hasMany(StudentInvoice::class, 'student_id');
+        return $this->hasMany(StudentInvoice::class, 'student_id')->where('academic_year_id', auth()->user()->id);
     }
     public function attendanceNote($subject, $date)
     {

@@ -14,9 +14,14 @@ class StaffLoan extends Model
         'staff_id',
         'amount',
         'partition',
+        
         'mode',
-        'is_paid'
+        'is_paid', 'academic_year_id'
     ];
+    public function academicYear()
+    {
+        return $this->belongsTo(AcademicCalender::class, 'academic_year_id');
+    }
     public function branch()
     {
         return $this->belongsTo(Branch::class, 'branch_id');

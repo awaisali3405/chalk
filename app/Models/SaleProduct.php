@@ -14,8 +14,13 @@ class SaleProduct extends Model
         'quantity',
         'rate',
         'amount',
-        'sale_id'
+        'sale_id',
+        'academic_year_id'
     ];
+    public function saleProduct()
+    {
+        return $this->belongsTo(AcademicCalender::class, 'academic_year_id');
+    }
     public function sale()
     {
         return $this->belongsTo(Sale::class, 'sale_id');

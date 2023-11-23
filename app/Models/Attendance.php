@@ -34,13 +34,28 @@ class Attendance extends Model
         if ($this->status == 1) {
             return "Present";
         } else if ($this->status == 2) {
-            return "Absent";
+            return "Authorised";
         } else if ($this->status == 3) {
-            return "Unautorized";
+            return "Unauthorised";
         } else if ($this->status == 4) {
             return "Additional Class";
         } else if ($this->status == 5) {
             return "Cover Up";
         }
+    }
+    public function getStatusColorAttribute()
+    {
+        if ($this->status == 1) {
+            return "White !important";
+        } else if ($this->status == 2) {
+            return "pink !important";
+        } else if ($this->status == 3) {
+            return "red !important";
+        } else if ($this->status == 4) {
+            return "yellow !important";
+        } else if ($this->status == 5) {
+            return "Green !important";
+        }
+        return 'test';
     }
 }

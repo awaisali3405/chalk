@@ -16,8 +16,12 @@ class StudentInvoiceReceipt extends Model
         'date',
         'description',
         'mode',
-        'invoice_id'
+        'invoice_id', 'academic_year_id'
     ];
+    public function academicYear()
+    {
+        return $this->belongsTo(AcademicCalender::class, 'academic_year_id');
+    }
     public function invoice()
     {
         return $this->belongsTo(StudentInvoice::class, 'invoice_id');

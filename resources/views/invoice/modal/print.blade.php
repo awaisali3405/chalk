@@ -61,24 +61,26 @@
 
 
 
-                                <h6 style="text-align: end;">
+                                <h6 style="text-align: end !important; padding-right:5px;">
                                     From: {{ $invoice->student->branch->res_address }}</h6>
-                                <h6 style="text-align: end;">{{ $invoice->student->branch->res_second_address }}
+                                <h6 style="text-align: end !important; padding-right:5px;">
+                                    {{ $invoice->student->branch->res_second_address }}
                                     ,{{ $invoice->student->branch->res_third_address }}
-                                </h6 style="text-align: end;">
-                                <h6 style="text-align: end;">{{ $invoice->student->branch->res_postal_code }},
+                                </h6 style="text-align: end !important; padding-right:5px;">
+                                <h6 style="text-align: end !important; padding-right:5px;">
+                                    {{ $invoice->student->branch->res_postal_code }},
                                     {{ $invoice->student->branch->res_town }}
-                                </h6 style="text-align: end;">
-                                <h6 style="text-align: end;">
+                                </h6 style="text-align: end !important; padding-right:5px;">
+                                <h6 style="text-align: end !important; padding-right:5px;">
                                     email:
                                 </h6>
-                                <h6 style="text-align: end;">
+                                <h6 style="text-align: end !important; padding-right:5px;">
                                     Phone:
                                 </h6>
-                                <h6 style="text-align: end;">
+                                <h6 style="text-align: end !important; padding-right:5px;">
                                     Company No:
                                 </h6>
-                                <h6 style="text-align: end;">
+                                <h6 style="text-align: end !important; padding-right:5px;">
                                     VAT reg No:
                                 </h6>
 
@@ -272,9 +274,8 @@
                                     @else
                                         <tr>
                                             <td></td>
-                                            <td class="text-center">
-                                                <b>{{ $months }}
-                                                    Month{{ $months > 1 ? 's' : '' }}</b>
+                                            <td class="text-center text-white">
+                                                blanck
                                             </td>
 
                                             <td class="bg-grey"></td>
@@ -297,13 +298,14 @@
                                             <td class="text-center bg-grey">
                                                 <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
                                             </td>
-                                            <td class="text-center bg-grey">
+                                            <td class="text-center bg-grey"
+                                                style="text-align: end !important; padding-right:5px;">
                                                 <b>£{{ auth()->user()->priceFormat($invoice->amount) }}</b>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td></td>
-                                            <td class="pl-2">
+                                            <td class="pl-2 pt-1">
                                                 <h6>Until {{ auth()->user()->ukFormat($invoice->to_date) }} </h6>
                                             </td>
                                             <td class="bg-grey"></td>
@@ -328,7 +330,8 @@
                                                 <td class="text-center bg-grey">
                                                     <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
                                                 </td>
-                                                <td class="text-center bg-grey">
+                                                <td class="text-center bg-grey"
+                                                    style="text-align: end !important; padding-right:5px;">
                                                     <b>£{{ auth()->user()->priceFormat($value->amount) }}</b>
                                                 </td>
                                             </tr>
@@ -336,7 +339,7 @@
                                                 <td></td>
                                                 <td class="pl-2">
                                                 </td>
-                                                <td class="bg-grey text-centertext-center">
+                                                <td class="bg-grey text-center">
                                                     <h6>{{ $value->quantity }} Qty </h6>
 
                                                 </td>
@@ -362,7 +365,8 @@
                                                 <td class="text-center text-center">
                                                     <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
                                                 </td>
-                                                <td class="text-center bg-grey">
+                                                <td class=" bg-grey "
+                                                    style="text-align: end !important; padding-right:5px;">
                                                     <b>£{{ $value->subject_amount }}</b>
                                                 </td>
                                             </tr>
@@ -396,13 +400,14 @@
                                             <td class="text-center bg-grey">
                                                 <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
                                             </td>
-                                            <td class="text-center bg-grey">
+                                            <td class="text-center bg-grey"
+                                                style="text-align: end !important; padding-right:5px;">
                                                 <b>£{{ auth()->user()->priceFormat($invoice->amount) }}</b>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td></td>
-                                            <td class="pl-2">
+                                            <td class="pl-2 pt-1">
                                                 <h6>Until {{ auth()->user()->ukFormat($invoice->to_date) }} </h6>
                                             </td>
                                             <td class="bg-grey"></td>
@@ -413,7 +418,7 @@
                                             $sr = 2;
                                         @endphp
                                     @elseif (str_contains($invoice->type, 'Resource Fee'))
-                                        @foreach ($invoice->student->enquirySubject as $key => $value)
+                                        @foreach ($invoice->student->yearSubject as $key => $value)
                                             <tr class="">
                                                 <td class="text-center">
                                                     <b>{{ $key + 1 }}</b>
@@ -423,13 +428,14 @@
                                                     </b>
                                                 </td>
                                                 <td class="text-center bg-grey">
-                                                    <b>£{{ auth()->user()->priceFormat($value->subject->rate) }}</b>
+                                                    <b>£{{ auth()->user()->priceFormat($value->subject->rate + $value->subject->book_rate) }}</b>
                                                 </td>
                                                 <td class="text-center bg-grey">
                                                     <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
                                                 </td>
-                                                <td class="text-center bg-grey">
-                                                    <b>£{{ auth()->user()->priceFormat($value->subject->rate) }}</b>
+                                                <td class="text-center bg-grey"
+                                                    style="text-align: end !important; padding-right:5px;">
+                                                    <b>£{{ auth()->user()->priceFormat($value->subject->rate + $value->subject->book_rate) }}</b>
                                                 </td>
                                             </tr>
                                             <tr class="">
@@ -448,17 +454,14 @@
 
                                                 </td>
                                             </tr>
-                                            @php
-                                                $sr = $key + 1;
-                                            @endphp
                                         @endforeach
                                         <tr class="">
                                             <td class="text-center">
                                                 <b>{{ $sr + 1 }}</b>
                                             </td>
-                                            <td class="pl-2 ">
+                                            <td class="pl-2 pt-1">
                                                 <b>Exercise Book (Quantity x
-                                                    {{ count($invoice->student->enquirySubject) }} )
+                                                    {{ count($invoice->student->yearSubject) }} )
                                                 </b>
                                             </td>
                                             <td class="text-center bg-grey">
@@ -467,7 +470,8 @@
                                             <td class="text-center bg-grey">
                                                 <b></b>
                                             </td>
-                                            <td class="text-center bg-grey">
+                                            <td class="text-center bg-grey"
+                                                style="text-align: end !important; padding-right:5px;">
                                                 <b>
                                                     £{{ auth()->user()->priceFormat($invoice->amount) }}</b>
                                             </td>
@@ -477,7 +481,6 @@
                                             $sr = 2;
                                         @endphp
                                     @elseif (str_contains($invoice->type, 'Fee'))
-                                        {{-- @dd($invoice->student->enquirySubject) --}}
                                         @php
                                             $sr++;
                                         @endphp
@@ -507,7 +510,8 @@
                                                         <b> {{ auth()->user()->priceFormat($invoice->tax) }}% </b>
                                                     </h6>
                                                 </td>
-                                                <td class="text-center bg-grey">
+                                                <td class="text-center bg-grey"
+                                                    style="text-align: end !important; padding-right:5px;">
                                                     <b>
 
                                                         £{{ str_contains($invoice->type, 'Month') ? (str_contains($invoice->student->year->name, '11') ? number_format((($invoice->student->normalSubject()->sum('amount') * 40) / 9) * $months, 2) : number_format((($invoice->student->normalSubject()->sum('amount') * 52) / 12) * $months, 2)) : $invoice->student->normalSubject()->sum('amount') * $weeks }}
@@ -548,7 +552,8 @@
                                                 <td class="text-center bg-grey">
                                                     <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
                                                 </td>
-                                                <td class="text-center bg-grey">
+                                                <td class="text-center bg-grey"
+                                                    style="text-align: end !important; padding-right:5px;">
                                                     <b>£{{ str_contains($invoice->type, 'Month') ? (str_contains($invoice->student->year->name, '11') ? number_format((($invoice->student->oneOnOneSubject()->sum('amount') * 40) / 9) * $months, 2) : number_format((($invoice->student->oneOnOneSubject()->sum('amount') * 52) / 12) * $months, 2)) : $invoice->student->oneOnOneSubject()->sum('amount') * $weeks }}</b>
                                                 </td>
                                             </tr>
@@ -585,7 +590,8 @@
                                             <td class="bg-grey text-center">
                                                 <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
                                             </td>
-                                            <td class="bg-grey text-center">
+                                            <td class="bg-grey text-center"
+                                                style="text-align: end !important; padding-right:5px;">
                                                 <b>
 
                                                     -£{{ $invoice->student->fee_discount }}
@@ -628,7 +634,8 @@
                                                 <td class="bg-grey text-center">
                                                     <b>{{ $invoice->student->branch->tax_type == 'flat'? auth()->user()->priceFormat($invoice->student->branch->tax): 0 }}%</b>
                                                 </td>
-                                                <td class="bg-grey text-center">
+                                                <td class="bg-grey text-center"
+                                                    style="text-align: end !important; padding-right:5px;">
                                                     <b>
 
                                                         £{{ $invoice->receipt->sum('late_fee') }}
@@ -670,7 +677,8 @@
                                                 <td class="bg-grey text-center">
                                                     <b>{{ number_format(auth()->user()->priceFormat($invoice->tax)) }}%</b>
                                                 </td>
-                                                <td class="bg-grey text-center">
+                                                <td class="bg-grey text-center"
+                                                    style="text-align: end !important; padding-right:5px;">
                                                     <b>
 
                                                         -£{{ $invoice->receipt->sum('discount') }}
@@ -707,7 +715,8 @@
                                                 </td>
                                                 <td class="bg-grey text-center">
                                                 </td>
-                                                <td class="bg-grey text-center">
+                                                <td class="bg-grey text-center"
+                                                    style="text-align: end !important; padding-right:5px;">
                                                     <b>
 
                                                         £{{ auth()->user()->priceFormat($invoice->amount) -$invoice->receipt->sum('discount') +$invoice->receipt->sum('late_fee') }}
@@ -747,7 +756,8 @@
                                                 <td class="bg-grey">
                                                     <b></b>
                                                 </td>
-                                                <td class="bg-grey text-center">
+                                                <td class="bg-grey text-center"
+                                                    style="text-align: end !important; padding-right:5px;">
                                                     <b>
 
                                                         -£{{ auth()->user()->priceFormat($value->amount) }}
@@ -789,7 +799,8 @@
                                         <td class="">
                                             Sub Total INCLUSIVE VAT
                                         </td>
-                                        <th class="text-center">
+                                        <th class="text-center"
+                                            style="text-align: end !important; padding-right:5px;">
 
                                             £{{ auth()->user()->priceFormat($invoice->amount) -$invoice->receipt->sum('discount') +$invoice->receipt->sum('late_fee') }}
 
@@ -801,7 +812,8 @@
                                         <td class="">
                                             Balance
                                         </td>
-                                        <th class="text-center" style="color:red;">
+                                        <th class="text-center"
+                                            style="color:red; text-align: end !important; padding-right:5px;">
 
                                             £{{ $invoice->remainingAmount() }}
 
@@ -813,9 +825,23 @@
                                         <th class="" colspan="">
                                             Vat Inclusive
                                         </th>
-                                        <th class="text-center">
+                                        <th class="text-center"
+                                            style="text-align: end !important; padding-right:5px;">
 
                                             £{{ auth()->user()->priceFormat($invoice->taxAmount()) }}
+
+                                        </th>
+                                    </tr>
+                                    <tr>
+
+
+                                        <th class="" colspan="">
+                                            Remaining Due
+                                        </th>
+                                        <th class="text-center"
+                                            style="text-align: end !important; padding-right:5px;">
+
+                                            £{{ auth()->user()->priceFormat($invoice->student->due()) }}
 
                                         </th>
                                     </tr>

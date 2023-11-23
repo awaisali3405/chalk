@@ -89,21 +89,17 @@
                                         <table id="example5" class="display" style="min-width: 845px">
                                             <thead>
                                                 <tr>
-                                                    {{-- <th><input type="checkbox" name="" id="check_all">
-                                                        </th> --}}
                                                     <th>Roll</th>
                                                     <th>Name</th>
                                                     <th>Present</th>
-                                                    <th>Absent</th>
+                                                    <th>Authorised</th>
                                                     <th>Unathorized</th>
                                                     <th>Additional Class</th>
                                                     <th>Cover Up</th>
                                                     <th>Detail</th>
-                                                    {{-- <th>Action</th> --}}
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {{-- @dd($student) --}}
                                                 @foreach ($student as $key => $value)
                                                     <tr>
                                                         <td>{{ $value->id }}</td>
@@ -119,8 +115,8 @@
                                                         <td>{{ $value->totalAttendance(request()->get('from_date'), request()->get('to_date'))->where('status', 5)->count() }}
                                                         </td>
                                                         <td>
-                                                            <a href="{{ route('attendance.student.detail', $value->id) }}"
-                                                                class="btn btn-primary">Detail</a>
+                                                            <span class="btn btn-primary" data-toggle="modal"
+                                                                data-target="#attendance-{{ $value->id }}">Detail</span>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -137,4 +133,7 @@
 
         </div>
     </div>
+    @foreach ($student as $key => $value)
+        @include('attendance.modal.detail')
+    @endforeach
 @endsection

@@ -12,7 +12,8 @@ class GeneralNotificationPeople extends Model
     protected $fillable = [
         'general_notification_id',
         'name',
-        'type'
+        'type',
+        'academic_year_id'
     ];
     public function generalNotification()
     {

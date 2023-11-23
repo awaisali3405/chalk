@@ -14,8 +14,12 @@ class SalaryInvoice extends Model
         'to_date',
         'amount',
         'staff_id',
-        'is_paid',
+        'is_paid', 'academic_year_id'
     ];
+    public function academicYear()
+    {
+        return $this->belongsTo(AcademicCalender::class, 'academic_year_id');
+    }
     public function staff()
     {
         return $this->belongsTo(Staff::class, 'staff_id');

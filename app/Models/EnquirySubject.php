@@ -23,8 +23,13 @@ class EnquirySubject extends Model
         'rate_per_hr',
         'no_hr_weekly',
         'amount',
-        'year_id'
+        'year_id',
+        'academic_year_id'
     ];
+    public function academicYear()
+    {
+        return $this->belongsTo(AcademicCalender::class, 'academic_year_id');
+    }
     /**
      * Get the subject that owns the EnquirySubject
      *

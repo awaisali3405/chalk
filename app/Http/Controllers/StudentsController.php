@@ -211,7 +211,8 @@ class StudentsController extends Controller
 
                 $subject = EnquirySubject::whereIn('id', $data1['enquiry_subject'])->update([
                     'student_id' => $student->id,
-                    'year_id' => $student->year_id
+                    'year_id' => $student->year_id,
+                    'academic_year_id' => auth()->user()->session()->id
                 ]);
             }
             StudentPromotionDetail::create([
@@ -221,12 +222,9 @@ class StudentsController extends Controller
                 'academic_year_id' => auth()->user()->session()->id
             ]);
 
-            // $invoice->update([
-            //     'amount' =>
-            // ]);
+
 
             $email = Email::find(2);
-            // dd(gettype($email->template));
             $email->name = str_replace("[Student's Name]", $student->first_name . " " . $student->last_name, $email->name);
             $email->template = str_replace("[Parent/Guardian's Name]", $student->parents[0]->given_name, $email->template);
             $email->template = str_replace("[Student's Name]", $student->name(), $email->template);
@@ -609,8 +607,6 @@ class StudentsController extends Controller
     public function statementPrint($id)
     {
         $student = Student::find($id);
-        // $pdf = Pdf::loadView('student.print.statement', ['student' => $student]);
-        // return $pdf->stream('statement.pdf');
         return view('student.print.statement', compact('student'));
     }
     public function generateInvoice($student, $request)
@@ -625,7 +621,8 @@ class StudentsController extends Controller
                 'from_date' => auth()->user()->session()->start_date,
                 'to_date' => auth()->user()->session()->end_date,
                 'branch_id' => $student->branch_id,
-                'year_id' => $student->currentYear()->id
+                'year_id' => $student->currentYear()->id,
+                'academic_year_id' => auth()->user()->session()->id
             ]);
         }
         if ($request->registration_fee > 0) {
@@ -639,7 +636,8 @@ class StudentsController extends Controller
                 'from_date' => auth()->user()->session()->start_date,
                 'to_date' => auth()->user()->session()->end_date,
                 'branch_id' => $student->branch_id,
-                'year_id' => $student->currentYear()->id
+                'year_id' => $student->currentYear()->id,
+                'academic_year_id' => auth()->user()->session()->id
             ]);
         }
         if ($request->annual_resource_fee + $request->exercise_book_fee > 0) {
@@ -652,7 +650,8 @@ class StudentsController extends Controller
                 'from_date' => auth()->user()->session()->start_date,
                 'to_date' => auth()->user()->session()->end_date,
                 'branch_id' => $student->branch_id,
-                'year_id' => $student->currentYear()->id
+                'year_id' => $student->currentYear()->id,
+                'academic_year_id' => auth()->user()->session()->id
             ]);
         }
     }
