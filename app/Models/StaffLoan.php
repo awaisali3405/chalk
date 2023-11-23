@@ -14,6 +14,7 @@ class StaffLoan extends Model
         'staff_id',
         'amount',
         'partition',
+        
         'mode',
         'is_paid', 'academic_year_id'
     ];
