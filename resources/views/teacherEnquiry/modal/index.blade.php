@@ -31,7 +31,7 @@
                     </div>
                 </form>
                 <div class="table-responsive pt-5">
-                    <table id="example5" class="display">
+                    <table id="example5" class=" example5 display">
                         <thead>
                             <tr>
                                 <th>Sr</th>

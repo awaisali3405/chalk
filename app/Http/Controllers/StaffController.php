@@ -80,6 +80,7 @@ class StaffController extends Controller
     {
         $data = $request->except('_token');
         $data['staff_id'] = $id;
+        $data['academic_year_id'] = auth()->user()->session()->id;
         StaffAttendance::create($data);
         return redirect()->back()->with('success', 'Staff Attendance Created Successfully.');
     }
@@ -105,6 +106,7 @@ class StaffController extends Controller
     public function payStore(Request $request)
     {
         $data = $request->except('_token');
+        $data['academic_year_id'] = auth()->user()->session()->id;
         StaffReceipt::create($data);
         StaffAttendance::where('date', '>=', $request->from_date)->where('date', '<=', $request->to_date)->where('staff_id', $request->staff_id)->update([
             'is_paid' => true

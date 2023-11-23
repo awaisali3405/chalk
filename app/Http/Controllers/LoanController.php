@@ -31,6 +31,7 @@ class LoanController extends Controller
     public function store(Request $request)
     {
         $data = $request->except('_token');
+        $data['academic_year_id'] = auth()->user()->session()->id;
         $loan = StaffLoan::create($data);
         return redirect()->route('loan.index')->with('success', 'Loan Created Successfully.');
     }

@@ -88,6 +88,7 @@ class AttendanceController extends Controller
                             'status' => $data['status'][$student][$subject->id],
                             'date' => $data['date'],
                             'note' => $data['note'][$student][$subject->id],
+                            'academic_year_id' => auth()->user()->session()->id
                         ]);
                     }
                 }

@@ -38,15 +38,15 @@ class StudentInvoice extends Model
     }
     public function subject()
     {
-        return $this->hasMany(InvoiceSubject::class, 'invoice_id');
+        return $this->hasMany(InvoiceSubject::class, 'invoice_id')->where('academic_year_id', auth()->user()->session()->id);
     }
     public function receipt()
     {
-        return $this->hasMany(StudentInvoiceReceipt::class, 'invoice_id');
+        return $this->hasMany(StudentInvoiceReceipt::class, 'invoice_id')->where('academic_year_id', auth()->user()->session()->id);
     }
     public function sale()
     {
-        return $this->hasOne(Sale::class, 'invoice_id');
+        return $this->hasOne(Sale::class, 'invoice_id')->where('academic_year_id', auth()->user()->session()->id);
     }
     public function saleProduct()
     {

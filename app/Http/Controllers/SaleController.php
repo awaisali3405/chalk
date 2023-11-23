@@ -43,6 +43,7 @@ class SaleController extends Controller
             'type' => 'Sale Invoice',
             'from_date' => auth()->user()->session()->start_date,
             'to_date' => auth()->user()->session()->end_date,
+            'academic_year_id' => auth()->user()->session()->id
 
         ]);
         $sale = Sale::create([
@@ -51,7 +52,8 @@ class SaleController extends Controller
             'key_stage_id' => $data['key_stage_id'],
             'student_id' => $data['student_id'],
             'invoice_id' => $invoice->id,
-            'date' => $data['date']
+            'date' => $data['date'],
+            'academic_year_id' => auth()->user()->session()->id
         ]);
 
         foreach ($data['product'] as $key => $value) {
@@ -61,6 +63,7 @@ class SaleController extends Controller
                 'quantity' => $data['quantity'][$key],
                 'rate' => $data['rate'][$key],
                 'amount' => $data['amount'][$key],
+                'academic_year_id' => auth()->user()->session()->id
             ]);
         }
         return redirect()->route('sale.index')->withSuccess(__('Create Success'));

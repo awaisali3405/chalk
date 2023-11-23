@@ -16,8 +16,13 @@ class Sale extends Model
         'key_stage_id',
         'student_id',
         'date',
-        'invoice_id'
+        'invoice_id',
+        'academic_year_id'
     ];
+    public function academicYear()
+    {
+        return $this->belongsTo(AcademicCalender::class, 'academic_year_id');
+    }
     public function invoice()
     {
         return $this->belongsTo(StudentInvoice::class, 'invoice_id');
@@ -42,5 +47,4 @@ class Sale extends Model
     {
         return $this->belongsTo(KeyStage::class, 'key_stage_id');
     }
-    
 }

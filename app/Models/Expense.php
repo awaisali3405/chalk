@@ -19,8 +19,13 @@ class Expense extends Model
         'branch_id',
         'tax',
         'net',
-        'file'
+        'file',
+        'academic_year_id'
     ];
+    public function academicYear()
+    {
+        return $this->belongsTo(AcademicCalender::class, 'academic_year_id');
+    }
     public function accountType()
     {
         return $this->belongsTo(ExpenseAccountType::class, 'account_type');

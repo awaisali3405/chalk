@@ -37,6 +37,7 @@ class ExpenseController extends Controller
         if (isset($data['file'])) {
             $data['file'] = $this->saveImage($data['file']);
         }
+        $data['academic_year_id'] = auth()->user()->session()->id;
         Expense::create($data);
         return redirect()->route('expense.index')->with('success', 'Expense Created Successfully');
     }

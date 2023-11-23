@@ -73,6 +73,7 @@ class GenerateSalaryController extends Controller
                 $data['staff_id'] = $value;
                 $staff = Staff::find($value);
                 $data['amount'] = $staff->salary;
+                $data['academic_year_id'] = auth()->user()->session()->id;
                 SalaryInvoice::create($data);
             }
 

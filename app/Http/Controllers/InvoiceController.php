@@ -98,7 +98,8 @@ class InvoiceController extends Controller
             'tax' => $student->tax,
             'type' => $data['type'],
             'from_date' => $data['from_date'],
-            'to_date' => $data['to_date']
+            'to_date' => $data['to_date'],
+            'academic_year_id' => auth()->user()->session()->id
         ]);
         foreach ($data['subject'] as $key => $value) {
             InvoiceSubject::create([
@@ -107,6 +108,7 @@ class InvoiceController extends Controller
                 'subject_rate' => $data['rate'][$key],
                 'subject_hr' => $data['hours'][$key],
                 'subject_amount' => $data['amount'][$key],
+                'academic_year_id' => auth()->user()->session()->id
             ]);
         }
 
@@ -118,8 +120,8 @@ class InvoiceController extends Controller
      */
     public function show(string $id)
     {
-        $invoice = StudentInvoice::where('student_id', $id)->latest()->get();
         $student = Student::find($id);
+        $invoice = $student->invoice;
         return view('invoice.show', compact('invoice', 'student'));
     }
 

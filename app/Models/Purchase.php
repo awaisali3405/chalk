@@ -18,8 +18,12 @@ class Purchase extends Model
         'quantity',
         'rate',
         'amount',
-        'date', 'mode'
+        'date', 'mode', 'academic_year_id'
     ];
+    public function academicYear()
+    {
+        return $this->belongsTo(AcademicCalender::class, 'academic_year_id');
+    }
     public function supplier()
     {
         return $this->belongsTo(Supplier::class, 'supplier_id');

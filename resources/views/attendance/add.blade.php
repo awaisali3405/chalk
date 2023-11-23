@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('content')
+    @foreach ($student as $key => $value)
+        @include('attendance.modal.detail')
+    @endforeach
     <div class="content-body">
         <!-- row -->
         <div class="container-fluid">
@@ -31,23 +34,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- @dd(session('key_stage_id')) --}}
-                        {{-- <div class="col-lg-4 col-md-3 col-sm-12">
-                            <div class="form-group">
-                                <label class="form-label">Key Stage</label>
-                                <div class="input-group mb-2">
-                                    <select name="key_stage_id" id="year" class="form-control keyStage" required> --}}
-                        {{-- <option value="0">All</option> --}}
-                        {{-- @foreach ($keyStage as $value)
-                                            <option value="{{ $value->id }}"
-                                                {{ request()->get('key_stage_id') == $value->id ? 'selected' : '' }}>
-                                                {{ $value->name }}</option>
-                                        @endforeach
-
-                                    </select>
-                                </div>
-                            </div>
-                        </div> --}}
                         <div class="col-lg-4 col-md-3 col-sm-12">
                             <div class="form-group">
                                 <label class="form-label">Year</label>
@@ -63,8 +49,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label class="form-label">Date</label>
@@ -96,7 +80,7 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive">
-                                            <table id="example5" class="display" style="min-width: 845px">
+                                            <table id="example5" class="display">
                                                 <thead>
                                                     <tr>
                                                         {{-- <th><input type="checkbox" name="" id="check_all">
@@ -106,6 +90,7 @@
                                                         <th style="width: 10%">Subject</th>
                                                         <th style="width: 20%">Action</th>
                                                         <th style="width: 30%">Note</th>
+                                                        <th>Detail</th>
                                                         {{-- <th>Action</th> --}}
                                                     </tr>
                                                 </thead>
@@ -124,9 +109,6 @@
 
                                                                     <td rowspan="{{ count($value->enquirySubject) }}">
                                                                         {{ $value->first_name }}</td>
-                                                                    {{-- @else
-                                                                    <td class="d-none"></td>
-                                                                    <td class="d-none"></td> --}}
                                                                 @endif
 
                                                                 <td>{{ $value1->subject->name }}</td>
@@ -147,10 +129,10 @@
                                                                                         Present</option>
                                                                                     <option value="2"
                                                                                         {{ $value->attendanceStatus($value1->id, request()->get('date')) == 2 ? 'selected' : '' }}>
-                                                                                        Absent</option>
+                                                                                        Authorised</option>
                                                                                     <option value="3"
                                                                                         {{ $value->attendanceStatus($value1->id, request()->get('date')) == 3 ? 'selected' : '' }}>
-                                                                                        Unautorized
+                                                                                        Unautorised
                                                                                     </option>
                                                                                     <option value="4"
                                                                                         {{ $value->attendanceStatus($value1->id, request()->get('date')) == 4 ? 'selected' : '' }}>
@@ -160,100 +142,20 @@
                                                                                         {{ $value->attendanceStatus($value1->id, request()->get('date')) == 5 ? 'selected' : '' }}>
                                                                                         Cover Up</option>
                                                                                 </select>
-                                                                                {{-- if ($this->status == 1) {
-                                                                                return "Present";
-                                                                                } else if ($this->status == 2) {
-                                                                                return "Absent";
-                                                                                } else if ($this->status == 3) {
-                                                                                return "Unautorized";
-                                                                                } else if ($this->status == 4) {
-                                                                                return "Additional Class";
-                                                                                } else if ($this->status == 5) {
-                                                                                return "Cover Up";
-                                                                                } --}}
-                                                                                {{-- <div class="row">
-                                                                                    <div class="col-1">
-
-                                                                                        <div class="form-check">
-
-                                                                                            <input type="radio"
-                                                                                                class="form-check-input"
-                                                                                                id="p"
-                                                                                                value="1"
-                                                                                                {{ $value->attendanceStatus($value1->subject_id, request()->get('date')) == 1 ? 'checked' : '' }}
-                                                                                                name="status[{{ $value->id }}][{{ $value1->subject_id }}]">
-                                                                                            <label class="form-check-label"
-                                                                                                for="p">P</label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-1">
-                                                                                        <div class="form-check">
-
-                                                                                            <input type="radio"
-                                                                                                class="form-check-input"
-                                                                                                id="A"
-                                                                                                value="2"
-                                                                                                {{ $value->attendanceStatus($value1->subject_id, request()->get('date')) == 2 ? 'checked' : '' }}
-                                                                                                name="status[{{ $value->id }}][{{ $value1->subject_id }}]">
-                                                                                            <label class="form-check-label"
-                                                                                                for="A">A</label>
-                                                                                        </div>
-
-                                                                                    </div>
-                                                                                    <div class="col-3">
-                                                                                        <div class="form-check">
-
-                                                                                            <input type="radio"
-                                                                                                class="form-check-input"
-                                                                                                id="unathorized"
-                                                                                                value="3"
-                                                                                                {{ $value->attendanceStatus($value1->subject_id, request()->get('date')) == 3 ? 'checked' : '' }}
-                                                                                                name="status[{{ $value->id }}][{{ $value1->subject_id }}]">
-                                                                                            <label class="form-check-label"
-                                                                                                for="unathorized">Unautorised</label>
-                                                                                        </div>
-
-                                                                                    </div>
-                                                                                    <div class="col-3">
-                                                                                        <div class="form-check">
-
-                                                                                            <input type="radio"
-                                                                                                class="form-check-input"
-                                                                                                id="additional-class"
-                                                                                                value="4"
-                                                                                                {{ $value->attendanceStatus($value1->subject_id, request()->get('date')) == 4 ? 'checked' : '' }}
-                                                                                                name="status[{{ $value->id }}][{{ $value1->subject_id }}]">
-                                                                                            <label class="form-check-label"
-                                                                                                for="additional-class">
-                                                                                                Additional Class</label>
-                                                                                        </div>
-
-                                                                                    </div>
-                                                                                    <div class="col-3">
-                                                                                        <div class="form-check">
-
-                                                                                            <input type="radio"
-                                                                                                class="form-check-input"
-                                                                                                id="cover-up"
-                                                                                                value="5"
-                                                                                                {{ $value->attendanceStatus($value1->subject_id, request()->get('date')) == 5 ? 'checked' : '' }}
-                                                                                                name="status[{{ $value->id }}][{{ $value1->subject_id }}]">
-                                                                                            <label class="form-check-label"
-                                                                                                for="cover-up">
-                                                                                                CoverUp</label>
-                                                                                        </div>
-
-                                                                                    </div>
-                                                                                </div> --}}
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </td>
+
                                                                 <td>
                                                                     <input type="text"
                                                                         name="note[{{ $value->id }}][{{ $value1->id }}]"
                                                                         value="{{ $value->attendanceNote($value1->id, request()->get('date')) }}"
                                                                         id="">
+                                                                </td>
+                                                                <td>
+                                                                    <span class="btn btn-primary" data-toggle="modal"
+                                                                        data-target="#attendance-{{ $value->id }}">Detail</span>
                                                                 </td>
                                                             </tr>
                                                         @endforeach
@@ -264,13 +166,10 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </form>
-
-
         </div>
     </div>
 @endsection

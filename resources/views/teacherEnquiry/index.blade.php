@@ -73,8 +73,14 @@
                                                                     href="{{ route('enquiryTeacher.note', $value->id) }}">Note</a>
 
                                                                 @if (!$value->staff)
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ route('enquiryTeacher.destroy', $value->id) }}">Delete</a>
+                                                                    <form
+                                                                        action="{{ route('enquiryTeacher.destroy', $value->id) }}"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        @method('delete')
+                                                                        <button class="dropdown-item"
+                                                                            href="{{ route('enquiryTeacher.destroy', $value->id) }}">Delete</button>
+                                                                    </form>
                                                                 @endif
                                                             </div>
                                                         </td>

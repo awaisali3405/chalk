@@ -11,8 +11,13 @@ class GeneralNotification extends Model
     protected $table = "general_notification";
     protected $fillable = [
         'subject',
-        'message'
+        'message',
+        'academic_year_id'
     ];
+    public function academicYear()
+    {
+        return $this->belongsTo(AcademicCalender::class, 'academic_year_id');
+    }
     public function people()
     {
         return $this->hasMany(GeneralNotificationPeople::class, 'general_notification_id');
