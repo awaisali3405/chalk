@@ -413,10 +413,10 @@ class User extends Authenticatable
     {
 
 
-        // dd($date);
         if ($date) {
 
             $year = AcademicCalender::whereDate('start_date', '<=', $date)->whereDate('end_date', '>=', $date)->first();
+
             if ($year) {
                 return Carbon::parse($year->start_date)->diffInWeeks(Carbon::parse($date)) + 1;
             } else {

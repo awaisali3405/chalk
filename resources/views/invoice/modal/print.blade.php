@@ -168,7 +168,7 @@
                             <thead>
                                 <tr>
                                     <th>Payment Due by</th>
-                                    <th>Final Payment Due</th>
+                                    <th>Final Paid Date</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -419,9 +419,12 @@
                                         @endphp
                                     @elseif (str_contains($invoice->type, 'Resource Fee'))
                                         @foreach ($invoice->student->yearSubject as $key => $value)
+                                            @php
+                                                $sr++;
+                                            @endphp
                                             <tr class="">
                                                 <td class="text-center">
-                                                    <b>{{ $key + 1 }}</b>
+                                                    <b>{{ $sr }}</b>
                                                 </td>
                                                 <td class="pl-2 ">
                                                     <b>{{ $value->subject->name }} Resources
@@ -455,9 +458,12 @@
                                                 </td>
                                             </tr>
                                         @endforeach
+                                        @php
+                                            $sr++;
+                                        @endphp
                                         <tr class="">
                                             <td class="text-center">
-                                                <b>{{ $sr + 1 }}</b>
+                                                <b>{{ $sr++ }}</b>
                                             </td>
                                             <td class="pl-2 pt-1">
                                                 <b>Exercise Book (Quantity x
@@ -476,10 +482,22 @@
                                                     £{{ auth()->user()->priceFormat($invoice->amount) }}</b>
                                             </td>
                                         </tr>
+                                        <tr class="">
+                                            <td class=" text-center">
 
-                                        @php
-                                            $sr = 2;
-                                        @endphp
+                                            </td>
+                                            <td class="pl-2">
+
+                                            </td>
+                                            <td class="bg-grey text-grey">
+                                                blanck
+                                            </td>
+                                            <td class="bg-grey text-center">
+                                            </td>
+                                            <td class="bg-grey text-center">
+
+                                            </td>
+                                        </tr>
                                     @elseif (str_contains($invoice->type, 'Fee'))
                                         @php
                                             $sr++;
@@ -571,50 +589,50 @@
                                         @php
                                             $sr = 3;
                                         @endphp
+                                        @if ($invoice->student->fee_discount > 0)
+                                            <tr>
+                                                <td class=" text-center">
+                                                    <b>
+                                                        {{ $sr++ }}
 
+                                                    </b>
+                                                </td>
+                                                <td class="pl-2">
+                                                    <b>Discount</b>
+                                                </td>
+                                                <td class="bg-grey">
+                                                    <b></b>
+                                                </td>
+                                                <td class="bg-grey text-center">
+                                                    <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
+                                                </td>
+                                                <td class="bg-grey text-center"
+                                                    style="text-align: end !important; padding-right:5px;">
+                                                    <b>
+
+                                                        -£{{ $invoice->student->fee_discount }}
+                                                    </b>
+                                                </td>
+                                            </tr>
+                                            <tr class="border-x-black">
+                                                <td class=" text-center">
+
+                                                </td>
+                                                <td class="pl-2">
+
+                                                </td>
+                                                <td class="bg-grey text-grey">
+                                                    blanck
+                                                </td>
+                                                <td class="bg-grey text-center">
+                                                </td>
+                                                <td class="bg-grey text-center">
+
+                                                </td>
+                                            </tr>
+                                        @endif
                                     @endif
-                                    @if ($invoice->student->fee_discount > 0)
-                                        <tr>
-                                            <td class=" text-center">
-                                                <b>
-                                                    {{ $sr++ }}
 
-                                                </b>
-                                            </td>
-                                            <td class="pl-2">
-                                                <b>Discount</b>
-                                            </td>
-                                            <td class="bg-grey">
-                                                <b></b>
-                                            </td>
-                                            <td class="bg-grey text-center">
-                                                <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
-                                            </td>
-                                            <td class="bg-grey text-center"
-                                                style="text-align: end !important; padding-right:5px;">
-                                                <b>
-
-                                                    -£{{ $invoice->student->fee_discount }}
-                                                </b>
-                                            </td>
-                                        </tr>
-                                        <tr class="border-x-black">
-                                            <td class=" text-center">
-
-                                            </td>
-                                            <td class="pl-2">
-
-                                            </td>
-                                            <td class="bg-grey text-grey">
-                                                blanck
-                                            </td>
-                                            <td class="bg-grey text-center">
-                                            </td>
-                                            <td class="bg-grey text-center">
-
-                                            </td>
-                                        </tr>
-                                    @endif
 
                                     @if (count($invoice->receipt) > 0)
                                         @if ($invoice->receipt->sum('late_fee') > 0)

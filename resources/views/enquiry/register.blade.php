@@ -422,7 +422,7 @@
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Payment Type</label>
-                                                    <select class="form-control" name="payment_period">
+                                                    <select class="form-control" name="payment_period" id="payment-type">
                                                         <option value="Weekly"
                                                             {{ old('payment_period') == 'Weekly' ? 'selected' : '' }}>
                                                             Weekly
@@ -575,6 +575,22 @@
 
                                                         <input type="date" class="form-control" value=""
                                                             name="admission_date">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12 d-none" id="monthly-fee">
+                                                <div class="form-group">
+                                                    <label class="form-label">Monthly Fee</label>
+                                                    <div class="input-group mb-2">
+                                                        <div class="input-group mb-2">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">£</div>
+                                                            </div>
+                                                            <input type="text" class="form-control monthly-fee"
+                                                                value="0" disabled>
+                                                        </div>
+
+
                                                     </div>
                                                 </div>
                                             </div>

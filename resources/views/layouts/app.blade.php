@@ -19,8 +19,11 @@
     <!-- Datatable -->
     <link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 
+    <!-- Toaster -->
+    <link rel="stylesheet" href="{{ asset('vendor/toastr/css/toastr.min.css') }}">
+
     {{-- Full Calender --}}
-    <link href="vendor/fullcalendar/css/fullcalendar.min.css" rel="stylesheet">
+    <link href="{{ asset('vendor/fullcalendar/css/fullcalendar.min.css') }}" rel="stylesheet">
     {{-- Select 2 --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
@@ -271,6 +274,44 @@
     <!-- Init file -->
     <script src="{{ asset('js/plugins-init/widgets-script-init.js') }}"></script>
 
+
+    {{-- Toaster --}}
+    <script src="{{ asset('vendor/toastr/js/toastr.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            toastr.options = {
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut",
+                // "rtl": isEnableRtl,
+                "closeButton": true
+            }
+            if ("{!! session()->has('success') !!}") {
+                toastr.success("{!! session()->get('success') !!}", 'Success')
+            }
+            if ("{!! session()->has('error') !!}") {
+                toastr.error("{!! session()->get('error') !!}", 'Error')
+            }
+            if ("{!! session()->has('info') !!}") {
+                toastr.info("{!! session()->get('info') !!}", 'Info')
+            }
+            if ("{!! session()->has('warning') !!}") {
+                toastr.warning("{!! session()->get('warning') !!}", 'Warning')
+            }
+        })
+    </script>
+
     <!-- Demo scripts -->
     <!-- Demo scripts -->
     <script src="{{ asset('js/dashboard/dashboard-2.js') }}"></script>
@@ -385,8 +426,9 @@
 
 
                         // total = parseFloat($('.fee-total').val());
-                        discount = parseFloat($('#fee_discount').val()).toFixed(2);
-                        total = parseFloat($('.fee').val()).toFixed(2);
+
+                        discount = parseFloat($('#fee_discount').val());
+                        total = parseFloat($('.fee').val());
                         $('.fee-total').val(parseFloat((total + parseFloat(success.data.amount)) -
                             discount).toFixed(2))
                         $('.fee').val(parseFloat(total + +success.data.amount).toFixed(2))
@@ -397,12 +439,14 @@
                         console.log(x);
                         // if (success.data.lesson_type_id == 1) {
 
-                        price = parseFloat($("#annual_resource_fee").val()) + parseFloat(success.data
+                        price = parseFloat(parseFloat($("#annual_resource_fee").val()) + parseFloat(
+                            success.data
                             .subject
-                            .rate).toFixed(2)
-                        e_price = parseFloat($("#exercise_book").val()) + parseFloat(success.data
+                            .rate)).toFixed(2)
+                        e_price = parseFloat(parseFloat($("#exercise_book").val()) + parseFloat(success
+                            .data
                             .subject
-                            .book_rate).toFixed(2)
+                            .book_rate)).toFixed(2)
                         console.log(price, e_price);
                         $('#annual_resource_fee').val(price)
                         $('#exercise_book').val(e_price)
@@ -569,20 +613,14 @@
             });
 
         });
-        $('#discount').on('change keyup', function() {
+        $('#discount').add('#late_fee').on('change keyup', function() {
             discount = $('#discount').val();
             late = $('#late_fee').val();
             amount = $('#actual_amount').val()
             pay = (amount - discount) + +late
-            $('#pay_amount').val(pay)
+            $('.pay_amount').val(pay)
         })
-        $('#late_fee').on('change keyup', function() {
-            discount = $('#discount').val();
-            late = $('#late_fee').val();
-            amount = $('#actual_amount').val()
-            pay = (amount - discount) + +late
-            $('#pay_amount').val(pay)
-        })
+
         $('.keyStage').on('change keyup', function() {
             id = $(this).val()
             $.ajax({
@@ -848,7 +886,6 @@
     {{-- Addition Invoice --}}
     <script>
         $('.addition-subject').on('click', function() {
-            console.log('asasas')
             // var subject = '';
             subject_id = $(".subject option:selected").val()
             subject = $(".subject option:selected").text()
@@ -880,6 +917,7 @@
                                     </tr>
                     `;
                 $('.addition-subject-add').append(x);
+                $('.additional-invoice-btn').attr('disabled', false);
             }
 
 
@@ -1132,6 +1170,7 @@
         // })
         $('#payment-type').on('keyup change', function() {
             type = $("#payment-type").val();
+            console.log(type)
             if (type != 'Weekly') {
                 $('#monthly-fee').removeClass('d-none')
             } else {

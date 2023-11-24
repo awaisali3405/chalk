@@ -99,13 +99,13 @@
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ auth()->user()->ukFormat($value->created_at) }}</td>
                                                     <td>{{ $value->type == 'Refundable' ? 'Deposit' : $value->type }}</td>
-                                                    <td>{{ $value->amount }}</td>
+                                                    <td>£{{ $value->amount }}</td>
                                                     <td>{{ $value->tax }}</td>
-                                                    <td>{{ $value->receipt->sum('discount') }}</td>
-                                                    <td>{{ $value->receipt->sum('late_fee') }}</td>
-                                                    <td>{{ $value->receipt->sum('amount') }}
+                                                    <td>£{{ $value->receipt->sum('discount') }}</td>
+                                                    <td>£{{ $value->receipt->sum('late_fee') }}</td>
+                                                    <td>£{{ $value->receipt->sum('amount') }}
                                                     </td>
-                                                    <td>{{ $value->amount - ($value->receipt->sum('discount') - $value->receipt->sum('late_fee')) - $value->receipt->sum('amount') }}
+                                                    <td>£{{ $value->amount - ($value->receipt->sum('discount') - $value->receipt->sum('late_fee')) - $value->receipt->sum('amount') }}
                                                     </td>
                                                     <td>{{ $value->is_paid ? 'Paid' : 'Unpaid' }}</td>
                                                     <td>{{ $value->from_date }} - {{ $value->to_date }}</td>
@@ -128,112 +128,32 @@
                                                                     data-toggle="modal"
                                                                     data-target="#print-{{ $value->id }}">Print</a>
                                                             @else
-                                                                <a class="dropdown-item"
-                                                                    href="{{ route('receipt.show', $value->id) }}">Recieve</a>
+                                                                @if (!$value->is_paid)
+                                                                    <a class="dropdown-item"
+                                                                        href="{{ route('receipt.show', $value->id) }}">Recieve</a>
+                                                                @endif
                                                                 <a class="dropdown-item btn-event"
                                                                     href="{{ route('invoice.print', $value->id) }}"
                                                                     data-toggle="modal"
                                                                     data-target="#print-{{ $value->id }}">Print</a>
-                                                                {{-- <a href="" class="btn btn-primary btn-event w-100">
-                                                                    <span class="align-middle"><i
-                                                                            class="ti-plus"></i></span> Create New
-                                                                </a> --}}
+
                                                                 <!-- Trigger the modal with a button -->
-
-
-                                                                <a class="dropdown-item"
-                                                                    href="{{ route('board.edit', $value->id) }}">Delete</a>
+                                                                @if (!$value->is_paid && !$value->receipt)
+                                                                    <form
+                                                                        action="{{ route('invoice.destroy', $value->id) }}"
+                                                                        id="myForm" method="POST">
+                                                                        @csrf
+                                                                        @method('delete')
+                                                                        <span
+                                                                            onclick="document.getElementById('myForm').submit();"
+                                                                            class="dropdown-item">Delete</span>
+                                                                    </form>
+                                                                @endif
                                                             @endif
-                                                            <!-- Vertically centered modal -->
 
-                                                            {{-- <div class="modal fade none-border"
-                                                                id="print-{{ $value->id }}" aria-hidden="true">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h4 class="modal-title"><strong>Add a
-                                                                                    category</strong></h4>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <form>
-                                                                                <div class="row">
-                                                                                    <div class="col-md-6">
-                                                                                        <label
-                                                                                            class="control-label">Category
-                                                                                            Name</label>
-                                                                                        <input
-                                                                                            class="form-control form-white"
-                                                                                            placeholder="Enter name"
-                                                                                            type="text"
-                                                                                            name="category-name">
-                                                                                    </div>
-                                                                                    <div class="col-md-6">
-                                                                                        <label class="control-label">Choose
-                                                                                            Category Color</label>
-                                                                                        <div
-                                                                                            class="dropdown bootstrap-select form-control form-white">
-                                                                                            <select
-                                                                                                class="form-control form-white"
-                                                                                                data-placeholder="Choose a color..."
-                                                                                                name="category-color"
-                                                                                                tabindex="-98">
-                                                                                                <option value="success">
-                                                                                                    Success</option>
-                                                                                                <option value="danger">
-                                                                                                    Danger</option>
-                                                                                                <option value="info">Info
-                                                                                                </option>
-                                                                                                <option value="pink">Pink
-                                                                                                </option>
-                                                                                                <option value="primary">
-                                                                                                    Primary</option>
-                                                                                                <option value="warning">
-                                                                                                    Warning</option>
-                                                                                            </select><button type="button"
-                                                                                                class="btn dropdown-toggle btn-light"
-                                                                                                data-toggle="dropdown"
-                                                                                                role="button"
-                                                                                                title="Success">
-                                                                                                <div class="filter-option">
-                                                                                                    <div
-                                                                                                        class="filter-option-inner">
-                                                                                                        <div
-                                                                                                            class="filter-option-inner-inner">
-                                                                                                            Success</div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </button>
-                                                                                            <div class="dropdown-menu "
-                                                                                                role="combobox">
-                                                                                                <div class="inner show"
-                                                                                                    role="listbox"
-                                                                                                    aria-expanded="false"
-                                                                                                    tabindex="-1">
-                                                                                                    <ul
-                                                                                                        class="dropdown-menu inner show">
-                                                                                                    </ul>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </form>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button"
-                                                                                class="btn btn-default waves-effect"
-                                                                                data-dismiss="modal">Close</button>
-                                                                            <button type="button"
-                                                                                class="btn btn-danger waves-effect waves-light save-category"
-                                                                                data-dismiss="modal">Save</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div> --}}
+
                                                         </div>
-                                                        {{-- <a href="{{ route('branch.show', $value->id) }}"
-                                                                class="btn btn-sm btn-danger"><i
-                                                                    class="la la-trash-o"></i></a> --}}
+
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -245,12 +165,12 @@
                                                 <th></th>
                                                 <th></th>
                                                 <th></th>
-                                                <th>{{ $total }}</th>
+                                                <th>£{{ $total }}</th>
                                                 <th></th>
                                                 <th></th>
                                                 <th></th>
-                                                <th>{{ $total_paid }}</th>
-                                                <th>{{ $tatal_remaining }}</th>
+                                                <th>£{{ $total_paid }}</th>
+                                                <th>£{{ $tatal_remaining }}</th>
                                                 <th></th>
                                                 <th></th>
                                                 <th></th>

@@ -153,10 +153,7 @@
                                                     <td>{{ $value->year->name }}</td>
                                                     <td>{{ auth()->user()->ukFormat($value->enquiry_date) }}</td>
                                                     <td>Week
-                                                        {{-- @dd(
-                                                            auth()->user()->session()->start_date,
-                                                            $value->$value->enquriy_date
-                                                        ) --}}
+
                                                         {{ auth()->user()->week($value->enquiry_date) }}
                                                         {{-- {{ \Carbon\Carbon::parse(auth()->user()->session()->start_date)->diffInWeeks(\Carbon\Carbon::parse($value->$value->enquiry_date)) }} --}}
                                                     </td>

@@ -175,7 +175,7 @@
                                                                                 <label class="form-label">Subject</label>
 
                                                                                 <select class="form-control subject"
-                                                                                    name="" required>
+                                                                                    name="">
 
 
 
@@ -190,7 +190,7 @@
 
                                                                                 <input type="number" name=""
                                                                                     id="hours"
-                                                                                    class="form-control hours" required>
+                                                                                    class="form-control hours">
 
                                                                             </div>
 
@@ -204,10 +204,10 @@
                                                                                         <div class="input-group-text">£
                                                                                         </div>
                                                                                     </div>
-                                                                                    <input type="text"
+                                                                                    <input type="number"
                                                                                         class="form-control rate"
                                                                                         id="rate" value=""
-                                                                                        name="" required>
+                                                                                        name="">
                                                                                 </div>
 
                                                                             </div>
@@ -270,7 +270,8 @@
                                                         </div>
                                                         <div class="col-lg-12 col-md-12 col-sm-12">
                                                             <button type="submit"
-                                                                class="btn btn-primary">Generate</button>
+                                                                class="btn btn-primary additional-invoice-btn"
+                                                                disabled>Generate</button>
                                                             {{-- <button type="submit" class="btn btn-light">Cencel</button> --}}
                                                         </div>
                                                     </div>
@@ -382,7 +383,7 @@
                                                                                         class="form-control start_date"
                                                                                         name="from_date" placeholder=""
                                                                                         value="{{ request()->from_date }}"
-                                                                                        required>
+                                                                                        required readonly>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -395,7 +396,7 @@
                                                                                         class="form-control end_date"
                                                                                         name="to_date" placeholder=""
                                                                                         value="{{ request()->to_date }}"
-                                                                                        required>
+                                                                                        required readonly>
                                                                                 </div>
                                                                             </div>
                                                                         </div>

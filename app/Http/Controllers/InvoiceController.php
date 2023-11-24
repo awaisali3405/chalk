@@ -86,33 +86,37 @@ class InvoiceController extends Controller
         $data['type'] = 'Addition Invoice';
         $student = Student::find($request->student_id);
 
-        $amount = 0;
-        foreach ($data['amount'] as $value) {
-            $amount += $value;
-        }
-        // dd($data, $amount);
+        if (isset($data['subject'])) {
+            $amount = 0;
+            foreach ($data['amount'] as $value) {
+                $amount += $value;
+            }
+            // dd($data, $amount);
 
-        $invoice = StudentInvoice::create([
-            'student_id' => $student->id,
-            'amount' => $amount,
-            'tax' => $student->tax,
-            'type' => $data['type'],
-            'from_date' => $data['from_date'],
-            'to_date' => $data['to_date'],
-            'academic_year_id' => auth()->user()->session()->id
-        ]);
-        foreach ($data['subject'] as $key => $value) {
-            InvoiceSubject::create([
-                'invoice_id' => $invoice->id,
-                'subject_name' => EnquirySubject::find($value)->subject->name,
-                'subject_rate' => $data['rate'][$key],
-                'subject_hr' => $data['hours'][$key],
-                'subject_amount' => $data['amount'][$key],
+            $invoice = StudentInvoice::create([
+                'student_id' => $student->id,
+                'amount' => $amount,
+                'tax' => $student->tax,
+                'type' => $data['type'],
+                'from_date' => $data['from_date'],
+                'to_date' => $data['to_date'],
                 'academic_year_id' => auth()->user()->session()->id
             ]);
-        }
+            foreach ($data['subject'] as $key => $value) {
+                InvoiceSubject::create([
+                    'invoice_id' => $invoice->id,
+                    'subject_name' => EnquirySubject::find($value)->subject->name,
+                    'subject_rate' => $data['rate'][$key],
+                    'subject_hr' => $data['hours'][$key],
+                    'subject_amount' => $data['amount'][$key],
+                    'academic_year_id' => auth()->user()->session()->id
+                ]);
+            }
+            return redirect()->route('invoice.index')->with('success', 'invoice Created Successfully.');
+        } else {
 
-        return redirect()->route('invoice.index')->with('success', 'invoice Created Successfully');
+            return redirect()->back()->with('error', 'Please Add Your Subject.');
+        }
     }
 
     /**
@@ -142,7 +146,7 @@ class InvoiceController extends Controller
     {
         $data = $request->except('_token', 'method');
         StudentInvoice::find($id)->update($data);
-        return redirect()->route('invoice.index')->with('success', 'Branch Updated Successfully');
+        return redirect()->route('invoice.index')->with('success', 'Invoice Updated Successfully');
     }
 
     /**
@@ -150,7 +154,8 @@ class InvoiceController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        StudentInvoice::find($id)->delete();
+        return redirect()->back()->with('success', 'Invoice Deleted Successfully');
     }
     public function groupInvoice(Request $request)
     {

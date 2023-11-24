@@ -10,6 +10,11 @@
                         <h4>Receipt</h4>
                     </div>
                 </div>
+                <div class="col-sm-6 p-md-0 d-flex justify-content-end">
+                    <div class="welcome-text">
+                        <a href="{{ route('invoice.show', $invoice->student->id) }}" class="btn btn-primary">Back</a>
+                    </div>
+                </div>
 
             </div>
 
@@ -88,38 +93,7 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="card">
-                                {{-- <div class="card-header d-block">
-                                    <h4 class="card-title">Parent Login Detail </h4>
-                                </div> --}}
-                                {{-- <div class="card-body">
-                                    <h6>Photoshop
-                                        <span class="pull-right">85%</span>
-                                    </h6>
-                                    <div class="progress ">
-                                        <div class="progress-bar bg-danger progress-animated"
-                                            style="width: 85%; height:6px;" role="progressbar">
-                                            <span class="sr-only">60% Complete</span>
-                                        </div>
-                                    </div>
-                                    <h6 class="mt-4">Code editor
-                                        <span class="pull-right">90%</span>
-                                    </h6>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-info progress-animated" style="width: 90%; height:6px;"
-                                            role="progressbar">
-                                            <span class="sr-only">60% Complete</span>
-                                        </div>
-                                    </div>
-                                    <h6 class="mt-4">Illustrator
-                                        <span class="pull-right">65%</span>
-                                    </h6>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-success progress-animated"
-                                            style="width: 65%; height:6px;" role="progressbar">
-                                            <span class="sr-only">60% Complete</span>
-                                        </div>
-                                    </div>
-                                </div> --}}
+
                             </div>
                         </div>
                     </div>
@@ -166,8 +140,8 @@
                                                                     <input type="hidden" class="form-control"
                                                                         id="actual_amount"
                                                                         value="{{ $invoice->amount - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount') }}">
-                                                                    <input type="text" class="form-control"
-                                                                        id="pay_amount"
+                                                                    <input type="text" class="form-control pay_amount"
+                                                                        id=""
                                                                         value="{{ auth()->user()->priceFormat($invoice->amount - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount')) }}"
                                                                         name="amount" required>
                                                                 </div>
@@ -277,7 +251,7 @@
                                                                 <div class="input-group-text">£</div>
                                                             </div>
                                                             <input type="text" value="{{ $invoice->totalAmount() }}"
-                                                                id="pay_amount" class="form-control" placeholder=""
+                                                                id="" class="form-control pay_amount" placeholder=""
                                                                 readonly>
                                                         </div>
                                                     </div>
@@ -329,11 +303,14 @@
                                                             @forelse ($invoice->receipt as $key=> $value)
                                                                 <tr>
                                                                     <td>{{ $key + 1 }}</td>
-                                                                    <td>{{ $value->date }}</td>
-                                                                    <td>{{ $value->amount }}</td>
-                                                                    <td>{{ $value->discount }}</td>
-                                                                    <td>{{ $value->late_fee }}</td>
-                                                                    <td>{{ $value->mode }}</td>
+                                                                    <td>{{ auth()->user()->ukFormat($value->date) }}</td>
+                                                                    <td>£{{ auth()->user()->priceFormat($value->amount) }}
+                                                                    </td>
+                                                                    <td>£{{ auth()->user()->priceFormat($value->discount) }}
+                                                                    </td>
+                                                                    <td>£{{ auth()->user()->priceFormat($value->late_fee) }}
+                                                                    </td>
+                                                                    <td>£{{ $value->mode }}</td>
                                                                     <td></td>
                                                                 </tr>
                                                             @empty
