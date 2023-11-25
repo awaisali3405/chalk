@@ -20,6 +20,10 @@ class StudentInvoice extends Model
         'year_id',
         'academic_year_id'
     ];
+    public function period()
+    {
+        return auth()->user()->ukFormat($this->from_date) . ' - ' . auth()->user()->ukFormat($this->to_date);
+    }
     public function academicYear()
     {
         return $this->belongsTo(AcademicCalender::class, 'academic_year_id');

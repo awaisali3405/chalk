@@ -36,9 +36,6 @@
                                     <li class="list-group-item d-flex justify-content-between"><span
                                             class="mb-0">Branch</span> <strong
                                             class="text-muted">{{ $staff->branch->name }}</strong></li>
-                                    <li class="list-group-item d-flex justify-content-between"><span class="mb-0"></span>
-                                        <strong class="text-muted">£ {{ $staff->salary }}</strong>
-                                    </li>
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Staff
                                             {{ $staff->salary_type }}
                                             Salary</span> <strong class="text-muted">£ {{ $staff->salary }}</strong></li>
@@ -69,16 +66,7 @@
                                                 List</a></li>
                                         <li class="nav-item"><a href="#attendance-list" data-toggle="tab"
                                                 class="nav-link ">Attendance List</a></li>
-                                        {{-- <li class="nav-item"><a href="#upload" data-toggle="tab" class="nav-link">Upload</a>
-                                        </li>
-                                        <li class="nav-item"><a href="#note" data-toggle="tab" class="nav-link">Notes</a>
-                                        </li>
-                                        <li class="nav-item"><a href="#attandence" data-toggle="tab"
-                                                class="nav-link">Attendance</a></li>
-                                        <li class="nav-item"><a href="#statement" data-toggle="tab"
-                                                class="nav-link">Statement</a></li>
-                                        <li class="nav-item"><a href="#parent" data-toggle="tab" class="nav-link">Parent
-                                                Detail</a></li> --}}
+
                                     </ul>
                                     <div class="tab-content">
                                         <div id="about-me" class="tab-pane fade active show">
@@ -342,61 +330,8 @@
                                                         </div>
                                                     </div>
                                                 </form>
-                                                {{-- <div class="profile-about-me">
-                                                <div class="border-bottom-1 pb-4">
-                                                    <p>A wonderful serenity has taken possession of my entire soul, like
-                                                        these sweet mornings of spring which I enjoy with my whole heart. I
-                                                        am alone, and feel the charm of existence was created for the bliss
-                                                        of souls like mine.I am so happy, my dear friend, so absorbed in the
-                                                        exquisite sense of mere tranquil existence, that I neglect my
-                                                        talents.</p>
-                                                    <p>A collection of textile samples lay spread out on the table - Samsa
-                                                        was a travelling salesman - and above it there hung a picture that
-                                                        he had recently cut out of an illustrated magazine and housed in a
-                                                        nice, gilded frame.</p>
-                                                </div>
-                                            </div> --}}
                                             </div>
-                                            {{-- <div class="row pt-5">
-                                                <div class="col-4">
-                                                    <div class="form-group">
-                                                        <label class="form-label">Balance To Pay</label>
-                                                        <div class="input-group mb-2">
-                                                            <div class="input-group-prepend">
-                                                                <div class="input-group-text">£</div>
-                                                            </div>
-                                                            <input type="text" id="total" class="form-control"
-                                                                placeholder="" readonly>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="form-group">
-                                                        <label class="form-label">Receiving Cash</label>
-                                                        <div class="input-group mb-2">
-                                                            <div class="input-group-prepend">
-                                                                <div class="input-group-text">£</div>
-                                                            </div>
-                                                            <input type="text" value="0" id="receiving_cash"
-                                                                class="form-control" placeholder="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="form-group">
-                                                        <label class="form-label">Change</label>
-                                                        <div class="input-group mb-2">
-                                                            <div class="input-group-prepend">
-                                                                <div class="input-group-text">£</div>
-                                                            </div>
-                                                            <input type="text" name="0" class="form-control"
-                                                                id="change" placeholder="" readonly>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
                                         </div>
-
                                         <div id="receipt-list" class="tab-pane  ">
                                             <div class="profile-personal-info pt-4">
                                                 <div class="table-responsive">
@@ -419,9 +354,12 @@
                                                                 <tr>
                                                                     <td>{{ $key + 1 }}</td>
                                                                     <td>{{ auth()->user()->ukFormat($value->date) }}</td>
-                                                                    <td>{{ $value->salary }}</td>
-                                                                    <td>{{ $value->deduction }}</td>
-                                                                    <td>{{ $value->total }}</td>
+                                                                    <td>£{{ auth()->user()->priceFormat($value->salary) }}
+                                                                    </td>
+                                                                    <td>£{{ auth()->user()->priceFormat($value->deduction) }}
+                                                                    </td>
+                                                                    <td>£{{ auth()->user()->priceFormat($value->total) }}
+                                                                    </td>
                                                                     <td>{{ $value->mode }}</td>
                                                                     <td><a href=""
                                                                             class="btn btn-primary">Print</a></td>
@@ -430,26 +368,17 @@
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                {{-- <h4 class="text-primary mb-4">Personal Information</h4> --}}
 
-                                                {{-- <div class="profile-about-me">
-                                                <div class="border-bottom-1 pb-4">
-                                                    <p>A wonderful serenity has taken possession of my entire soul, like
-                                                        these sweet mornings of spring which I enjoy with my whole heart. I
-                                                        am alone, and feel the charm of existence was created for the bliss
-                                                        of souls like mine.I am so happy, my dear friend, so absorbed in the
-                                                        exquisite sense of mere tranquil existence, that I neglect my
-                                                        talents.</p>
-                                                    <p>A collection of textile samples lay spread out on the table - Samsa
-                                                        was a travelling salesman - and above it there hung a picture that
-                                                        he had recently cut out of an illustrated magazine and housed in a
-                                                        nice, gilded frame.</p>
-                                                </div>
-                                            </div> --}}
                                             </div>
 
                                         </div>
                                         <div id="attendance-list" class="tab-pane  ">
+                                            <div class="row pt-3">
+                                                <div class="col-12 justify-content-end   d-flex">
+                                                    <a href="{{ route('staff.attendance.index', $staff->id) }}"
+                                                        class="btn btn-primary">Add Attendance</a>
+                                                </div>
+                                            </div>
                                             <div class="profile-personal-info pt-4">
                                                 <div class="table-responsive">
                                                     <table id="example5" class="display">
@@ -468,7 +397,8 @@
                                                                     <td>{{ $key + 1 }}</td>
                                                                     <td>{{ auth()->user()->ukFormat($value->date) }}</td>
                                                                     <td>{{ $value->period() }}</td>
-                                                                    <td>{{ $value->amount() }}</td>
+                                                                    <td>£{{ auth()->user()->priceFormat($value->amount()) }}
+                                                                    </td>
                                                                 </tr>
                                                             @endforeach
 

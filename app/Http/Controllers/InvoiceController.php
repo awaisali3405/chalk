@@ -48,9 +48,7 @@ class InvoiceController extends Controller
     public function create(Request $request)
     {
         if (request()->input()) {
-            $invoice = StudentInvoice::latest();
-
-            $student = Student::where(function ($query) use ($request) {
+            $invoice = StudentInvoice::whereHas('student', function ($query) use ($request) {
                 if ($request->branch_id != 0) {
                     $query->where('branch_id', $request->branch_id);
                 }
@@ -71,10 +69,9 @@ class InvoiceController extends Controller
             // dd($student);
         } else {
             $invoice = StudentInvoice::all();
-            $student = Student::where('payment_period', "Weekly")->get();
         }
 
-        return view('invoice.add', compact('student'));
+        return view('invoice.add', compact('invoice'));
     }
 
     /**

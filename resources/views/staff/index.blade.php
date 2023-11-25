@@ -61,6 +61,12 @@
                                                                     href="{{ route('staff.pay', $value->id) }}">Pay</a>
                                                                 <a class="dropdown-item"
                                                                     href="{{ route('staff.statement', $value->id) }}">Statement</a>
+                                                                <a class="dropdown-item"
+                                                                    href="{{ route('enquiryTeacher.upload', $value->teacherEnquiry->id) }}">Document</a>
+                                                                <a class="dropdown-item"
+                                                                    href="{{ route('enquiryTeacher.payroll', $value->teacherEnquiry->id) }}">Upload</a>
+                                                                <a class="dropdown-item"
+                                                                    href="{{ route('enquiryTeacher.note', $value->teacherEnquiry->id) }}">Note</a>
                                                             </div>
                                                             {{-- <a href="{{ route('branch.show', $value->id) }}"
                                                                 class="btn btn-sm btn-danger"><i

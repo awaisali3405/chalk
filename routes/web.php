@@ -78,6 +78,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/student/upload', [StudentsController::class, 'uploadStore'])->name('student.upload.store');
     Route::get('/student/request/parent', [StudentsController::class, 'request'])->name('student.request');
     Route::post('/student/promote/{id}', [StudentsController::class, 'promote'])->name('student.promote');
+    Route::get('/disable/student', [StudentsController::class, 'disable'])->name('student.disable');
     // Enquiry
     Route::resource('enquiry', EnquiryController::class);
     Route::get('/enquiry/{id}/note', [EnquiryController::class, 'note'])->name('enquiry.note');

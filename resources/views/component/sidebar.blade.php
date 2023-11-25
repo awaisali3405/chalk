@@ -42,6 +42,8 @@
                         @if (auth()->user()->role->name != 'parent')
                             <li><a href="{{ route('student.request') }}">Student Request
                                     ({{ auth()->user()->studentRequest()->count() }})</a></li>
+                            <li><a href="{{ route('student.disable') }}">Disabled Student
+                                    ({{ auth()->user()->studentDisable()->count() }})</a></li>
                         @endif
                     </ul>
                 </li>

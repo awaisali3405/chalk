@@ -63,8 +63,11 @@
                                         </div>
                                     @endif
 
-                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 justify-content-center d-flex">
+                                        <div>
+
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
                                         <a href="{{ route('staff.index') }}" class="btn btn-light">Cencel</a>
                                     </div>
                                 </div>

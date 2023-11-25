@@ -586,6 +586,45 @@ class StudentsController extends Controller
 
         return view('student.index', compact('student'));
     }
+    public function disable(Request $request)
+    {
+        if (auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'super admin') {
+
+            if ($request->input()) {
+                $student = new Student();
+                if ($request->input('branch_id')) {
+                    $student = $student->where('branch_id', $request->input('branch_id'));
+                }
+                if ($request->input('from_date')) {
+                    $student = $student->where('admission_date', '>=', $request->input('from_date'));
+                }
+                if ($request->input('to_date')) {
+                    $student = $student->where('admission_date', '<=', $request->input('to_date'));
+                }
+                if ($request->input('current_school')) {
+                    $student = $student->where('current_school_name', $request->input('current_school'));
+                }
+                if ($request->input('from_week')) {
+                    $student = $student->where('admission_date', '>=', auth()->user()->dateWeek($request->input('from_week')));
+                }
+                if ($request->input('to_week')) {
+                    $student = $student->where('admission_date', '<=', auth()->user()->dateWeek($request->input('to_week')));
+                }
+                $student = $student->where('is_disable', true)->get();
+            } else {
+                $student = Student::where('is_disable', true)->get();
+            }
+        } else if (auth()->user()->role->name == 'parent') {
+            $student = Parents::where('user_id', auth()->user()->id)->first();
+            if ($student) {
+                $student = $student->student;
+            } else {
+                $student = array();
+            }
+        }
+
+        return view('student.index', compact('student'));
+    }
     public function getStudent($id)
     {
         $year = Year::find($id);

@@ -40,6 +40,9 @@
                                                         Quantity
                                                     </th>
                                                     <th>
+                                                        Rate
+                                                    </th>
+                                                    <th>
                                                         Amount
                                                     </th>
 
@@ -54,8 +57,9 @@
                                                         <td>{{ $value->name }}</td>
                                                         <td>{{ $value->year->name }}</td>
                                                         <td>{{ $value->branch->name }}</td>
-                                                        <td> {{ $value->purchase->sum('quantity') }}</td>
-                                                        <td>£{{ $value->purchase->sum('amount') }}</td>
+                                                        <td> {{ $value->remainingProduct() }}</td>
+                                                        <td>£{{ $value->purchase->avg('rate') }}</td>
+                                                        <td>£{{ $value->remainingAmount() }}</td>
                                                         <td>
                                                             <a href="{{ route('product.edit', $value->id) }}"
                                                                 class="btn btn-sm btn-primary"><i

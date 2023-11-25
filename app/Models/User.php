@@ -54,7 +54,7 @@ class User extends Authenticatable
     }
     public function priceFormat($price)
     {
-        return number_format($price) != $price ? number_format($price, 2) : number_format($price);
+        return  number_format($price) != $price ? number_format($price, 2) : number_format($price);
     }
     public function ukFormat($date)
     {
@@ -263,10 +263,14 @@ class User extends Authenticatable
     public function availableStock($branch, $academicYear)
     {
         $purchase = $this->purchaseProduct($branch, $academicYear)->sum('amount');
+        $purchaseRate = $this->purchaseProduct($branch, $academicYear)->avg('rate');
         $purchaseQuantity = $this->purchaseProduct($branch, $academicYear)->sum('quantity');
+        $saleQuantity = $this->resourceSaleQuantity($branch, $academicYear);
         $saleTotal = $this->resourceSale($branch, $academicYear);
         // dd();
-        return $purchase - $saleTotal;
+        $remainingProduct = $purchaseQuantity - $saleQuantity;
+
+        return $purchaseRate * $remainingProduct;
     }
     public function resourceSale($branch, $academicYear)
     {
@@ -277,6 +281,16 @@ class User extends Authenticatable
         }
         // dd();
         return  $saleTotal;
+    }
+    public function resourceSaleQuantity($branch, $academicYear)
+    {
+        $salesProduct = $this->productSale($branch, $academicYear)->get();
+        $quantity = 0;
+        foreach ($salesProduct as $value) {
+            $quantity += $value->product->sum('quantity');
+        }
+        // dd();
+        return  $quantity;
     }
     public function resourceDue($branch, $academicYear)
     {
@@ -312,9 +326,10 @@ class User extends Authenticatable
         $resourceReceived = $this->resourceReceived($branch, $academicYear);
         // $resourceDue = $this->resourceDue($branch, $academicYear);
         // $resourceFeeDue = $this->resourceFeeDue($branch, $academicYear);
+        $loanPaid = $this->totalSalaryLoan($branch, $academicYear);
         $resourceFeeReceived = $this->resourceFeeReceived($branch, $academicYear);
         $availableStock = $this->availableStock($branch, $academicYear);
-        return  (float) $feeReceived + (float) $depositReceived +  (float) $resourceReceived +  (float) $resourceFeeReceived + (float) $availableStock;
+        return  (float) $feeReceived + (float) $depositReceived +  (float) $resourceReceived +  (float) $resourceFeeReceived + (float) $availableStock + (float)$loanPaid;
     }
     // public function totalLiability(){
 
@@ -526,5 +541,9 @@ class User extends Authenticatable
     public function studentRequest()
     {
         return Student::where('active', false)->get();
+    }
+    public function studentDisable()
+    {
+        return Student::where('is_disable', true)->get();
     }
 }

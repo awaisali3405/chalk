@@ -65,10 +65,10 @@
                                                                     <a class="dropdown-item btn-event" data-toggle="modal"
                                                                         data-target="#registration-{{ $value->id }}">Registration</a>
                                                                 @endif
-                                                                <a class="dropdown-item"
+                                                                {{-- <a class="dropdown-item"
                                                                     href="{{ route('enquiryTeacher.upload', $value->id) }}">Document</a>
                                                                 <a class="dropdown-item"
-                                                                    href="{{ route('enquiryTeacher.payroll', $value->id) }}">Upload</a>
+                                                                    href="{{ route('enquiryTeacher.payroll', $value->id) }}">Upload</a> --}}
                                                                 <a class="dropdown-item"
                                                                     href="{{ route('enquiryTeacher.note', $value->id) }}">Note</a>
 

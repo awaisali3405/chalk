@@ -17,7 +17,7 @@ class AcademicCalender extends Model
     ];
     public function period()
     {
-        return $this->start_date . ' - ' . $this->end_date;
+        return auth()->user()->ukFormat($this->start_date) . ' - ' . auth()->user()->ukFormat($this->end_date);
     }
     public function invoice()
     {
@@ -51,5 +51,4 @@ class AcademicCalender extends Model
     {
         return $this->hasMany(StaffLoan::class, 'academic_year_id');
     }
-    
 }

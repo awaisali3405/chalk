@@ -26,8 +26,16 @@ class Product extends Model
     {
         return $this->hasMany(Purchase::class, 'product_id');
     }
-    public function remaining()
+    public function saleProduct()
     {
-        $total = 0;
+        return $this->hasMany(SaleProduct::class, 'product_id');
+    }
+    public function remainingProduct()
+    {
+        return $this->purchase->sum('quantity') - $this->saleProduct()->sum('quantity');
+    }
+    public function remainingAmount()
+    {
+        return $this->purchase->avg('rate') * $this->remainingProduct();
     }
 }

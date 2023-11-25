@@ -39,20 +39,24 @@ class Branch extends Model
             $query->whereHas('student', function ($query) use ($id) {
                 $query->where('branch_id', $id);
             });
-        })->get();
+        });
         return $receipt;
     }
     public function expense()
     {
-        $expense = Expense::where('branch_id', $this->id)->get();
+        $expense = Expense::where('branch_id', $this->id);
         return $expense;
     }
     public function purchase()
     {
-        return $this->hasMany(Purchase::class, 'branch_id')->get();
+        return $this->hasMany(Purchase::class, 'branch_id');
     }
     public function sale()
     {
-        return $this->hasMany(Sale::class, 'branch_id')->get();
+        return $this->hasMany(Sale::class, 'branch_id');
+    }
+    public function staff()
+    {
+        return $this->hasMany(Staff::class, 'branch_id');
     }
 }

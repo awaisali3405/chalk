@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Branch;
 use Illuminate\Http\Request;
 
 class CashFlowController extends Controller
@@ -13,9 +14,16 @@ class CashFlowController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('cashflow.index');
+        if ($request->input()) {
+            $academicYear = $request->get('academicYear');
+            $branch_id = Branch::find($request->get('branch_id'));
+        } else {
+            $academicYear = auth()->user()->session()->id;
+            $branch_id = Branch::find(1);
+        }
+        return view('cashflow.index', compact('branch_id', 'academicYear'));
     }
 
     /**
