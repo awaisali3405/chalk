@@ -58,7 +58,8 @@ class User extends Authenticatable
     }
     public function ukFormat($date)
     {
-        return Carbon::parse($date)->format('d/m/Y');
+
+        return $date ? Carbon::parse($date)->format('d/m/Y') : '';
     }
     public function session()
     {
@@ -79,12 +80,13 @@ class User extends Authenticatable
     }
     public function invoice($branch, $academicYear)
     {
+
         return StudentInvoice::whereHas('student', function ($query) use ($branch, $academicYear) {
             if ($branch != -1) {
 
                 $query->where('branch_id', $branch);
             }
-        })->where('created_at', ">=", $this->getAcademicYear($academicYear)->start_date)->where('created_at', '<=', $this->getAcademicYear($academicYear)->end_date);
+        })->where('academic_year_id', $academicYear);
     }
     public function deposit($branch, $academicYear)
     {
@@ -237,7 +239,7 @@ class User extends Authenticatable
     }
     public function purchaseProduct($branch, $academicYear)
     {
-        $purchase = Purchase::where('created_at', ">=", $this->getAcademicYear($academicYear)->start_date)->where('created_at', '<=', $this->getAcademicYear($academicYear)->end_date);
+        $purchase = Purchase::where('academic_year_id', $academicYear);
         if ($branch != -1) {
             $purchase = $purchase->where('branch_id', $branch);
         }
@@ -245,7 +247,7 @@ class User extends Authenticatable
     }
     public function productSale($branch, $academicYear)
     {
-        $purchase = Sale::where('created_at', ">=", $this->getAcademicYear($academicYear)->start_date)->where('created_at', '<=', $this->getAcademicYear($academicYear)->end_date);
+        $purchase = Sale::where('academic_year_id', $academicYear);
         if ($branch != -1) {
             $purchase = $purchase->where('branch_id', $branch);
         }
@@ -303,16 +305,16 @@ class User extends Authenticatable
     }
     public function totalAsset($branch, $academicYear)
     {
-        $feeDue = $this->feeDue($branch, $academicYear);
+        // $feeDue = $this->feeDue($branch, $academicYear);
         $feeReceived = $this->feeReceived($branch, $academicYear);
         $depositReceived = $this->depositReceived($branch, $academicYear);
-        $depositDue = $this->depositDue($branch, $academicYear);
+        // $depositDue = $this->depositDue($branch, $academicYear);
         $resourceReceived = $this->resourceReceived($branch, $academicYear);
-        $resourceDue = $this->resourceDue($branch, $academicYear);
-        $resourceFeeDue = $this->resourceFeeDue($branch, $academicYear);
+        // $resourceDue = $this->resourceDue($branch, $academicYear);
+        // $resourceFeeDue = $this->resourceFeeDue($branch, $academicYear);
         $resourceFeeReceived = $this->resourceFeeReceived($branch, $academicYear);
         $availableStock = $this->availableStock($branch, $academicYear);
-        return $feeDue + $feeReceived + $depositReceived + $depositDue + $resourceReceived + $resourceDue + $resourceFeeReceived + $resourceFeeDue + $availableStock;
+        return  (float) $feeReceived + (float) $depositReceived +  (float) $resourceReceived +  (float) $resourceFeeReceived + (float) $availableStock;
     }
     // public function totalLiability(){
 
@@ -345,7 +347,7 @@ class User extends Authenticatable
 
                 $query->where('branch_id', $branch);
             }
-        })->where('created_at', ">=", $this->getAcademicYear($academicYear)->start_date)->where('created_at', '<=', $this->getAcademicYear($academicYear)->end_date);
+        })->where('academic_year_id', $academicYear);
     }
     public function refundByBank($branch, $academicYear)
     {
@@ -354,7 +356,7 @@ class User extends Authenticatable
 
                 $query->where('branch_id', $branch);
             }
-        })->where('created_at', ">=", $this->getAcademicYear($academicYear)->start_date)->where('created_at', '<=', $this->getAcademicYear($academicYear)->end_date);
+        })->where('academic_year_id', $academicYear);
     }
     public function refund($branch, $academicYear)
     {
@@ -363,7 +365,7 @@ class User extends Authenticatable
 
                 $query->where('branch_id', $branch);
             }
-        })->where('created_at', ">=", $this->getAcademicYear($academicYear)->start_date)->where('created_at', '<=', $this->getAcademicYear($academicYear)->end_date);
+        })->where('academic_year_id', $academicYear);
     }
     public function totalRefunded($branch, $academicYear)
     {
@@ -398,9 +400,9 @@ class User extends Authenticatable
     public function totalExpense($branch, $academicYear)
     {
         if ($branch == -1) {
-            // dd($this->expense()->where('date', ">=", $this->getAcademicYear($academicYear)->start_date)->where('date', '<=', $this->getAcademicYear($academicYear)->end_date)->get());
+            // dd($this->expense()->where("academic_year_id",$academicYear)->get());
 
-            return $this->expense()->where('created_at', ">=", $this->getAcademicYear($academicYear)->start_date)->where('created_at', '<=', $this->getAcademicYear($academicYear)->end_date)->get()->sum('amount');
+            return $this->expense()->where('academic_year_id', $academicYear)->get()->sum('amount');
         } else {
             return $this->expense()->where('branch_id', $branch)->where('created_at', ">=", $this->getAcademicYear($academicYear)->start_date)->where('created_at', '<=', $this->getAcademicYear($academicYear))->sum('amount');
         }
@@ -465,7 +467,7 @@ class User extends Authenticatable
     public function totalAttendancePay($staff, $academicYear)
     {
         $total = 0;
-        $attendance = $staff->attendance()->where('date', ">=", $this->getAcademicYear($academicYear)->start_date)->where('date', '<=', $this->getAcademicYear($academicYear)->end_date)->where('is_paid', 0)->get();
+        $attendance = $staff->attendance()->where("academic_year_id", $academicYear)->where('is_paid', 0)->get();
         foreach ($attendance as $key => $value) {
             $total += $value->amount();
         }
@@ -483,7 +485,7 @@ class User extends Authenticatable
     public function totalPaid($staff, $academicYear)
     {
         $total = 0;
-        $pay = $staff->receipt()->where('date', ">=", $this->getAcademicYear($academicYear)->start_date)->where('date', '<=', $this->getAcademicYear($academicYear)->end_date)->get();
+        $pay = $staff->receipt()->where("academic_year_id", $academicYear)->get();
         foreach ($pay as $value) {
             $total += $value->total() + $value->loan;
         }
@@ -501,7 +503,7 @@ class User extends Authenticatable
     public function totalLoan($staff, $academicYear)
     {
         $total = 0;
-        $pay = $staff->receipt()->where('date', ">=", $this->getAcademicYear($academicYear)->start_date)->where('date', '<=', $this->getAcademicYear($academicYear)->end_date)->get();
+        $pay = $staff->receipt()->where("academic_year_id", $academicYear)->get();
         foreach ($pay as $value) {
             $total += $value->loan;
         }
@@ -516,9 +518,9 @@ class User extends Authenticatable
     public function givenLoan($branch, $academicYear)
     {
         if ($branch != -1) {
-            return StaffLoan::where('branch_id', $branch)->where('created_at', ">=", $this->getAcademicYear($academicYear)->start_date)->where('created_at', '<=', $this->getAcademicYear($academicYear)->end_date)->get()->sum('amount');
+            return StaffLoan::where('branch_id', $branch)->where('academic_year_id', $academicYear)->get()->sum('amount');
         } else {
-            return StaffLoan::where('created_at', ">=", $this->getAcademicYear($academicYear)->start_date)->where('created_at', '<=', $this->getAcademicYear($academicYear)->end_date)->get()->sum('amount');
+            return StaffLoan::where('academic_year_id', $academicYear)->get()->sum('amount');
         }
     }
     public function studentRequest()

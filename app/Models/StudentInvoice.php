@@ -36,6 +36,27 @@ class StudentInvoice extends Model
     {
         return $this->belongsTo(Student::class, 'student_id');
     }
+    public function InvoiceSubject()
+    {
+        return $this->belongsToMany(EnquirySubject::class, 'invoice_enquiry_subject', 'invoice_id', 'enquiry_subject_id')->where('year_id', $this->student->currentYear()->id)->where('academic_year_id', auth()->user()->session()->id);
+    }
+    public function resourceInvoiceSubject()
+    {
+        return $this->hasMany(EnquirySubject::class, 'resource_invoice_id')->where('year_id', $this->student->currentYear()->id)->where('academic_year_id', auth()->user()->session()->id);
+    }
+    public function hasOneOnOne()
+    {
+        return $this->InvoiceSubject->where("lesson_type_id ", 2)->count() > 0 ? true : false;
+    }
+    public function oneOnOneSubject()
+    {
+
+        return $this->InvoiceSubject()->where('lesson_type_id', 2)->get();
+    }
+    public function normalSubject()
+    {
+        return $this->InvoiceSubject()->where('lesson_type_id', 1)->get();
+    }
     public function subject()
     {
         return $this->hasMany(InvoiceSubject::class, 'invoice_id')->where('academic_year_id', auth()->user()->session()->id);

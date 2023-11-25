@@ -164,7 +164,7 @@ class InvoiceController extends Controller
 
 
         $days = $to->diffInDays($from) + 1;
-        $weeks = $to->diffInWeeks($from->addDay(2));
+        $weeks = $to->diffInWeeks($from->addDay(1));
         $months = $to->diffInMonths($from->addDay(1));
         // $days=$request->from_date
         $to = Carbon::createFromFormat('m/d/Y', $request->from_date)->format('Y-m-d');
@@ -178,6 +178,7 @@ class InvoiceController extends Controller
                 $student = Student::find($value);
                 if ($student->payment_period == "Weekly") {
                     $amount = (($student->yearSubject->sum('amount') - $student->fee_discount) * $weeks);
+                    // dd($amount, $weeks, $to, $from);
                     if ($amount > 0) {
                         $invoice = StudentInvoice::create([
                             'student_id' => $student->id,
@@ -190,16 +191,17 @@ class InvoiceController extends Controller
                             'year_id' => $student->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()->toYear->id
                         ]);
                     }
+                    $invoice->invoiceSubject()->sync($student->yearSubject()->pluck('id')->toArray());
                 } else {
                     if (str_contains($student->year->name, "11")) {
-                        $amount = (($student->yearSubject->sum('amount')) * 40 / 9) * $months - $student->fee_discount;
+                        $amount = ((($student->yearSubject->sum('amount')) * 40 / 9) * $months) - $student->fee_discount;
                     } else {
 
-                        $amount = (($student->yearSubject->sum('amount')) * 52 / 12) * $months - $student->fee_discount;
+                        $amount = ((($student->yearSubject->sum('amount')) * 52 / 12) * $months) - $student->fee_discount;
                     }
                     if ($amount > 0) {
 
-                        StudentInvoice::create([
+                        $invoice = StudentInvoice::create([
                             'student_id' => $student->id,
                             'type' => 'Monthly Fee',
                             'amount' => $amount,
@@ -209,12 +211,13 @@ class InvoiceController extends Controller
                             'branch_id' => $student->branch_id,
                             'year_id' => $student->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()->toYear->id
                         ]);
+                        $invoice->invoiceSubject()->sync($student->yearSubject()->pluck('id')->toArray());
                     }
                 }
             }
             return redirect()->back()->with('success', "General Invoice Created Successfully");
         } else {
-            return redirect()->back()->with('error', "Select Student");
+            return redirect()->back()->with('error', "Please Select Student");
         }
     }
     public function print($id)

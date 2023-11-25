@@ -85,7 +85,7 @@
                                         @php
                                             $total = 0;
                                             $total_paid = 0;
-                                            $tatal_remaining = 0;
+                                            $total_remaining = 0;
                                         @endphp
                                         <tbody>
                                             @foreach ($invoice as $key => $value)
@@ -93,14 +93,14 @@
                                                     $total += $value->amount;
                                                     // dd($value->);
                                                     $total_paid += $value->receipt->sum('amount');
-                                                    $tatal_remaining += $value->amount - ($value->receipt->sum('discount') - $value->receipt->sum('late_fee')) - $value->receipt->sum('amount');
+                                                    $total_remaining += $value->amount - ($value->receipt->sum('discount') - $value->receipt->sum('late_fee')) - $value->receipt->sum('amount');
                                                 @endphp
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ auth()->user()->ukFormat($value->created_at) }}</td>
                                                     <td>{{ $value->type == 'Refundable' ? 'Deposit' : $value->type }}</td>
                                                     <td>£{{ $value->amount }}</td>
-                                                    <td>{{ $value->tax }}</td>
+                                                    <td>{{ auth()->user()->priceFormat($value->tax) }}%</td>
                                                     <td>£{{ $value->receipt->sum('discount') }}</td>
                                                     <td>£{{ $value->receipt->sum('late_fee') }}</td>
                                                     <td>£{{ $value->receipt->sum('amount') }}
@@ -138,7 +138,7 @@
                                                                     data-target="#print-{{ $value->id }}">Print</a>
 
                                                                 <!-- Trigger the modal with a button -->
-                                                                @if (!$value->is_paid && !$value->receipt)
+                                                                @if (!$value->is_paid && count($value->receipt) == 0)
                                                                     <form
                                                                         action="{{ route('invoice.destroy', $value->id) }}"
                                                                         id="myForm" method="POST">
@@ -170,7 +170,7 @@
                                                 <th></th>
                                                 <th></th>
                                                 <th>£{{ $total_paid }}</th>
-                                                <th>£{{ $tatal_remaining }}</th>
+                                                <th>£{{ $total_remaining }}</th>
                                                 <th></th>
                                                 <th></th>
                                                 <th></th>

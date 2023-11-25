@@ -1226,7 +1226,7 @@
         $("#receiving_cash").keyup(function() {
             let total = parseFloat($("#total").val()).toFixed(2);
             let receive = parseFloat($(this).val()).toFixed(2);
-            let change = receive - total;
+            let change = parseFloat(total - receive).toFixed(2);
             $("#change").val(isNaN(change) ? "" : change);
         });
     </script>

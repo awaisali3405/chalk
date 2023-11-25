@@ -24,8 +24,16 @@ class EnquirySubject extends Model
         'no_hr_weekly',
         'amount',
         'year_id',
-        'academic_year_id'
+        'academic_year_id', 'invoice_id', 'resource_invoice_id'
     ];
+    public function resourceInvoice()
+    {
+        return $this->belongsTo(StudentInvoice::class, 'resource_invoice_id');
+    }
+    public function invoice()
+    {
+        return $this->belongsTo(StudentInvoice::class, 'invoice_id');
+    }
     public function academicYear()
     {
         return $this->belongsTo(AcademicCalender::class, 'academic_year_id');

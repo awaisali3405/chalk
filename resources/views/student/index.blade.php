@@ -192,6 +192,18 @@
                                                                         @if (!$value->active)
                                                                             <a class="dropdown-item"
                                                                                 href="{{ route('student.edit', $value->id) }}">Edit</a>
+                                                                            <a class="dropdown-item"
+                                                                                href="javascript:void(0);"
+                                                                                onclick="event.preventDefault(); document.getElementById('delete').submit();">
+                                                                                Delete
+                                                                            </a>
+                                                                            <form method="POST" id="delete"
+                                                                                action="{{ route('student.destroy', $value->id) }}">
+                                                                                @csrf
+                                                                                <input name="_method" type="hidden"
+                                                                                    value="DELETE">
+
+                                                                            </form>
                                                                         @else
                                                                             <a class="dropdown-item"
                                                                                 href="{{ route('student.show', $value->id) }}">Show</a>

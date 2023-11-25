@@ -126,6 +126,15 @@ class Student extends Model
     {
         return $this->hasMany(EnquirySubject::class, 'student_id')->where('year_id', $this->currentYear()->id)->where('academic_year_id', auth()->user()->session()->id);
     }
+    public function InvoiceSubject($invoice)
+    {
+        
+        return $this->hasMany(EnquirySubject::class, 'student_id')->where('year_id', $this->currentYear()->id)->where('academic_year_id', auth()->user()->session()->id)->where('invoice_id', $invoice)->get();
+    }
+    public function resourceInvoiceSubject($invoice)
+    {
+        return $this->hasMany(EnquirySubject::class, 'student_id')->where('year_id', $this->currentYear()->id)->where('academic_year_id', auth()->user()->session()->id)->where('resource_invoice_id', $invoice)->get();
+    }
     /**
      * Get all of the upload for the Enquiry
      *
@@ -166,7 +175,7 @@ class Student extends Model
     }
     public function invoice()
     {
-        return $this->hasMany(StudentInvoice::class, 'student_id')->where('academic_year_id', auth()->user()->id);
+        return $this->hasMany(StudentInvoice::class, 'student_id')->where('academic_year_id', auth()->user()->session()->id)->latest();
     }
     public function attendanceNote($subject, $date)
     {
@@ -179,18 +188,18 @@ class Student extends Model
             return "";
         }
     }
-    public function hasOneOnOne()
+    public function hasOneOnOne($invoice)
     {
-        return $this->yearSubject->where("lesson_type_id ", 2)->count() > 0 ? true : false;
+        return $this->yearSubject->where("lesson_type_id ", 2)->where('invoice_id', $invoice)->count() > 0 ? true : false;
     }
-    public function oneOnOneSubject()
+    public function oneOnOneSubject($invoice)
     {
 
-        return $this->yearSubject()->where('lesson_type_id', 2)->get();
+        return $this->yearSubject()->where('lesson_type_id', 2)->where('invoice_id', $invoice)->get();
     }
-    public function normalSubject()
+    public function normalSubject($invoice)
     {
-        return $this->yearSubject()->where('lesson_type_id', 1)->get();
+        return $this->yearSubject()->where('lesson_type_id', 1)->where('invoice_id', $invoice)->get();
     }
     public function isFullyPaid()
     {

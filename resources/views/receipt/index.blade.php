@@ -56,25 +56,25 @@
                                             Type</span> <strong class="text-muted">{{ $invoice->type }}</strong>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Vat
-                                            Inclusive Tax %</span> <strong class="text-muted">{{ $invoice->tax }}%</strong>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Vat
-                                            Inclusive Tax </span> <strong class="text-muted">{{ $invoice->tax }}%</strong>
+                                            Inclusive Tax %</span> <strong
+                                            class="text-muted">{{ auth()->user()->priceFormat($invoice->tax) }}%</strong>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Invoice
-                                            Amount</span> <strong class="text-muted">£{{ $invoice->amount }}</strong></li>
+                                            Amount</span> <strong
+                                            class="text-muted">£{{ auth()->user()->priceFormat($invoice->amount) }}</strong>
+                                    </li>
 
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Invoice
                                             Remaining </span> <strong
-                                            class="text-muted">£{{ $invoice->remainingAmount() }}</strong>
+                                            class="text-muted">£{{ auth()->user()->priceFormat($invoice->remainingAmount()) }}</strong>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Paid
                                             Amount </span> <strong
-                                            class="text-muted">£{{ number_format($invoice->paidAmount(), 2) }}</strong>
+                                            class="text-muted">£{{ auth()->user()->priceFormat($invoice->paidAmount()) }}</strong>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Tax
                                             Amount </span> <strong
-                                            class="text-muted">£{{ number_format($invoice->taxAmount(), 2) }}</strong>
+                                            class="text-muted">£{{ auth()->user()->priceFormat($invoice->taxAmount()) }}</strong>
                                     </li>
                                 </ul>
 
@@ -216,9 +216,15 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                                            <button type="submit" class="btn btn-light">Cencel</button>
+                                                        <div
+                                                            class="col-lg-12 col-md-12 col-sm-12 pt-2 pb-5 justify-content-center d-flex">
+                                                            <div class="pr-2">
+
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">Submit</button>
+                                                            </div>
+                                                            <a href="{{ route('invoice.show', $invoice->student->id) }}"
+                                                                class="btn btn-light">Cancel</a>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -237,7 +243,8 @@
                                                 </div>
                                             </div> --}}
                                             </div>
-                                            <div class="row">
+                                            <hr class="text-bold">
+                                            <div class="row pt-5">
                                                 <div class="col-12 justify-content-center d-flex">
                                                     <h4>Calculator</h4>
                                                 </div>
@@ -251,8 +258,8 @@
                                                                 <div class="input-group-text">£</div>
                                                             </div>
                                                             <input type="text" value="{{ $invoice->totalAmount() }}"
-                                                                id="" class="form-control pay_amount" placeholder=""
-                                                                readonly>
+                                                                id="total" class="form-control pay_amount"
+                                                                placeholder="" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -286,7 +293,7 @@
                                         <div id="receipt-list" class="tab-pane  ">
                                             <div class="profile-personal-info pt-4">
                                                 <div class="table-responsive">
-                                                    <table id="example5" class="display" style="min-width: 845px">
+                                                    <table id="example5" class="display">
                                                         <thead>
                                                             <tr>
                                                                 <th>Sr</th>
@@ -315,30 +322,14 @@
                                                                 </tr>
                                                             @empty
                                                                 <tr>
-                                                                    <td colspan="7">No Data Available </td>
+                                                                    <td colspan="7" class="text-center">No Data
+                                                                        Available </td>
                                                                 </tr>
                                                             @endforelse
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                {{-- <h4 class="text-primary mb-4">Personal Information</h4> --}}
-
-                                                {{-- <div class="profile-about-me">
-                                                <div class="border-bottom-1 pb-4">
-                                                    <p>A wonderful serenity has taken possession of my entire soul, like
-                                                        these sweet mornings of spring which I enjoy with my whole heart. I
-                                                        am alone, and feel the charm of existence was created for the bliss
-                                                        of souls like mine.I am so happy, my dear friend, so absorbed in the
-                                                        exquisite sense of mere tranquil existence, that I neglect my
-                                                        talents.</p>
-                                                    <p>A collection of textile samples lay spread out on the table - Samsa
-                                                        was a travelling salesman - and above it there hung a picture that
-                                                        he had recently cut out of an illustrated magazine and housed in a
-                                                        nice, gilded frame.</p>
-                                                </div>
-                                            </div> --}}
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>

@@ -268,11 +268,11 @@
                                                             </div>
 
                                                         </div>
-                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <div
+                                                            class="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center">
                                                             <button type="submit"
                                                                 class="btn btn-primary additional-invoice-btn"
                                                                 disabled>Generate</button>
-                                                            {{-- <button type="submit" class="btn btn-light">Cencel</button> --}}
                                                         </div>
                                                     </div>
                                                 </form>
@@ -441,21 +441,12 @@
                                                                                             </td>
                                                                                             <td>{{ $value->branch->name }}
                                                                                             </td>
-                                                                                            <td>{{ $value->payment_period == 'Monthly'? (str_contains('11', $value->year->name)? auth()->user()->priceFormat(($value->fee * 49) / 12 - $value->fee_discount): auth()->user()->priceFormat(($value->fee * 52) / 12 - $value->fee_discount)): $value->fee - $value->fee_discount }}
+                                                                                            <td>£{{ $value->payment_period == 'Monthly'? (str_contains('11', $value->year->name)? auth()->user()->priceFormat(($value->fee * 49) / 12 - $value->fee_discount): auth()->user()->priceFormat(($value->fee * 52) / 12 - $value->fee_discount)): $value->fee - $value->fee_discount }}
                                                                                             </td>
                                                                                             <td>
                                                                                                 <a class="btn btn-primary"
                                                                                                     href="{{ route('invoice.show', $value->id) }}">Invoice</a>
                                                                                             </td>
-                                                                                            {{-- <td>
-                                                                                            <a href="{{ route('student.show', $value->id) }}"
-                                                                                                title="upload"
-                                                                                                class="btn btn-sm btn-info"><i
-                                                                                                    class="la la-eye"></i></a>
-                                                                                            <a href="{{ route('invoice.show', $value->id) }}"
-                                                                                                title="upload"
-                                                                                                class="btn btn-sm btn-info">Invoice</a>
-                                                                                        </td> --}}
                                                                                         </tr>
                                                                                     @endforeach
                                                                                 </tbody>

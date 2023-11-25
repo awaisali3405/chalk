@@ -446,14 +446,6 @@
                                                                                             </td>
 
                                                                                             <td>
-
-                                                                                                <input type="hidden"
-                                                                                                    value="{{ $value->id }}"
-                                                                                                    class="id"
-                                                                                                    name="enquiry_subject[]">
-                                                                                                <a class="delete-subject"
-                                                                                                    href="javascript:void(0);"><i
-                                                                                                        class=" fa fa-close color-danger"></i></a>
                                                                                             </td>
                                                                                         </tr>
                                                                                     @endforeach
@@ -1681,8 +1673,6 @@
 
                                             </div>
                                         </div>
-
-
                                         <div class="col-lg-12 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">Other Contact Info</label>
@@ -1690,12 +1680,6 @@
                                                     value="{{ old('e_contact_info_2', $student->e_contact_info_2) }}">
                                             </div>
                                         </div>
-
-
-
-
-
-
                                     </div>
                                 </div>
                             </div>
