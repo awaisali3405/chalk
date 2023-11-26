@@ -76,6 +76,15 @@
                         {{-- <li><a href="{{ route('invoice.create') }}">All Invoice</a></li> --}}
                         <li><a href="{{ route('email.index') }}">All Email</a></li>
                         <li><a href="{{ route('sms.index') }}">All SMS</a></li>
+                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                <i class="la la-home"></i>
+                                <span class="nav-text">Notification</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="{{ route('generalNotification.index') }}">Send Notification</a></li>
+                                <li><a href="{{ route('generalNotification.create') }}">History Notification</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -179,89 +188,94 @@
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{ route('refund.index') }}">Student Deposit</a></li>
-                        {{-- <li><a href="{{ route('branch.create') }}"></a></li> --}}
                     </ul>
                 </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-home"></i>
-                        <span class="nav-text">Key Stage</span>
+                <li class="mm-active"><a class="has-arrow" href="javascript:void()" aria-expanded="true">
+                        <i class="la la-th-list"></i>
+                        <span class="nav-text">Hr Department</span>
                     </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('keyStage.index') }}">All Key Stage</a></li>
-                        <li><a href="{{ route('keyStage.create') }}">Add Key Stage</a></li>
+                    <ul aria-expanded="false" class="mm-collapse mm-show" style="">
                     </ul>
                 </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-home"></i>
-                        <span class="nav-text">Year</span>
+                <li class="mm-active"><a class="has-arrow" href="javascript:void()" aria-expanded="true">
+                        <i class="la la-th-list"></i>
+                        <span class="nav-text">Setting</span>
                     </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('year.index') }}">All Year</a></li>
-                        <li><a href="{{ route('year.create') }}">Add Year</a></li>
-                    </ul>
-                </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-home"></i>
-                        <span class="nav-text">Subject</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('subject.index') }}">All Subject</a></li>
-                        <li><a href="{{ route('subject.create') }}">Add Subject</a></li>
-                    </ul>
-                </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-home"></i>
-                        <span class="nav-text">Board</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('board.index') }}">All Board</a></li>
-                        <li><a href="{{ route('board.create') }}">Add Board</a></li>
-                    </ul>
-                </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-home"></i>
-                        <span class="nav-text">Department</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('department.index') }}">All Department</a></li>
-                        <li><a href="{{ route('department.create') }}">Add Department</a></li>
-                    </ul>
-                </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-home"></i>
-                        <span class="nav-text">Notification</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('generalNotification.index') }}">Send Notification</a></li>
-                        <li><a href="{{ route('generalNotification.create') }}">History Notification</a></li>
-                    </ul>
-                </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-home"></i>
-                        <span class="nav-text">Paper</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('paper.index') }}">All Paper</a></li>
-                        <li><a href="{{ route('paper.create') }}">Add Paper</a></li>
-                    </ul>
-                </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-home"></i>
-                        <span class="nav-text">Science Type</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('scienceType.index') }}">All Science Type</a></li>
-                        <li><a href="{{ route('scienceType.create') }}">Add Science Type</a></li>
-                    </ul>
-                </li>
+                    <ul aria-expanded="false" class="mm-collapse mm-show" style="">
+                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                <i class="la la-home"></i>
+                                <span class="nav-text">Key Stage</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="{{ route('keyStage.index') }}">All Key Stage</a></li>
+                                <li><a href="{{ route('keyStage.create') }}">Add Key Stage</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                <i class="la la-home"></i>
+                                <span class="nav-text">Year</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="{{ route('year.index') }}">All Year</a></li>
+                                <li><a href="{{ route('year.create') }}">Add Year</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                <i class="la la-home"></i>
+                                <span class="nav-text">Subject</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="{{ route('subject.index') }}">All Subject</a></li>
+                                <li><a href="{{ route('subject.create') }}">Add Subject</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                <i class="la la-home"></i>
+                                <span class="nav-text">Board</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="{{ route('board.index') }}">All Board</a></li>
+                                <li><a href="{{ route('board.create') }}">Add Board</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                <i class="la la-home"></i>
+                                <span class="nav-text">Department</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="{{ route('department.index') }}">All Department</a></li>
+                                <li><a href="{{ route('department.create') }}">Add Department</a></li>
+                            </ul>
+                        </li>
 
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-home"></i>
-                        <span class="nav-text">Academic Calender</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('academicCalender.index') }}">All Academic Calender</a></li>
-                        <li><a href="{{ route('academicCalender.create') }}">Add Academic Calender</a></li>
+                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                <i class="la la-home"></i>
+                                <span class="nav-text">Paper</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="{{ route('paper.index') }}">All Paper</a></li>
+                                <li><a href="{{ route('paper.create') }}">Add Paper</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                <i class="la la-home"></i>
+                                <span class="nav-text">Science Type</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="{{ route('scienceType.index') }}">All Science Type</a></li>
+                                <li><a href="{{ route('scienceType.create') }}">Add Science Type</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                <i class="la la-home"></i>
+                                <span class="nav-text">Academic Calender</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="{{ route('academicCalender.index') }}">All Academic Calender</a></li>
+                                <li><a href="{{ route('academicCalender.create') }}">Add Academic Calender</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
             @endif

@@ -209,6 +209,7 @@ class StudentsController extends Controller
 
             $subject = $student->EnquirySubject()->pluck('id')->toArray();
             $this->generateInvoice($student, $request);
+            $this->generateResource($request, $student, $subject);
             if (isset($data1['enquiry_subject'])) {
 
                 $subject = EnquirySubject::whereIn('id', $data1['enquiry_subject'])->update([
