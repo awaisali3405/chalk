@@ -723,9 +723,9 @@ class StudentsController extends Controller
             'to_year_id' => $request->year_id,
             'academic_year_id' => $request->academic_year_id
         ]);
-        $student->invoice->where('is_paid', false)->whereHas('receipt', function ($query) {
+        $student->invoice()->where('is_paid', false)->whereHas('receipt', function ($query) {
             $query->where('id', '!=', 0);
-        }, '==', 0)->update(
+        }, '=', 0)->update(
             [
                 'academic_year_id' => $request->academic_year_id
             ]
