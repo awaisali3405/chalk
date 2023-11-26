@@ -23,7 +23,7 @@ class AttendanceController extends Controller
 
                 $student = $student->where('branch_id', $request->branch_id);
             }
-            $student = $student->get();
+            $student = $student->where('academic_year_id')->get();
         } else {
             $student = Student::where('active', true)->get();
         }

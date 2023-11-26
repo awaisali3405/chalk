@@ -48,13 +48,13 @@ class Attendance extends Model
         if ($this->status == 1) {
             return "White !important";
         } else if ($this->status == 2) {
-            return "pink !important";
+            return "lightpink !important";
         } else if ($this->status == 3) {
-            return "red !important";
+            return "lightcoral !important";
         } else if ($this->status == 4) {
-            return "yellow !important";
+            return "lightyellow !important";
         } else if ($this->status == 5) {
-            return "Green !important";
+            return "lightgreen !important";
         }
         return 'test';
     }

@@ -2,34 +2,12 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Interview List</b>
+                <h5 class="modal-title">Attendance List</b>
                     <button type="button" class="close" data-dismiss="modal"><span>×</span>
                     </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('enquiry.send.interview', $value->id) }}" method="POST">
-                    @csrf
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="form-group">
-                                <label for="interview-date" class="form-label">Interview Date</label>
-                                <input type="date" class="form-control" name="date" id="">
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="form-group">
-                                <label for="interview-time" class="form-label">Interview Time</label>
-                                <input type="time" class="form-control" name="time" id="">
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="form-group pt-4">
 
-                                <button type="submit" class="btn btn-primary">Send</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
                 <div class="table-responsive pt-5">
                     <table id="example4" class="display">
                         <thead>
