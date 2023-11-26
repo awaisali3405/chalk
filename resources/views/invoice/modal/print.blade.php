@@ -316,8 +316,8 @@
                                         </tr>
                                         <tr>
                                             <td></td>
-                                            <td class="pl-2 pt-1">
-                                                <h6>Until {{ auth()->user()->ukFormat($invoice->to_date) }} </h6>
+                                            <td class="pl-2 pt-1 text-white">
+                                                blank
                                             </td>
                                             <td class="bg-grey"></td>
                                             <td class="bg-grey"></td>
@@ -418,8 +418,8 @@
                                         </tr>
                                         <tr>
                                             <td></td>
-                                            <td class="pl-2 pt-1">
-                                                <h6>Until {{ auth()->user()->ukFormat($invoice->to_date) }} </h6>
+                                            <td class="pl-2 pt-1 text-white">
+                                                blanck
                                             </td>
                                             <td class="bg-grey"></td>
                                             <td class="bg-grey"></td>
@@ -852,7 +852,7 @@
 
 
                                         <td class="">
-                                            Balance
+                                            Invoice Balance
                                         </td>
                                         <th class="text-center"
                                             style="color:red; text-align: end !important; padding-right:5px;">
@@ -878,7 +878,20 @@
 
 
                                         <th class="" colspan="">
-                                            Remaining Due
+                                            Debit Brought Forward
+                                        </th>
+                                        <th class="text-center"
+                                            style="text-align: end !important; padding-right:5px;">
+
+                                            £{{ auth()->user()->priceFormat($total_remaining) - $invoice->remainingAmount() }}
+
+                                        </th>
+                                    </tr>
+                                    <tr>
+
+
+                                        <th class="" colspan="">
+                                            Payment Due
                                         </th>
                                         <th class="text-center"
                                             style="text-align: end !important; padding-right:5px;">
