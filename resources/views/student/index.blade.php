@@ -151,8 +151,8 @@
 
                                                             <td>{{ $value->id }}</td>
                                                             <td>{{ $value->first_name }} {{ $value->last_name }} </td>
-
-                                                            <td> {{ $value->promotionDetail()->where('academic_year_id',auth()->user()->session()->id)->first()? $value->promotionDetail()->where('academic_year_id',auth()->user()->session()->id)->first()->toYear->name: $value->year->name }}
+                                                            <td>
+                                                                {{ $value->currentYear()->name }}
                                                             </td>
                                                             <td>{{ auth()->user()->ukFormat($value->promotion_date) }}</td>
                                                             <td>Week
@@ -184,7 +184,7 @@
                                                                             <a class="dropdown-item"
                                                                                 href="{{ route('invoice.show', $value->id) }}">Invoice</a>
                                                                             <a class="dropdown-item" data-toggle="modal"
-                                                                                data-target="#statement-{{ $value->id }}">Statement</a> 
+                                                                                data-target="#statement-{{ $value->id }}">Statement</a>
                                                                             <a class="dropdown-item " data-toggle="modal"
                                                                                 data-target="#promotion-{{ $value->id }}">Promotion</a>
                                                                         @endif
