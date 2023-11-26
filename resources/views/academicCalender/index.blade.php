@@ -37,7 +37,8 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($academicCalender as $key => $value)
-                                                    <tr>
+                                                    <tr
+                                                        style="{{ $value->active ? 'background-color:lightgreen!important;' : '' }}">
                                                         <td>{{ $key + 1 }}</td>
 
                                                         <td>{{ $value->start_date }} - {{ $value->end_date }}</td>
