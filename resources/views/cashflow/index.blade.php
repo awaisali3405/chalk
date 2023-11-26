@@ -328,7 +328,7 @@
                                                         </tr>
                                                     @endforeach
                                                     {{-- Total Income --}}
-                                                    @foreach ($value->staff as $value1)
+                                                    {{-- @foreach ($value->staff as $value1)
                                                         @php
                                                             $query = $value1->receipt();
                                                             if (request()->get('from_date')) {
@@ -379,7 +379,7 @@
                                                                 <td>£{{ auth()->user()->priceFormat($total) }}</td>
                                                             </tr>
                                                         @endforeach
-                                                    @endforeach
+                                                    @endforeach --}}
                                                     {{-- @dd($value->loan()) --}}
                                                     @php
                                                         $query = $value->loan();
