@@ -78,7 +78,7 @@
                             <select name="salary_type" id="" class="form-control">
                                 <option value="Monthly" {{ $staff->salary_type == 'Monthly' ? 'selected' : '' }}>Monthly
                                 </option>
-                                <option value="Weekly" {{ $staff->salary_type == 'Weekly' ? 'selected' : '' }}>Weekly
+                                <option value="Hourly" {{ $staff->salary_type == 'Hourly' ? 'selected' : '' }}>Weekly
                                 </option>
 
                             </select>
