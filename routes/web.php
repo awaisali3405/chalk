@@ -92,6 +92,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('invoice', InvoiceController::class);
     Route::post('invoice/group/generate', [InvoiceController::class, 'groupInvoice'])->name('group.invoice');
     Route::get('invoice/pdf/{id}', [InvoiceController::class, 'print'])->name('invoice.print');
+    Route::get('invoice/due/payment', [InvoiceController::class, 'dueStudent'])->name('invoice.due');
 
     Route::resource('receipt', ReceiptController::class);
     // Product

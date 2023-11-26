@@ -114,45 +114,104 @@
                                                         <table id="example5" class="display" style="min-width: 845px">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>#
-                                                                    </th>
-                                                                    <th>Roll</th>
-                                                                    <th>Name</th>
-                                                                    <th>Year</th>
-                                                                    <th>Branch</th>
-                                                                    <th>Total Amount</th>
-                                                                    <th>Paid</th>
-                                                                    <th>Due</th>
-                                                                    <th>Invoice</th>
-                                                                    {{-- <th>Action</th> --}}
+                                                                    <th>Sr</th>
+                                                                    <th>Invoice Date</th>
+                                                                    <th>Type</th>
+                                                                    <th>Student</th>
+                                                                    <th>Payable</th>
+                                                                    <th>Status</th>
+                                                                    <th>Period</th>
+                                                                    <th>Action</th>
                                                                 </tr>
                                                             </thead>
+                                                            @php
+                                                                $total = 0;
+                                                                $total_paid = 0;
+                                                                $total_remaining = 0;
+                                                            @endphp
                                                             <tbody>
-                                                                @foreach ($student as $key => $value)
+                                                                @foreach ($invoice as $key => $value)
+                                                                    @php
+                                                                        $total += $value->amount;
+                                                                        // dd($value->);
+                                                                        $total_paid += $value->receipt->sum('amount');
+                                                                        $total_remaining += $value->amount - ($value->receipt->sum('discount') - $value->receipt->sum('late_fee')) - $value->receipt->sum('amount');
+                                                                    @endphp
                                                                     <tr>
-                                                                        <td>{{ $key + 1 }}
+                                                                        <td>{{ $key + 1 }}</td>
+                                                                        <td>{{ auth()->user()->ukFormat($value->created_at) }}
                                                                         </td>
-                                                                        <td>{{ $value->id }}
-                                                                        </td>
-                                                                        <td>{{ $value->first_name }}
-                                                                            {{ $value->last_name }}
-                                                                        </td>
-                                                                        <td>{{ $value->year->name }}
-                                                                        </td>
-                                                                        <td>{{ $value->branch->name }}
-                                                                        </td>
-                                                                        <td>£{{ $value->totalAmount() }}
-                                                                        <td>£{{ $value->paid() }}
-                                                                        <td>£{{ $value->due() }}
+                                                                        <td>{{ $value->type == 'Refundable' ? 'Deposit' : $value->type }}
                                                                         </td>
                                                                         <td>
-                                                                            <a class="btn btn-primary"
-                                                                                href="{{ route('invoice.show', $value->id) }}">Invoice</a>
+                                                                            {{ $value->student->name() }}
                                                                         </td>
+                                                                        <td>£{{ $value->amount - ($value->receipt->sum('discount') - $value->receipt->sum('late_fee')) - $value->receipt->sum('amount') }}
+                                                                        </td>
+                                                                        <td>{{ $value->is_paid ? 'Paid' : 'Unpaid' }}</td>
+                                                                        <td>{{ $value->from_date }} -
+                                                                            {{ $value->to_date }}</td>
+                                                                        <td>
+                                                                            <button type="button"
+                                                                                class="btn btn-primary dropdown-toggle"
+                                                                                data-toggle="dropdown" aria-expanded="true">
+                                                                                Action
+                                                                            </button>
+                                                                            <div class="dropdown-menu"
+                                                                                x-placement="bottom-start"
+                                                                                style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
+                                                                                @if (auth()->user()->role->name == 'parent')
+                                                                                    <a class="dropdown-item btn-event"
+                                                                                        href="{{ route('invoice.print', $value->id) }}"
+                                                                                        data-toggle="modal"
+                                                                                        data-target="#print-{{ $value->id }}">Print</a>
+                                                                                @else
+                                                                                    @if (!$value->is_paid)
+                                                                                        <a class="dropdown-item"
+                                                                                            href="{{ route('receipt.show', $value->id) }}">Recieve</a>
+                                                                                    @endif
+                                                                                    <a class="dropdown-item btn-event"
+                                                                                        href="{{ route('invoice.print', $value->id) }}"
+                                                                                        data-toggle="modal"
+                                                                                        data-target="#print-{{ $value->id }}">Print</a>
 
+                                                                                    <!-- Trigger the modal with a button -->
+                                                                                    @if (!$value->is_paid && count($value->receipt) == 0)
+                                                                                        <form
+                                                                                            action="{{ route('invoice.destroy', $value->id) }}"
+                                                                                            id="myForm" method="POST">
+                                                                                            @csrf
+                                                                                            @method('delete')
+                                                                                            <span
+                                                                                                onclick="document.getElementById('myForm').submit();"
+                                                                                                class="dropdown-item">Delete</span>
+                                                                                        </form>
+                                                                                    @endif
+                                                                                @endif
+
+
+                                                                            </div>
+
+                                                                        </td>
                                                                     </tr>
                                                                 @endforeach
+
+
                                                             </tbody>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+
+                                                                    <th>£{{ $total_remaining }}</th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+
                                                         </table>
                                                     </div>
                                                 </div>

@@ -112,7 +112,7 @@
 
 
 
-<body class="pt-5" style="padding-left: 6rem!important; width:70%;">
+<body class="pt-5" style="padding-left: 6rem!important; width:70%; background-color:white;">
 
     <div class="row">
         <div class="col-12 d-flex justify-content-center">
@@ -149,36 +149,37 @@
                 <tbody>
                     <tr>
                         <td style="width: 40%">
-                            <h3 class="font-weight-bolder">Roll No</h3>
+                            <h4 class="font-weight-bolder">Roll No</h4>
                         </td>
                         <td class="">
-                            <h3 class="font-weight-bolder">{{ $student->id }}</h3>
+                            <h4 class="font-weight-bolder">{{ $student->id }}</h4>
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 40%">
-                            <h3 class="font-weight-bolder">Name</h3>
+                            <h4 class="font-weight-bolder">Name</h4>
                         </td>
                         <td class="">
-                            <h3 class="font-weight-bolder">{{ $student->first_name }}{{ $student->last_name }}</h3>
+                            <h4 class="font-weight-bolder">{{ $student->first_name }}{{ $student->last_name }}</h4>
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 40%">
-                            <h3 class="font-weight-bolder">Parent</h3>
+                            <h4 class="font-weight-bolder">Parent</h4>
                         </td>
                         <td class="">
-                            <h3 class="font-weight-bolder">
-                                {{ $student->parents[0]->first_name }}{{ $student->parents[0]->last_name }}</h3>
+                            <h4 class="font-weight-bolder">
+                                {{ $student->parents[0]->first_name }}{{ $student->parents[0]->last_name }}</h4>
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 40%">
-                            <h3 class="font-weight-bolder">Year </h3>
+                            <h4 class="font-weight-bolder">Year </h4>
                         </td>
                         <td class="">
-                            <h3 class="font-weight-bolder">
-                                {{ $student->promotionDetail()->where('academic_year_id',auth()->user()->session()->id)->first()->toYear->name }}h3>
+                            <h4 class="font-weight-bolder">
+                                {{ $student->promotionDetail()->where('academic_year_id',auth()->user()->session()->id)->first()->toYear->name }}
+                            </h4>
                         </td>
                     </tr>
 
@@ -189,10 +190,10 @@
         </div>
         <div class="col-3"></div>
         <div class="col-3 text-align-end border-black">
-            <h3> {{ $student->parents[0]->res_address }}</h3>
-            <h3 class="">{{ $student->parents[0]->res_second_address }}</h3>
-            <h3 class="">{{ $student->parents[0]->res_town }}</h3>
-            <h3 class="">{{ $student->parents[0]->res_postal_code }}</h3>
+            <h4> {{ $student->parents[0]->res_address }}</h4>
+            <h4 class="">{{ $student->parents[0]->res_second_address }}</h4>
+            <h4 class="">{{ $student->parents[0]->res_town }}</h4>
+            <h4 class="">{{ $student->parents[0]->res_postal_code }}</h4>
         </div>
 
 
@@ -335,5 +336,13 @@
         }
     </script> --}}
 </body>
+<script>
+    window.print();
+    window.onafterprint = back;
+
+    function back() {
+        window.close();
+    }
+</script>
 
 </html>

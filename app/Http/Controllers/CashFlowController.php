@@ -17,13 +17,16 @@ class CashFlowController extends Controller
     public function index(Request $request)
     {
         if ($request->input()) {
-            $academicYear = $request->get('academicYear');
-            $branch_id = Branch::find($request->get('branch_id'));
+            $branch_id = new Branch();
+            if ($request->input('branch_id')) {
+                $branch_id = $branch_id->where('id', $request->input('branch_id'));
+            }
+
+            $branch_id = $branch_id->get();
         } else {
-            $academicYear = auth()->user()->session()->id;
-            $branch_id = Branch::find(1);
+            $branch_id = Branch::all();
         }
-        return view('cashflow.index', compact('branch_id', 'academicYear'));
+        return view('cashflow.index', compact('branch_id'));
     }
 
     /**

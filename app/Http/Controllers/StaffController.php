@@ -143,12 +143,12 @@ class StaffController extends Controller
                 $salary += $value->amount();
             }
         } else {
-            if ($attendance->count() > 0) {
+            $salary = $staff->salary;
 
-                $salary = $staff->salary;
-            } else {
-                $salary = 0;
-            }
+            // if ($attendance->count() > 0) {
+            // } else {
+            //     $salary = 0;
+            // }
         }
         return response()->json([
             'data' => $attendance,

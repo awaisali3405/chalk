@@ -17,7 +17,8 @@ class Sale extends Model
         'student_id',
         'date',
         'invoice_id',
-        'academic_year_id'
+        'academic_year_id',
+        'mode'
     ];
     public function academicYear()
     {

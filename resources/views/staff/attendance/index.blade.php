@@ -68,7 +68,7 @@
 
                                             <button type="submit" class="btn btn-primary">Submit</button>
                                         </div>
-                                        <a href="{{ route('staff.index') }}" class="btn btn-light">Cencel</a>
+                                        <a href="{{ route('staff.index') }}" class="btn btn-light">Cancel</a>
                                     </div>
                                 </div>
                             </form>

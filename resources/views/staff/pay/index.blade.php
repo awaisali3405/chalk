@@ -139,8 +139,6 @@
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
-                                                                    {{-- @dd($invoice->receipt->sum('amount') - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee'))) --}}
-
                                                                     <input type="text" class="form-control"
                                                                         value="{{ (isset($invoice) ? $invoice->amount : $staff->salary_type == 'Monthly') ? $staff->salary : 0 }}"
                                                                         id="salary" name="salary" readonly required>
@@ -154,8 +152,6 @@
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
-                                                                    {{-- @dd($invoice->receipt->sum('amount') - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee'))) --}}
-
                                                                     <input type="text" class="form-control"
                                                                         value="0" id="deduction" name="deduction"
                                                                         required>

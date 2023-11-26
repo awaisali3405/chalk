@@ -183,8 +183,8 @@
                                                                                 href="{{ route('student.show', $value->id) }}">Show</a>
                                                                             <a class="dropdown-item"
                                                                                 href="{{ route('invoice.show', $value->id) }}">Invoice</a>
-                                                                            <a class="dropdown-item" target="_blank"
-                                                                                href="{{ route('student.statement', $value->id) }}">Statement</a>
+                                                                            <a class="dropdown-item" data-toggle="modal"
+                                                                                data-target="#statement-{{ $value->id }}">Statement</a> 
                                                                             <a class="dropdown-item " data-toggle="modal"
                                                                                 data-target="#promotion-{{ $value->id }}">Promotion</a>
                                                                         @endif
@@ -210,8 +210,8 @@
                                                                             <a class="dropdown-item"
                                                                                 href="{{ route('invoice.show', $value->id) }}">Invoice</a>
 
-                                                                            <a class="dropdown-item" target="_blank"
-                                                                                href="{{ route('student.statement', $value->id) }}">Statement</a>
+                                                                            <a class="dropdown-item" data-toggle="modal"
+                                                                                data-target="#statement-{{ $value->id }}">Statement</a>
                                                                         @endif
                                                                     @endif
                                                                 </div>
@@ -238,5 +238,6 @@
     </div>
     @foreach ($student as $value)
         @include('student.promotion')
+        @include('student.statement')
     @endforeach
 @endsection

@@ -48,6 +48,37 @@ class InvoiceController extends Controller
     public function create(Request $request)
     {
         if (request()->input()) {
+            $student = new Student;
+            if ($request->branch_id != 0) {
+                $student = $student->where('branch_id', $request->branch_id);
+            }
+            if ($request->year_id) {
+
+                $student = $student->where('year_id', $request->year_id);
+            }
+            if ($request->payment_period != 0) {
+
+                $student = $student->where('payment_period', $request->payment_period);
+            }
+            if ($request->status) {
+                $student = $student->whereHas('invoice', function ($student) {
+                    $student->where('is_paid', false);
+                });
+            }
+            $student = $student->get();
+            // dd($student);
+        } else {
+            $student = Student::whereHas('invoice', function ($query) {
+                $query->where('is_paid', false);
+            })->get();
+        }
+
+        return view('invoice.add', compact('student'));
+    }
+
+    public function dueStudent(Request $request)
+    {
+        if (request()->input()) {
             $invoice = StudentInvoice::whereHas('student', function ($query) use ($request) {
                 if ($request->branch_id != 0) {
                     $query->where('branch_id', $request->branch_id);
@@ -60,20 +91,14 @@ class InvoiceController extends Controller
 
                     $query->where('payment_period', $request->payment_period);
                 }
-                if ($request->status) {
-                    $query->whereHas('invoice', function ($query) {
-                        $query->where('is_paid', true);
-                    });
-                }
-            })->get();
+            })->where('is_paid', false)->get();
             // dd($student);
         } else {
-            $invoice = StudentInvoice::all();
+            $invoice = StudentInvoice::where('is_paid', false)->get();
         }
 
-        return view('invoice.add', compact('invoice'));
+        return view('invoice.due', compact('invoice'));
     }
-
     /**
      * Store a newly created resource in storage.
      */
