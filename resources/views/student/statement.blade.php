@@ -167,7 +167,7 @@
                                     </td>
                                     <td class="">
                                         <h4 class="font-weight-bolder">
-                                            {{ $value->promotionDetail()->where('academic_year_id',auth()->user()->session()->id)->first()->toYear->name }}
+                                            {{ $value->currentYear()->name }}
                                         </h4>
                                     </td>
                                 </tr>
