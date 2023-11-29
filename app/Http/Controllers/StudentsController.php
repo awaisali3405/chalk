@@ -329,13 +329,15 @@ class StudentsController extends Controller
             'parent_id' => 'nullable'
         ]);
         // $data = $request->except('_token', 'method');
+
         if (isset($request->profile_pic)) {
             $data['profile_pic'] =   $this->saveImage($request->profile_pic);
         }
         $student = Student::find($id);
+        $data['promotion_date'] = $data['admission_date'];
+
         if (auth()->user()->role->name != 'parent' && !$student->active) {
             $data['active'] = true;
-            $data['promotion_date'] = $data['admission_date'];
             StudentPromotionDetail::create([
                 'student_id' => $student->id,
                 'from_year_id' => 0,
@@ -381,6 +383,7 @@ class StudentsController extends Controller
             ]);
         }
         $student->update($data);
+        // dd($data, $student);
         if (auth()->user()->role->name == 'parent') {
             $student->parents()->detach();
             if ($data1['last_name1']) {

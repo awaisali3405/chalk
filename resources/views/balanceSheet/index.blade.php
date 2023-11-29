@@ -40,7 +40,7 @@
                                         @foreach ($academicCalender as $value)
                                             <option value="{{ $value->id }}"
                                                 {{ request()->get('academic_year_id') == $value->id ? 'selected' : '' }}>
-                                                {{ $value->start_date }} - {{ $value->end_date }}</option>
+                                                {{ $value->period() }}</option>
                                         @endforeach
                                     </select>
                                 </div>

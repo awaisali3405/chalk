@@ -27,9 +27,13 @@ class InvoiceController extends Controller
                 if ($request->payment_period != 0) {
                     $query->where('payment_period', $request->payment_period);
                 }
+            })->whereHas('promotionDetail', function ($query) {
+                $query->where('academic_year_id', auth()->user()->session()->id);
             })->get();
         } else {
-            $student = Student::where('payment_period', "Weekly")->get();
+            $student = Student::where('payment_period', "Weekly")->whereHas('promotionDetail', function ($query) {
+                $query->where('academic_year_id', auth()->user()->session()->id);
+            })->get();
         }
         return view('invoice.index', compact('student'));
     }
@@ -53,14 +57,14 @@ class InvoiceController extends Controller
             }
             if ($request->status) {
                 $student = $student->whereHas('invoice', function ($student) {
-                    $student->where('is_paid', false);
+                    $student->where('is_paid', false)->where('academic_year_id', auth()->user()->session()->id);
                 });
             }
             $student = $student->get();
             // dd($student);
         } else {
             $student = Student::whereHas('invoice', function ($query) {
-                $query->where('is_paid', false);
+                $query->where('is_paid', false)->where('academic_year_id', auth()->user()->session()->id);
             })->get();
         }
 

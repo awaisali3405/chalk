@@ -39,7 +39,7 @@
                     <div>
 
                         <label for="upload" class="mt-3 mb-1 text-bold"> Year
-                            :{{ $student->promotionDetail()->where('academic_year_id',auth()->user()->session()->id)->first()->toYear->name }}
+                            :{{ $student->currentYear()->name }}
                         </label>
                     </div>
                     <div>
