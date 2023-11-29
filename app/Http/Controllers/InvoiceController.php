@@ -205,7 +205,8 @@ class InvoiceController extends Controller
                             'from_date' => $to,
                             'to_date' => $from,
                             'branch_id' => $student->branch_id,
-                            'year_id' => $student->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()->toYear->id
+                            'year_id' => $student->currentYear()->id,
+                            'academic_year_id' => auth()->user()->session()->id
                         ]);
                     }
                     $invoice->invoiceSubject()->sync($student->yearSubject()->pluck('id')->toArray());
@@ -216,6 +217,7 @@ class InvoiceController extends Controller
 
                         $amount = ((($student->yearSubject->sum('amount')) * 52 / 12) * $months) - $student->fee_discount;
                     }
+                    // dd($amount, $months, ($student->yearSubject->sum('amount')));
                     if ($amount > 0) {
 
                         $invoice = StudentInvoice::create([
@@ -226,7 +228,8 @@ class InvoiceController extends Controller
                             'from_date' => $to,
                             'to_date' => $from,
                             'branch_id' => $student->branch_id,
-                            'year_id' => $student->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()->toYear->id
+                            'year_id' => $student->currentYear()->id,
+                            'academic_year_id' => auth()->user()->session()->id
                         ]);
                         $invoice->invoiceSubject()->sync($student->yearSubject()->pluck('id')->toArray());
                     }

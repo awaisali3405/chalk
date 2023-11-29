@@ -11,6 +11,7 @@ class EnquirySubjectController extends Controller
     public function apiCreate(Request $request)
     {
         $data = $request->except('_token');
+        $data['academic_year_id'] = auth()->user()->session()->id;
         $enquirySubject = EnquirySubject::create($data);
         $enquirySubject1 = new EnquirySubject;
         $enquirySubject1 =  $enquirySubject1->with('subject');

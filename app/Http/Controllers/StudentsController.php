@@ -289,8 +289,8 @@ class StudentsController extends Controller
             'current_school_name' => 'required',
             'branch_id' => 'nullable',
             'payment_period' => 'nullable',
-            'year_id' => 'required',
-            'key_stage_id' => 'required',
+            'year_id' => 'nullable',
+            'key_stage_id' => 'nullable',
             'admission_date' => 'nullable',
             'deposit' => 'nullable',
             'registration_fee' => 'nullable',
@@ -372,7 +372,8 @@ class StudentsController extends Controller
             // dd($subject->get());
             $subject->update([
                 'student_id' => $student->id,
-                'year_id' => $student->year_id
+                'year_id' => $student->year_id,
+                'academic_year_id' => auth()->user()->session()->id
             ]);
             $this->generateResource($request, $student, $subject);
             StudentPromotionDetail::create([

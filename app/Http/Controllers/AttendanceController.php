@@ -23,9 +23,13 @@ class AttendanceController extends Controller
 
                 $student = $student->where('branch_id', $request->branch_id);
             }
-            $student = $student->where('academic_year_id')->get();
+            $student = $student->whereHas('promotionDetail', function ($query) {
+                $query->where('academic_year_id', auth()->user()->session()->id);
+            })->get();
         } else {
-            $student = Student::where('active', true)->get();
+            $student = Student::where('active', true)->whereHas('promotionDetail', function ($query) {
+                $query->where('academic_year_id', auth()->user()->session()->id);
+            })->get();
         }
         // dd($student);
         return view('attendance.index', compact('student'));

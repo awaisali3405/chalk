@@ -632,7 +632,7 @@
 
 
                                                                     <input type="date" class="form-control"
-                                                                        value="" name="admission_date">
+                                                                        value="" name="admission_date" required>
                                                                 </div>
                                                             </div>
                                                         </div>

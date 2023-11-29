@@ -180,7 +180,7 @@
                                                             <label class="form-label">Key Stage</label>
 
                                                             <select class="form-control keyStage" name="key_stage_id"
-                                                                required @readonly(true)>
+                                                                disabled>
                                                                 <option value="">Select Key Stage</option>
                                                                 @foreach ($keyStage as $value)
                                                                     <option value="{{ $value->id }}"
@@ -196,8 +196,7 @@
                                                             <label class="form-label">Year</label>
 
 
-                                                            <select class="form-control year" name="year_id" required
-                                                                @readonly(true)>
+                                                            <select class="form-control year" name="year_id" disabled>
                                                                 <option value="{{ $student->currentYear()->id }}">
                                                                     {{ $student->currentYear()->name }}
                                                                 </option>
@@ -668,7 +667,7 @@
 
                                                                     <input type="date" class="form-control"
                                                                         value="{{ $student->promotion_date }}"
-                                                                        name="admission_date" required
+                                                                        name="admission_date" required readonly
                                                                         @if (!$student->is_active) required @endif>
                                                                 </div>
                                                             </div>
