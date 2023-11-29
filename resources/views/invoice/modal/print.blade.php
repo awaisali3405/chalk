@@ -883,7 +883,7 @@
                                         <th class="text-center"
                                             style="text-align: end !important; padding-right:5px;">
 
-                                            £{{ auth()->user()->priceFormat($total_remaining) - $invoice->remainingAmount() }}
+                                            £{{ auth()->user()->priceFormat($total_remaining - $invoice->remainingAmount()) }}
 
                                         </th>
                                     </tr>
