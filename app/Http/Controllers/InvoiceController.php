@@ -82,10 +82,10 @@ class InvoiceController extends Controller
 
                     $query->where('payment_period', $request->payment_period);
                 }
-            })->where('is_paid', false)->get();
+            })->where('is_paid', false)->where('academic_year_id', auth()->user()->session()->id)->get();
             // dd($student);
         } else {
-            $invoice = StudentInvoice::where('is_paid', false)->get();
+            $invoice = StudentInvoice::where('is_paid', false)->where('academic_year_id', auth()->user()->session()->id)->get();
         }
 
         return view('invoice.due', compact('invoice'));
