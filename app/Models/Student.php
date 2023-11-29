@@ -78,7 +78,6 @@ class Student extends Model
     ];
     public function currentYear()
     {
-        // dd(!is_null($this->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()) ? $this->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()->toYear : $this->year->name);
         return !is_null($this->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()) ? $this->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()->toYear : $this->year;
     }
     public function promotionDetail()
@@ -128,7 +127,7 @@ class Student extends Model
     }
     public function InvoiceSubject($invoice)
     {
-        
+
         return $this->hasMany(EnquirySubject::class, 'student_id')->where('year_id', $this->currentYear()->id)->where('academic_year_id', auth()->user()->session()->id)->where('invoice_id', $invoice)->get();
     }
     public function resourceInvoiceSubject($invoice)

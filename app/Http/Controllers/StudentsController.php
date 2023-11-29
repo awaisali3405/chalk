@@ -136,7 +136,6 @@ class StudentsController extends Controller
             'feedback' => 'nullable',
             'parent_id' => 'nullable'
         ]);
-        // dd($data1);
         if (isset($request->profile_pic)) {
             $data['profile_pic'] =   $this->saveImage($request->profile_pic);
         } else {
@@ -207,10 +206,7 @@ class StudentsController extends Controller
                 $student->parents()->attach([$parent->id]);
             }
 
-            $subject = $student->EnquirySubject()->pluck('id')->toArray();
-            $this->generateInvoice($student, $request);
-            $subject1 = EnquirySubject::whereIn('id', $subject);
-            $this->generateResource($request, $student, $subject1);
+
             if (isset($data1['enquiry_subject'])) {
 
                 $subject = EnquirySubject::whereIn('id', $data1['enquiry_subject'])->update([
@@ -225,7 +221,10 @@ class StudentsController extends Controller
                 'to_year_id' => $student->year_id,
                 'academic_year_id' => auth()->user()->session()->id
             ]);
-
+            $subject = $student->EnquirySubject()->pluck('id')->toArray();
+            $this->generateInvoice($student, $request);
+            $subject1 = EnquirySubject::whereIn('id', $subject);
+            $this->generateResource($request, $student, $subject1);
 
 
             $email = Email::find(2);

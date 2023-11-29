@@ -38,7 +38,7 @@
                             <div class="form-group">
                                 <label class="form-label">Year</label>
                                 <div class="input-group mb-2">
-                                    <select name="year_id" class="form-control year" required>
+                                    <select name="year_id" class="form-control year" >
                                         <option value="">All</option>
                                         @foreach ($year as $value)
                                             <option value={{ $value->id }}

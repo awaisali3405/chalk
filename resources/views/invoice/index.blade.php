@@ -437,7 +437,7 @@
                                                                                             <td>{{ $value->first_name }}
                                                                                                 {{ $value->last_name }}
                                                                                             </td>
-                                                                                            <td>{{ $value->year->name }}
+                                                                                            <td>{{ $value->currentYear()->name }}
                                                                                             </td>
                                                                                             <td>{{ $value->branch->name }}
                                                                                             </td>

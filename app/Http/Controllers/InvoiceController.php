@@ -16,32 +16,23 @@ class InvoiceController extends Controller
      */
     public function index(Request $request)
     {
-
         if (request()->input()) {
-            $invoice = StudentInvoice::latest();
-
             $student = Student::where(function ($query) use ($request) {
                 if ($request->branch_id != 0) {
                     $query->where('branch_id', $request->branch_id);
                 }
                 if ($request->year_id) {
-
                     $query->where('year_id', $request->year_id);
                 }
                 if ($request->payment_period != 0) {
-
                     $query->where('payment_period', $request->payment_period);
                 }
             })->get();
-            // dd($student);
         } else {
-            $invoice = StudentInvoice::all();
             $student = Student::where('payment_period', "Weekly")->get();
         }
-
-        return view('invoice.index', compact('invoice', 'student'));
+        return view('invoice.index', compact('student'));
     }
-
     /**
      * Show the form for creating a new resource.
      */
