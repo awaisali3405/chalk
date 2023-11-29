@@ -108,7 +108,7 @@
                                                     <td>£{{ $value->amount - ($value->receipt->sum('discount') - $value->receipt->sum('late_fee')) - $value->receipt->sum('amount') }}
                                                     </td>
                                                     <td>{{ $value->is_paid ? 'Paid' : 'Unpaid' }}</td>
-                                                    <td>{{ $value->from_date }} - {{ $value->to_date }}</td>
+                                                    <td>{{ $value->period() }}</td>
                                                     <td>
                                                         {{-- <a href="{{ route('receipt.show', $value->id) }}"
                                                             class="btn btn-sm btn-primary">Recieve</a>

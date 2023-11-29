@@ -672,7 +672,8 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-12 d-none" id="monthly-fee">
+                                                        <div class="col-lg-6 col-md-6 col-sm-12 {{ $student->payment_period == 'Monthly' ? '' : 'd-none' }}"
+                                                            id="monthly-fee">
                                                             <div class="form-group">
                                                                 <label class="form-label">Monthly Fee</label>
                                                                 <div class="input-group mb-2">

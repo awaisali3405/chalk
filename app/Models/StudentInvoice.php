@@ -42,11 +42,11 @@ class StudentInvoice extends Model
     }
     public function InvoiceSubject()
     {
-        return $this->belongsToMany(EnquirySubject::class, 'invoice_enquiry_subject', 'invoice_id', 'enquiry_subject_id')->where('year_id', $this->student->currentYear()->id)->where('academic_year_id', auth()->user()->session()->id);
+        return $this->belongsToMany(EnquirySubject::class, 'invoice_enquiry_subject', 'invoice_id', 'enquiry_subject_id');
     }
     public function resourceInvoiceSubject()
     {
-        return $this->hasMany(EnquirySubject::class, 'resource_invoice_id')->where('year_id', $this->student->currentYear()->id)->where('academic_year_id', auth()->user()->session()->id);
+        return $this->hasMany(EnquirySubject::class, 'resource_invoice_id');
     }
     public function hasOneOnOne()
     {

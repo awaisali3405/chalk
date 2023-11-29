@@ -221,10 +221,9 @@ class StudentsController extends Controller
                 'to_year_id' => $student->year_id,
                 'academic_year_id' => auth()->user()->session()->id
             ]);
-            $subject = $student->EnquirySubject()->pluck('id')->toArray();
             $this->generateInvoice($student, $request);
-            $subject1 = EnquirySubject::whereIn('id', $subject);
-            $this->generateResource($request, $student, $subject1);
+            // $subject1 = EnquirySubject::whereIn('id', $subject);
+            $this->generateResource($request, $student, $subject);
 
 
             $email = Email::find(2);
@@ -688,6 +687,7 @@ class StudentsController extends Controller
                 'year_id' => $student->currentYear()->id,
                 'academic_year_id' => auth()->user()->session()->id
             ]);
+            // $invoice->student()->
         }
         // if ($request->annual_resource_fee + $request->exercise_book_fee > 0) {
 
