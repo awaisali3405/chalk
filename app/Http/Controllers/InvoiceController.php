@@ -117,6 +117,8 @@ class InvoiceController extends Controller
                 'type' => $data['type'],
                 'from_date' => $data['from_date'],
                 'to_date' => $data['to_date'],
+                'branch_id' => $student->branch_id,
+                'year_id' => $student->currentYear()->id,
                 'academic_year_id' => auth()->user()->session()->id
             ]);
             foreach ($data['subject'] as $key => $value) {

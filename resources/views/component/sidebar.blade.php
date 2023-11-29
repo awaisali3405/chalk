@@ -18,6 +18,15 @@
                         <li><a href="{{ route('enquiry.create') }}">Add Enquiry</a></li>
                     </ul>
                 </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-headphones"></i>
+                        <span class="nav-text">Wallet</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('wallet.index') }}">All Wallet</a></li>
+                        <li><a href="{{ route('wallet.create') }}">Add Wallet</a></li>
+                    </ul>
+                </li>
 
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-user"></i>

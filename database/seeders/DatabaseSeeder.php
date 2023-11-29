@@ -33,11 +33,8 @@ class DatabaseSeeder extends Seeder
             ['name' => 'super admin'],
             ['name' => 'teacher'],
         ]);
-        AcademicCalender::create([
-            'start_date' => Carbon::now(),
-            'end_date' => Carbon::now(),
-            'active' => 1
-        ]);
+
+
         Branch::create([
             'name' => 'test',
             'account_number' => 'test',
@@ -66,6 +63,12 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Key Stage 3'
             ],
+            [
+                'name' => 'GCSE'
+            ],
+            [
+                'name' => '11 Plus'
+            ],
         ]);
         Year::insert([
             [
@@ -78,7 +81,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Year 3',
-                'key_stage_id' => 1
+                'key_stage_id' => 2
             ],
             [
                 'name' => 'Year 4',
@@ -114,40 +117,166 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Year 12',
-                'key_stage_id' => 4
+                'key_stage_id' => 5
             ],
         ]);
         Subject::insert([
             [
-                'name' => 'subject1',
-                'year_id' => 1, 'rate' => 12,
-                'book_rate' => 13
+                'name' => 'English',
+                'year_id' => 1, 'rate' => 24.9,
+                'book_rate' => 2
             ],
             [
-                'name' => 'subject2',
-                'year_id' => 2, 'rate' => 12,
-                'book_rate' => 14
+                'name' => 'Math',
+                'year_id' => 1, 'rate' => 24.9,
+                'book_rate' => 2
             ],
             [
-                'name' => 'subject2',
-                'year_id' => 2, 'rate' => 12,
-                'book_rate' => 15
+                'name' => 'English',
+                'year_id' => 2, 'rate' => 24.9,
+                'book_rate' => 2
             ],
             [
-                'name' => 'subject3',
-                'year_id' => 3, 'rate' => 12,
-                'book_rate' => 16
+                'name' => 'Math',
+                'year_id' => 2, 'rate' => 24.9,
+                'book_rate' => 2
             ],
             [
-                'name' => 'subject4',
-                'year_id' => 4, 'rate' => 12,
-                'book_rate' => 17
+                'name' => 'English',
+                'year_id' => 3, 'rate' => 24.9,
+                'book_rate' => 2
             ],
             [
-                'name' => 'subject5',
-                'year_id' => 5, 'rate' => 12,
-                'book_rate' => 18
+                'name' => 'Math',
+                'year_id' => 3, 'rate' => 24.9,
+                'book_rate' => 2
             ],
+            [
+                'name' => 'English',
+                'year_id' => 4, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'Math',
+                'year_id' => 4, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'English',
+                'year_id' => 5, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'Math',
+                'year_id' => 5, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'English',
+                'year_id' => 6, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'Math',
+                'year_id' => 6, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'English',
+                'year_id' => 7, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'Math',
+                'year_id' => 7, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'Science',
+                'year_id' => 7, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'English',
+                'year_id' => 8, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'Math',
+                'year_id' => 8, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'Science',
+                'year_id' => 8, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'English',
+                'year_id' => 9, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'Math',
+                'year_id' => 9, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'Science',
+                'year_id' => 9, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'English Language',
+                'year_id' => 10, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'Math',
+                'year_id' => 10, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'Physics',
+                'year_id' => 10, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'Chemistry',
+                'year_id' => 10, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'Biology',
+                'year_id' => 10, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'English Language',
+                'year_id' => 11, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'Math',
+                'year_id' => 11, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'Physics',
+                'year_id' => 11, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'Chemistry',
+                'year_id' => 11, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+            [
+                'name' => 'Biology',
+                'year_id' => 11, 'rate' => 24.9,
+                'book_rate' => 2
+            ],
+
         ]);
         // \App\Models\User::factory(10)->create();
 

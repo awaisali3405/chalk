@@ -35,6 +35,7 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\SupplierControlller;
 use App\Http\Controllers\TaxFlowController;
 use App\Http\Controllers\TeacherEnquiryController;
+use App\Http\Controllers\WalletController;
 use App\Http\Controllers\YearController;
 use App\Models\ExpenseAccountType;
 use Illuminate\Support\Facades\Auth;
@@ -162,6 +163,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('cashFlow', CashFlowController::class);
     // Tax
     Route::resource('taxFlow', TaxFlowController::class);
+    // Wallet
+    Route::resource('wallet', WalletController::class);
 });
 
 Route::get('test', [EnquiryController::class, 'test']);
