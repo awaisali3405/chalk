@@ -201,31 +201,27 @@ class StudentsController extends Controller
                     'work_phone_number' => isset($data1['work_phone_number1']) ? $data1['work_phone_number1'] : '',
                     'mobile_number' => isset($data1['mobile_number1']) ? $data1['mobile_number1'] : '',
                     'email' => isset($data1['email1']) ? $data1['email1'] : '',
-
                 ]);
                 $student->parents()->attach([$parent->id]);
             }
-
-
             if (isset($data1['enquiry_subject'])) {
-
-                $subject = EnquirySubject::whereIn('id', $data1['enquiry_subject'])->update([
+                $subject = EnquirySubject::whereIn('id', $data1['enquiry_subject']);
+                $subject->update([
                     'student_id' => $student->id,
                     'year_id' => $student->year_id,
                     'academic_year_id' => auth()->user()->session()->id
                 ]);
             }
+            $rollNo =  $this->generateRollNo($student);
             StudentPromotionDetail::create([
                 'student_id' => $student->id,
                 'from_year_id' => 0,
                 'to_year_id' => $student->year_id,
-                'academic_year_id' => auth()->user()->session()->id
+                'academic_year_id' => auth()->user()->session()->id, 'roll_no' => $rollNo
             ]);
             $this->generateInvoice($student, $request);
             // $subject1 = EnquirySubject::whereIn('id', $subject);
             $this->generateResource($request, $student, $subject);
-
-
             $email = Email::find(2);
             $email->name = str_replace("[Student's Name]", $student->first_name . " " . $student->last_name, $email->name);
             $email->template = str_replace("[Parent/Guardian's Name]", $student->parents[0]->given_name, $email->template);
@@ -337,11 +333,12 @@ class StudentsController extends Controller
 
         if (auth()->user()->role->name != 'parent' && !$student->active) {
             $data['active'] = true;
+            $rollNo =  $this->generateRollNo($student);
             StudentPromotionDetail::create([
                 'student_id' => $student->id,
                 'from_year_id' => 0,
                 'to_year_id' => $student->year_id,
-                'academic_year_id' => auth()->user()->session()->id
+                'academic_year_id' => auth()->user()->session()->id, 'roll_no' => $rollNo
             ]);
             $this->generateInvoice($student, $request);
             $subject = $student->EnquirySubject()->pluck('id')->toArray();
@@ -375,11 +372,12 @@ class StudentsController extends Controller
                 'academic_year_id' => auth()->user()->session()->id
             ]);
             $this->generateResource($request, $student, $subject);
+            $rollNo =  $this->generateRollNo($student);
             StudentPromotionDetail::create([
                 'student_id' => $student->id,
                 'from_year_id' => 0,
                 'to_year_id' => $student->year_id,
-                'academic_year_id' => auth()->user()->session()->id
+                'academic_year_id' => auth()->user()->session()->id, 'roll_no' => $rollNo
             ]);
         }
         $student->update($data);
@@ -403,7 +401,6 @@ class StudentsController extends Controller
                         'email' => isset($data1['email1']) ? $data1['email1'] : '',
                     ]);
                 } else {
-
                     $parent = Parents::create([
                         'last_name' => $data1['last_name1'],
                         'first_name' => isset($data1['first_name1']) ? $data1['first_name1'] : ' ',
@@ -420,8 +417,6 @@ class StudentsController extends Controller
                 $student->parents()->attach([$parent->id]);
             }
         } else {
-
-
             if ($data1['last_name1']) {
                 if ($student->parents->count() > 1) {
                     $parent = Parents::find($student->parents[1]->id);
@@ -635,6 +630,17 @@ class StudentsController extends Controller
         $string = '<option value="">-</option>';
         // dd($year);
         foreach ($year->student as $key => $value) {
+            
+            $string .= "<option value='" . $value->id . "'>" . $value->first_name . "</option>";
+        }
+        return response()->json(['data' => $string]);
+    }
+    public function getStudentBranch($id, $branch)
+    {
+        $year = Year::find($id);
+        $string = '<option value="">-</option>';
+        // dd($year);
+        foreach ($year->student->where('branch_id', $branch) as $key => $value) {
 
             $string .= "<option value='" . $value->id . "'>" . $value->first_name . "</option>";
         }
@@ -672,6 +678,9 @@ class StudentsController extends Controller
                 'year_id' => $student->currentYear()->id,
                 'academic_year_id' => auth()->user()->session()->id
             ]);
+            $invoice->update([
+                'code' => "F00" . $invoice->id . '/' . auth()->user()->session()->InvoiceYearCode()
+            ]);
         }
         if ($request->registration_fee > 0) {
 
@@ -686,6 +695,9 @@ class StudentsController extends Controller
                 'branch_id' => $student->branch_id,
                 'year_id' => $student->currentYear()->id,
                 'academic_year_id' => auth()->user()->session()->id
+            ]);
+            $invoice->update([
+                'code' => "A00" . $invoice->id . '/' . auth()->user()->session()->InvoiceYearCode()
             ]);
             // $invoice->student()->
         }
@@ -721,11 +733,13 @@ class StudentsController extends Controller
             'fee' => 0,
             'fee_discount' => 0,
         ]);
+        $rollNo =  $this->generatePromotionRollNo($student, $request);
         StudentPromotionDetail::create([
             'student_id' => $student->id,
             'from_year_id' => $student->year_id,
             'to_year_id' => $request->year_id,
-            'academic_year_id' => $request->academic_year_id
+            'academic_year_id' => $request->academic_year_id,
+            'roll_no' => $rollNo
         ]);
         $student->invoice()->where('is_paid', false)->whereHas('receipt', function ($query) {
             $query->where('id', '!=', 0);
@@ -755,6 +769,9 @@ class StudentsController extends Controller
         $subject->update([
             'resource_invoice_id' => $invoice->id
         ]);
+        $invoice->update([
+            'code' => "R00" . $invoice->id . '/' . auth()->user()->session()->InvoiceYearCode()
+        ]);
     }
     public function sumRate($subject)
     {
@@ -771,5 +788,36 @@ class StudentsController extends Controller
             $exercise_book_fee += $value->subject->book_rate;
         }
         return $exercise_book_fee;
+    }
+    public function generateRollNo($student)
+    {
+        if ($student->id < 10) {
+            $id = "00" . $student->id;
+        } elseif ($student->id < 100) {
+            $id = "0" . $student->id;
+        } else {
+            $id = $student->id;
+        }
+        $rollNo = $student->branch->short_code . "" . auth()->user()->session()->yearCode() . "" . $id;
+        $student->update([
+            'roll_no' => $rollNo
+        ]);
+        return $rollNo;
+    }
+    public function generatePromotionRollNo($student, $request)
+    {
+        $academicYear = AcademicCalender::find($request->academic_year_id);
+        if ($student->id < 10) {
+            $id = "00" . $student->id;
+        } elseif ($student->id < 100) {
+            $id = "0" . $student->id;
+        } else {
+            $id = $student->id;
+        }
+        $rollNo = $student->branch->short_code . "" . $academicYear->yearCode() . "" . $id;
+        $student->update([
+            'roll_no' => $rollNo
+        ]);
+        return $rollNo;
     }
 }

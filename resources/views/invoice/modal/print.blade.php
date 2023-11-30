@@ -5,7 +5,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header justify-between">
-                <h5 class="modal-title">Invoice # {{ $value->id }}</b></h5>
+                <h5 class="modal-title">Invoice # {{ $value->code }}</b></h5>
 
                 <a href="{{ route('invoice.print', $invoice->id) }}" target="_blank"
                     class="btn btn-primary  importStyle">Print</a>
@@ -111,7 +111,7 @@
                                                 <b>Student ID</b>
                                             </td>
                                             <td>
-                                                <b>{{ $invoice->student->id }}</b>
+                                                <b>{{ $invoice->student->currentRollNo() }}</b>
                                             </td>
                                         </tr>
                                         <tr>

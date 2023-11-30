@@ -14,7 +14,8 @@ class StudentPromotionDetail extends Model
         'from_year_id',
         'to_year_id',
         'student_id',
-        'academic_year_id'
+        'academic_year_id',
+        'roll_no'
     ];
     public function fromYear()
     {

@@ -128,7 +128,8 @@
                                                             <div class="form-group">
                                                                 <label class="form-label">Year</label>
                                                                 <div class="input-group mb-2">
-                                                                    <select name="branch" class="form-control year_student"
+                                                                    <select name="branch"
+                                                                        class="form-control year_student_branch "
                                                                         required>
                                                                     </select>
                                                                 </div>

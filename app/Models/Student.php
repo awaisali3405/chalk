@@ -74,8 +74,17 @@ class Student extends Model
         'parent_subject',
         'active',
         'promotion_date',
-        'is_promoted'
+        'is_promoted',
+        'balance', 'roll_no'
     ];
+    public function wallet()
+    {
+        return $this->hasMany(Wallet::class, 'student_id');
+    }
+    public function currentRollNo()
+    {
+        return !is_null($this->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()) ? $this->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()->roll_no : $this->roll_no;
+    }
     public function currentYear()
     {
         return !is_null($this->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()) ? $this->promotionDetail()->where('academic_year_id', auth()->user()->session()->id)->first()->toYear : $this->year;

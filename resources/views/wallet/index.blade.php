@@ -37,7 +37,29 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach ($wallet as $key => $value)
+                                                    <tr>
+                                                        <td>{{ $key + 1 }}</td>
+                                                        <td>{{ $value->branch->name }}</td>
+                                                        <td>{{ $value->year->name }}</td>
+                                                        <td>{{ $value->student->name() }}</td>
+                                                        <td>
+                                                            @if (!$value->fixed)
+                                                                <button type="button"
+                                                                    class="btn btn-primary dropdown-toggle"
+                                                                    data-toggle="dropdown" aria-expanded="true">
+                                                                    Action
+                                                                </button>
+                                                                <div class="dropdown-menu" x-placement="bottom-start"
+                                                                    style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
+                                                                    <a class="dropdown-item"
+                                                                        href="{{ route('wallet.edit', $value->id) }}">Edit</a>
 
+                                                                </div>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

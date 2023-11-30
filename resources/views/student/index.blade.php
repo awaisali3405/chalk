@@ -113,7 +113,6 @@
                                 <div class="card-header">
                                     <h4 class="card-title">All Student </h4>
                                     <div class="">
-
                                         <span id="filter" class="btn btn-secondary">Filter</span>
                                         <a href="{{ route('student.create') }}" class="btn btn-primary">+ Add new</a>
                                     </div>
@@ -129,16 +128,10 @@
                                                     <th>Year</th>
                                                     <th>Date</th>
                                                     <th>Week</th>
-
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {{-- @forelse ( as )
-
-                                                @empty --}}
-
-
                                                 @forelse ($student as $key => $value)
                                                     @if (
                                                         $value->promotionDetail()->where(
@@ -148,8 +141,7 @@
                                                             str_contains(url()->current(), 'request'))
                                                         <tr>
                                                             <td>{{ $key + 1 }}</td>
-
-                                                            <td>{{ $value->id }}</td>
+                                                            <td>{{ $value->currentRollNo() }}</td>
                                                             <td>{{ $value->first_name }} {{ $value->last_name }} </td>
                                                             <td>
                                                                 {{ $value->currentYear()->name }}
@@ -172,7 +164,6 @@
                                                                         <a class="dropdown-item"
                                                                             href="{{ route('student.edit', $value->id) }}">
                                                                             {{ str_contains(url()->current(), 'request') ? 'Register' : 'Edit' }}
-
                                                                         </a>
                                                                         <a class="dropdown-item"
                                                                             href="{{ route('student.note', $value->id) }}">Note</a>

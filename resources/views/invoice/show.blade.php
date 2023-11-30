@@ -68,7 +68,7 @@
                                     <table id="example5" class="display" style="min-width: 845px">
                                         <thead>
                                             <tr>
-                                                <th>Sr</th>
+                                                <th>Code</th>
                                                 <th>Invoice Date</th>
                                                 <th>Type</th>
                                                 <th>Amount</th>
@@ -96,7 +96,7 @@
                                                     $total_remaining += $value->amount - ($value->receipt->sum('discount') - $value->receipt->sum('late_fee')) - $value->receipt->sum('amount');
                                                 @endphp
                                                 <tr>
-                                                    <td>{{ $key + 1 }}</td>
+                                                    <td>{{ $value->code }}</td>
                                                     <td>{{ auth()->user()->ukFormat($value->created_at) }}</td>
                                                     <td>{{ $value->type == 'Refundable' ? 'Deposit' : $value->type }}</td>
                                                     <td>£{{ $value->amount }}</td>

@@ -18,7 +18,8 @@ class StudentInvoice extends Model
         'to_date', 'tax',
         'branch_id',
         'year_id',
-        'academic_year_id'
+        'academic_year_id',
+        'code'
     ];
     public function period()
     {

@@ -631,6 +631,7 @@
                     // if (success.message == 'success') {
                     console.log(success.data)
                     $('.year_student').html(success.data);
+                    $('.year_student_branch').html(success.data);
                     // }
 
 
@@ -1380,6 +1381,12 @@
     {{-- <script src="{{ asset('vendor/svganimation/vivus.min.js') }}"></script>
     <script src="{{ asset('vendor/svganimation/svg.animation.js') }}"></script>
     <script src="{{ asset('js/styleSwitcher.js') }}"></script> --}}
+
+
+
+    {{-- branch and year change --}}
+    <script src="{{ asset('js/dashboard/branch-year-api.js') }}"></script>
+
 
     <script src="{{ asset('vendor/jqueryui/js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('vendor/moment/moment.min.js') }}"></script>

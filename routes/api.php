@@ -35,6 +35,7 @@ Route::get('/get/year/{id}', [YearController::class, 'getYear']);
 Route::get('/get/subject/{id}', [SubjectController::class, 'getSubject']);
 Route::get('/get/subject/{id}/value', [SubjectController::class, 'getSubjectValue']);
 Route::get('/get/student/{id}', [StudentsController::class, 'getStudent']);
+Route::get('/get/student/{id}/{branch}', [StudentsController::class, 'getStudentBranch']);
 Route::get('/get/student/data/{id}', [StudentsController::class, 'getStudentData']);
 Route::get('/get/parent/data/{id}', [ParentController::class, 'getParentData']);
 Route::get('/get/product/{year}/{branch}', [ProductController::class, 'getProduct']);

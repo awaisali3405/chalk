@@ -15,8 +15,17 @@ class AcademicCalender extends Model
         'end_date',
         'active'
     ];
+    public function yearCode()
+    {
+        return substr($this->start_date, 2, 2) . "" . substr($this->end_date, 2, 2);
+    }
+    public function InvoiceYearCode()
+    {
+        return substr($this->start_date, 2, 2) . "-" . substr($this->end_date, 2, 2);
+    }
     public function period()
     {
+        // return substr($this->start_date, 2, 2) . "" . substr($this->end_date, 2, 2);
         return auth()->user()->ukFormat($this->start_date) . ' - ' . auth()->user()->ukFormat($this->end_date);
     }
     public function invoice()

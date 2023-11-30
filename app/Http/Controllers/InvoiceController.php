@@ -121,6 +121,9 @@ class InvoiceController extends Controller
                 'year_id' => $student->currentYear()->id,
                 'academic_year_id' => auth()->user()->session()->id
             ]);
+            $invoice->update([
+                'code' => "F00" . $invoice->id . '/' . auth()->user()->session()->InvoiceYearCode()
+            ]);
             foreach ($data['subject'] as $key => $value) {
                 InvoiceSubject::create([
                     'invoice_id' => $invoice->id,
@@ -211,6 +214,9 @@ class InvoiceController extends Controller
                             'academic_year_id' => auth()->user()->session()->id
                         ]);
                     }
+                    $invoice->update([
+                        'code' => "F00" . $invoice->id . '/' . auth()->user()->session()->InvoiceYearCode()
+                    ]);
                     $invoice->invoiceSubject()->sync($student->yearSubject()->pluck('id')->toArray());
                 } else {
                     if (str_contains($student->year->name, "11")) {
@@ -232,6 +238,9 @@ class InvoiceController extends Controller
                             'branch_id' => $student->branch_id,
                             'year_id' => $student->currentYear()->id,
                             'academic_year_id' => auth()->user()->session()->id
+                        ]);
+                        $invoice->update([
+                            'code' => "F00" . $invoice->id . '/' . auth()->user()->session()->InvoiceYearCode()
                         ]);
                         $invoice->invoiceSubject()->sync($student->yearSubject()->pluck('id')->toArray());
                     }
