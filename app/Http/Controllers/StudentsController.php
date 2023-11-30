@@ -630,7 +630,7 @@ class StudentsController extends Controller
         $string = '<option value="">-</option>';
         // dd($year);
         foreach ($year->student as $key => $value) {
-            
+
             $string .= "<option value='" . $value->id . "'>" . $value->first_name . "</option>";
         }
         return response()->json(['data' => $string]);
