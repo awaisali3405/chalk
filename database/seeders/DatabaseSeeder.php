@@ -278,7 +278,7 @@ class DatabaseSeeder extends Seeder
             ],
 
         ]);
-        // $this->call(AcademicSeeder::class);
+        $this->call(AcademicSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
