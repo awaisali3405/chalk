@@ -20,7 +20,7 @@ class AcademicSeeder extends Seeder
             [
                 'start_date' => Carbon::create('2023', '09', '04'),
                 'end_date' =>  Carbon::create('2024', '09', '01'),
-                'active' => 0
+                'active' => 1
             ],
             [
                 'start_date' => Carbon::create('2022', '08', '29'),
