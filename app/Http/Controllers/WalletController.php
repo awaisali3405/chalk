@@ -32,6 +32,7 @@ class WalletController extends Controller
     {
         $data = $request->except('_token');
         // dd($data);
+        $data['academic_year_id'] = auth()->user()->session()->id;
         $wallet =  Wallet::create($data);
         $wallet->student->update([
 

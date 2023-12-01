@@ -15,7 +15,10 @@ class Wallet extends Model
         'student_id',
         'date',
         'mode',
-        'amount', 'description','fixed'
+        'amount',
+        'description',
+        'fixed',
+        'academic_year_id'
     ];
     public function branch()
     {
@@ -28,5 +31,9 @@ class Wallet extends Model
     public function student()
     {
         return $this->belongsTo(Student::class, 'student_id');
+    }
+    public function academicYear()
+    {
+        return $this->belongsTo(AcademicCalender::class, 'academic_year_id');
     }
 }

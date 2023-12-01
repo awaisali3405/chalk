@@ -47,10 +47,13 @@
                                             class="mb-0">Branch</span> <strong
                                             class="text-muted">{{ $invoice->student->branch->name }}</strong></li>
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Student
-                                            Balance</span> <strong class="text-muted">0</strong></li>
+                                            Balance</span> <strong
+                                            class="text-muted">£{{ auth()->user()->priceFormat($invoice->student->balance) }}
+                                            <input type="checkbox" name="" id="balance-add" id=""> </strong>
+                                    </li>
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Invoice
                                             #</span> <strong class="text-muted"><a
-                                                href="{{ route('invoice.show', $invoice->student->id) }}">{{ $invoice->id }}</a></strong>
+                                                href="{{ route('invoice.show', $invoice->student->id) }}">{{ $invoice->code }}</a></strong>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Invoice
                                             Type</span> <strong class="text-muted">{{ $invoice->type }}</strong>
@@ -126,7 +129,9 @@
                                                 <form action="{{ route('receipt.store') }}" method="post">
                                                     @csrf
                                                     <div class="row">
-
+                                                        <input type="hidden" value="{{ $invoice->student->balance }}"
+                                                            name="balance" disabled id="balance">
+                                                        {{-- <input type="hidden" name="" id=""> --}}
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <input type="hidden" name="invoice_id"
                                                                 value="{{ $invoice->id }}">
@@ -140,8 +145,8 @@
                                                                     <input type="hidden" class="form-control"
                                                                         id="actual_amount"
                                                                         value="{{ $invoice->amount - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount') }}">
-                                                                    <input type="text" class="form-control pay_amount"
-                                                                        id=""
+                                                                    <input type="number" step="0.01"
+                                                                        class="form-control pay_amount" id=""
                                                                         value="{{ auth()->user()->priceFormat($invoice->amount - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount')) }}"
                                                                         name="amount" required>
                                                                 </div>
@@ -154,9 +159,9 @@
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
-                                                                    <input type="text" class="form-control"
-                                                                        id="discount" name="discount" value="0"
-                                                                        placeholder=""
+                                                                    <input type="number" step="0.01"
+                                                                        class="form-control" id="discount"
+                                                                        name="discount" value="0" placeholder=""
                                                                         {{ $invoice->type == 'Refundable' || $invoice->type == 'Registration' ? 'readonly' : 'required' }}>
                                                                 </div>
                                                             </div>
@@ -168,9 +173,24 @@
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
-                                                                    <input type="text" class="form-control"
-                                                                        id="late_fee" name="late_fee" value="0"
+                                                                    <input type="number" step="0.01"
+                                                                        class="form-control" id="late_fee"
+                                                                        name="late_fee" value="0"
                                                                         {{ $invoice->type == 'Refundable' || $invoice->type == 'Registration' ? 'readonly' : 'required' }}
+                                                                        placeholder="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Add To Wallet</label>
+                                                                <div class="input-group mb-2">
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">£</div>
+                                                                    </div>
+                                                                    <input type="number" step="0.01"
+                                                                        class="form-control" id="add-to-wallet"
+                                                                        name="add_to_wallet" value="0"
                                                                         placeholder="">
                                                                 </div>
                                                             </div>
@@ -183,6 +203,7 @@
                                                                         <div class="input-group-text">£</div>
                                                                     </div> --}}
                                                                     <input type="date" class="form-control"
+                                                                        value="{{ \Carbon\Carbon::now()->toDateString() }}"
                                                                         name="date" placeholder="" required>
                                                                 </div>
                                                             </div>
@@ -207,10 +228,11 @@
                                                                     {{-- <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
                                                                     </div> --}}
-                                                                    <select name="mode" id=""
+                                                                    <select name="mode" id="mode"
                                                                         class="form-control">
                                                                         <option value="Cash">Cash</option>
                                                                         <option value="Bank">Bank</option>
+                                                                        <option value="Wallet">Wallet</option>
                                                                     </select>
 
                                                                 </div>

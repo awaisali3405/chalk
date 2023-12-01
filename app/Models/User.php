@@ -155,7 +155,7 @@ class User extends Authenticatable
     }
     public function receipt($invoice_id)
     {
-        return  StudentInvoiceReceipt::whereIn('invoice_id', $invoice_id);
+        return  StudentInvoiceReceipt::whereIn('invoice_id', $invoice_id)->where('mode', '!=', "Wallet");
     }
 
 

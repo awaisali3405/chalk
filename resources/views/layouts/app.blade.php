@@ -1384,6 +1384,9 @@
 
 
 
+
+    {{-- Receipt Js --}}
+    <script src="{{ asset('js/dashboard/receipt.js') }}"></script>
     {{-- branch and year change --}}
     <script src="{{ asset('js/dashboard/branch-year-api.js') }}"></script>
 

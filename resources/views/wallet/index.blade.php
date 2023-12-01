@@ -32,7 +32,8 @@
                                                     <th>Branch</th>
                                                     <th>Year</th>
                                                     <th>Student Name</th>
-
+                                                    <th>Amount</th>
+                                                    <th>Mode</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -43,6 +44,8 @@
                                                         <td>{{ $value->branch->name }}</td>
                                                         <td>{{ $value->year->name }}</td>
                                                         <td>{{ $value->student->name() }}</td>
+                                                        <td>{{ auth()->user()->priceFormat($value->amount) }}</td>
+                                                        <td>{{ $value->mode }}</td>
                                                         <td>
                                                             @if (!$value->fixed)
                                                                 <button type="button"

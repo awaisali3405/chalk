@@ -77,10 +77,11 @@
                                         <div class="form-group">
                                             <label class="form-label">Mode</label>
                                             <select name="mode" id="" class="form-control" required>
-                                                <option value="Cash" {{ $wallet->mode == 'Cash' ? 'selected' : '' }}>Cash
+                                                <option value="Wallet">Wallet</option>
+                                                <option value="Wallet" {{ $wallet->mode == 'Wallet' ? 'selected' : '' }}>
+                                                    Wallet
                                                 </option>
-                                                <option value="Bank" {{ $wallet->mode == 'Bank' ? 'selected' : '' }}>Bank
-                                                </option>
+
                                             </select>
                                         </div>
                                     </div>

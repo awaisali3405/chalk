@@ -68,8 +68,9 @@
                                         <div class="form-group">
                                             <label class="form-label">Mode</label>
                                             <select name="mode" id="" class="form-control">
-                                                <option value="Cash">Cash</option>
-                                                <option value="Bank">Bank</option>
+                                                <option value="Wallet">Wallet</option>
+                                                {{-- <option value="Cash">Cash</option>
+                                                <option value="Bank">Bank</option> --}}
                                             </select>
                                         </div>
                                     </div>

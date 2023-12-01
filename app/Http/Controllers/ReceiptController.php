@@ -6,6 +6,7 @@ use App\Models\Refund;
 use App\Models\StudentInvoice;
 use App\Models\StudentInvoiceReceipt;
 use App\Models\Transaction;
+use App\Models\Wallet;
 use Illuminate\Http\Request;
 
 class ReceiptController extends Controller
@@ -38,28 +39,47 @@ class ReceiptController extends Controller
     {
         $data = $request->except('_token');
         $data['academic_year_id'] = auth()->user()->session()->id;
-        $data = StudentInvoiceReceipt::create($data);
-        $invoice = StudentInvoice::find($request->invoice_id);
-        // Transaction::create([
-        //     'branch_id' => $invoice->student->branch_id,
-        //     'year_id' => $invoice->student->year_id,
-        //     'cash_out' => false,
-        //     'amount' => $data['amount'],
-        //     'description'=>$invoice->student->first_name." ",
-        //     'date'
-        // ]);
-        if ($invoice->amount - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount') <= 0) {
-            $invoice->update([
-                'is_paid' => 1
-            ]);
-            if ($invoice->type == "Refundable") {
-                Refund::create([
-                    'academic_year_id' => auth()->user()->session()->id,
-                    'invoice_id' => $invoice->id
+        if ($data['amount']) {
+
+            $receipt = StudentInvoiceReceipt::create($data);
+            if ($data['mode'] == "Wallet") {
+                $receipt->invoice->student()->update([
+                    'balance' => $receipt->invoice->student->balance - $data['amount']
                 ]);
             }
+            if ($data['add_to_wallet']) {
+                $wallet = Wallet::create([
+                    'branch_id' => $receipt->invoice->student->branch_id,
+                    'year_id' => $receipt->invoice->student->currentYear()->id,
+                    'student_id' => $receipt->invoice->student_id,
+                    'description' => "Add From Receipt by",
+                    'amount' => $data['add_to_wallet'],
+                    'fixed' => 1,
+                    'date' => $data['date'],
+                    'mode' => $data['mode'],
+                    'academic_year_id' => auth()->user()->session()->id
+                ]);
+                $receipt->invoice->student()->update([
+                    'balance' => $receipt->invoice->student->balance + $data['add_to_wallet']
+                ]);
+            }
+            $invoice = StudentInvoice::find($request->invoice_id);
+            if ($invoice->amount - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount') <= 0) {
+                $invoice->update([
+                    'is_paid' => 1
+                ]);
+                if ($invoice->type == "Refundable") {
+                    Refund::create([
+                        'academic_year_id' => auth()->user()->session()->id,
+                        'invoice_id' => $invoice->id
+                    ]);
+                }
+            }
+            return redirect()->route('receipt.show', $request->invoice_id)->with('success', "Receipt Created Successfully");
+        } else {
+
+            return redirect()->route('receipt.show', $request->invoice_id)->with('error', "Enter Balance To Pay Field");
         }
-        return redirect()->route('receipt.show', $request->invoice_id)->with('success', "Receipt Created Successfully");
     }
 
     /**
