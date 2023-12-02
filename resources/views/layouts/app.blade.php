@@ -545,14 +545,14 @@
                     // if (success.message == 'success') {
                     console.log(success, $(this).parent().parent());
                     // }
-                    price = parseFloat($('#annual_resource_fee').val()).toFixed(2) - +success.data.rate
+                    price = parseFloat($('#annual_resource_fee').val() - +success.data.rate).toFixed(2)
                     if (price && price < 0) {
 
                         $('#annual_resource_fee').val(0)
                     } else {
                         $('#annual_resource_fee').val(price)
                     }
-                    e_price = parseFloat($('#exercise_book').val()).toFixed(2) - +success.data.book_rate
+                    e_price = parseFloat($('#exercise_book').val() - +success.data.book_rate).toFixed(2)
                     console.log(e_price);
                     if (e_price && e_price < 0) {
 
