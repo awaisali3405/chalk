@@ -374,7 +374,7 @@ class StudentsController extends Controller
             $this->generateResource($request, $student, $subject);
         }
         $student->update($data);
-        if ($data['enquiry_subject']) {
+        if (isset($data1['enquiry_subject'])) {
             $rollNo =  $this->generateRollNo($student);
             StudentPromotionDetail::create([
                 'student_id' => $student->id,
