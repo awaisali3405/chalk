@@ -38,7 +38,7 @@
                                             No</span> <strong class="text-muted">{{ $student->id }}</strong></li>
                                     <li class="list-group-item d-flex justify-content-between"><span
                                             class="mb-0">Year</span> <strong
-                                            class="text-muted">{{ $student->promotionDetail()->where('academic_year_id',auth()->user()->session()->id)->first()->toYear->name }}
+                                            class="text-muted">{{ $student->currentYear()->name }}
                                         </strong></li>
                                     <li class="list-group-item d-flex justify-content-between"><span
                                             class="mb-0">Payment</span> <strong
