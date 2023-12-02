@@ -132,7 +132,7 @@
                                                                     <tr>
                                                                         <td>{{ $key + 1 }}
                                                                         </td>
-                                                                        <td>{{ $value->id }}
+                                                                        <td>{{ $value->roll_no }}
                                                                         </td>
                                                                         <td>{{ $value->first_name }}
                                                                             {{ $value->last_name }}

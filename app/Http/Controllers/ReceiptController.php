@@ -46,6 +46,9 @@ class ReceiptController extends Controller
                 $receipt->invoice->student()->update([
                     'balance' => $receipt->invoice->student->balance - $data['amount']
                 ]);
+                // $data['description'] = "Wallet Received By";
+                // $data['amount'] = $data['add_to_wallet'];
+                // $receipt = StudentInvoiceReceipt::create($data);
             }
             if ($data['add_to_wallet']) {
                 $wallet = Wallet::create([

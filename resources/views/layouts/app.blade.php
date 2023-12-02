@@ -720,7 +720,7 @@
             console.log(id)
             $.ajax({
                 method: "GET",
-                'url': `/api/get/student/data/${id}`,
+                'url': `/api/get/student1/data1/${id}`,
                 success: function(success) {
 
                     image = "http://" + $(location).attr('host') + "/" + success.data.profile_pic

@@ -95,7 +95,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Promotion</h5>
+                <h5 class="modal-title">Statement</h5>
                 <a class="btn btn-primary" target="_blank" href="{{ route('student.statement', $value->id) }}">Print</a>
 
             </div>
@@ -139,7 +139,7 @@
                                         <h4 class="font-weight-bolder">Roll No</h4>
                                     </td>
                                     <td class="">
-                                        <h4 class="font-weight-bolder">{{ $value->id }}</h4>
+                                        <h4 class="font-weight-bolder">{{ $value->roll_no }}</h4>
                                     </td>
                                 </tr>
                                 <tr>
@@ -241,7 +241,7 @@
                                         }
 
                                     @endphp
-                                    <td rowspan="{{ $row }}" class="text-center">{{ $value1->id }}</td>
+                                    <td rowspan="{{ $row }}" class="text-center">{{ $value1->code }}</td>
                                     <td>{{ $value1->created_at->toDateString() }}</td>
                                     <td>{{ $value1->type }}</td>
                                     <td class="text-align-end"> £{{ $value1->amount }}</td>

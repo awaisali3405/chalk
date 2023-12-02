@@ -55,15 +55,16 @@ class InvoiceController extends Controller
 
                 $student = $student->where('payment_period', $request->payment_period);
             }
-            if ($request->status) {
-                $student = $student->whereHas('invoice', function ($student) {
-                    $student->where('is_paid', false)->where('academic_year_id', auth()->user()->session()->id);
-                });
-            }
+            // dd('asdas');
+            // if ($request->status) {
+            $student = $student->where('is_promoted', false)->where('active', true)->whereHas('invoice', function ($student) {
+                $student->where('is_paid', false)->where('academic_year_id', auth()->user()->session()->id);
+            });
+            // }
             $student = $student->get();
             // dd($student);
         } else {
-            $student = Student::whereHas('invoice', function ($query) {
+            $student = Student::where('payment_period', "Weekly")->where('is_promoted', false)->where('active', true)->whereHas('invoice', function ($query) {
                 $query->where('is_paid', false)->where('academic_year_id', auth()->user()->session()->id);
             })->get();
         }

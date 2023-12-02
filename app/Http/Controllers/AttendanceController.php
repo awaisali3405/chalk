@@ -50,7 +50,9 @@ class AttendanceController extends Controller
 
                 $student = $student->where('branch_id', $request->branch_id);
             }
-            $student = $student->get();
+            $student = $student->where('active', true)->where('is_promoted', false)->whereHas('promotionDetail', function ($query) {
+                $query->where('academic_year_id', auth()->user()->session()->id);
+            })->get();
         } else {
             $student = array();
         }
@@ -84,7 +86,7 @@ class AttendanceController extends Controller
                     }
                 } else {
                     // dd($data['status'][$student]);
-                    if ($data['status'][$student][$subject->id]) {
+                    if (isset($data['status'][$student][$subject->id])) {
 
                         $attendance =  Attendance::create([
                             'student_id' => $student,

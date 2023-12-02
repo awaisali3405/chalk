@@ -38,7 +38,7 @@
                             <div class="form-group">
                                 <label class="form-label">Year</label>
                                 <div class="input-group mb-2">
-                                    <select name="year_id" class="form-control year" >
+                                    <select name="year_id" class="form-control year">
                                         <option value="">All</option>
                                         @foreach ($year as $value)
                                             <option value={{ $value->id }}
@@ -97,17 +97,17 @@
                                                 <tbody>
                                                     {{-- @dd($student) --}}
                                                     @foreach ($student as $key => $value)
-                                                        @if (count($value->enquirySubject) > 0)
+                                                        @if (count($value->yearSubject) > 0)
                                                             <input type="hidden" name="student[]"
                                                                 value="{{ $value->id }}">
                                                         @endif
-                                                        @foreach ($value->enquirySubject as $key2 => $value1)
+                                                        @foreach ($value->yearSubject as $key2 => $value1)
                                                             <tr>
                                                                 @if ($key2 == 0)
-                                                                    <td rowspan="{{ count($value->enquirySubject) }}">
+                                                                    <td rowspan="{{ count($value->yearSubject) }}">
                                                                         {{ $value->id }}</td>
 
-                                                                    <td rowspan="{{ count($value->enquirySubject) }}">
+                                                                    <td rowspan="{{ count($value->yearSubject) }}">
                                                                         {{ $value->first_name }}</td>
                                                                 @endif
 

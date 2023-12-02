@@ -47,9 +47,11 @@
                                             class="mb-0">Branch</span> <strong
                                             class="text-muted">{{ $invoice->student->branch->name }}</strong></li>
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Student
-                                            Balance</span> <strong
-                                            class="text-muted">£{{ auth()->user()->priceFormat($invoice->student->balance) }}
-                                            <input type="checkbox" name="" id="balance-add" id=""> </strong>
+                                            Balance</span> <strong class="text-muted">£<span
+                                                id="changePrice">{{ auth()->user()->priceFormat($invoice->student->balance) }}</span>
+                                            <input type="checkbox" name="" id="balance-add" id=""
+                                                {{ $invoice->student->balance <= 0 && $invoice->amount > 0 ? 'disabled' : '' }}>
+                                        </strong>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Invoice
                                             #</span> <strong class="text-muted"><a
@@ -147,8 +149,9 @@
                                                                         value="{{ $invoice->amount - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount') }}">
                                                                     <input type="number" step="0.01"
                                                                         class="form-control pay_amount" id=""
-                                                                        value="{{ auth()->user()->priceFormat($invoice->amount - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount')) }}"
-                                                                        name="amount" required>
+                                                                        value="{{ $invoice->remainingAmount() }}"
+                                                                        name="amount" required
+                                                                        {{ $invoice->remainingAmount() <= 0 ? 'readonly' : '' }}>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -191,7 +194,8 @@
                                                                     <input type="number" step="0.01"
                                                                         class="form-control" id="add-to-wallet"
                                                                         name="add_to_wallet" value="0"
-                                                                        placeholder="">
+                                                                        placeholder=""
+                                                                        {{ $invoice->remainingAmount() <= 0 ? 'readonly' : '' }}>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -243,6 +247,7 @@
                                                             <div class="pr-2">
 
                                                                 <button type="submit"
+                                                                    {{ $invoice->remainingAmount() <= 0 ? 'disabled' : '' }}
                                                                     class="btn btn-primary">Submit</button>
                                                             </div>
                                                             <a href="{{ route('invoice.show', $invoice->student->id) }}"

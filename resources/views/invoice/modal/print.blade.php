@@ -145,7 +145,7 @@
                                         <b>Invoice No</b>
                                     </td>
                                     <td class="text-center">
-                                        <b>{{ $invoice->id }}</b>
+                                        <b>{{ $invoice->code }}</b>
                                     </td>
                                 </tr>
 
@@ -761,7 +761,7 @@
                                                     style="text-align: end !important; padding-right:5px;">
                                                     <b>
 
-                                                        £{{ auth()->user()->priceFormat($invoice->amount) -$invoice->receipt->sum('discount') +$invoice->receipt->sum('late_fee') }}
+                                                        £{{ auth()->user()->priceFormat($invoice->amount - ($invoice->receipt->sum('discount') + $invoice->receipt->sum('late_fee'))) }}
                                                     </b>
                                                 </td>
                                             </tr>
