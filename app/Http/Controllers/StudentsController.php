@@ -334,12 +334,12 @@ class StudentsController extends Controller
         if (auth()->user()->role->name != 'parent' && !$student->active) {
             $data['active'] = true;
 
-            StudentPromotionDetail::create([
-                'student_id' => $student->id,
-                'from_year_id' => 0,
-                'to_year_id' => $student->year_id,
-                'academic_year_id' => auth()->user()->session()->id, 'roll_no' => $rollNo
-            ]);
+            // StudentPromotionDetail::create([
+            //     'student_id' => $student->id,
+            //     'from_year_id' => 0,
+            //     'to_year_id' => $student->year_id,
+            //     'academic_year_id' => auth()->user()->session()->id, 'roll_no' => $rollNo
+            // ]);
             $this->generateInvoice($student, $request);
             $subject = $student->EnquirySubject()->pluck('id')->toArray();
             // dd($subject);
@@ -372,6 +372,9 @@ class StudentsController extends Controller
                 'academic_year_id' => auth()->user()->session()->id
             ]);
             $this->generateResource($request, $student, $subject);
+        }
+        $student->update($data);
+        if ($data['enquiry_subject']) {
             $rollNo =  $this->generateRollNo($student);
             StudentPromotionDetail::create([
                 'student_id' => $student->id,
@@ -380,8 +383,6 @@ class StudentsController extends Controller
                 'academic_year_id' => auth()->user()->session()->id, 'roll_no' => $rollNo
             ]);
         }
-        $student->update($data);
-        $rollNo =  $this->generateRollNo($student);
         // dd($data, $student);
         if (auth()->user()->role->name == 'parent') {
             $student->parents()->detach();
