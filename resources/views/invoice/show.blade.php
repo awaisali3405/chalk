@@ -141,11 +141,11 @@
                                                                 @if (!$value->is_paid && count($value->receipt) == 0)
                                                                     <form
                                                                         action="{{ route('invoice.destroy', $value->id) }}"
-                                                                        id="myForm" method="POST">
+                                                                        id="myForm{{ $value->id }}" method="POST">
                                                                         @csrf
                                                                         @method('delete')
                                                                         <span
-                                                                            onclick="document.getElementById('myForm').submit();"
+                                                                            onclick="document.getElementById('myForm{{ $value->id }}').submit();"
                                                                             class="dropdown-item">Delete</span>
                                                                     </form>
                                                                 @endif
