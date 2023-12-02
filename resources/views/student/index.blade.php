@@ -229,6 +229,8 @@
     </div>
     @foreach ($student as $value)
         @include('student.promotion')
-        @include('student.statement')
+        @if ($value->branch)
+            @include('student.statement')
+        @endif
     @endforeach
 @endsection

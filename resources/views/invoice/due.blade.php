@@ -115,6 +115,7 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>Sr</th>
+                                                                    <th>Code</th>
                                                                     <th>Invoice Date</th>
                                                                     <th>Type</th>
                                                                     <th>Student</th>
@@ -139,6 +140,7 @@
                                                                     @endphp
                                                                     <tr>
                                                                         <td>{{ $key + 1 }}</td>
+                                                                        <td>{{ $invoice->code }}</td>
                                                                         <td>{{ auth()->user()->ukFormat($value->created_at) }}
                                                                         </td>
                                                                         <td>{{ $value->type == 'Refundable' ? 'Deposit' : $value->type }}

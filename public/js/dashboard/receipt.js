@@ -22,6 +22,7 @@ $(document).ready(function () {
                     $('.pay_amount').attr('readonly', true).val(actual);
                 }
                 $('#mode option[value=Wallet]').prop('selected', 'selected').change();
+                $('#mode option[value=Wallet]').attr('disabled', false).change();
                 $('#mode option[value=Cash]').attr('disabled', true).change();
                 $('#mode option[value=Bank]').attr('disabled', true).change();
             } else {
@@ -31,6 +32,7 @@ $(document).ready(function () {
                 $('#add-to-wallet').attr('readonly', false).val(0);
                 $('.pay_amount').attr('readonly', false).val($('#actual_amount').val());
                 $('#mode option[value=Cash]').prop('selected', 'selected').change();
+                $('#mode option[value=Wallet]').attr('disabled', true).change();
                 $('#mode option[value=Cash]').attr('disabled', false).change();
                 $('#mode option[value=Bank]').attr('disabled', false).change();
 

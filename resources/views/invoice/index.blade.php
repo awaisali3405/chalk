@@ -129,8 +129,7 @@
                                                                 <label class="form-label">Year</label>
                                                                 <div class="input-group mb-2">
                                                                     <select name="branch"
-                                                                        class="form-control year_student_branch "
-                                                                        required>
+                                                                        class="form-control year_student_branch " required>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -433,7 +432,7 @@
                                                                                                     id=""
                                                                                                     class="checkbox">
                                                                                             </td>
-                                                                                            <td>{{ $value->id }}
+                                                                                            <td>{{ $value->roll_no }}
                                                                                             </td>
                                                                                             <td>{{ $value->first_name }}
                                                                                                 {{ $value->last_name }}

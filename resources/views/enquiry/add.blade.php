@@ -27,27 +27,27 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Caller Name</label>
+                                            <label class="form-label">Inquering Person Name*</label>
                                             <input type="text" class="form-control" name="caller_name" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">
-                                                Relationship
+                                                Relationship*
                                             </label>
                                             <input type="text" class="form-control" name="relationship" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Student First Name</label>
+                                            <label class="form-label">Student First Name*</label>
                                             <input type="text" class="form-control uppercase" name="first_name" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Student Last Name</label>
+                                            <label class="form-label">Student Last Name*</label>
                                             <input type="text" class="form-control uppercase" name="last_name" required>
                                         </div>
                                     </div>
@@ -59,7 +59,11 @@
                                     </div> --}}
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Email</label>
+                                            <label class="form-label">Email <input type="checkbox" name="email_receive"
+                                                    value="1" id="">
+                                                <span class="font-weight-light font-italic font">(Check if you want send
+                                                    email)</span>
+                                            </label>
                                             <input type="email" class="form-control" name="email" required>
                                         </div>
                                     </div>
@@ -71,7 +75,12 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Mobile</label>
+                                            <label class="form-label">Mobile <input type="checkbox" name="message_receive"
+                                                    value="1" id="">
+                                                <span class="font-weight-light font-italic font">(Check if you want send
+                                                    Mesage)</span>
+
+                                            </label>
                                             <input type="number" class="form-control" name="mobile_no">
                                         </div>
                                     </div>
