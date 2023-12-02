@@ -333,7 +333,7 @@ class StudentsController extends Controller
 
         if (auth()->user()->role->name != 'parent' && !$student->active) {
             $data['active'] = true;
-            $rollNo =  $this->generateRollNo($student);
+
             StudentPromotionDetail::create([
                 'student_id' => $student->id,
                 'from_year_id' => 0,
@@ -381,6 +381,7 @@ class StudentsController extends Controller
             ]);
         }
         $student->update($data);
+        $rollNo =  $this->generateRollNo($student);
         // dd($data, $student);
         if (auth()->user()->role->name == 'parent') {
             $student->parents()->detach();
