@@ -6,7 +6,7 @@ $(document).ready(function () {
             if (checked) {
                 balance = parseFloat($('#balance').val());
                 actual = parseFloat($('#actual_amount').val());
-                newBalance = balance - actual;
+                newBalance = parseFloat(balance - actual).toFixed(2);
                 if (newBalance < 0) {
                     newBalance = 0;
                 }
@@ -15,7 +15,7 @@ $(document).ready(function () {
                 $('#add-to-wallet').attr('readonly', true).val(0);
 
                 $("#changePrice").html(newBalance);
-                console.log(typeof (balance), typeof (actual), balance < actual);
+                // console.log(typeof (balance), typeof (actual), balance < actual);
                 if (balance <= actual) {
                     $('.pay_amount').attr('readonly', true).val(balance);
                 } else {
@@ -26,7 +26,7 @@ $(document).ready(function () {
                 $('#mode option[value=Cash]').attr('disabled', true).change();
                 $('#mode option[value=Bank]').attr('disabled', true).change();
             } else {
-                $("#changePrice").html(balance + actual);
+                $("#changePrice").html(balance);
                 $('#discount').attr('readonly', false).val(0);
                 $('#late_fee').attr('readonly', false).val(0);
                 $('#add-to-wallet').attr('readonly', false).val(0);
