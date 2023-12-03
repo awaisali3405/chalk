@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CashFlow;
 use App\Models\Sale;
 use App\Models\SaleProduct;
 use App\Models\StudentInvoice;
@@ -66,6 +67,14 @@ class SaleController extends Controller
                 'academic_year_id' => auth()->user()->session()->id
             ]);
         }
+        CashFlow::create([
+            'date' => $sale->date,
+            'branch_id' => $sale->branch_id,
+            'description' => "Sale To " . $sale->student->name() . "Qty(" . $sale->product->sum('quantity') . ")",
+            'mode' => $sale->mode,
+            'type' => $receipt->type,
+            'in' => $receipt->amount,
+        ]);
         return redirect()->route('sale.index')->withSuccess(__('Create Success'));
     }
 
