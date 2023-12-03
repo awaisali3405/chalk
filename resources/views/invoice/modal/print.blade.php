@@ -442,7 +442,7 @@
                                                     </b>
                                                 </td>
                                                 <td class="text-center bg-grey">
-                                                    <b>£{{ auth()->user()->priceFormat($value->subject->rate) }}</b>
+                                                    <b>£{{ auth()->user()->priceFormat($value->subject->rate + $value->subject->book_rate) }}</b>
                                                 </td>
                                                 <td class="text-center bg-grey">
                                                     <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
@@ -450,41 +450,6 @@
                                                 <td class="text-center bg-grey"
                                                     style="text-align: end !important; padding-right:5px;">
                                                     <b>£{{ auth()->user()->priceFormat($value->subject->rate + $value->subject->book_rate) }}</b>
-                                                </td>
-                                            </tr>
-                                            <tr class="">
-                                                <td class=" text-center">
-
-                                                </td>
-                                                <td class="pl-2">
-
-                                                </td>
-                                                <td class="bg-grey text-grey">
-                                                    blanck
-                                                </td>
-                                                <td class="bg-grey text-center">
-                                                </td>
-                                                <td class="bg-grey text-center">
-
-                                                </td>
-                                            </tr>
-                                            <tr class="">
-                                                <td class="text-center">
-                                                    <b>{{ $sr }}</b>
-                                                </td>
-                                                <td class="pl-2 ">
-                                                    <b>{{ $value->subject->name }} Book Fee
-                                                    </b>
-                                                </td>
-                                                <td class="text-center bg-grey">
-                                                    <b>£{{ auth()->user()->priceFormat($value->subject->book_rate) }}</b>
-                                                </td>
-                                                <td class="text-center bg-grey">
-                                                    <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
-                                                </td>
-                                                <td class="text-center bg-grey"
-                                                    style="text-align: end !important; padding-right:5px;">
-                                                    <b>£{{ auth()->user()->priceFormat($value->subject->book_rate) }}</b>
                                                 </td>
                                             </tr>
                                             <tr class="">
@@ -518,7 +483,7 @@
                                                 </b>
                                             </td>
                                             <td class="text-center bg-grey">
-                                                <b></b>
+                                                <b>£{{ auth()->user()->priceFormat($invoice->subject->sum('book_rate')) }}</b>
                                             </td>
                                             <td class="text-center bg-grey">
                                                 <b></b>
