@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CashFlow;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,7 @@ class PurchaseController extends Controller
     public function index()
     {
         $purchase = Purchase::all();
+
         return view('purchase.index', compact('purchase'));
     }
 
@@ -32,7 +34,15 @@ class PurchaseController extends Controller
         $data = $request->except('_token');
         // dd($data);
         $data['academic_year_id'] = auth()->user()->session()->id;
-        Purchase::create($data);
+        $purchase = Purchase::create($data);
+        CashFlow::create([
+            'date' => $purchase->date,
+            'branch_id' => $purchase->branch_id,
+            'description' => "Qty(" . $purchase->quantity . ") Paid by " . $purchase->mode,
+            'mode' => $purchase->mode,
+            'type' => "Purchase",
+            'out' => $purchase->amount,
+        ]);
         return redirect()->route('purchase.index')->with('success', 'Purchase Created Successfully');
     }
 

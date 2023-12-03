@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CashFlow;
 use App\Models\Refund;
 use App\Models\StudentInvoice;
 use App\Models\StudentInvoiceReceipt;
@@ -42,6 +43,14 @@ class ReceiptController extends Controller
         if ($data['amount']) {
 
             $receipt = StudentInvoiceReceipt::create($data);
+            CashFlow::create([
+                'date' => $receipt->date,
+                'branch_id' => $receipt->invoice->branch_id,
+                'description' => $receipt->invoice->student->name() . " (" . auth()->user()->session()->period() . ")",
+                'mode' => $receipt->mode,
+                'type' => $receipt->type,
+                'in' => $receipt->amount,
+            ]);
             if ($data['mode'] == "Wallet") {
                 $receipt->invoice->student()->update([
                     'balance' => $receipt->invoice->student->balance - $data['amount']
@@ -61,6 +70,14 @@ class ReceiptController extends Controller
                     'date' => $data['date'],
                     'mode' => $data['mode'],
                     'academic_year_id' => auth()->user()->session()->id
+                ]);
+                CashFlow::create([
+                    'date' => $receipt->date,
+                    'branch_id' => $receipt->invoice->branch_id,
+                    'description' => $receipt->invoice->student->name() . " (" . auth()->user()->session()->period() . ")",
+                    'mode' => $receipt->mode,
+                    'type' => $receipt->type,
+                    'in' => $receipt->amount,
                 ]);
                 $receipt->invoice->student()->update([
                     'balance' => $receipt->invoice->student->balance + $data['add_to_wallet']

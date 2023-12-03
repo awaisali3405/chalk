@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CashFlow;
 use App\Models\Expense;
 use Illuminate\Http\Request;
 
@@ -38,7 +39,26 @@ class ExpenseController extends Controller
             $data['file'] = $this->saveImage($data['file']);
         }
         $data['academic_year_id'] = auth()->user()->session()->id;
-        Expense::create($data);
+        $expense =  Expense::create($data);
+        // 'name',
+        // 'account_type',
+        // 'payment_type',
+        // 'amount',
+        // 'date',
+        // 'description',
+        // 'branch_id',
+        // 'tax',
+        // 'net',
+        // 'file',
+        // 'academic_year_id'
+        CashFlow::create([
+            'date' => $expense->date,
+            'branch_id' => $expense->accountType->branch_id,
+            'description' => $expense->description,
+            'mode' => $expense->mode,
+            'type' => "Expense",
+            'out' => $expense->amount,
+        ]);
         return redirect()->route('expense.index')->with('success', 'Expense Created Successfully');
     }
 

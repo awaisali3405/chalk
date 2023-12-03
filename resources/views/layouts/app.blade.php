@@ -708,12 +708,7 @@
             quantity = $('.quantity').val()
             $('.amount').val((rate * quantity).toFixed(0))
         })
-        $('.quantity').on('change keyup', function() {
-            rate = $('.rate').val()
-            quantity = $('.quantity').val()
 
-            $('.amount').val((rate * quantity).toFixed(0))
-        })
         $('.student').on('change keyup', function() {
 
             id = $(this).val()
@@ -1383,8 +1378,8 @@
     <script src="{{ asset('js/styleSwitcher.js') }}"></script> --}}
 
 
-
-
+    {{-- Purhcase --}}
+    <script src="{{ asset('js/dashboard/purchase.js') }}"></script>
     {{-- Receipt Js --}}
     <script src="{{ asset('js/dashboard/receipt.js') }}"></script>
     {{-- branch and year change --}}

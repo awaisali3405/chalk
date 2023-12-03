@@ -79,7 +79,6 @@ class EnquiryController extends Controller
      */
     public function create()
     {
-        $enquirySubject = EnquirySubject::where('student_id', null)->where('enquiry_id', null)->delete();
         return view('enquiry.add');
     }
 
@@ -94,20 +93,20 @@ class EnquiryController extends Controller
         }
 
         $enquiry = Enquiry::create($data);
+        // dd($enquiry  );
         if ($request->email_received && $request->email) {
 
             $email = Email::find(1);
             // dd(gettype($email->template));
             $email->template = str_replace('[Date]', auth()->user()->ukFormat($enquiry->assessment_date), $email->template);
             $email->template = str_replace('[Time]', $enquiry->assessment_time, $email->template);
+
+            $email->template = str_replace("[Student's Name]", $enquiry->first_name . " " . $enquiry->last_name, $email->template);
+            Mail::send('notification.enquiry', ['template' => $email->template], function ($message) use ($enquiry, $email) {
+                $message->to($enquiry->email);
+                $message->subject($email->name);
+            });
         }
-
-        $email->template = str_replace("[Student's Name]", $enquiry->first_name . " " . $enquiry->last_name, $email->template);
-        Mail::send('notification.enquiry', ['template' => $email->template], function ($message) use ($enquiry, $email) {
-            $message->to($enquiry->email);
-            $message->subject($email->name);
-        });
-
         // dd($data);
 
         return redirect()->route('enquiry.index')->with('success', 'enquiry Created Successfully');

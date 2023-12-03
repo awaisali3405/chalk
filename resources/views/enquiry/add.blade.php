@@ -148,13 +148,13 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Assessment Date</label>
-                                            <input type="date" class="form-control" name="assessment_date" required>
+                                            <input type="date" class="form-control" name="assessment_date">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Assessment Time</label>
-                                            <input type="time" class="form-control" name="assessment_time" required>
+                                            <input type="time" class="form-control" name="assessment_time">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">

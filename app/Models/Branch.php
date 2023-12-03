@@ -59,4 +59,12 @@ class Branch extends Model
     {
         return $this->hasMany(Staff::class, 'branch_id');
     }
+    public function wallet()
+    {
+        return $this->hasMany(Wallet::class, 'branch_id');
+    }
+    public function cashFlow()
+    {
+        return $this->hasMany(CashFlow::class, 'branch_id');
+    }
 }

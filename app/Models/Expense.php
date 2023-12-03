@@ -20,7 +20,7 @@ class Expense extends Model
         'tax',
         'net',
         'file',
-        'academic_year_id'
+        'academic_year_id', 'mode'
     ];
     public function academicYear()
     {

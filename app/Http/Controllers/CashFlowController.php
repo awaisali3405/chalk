@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Branch;
+use App\Models\CashFlow;
 use Illuminate\Http\Request;
 
 class CashFlowController extends Controller
@@ -17,18 +18,35 @@ class CashFlowController extends Controller
     public function index(Request $request)
     {
         if ($request->input()) {
-            $branch_id = new Branch();
+
+            $cashFlow = new CashFlow();
             if ($request->input('branch_id')) {
-                $branch_id = $branch_id->where('id', $request->input('branch_id'));
+                $cashFlow = $cashFlow->where('branch_id', $request->input('branch_id'));
             }
 
-            $branch_id = $branch_id->get();
-        } else {
-            $branch_id = Branch::all();
-        }
-        return view('cashflow.index', compact('branch_id'));
-    }
+            // dd($cashFlow->where('date', '>=', $request->form_date)->get(), $request->from_date);
+            if ($request->from_date) {
 
+                $cashFlow = $cashFlow->where('date', '>=', $request->from_date);
+            }
+
+            if ($request->to_date) {
+
+                $cashFlow = $cashFlow->where("date", '<=', $request->to_date);
+            }
+            if ($request->from_week) {
+                $cashFlow = $cashFlow->where("date", '>=', auth()->user()->dateWeek($request->from_week));
+            }
+            if ($request->to_week) {
+                $cashFlow = $cashFlow->where("date", '<=', auth()->user()->dateWeek($request->to_week));
+            }
+
+            $cashFlow = $cashFlow->get();
+        } else {
+            $cashFlow = CashFlow::all();
+        }
+        return view('cashflow.index', compact('cashFlow'));
+    }
     /**
      * Show the form for creating a new resource.
      */

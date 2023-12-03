@@ -7,14 +7,14 @@
             <div class="row page-titles mx-0">
                 <div class="col-sm-6 p-md-0">
                     <div class="welcome-text">
-                        <h4>Add Staff</h4>
+                        <h4>Add Purchase</h4>
                     </div>
                 </div>
                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0);">Staff</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0);">Add Staff</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0);">Purchase</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0);">Add Purchase</a></li>
                     </ol>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                 <div class="col-xl-12 col-xxl-12 col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Basic Info</h5>
+                            <h5 class="card-title">Purchase</h5>
                         </div>
                         <div class="card-body">
                             <form action="{{ route('purchase.store') }}" method="post">
@@ -88,7 +88,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Quantity</label>
-                                            <input class="form-control quantity " name="quantity" value="0">
+                                            <input class="form-control quantity " name="quantity" value="0" required>
 
 
                                         </div>
@@ -100,7 +100,8 @@
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">£</div>
                                                 </div>
-                                                <input class="form-control rate" name="rate" value="0">
+                                                <input type="number" step="0.01" class="form-control rate"
+                                                    name="rate" value="0" required>
                                             </div>
 
 
@@ -113,7 +114,61 @@
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">£</div>
                                                 </div>
-                                                <input type="text" class="form-control amount" name="amount" readonly>
+                                                <input type="text" class="form-control amount" name="amount" readonly
+                                                    required>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label d-flex">Discount Type
+
+                                            </label>
+                                            <div class="row pl-2 justify-content-center">
+                                                <div class="col-3">
+                                                    <input type="radio" name="is_discount_price" class="is-discount-price"
+                                                        value="0" id="percentage">
+                                                    <label for="percentage pt-3">%</label>
+                                                </div>
+                                                <div class="col-3">
+                                                    <input type="radio" name="is_discount_price" class="is-discount-price"
+                                                        value="1" id="price" checked>
+                                                    <label for="price pt-3">£</label>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label d-flex">Discount
+
+                                            </label>
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text symbol">£</div>
+                                                </div>
+                                                <input type="number" step="0.01"
+                                                    class="form-control discount_purchase" name="discount" value="0"
+                                                    required>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label d-flex">Discount Amount
+
+                                            </label>
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">£</div>
+                                                </div>
+                                                <input type="number" step="0.01"
+                                                    class="form-control  discounted_amount" name="discounted_amount"
+                                                    value="0" required readonly>
                                             </div>
 
                                         </div>
@@ -121,7 +176,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Mode</label>
-                                            <select class="form-control " name="mode">
+                                            <select class="form-control" name="mode">
                                                 <option value="Cash">Cash</option>
                                                 <option value="Bank">Bank</option>
 
@@ -131,7 +186,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Date</label>
-                                            <input type="date" class="form-control " name="date">
+                                            <input type="date" class="form-control " name="date" required>
 
 
                                         </div>

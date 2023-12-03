@@ -18,7 +18,8 @@ class Purchase extends Model
         'quantity',
         'rate',
         'amount',
-        'date', 'mode', 'academic_year_id'
+        'date', 'mode', 'academic_year_id',
+        'discount', 'is_discount_price', 'discounted_amount'
     ];
     public function academicYear()
     {
