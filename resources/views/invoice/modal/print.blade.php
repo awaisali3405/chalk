@@ -32,8 +32,8 @@
                             </div>
                             <div class="pr-4 col-11">
 
-                                <h6>{{ $invoice->student->first_name }}
-                                    {{ $invoice->student->last_name }}</h6>
+                                <h6>{{ $invoice->student->parents[0]->first_name }}
+                                    {{ $invoice->student->parents[0]->last_name }}</h6>
                                 <h6>
                                     {{ $invoice->student->parents[0]->res_second_address }}
                                 </h6>
