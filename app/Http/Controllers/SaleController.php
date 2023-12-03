@@ -71,9 +71,9 @@ class SaleController extends Controller
             'date' => $sale->date,
             'branch_id' => $sale->branch_id,
             'description' => "Sale To " . $sale->student->name() . "Qty(" . $sale->product->sum('quantity') . ")",
-            'mode' => $sale->mode,
-            'type' => $receipt->type,
-            'in' => $receipt->amount,
+            'mode' => "Cash",
+            'type' => "Sale",
+            'in' => $sale->productSum(),
         ]);
         return redirect()->route('sale.index')->withSuccess(__('Create Success'));
     }
