@@ -23,7 +23,7 @@
                 <div class="col-xl-12 col-xxl-12 col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Personal Information</h5>
+                            <h5 class="card-title">Parent Information</h5>
                         </div>
                         <div class="card-body">
                             <form action="{{ route('parent.update', $parent->id) }}" method="post">
@@ -156,7 +156,7 @@
                                             <label class="form-label">Email Address *
                                             </label>
                                             <input type="text" class="form-control"
-                                                value="{{ old('email', $parent->email) }}" name="email">
+                                                value="{{ old('email', $parent->email) }}" name="email" required>
                                             @error('email')
                                                 <span style="color:#ff3d71" role="alert">
                                                     <strong>{{ $message }}</strong>

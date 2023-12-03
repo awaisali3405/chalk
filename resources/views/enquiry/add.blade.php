@@ -27,7 +27,7 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Inquering Person Name*</label>
+                                            <label class="form-label">Inquiring Person Name*</label>
                                             <input type="text" class="form-control" name="caller_name" required>
                                         </div>
                                     </div>
@@ -64,7 +64,7 @@
                                                 <span class="font-weight-light font-italic font">(Check if you want send
                                                     email)</span>
                                             </label>
-                                            <input type="email" class="form-control" name="email" required>
+                                            <input type="email" class="form-control" name="email">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
@@ -81,7 +81,7 @@
                                                     Mesage)</span>
 
                                             </label>
-                                            <input type="number" class="form-control" name="mobile_no">
+                                            <input type="number" class="form-control" name="mobile_no" required>
                                         </div>
                                     </div>
                                     {{-- <div class="col-lg-6 col-md-6 col-sm-12">
@@ -93,7 +93,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Current School Name</label>
-                                            <input type="text" class="form-control" name="current_school_name" required>
+                                            <input type="text" class="form-control" name="current_school_name">
                                         </div>
                                     </div>
                                     {{-- <div class="col-lg-6 col-md-6 col-sm-12">
@@ -112,7 +112,7 @@
                                     </div> --}}
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Year</label>
+                                            <label class="form-label">Year *</label>
 
                                             <select class="form-control year_enquiry" name="year_id" required>
                                                 <option value="">-</option>
@@ -128,7 +128,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Branch</label>
-                                            <select class="form-control" name="branch_id" required>
+                                            <select class="form-control" name="branch_id">
                                                 <option value="">Select Branch</option>
                                                 @foreach ($branch as $value)
                                                     <option value="{{ $value->id }}">
@@ -141,7 +141,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Enquiry Date</label>
+                                            <label class="form-label">Enquiry Date *</label>
                                             <input type="date" class="form-control" name="enquiry_date" required>
                                         </div>
                                     </div>
@@ -159,10 +159,10 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">How do you Know About Us</label>
+                                            <label class="form-label">How do you Know About Us *</label>
 
                                             <input list="browsers" name="know_about_us" id="browser"
-                                                class="form-control">
+                                                class="form-control" required>
                                             <datalist id="browsers">
                                                 <option value="Leaflet">
                                                 <option value="Google">

@@ -133,7 +133,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Sr</th>
-                                                <th>Caller</th>
+                                                <th>Inquiring Person</th>
                                                 <th>Name</th>
                                                 <th>Year</th>
                                                 <th>Date</th>

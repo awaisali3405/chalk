@@ -23,7 +23,7 @@
                 <div class="col-xl-12 col-xxl-12 col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Personal Information</h5>
+                            <h5 class="card-title">Parent Information</h5>
                         </div>
                         <div class="card-body">
                             <form action="{{ route('parent.store') }}" method="post">
@@ -142,7 +142,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Email Address
+                                            <label class="form-label">Email Address *
                                             </label>
                                             <input type="text" class="form-control"
                                                 @error('email') is-invalid @enderror" value="" name="email"
@@ -179,21 +179,21 @@
                                         <div class="form-group">
                                             <label class="form-label"> Town</label>
                                             <input type="text" id="town_or_city" class="form-control" name="res_town"
-                                                value="{{ old('res_town') }}" required>
+                                                value="{{ old('res_town') }}">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label"> County </label>
+                                            <label class="form-label"> Country </label>
                                             <input type="text" id="county" class="form-control"
-                                                value="{{ old('postcode') }}" name="res_country"required>
+                                                value="{{ old('postcode') }}" name="res_country">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label"> Postcode</label>
                                             <input type="text" id="postcode" class="form-control"
-                                                value="{{ old('postcode') }}" name="res_postal_code" required>
+                                                value="{{ old('postcode') }}" name="res_postal_code">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">

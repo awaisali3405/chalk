@@ -10,7 +10,7 @@
                         <div class="card-body">
 
                             <div class="welcome-text d-flex justify-content-center">
-                                <h2>Student Informatioin</h2>
+                                <h2>Student Information</h2>
                                 @if ($errors->any())
                                     {!! implode('', $errors->all('<div>:message</div>')) !!}
                                 @endif
@@ -49,14 +49,14 @@
                                             <input type='file' id="upload" class="d-none" name="profile_pic">
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">First Name</label>
+                                                    <label class="form-label">First Name *</label>
                                                     <input type="text" class="form-control" name="first_name"
                                                         value="{{ old('first_name') }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Last Name</label>
+                                                    <label class="form-label">Last Name *</label>
                                                     <input type="text" class="form-control" name="last_name"
                                                         value="{{ old('last_name') }}" required>
                                                 </div>
@@ -65,19 +65,19 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Middle Name</label>
                                                     <input type="text" class="form-control" name="middle_name"
-                                                        value="{{ old('middle_name') }}" required>
+                                                        value="{{ old('middle_name') }}">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Phone</label>
                                                     <input type="text" class="form-control" name="phone_no"
-                                                        value="{{ old('phone_no') }}" required>
+                                                        value="{{ old('phone_no') }}">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Gender</label>
+                                                    <label class="form-label">Gender *</label>
                                                     <div class="row">
                                                         <div class="col-4">
 
@@ -85,7 +85,7 @@
 
                                                                 <input type="radio" class="form-check-input"
                                                                     id="male" value="male" name="gender"
-                                                                    {{ old('gender') == 'male' ? 'checked' : '' }}>
+                                                                    {{ old('gender') == 'male' ? 'checked' : '' }} checked>
                                                                 <label class="form-check-label" for="male">Male</label>
                                                             </div>
                                                         </div>
@@ -115,14 +115,14 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Nationality</label>
+                                                    <label class="form-label">Nationality *</label>
                                                     <input type="text" class="form-control" name="nationality"
                                                         value="{{ old('nationality') }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Place Of Birth</label>
+                                                    <label class="form-label">Place Of Birth *</label>
                                                     <input type="text" class="form-control" name="place_of_birth"
                                                         value="{{ old('place_of_birth') }}" required>
                                                 </div>
@@ -138,7 +138,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Main Languague</label>
                                                     <input type="text" class="form-control" name="main_language"
-                                                        value="{{ old('main_language') }}" required>
+                                                        value="{{ old('main_language') }}" >
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -152,7 +152,7 @@
 
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Current School Name</label>
+                                                    <label class="form-label">Current School Name *</label>
                                                     <input type="text" class="form-control" name="current_school_name"
                                                         value="{{ old('current_school_name') }}" required>
                                                 </div>
@@ -228,7 +228,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                                         <div class="form-group">
-                                                            <label class="form-label">Key Stage</label>
+                                                            <label class="form-label">Key Stage *</label>
 
                                                             <select class="form-control keyStage" name="key_stage_id"
                                                                 required>
@@ -244,7 +244,7 @@
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                                         <div class="form-group">
-                                                            <label class="form-label">Year</label>
+                                                            <label class="form-label">Year *</label>
 
 
                                                             <select
@@ -502,7 +502,7 @@
                                                     <div class="form-group">
                                                         <label for="" class="form-label">Tax</label>
                                                         <input type="text" name="tax" id=""
-                                                            class="form-control tax" value="0">
+                                                            class="form-control tax" value="0" >
                                                     </div>
                                                 </div>
                                                 <div class="col-3">
@@ -524,33 +524,33 @@
                                                     <div class="row card-body">
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
-                                                                <label class="form-label">Deposit (Refundable)</label>
+                                                                <label class="form-label">Deposit (Refundable) *</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
                                                                     <input type="text" class="form-control"
-                                                                        value="40" name="deposit">
+                                                                        value="40" name="deposit" required>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
                                                                 <label class="form-label">Registration (Non
-                                                                    Refundable)</label>
+                                                                    Refundable) *</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
                                                                     <input type="text" class="form-control"
                                                                         value="20" name="registration_fee"
-                                                                        id="registration_fee">
+                                                                        id="registration_fee" required>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
-                                                                <label class="form-label">Annual resources</label>
+                                                                <label class="form-label">Annual Resources *</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
@@ -563,7 +563,7 @@
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-12 d-none">
                                                             <div class="form-group">
-                                                                <label class="form-label">Resource Discount</label>
+                                                                <label class="form-label">Resource Discount *</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
@@ -576,7 +576,7 @@
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
-                                                                <label class="form-label">Exercise Book</label>
+                                                                <label class="form-label">Exercise Book *</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
@@ -589,7 +589,7 @@
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
-                                                                <label class="form-label">Gross Fee</label>
+                                                                <label class="form-label">Gross Fee *</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>

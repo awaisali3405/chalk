@@ -28,7 +28,7 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Caller Name</label>
+                                            <label class="form-label">Inquiring Person Name *</label>
                                             <input type="text" class="form-control " name="caller_name"
                                                 value="{{ $enquiry->caller_name }}" required>
                                         </div>
@@ -36,7 +36,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">
-                                                Relationship
+                                                Relationship *
                                             </label>
                                             <input type="text" class="form-control" name="relationship"
                                                 value="{{ $enquiry->relationship }}" required>
@@ -66,7 +66,7 @@
                                         <div class="form-group">
                                             <label class="form-label">Email</label>
                                             <input type="email" class="form-control" name="email"
-                                                value="{{ $enquiry->email }}" required>
+                                                value="{{ $enquiry->email }}">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Mobile</label>
+                                            <label class="form-label">Mobile *</label>
                                             <input type="text" class="form-control" name="mobile_no"
                                                 value="{{ $enquiry->mobile_no }}">
                                         </div>
@@ -93,27 +93,12 @@
                                         <div class="form-group">
                                             <label class="form-label">Current School Name</label>
                                             <input type="text" class="form-control" name="current_school_name"
-                                                value="{{ $enquiry->current_school_name }}" required>
+                                                value="{{ $enquiry->current_school_name }}">
                                         </div>
                                     </div>
-                                    {{-- <div class="col-lg-6 col-md-6 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-label">Key Stage</label>
-
-                                            <select class="form-control keyStage" name="key_stage_id" required>
-                                                <option value="">Select Key Stage</option>
-                                                @foreach ($keyStage as $value)
-                                                    <option value="{{ $value->id }}">
-                                                        {{ $value->name }}</option>
-                                                @endforeach
-
-                                            </select>
-                                        </div>
-                                    </div> --}}
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Year</label>
-
+                                            <label class="form-label">Year *</label>
                                             <select class="form-control year_enquiry" name="year_id" required>
                                                 <option value="">-</option>
                                                 @foreach ($year as $value)
@@ -122,29 +107,24 @@
                                                         {{ $value->name }}</option>
                                                 @endforeach
                                             </select>
-
-
                                         </div>
                                     </div>
-
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Branch</label>
-                                            <select class="form-control" name="branch_id" required>
+                                            <select class="form-control" name="branch_id">
                                                 <option value="">Select Branch</option>
                                                 @foreach ($branch as $value)
                                                     <option value="{{ $value->id }}"
                                                         {{ $value->id == $enquiry->branch_id ? 'selected' : '' }}>
                                                         {{ $value->name }}</option>
                                                 @endforeach
-
                                             </select>
-
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Enquiry Date</label>
+                                            <label class="form-label">Enquiry Date *</label>
                                             <input type="date" class="form-control" name="enquiry_date"
                                                 value="{{ $enquiry->enquiry_date }}" required>
                                         </div>
@@ -153,23 +133,23 @@
                                         <div class="form-group">
                                             <label class="form-label">Assessment Date</label>
                                             <input type="date" class="form-control" name="assessment_date"
-                                                value="{{ $enquiry->assessment_date }}" required>
+                                                value="{{ $enquiry->assessment_date }}">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Assessment Time</label>
                                             <input type="time" class="form-control" name="assessment_time"
-                                                value="{{ $enquiry->assessment_time }}" required>
+                                                value="{{ $enquiry->assessment_time }}">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">How do you Know About Us</label>
+                                            <label class="form-label">How do you Know About Us *</label>
 
                                             <input list="browsers" name="know_about_us"
                                                 value="{{ $enquiry->know_about_us }}" id="browser"
-                                                class="form-control">
+                                                class="form-control" required>
                                             <datalist id="browsers">
                                                 <option value="Leaflet">
                                                 <option value="Google">
