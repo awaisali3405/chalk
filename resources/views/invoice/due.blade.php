@@ -140,7 +140,7 @@
                                                                     @endphp
                                                                     <tr>
                                                                         <td>{{ $key + 1 }}</td>
-                                                                        <td>{{ $invoice->code }}</td>
+                                                                        <td>{{ $value->code }}</td>
                                                                         <td>{{ auth()->user()->ukFormat($value->created_at) }}
                                                                         </td>
                                                                         <td>{{ $value->type == 'Refundable' ? 'Deposit' : $value->type }}
