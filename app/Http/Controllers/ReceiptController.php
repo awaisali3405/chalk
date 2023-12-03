@@ -48,7 +48,7 @@ class ReceiptController extends Controller
                 'branch_id' => $receipt->invoice->branch_id,
                 'description' => $receipt->invoice->student->name() . " (" . auth()->user()->session()->period() . ")",
                 'mode' => $receipt->mode,
-                'type' => $receipt->type,
+                'type' => $receipt->invoice->type,
                 'in' => $receipt->amount,
             ]);
             if ($data['mode'] == "Wallet") {
@@ -76,7 +76,7 @@ class ReceiptController extends Controller
                     'branch_id' => $receipt->invoice->branch_id,
                     'description' => $receipt->invoice->student->name() . " (" . auth()->user()->session()->period() . ")",
                     'mode' => $receipt->mode,
-                    'type' => $receipt->type,
+                    'type' => $receipt->invoice->type,
                     'in' => $receipt->amount,
                 ]);
                 $receipt->invoice->student()->update([
