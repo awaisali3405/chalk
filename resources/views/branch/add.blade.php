@@ -119,8 +119,8 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12 tax">
                                         <div class="form-group">
                                             <label class="form-label"> Tax %</label>
-                                            <input type="text" id="" class="form-control tax-input"
-                                                name="tax" value='0'>
+                                            <input type="number" step="0.01" id=""
+                                                class="form-control tax-input" name="tax" value='0'>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
