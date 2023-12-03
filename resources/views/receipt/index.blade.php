@@ -284,9 +284,9 @@
                                                             <div class="input-group-prepend">
                                                                 <div class="input-group-text">£</div>
                                                             </div>
-                                                            <input type="text" value="{{ $invoice->totalAmount() }}"
-                                                                id="total" class="form-control pay_amount"
-                                                                placeholder="" readonly>
+                                                            <input type="text"
+                                                                value="{{ $invoice->remainingAmount() }}" id="total"
+                                                                class="form-control pay_amount" placeholder="" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
