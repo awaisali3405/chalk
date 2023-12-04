@@ -1102,54 +1102,7 @@
             }
         });
 
-        $('.branch_student').on('change', function() {
-            branch_id = $(this).val();
 
-            $.ajax({
-                url: `/api/get/branch/${branch_id}`,
-                method: 'GET',
-                success: function(data) {
-                    console.log(data);
-                    $('.tax').val(data.data.tax)
-                    total = parseFloat($('.fee-total').val()).toFixed(2)
-                    fee_tax = calculateFeeTax(total, $('.tax').val())
-                    $('.fee-tax').val(fee_tax);
-                    reg_total = parseFloat($('#registration_fee').val()).toFixed(2)
-                    reg_tax = calculateFeeTax(reg_total, $('.tax').val())
-                    $('#reg_tax').val(reg_tax)
-                    monthly = parseFloat($('.fee-total').val() * 52 / 12).toFixed(2);
-                    $('.monthly-fee').val(monthly)
-                }
-
-            })
-        })
-
-        function calculateFeeTax(total, tax) {
-            return parseFloat(total - parseFloat(total / (100 + parseFloat(tax))) *
-                100).toFixed(2);
-        }
-        $(document).ready(function() {
-            total = parseFloat($('.fee-total').val()).toFixed(2)
-            fee_tax = calculateFeeTax(total, $('.tax').val())
-            $('.fee-tax').val(fee_tax);
-            reg_total = parseFloat($('#registration_fee').val()).toFixed(2)
-            reg_tax = calculateFeeTax(reg_total, $('.tax').val())
-            $('#reg_tax').val(reg_tax)
-        })
-        $('.tax').add('#registration_fee').add('#fee_discount').on('change keyup', function() {
-            total = parseFloat($('.fee-total').val()).toFixed(2)
-            fee_tax = calculateFeeTax(total, $('.tax').val())
-            $('.fee-tax').val(fee_tax);
-            reg_total = parseFloat($('#registration_fee').val()).toFixed(2)
-            reg_tax = calculateFeeTax(reg_total, $('.tax').val())
-            $('#reg_tax').val(reg_tax)
-            discount = parseFloat($("#fee_discount").val()).toFixed(2)
-            fee = parseFloat($('.fee').val()).toFixed(2)
-            $('.fee-total').val(parseFloat(fee - discount))
-            monthly = parseFloat($('.fee-total').val() * 52 / 12).toFixed(2);
-            $('.monthly-fee').val(monthly)
-
-        })
         // $('#registration_fee').on('change keyup', function() {
         //     reg_total = $("#registration_fee").val()
         //     reg_tax = calculateFeeTax(reg_total, $('.tax').val())
@@ -1176,9 +1129,7 @@
             }
         })
 
-        function calculateMonthly() {
 
-        }
         // function branch() {
 
         // }
@@ -1187,18 +1138,7 @@
 
     <script type="text/javascript" src="https://www.codehim.com/demo/jquery-printthis/printThis.js"></script>
 
-    {{-- Invoice --}}
-    <script>
-        $('.print-btn').on('click', function() {
-            id = $(this).data('id');
-            console.log(id);
-            print_div = `#print-${id}`;
-            html = $(print_div).html();
-            $(print_div).printThis({
-                importStyle: $(this).hasClass('importStyle')
-            });
-        })
-    </script>
+
 
 
 
@@ -1376,8 +1316,8 @@
     {{-- <script src="{{ asset('vendor/svganimation/vivus.min.js') }}"></script>
     <script src="{{ asset('vendor/svganimation/svg.animation.js') }}"></script>
     <script src="{{ asset('js/styleSwitcher.js') }}"></script> --}}
-
-
+    {{-- Invoice --}}
+    <script src="{{ asset('js/dashboard/invoice.js') }}"></script>
     {{-- Purhcase --}}
     <script src="{{ asset('js/dashboard/purchase.js') }}"></script>
     {{-- Receipt Js --}}

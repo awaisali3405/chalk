@@ -26,7 +26,8 @@ class Branch extends Model
         'res_postal_code',
         'company_number',
         'tax_type',
-        'tax'
+        'tax',
+        "branch_code", 'vat_reg_no'
     ];
     public function loan()
     {

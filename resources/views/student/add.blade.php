@@ -138,7 +138,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Main Languague</label>
                                                     <input type="text" class="form-control" name="main_language"
-                                                        value="{{ old('main_language') }}" >
+                                                        value="{{ old('main_language') }}">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -275,7 +275,7 @@
 
                                                     {{-- <div class="col-lg-12 col-md-12 col-sm-12">
                                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                                        <button type="submit" class="btn btn-light">Cencel</button>
+                                                        <button type="submit" class="btn btn-light">Cancel</button>
                                                     </div> --}}
                                                 </div>
                                             </div>
@@ -500,9 +500,9 @@
                                                 </div>
                                                 <div class="col-3">
                                                     <div class="form-group">
-                                                        <label for="" class="form-label">Tax</label>
+                                                        <label for="" class="form-label">VAT</label>
                                                         <input type="text" name="tax" id=""
-                                                            class="form-control tax" value="0" >
+                                                            class="form-control tax" value="0">
                                                     </div>
                                                 </div>
                                                 <div class="col-3">
@@ -1690,7 +1690,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <a href="{{ route('student.index') }}" class="btn btn-light">Cencel</a>
+                    <a href="{{ route('student.index') }}" class="btn btn-light">Cancel</a>
             </form>
         </div>
     </div>

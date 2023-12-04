@@ -47,6 +47,9 @@ class StudentsController extends Controller
                 if ($request->input('to_week')) {
                     $student = $student->where('promotion_date', '<=', auth()->user()->dateWeek($request->input('to_week')));
                 }
+                if ($request->input('know_about_us')) {
+                    $student = $student->where('know_about_us', $request->input('know_about_us'));
+                }
                 $student = $student->where('active', true)->get();
             } else {
                 $student = Student::where('active', true)->get();
@@ -800,7 +803,7 @@ class StudentsController extends Controller
         } else {
             $id = $student->id;
         }
-        $rollNo = $student->branch->short_code . "" . auth()->user()->session()->yearCode() . "" . $id;
+        $rollNo = $student->branch->short_code . "/" . auth()->user()->session()->yearCode() . "/" . $id;
         $student->update([
             'roll_no' => $rollNo
         ]);
@@ -816,7 +819,7 @@ class StudentsController extends Controller
         } else {
             $id = $student->id;
         }
-        $rollNo = $student->branch->short_code . "" . $academicYear->yearCode() . "" . $id;
+        $rollNo = $student->branch->short_code . "/" . $academicYear->yearCode() . "/" . $id;
         $student->update([
             'roll_no' => $rollNo
         ]);

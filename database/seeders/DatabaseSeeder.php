@@ -8,6 +8,7 @@ use App\Models\AcademicCalender;
 use App\Models\Branch;
 use App\Models\KeyStage;
 use App\Models\Subject;
+use App\Models\Supplier;
 use App\Models\Year;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -33,25 +34,81 @@ class DatabaseSeeder extends Seeder
             ['name' => 'super admin'],
             ['name' => 'teacher'],
         ]);
-
+        // ChalknDuster Tutors
+        // Unit 5, Duke of Cambridge
+        // 1 - 3 Kingsley Road
+        // Hounslow, TW3 1PA
+        // United Kingdom
+        //  Sort Code: 09-01-29
+        // Acc No: 35802484
+        // Company Registration Number: 11801966
+        //  contact us on 02085777077 or 07535050502
+        // info@chalknduster.co.uk
+        // branch code
 
         Branch::create([
-            'name' => 'test',
-            'account_number' => 'test',
+            'name' => 'ChalknDuster Tutors (Flat)',
+            'account_number' => '35802484',
             'bank_name' => 'test',
-            'short_code' => 'test',
-            'phone_number' => '21122112',
-            'email' => 'test@gmail.com',
+            'branch_code' => '09-01-29',
+            'short_code' => 'CNDT',
+            'phone_number' => '02085777077',
+            'email' => 'info@chalknduster.co.uk',
             'address' => 'test',
-            'res_address' => 'test',
-            'res_second_address' => 'test',
-            'res_third_address' => 'test',
-            'res_town' => 'test',
-            'res_country' => 'test',
-            'res_postal_code' => 'test',
-            'company_number' => 'test',
+            'res_address' => 'Unit 5, Duke of Cambridge',
+            'res_second_address' => '1 - 3 Kingsley Road',
+            'res_third_address' => '',
+            'res_town' => 'Hounslow',
+            'res_country' => 'United Kingdom',
+            'res_postal_code' => 'TW3 1PA',
+            'company_number' => '11801966',
             'tax_type' => 'flat',
-            'tax' => 12
+            'tax' => 12,
+            'vat_reg_no' => '121212121'
+        ]);
+
+        Branch::create([
+            'name' => 'ChalknDuster Tutors Ltd (Standard)',
+            'account_number' => '35802484',
+            'bank_name' => 'test',
+            'branch_code' => '09-01-29',
+            'short_code' => 'CNDT',
+            'phone_number' => '02085777077',
+            'email' => 'info@chalknduster.co.uk',
+            'address' => 'test',
+            'res_address' => 'Unit 5, Duke of Cambridge',
+            'res_second_address' => '1 - 3 Kingsley Road',
+            'res_third_address' => '',
+            'res_town' => 'Hounslow',
+            'res_country' => 'United Kingdom',
+            'res_postal_code' => 'TW3 1PA',
+            'company_number' => '10446966',
+            'tax_type' => 'vat',
+            'tax' => 20,
+            'vat_reg_no' => '452 7250 02'
+        ]);
+        Branch::create([
+            'name' => 'ChalknDuster Tutors (No Vat)',
+            'account_number' => '35802484',
+            'bank_name' => 'test',
+            'branch_code' => '09-01-29',
+            'short_code' => 'CNDT',
+            'phone_number' => '02085777077',
+            'email' => 'info@chalknduster.co.uk',
+            'address' => 'test',
+            'res_address' => 'Unit 5, Duke of Cambridge',
+            'res_second_address' => '1 - 3 Kingsley Road',
+            'res_third_address' => '',
+            'res_town' => 'Hounslow',
+            'res_country' => 'United Kingdom',
+            'res_postal_code' => 'TW3 1PA',
+            'company_number' => '11111111',
+            'tax_type' => 'no_vat',
+            'tax' => 0,
+            'vat_reg_no' => '121212121'
+        ]);
+        Supplier::create([
+            'name' => 'Supplier', 'academic_year_id' => 1
         ]);
         KeyStage::insert([
             [

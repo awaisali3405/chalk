@@ -193,7 +193,7 @@
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a href="{{ route('product.index') }}" class="btn btn-light">Cencel</a>
+                                        <a href="{{ route('product.index') }}" class="btn btn-light">Cancel</a>
                                     </div>
                                 </div>
                             </form>

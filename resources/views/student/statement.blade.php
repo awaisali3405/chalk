@@ -242,11 +242,12 @@
 
                                     @endphp
                                     <td rowspan="{{ $row }}" class="text-center">{{ $value1->code }}</td>
-                                    <td>{{ $value1->created_at->toDateString() }}</td>
+                                    <td>{{ auth()->user()->ukFormat($value1->created_at->toDateString()) }}</td>
                                     <td>{{ $value1->type }}</td>
-                                    <td class="text-align-end"> £{{ $value1->amount }}</td>
+                                    <td class="text-align-end"> £{{ auth()->user()->priceFormat($value1->amount) }}
+                                    </td>
                                     <td class="text-align-end"> £0</td>
-                                    <td class="text-align-end"> £{{ $total }}</td>
+                                    <td class="text-align-end"> £{{ auth()->user()->priceFormat($total) }}</td>
                                 </tr>
                                 @foreach ($value1->receipt as $value11)
                                     @php
@@ -259,8 +260,9 @@
                                             <td>{{ $value11->date }}</td>
                                             <td>Discount</td>
                                             <td class="text-align-end">£0</td>
-                                            <td class="text-align-end">£{{ $value11->discount }}</td>
-                                            <td class="text-align-end">£{{ $total }}</td>
+                                            <td class="text-align-end">
+                                                £{{ auth()->user()->priceFormat($value11->discount) }}</td>
+                                            <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
                                         </tr>
                                     @endif
                                     @php
@@ -271,11 +273,12 @@
                                     @if ($value11->late_fee > 0)
                                         <tr>
 
-                                            <td>{{ $value11->date }}</td>
+                                            <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
                                             <td>Late Fee</td>
-                                            <td class="text-align-end">£{{ $value11->late_fee }}</td>
+                                            <td class="text-align-end">
+                                                £{{ auth()->user()->priceFormat($value11->late_fee) }}</td>
                                             <td class="text-align-end">£0</td>
-                                            <td class="text-align-end">£{{ $total }}</td>
+                                            <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
                                         </tr>
                                     @endif
                                     @php
@@ -284,11 +287,12 @@
                                     @endphp
                                     <tr>
 
-                                        <td>{{ $value11->date }}</td>
+                                        <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
                                         <td>{{ $value11->description }} {{ $value11->mode }}</td>
                                         <td class="text-align-end">£0</td>
-                                        <td class="text-align-end">£{{ $value11->amount }}</td>
-                                        <td class="text-align-end">£{{ $total }}</td>
+                                        <td class="text-align-end">£{{ auth()->user()->priceFormat($value11->amount) }}
+                                        </td>
+                                        <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
 
 
                                     </tr>
@@ -310,9 +314,12 @@
                                 <th style="width: 25%;" class="text-center">
 
                                 </th>
-                                <th style="width: 15%;" class="text-align-end">£{{ $debit }}</th>
-                                <th style="width: 15%;" class="text-align-end">£{{ $credit }}</th>
-                                <th style="width: 15%;" class="text-align-end">£{{ $debit - $credit }}</th>
+                                <th style="width: 15%;" class="text-align-end">
+                                    £{{ auth()->user()->priceFormat($debit) }}</th>
+                                <th style="width: 15%;" class="text-align-end">
+                                    £{{ auth()->user()->priceFormat($credit) }}</th>
+                                <th style="width: 15%;" class="text-align-end">
+                                    £{{ auth()->user()->priceFormat($debit - $credit) }}</th>
                             </tr>
                         </tbody>
 

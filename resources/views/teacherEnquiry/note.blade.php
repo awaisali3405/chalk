@@ -44,7 +44,7 @@
                                     {{-- {!! Form::textarea('description', null, ['class' => 'form-control summernote', 'id' => 'summernote']) !!} --}}
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a href="{{ route('enquiryTeacher.index') }}" class="btn btn-light">Cencel</a>
+                                        <a href="{{ route('enquiryTeacher.index') }}" class="btn btn-light">Cancel</a>
                                     </div>
                                 </div>
                             </form>

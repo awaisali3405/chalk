@@ -147,7 +147,7 @@
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                                 <a href="{{ route('enquiryTeacher.index') }}"
-                                                    class="btn btn-light">Cencel</a>
+                                                    class="btn btn-light">Cancel</a>
                                             </div>
                                         </div>
 
@@ -227,27 +227,29 @@
                                                     <div class="col-6">
                                                         <div class="form-group">
                                                             <label for="name" class="form-label">Name</label>
-                                                            <input type="text" class="form-control" name="kin_name" value="{{ $enquiry->kin_name }}">
+                                                            <input type="text" class="form-control" name="kin_name"
+                                                                value="{{ $enquiry->kin_name }}">
                                                         </div>
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="form-group">
                                                             <label for="name" class="form-label">Contact</label>
-                                                            <input type="text" class="form-control" name="kin_phone" value="{{ $enquiry->kin_phone }}">
+                                                            <input type="text" class="form-control" name="kin_phone"
+                                                                value="{{ $enquiry->kin_phone }}">
                                                         </div>
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="form-group">
                                                             <label for="name" class="form-label">Relation</label>
-                                                            <input type="text" class="form-control" value="{{ $enquiry->kin_relation }}"
-                                                                name="kin_relation">
+                                                            <input type="text" class="form-control"
+                                                                value="{{ $enquiry->kin_relation }}" name="kin_relation">
                                                         </div>
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="form-group">
                                                             <label for="name" class="form-label">Address</label>
-                                                            <input type="text" class="form-control" value="{{ $enquiry->kin_address }}"
-                                                                name="kin_address">
+                                                            <input type="text" class="form-control"
+                                                                value="{{ $enquiry->kin_address }}" name="kin_address">
                                                         </div>
                                                     </div>
                                                 </div>

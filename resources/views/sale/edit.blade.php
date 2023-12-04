@@ -233,7 +233,7 @@
                                                             <a href="{{ route('sale.index') }}"
                                                                 class="btn btn-info">Cancel</a>
 
-                                                            {{-- <button type="submit" class="btn btn-light">Cencel</button> --}}
+                                                            {{-- <button type="submit" class="btn btn-light">Cancel</button> --}}
                                                         </div>
 
                                                     </div>

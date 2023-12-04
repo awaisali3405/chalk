@@ -48,7 +48,7 @@
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-12 pt-4">
                             <button type="submit" class="btn btn-primary">Show</button>
-                            {{-- <button type="submit" class="btn btn-light">Cencel</button> --}}
+                            {{-- <button type="submit" class="btn btn-light">Cancel</button> --}}
                         </div>
                     </div>
                 </form>

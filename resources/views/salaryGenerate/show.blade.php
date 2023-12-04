@@ -63,7 +63,7 @@
                                                 class="col-lg-12 col-md-6 col-sm-12 pt-4 justify-content-center d-flex pb-4">
                                                 <button type="submit" class="btn btn-primary">Show</button>
 
-                                                {{-- <button type="submit" class="btn btn-light">Cencel</button> --}}
+                                                {{-- <button type="submit" class="btn btn-light">Cancel</button> --}}
                                             </div>
 
                                         </div>

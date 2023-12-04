@@ -183,7 +183,7 @@ class Student extends Model
     }
     public function invoice()
     {
-        return $this->hasMany(StudentInvoice::class, 'student_id')->where('academic_year_id', auth()->user()->session()->id)->latest();
+        return $this->hasMany(StudentInvoice::class, 'student_id')->where('academic_year_id', auth()->user()->session()->id);
     }
     public function attendanceNote($subject, $date)
     {

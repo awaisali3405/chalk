@@ -30,7 +30,7 @@
                                                 <tr>
                                                     <th>Sr</th>
                                                     <th>Name</th>
-                                                    <th>Tax</th>
+                                                    <th>VAT</th>
 
                                                     <th>Action</th>
                                                 </tr>

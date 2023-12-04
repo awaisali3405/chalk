@@ -75,7 +75,7 @@
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Tax</label>
+                                            <label class="form-label">VAT</label>
                                             <input type="text" name="tax" id="" class="form-control"
                                                 value="{{ $expense->tax }}" required>
                                         </div>
@@ -117,7 +117,7 @@
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a href="{{ route('expense.index') }}" class="btn btn-light">Cencel</a>
+                                        <a href="{{ route('expense.index') }}" class="btn btn-light">Cancel</a>
                                     </div>
                                 </div>
                             </form>

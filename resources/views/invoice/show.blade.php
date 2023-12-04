@@ -72,7 +72,7 @@
                                                 <th>Invoice Date</th>
                                                 <th>Type</th>
                                                 <th>Amount</th>
-                                                <th>Tax%</th>
+                                                <th>Vat%</th>
                                                 <th>Discount</th>
                                                 <th>Late Fee</th>
                                                 <th>Paid Amount</th>

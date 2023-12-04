@@ -56,9 +56,23 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Short Code </label>
-                                            <input type="text" class="form-control" value="{{ $branch->short_code }}"
-                                                name="short_code">
+                                            <label class="form-label">Branch Code </label>
+                                            <input type="text" class="form-control"
+                                                value="{{ old('short_code', $branch->short_code) }}" name="short_code">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Sort Code </label>
+                                            <input type="text" class="form-control"
+                                                value="{{ old('branch_code', $branch->branch_code) }}" name="branch_code">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Vat Registration Number</label>
+                                            <input type="text" class="form-control"
+                                                value="{{ old('vat_reg_no', $branch->vat_reg_no) }}" name="vat_reg_no">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
@@ -142,7 +156,7 @@
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                        <button type="submit" class="btn btn-light">Cencel</button>
+                                        <button type="submit" class="btn btn-light">Cancel</button>
                                     </div>
                                 </div>
                             </form>

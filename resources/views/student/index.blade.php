@@ -96,6 +96,20 @@
                                                         </select>
                                                     </div>
                                                 </div>
+                                                <div class="col-3">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Know About Us</label>
+                                                        <select name="reference" id="" class="form-control">
+
+                                                            <option value="">None</option>
+                                                            @foreach ($knowUsAbout as $value)
+                                                                <option value="{{ $value }}"
+                                                                    {{ $value == request()->input('reference') ? 'selected' : '' }}>
+                                                                    {{ $value }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
                                                 <div class="col-12 d-flex justify-content-center pt-2">
                                                     <div class="form-group">
 

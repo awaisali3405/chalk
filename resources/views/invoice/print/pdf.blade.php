@@ -103,19 +103,16 @@
             <h4 class="font-weight-bolder p-0 text-blue " style="font-size: 4rem;">
                 {{ count($invoice->receipt) > 0 ? 'Receipt' : 'Invoice' }}</h4>
         </div>
-
     </div>
     <div class="row pt-4 pl-3">
         <div class="col-6 pr-4">
             <div class="row  border-black pl-3">
                 <div class="col-1 p-0">
-
                     <h6>To:</h6>
                 </div>
                 <div class="pr-4 col-11">
-
-                    <h6>{{ $invoice->student->first_name }}
-                        {{ $invoice->student->last_name }}</h6>
+                    <h6>{{ $invoice->student->parents[0]->first_name }}
+                        {{ $invoice->student->parents[0]->last_name }}</h6>
                     <h6>
                         {{ $invoice->student->parents[0]->res_second_address }}
                     </h6>
@@ -128,10 +125,10 @@
                         {{ $invoice->student->parents[0]->res_postal_code }}</h6>
 
                     <h6>
-                        Email:
+                        Email: {{ $invoice->student->parents[0]->email }}
                     </h6>
                     <h6 class="">
-                        Phone:
+                        Phone: {{ $invoice->student->parents[0]->mobile_number }}
                     </h6>
                 </div>
             </div>
@@ -154,16 +151,16 @@
                         {{ $invoice->student->branch->res_town }}
                     </h6 style="text-align: end !important; padding-right:5px;">
                     <h6 style="text-align: end !important; padding-right:5px;">
-                        email:
+                        Email: {{ $invoice->student->branch->email }}
                     </h6>
                     <h6 style="text-align: end !important; padding-right:5px;">
-                        Phone:
+                        Phone: {{ $invoice->student->branch->phone_number }}
                     </h6>
                     <h6 style="text-align: end !important; padding-right:5px;">
-                        Company No:
+                        Company No: {{ $invoice->student->branch->company_number }}
                     </h6>
                     <h6 style="text-align: end !important; padding-right:5px;">
-                        VAT reg No:
+                        VAT reg No: {{ $invoice->student->branch->vat_reg_no }}
                     </h6>
 
                 </div>
@@ -368,7 +365,7 @@
                             <tr>
                                 <td></td>
                                 <td class="text-center text-white">
-                                    blanck
+                                    blank
                                 </td>
 
                                 <td class="bg-grey"></td>
@@ -465,7 +462,6 @@
                                 <tr>
                                     <td></td>
                                     <td class="pl-2">
-                                        {{-- <h6>Until {{ $invoice->to_date }} </h6> --}}
                                     </td>
                                     <td class="bg-grey">
                                         <h5 class=" text-center"> {{ $value->subject_hr }} hr</b>
@@ -523,14 +519,14 @@
                                         </b>
                                     </td>
                                     <td class="text-center bg-grey">
-                                        <b>£{{ auth()->user()->priceFormat($value->subject->rate + $value->subject->book_rate) }}</b>
+                                        <b>£{{ auth()->user()->priceFormat($value->subject->rate) }}</b>
                                     </td>
                                     <td class="text-center bg-grey">
                                         <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
                                     </td>
                                     <td class="text-center bg-grey"
                                         style="text-align: end !important; padding-right:5px;">
-                                        <b>£{{ auth()->user()->priceFormat($value->subject->rate + $value->subject->book_rate) }}</b>
+                                        <b>£{{ auth()->user()->priceFormat($value->subject->rate) }}</b>
                                     </td>
                                 </tr>
                                 <tr class="">
@@ -564,7 +560,9 @@
                                     </b>
                                 </td>
                                 <td class="text-center bg-grey">
-                                    <b></b>
+                                    <b>
+                                        {{-- {{ $invoice->resourceInvoiceSubject[0]->subject->book_rate * count($invoice->resourceInvoiceSubject) }} --}}
+                                        £{{ auth()->user()->priceFormat($invoice->resourceInvoiceSubject[0]->subject->book_rate * count($invoice->resourceInvoiceSubject)) }}</b>
                                 </td>
                                 <td class="text-center bg-grey">
                                     <b></b>
@@ -997,15 +995,15 @@
     </div>
 
 
+</body>
 
+<script>
+    window.print();
+    window.onafterprint = back;
 
-    <script>
-        window.print();
-        window.onafterprint = back;
-
-        function back() {
-            window.close();
-        }
-    </script>
+    function back() {
+        window.close();
+    }
+</script>
 
 </html>
