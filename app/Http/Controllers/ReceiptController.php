@@ -19,7 +19,7 @@ class ReceiptController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($id)
+    public function index()
     {
         // $invoice = StudentInvoice::find($id);
         // return view('receipt.index', compact('invoice'));
