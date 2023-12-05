@@ -76,7 +76,7 @@ class ReceiptController extends Controller
                     'branch_id' => $receipt->invoice->branch_id,
                     'description' => $receipt->invoice->student->name() . " (" . auth()->user()->session()->period() . ")",
                     'mode' => $data['mode'],
-                    'type' => "Wallet" . " (" . $request->invoice->type . ")",
+                    'type' => "Wallet" . " (" . $receipt->invoice->type . ")",
                     'in' => $data['add_to_wallet'],
                 ]);
                 $receipt->invoice->student()->update([
