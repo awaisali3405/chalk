@@ -547,7 +547,7 @@
                                             <tr>
                                                 <td></td>
                                                 <td class="pl-2 pt-1">
-                                                    <h6>Period( {{ auth()->user()->ukFormat($invoice->from_date) }} -
+                                                    <h6>Period ({{ auth()->user()->ukFormat($invoice->from_date) }} -
                                                         {{ auth()->user()->ukFormat($invoice->to_date) }}) </h6>
                                                 </td>
                                                 <td class="bg-grey text-center">
@@ -589,7 +589,7 @@
                                             <tr>
                                                 <td></td>
                                                 <td class="pl-2 pt-1">
-                                                    <h6>Period( {{ auth()->user()->ukFormat($invoice->from_date) }} -
+                                                    <h6>Period ( {{ auth()->user()->ukFormat($invoice->from_date) }} -
                                                         {{ auth()->user()->ukFormat($invoice->to_date) }}) </h6>
                                                 </td>
                                                 <td class="bg-grey text-center">
