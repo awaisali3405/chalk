@@ -20,6 +20,10 @@ class Sale extends Model
         'academic_year_id',
         'mode'
     ];
+    public function student()
+    {
+        return $this->belongsTo(Student::class, 'student_id');
+    }
     public function academicYear()
     {
         return $this->belongsTo(AcademicCalender::class, 'academic_year_id');

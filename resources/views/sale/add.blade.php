@@ -153,8 +153,8 @@
                                                             <div class="form-group">
                                                                 <label class="form-label">Student</label>
                                                                 <div class="input-group mb-2">
-                                                                    <select name="student_id"
-                                                                        class="form-control student">
+                                                                    <select name="student_id" class="form-control student"
+                                                                        required>
 
                                                                     </select>
                                                                 </div>
@@ -188,7 +188,7 @@
                                                                 </div>
                                                                 <div class="col-lg-3 col-md-3 col-sm-12">
                                                                     <div class="form-group">
-                                                                        <label class="form-label">Quantiy</label>
+                                                                        <label class="form-label">Quantity</label>
                                                                         <div class="input-group mb-2">
                                                                             <input type="text" name=""
                                                                                 class="form-control quantity">
