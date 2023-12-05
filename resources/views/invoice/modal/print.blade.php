@@ -362,7 +362,8 @@
                                                     <b>{{ $key + 1 }}</b>
                                                 </td>
                                                 <td class="pl-2 ">
-                                                    <b> {{ $value->subject_name }}</b>
+                                                    <b>lesson ({{ $value->subject_name }}) - {{ $value->subject_hr }}
+                                                        hours</b>
                                                 </td>
                                                 <td class="text-center text-center">
                                                     <b>£{{ auth()->user()->priceFormat($value->subject_rate) }}</b>
@@ -378,9 +379,11 @@
                                             <tr>
                                                 <td></td>
                                                 <td class="pl-2">
+                                                    <h6>Period ({{ auth()->user()->ukFormat($invoice->from_date) }} -
+                                                        {{ auth()->user()->ukFormat($invoice->to_date) }}) </h6>
                                                 </td>
                                                 <td class="bg-grey">
-                                                    <h5 class=" text-center"> {{ $value->subject_hr }} hr</b>
+                                                    {{-- <h5 class=" text-center"> {{ $value->subject_hr }} hr</b> --}}
 
                                                 </td>
                                                 <td class="bg-grey"></td>
