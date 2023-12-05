@@ -148,7 +148,7 @@
                                     </td>
                                     <td class="">
                                         <h4 class="font-weight-bolder">
-                                            {{ $value->first_name }}{{ $value->last_name }}</h4>
+                                            {{ $value->first_name }} {{ $value->last_name }}</h4>
                                     </td>
                                 </tr>
                                 <tr>
@@ -157,7 +157,7 @@
                                     </td>
                                     <td class="">
                                         <h4 class="font-weight-bolder">
-                                            {{ $value->parents[0]->first_name }}{{ $value->parents[0]->last_name }}
+                                            {{ $value->parents[0]->first_name }} {{ $value->parents[0]->last_name }}
                                         </h4>
                                     </td>
                                 </tr>
@@ -243,7 +243,7 @@
                                     @endphp
                                     <td rowspan="{{ $row }}" class="text-center">{{ $value1->code }}</td>
                                     <td>{{ auth()->user()->ukFormat($value1->created_at->toDateString()) }}</td>
-                                    <td>{{ $value1->type }}</td>
+                                    <td>{{ $value1->type=="Refundable"?'Deposit':$value1->type }}</td>
                                     <td class="text-align-end"> £{{ auth()->user()->priceFormat($value1->amount) }}
                                     </td>
                                     <td class="text-align-end"> £0</td>
