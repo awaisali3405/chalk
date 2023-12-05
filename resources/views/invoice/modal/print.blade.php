@@ -197,7 +197,7 @@
                                             Rate
                                         </th>
                                         <th>
-                                            Tax
+                                            VAT%
                                         </th>
                                         <th class="">
                                             Amount
@@ -478,7 +478,7 @@
                                             <td class="text-center bg-grey">
                                                 <b>
                                                     {{-- {{ $invoice->resourceInvoiceSubject[0]->subject->book_rate * count($invoice->resourceInvoiceSubject) }} --}}
-                                                    £{{ auth()->user()->priceFormat($invoice->resourceInvoiceSubject[0]->subject->book_rate * count($invoice->resourceInvoiceSubject)) }}</b>
+                                                    £{{ auth()->user()->priceFormat($invoice->resourceInvoiceSubject[0]->subject->book_rate) }}</b>
                                             </td>
                                             <td class="text-center bg-grey">
                                                 <b></b>
@@ -486,7 +486,8 @@
                                             <td class="text-center bg-grey"
                                                 style="text-align: end !important; padding-right:5px;">
                                                 <b>
-                                                    £{{ auth()->user()->priceFormat($invoice->amount) }}</b>
+                                                    £{{ auth()->user()->priceFormat($invoice->resourceInvoiceSubject[0]->subject->book_rate * count($invoice->resourceInvoiceSubject)) }}</b>
+                                                </b>
                                             </td>
                                         </tr>
                                         <tr class="">
