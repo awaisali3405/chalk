@@ -167,6 +167,7 @@
                                                 <th></th>
                                                 <th></th>
                                                 <th></th>
+                                                <th></th>
                                                 <th>£{{ $total }}</th>
                                                 <th></th>
                                                 <th></th>
