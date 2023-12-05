@@ -958,7 +958,7 @@
                             </th>
                             <th class="text-center" style="text-align: end !important; padding-right:5px;">
 
-                                £{{ auth()->user()->priceFormat($total_remaining - $invoice->remainingAmount()) }}
+                                £{{ auth()->user()->priceFormat($invoice->debitBroughtForward()) }}
 
                             </th>
                         </tr>
@@ -970,7 +970,7 @@
                             </th>
                             <th class="text-center" style="text-align: end !important; padding-right:5px;">
 
-                                £{{ auth()->user()->priceFormat($total_remaining) }}
+                                £{{ auth()->user()->priceFormat($invoice->debitBroughtForward() + $invoice->remainingAmount()) }}
 
                             </th>
                         </tr>

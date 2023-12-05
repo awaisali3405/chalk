@@ -10,7 +10,7 @@
                         <div class="card-body">
 
                             <div class="welcome-text d-flex justify-content-center">
-                                <h2>Student Informatioin</h2>
+                                <h2>Student Information</h2>
                                 @if ($errors->any())
                                     {!! implode('', $errors->all('<div>:message</div>')) !!}
                                 @endif
@@ -51,14 +51,14 @@
                                             <input type='file' id="upload" class="d-none" name="profile_pic">
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">First Name</label>
+                                                    <label class="form-label">First Name *</label>
                                                     <input type="text" class="form-control" name="first_name"
                                                         value="{{ old('first_name', $enquiry->first_name) }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Last Name</label>
+                                                    <label class="form-label">Last Name *</label>
                                                     <input type="text" class="form-control" name="last_name"
                                                         value="{{ old('last_name', $enquiry->last_name) }}" required>
                                                 </div>
@@ -74,12 +74,12 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Phone</label>
                                                     <input type="text" class="form-control" name="phone_no"
-                                                        value="{{ old('phone_no', $enquiry->phone_no) }}" required>
+                                                        value="{{ old('phone_no', $enquiry->phone_no) }}">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Gender</label>
+                                                    <label class="form-label">Gender *</label>
                                                     <div class="row">
                                                         <div class="col-4">
 
@@ -117,14 +117,14 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Nationality</label>
+                                                    <label class="form-label">Nationality *</label>
                                                     <input type="text" class="form-control" name="nationality"
                                                         value="{{ old('nationality') }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Place Of Birth</label>
+                                                    <label class="form-label">Place Of Birth *</label>
                                                     <input type="text" class="form-control" name="place_of_birth"
                                                         value="{{ old('place_of_birth') }}" required>
                                                 </div>
@@ -140,7 +140,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Main Languague</label>
                                                     <input type="text" class="form-control" name="main_language"
-                                                        value="{{ old('main_language') }}" required>
+                                                        value="{{ old('main_language') }}">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -154,7 +154,7 @@
 
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Current School Name</label>
+                                                    <label class="form-label">Current School Name *</label>
                                                     <input type="text" class="form-control" name="current_school_name"
                                                         value="{{ old('current_school_name', $enquiry->current_school_name) }}"
                                                         required>
@@ -171,7 +171,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                                         <div class="form-group">
-                                                            <label class="form-label">Key Stage</label>
+                                                            <label class="form-label">Key Stage *</label>
 
                                                             <select class="form-control keyStage" name="key_stage_id"
                                                                 required>
@@ -187,30 +187,17 @@
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                                         <div class="form-group">
-                                                            <label class="form-label">Year</label>
+                                                            <label class="form-label">Year *</label>
 
 
                                                             <select class="form-control year" name="year_id" required>
                                                                 <option value="{{ $enquiry->year->id }}">
                                                                     {{ $enquiry->year->name }}</option>
                                                             </select>
-
-
                                                         </div>
                                                     </div>
-
-
-
-
-
-                                                    {{-- <div class="col-lg-12 col-md-12 col-sm-12">
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                        <button type="submit" class="btn btn-light">Cancel</button>
-                                                    </div> --}}
                                                 </div>
                                             </div>
-
-
                                         </div>
 
                                     </div>
@@ -256,7 +243,7 @@
                                                         <div class="row">
                                                             <div class="col-2">
                                                                 <div class="form-group">
-                                                                    <label class="form-label">Lesson Type</label>
+                                                                    <label class="form-label">Lesson Type </label>
 
                                                                     <select class="form-control" id="lesson_type_id">
                                                                         @foreach ($lessonType as $value)
@@ -407,7 +394,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Branch</label>
                                                     <select class="form-control branch_student" name="branch_id" required>
-                                                        <option value="">Select Branch</option>
+                                                        <option value="">Select Branch *</option>
                                                         @foreach ($branch as $value)
                                                             <option value="{{ $value->id }}"
                                                                 {{ old('branch_id') == $value->id ? 'selected' : '' }}>
@@ -449,7 +436,7 @@
                                                 <div class="form-group">
                                                     <label for="" class="form-label">VAT</label>
                                                     <input type="text" name="tax" id=""
-                                                        class="form-control tax" value="0">
+                                                        class="form-control tax" value="0" required>
                                                 </div>
                                             </div>
                                             <div class="col-3">
@@ -485,31 +472,32 @@
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Registration (Non
-                                                        Refundable)</label>
+                                                        Refundable) *</label>
                                                     <div class="input-group mb-2">
                                                         <div class="input-group-prepend">
                                                             <div class="input-group-text">£</div>
                                                         </div>
                                                         <input type="text" class="form-control" value="20"
-                                                            name="registration_fee" id="registration_fee">
+                                                            name="registration_fee" id="registration_fee" required>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Annual resources</label>
+                                                    <label class="form-label">Annual Resources *</label>
                                                     <div class="input-group mb-2">
                                                         <div class="input-group-prepend">
                                                             <div class="input-group-text">£</div>
                                                         </div>
                                                         <input type="text" class="form-control" value="0"
-                                                            name="annual_resource_fee" id="annual_resource_fee" readonly>
+                                                            min="1" title="Add Subject" name="annual_resource_fee"
+                                                            id="annual_resource_fee" required readonly>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12 d-none">
                                                 <div class="form-group">
-                                                    <label class="form-label">Resource Discount</label>
+                                                    <label class="form-label">Resource Discount *</label>
                                                     <div class="input-group mb-2">
                                                         <div class="input-group-prepend">
                                                             <div class="input-group-text">£</div>
@@ -521,25 +509,26 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Exercise Book</label>
+                                                    <label class="form-label">Exercise Book *</label>
                                                     <div class="input-group mb-2">
                                                         <div class="input-group-prepend">
                                                             <div class="input-group-text">£</div>
                                                         </div>
                                                         <input type="text" id="exercise_book" class="form-control"
-                                                            value="0" name="exercise_book_fee" readonly>
+                                                            min="1" value="0" name="exercise_book_fee"
+                                                            readonly>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Sub total Fee</label>
+                                                    <label class="form-label">Gross Fee *</label>
                                                     <div class="input-group mb-2">
                                                         <div class="input-group-prepend">
                                                             <div class="input-group-text">£</div>
                                                         </div>
                                                         <input type="text" class="form-control fee" value="0"
-                                                            name="fee" readonly>
+                                                            min="1" name="fee" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -551,13 +540,13 @@
                                                             <div class="input-group-text">£</div>
                                                         </div>
                                                         <input type="text" class="form-control" value="0"
-                                                            name="fee_discount" id="fee_discount">
+                                                            name="fee_discount" id="fee_discount" required>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">Total Fee</label>
+                                                    <label class="form-label">Net Fee *</label>
                                                     <div class="input-group mb-2">
                                                         <div class="input-group-prepend">
                                                             <div class="input-group-text">£</div>
@@ -573,8 +562,9 @@
                                                     <div class="input-group mb-2">
 
 
-                                                        <input type="date" class="form-control" value=""
-                                                            name="admission_date">
+                                                        <input type="date" class="form-control"
+                                                            value="{{ Carbon::now()->toDateString() }}"
+                                                            name="admission_date" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1113,7 +1103,7 @@
 
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-center">
-                                        <h2>Emergency Contact if Parent/Guadiasn cannot be
+                                        <h2>Emergency Contact if Parent/Guadian cannot be
                                             contacted</h2>
                                     </div>
                                 </div>
@@ -1130,28 +1120,29 @@
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Full
-                                                        Name</label>
+                                                        Name *</label>
                                                     <input type="text" class="form-control" name="e_full_name_1"
-                                                        value="{{ old('e_full_name_1') }}">
+                                                        value="{{ old('e_full_name_1') }}" required>
 
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Work
-                                                        Phone</label>
+                                                        Phone *</label>
                                                     <input type="text" class="form-control" name="e_work_phone_1"
-                                                        value="{{ old('e_work_phone_1') }}">
+                                                        value="{{ old('e_work_phone_1') }}" required>
 
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Relationship
-                                                        to Student</label>
+                                                        to Student *</label>
 
                                                     <input type="text" list="parent" class="form-control"
-                                                        value="{{ old('e_relationship_1') }}" name="e_relationship_1">
+                                                        value="{{ old('e_relationship_1') }}" name="e_relationship_1"
+                                                        required>
                                                     <datalist id="parent">
                                                         <option>Father</option>
                                                         <option>Mother</option>
@@ -1162,9 +1153,9 @@
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Mobile
-                                                        Phone</label>
+                                                        Phone *</label>
                                                     <input type="text" class="form-control" name="e_mobile_phone_1"
-                                                        value="{{ old('e_mobile_phone_1') }}">
+                                                        value="{{ old('e_mobile_phone_1') }}" required>
 
                                                 </div>
                                             </div>
@@ -1329,7 +1320,7 @@
                                                         <input type="text" class="form-control"
                                                             name="signature_person"
                                                             value="{{ auth()->user()->parent->given_name }}"
-                                                            id="">
+                                                            id="" required>
 
 
                                                     </div>
@@ -1365,7 +1356,8 @@
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <input type="checkbox" name="" id="check_all_agreemnet">
+                                                    <input type="checkbox" name="" id="check_all_agreemnet"
+                                                        required>
                                                     <label class="form-label pl-2"> Check
                                                         All</label>
 
@@ -1431,12 +1423,8 @@
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <input type="checkbox" name="">
-                                                    <label class="form-label pl-2">I am aware
-                                                        that my deposit of £40 will be
-                                                        refunded only if I comply with the
-                                                        transmission procedure and all payments
-                                                        are up to
-                                                        date.
+                                                    <label class="form-label pl-2">I have provided the copies of RECENT
+                                                        proof of address and ID.
                                                     </label>
 
 
@@ -1445,10 +1433,22 @@
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <input type="checkbox" name="">
-                                                    <label class="form-label pl-2">I am aware
-                                                        that if child misses a lesson for
-                                                        any
-                                                        reason, class will not be refunded.
+                                                    <label class="form-label pl-2">I understand that I am responsible for
+                                                        monthly or four/five weeks payment of the tuition fees and for the
+                                                        resources within the given deadline.
+                                                    </label>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <input type="checkbox" name="" id="check_all_agreemnet">
+                                                    <label class="form-label pl-2">I declare that, to the best of my
+                                                        knowledge, the information provided in this application form is
+                                                        accurate and agree to abide by all the given terms and conditions
+                                                        specified from points 1 to 24.
+
 
                                                     </label>
 
@@ -1458,34 +1458,11 @@
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <input type="checkbox" name="" id="check_all_agreemnet">
-                                                    <label class="form-label pl-2">I certify
-                                                        that I have read and understood the
-                                                        Terms
-                                                        and Conditions of Chalk'n'Duster Ltd
-                                                        accompanied with this enrolment form on
-                                                        page 3 & 4 and that all information
-                                                        provided are true and correct.
-
-
-                                                    </label>
-
-
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <input type="checkbox" name="" id="check_all_agreemnet">
-                                                    <label class="form-label pl-2">I
-                                                        understand that I am responsible for
-                                                        payment
-                                                        of
-                                                        all tuition fees and stationary
-                                                        including resources by the due dates and
-                                                        on
-                                                        occasion of non-payment as agreed on the
-                                                        time of application, information
-                                                        will be passed to the external debt
-                                                        collection agencies.
+                                                    <label class="form-label pl-2">I also consent to any necessary
+                                                        emergency medical treatment whilst my child is attending CND and
+                                                        authorize the staff to sign any form of consent required by medical
+                                                        staff if a delay in obtaining my signature could endanger my child's
+                                                        health or safety.
 
                                                     </label>
 

@@ -21,6 +21,15 @@ class StudentInvoice extends Model
         'academic_year_id',
         'code'
     ];
+    public function debitBroughtForward()
+    {
+        $total = 0;
+        $otherInvoice = $this->student->invoice->where('id', '<', $this->id);
+        foreach ($otherInvoice as  $value) {
+            $total += $value->remainingAmount();
+        }
+        return $total;
+    }
     public function period()
     {
         return auth()->user()->ukFormat($this->from_date) . ' - ' . auth()->user()->ukFormat($this->to_date);

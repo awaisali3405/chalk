@@ -1842,10 +1842,8 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <input type="checkbox" name="">
-                                            <label class="form-label pl-2">I am aware that my deposit of £40 will be
-                                                refunded only if I comply with the transmission procedure and all payments
-                                                are up to
-                                                date.
+                                            <label class="form-label pl-2">I have provided the copies of RECENT
+                                                proof of address and ID.
                                             </label>
 
 
@@ -1854,10 +1852,9 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <input type="checkbox" name="">
-                                            <label class="form-label pl-2">I am aware that if child misses a lesson for
-                                                any
-                                                reason, class will not be refunded.
-
+                                            <label class="form-label pl-2">I understand that I am responsible for
+                                                monthly or four/five weeks payment of the tuition fees and for the
+                                                resources within the given deadline.
                                             </label>
 
 
@@ -1866,38 +1863,28 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <input type="checkbox" name="" id="check_all_agreemnet">
-                                            <label class="form-label pl-2">I certify that I have read and understood the
-                                                Terms
-                                                and Conditions of Chalk'n'Duster Ltd accompanied with this enrolment form on
-                                                page 3 & 4 and that all information provided are true and correct.
-
-
+                                            <label class="form-label pl-2">I declare that, to the best of my
+                                                knowledge, the information provided in this application form is
+                                                accurate and agree to abide by all the given terms and conditions
+                                                specified from points 1 to 24.
                                             </label>
-
-
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <input type="checkbox" name="" id="check_all_agreemnet">
-                                            <label class="form-label pl-2">I understand that I am responsible for payment
-                                                of
-                                                all tuition fees and stationary including resources by the due dates and on
-                                                occasion of non-payment as agreed on the time of application, information
-                                                will be passed to the external debt collection agencies.
-
+                                            <label class="form-label pl-2">I also consent to any necessary
+                                                emergency medical treatment whilst my child is attending CND and
+                                                authorize the staff to sign any form of consent required by medical
+                                                staff if a delay in obtaining my signature could endanger my child's
+                                                health or safety.
                                             </label>
-
-
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <a href="{{ route('student.index') }}" class="btn btn-light">Cancel</a>
             </form>
