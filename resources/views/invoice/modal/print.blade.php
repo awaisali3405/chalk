@@ -362,7 +362,7 @@
                                                     <b>{{ $key + 1 }}</b>
                                                 </td>
                                                 <td class="pl-2 ">
-                                                    <b>lesson ({{ $value->subject_name }}) - {{ $value->subject_hr }}
+                                                    <b>Lesson ({{ $value->subject_name }}) - {{ $value->subject_hr }}
                                                         hours</b>
                                                 </td>
                                                 <td class="text-center text-center">
