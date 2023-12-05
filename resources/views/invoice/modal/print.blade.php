@@ -527,7 +527,7 @@
                                                 </td>
                                                 <td class="text-center bg-grey">
                                                     <h6>
-                                                        <b> £{{ $invoice->normalSubject()[0]->rate_per_hr }}
+                                                        <b> £{{ auth()->user()->priceFormat($invoice->normalSubject()[0]->rate_per_hr) }}
                                                         </b>
                                                     </h6>
                                                 </td>
@@ -589,7 +589,7 @@
                                             <tr>
                                                 <td></td>
                                                 <td class="pl-2 pt-1">
-                                                    <h6>Period ( {{ auth()->user()->ukFormat($invoice->from_date) }} -
+                                                    <h6>Period ({{ auth()->user()->ukFormat($invoice->from_date) }} -
                                                         {{ auth()->user()->ukFormat($invoice->to_date) }}) </h6>
                                                 </td>
                                                 <td class="bg-grey text-center">
