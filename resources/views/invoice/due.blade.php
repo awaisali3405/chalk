@@ -21,7 +21,7 @@
                             <h5 class="card-title">All Invoice</h5>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('invoice.create') }}" method="GET">
+                            <form action="{{ route('invoice.due') }}" method="GET">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-3 col-sm-12">
                                         <div class="form-group">
