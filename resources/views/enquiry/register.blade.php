@@ -562,9 +562,8 @@
                                                     <div class="input-group mb-2">
 
 
-                                                        <input type="date" class="form-control"
-                                                            value="{{ Carbon::now()->toDateString() }}"
-                                                            name="admission_date" required>
+                                                        <input type="date" class="form-control" name="admission_date"
+                                                            required>
                                                     </div>
                                                 </div>
                                             </div>
