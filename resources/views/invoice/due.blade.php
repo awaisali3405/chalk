@@ -79,7 +79,8 @@
                                                     @foreach ($invoiceType as $value)
                                                         <option value="{{ $value }}"
                                                             {{ $value == str_replace(['+'], ' ', request()->get('type')) ? 'selected' : '' }}>
-                                                            {{ $value == 'Registration' ? 'Deposit' : $value }}</option>
+                                                            {{ ($value == 'Refundable' ? 'Deposit' : $value == 'Resource Fee') ? 'Resources' : $value }}
+                                                        </option>
                                                     @endforeach
 
                                                 </select>
@@ -159,7 +160,7 @@
                                                                         <td>{{ $value->code }}</td>
                                                                         <td>{{ auth()->user()->ukFormat($value->created_at) }}
                                                                         </td>
-                                                                        <td>{{ $value->type == 'Refundable' ? 'Deposit' : $value->type }}
+                                                                        <td>{{ ($value->type == 'Refundable' ? 'Deposit' : $value->type == 'Resource Fee') ? 'Resources' : $value->type }}
                                                                         </td>
                                                                         <td>
                                                                             {{ $value->student->name() }}

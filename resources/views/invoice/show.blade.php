@@ -100,7 +100,8 @@
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ $value->code }}</td>
                                                     <td>{{ auth()->user()->ukFormat($value->created_at) }}</td>
-                                                    <td>{{ $value->type == 'Refundable' ? 'Deposit' : $value->type }}</td>
+                                                    <td>{{ ($value->type == 'Refundable' ? 'Deposit' : $value->type == 'Resource Fee') ? 'Resources' : $value->type }}
+                                                    </td>
                                                     <td>£{{ $value->amount }}</td>
                                                     <td>{{ auth()->user()->priceFormat($value->tax) }}%</td>
                                                     <td>£{{ $value->receipt->sum('discount') }}</td>

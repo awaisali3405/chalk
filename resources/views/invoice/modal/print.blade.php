@@ -929,7 +929,7 @@
                             {{ $invoice->branch->name }},
                             Acc No:
                             {{ $invoice->branch->account_number }}, Sort Code: {{ $invoice->branch->branch_code }},
-                            Reference:{{ $invoice->student->parents[0]->name() }}
+                            Reference:{{ $invoice->student->name() }}
                         </p>
                     </div>
                 </div>

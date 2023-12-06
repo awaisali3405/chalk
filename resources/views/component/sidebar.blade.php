@@ -102,9 +102,9 @@
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{ route('product.index') }}">Product</a></li>
-                        <li><a href="{{ route('purchase.index') }}">Pruchase</a></li>
-                        <li><a href="{{ route('sale.index') }}">Sale</a></li>
                         <li><a href="{{ route('supplier.index') }}">Supplier</a></li>
+                        <li><a href="{{ route('purchase.index') }}">Purchase</a></li>
+                        <li><a href="{{ route('sale.index') }}">Sale</a></li>
                     </ul>
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
