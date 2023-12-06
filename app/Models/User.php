@@ -219,7 +219,25 @@ class User extends Authenticatable
         $received = $invoiceReceived->sum('amount');
         $discount = $invoiceReceived->sum('discount');
         $late_fee = $invoiceReceived->sum('late_fee');
-        return number_format($received);
+        $wallet = $this->bankWallet($branch, $academicYear);
+        return number_format($received + $wallet);
+    }
+    public function wallet($branch, $academicYear)
+    {
+        $wallet = Wallet::where('academic_year_id', $academicYear);
+        if ($branch != -1) {
+            $wallet = $wallet->where('branch_id', $branch);
+        }
+
+        return $wallet;
+    }
+    public function bankWallet($branch, $academicYear)
+    {
+        return $this->wallet($branch, $academicYear)->where('mode', 'Bank')->sum('amount');
+    }
+    public function cashWallet($branch, $academicYear)
+    {
+        return $this->wallet($branch, $academicYear)->where('mode', 'Cash')->sum('amount');
     }
     public function feeReceivedByCash($branch, $academicYear)
     {
@@ -230,7 +248,8 @@ class User extends Authenticatable
         $received = $invoiceReceived->sum('amount');
         $discount = $invoiceReceived->sum('discount');
         $late_fee = $invoiceReceived->sum('late_fee');
-        return number_format($received);
+        $wallet = $this->cashWallet($branch, $academicYear);
+        return number_format($received + $wallet);
     }
 
     public function product()
