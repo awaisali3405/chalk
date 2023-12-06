@@ -204,7 +204,7 @@ class User extends Authenticatable
         $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Monthly Fee', 'Weekly Fee', 'Addition Invoice']);
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
-        $invoiceReceived = $this->receipt($invoice_id)->where('mode', 'Cash')->get();
+        $invoiceReceived = $this->receipt($invoice_id)->get();
         $received = $invoiceReceived->sum('amount');
         $discount = $invoiceReceived->sum('discount');
         $late_fee = $invoiceReceived->sum('late_fee');
