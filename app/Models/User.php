@@ -136,7 +136,7 @@ class User extends Authenticatable
         $invoice = $this->invoice($branch, $academicYear)->where('type', 'Refundable');
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
-        $invoiceReceived = $this->receipt($invoice_id)->where('mode', 'Cash')->get();
+        $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->where('mode', 'Cash')->get();
         $received = $invoiceReceived->sum('amount');
         $refund = $this->totalRefundedByCash($branch, $academicYear);
         // dd($invoice_sum, $received);
@@ -147,7 +147,7 @@ class User extends Authenticatable
         $invoice = $this->invoice($branch, $academicYear)->where('type', 'Refundable');
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
-        $invoiceReceived = $this->receipt($invoice_id)->where('mode', 'Bank')->get();
+        $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->where('mode', 'Bank')->get();
         $received = $invoiceReceived->sum('amount');
         $refund = $this->totalRefundedByBank($branch, $academicYear);
         // dd($invoice_sum, $received);
@@ -155,7 +155,7 @@ class User extends Authenticatable
     }
     public function receipt($invoice_id)
     {
-        return  StudentInvoiceReceipt::whereIn('invoice_id', $invoice_id)->where('mode', '!=', "Wallet");
+        return  StudentInvoiceReceipt::whereIn('invoice_id', $invoice_id);
     }
 
 
@@ -167,7 +167,7 @@ class User extends Authenticatable
         $invoice = $this->invoice($branch, $academicYear)->where('type', 'Resource Fee');
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
-        $invoiceReceived = $this->receipt($invoice_id)->get();
+        $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->get();
         $received = $invoiceReceived->sum('amount');
         // $discount = $invoiceReceived->sum('discount');
         // $lateFee = $invoiceReceived->sum('late_fee');
@@ -178,7 +178,7 @@ class User extends Authenticatable
         $invoice = $this->invoice($branch, $academicYear)->where('type', 'Resource Fee');
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
-        $invoiceReceived = $this->receipt($invoice_id)->get();
+        $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->get();
         $received = $invoiceReceived->sum('amount');
         $discount = $invoiceReceived->sum('discount');
         $late_fee = $invoiceReceived->sum('late_fee');
@@ -193,7 +193,7 @@ class User extends Authenticatable
         $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Monthly Fee', 'Weekly Fee', 'Addition Invoice']);
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
-        $invoiceReceived = $this->receipt($invoice_id)->get();
+        $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->get();
         $received = $invoiceReceived->sum('amount');
         $discount = $invoiceReceived->sum('discount');
         $late_fee = $invoiceReceived->sum('late_fee');
@@ -204,7 +204,7 @@ class User extends Authenticatable
         $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Monthly Fee', 'Weekly Fee', 'Addition Invoice']);
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
-        $invoiceReceived = $this->receipt($invoice_id)->get();
+        $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->get();
         $received = $invoiceReceived->sum('amount');
         $discount = $invoiceReceived->sum('discount');
         $late_fee = $invoiceReceived->sum('late_fee');
@@ -215,7 +215,7 @@ class User extends Authenticatable
         $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Monthly Fee', 'Weekly Fee', 'Addition Invoice']);
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
-        $invoiceReceived = $this->receipt($invoice_id)->where('mode', 'Bank')->get();
+        $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->where('mode', 'Bank')->get();
         $received = $invoiceReceived->sum('amount');
         $discount = $invoiceReceived->sum('discount');
         $late_fee = $invoiceReceived->sum('late_fee');
@@ -226,7 +226,7 @@ class User extends Authenticatable
         $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Monthly Fee', 'Weekly Fee', 'Addition Invoice']);
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
-        $invoiceReceived = $this->receipt($invoice_id)->where('mode', 'Cash')->get();
+        $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->where('mode', 'Cash')->get();
         $received = $invoiceReceived->sum('amount');
         $discount = $invoiceReceived->sum('discount');
         $late_fee = $invoiceReceived->sum('late_fee');
@@ -297,7 +297,7 @@ class User extends Authenticatable
         $invoice = $this->invoice($branch, $academicYear)->where('type', 'Sale Invoice');
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
-        $invoiceReceived = $this->receipt($invoice_id)->get();
+        $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->get();
         $received = $invoiceReceived->sum('amount');
         $discount = $invoiceReceived->sum('discount');
         $late_fee = $invoiceReceived->sum('late_fee');
@@ -310,7 +310,7 @@ class User extends Authenticatable
         $invoice = $this->invoice($branch, $academicYear)->where('type', 'Sale Invoice');
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
-        $invoiceReceived = $this->receipt($invoice_id)->get();
+        $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->get();
         $received = $invoiceReceived->sum('amount');
         $discount = $invoiceReceived->sum('discount');
         $late_fee = $invoiceReceived->sum('late_fee');
