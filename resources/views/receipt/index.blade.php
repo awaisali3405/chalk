@@ -236,7 +236,7 @@
                                                                         class="form-control">
                                                                         <option value="Cash">Cash</option>
                                                                         <option value="Bank">Bank</option>
-                                                                        <option value="Wallet" disabled>Wallet</option>
+                                                                        <option value="Wallet">Wallet</option>
                                                                     </select>
 
                                                                 </div>
