@@ -32,6 +32,7 @@ class Parents extends Model
         'res_postal_code',
         'user_id'
     ];
+
     /**
      * The student that belong to the Parent
      *

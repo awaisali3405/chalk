@@ -206,6 +206,7 @@
                                                                     <th></th>
                                                                     <th></th>
                                                                     <th></th>
+                                                                    <th></th>
 
                                                                     <th>£{{ $total_remaining }}</th>
                                                                     <th></th>
@@ -229,4 +230,7 @@
             </div>
         </div>
     </div>
+    @foreach ($invoice as $value)
+        @include('invoice.modal.print')
+    @endforeach
 @endsection

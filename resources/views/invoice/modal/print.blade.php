@@ -26,8 +26,7 @@
                                 <h6>To:</h6>
                             </div>
                             <div class="pr-4 col-11">
-                                <h6>{{ $invoice->student->parents[0]->first_name }}
-                                    {{ $invoice->student->parents[0]->last_name }}</h6>
+                                <h6>{{ $invoice->student->parents[0]->name() }}</h6>
                                 <h6>
                                     {{ $invoice->student->parents[0]->res_second_address }}
                                 </h6>
@@ -920,6 +919,15 @@
                             period is given for payment). Failure to comply with the company policies we may pass your
                             account to the debt collection team. For full terms & conditions of business, refer to the
                             application form.</p>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-12 d-flex justify-content-center" style="border: 2px solid black;">
+
+                        Bank Details: {{ $invoice->branch->bank_name }} ,Company Name: {{ $invoice->branch->name }},
+                        Acc No:
+                        {{ $invoice->branch->account_number }}, Sort Code: {{ $invoice->branch->branch_code }},
+                        Reference:{{ $invoice->student->parents[0]->name() }}
                     </div>
                 </div>
 
