@@ -220,7 +220,7 @@ class User extends Authenticatable
         $discount = $invoiceReceived->sum('discount');
         $late_fee = $invoiceReceived->sum('late_fee');
         $wallet = $this->bankWallet($branch, $academicYear);
-        return number_format($received + $wallet);
+        return number_format($received);
     }
     public function wallet($branch, $academicYear)
     {
@@ -249,7 +249,7 @@ class User extends Authenticatable
         $discount = $invoiceReceived->sum('discount');
         $late_fee = $invoiceReceived->sum('late_fee');
         $wallet = $this->cashWallet($branch, $academicYear);
-        return number_format($received + $wallet);
+        return number_format($received);
     }
 
     public function product()
