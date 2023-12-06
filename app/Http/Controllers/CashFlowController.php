@@ -41,9 +41,9 @@ class CashFlowController extends Controller
                 $cashFlow = $cashFlow->where("date", '<=', auth()->user()->dateWeek($request->to_week));
             }
 
-            $cashFlow = $cashFlow->where('mode', '!=', 'Wallet')->where('academic_year_id', auth()->user()->session()->id)->get();
+            $cashFlow = $cashFlow->where('mode', '!=', 'Wallet')->get();
         } else {
-            $cashFlow = CashFlow::where('mode', '!=', 'Wallet')->where('academic_year_id', auth()->user()->session()->id)->get();
+            $cashFlow = CashFlow::where('mode', '!=', 'Wallet')->get();
         }
         return view('cashflow.index', compact('cashFlow'));
     }
