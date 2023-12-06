@@ -41,7 +41,7 @@ class PurchaseController extends Controller
             'description' => "Qty(" . $purchase->quantity . ") Paid by " . $purchase->mode,
             'mode' => $purchase->mode,
             'type' => "Purchase",
-            'out' => $purchase->amount,
+            'out' => $purchase->discounted_amount ? $purchase->discounted_amount : $purchase->amount,
         ]);
         return redirect()->route('purchase.index')->with('success', 'Purchase Created Successfully');
     }

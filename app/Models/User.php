@@ -262,7 +262,7 @@ class User extends Authenticatable
     // Available Stock
     public function availableStock($branch, $academicYear)
     {
-        $purchase = $this->purchaseProduct($branch, $academicYear)->sum('amount');
+        $purchase = $this->purchaseProduct($branch, $academicYear)->sum('discounted_amount');
         $purchaseRate = $this->purchaseProduct($branch, $academicYear)->avg('rate');
         $purchaseQuantity = $this->purchaseProduct($branch, $academicYear)->sum('quantity');
         $saleQuantity = $this->resourceSaleQuantity($branch, $academicYear);
