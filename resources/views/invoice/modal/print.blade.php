@@ -112,7 +112,7 @@
                                                 <b>Student Year</b>
                                             </td>
                                             <td>
-                                                <b>{{ $invoice->year->name }}
+                                                <b>{{ $invoice->currentYear()->name }}
                                                 </b>
                                             </td>
                                         </tr>
@@ -542,7 +542,7 @@
                                                     style="text-align: end !important; padding-right:5px;">
                                                     <b>
 
-                                                        £{{ str_contains($invoice->type, 'Month')? (str_contains($invoice->student->year->name, '11')? auth()->user()->priceFormat((($invoice->normalSubject()->sum('amount') * 40) / 9) * $months): auth()->user()->priceFormat((($invoice->normalSubject()->sum('amount') * 52) / 12) * $months)): $invoice->normalSubject()->sum('amount') * $weeks }}
+                                                        £{{ str_contains($invoice->type, 'Month')? (str_contains($invoice->student->currentYear()->name, '11')? auth()->user()->priceFormat((($invoice->normalSubject()->sum('amount') * 40) / 9) * $months): auth()->user()->priceFormat((($invoice->normalSubject()->sum('amount') * 52) / 12) * $months)): $invoice->normalSubject()->sum('amount') * $weeks }}
                                                     </b>
                                                 </td>
                                             </tr>
@@ -585,7 +585,7 @@
                                                 </td>
                                                 <td class="text-center bg-grey"
                                                     style="text-align: end !important; padding-right:5px;">
-                                                    <b>£{{ str_contains($invoice->type, 'Month')? (str_contains($invoice->year->name, '11')? auth()->user()->priceFormat((($invoice->oneOnOneSubject()->sum('amount') * 40) / 9) * $months, 2): auth()->user()->priceFormat((($invoice->oneOnOneSubject()->sum('amount') * 52) / 12) * $months, 2)): auth()->user()->priceFormat($invoice->oneOnOneSubject()->sum('amount') * $weeks) }}</b>
+                                                    <b>£{{ str_contains($invoice->type, 'Month')? (str_contains($invoice->currentYear()->name, '11')? auth()->user()->priceFormat((($invoice->oneOnOneSubject()->sum('amount') * 40) / 9) * $months, 2): auth()->user()->priceFormat((($invoice->oneOnOneSubject()->sum('amount') * 52) / 12) * $months, 2)): auth()->user()->priceFormat($invoice->oneOnOneSubject()->sum('amount') * $weeks) }}</b>
                                                 </td>
                                             </tr>
                                             <tr>

@@ -8,6 +8,7 @@ use App\Models\Student;
 use App\Models\StudentInvoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Session;
 
 class InvoiceController extends Controller
 {
@@ -111,6 +112,7 @@ class InvoiceController extends Controller
             }
             // dd($data, $amount);
 
+
             $invoice = StudentInvoice::create([
                 'student_id' => $student->id,
                 'amount' => $amount,
@@ -137,7 +139,7 @@ class InvoiceController extends Controller
             }
             return redirect()->route('invoice.index')->with('success', 'invoice Created Successfully.');
         } else {
-
+            Session::put('action', route("invoice.print"));
             return redirect()->back()->with('error', 'Please Add Your Subject.');
         }
     }
@@ -255,6 +257,7 @@ class InvoiceController extends Controller
     public function print($id)
     {
         $invoice = StudentInvoice::find($id);
+        Session::forget('action');
         return view('invoice.print.pdf', compact('invoice'));
     }
 }

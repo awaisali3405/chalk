@@ -1290,6 +1290,15 @@
         });
     </script>
 
+    {{-- Invocie Print --}}
+    <script>
+        console.log('asdasdas asdasdasdasdasd');
+        if ("{!! session()->has('action') !!}") {
+            console.log('asdasdas');
+            window.open("{!! session()->get('action') !!}", '_blank');
+        }
+    </script>
+
     {{--
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
