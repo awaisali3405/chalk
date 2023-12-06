@@ -483,7 +483,7 @@
                                                     £{{ auth()->user()->priceFormat($invoice->resourceInvoiceSubject[0]->subject->book_rate) }}</b>
                                             </td>
                                             <td class="text-center bg-grey">
-                                                <b></b>
+                                                <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
                                             </td>
                                             <td class="text-center bg-grey"
                                                 style="text-align: end !important; padding-right:5px;">
@@ -923,11 +923,14 @@
                 </div>
                 <div class="row ">
                     <div class="col-12 d-flex justify-content-center" style="border: 2px solid black;">
+                        <p>
 
-                        Bank Details: {{ $invoice->branch->bank_name }} ,Company Name: {{ $invoice->branch->name }},
-                        Acc No:
-                        {{ $invoice->branch->account_number }}, Sort Code: {{ $invoice->branch->branch_code }},
-                        Reference:{{ $invoice->student->parents[0]->name() }}
+                            Bank Details: {{ $invoice->branch->bank_name }} ,Company Name:
+                            {{ $invoice->branch->name }},
+                            Acc No:
+                            {{ $invoice->branch->account_number }}, Sort Code: {{ $invoice->branch->branch_code }},
+                            Reference:{{ $invoice->student->parents[0]->name() }}
+                        </p>
                     </div>
                 </div>
 

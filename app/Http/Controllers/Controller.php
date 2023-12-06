@@ -14,6 +14,7 @@ use App\Models\Paper;
 use App\Models\Parents;
 use App\Models\ScienceType;
 use App\Models\Student;
+use App\Models\StudentInvoice;
 use App\Models\Subject;
 use App\Models\Supplier;
 use App\Models\Year;
@@ -64,6 +65,9 @@ class Controller extends BaseController
         View::share('academicCalender', $academicCalender);
         $knowUsAbout = Student::distinct('know_about_us')->pluck("know_about_us");
         View::share('knowUsAbout', $knowUsAbout);
+        $academicCalender = AcademicCalender::where('active', 1)->first();
+        $invoiceType = StudentInvoice::where('academic_year_id', $academicCalender->id)->distinct('type')->pluck('type');
+        View::share('invoiceType', $invoiceType);
 
         // $studentRequest=
     }

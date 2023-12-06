@@ -88,6 +88,10 @@ class InvoiceController extends Controller
 
                     $query->where('payment_period', $request->payment_period);
                 }
+                if ($request->type != 0) {
+                    // dd($request->type);
+                    $query->where('type', str_replace(['+'], ' ', $request->type));
+                }
             })->where('is_paid', false)->where('academic_year_id', auth()->user()->session()->id)->get();
             // dd($student);
         } else {

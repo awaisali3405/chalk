@@ -70,6 +70,22 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-lg-4 col-md-3 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Type</label>
+                                            <div class="input-group mb-2">
+                                                <select name="type" id="" class="form-control ">
+                                                    <option value="">All</option>
+                                                    @foreach ($invoiceType as $value)
+                                                        <option value="{{ $value }}"
+                                                            {{ $value == str_replace(['+'], ' ', request()->get('type')) ? 'selected' : '' }}>
+                                                            {{ $value == 'Registration' ? 'Deposit' : $value }}</option>
+                                                    @endforeach
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                     {{-- <div class="col-lg-4 col-md-3 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Status</label>
