@@ -45,7 +45,7 @@
                                                         <td>Week
                                                             {{ \Carbon\Carbon::parse($value->start_date)->diffInWeeks(\Carbon\Carbon::parse($value->end_date)->addDay(1)) }}
                                                         </td>
-                                                        <td>{{ $value->active ? 'Active' : 'De Active' }}</td>
+                                                        <td>{{ $value->active ? 'Activate' : 'De Activate' }}</td>
                                                         <td>
                                                             <a href="{{ route('academicCalender.edit', $value->id) }}"
                                                                 class="btn btn-sm btn-primary"><i
