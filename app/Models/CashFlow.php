@@ -17,6 +17,7 @@ class CashFlow extends Model
         'type',
         'in',
         'out',
+        'academic_year_id'
     ];
     public function branch()
     {
