@@ -75,7 +75,11 @@ class Student extends Model
         'active',
         'promotion_date',
         'is_promoted',
-        'balance', 'roll_no'
+        'balance',
+        'roll_no',
+        'cash_balance',
+        'bank_balance',
+        'credit_note'
     ];
     public function wallet()
     {

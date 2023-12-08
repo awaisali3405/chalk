@@ -16,7 +16,7 @@ class StudentInvoiceReceipt extends Model
         'date',
         'description',
         'mode',
-        'invoice_id', 'academic_year_id'
+        'invoice_id', 'academic_year_id', 'credit_discount'
     ];
     public function academicYear()
     {

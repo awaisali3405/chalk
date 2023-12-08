@@ -36,7 +36,7 @@ class WalletController extends Controller
         $wallet =  Wallet::create($data);
         $wallet->student->update([
 
-            'balance' => $wallet->student->balance + $data['amount']
+            'credit_note' => $wallet->student->credit_note + $data['amount']
         ]);
 
         return redirect()->route('wallet.index')->with(['success' => 'Wallet Created Successfully']);

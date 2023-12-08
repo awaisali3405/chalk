@@ -41,7 +41,10 @@ class ReceiptController extends Controller
         $data = $request->except('_token');
         $data['academic_year_id'] = auth()->user()->session()->id;
         if ($data['amount']) {
-
+            if ($data['credit_note']) {
+                $data['credit_discount'] = $data['discount'];
+                $data['discount'] = 0;
+            }
             $receipt = StudentInvoiceReceipt::create($data);
             CashFlow::create([
                 'date' => $receipt->date,
@@ -51,14 +54,23 @@ class ReceiptController extends Controller
                 'type' => $receipt->invoice->type == "Refundable" ? "Deposit" : $receipt->invoice->type,
                 'in' => $receipt->amount,
             ]);
-            if ($data['mode'] == "Wallet") {
+            if ($data['mode'] == "Cash_Wallet") {
                 $receipt->invoice->student()->update([
-                    'balance' => $receipt->invoice->student->balance - $data['amount']
+                    'cash_balance' => $receipt->invoice->student->cash_balance - $data['amount']
                 ]);
-                // $data['description'] = "Wallet Received By";
-                // $data['amount'] = $data['add_to_wallet'];
-                // $receipt = StudentInvoiceReceipt::create($data);
+            } else if ($data['mode'] == "Bank_Wallet") {
+                $receipt->invoice->student()->update([
+                    'bank_balance' => $receipt->invoice->student->bank_balance - $data['amount']
+                ]);
             }
+            if ($data['credit_note']) {
+                $receipt->invoice->student()->update([
+                    'credit_note' => $receipt->invoice->student->credit_note - $data['discount']
+                ]);
+            }
+            Wallet::where('student_id', $receipt->invoice->student->id)->update([
+                'fixed' => 1
+            ]);
             if ($data['add_to_wallet']) {
                 $wallet = Wallet::create([
                     'branch_id' => $receipt->invoice->student->branch_id,
@@ -76,15 +88,22 @@ class ReceiptController extends Controller
                     'branch_id' => $receipt->invoice->branch_id,
                     'description' => $receipt->invoice->student->name() . " (" . auth()->user()->session()->period() . ")",
                     'mode' => $data['mode'],
-                    'type' => "Wallet" . " (" . $receipt->invoice->type . ")",
+                    'type' => $receipt->mode . " (" . $receipt->invoice->type . ")",
                     'in' => $data['add_to_wallet'],
                 ]);
-                $receipt->invoice->student()->update([
-                    'balance' => $receipt->invoice->student->balance + $data['add_to_wallet']
-                ]);
+                if ($data['mode'] == "Cash") {
+
+                    $receipt->invoice->student()->update([
+                        'cash_balance' => $receipt->invoice->student->cash_balance + $data['add_to_wallet']
+                    ]);
+                } else {
+                    $receipt->invoice->student()->update([
+                        'bank_balance' => $receipt->invoice->student->bank_balance + $data['add_to_wallet']
+                    ]);
+                }
             }
             $invoice = StudentInvoice::find($request->invoice_id);
-            if ($invoice->amount - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount') <= 0) {
+            if ($invoice->amount - ($invoice->receipt->sum('discount') + $invoice->receipt->sum('credit_discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount') <= 0) {
                 $invoice->update([
                     'is_paid' => 1
                 ]);

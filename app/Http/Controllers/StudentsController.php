@@ -729,7 +729,6 @@ class StudentsController extends Controller
             'is_promoted' => true,
             'promotion_date' => AcademicCalender::find($request->academic_year_id)->start_date,
             'total_fee' => 0,
-            'tax' => 0,
             'deposit' => 0,
             'registration_fee' => 0,
             'annual_resource_fee' => 0,

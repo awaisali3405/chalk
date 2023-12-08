@@ -47,10 +47,26 @@
                                             class="mb-0">Branch</span> <strong
                                             class="text-muted">{{ $invoice->student->branch->name }}</strong></li>
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Student
+                                            Bank
                                             Balance</span> <strong class="text-muted">£<span
-                                                id="changePrice">{{ auth()->user()->priceFormat($invoice->student->balance) }}</span>
-                                            <input type="checkbox" name="" id="balance-add" id=""
-                                                {{ $invoice->student->balance <= 0 && $invoice->amount > 0 ? 'disabled' : '' }}>
+                                                id="changePrice-bank">{{ auth()->user()->priceFormat($invoice->student->bank_balance) }}</span>
+                                            <input type="checkbox" name="" id="bank-balance-add" id=""
+                                                {{ $invoice->student->bank_balance <= 0 && $invoice->amount > 0 ? 'disabled' : '' }}>
+                                        </strong>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Student
+                                            Cash
+                                            Balance</span> <strong class="text-muted">£<span
+                                                id="changePrice-cash">{{ auth()->user()->priceFormat($invoice->student->cash_balance) }}</span>
+                                            <input type="checkbox" name="" id="cash-balance-add" id=""
+                                                {{ $invoice->student->cash_balance <= 0 && $invoice->amount > 0 ? 'disabled' : '' }}>
+                                        </strong>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Student
+                                            Credit Note</span> <strong class="text-muted">£<span
+                                                id="credit-note-html">{{ auth()->user()->priceFormat($invoice->student->credit_note) }}</span>
+                                            <input type="checkbox" name="" id="credit-note-add" id=""
+                                                {{ $invoice->student->credit_note <= 0 && $invoice->amount > 0 ? 'disabled' : '' }}>
                                         </strong>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Invoice
@@ -113,16 +129,7 @@
                                                 class="nav-link active show">Add Receipt</a></li>
                                         <li class="nav-item"><a href="#receipt-list" data-toggle="tab"
                                                 class="nav-link ">Receipts List</a></li>
-                                        {{-- <li class="nav-item"><a href="#upload" data-toggle="tab" class="nav-link">Upload</a>
-                                        </li>
-                                        <li class="nav-item"><a href="#note" data-toggle="tab" class="nav-link">Notes</a>
-                                        </li>
-                                        <li class="nav-item"><a href="#attandence" data-toggle="tab"
-                                                class="nav-link">Attendance</a></li>
-                                        <li class="nav-item"><a href="#statement" data-toggle="tab"
-                                                class="nav-link">Statement</a></li>
-                                        <li class="nav-item"><a href="#parent" data-toggle="tab" class="nav-link">Parent
-                                                Detail</a></li> --}}
+
                                     </ul>
                                     <div class="tab-content">
                                         <div id="about-me" class="tab-pane fade active show">
@@ -131,8 +138,16 @@
                                                 <form action="{{ route('receipt.store') }}" method="post">
                                                     @csrf
                                                     <div class="row">
-                                                        <input type="hidden" value="{{ $invoice->student->balance }}"
-                                                            name="balance" disabled id="balance">
+                                                        <input type="hidden" name="" id="credit-note-amount"
+                                                            value="{{ $invoice->student->credit_note }}">
+                                                        <input type="hidden" name="credit_note" id="credit-note-check"
+                                                            value="0">
+                                                        <input type="hidden"
+                                                            value="{{ $invoice->student->bank_balance }}" name=""
+                                                            disabled id="bank-balance">
+                                                        <input type="hidden"
+                                                            value="{{ $invoice->student->cash_balance }}" name=""
+                                                            disabled id="cash-balance">
                                                         {{-- <input type="hidden" name="" id=""> --}}
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <input type="hidden" name="invoice_id"
@@ -236,7 +251,8 @@
                                                                         class="form-control">
                                                                         <option value="Cash">Cash</option>
                                                                         <option value="Bank">Bank</option>
-                                                                        <option value="Wallet">Wallet</option>
+                                                                        <option value="Cash_Wallet">Cash Wallet</option>
+                                                                        <option value="Bank_Wallet">Bank Wallet</option>
                                                                     </select>
 
                                                                 </div>
@@ -255,20 +271,6 @@
                                                         </div>
                                                     </div>
                                                 </form>
-                                                {{-- <div class="profile-about-me">
-                                                <div class="border-bottom-1 pb-4">
-                                                    <p>A wonderful serenity has taken possession of my entire soul, like
-                                                        these sweet mornings of spring which I enjoy with my whole heart. I
-                                                        am alone, and feel the charm of existence was created for the bliss
-                                                        of souls like mine.I am so happy, my dear friend, so absorbed in the
-                                                        exquisite sense of mere tranquil existence, that I neglect my
-                                                        talents.</p>
-                                                    <p>A collection of textile samples lay spread out on the table - Samsa
-                                                        was a travelling salesman - and above it there hung a picture that
-                                                        he had recently cut out of an illustrated magazine and housed in a
-                                                        nice, gilded frame.</p>
-                                                </div>
-                                            </div> --}}
                                             </div>
                                             <hr class="text-bold">
                                             <div class="row pt-5">

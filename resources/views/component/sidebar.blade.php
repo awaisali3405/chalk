@@ -199,18 +199,18 @@
                         <li><a href="{{ route('refund.index') }}">Student Deposit</a></li>
                     </ul>
                 </li>
-                <li class="mm-active"><a class="has-arrow" href="javascript:void()" aria-expanded="true">
+                <li class="mm-active"><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-th-list"></i>
                         <span class="nav-text">Hr Department</span>
                     </a>
-                    <ul aria-expanded="false" class="mm-collapse mm-show" style="">
+                    <ul aria-expanded="false" class="mm-collapse " style="">
                     </ul>
                 </li>
-                <li class="mm-active"><a class="has-arrow" href="javascript:void()" aria-expanded="true">
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-th-list"></i>
                         <span class="nav-text">Setting</span>
                     </a>
-                    <ul aria-expanded="false" class="mm-collapse mm-show" style="">
+                    <ul aria-expanded="false" class="mm-collapse " style="">
                         <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                                 <i class="la la-home"></i>
                                 <span class="nav-text">Key Stage</span>

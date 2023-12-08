@@ -655,6 +655,7 @@
 
 
                                     @if (count($invoice->receipt) > 0)
+
                                         @if ($invoice->receipt->sum('late_fee') > 0)
                                             @php
                                                 $sr++;
@@ -701,6 +702,7 @@
                                                 </td>
                                             </tr>
                                         @endif
+
                                         @if ($invoice->receipt->sum('discount') > 0)
                                             @php
                                                 $sr++;
@@ -729,6 +731,51 @@
                                                     </b>
                                                 </td>
                                             </tr>
+                                            <tr class="">
+                                                <td class=" text-center">
+
+                                                </td>
+                                                <td class="pl-2">
+
+                                                </td>
+                                                <td class="bg-grey text-grey">
+                                                    blanck
+                                                </td>
+                                                <td class="bg-grey text-center">
+                                                </td>
+                                                <td class="bg-grey text-center">
+
+                                                </td>
+                                            </tr>
+                                        @endif
+                                        @if ($invoice->receipt->sum('credit_discount') > 0)
+                                            @php
+                                                $sr++;
+                                            @endphp
+                                            <tr>
+                                                <td class=" text-center">
+                                                    <b>
+                                                        {{ $sr }}
+
+                                                    </b>
+                                                </td>
+                                                <td class="pl-2">
+                                                    <b>Credit Discount</b>
+                                                </td>
+                                                <td class="bg-grey">
+                                                    <b></b>
+                                                </td>
+                                                <td class="bg-grey text-center">
+                                                    <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
+                                                </td>
+                                                <td class="bg-grey text-center"
+                                                    style="text-align: end !important; padding-right:5px;">
+                                                    <b>
+
+                                                        -£{{ $invoice->receipt->sum('credit_discount') }}
+                                                    </b>
+                                                </td>
+                                            </tr>
                                             <tr class="border-x-black">
                                                 <td class=" text-center">
 
@@ -746,7 +793,10 @@
                                                 </td>
                                             </tr>
                                         @endif
-                                        @if ($invoice->receipt->sum('discount') > 0 || $invoice->receipt->sum('late_fee') > 0)
+                                        @if (
+                                            $invoice->receipt->sum('discount') > 0 ||
+                                                $invoice->receipt->sum('late_fee') > 0 ||
+                                                $invoice->receipt->sum('credit_discount') > 0)
                                             <tr class="border-x-black">
                                                 <td class=" text-center">
 
@@ -763,7 +813,7 @@
                                                     style="text-align: end !important; padding-right:5px;">
                                                     <b>
 
-                                                        £{{ auth()->user()->priceFormat($invoice->amount - ($invoice->receipt->sum('discount') + $invoice->receipt->sum('late_fee'))) }}
+                                                        £{{ auth()->user()->priceFormat($invoice->amount + $invoice->receipt->sum('late_fee') - ($invoice->receipt->sum('discount') + $invoice->receipt->sum('credit_discount'))) }}
                                                     </b>
                                                 </td>
                                             </tr>

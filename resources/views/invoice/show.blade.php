@@ -104,7 +104,8 @@
                                                     </td>
                                                     <td>£{{ $value->amount }}</td>
                                                     <td>{{ auth()->user()->priceFormat($value->tax) }}%</td>
-                                                    <td>£{{ $value->receipt->sum('discount') }}</td>
+                                                    <td>£{{ $value->receipt->sum('discount') + $value->receipt->sum('credit_discount') }}
+                                                    </td>
                                                     <td>£{{ $value->receipt->sum('late_fee') }}</td>
                                                     <td>£{{ $value->receipt->sum('amount') }}
                                                     </td>

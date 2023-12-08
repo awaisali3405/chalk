@@ -262,7 +262,6 @@
     <script src="{{ asset('vendor/global/global.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
     <script src="{{ asset('js/custom.min.js') }}"></script>
-    <script src="{{ asset('js/dlabnav-init.js') }}"></script>
 
     <!-- Chart sparkline plugin files -->
     <script src="{{ asset('vendor/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
@@ -1292,7 +1291,6 @@
 
     {{-- Invocie Print --}}
     <script>
-        console.log('asdasdas asdasdasdasdasd');
         if ("{!! session()->has('action') !!}") {
             console.log('asdasdas');
             window.open("{!! session()->get('action') !!}", '_blank');
