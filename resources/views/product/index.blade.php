@@ -58,7 +58,7 @@
                                                         <td>{{ $value->year->name }}</td>
                                                         <td>{{ $value->branch->name }}</td>
                                                         <td> {{ $value->remainingProduct() }}</td>
-                                                        <td>£{{ $value->purchase->avg('rate') }}</td>
+                                                        <td>£{{ $value->rate() }}</td>
                                                         <td>£{{ $value->remainingAmount() }}</td>
                                                         <td>
                                                             <a href="{{ route('product.edit', $value->id) }}"

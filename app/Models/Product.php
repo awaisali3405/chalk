@@ -36,6 +36,14 @@ class Product extends Model
     }
     public function remainingAmount()
     {
-        return $this->purchase->avg('rate') * $this->remainingProduct();
+        return $this->rate() * $this->remainingProduct();
+    }
+    public function rate()
+    {
+        $rate = 0;
+        $quantity = $this->purchase->sum('quantity');
+        $amount = $this->purchase->sum('discounted_amount');
+        $rate = $amount / $quantity;
+        return auth()->user()->priceFormat($rate);
     }
 }

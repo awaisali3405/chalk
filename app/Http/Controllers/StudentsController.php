@@ -281,7 +281,7 @@ class StudentsController extends Controller
             'gender' => 'required',
             'nationality' => 'required',
             'place_of_birth' => 'required',
-            'main_language' => 'required',
+            'main_language' => 'nullable',
             'other_language' => 'nullable',
             'dob' => 'required',
             'current_school_name' => 'required',
@@ -343,6 +343,7 @@ class StudentsController extends Controller
             //     'to_year_id' => $student->year_id,
             //     'academic_year_id' => auth()->user()->session()->id, 'roll_no' => $rollNo
             // ]);
+            $student->update($data);
             $this->generateInvoice($student, $request);
             $subject = $student->EnquirySubject()->pluck('id')->toArray();
             // dd($subject);
@@ -670,6 +671,7 @@ class StudentsController extends Controller
     }
     public function generateInvoice($student, $request)
     {
+        $student = Student::find($student->id);
         if ($request->deposit > 0) {
 
             $invoice = StudentInvoice::create([
@@ -759,6 +761,7 @@ class StudentsController extends Controller
 
         $annual_resource_fee = $this->sumRate($subject->get());
         $exercise_book_fee = $this->sumBookRate($subject->get());
+        $student = Student::find($student->id);
         $invoice = StudentInvoice::create([
             'student_id' => $student->id,
             'amount' => $annual_resource_fee + $exercise_book_fee,

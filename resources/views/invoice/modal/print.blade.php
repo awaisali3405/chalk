@@ -733,10 +733,8 @@
                                             </tr>
                                             <tr class="">
                                                 <td class=" text-center">
-
                                                 </td>
                                                 <td class="pl-2">
-
                                                 </td>
                                                 <td class="bg-grey text-grey">
                                                     blanck
@@ -744,7 +742,6 @@
                                                 <td class="bg-grey text-center">
                                                 </td>
                                                 <td class="bg-grey text-center">
-
                                                 </td>
                                             </tr>
                                         @endif
@@ -756,7 +753,6 @@
                                                 <td class=" text-center">
                                                     <b>
                                                         {{ $sr }}
-
                                                     </b>
                                                 </td>
                                                 <td class="pl-2">
@@ -771,17 +767,14 @@
                                                 <td class="bg-grey text-center"
                                                     style="text-align: end !important; padding-right:5px;">
                                                     <b>
-
                                                         -£{{ $invoice->receipt->sum('credit_discount') }}
                                                     </b>
                                                 </td>
                                             </tr>
                                             <tr class="border-x-black">
                                                 <td class=" text-center">
-
                                                 </td>
                                                 <td class="pl-2">
-
                                                 </td>
                                                 <td class="bg-grey text-grey">
                                                     blanck
@@ -789,7 +782,6 @@
                                                 <td class="bg-grey text-center">
                                                 </td>
                                                 <td class="bg-grey text-center">
-
                                                 </td>
                                             </tr>
                                         @endif

@@ -84,48 +84,51 @@
 
                                                 <td class="text-left">Fee Received</td>
                                                 <td class="text-left">
-                                                    {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->feeReceived(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                    {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->feeReceived(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
                                                 </td>
                                                 <td class="text-left">Salaries Paid</td>
                                                 <td class="text-left">
-                                                    {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->totalSalaryPaid(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                    {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->totalSalaryPaid(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                 </td>
                                                 </td>
                                                 <tr>
                                                     <td class="text-left">Fee Due</td>
                                                     <td class="text-left">
-                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->feeDue(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->feeDue(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                     </td>
                                                     <td class="text-left">Salaries Payable</td>
                                                     <td class="text-left">
 
-                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->totalSalary(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->totalSalary(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left">Deposit Received</td>
                                                     <td class="text-left">
-                                                        {{-- @dd(request()->get('branch_id'), request()->get('academic_year_id')) --}}
-                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->depositReceived(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')
+                                                            ? auth()->user()->priceFormat(
+                                                                    auth()->user()->depositReceived(request()->get('branch_id'), request()->get('academic_year_id')),
+                                                                )
+                                                            : 0 }}
                                                     </td>
                                                     <td class="text-left">Suppliers</td>
                                                     <td class="text-left">
-                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->supplierPurchase(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->supplierPurchase(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left">Deposit Due</td>
                                                     <td class="text-left">
-                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->depositDue(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->depositDue(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                     </td>
                                                     <td class="text-left">Misc Expense(Bill,Rent,Others)</td>
                                                     <td class="text-left">
 
-                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->totalExpense(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->totalExpense(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                     </td>
                                                 </tr>
@@ -133,22 +136,22 @@
                                                     <td class="text-left">Yearly Resource Received</td>
                                                     <td class="text-left">
 
-                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->resourceFeeReceived(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->resourceFeeReceived(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
                                                     </td>
                                                     <td class="text-left">Deposit Refunded Amount</td>
                                                     <td class="text-left">
-                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->totalRefunded(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->totalRefunded(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left">Yearly Resource Due</td>
                                                     <td class="text-left">
 
-                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->resourceFeeDue(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->resourceFeeDue(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
                                                     </td>
                                                     <td class="text-left">Deposit Refundables</td>
                                                     <td class="text-left">
-                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->depositRefundable(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->depositRefundable(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                     </td>
                                                 </tr>
@@ -156,11 +159,11 @@
                                                     <td class="text-left">Addition Resource Received</td>
                                                     <td class="text-left">
 
-                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->resourceReceived(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->resourceReceived(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
                                                     </td>
                                                     <td class="text-left">Loan Due</td>
                                                     <td class="text-left">
-                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->remainingLoan(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->remainingLoan(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                     </td>
                                                 </tr>
@@ -168,7 +171,7 @@
                                                     <td class="text-left">Addition Resource Due</td>
                                                     <td class="text-left">
 
-                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->resourceDue(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->resourceDue(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
                                                     </td>
                                                     <td class="text-left"></td>
                                                     <td class="text-left"></td>
@@ -176,7 +179,7 @@
                                                 <tr>
                                                     <td class="text-left">Available Stock</td>
                                                     <td class="text-left">
-                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->availableStock(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->availableStock(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                     </td>
 
@@ -185,7 +188,7 @@
                                                 <tr>
                                                     <td class="text-left">Loan Received</td>
                                                     <td class="text-left">
-                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->totalSalaryLoan(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->totalSalaryLoan(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                     </td>
 
@@ -198,7 +201,7 @@
                                                     </th>
                                                     <th class="">
                                                         <b>
-                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->totalAsset(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->totalAsset(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                         </b>
                                                     </th>
@@ -262,37 +265,37 @@
                                                     <tr class="border">
                                                         <td>Cash</td>
                                                         <td>
-                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->depositRefundableByCash(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->depositRefundableByCash(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
                                                         </td>
                                                         <td>
-                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->depositRegistrationByCash(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->depositRegistrationByCash(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                         </td>
                                                         <td>
-                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->feeReceivedByCash(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->feeReceivedByCash(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                         </td>
                                                         <td>
-                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->totalCashReceived(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->totalCashReceived(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                         </td>
                                                     </tr>
                                                     <tr class="border">
                                                         <td>Bank</td>
                                                         <td>
-                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->depositRefundableByBank(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->depositRefundableByBank(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                         </td>
                                                         <td>
 
-                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->depositRegistrationByBank(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->depositRegistrationByBank(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
                                                         </td>
                                                         <td>
-                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->feeReceivedByBank(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->feeReceivedByBank(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                         </td>
                                                         <td>
-                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->totalBankReceived(request()->get('branch_id'), request()->get('academic_year_id')): 0 }}
+                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->totalBankReceived(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                         </td>
                                                     </tr>

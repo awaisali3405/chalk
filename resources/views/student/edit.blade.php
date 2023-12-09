@@ -66,7 +66,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Middle Name</label>
                                                     <input type="text" class="form-control" name="middle_name"
-                                                        value="{{ old('middle_name', $student->middle_name) }}" required>
+                                                        value="{{ old('middle_name', $student->middle_name) }}">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -143,8 +143,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Main Languague</label>
                                                     <input type="text" class="form-control" name="main_language"
-                                                        value="{{ old('main_language', $student->main_language) }}"
-                                                        required>
+                                                        value="{{ old('main_language', $student->main_language) }}">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">

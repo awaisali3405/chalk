@@ -264,6 +264,10 @@ class User extends Authenticatable
         }
         return $purchase;
     }
+    public function purchaseProductRate($branch, $academicYear)
+    {
+        return $this->purchaseProduct($branch, $academicYear)->sum('discounted_amount') / $this->purchaseProduct($branch, $academicYear)->sum('quantity');
+    }
     public function productSale($branch, $academicYear)
     {
         $purchase = Sale::where('academic_year_id', $academicYear);
@@ -275,21 +279,21 @@ class User extends Authenticatable
 
     public function supplierPurchase($branch, $academicYear)
     {
-        $purchase = $this->purchaseProduct($branch, $academicYear)->sum('amount');
+        $purchase = $this->purchaseProduct($branch, $academicYear)->sum('discounted_amount');
         return $purchase;
     }
     // Available Stock
     public function availableStock($branch, $academicYear)
     {
         $purchase = $this->purchaseProduct($branch, $academicYear)->sum('discounted_amount');
-        $purchaseRate = $this->purchaseProduct($branch, $academicYear)->avg('rate');
+        $purchaseRate = $this->purchaseProductRate($branch, $academicYear);
         $purchaseQuantity = $this->purchaseProduct($branch, $academicYear)->sum('quantity');
         $saleQuantity = $this->resourceSaleQuantity($branch, $academicYear);
         $saleTotal = $this->resourceSale($branch, $academicYear);
-        // dd();
         $remainingProduct = $purchaseQuantity - $saleQuantity;
+        // dd($purchaseRate, $remainingProduct, number_format($purchaseRate, 2) * $remainingProduct);
 
-        return $purchaseRate * $remainingProduct;
+        return number_format($purchaseRate, 2) * $remainingProduct;
     }
     public function resourceSale($branch, $academicYear)
     {

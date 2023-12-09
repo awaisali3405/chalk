@@ -34,6 +34,9 @@ class PurchaseController extends Controller
         $data = $request->except('_token');
         // dd($data);
         $data['academic_year_id'] = auth()->user()->session()->id;
+        if (!$data['discounted_amount']) {
+            $data['discounted_amount'] = $data['amount'];
+        }
         $purchase = Purchase::create($data);
         CashFlow::create([
             'date' => $purchase->date,
