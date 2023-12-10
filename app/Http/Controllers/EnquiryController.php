@@ -44,8 +44,8 @@ class EnquiryController extends Controller
      */
     public function index(Request $request)
     {
-        $knowUsAbout = Enquiry::distinct('know_about_us')->pluck("know_about_us");
-        View::share('knowUsAbout', $knowUsAbout);
+        $knowUsAboutEnquiry = Enquiry::distinct('know_about_us')->pluck("know_about_us");
+        View::share('$knowUsAboutEnquiry', $knowUsAboutEnquiry);
         if ($request->input()) {
             $enquiry = new Enquiry();
             if ($request->input('branch_id')) {
@@ -68,6 +68,9 @@ class EnquiryController extends Controller
             }
             if ($request->input('year_id')) {
                 $enquiry = $enquiry->where('year_id', $request->input('year_id'));
+            }
+            if ($request->input('know_about_us')) {
+                $enquiry = $enquiry->where('know_about_us', $request->input('know_about_us'));
             }
             $enquiry = $enquiry->get();
         } else {

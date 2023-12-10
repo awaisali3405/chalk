@@ -618,6 +618,9 @@ class StudentsController extends Controller
                 if ($request->input('to_week')) {
                     $student = $student->where('admission_date', '<=', auth()->user()->dateWeek($request->input('to_week')));
                 }
+                if ($request->input('know_about_us')) {
+                    $student = $student->where('know_about_us', $request->input('know_about_us'));
+                }
                 $student = $student->where('is_disable', true)->get();
             } else {
                 $student = Student::where('is_disable', true)->get();
