@@ -365,17 +365,17 @@ class User extends Authenticatable
     }
     public function totalAsset($branch, $academicYear)
     {
-        // $feeDue = $this->feeDue($branch, $academicYear);
+        $feeDue = $this->feeDue($branch, $academicYear);
         $feeReceived = $this->feeReceived($branch, $academicYear);
         $depositReceived = $this->depositReceived($branch, $academicYear);
-        // $depositDue = $this->depositDue($branch, $academicYear);
+        $depositDue = $this->depositDue($branch, $academicYear);
         $resourceReceived = $this->resourceReceived($branch, $academicYear);
-        // $resourceDue = $this->resourceDue($branch, $academicYear);
-        // $resourceFeeDue = $this->resourceFeeDue($branch, $academicYear);
+        $resourceDue = $this->resourceDue($branch, $academicYear);
+        $resourceFeeDue = $this->resourceFeeDue($branch, $academicYear);
         $loanPaid = $this->totalSalaryLoan($branch, $academicYear);
         $resourceFeeReceived = $this->resourceFeeReceived($branch, $academicYear);
         $availableStock = $this->availableStock($branch, $academicYear);
-        return  (float) $feeReceived + (float) $depositReceived +  (float) $resourceReceived +  (float) $resourceFeeReceived + (float) $availableStock + (float)$loanPaid;
+        return  (float) $feeReceived + (float) $depositReceived +  (float) $resourceReceived +  (float) $resourceFeeReceived + (float) $availableStock + (float)$loanPaid + (float)$feeDue + (float)$depositDue + (float)$resourceFeeDue + (float)$resourceDue;
     }
     // public function totalLiability(){
 
