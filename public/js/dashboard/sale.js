@@ -7,6 +7,8 @@ $('#resource').on('change', function () {
             success: function (success) {
                 $('#resource-quantity').html(success.data.quantity);
                 $('#resource-rate').html(success.data.rate);
+                console.log(success.data);
+                $('#RRP').html(success.data.rrp);
             }
         }
         )

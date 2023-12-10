@@ -136,6 +136,7 @@ class SaleController extends Controller
         $product = Product::find($id);
         $data['quantity'] = $product->remainingProduct();
         $data['rate'] = $product->rate();
+        $data['rrp'] = $product->purchase->max('rate');
         return response()->json(['data' => $data]);
     }
 }

@@ -173,7 +173,6 @@
                                                             </div>
                                                         </div>
                                                         <div class="">
-
                                                             <div class="row pl-3">
                                                                 <div class="col-lg-3 col-md-3 col-sm-12">
                                                                     <div class="form-group">
@@ -182,7 +181,6 @@
                                                                             <select name=""
                                                                                 class="form-control product"
                                                                                 id="resource">
-
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -194,15 +192,14 @@
                                                                         <div class="input-group mb-2">
                                                                             <input type="text" name=""
                                                                                 class="form-control quantity">
-
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-3 col-md-3 col-sm-12">
                                                                     <div class="form-group">
                                                                         <label class="form-label">Rate(<span
-                                                                                id="resource-rate"></span> )</label>
+                                                                                id="resource-rate"></span> ) RRP( <span
+                                                                                id="RRP"></span> )</label>
                                                                         <div class="input-group mb-2">
                                                                             <div class="input-group-prepend">
                                                                                 <div class="input-group-text">£</div>
