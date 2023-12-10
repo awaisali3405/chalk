@@ -347,7 +347,7 @@
                                             </tr>
                                         @endforeach
                                         @php
-                                            $sr = $key + 2;
+                                            $sr = $key + 1;
                                         @endphp
                                     @elseif (str_contains($invoice->type, 'Addition Invoice'))
                                         @foreach ($invoice->subject as $key => $value)
@@ -416,7 +416,7 @@
                                             <td class="bg-grey"></td>
                                         </tr>
                                         @php
-                                            $sr = 1;
+                                            $sr = 2;
                                         @endphp
                                     @elseif (str_contains($invoice->type, 'Resource Fee'))
                                         @foreach ($invoice->resourceInvoiceSubject as $key => $value)
