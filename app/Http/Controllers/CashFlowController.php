@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Branch;
 use App\Models\CashFlow;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class CashFlowController extends Controller
 {
@@ -17,6 +18,8 @@ class CashFlowController extends Controller
      */
     public function index(Request $request)
     {
+        $type = CashFlow::distinct('type')->pluck("type");
+        View::share('type', $type);
         if ($request->input()) {
 
             $cashFlow = new CashFlow();

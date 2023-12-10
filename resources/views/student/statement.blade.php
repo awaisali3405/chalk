@@ -281,7 +281,7 @@
                                         $debit += $value11->late_fee;
 
                                     @endphp
-                                    @endphp
+                                    {{-- @endphp --}}
                                     @if ($value11->credit_discount > 0)
                                         <tr>
 
@@ -392,6 +392,7 @@
                                     <td class="text-align-end"> £{{ auth()->user()->priceFormat($total) }}</td>
                                 </tr>
                                 @php
+                                    $total = $total + $value11->amount;
                                     $grandTotal += $total;
                                     $credit += $value11->amount;
                                 @endphp

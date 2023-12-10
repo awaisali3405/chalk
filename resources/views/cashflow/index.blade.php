@@ -88,6 +88,23 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Type</label>
+                                        <div class="input-group mb-2">
+                                            <select name="type" id="" class="form-control ">
+                                                <option value="">All</option>
+                                                @foreach ($type as $value)
+                                                    <option value="{{ $value }}"
+                                                        {{ $value == request()->input('type') ? 'selected' : '' }}>
+                                                        {{ $value }}
+                                                    </option>
+                                                @endforeach
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-3  pt-4">
                                     <div class="row">
                                         <div class="col-4">
@@ -101,8 +118,7 @@
                                                     <a href="{{ route('cashFlow.index') }}"
                                                         class="btn btn-secondary">Reset</a>
                                                 @else
-                                                    <button type="reset"
-                                                        class=" btn btn-secondary">Reset</button>
+                                                    <button type="reset" class=" btn btn-secondary">Reset</button>
                                                 @endif
                                             </div>
                                         </div>
