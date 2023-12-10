@@ -198,10 +198,10 @@
                                 <th style="width: 15%;" class="text-center">
                                     Invoice
                                 </th>
-                                <th style="width: 15%;" class="text-center">
+                                <th style="width: 10%;" class="text-center">
                                     Date
                                 </th>
-                                <th style="width: 25%;" class="text-center">
+                                <th style="width: 30%;" class="text-center">
                                     Detail
                                 </th>
                                 <th style="width: 15%;" class="text-center">Debit</th>
