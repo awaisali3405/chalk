@@ -237,6 +237,12 @@
                                                 if ($value1Recipt->late_fee > 0) {
                                                     $row++;
                                                 }
+                                                if ($value1Recipt->mode == 'Bank_Wallet') {
+                                                    $row++;
+                                                }
+                                                if ($value1Recipt->mode == 'Cash_Wallet') {
+                                                    $row++;
+                                                }
                                             }
                                         }
 
@@ -248,8 +254,9 @@
                                     </td>
                                     <td class="text-align-end"> £0</td>
                                     <td class="text-align-end"> £{{ auth()->user()->priceFormat($total) }}</td>
+
                                 </tr>
-                                @foreach ($value1->receipt as $value11)
+                                < @foreach ($value1->receipt as $value11)
                                     @php
                                         $total = $total - $value11->discount;
                                         $credit += $value11->discount;
@@ -288,7 +295,8 @@
                                     <tr>
 
                                         <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
-                                        <td>{{ $value11->description }} {{ $value11->mode }} {{ $value11 }}</td>
+                                        <td>{{ $value11->description }} {{ $value11->mode }}
+                                            {{ str_contains($value11, 'Wallet') ? 'Credit' : '' }} </td>
                                         <td class="text-align-end">£0</td>
                                         <td class="text-align-end">£{{ auth()->user()->priceFormat($value11->amount) }}
                                         </td>
@@ -296,22 +304,65 @@
 
 
                                     </tr>
+                                    @if (str_contains($value11, 'Wallet'))
+                                        @php
+                                            $total = $total + $value11->amount;
+                                            $debit += $value11->amount;
 
+                                        @endphp
+                                        <tr>
+
+                                            <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
+                                            <td>{{ $value11->description }} {{ $value11->mode }}
+                                                Debit </td>
+                                            <td class="text-align-end">
+                                                £{{ auth()->user()->priceFormat($value11->amount) }}
+                                            </td>
+                                            <td class="text-align-end">£0</td>
+                                            <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
+
+
+                                        </tr>
+                                    @endif
                                     @php
                                         $grandTotal += $total;
                                         $credit += $value11->amount;
 
                                     @endphp
-                                @endforeach
                             @endforeach
+                            @endforeach
+                            {{-- @foreach ($value->invoice as $value2)
+                                @foreach ($value2->receipt as $value3)
+                                    @if (str_contains($value3->mode, 'Wallet'))
+                                        <tr>
+                                            <td></td>
+                                            <td>{{ $value3->date }}</td>
+                                            <td></td>
+                                            <td class="text-align-end">
+                                                £{{ auth()->user()->priceFormat($value3->amount) }}</td>
+                                            <td class="text-align-end">£0</td>
+                                            <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
+                                        </tr>
+
+                                        @php
+                                            $total = $total + $value3->late_fee;
+                                            $debit += $value3->late_fee;
+
+                                        @endphp
+                                    @endif
+                                @endforeach
+                            @endforeach --}}
                             @foreach ($value->wallet as $value1)
-                                <td rowspan="" class="text-center"></td>
-                                <td>{{ auth()->user()->ukFormat($value1->date) }}</td>
-                                <td>{{ $value1->description }} {{ $value1->mode }} Credit</td>
-                                <td class="text-align-end"> £0</td>
-                                <td class="text-align-end"> £{{ auth()->user()->priceFormat($value1->amount) }}
-                                </td>
-                                <td class="text-align-end"> £{{ auth()->user()->priceFormat($total) }}</td>
+                                <tr>
+
+                                    <td rowspan="" class="text-center"></td>
+                                    <td>{{ auth()->user()->ukFormat($value1->date) }}</td>
+                                    <td>{{ $value1->description }} {{ $value1->mode }} Credit</td>
+                                    <td class="text-align-end"> £0</td>
+                                    <td class="text-align-end"> £{{ auth()->user()->priceFormat($value1->amount) }}
+                                    </td>
+                                    <td class="text-align-end"> £{{ auth()->user()->priceFormat($total) }}</td>
+                                </tr>
                                 @php
                                     $grandTotal += $total;
                                     $credit += $value11->amount;
