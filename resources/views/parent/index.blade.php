@@ -38,6 +38,9 @@
                                                     <th>
                                                         Email
                                                     </th>
+                                                    <th>
+                                                        Contact No.
+                                                    </th>
 
                                                     <th>Action</th>
                                                 </tr>
@@ -50,6 +53,7 @@
                                                         <td>{{ $value->given_name }}</td>
                                                         <td>{{ $value->relationship }}</td>
                                                         <td>{{ $value->email }}</td>
+                                                        <td>{{ $value->mobile_number }}</td>
                                                         <td>
 
                                                             <button type="button" class="btn btn-primary dropdown-toggle"

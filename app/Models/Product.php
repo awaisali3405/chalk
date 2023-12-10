@@ -44,6 +44,6 @@ class Product extends Model
         $quantity = $this->purchase->sum('quantity');
         $amount = $this->purchase->sum('discounted_amount');
         $rate = $amount / $quantity;
-        return auth()->user()->priceFormat($rate);
+        return number_format($rate, 2);
     }
 }

@@ -21,7 +21,7 @@
                             @if (auth()->user()->role->name != 'parent')
                                 <form action="{{ route('student.index') }}" class="" method="GET">
                                     {{-- @csrf --}}
-                                    <div class="card d-none" id="filter-form">
+                                    <div class="card  {{ request()->input() ? '' : 'd-none' }}" id="filter-form">
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-3">
@@ -110,10 +110,61 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-12 d-flex justify-content-center pt-2">
+                                                <div class="col-3">
                                                     <div class="form-group">
+                                                        <label class="form-label">Payment Period</label>
+                                                        <select name="payment_period" id="" class="form-control">
 
-                                                        <button type="submit" class=" btn btn-primary">Show</button>
+                                                            <option value="">None</option>
+                                                            <option value="Weekly"
+                                                                {{ request()->input('payment_period') == 'Weekly' ? 'selected' : '' }}>
+                                                                Weekly</option>
+                                                            <option value="Monthly"
+                                                                {{ request()->input('payment_period') == 'Monthly' ? 'selected' : '' }}>
+                                                                Monthly</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Know About Us</label>
+                                                        <select name="reference" id="" class="form-control">
+
+                                                            <option value="">None</option>
+                                                            @foreach ($knowUsAbout as $value)
+                                                                <option value="{{ $value }}"
+                                                                    {{ $value == request()->input('reference') ? 'selected' : '' }}>
+                                                                    {{ $value }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3  pt-4">
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <div class="form-group">
+                                                                <button type="submit"
+                                                                    class=" btn btn-primary">Show</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="form-group">
+                                                                @if (request()->input())
+                                                                    <a href="{{ route('student.index') }}"
+                                                                        class="btn btn-secondary">Reset</a>
+                                                                @else
+                                                                    <button type="reset"
+                                                                        class=" btn btn-secondary">Reset</button>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="form-group">
+                                                                <button type="reset"
+                                                                    class=" btn btn-info">Print</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
 

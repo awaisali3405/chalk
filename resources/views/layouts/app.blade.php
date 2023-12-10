@@ -1292,7 +1292,6 @@
     {{-- Invocie Print --}}
     <script>
         if ("{!! session()->has('action') !!}") {
-            console.log('asdasdas');
             window.open("{!! session()->get('action') !!}", '_blank');
         }
     </script>
@@ -1323,6 +1322,8 @@
     {{-- <script src="{{ asset('vendor/svganimation/vivus.min.js') }}"></script>
     <script src="{{ asset('vendor/svganimation/svg.animation.js') }}"></script>
     <script src="{{ asset('js/styleSwitcher.js') }}"></script> --}}
+    {{-- Sale --}}
+    <script src="{{ asset('js/dashboard/sale.js') }}"></script>
     {{-- Invoice --}}
     <script src="{{ asset('js/dashboard/invoice.js') }}"></script>
     {{-- Purhcase --}}

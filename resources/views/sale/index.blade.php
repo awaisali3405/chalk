@@ -53,9 +53,10 @@
                                                         <td>{{ $value->invoice->student->first_name }}
                                                             {{ $value->invoice->student->last_name }}</td>
                                                         <td>
-                                                            {{-- <a href="{{ route('purchase.edit', $value->id) }}"
-                                                                class="btn btn-sm btn-primary"><i
-                                                                    class="la la-pencil"></i></a> --}}
+                                                            @if (!$value->invoice->is_paid)
+                                                                <a href="{{ route('receipt.show', $value->invoice->id) }}"
+                                                                    class="btn btn-sm btn-primary">Receive</a>
+                                                            @endif
                                                             {{-- <a href="{{ route('year.show', $value->id) }}"
                                                                 class="btn btn-sm btn-danger"><i
                                                                     class="la la-trash-o"></i></a> --}}

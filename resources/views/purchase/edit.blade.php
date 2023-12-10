@@ -120,6 +120,22 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
+                                            <label class="form-label d-flex">Amount
+
+                                            </label>
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text symbol">
+                                                        £</div>
+                                                </div>
+                                                <input type="number" step="0.01" class="form-control amount"
+                                                    name="amount" value="{{ $purchase->amount }}" required readonly>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
                                             <label class="form-label d-flex">Discount Type
 
                                             </label>
@@ -141,22 +157,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-label d-flex">Discount
 
-                                            </label>
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text symbol">
-                                                        {{ $purchase->is_discount_price ? '£' : '%' }}</div>
-                                                </div>
-                                                <input type="number" step="0.01" class="form-control " name="discount"
-                                                    value="{{ $purchase->discount }}" required>
-                                            </div>
-
-                                        </div>
-                                    </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label d-flex">Discount

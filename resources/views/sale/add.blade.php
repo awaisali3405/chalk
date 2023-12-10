@@ -180,7 +180,8 @@
                                                                         <label class="form-label">Resource</label>
                                                                         <div class="input-group mb-2">
                                                                             <select name=""
-                                                                                class="form-control product">
+                                                                                class="form-control product"
+                                                                                id="resource">
 
                                                                             </select>
                                                                         </div>
@@ -188,7 +189,8 @@
                                                                 </div>
                                                                 <div class="col-lg-3 col-md-3 col-sm-12">
                                                                     <div class="form-group">
-                                                                        <label class="form-label">Quantity</label>
+                                                                        <label class="form-label">Quantity (<span
+                                                                                id="resource-quantity"></span> )</label>
                                                                         <div class="input-group mb-2">
                                                                             <input type="text" name=""
                                                                                 class="form-control quantity">
@@ -199,7 +201,8 @@
                                                                 </div>
                                                                 <div class="col-lg-3 col-md-3 col-sm-12">
                                                                     <div class="form-group">
-                                                                        <label class="form-label">Rate</label>
+                                                                        <label class="form-label">Rate(<span
+                                                                                id="resource-rate"></span> )</label>
                                                                         <div class="input-group mb-2">
                                                                             <div class="input-group-prepend">
                                                                                 <div class="input-group-text">£</div>

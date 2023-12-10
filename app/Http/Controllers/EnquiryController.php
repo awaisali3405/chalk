@@ -65,6 +65,9 @@ class EnquiryController extends Controller
             if ($request->input('to_week')) {
                 $enquiry = $enquiry->where('enquiry_date', '<=', auth()->user()->dateWeek($request->input('to_week')));
             }
+            if ($request->input('year_id')) {
+                $enquiry = $enquiry->where('year_id', $request->input('year_id'));
+            }
             $enquiry = $enquiry->get();
         } else {
 

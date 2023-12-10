@@ -50,6 +50,9 @@ class StudentsController extends Controller
                 if ($request->input('know_about_us')) {
                     $student = $student->where('know_about_us', $request->input('know_about_us'));
                 }
+                if ($request->input('payment_period')) {
+                    $student = $student->where('payment_period', $request->input('payment_period'));
+                }
                 $student = $student->where('active', true)->get();
             } else {
                 $student = Student::where('active', true)->get();

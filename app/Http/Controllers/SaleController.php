@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CashFlow;
+use App\Models\Product;
 use App\Models\Sale;
 use App\Models\SaleProduct;
 use App\Models\StudentInvoice;
@@ -42,6 +43,8 @@ class SaleController extends Controller
             'student_id' => $data['student_id'],
             'amount' => $amount,
             'type' => 'Sale Invoice',
+            'year_id' => $data['year_id'],
+            'branch_id' => $data['branch_id'],
             'from_date' => auth()->user()->session()->start_date,
             'to_date' => auth()->user()->session()->end_date,
             'academic_year_id' => auth()->user()->session()->id
@@ -122,5 +125,12 @@ class SaleController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function getData($id)
+    {
+        $product = Product::find($id);
+        $data['quantity'] = $product->remainingProduct();
+        $data['rate'] = $product->rate();
+        return response()->json(['data' => $data]);
     }
 }

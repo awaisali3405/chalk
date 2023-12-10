@@ -40,12 +40,21 @@ class CashFlowController extends Controller
             if ($request->to_week) {
                 $cashFlow = $cashFlow->where("date", '<=', auth()->user()->dateWeek($request->to_week));
             }
+            if ($request->mode) {
+                $cashFlow = $cashFlow->where("mode", $request->mode);
+            }
 
             $cashFlow = $cashFlow->where('mode', '!=', 'Wallet')->get();
         } else {
             $cashFlow = CashFlow::where('mode', '!=', 'Wallet')->get();
         }
-        return view('cashflow.index', compact('cashFlow'));
+        $mode = [
+            'Cash',
+            'Bank',
+            'Cash_Wallet',
+            'Bank_Wallet',
+        ];
+        return view('cashflow.index', compact('cashFlow', 'mode'));
     }
     /**
      * Show the form for creating a new resource.

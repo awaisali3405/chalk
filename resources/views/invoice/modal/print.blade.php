@@ -887,14 +887,10 @@
                                         </td>
                                         <th class="text-center"
                                             style="text-align: end !important; padding-right:5px;">
-
                                             £{{ auth()->user()->priceFormat($invoice->amount - $invoice->receipt->sum('discount') + $invoice->receipt->sum('late_fee')) }}
-
                                         </th>
                                     </tr>
                                     <tr>
-
-
                                         <td class="">
                                             Invoice Balance
                                         </td>
@@ -913,35 +909,25 @@
                                         </th>
                                         <th class="text-center"
                                             style="text-align: end !important; padding-right:5px;">
-
                                             £{{ auth()->user()->priceFormat($invoice->taxAmount()) }}
-
                                         </th>
                                     </tr>
                                     <tr>
-
-
                                         <th class="" colspan="">
                                             Debit Brought Forward
                                         </th>
                                         <th class="text-center"
                                             style="text-align: end !important; padding-right:5px;">
-
                                             £{{ auth()->user()->priceFormat($invoice->debitBroughtForward()) }}
-
                                         </th>
                                     </tr>
                                     <tr>
-
-
                                         <th class="" colspan="">
                                             Payment Due
                                         </th>
                                         <th class="text-center"
                                             style="text-align: end !important; padding-right:5px;">
-
                                             £{{ auth()->user()->priceFormat($invoice->debitBroughtForward() + $invoice->remainingAmount()) }}
-
                                         </th>
                                     </tr>
                                 </tbody>

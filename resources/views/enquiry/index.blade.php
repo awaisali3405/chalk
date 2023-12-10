@@ -21,7 +21,7 @@
                         <div id="list-view" class="tab-pane fade active show col-lg-12">
                             <form action="{{ route('enquiry.index') }}" method="GET">
                                 {{-- @csrf --}}
-                                <div class="card">
+                                <div class="card {{ request()->input() ? '' : 'd-none' }}" id="filter-form">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-3">
@@ -38,20 +38,20 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            {{-- <div class="col-3">
+                                            <div class="col-3">
                                                 <div class="form-group">
-                                                    <label class="form-label">Academic Year</label>
-                                                    <select name="academic_year_id" id="" class="form-control">
+                                                    <label class="form-label">Year</label>
+                                                    <select name="year_id" id="" class="form-control">
 
                                                         <option value="">All</option>
-                                                        @foreach ($academicYear as $value)
+                                                        @foreach ($year as $value)
                                                             <option value="{{ $value->id }}"
-                                                                {{ $value->id == request()->input('academic_year_id') ? 'selected' : '' }}>
+                                                                {{ $value->id == request()->input('year_id') ? 'selected' : '' }}>
                                                                 {{ $value->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                            </div> --}}
+                                            </div>
                                             <div class="col-3">
                                                 <div class="form-group">
                                                     <label class="form-label">From Date</label>
@@ -110,10 +110,29 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-12 d-flex justify-content-center pt-2">
-                                                <div class="form-group">
-
-                                                    <button type="submit" class=" btn btn-primary">Show</button>
+                                            <div class="col-3  pt-4">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <div class="form-group">
+                                                            <button type="submit" class=" btn btn-primary">Show</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div class="form-group">
+                                                            @if (request()->input())
+                                                                <a href="{{ route('enquiry.index') }}"
+                                                                    class="btn btn-secondary">Reset</a>
+                                                            @else
+                                                                <button type="reset"
+                                                                    class=" btn btn-secondary">Reset</button>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div class="form-group">
+                                                            <button type="reset" class=" btn btn-info">Print</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -125,7 +144,10 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">All Enquiry </h4>
-                                <a href="{{ route('enquiry.create') }}" class="btn btn-primary">+ Add new</a>
+                                <div class="">
+                                    <span id="filter" class="btn btn-secondary">Filter</span>
+                                    <a href="{{ route('enquiry.create') }}" class="btn btn-primary">+ Add new</a>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -134,9 +156,9 @@
                                             <tr>
                                                 <th>Sr</th>
                                                 <th>Inquiring Person</th>
-                                                <th>Name</th>
+                                                <th>Student Name</th>
                                                 <th>Year</th>
-                                                <th>Date</th>
+                                                <th>Enquiry Date</th>
                                                 <th>Week</th>
 
                                                 <th>Action</th>

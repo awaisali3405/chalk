@@ -92,7 +92,6 @@
                                             @foreach ($invoice as $key => $value)
                                                 @php
                                                     $total += $value->amount;
-                                                    // dd($value->);
                                                     $total_paid += $value->receipt->sum('amount');
                                                     $total_remaining += $value->amount - ($value->receipt->sum('discount') - $value->receipt->sum('late_fee')) - $value->receipt->sum('amount');
                                                 @endphp
@@ -100,7 +99,7 @@
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ $value->code }}</td>
                                                     <td>{{ auth()->user()->ukFormat($value->created_at) }}</td>
-                                                    <td>{{ ($value->type == 'Refundable' ? 'Deposit' : $value->type == 'Resource Fee') ? 'Resources' : $value->type }}
+                                                    <td>{{ $value->type == 'Refundable' ? 'Deposit' : ($value->type == 'Resource Fee' ? 'Resources' : $value->type) }}
                                                     </td>
                                                     <td>£{{ $value->amount }}</td>
                                                     <td>{{ auth()->user()->priceFormat($value->tax) }}%</td>
@@ -114,12 +113,6 @@
                                                     <td>{{ $value->is_paid ? 'Paid' : 'Unpaid' }}</td>
                                                     <td>{{ $value->period() }}</td>
                                                     <td>
-                                                        {{-- <a href="{{ route('receipt.show', $value->id) }}"
-                                                            class="btn btn-sm btn-primary">Recieve</a>
-                                                        <a href="{{ route('invoice.print', $value->id) }}"
-                                                            class="btn btn-sm btn-primary">Print</a>
-                                                        <a href="{{ route('board.edit', $value->id) }}"
-                                                            class="btn btn-sm btn-primary">Delete</a> --}}
                                                         <button type="button" class="btn btn-primary dropdown-toggle"
                                                             data-toggle="dropdown" aria-expanded="true">
                                                             Action

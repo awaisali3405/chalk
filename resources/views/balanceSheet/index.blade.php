@@ -194,6 +194,15 @@
 
                                                     <td colspan="2" class="text-left"></td>
                                                 </tr>
+                                                <tr>
+                                                    <td class="text-left">Wallet</td>
+                                                    <td class="text-left">
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->studentWallet(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
+
+                                                    </td>
+
+                                                    <td colspan="2" class="text-left"></td>
+                                                </tr>
 
                                                 <tr>
                                                     <th class="text-center">
@@ -258,6 +267,7 @@
                                                         <th>Deposit</th>
                                                         <th>Admin</th>
                                                         <th>Fee</th>
+                                                        <th>Resources</th>
                                                         <th>Total</th>
                                                     </tr>
                                                 </thead>
@@ -273,6 +283,10 @@
                                                         </td>
                                                         <td>
                                                             {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->feeReceivedByCash(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
+
+                                                        </td>
+                                                        <td>
+                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->resourceFeeReceivedByCash(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                         </td>
                                                         <td>
@@ -292,6 +306,10 @@
                                                         </td>
                                                         <td>
                                                             {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->feeReceivedByBank(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
+
+                                                        </td>
+                                                        <td>
+                                                            {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->resourceFeeReceivedByBank(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                         </td>
                                                         <td>

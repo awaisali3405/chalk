@@ -105,7 +105,7 @@ class User extends Authenticatable
     public function depositRegistrationByCash($branch, $academicYear)
     {
         $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Registration'])->pluck('id');
-        $invoiceReceived = $this->receipt($invoice)->where('mode', 'Cash')->get();
+        $invoiceReceived = $this->receipt($invoice)->whereIn('mode', ['Cash', "Cash_Wallet"])->get();
         $received = $invoiceReceived->sum('amount');
 
         return $this->priceFormat($received);
@@ -113,7 +113,7 @@ class User extends Authenticatable
     public function depositRegistrationByBank($branch, $academicYear)
     {
         $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Registration'])->pluck('id');
-        $invoiceReceived = $this->receipt($invoice)->where('mode', 'Bank')->get();
+        $invoiceReceived = $this->receipt($invoice)->whereIn('mode', ['Bank', 'Bank_Wallet'])->get();
         $received = $invoiceReceived->sum('amount');
 
         return $this->priceFormat($received);
@@ -136,7 +136,7 @@ class User extends Authenticatable
         $invoice = $this->invoice($branch, $academicYear)->where('type', 'Refundable');
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
-        $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->where('mode', 'Cash')->get();
+        $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->whereIn('mode', ['Cash', "Cash_Wallet"])->get();
         $received = $invoiceReceived->sum('amount');
         $refund = $this->totalRefundedByCash($branch, $academicYear);
         // dd($invoice_sum, $received);
@@ -147,7 +147,7 @@ class User extends Authenticatable
         $invoice = $this->invoice($branch, $academicYear)->where('type', 'Refundable');
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
-        $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->where('mode', 'Bank')->get();
+        $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->whereIn('mode', ['Bank', 'Bank_Wallet'])->get();
         $received = $invoiceReceived->sum('amount');
         $refund = $this->totalRefundedByBank($branch, $academicYear);
         // dd($invoice_sum, $received);
@@ -162,6 +162,24 @@ class User extends Authenticatable
 
 
     // Resource Fee
+    public function resourceFeeReceivedByCash($branch, $academicYear)
+    {
+        $invoice = $this->invoice($branch, $academicYear)->where('type', 'Resource Fee');
+        $invoice_id = $invoice->pluck('id');
+        $invoice_sum = $invoice->get()->sum('amount');
+        $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->whereIn('mode', ['Cash', "Cash_Wallet"])->get();
+        $received = $invoiceReceived->sum('amount');
+        return $this->priceFormat($received);
+    }
+    public function resourceFeeReceivedByBank($branch, $academicYear)
+    {
+        $invoice = $this->invoice($branch, $academicYear)->where('type', 'Resource Fee');
+        $invoice_id = $invoice->pluck('id');
+        $invoice_sum = $invoice->get()->sum('amount');
+        $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->whereIn('mode', ['Bank', "Bank_Wallet"])->get();
+        $received = $invoiceReceived->sum('amount');
+        return $this->priceFormat($received);
+    }
     public function resourceFeeReceived($branch, $academicYear)
     {
         $invoice = $this->invoice($branch, $academicYear)->where('type', 'Resource Fee');
@@ -215,7 +233,7 @@ class User extends Authenticatable
         $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Monthly Fee', 'Weekly Fee', 'Addition Invoice']);
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
-        $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->where('mode', 'Bank')->get();
+        $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->whereIn('mode', ['Bank', 'Bank_Wallet'])->get();
         $received = $invoiceReceived->sum('amount');
         $discount = $invoiceReceived->sum('discount');
         $late_fee = $invoiceReceived->sum('late_fee');
@@ -233,18 +251,18 @@ class User extends Authenticatable
     }
     public function bankWallet($branch, $academicYear)
     {
-        return $this->wallet($branch, $academicYear)->where('mode', 'Bank')->sum('amount');
+        return $this->wallet($branch, $academicYear)->whereIn('mode', ['Bank', 'Bank_Wallet'])->sum('amount');
     }
     public function cashWallet($branch, $academicYear)
     {
-        return $this->wallet($branch, $academicYear)->where('mode', 'Cash')->sum('amount');
+        return $this->wallet($branch, $academicYear)->whereIn('mode', ['Cash', 'Cash_Wallet'])->sum('amount');
     }
     public function feeReceivedByCash($branch, $academicYear)
     {
         $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Monthly Fee', 'Weekly Fee', 'Addition Invoice']);
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
-        $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->where('mode', 'Cash')->get();
+        $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->whereIn('mode', ['Cash', "Cash_Wallet"])->get();
         $received = $invoiceReceived->sum('amount');
         $discount = $invoiceReceived->sum('discount');
         $late_fee = $invoiceReceived->sum('late_fee');
@@ -368,14 +386,16 @@ class User extends Authenticatable
         $feeReceivedByCash = $this->feeReceivedByCash($branch, $academicYear);
         $depositRegistrationByCash = $this->depositRegistrationByCash($branch, $academicYear);
         $depositRefundableByCash = $this->depositRefundableByCash($branch, $academicYear);
-        return $feeReceivedByCash + $depositRegistrationByCash + $depositRefundableByCash;
+        $walletByCash = $this->studentCashWallet($branch, $academicYear);
+        return $feeReceivedByCash + $depositRegistrationByCash + $depositRefundableByCash + $walletByCash;
     }
     public function totalBankReceived($branch, $academicYear)
     {
         $feeReceivedByBank = $this->feeReceivedByBank($branch, $academicYear);
         $depositRegistrationByBank = $this->depositRegistrationByBank($branch, $academicYear);
         $depositRefundableByBank = $this->depositRefundableByBank($branch, $academicYear);
-        return $feeReceivedByBank + $depositRegistrationByBank + $depositRefundableByBank;
+        $walletByBank = $this->studentBankWallet($branch, $academicYear);
+        return $feeReceivedByBank + $depositRegistrationByBank + $depositRefundableByBank + $walletByBank;
     }
     // Total Refunded
     public function refundByCash($branch, $academicYear)
@@ -567,5 +587,25 @@ class User extends Authenticatable
     public function studentDisable()
     {
         return Student::where('is_disable', true)->get();
+    }
+    public function studentBankWallet($branch, $academicYear)
+    {
+        $wallet = Student::where('academic_year_id', $academicYear);
+        if ($branch != -1) {
+            $wallet = $wallet->where('branch_id', $branch);
+        }
+        return $wallet->sum('bank_balance');
+    }
+    public function studentCashWallet($branch, $academicYear)
+    {
+        $wallet = Student::where('academic_year_id', $academicYear);
+        if ($branch != -1) {
+            $wallet = $wallet->where('branch_id', $branch);
+        }
+        return $wallet->sum('cash_balance');
+    }
+    public function studentWallet($branch, $academicYear)
+    {
+        return $this->studentBankWallet($branch, $academicYear) + $this->studentCashWallet($branch, $academicYear);
     }
 }
