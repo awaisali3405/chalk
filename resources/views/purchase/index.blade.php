@@ -30,6 +30,9 @@
                                                 <tr>
                                                     <th>Sr</th>
                                                     <th>
+                                                        Supplier
+                                                    </th>
+                                                    <th>
                                                         Year
                                                     </th>
                                                     <th>
@@ -49,7 +52,7 @@
                                                 @foreach ($purchase as $key => $value)
                                                     <tr>
                                                         <td>{{ $key + 1 }}</td>
-
+                                                        <td>{{ $value->supplier->name }}</td>
                                                         <td>{{ $value->year->name }}</td>
                                                         <td>{{ $value->branch->name }}</td>
                                                         <td>{{ $value->product->name }}</td>
