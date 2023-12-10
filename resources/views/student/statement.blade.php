@@ -221,7 +221,7 @@
                                     $total += $value1->amount;
                                     $debit += $value1->amount;
                                 @endphp
-                                <tr>
+                                <tr style="color: rgb(146, 10, 10);">
                                     @php
                                         $row = 1;
 
@@ -266,7 +266,7 @@
                                         $credit += $value11->discount;
                                     @endphp
                                     @if ($value11->discount > 0)
-                                        <tr>
+                                        <tr style="color: rgb(7, 116, 7);">
 
                                             <td>{{ $value11->date }}</td>
                                             <td>Discount</td>
