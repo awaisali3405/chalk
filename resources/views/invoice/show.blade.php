@@ -108,7 +108,7 @@
                                                     <td>£{{ $value->receipt->sum('late_fee') }}</td>
                                                     <td>£{{ $value->receipt->sum('amount') }}
                                                     </td>
-                                                    <td>£{{ $value->amount - ($value->receipt->sum('discount') - $value->receipt->sum('late_fee')) - $value->receipt->sum('amount') }}
+                                                    <td>£{{ $value->amount - ($value->receipt->sum('discount') - $value->receipt->sum('credit_discount') - $value->receipt->sum('late_fee')) - $value->receipt->sum('amount') }}
                                                     </td>
                                                     <td>{{ $value->is_paid ? 'Paid' : 'Unpaid' }}</td>
                                                     <td>{{ $value->period() }}</td>
