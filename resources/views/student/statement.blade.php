@@ -342,7 +342,7 @@
                                     @php
                                         $total = $total - $value11->amount;
                                     @endphp
-                                    <tr style="background-color: skyblue;">
+                                    <tr>
                                         <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
                                         <td>{{ $value11->description }} {{ $value11->mode }}
                                             {{ str_contains($value11, 'Wallet') ? 'Credit' : '' }} </td>
@@ -386,7 +386,7 @@
                                     $grandTotal += $total;
                                     $credit += $value1->amount;
                                 @endphp
-                                <tr>
+                                <tr style="background-color: skyblue;">
 
                                     <td rowspan="" class="text-center"></td>
                                     <td>{{ auth()->user()->ukFormat($value1->date) }}</td>
