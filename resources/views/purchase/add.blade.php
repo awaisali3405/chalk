@@ -167,8 +167,8 @@
                                                     <div class="input-group-text">£</div>
                                                 </div>
                                                 <input type="number" step="0.01"
-                                                    class="form-control  discounted_amount" name="discounted_amount"
-                                                    value="0" required readonly>
+                                                    class="form-control  discounted_amount amount"
+                                                    name="discounted_amount" value="0" required readonly>
                                             </div>
 
                                         </div>

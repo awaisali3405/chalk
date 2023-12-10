@@ -113,17 +113,11 @@
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
                 </form>
-
             </div>
-            {{-- <form action="{{ route('attendance.store') }}" method="post">
-                @csrf
-                <input type="hidden" name="date" value="{{ request()->get('date') }}" required> --}}
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="row tab-content">
