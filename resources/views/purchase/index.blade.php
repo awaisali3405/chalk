@@ -39,6 +39,7 @@
                                                         Product
                                                     </th>
                                                     <th>Rate</th>
+                                                    <th>RRP</th>
                                                     <th>Amount</th>
                                                     <th>Quantity</th>
                                                     <th>Action</th>
@@ -52,6 +53,10 @@
                                                         <td>{{ $value->year->name }}</td>
                                                         <td>{{ $value->branch->name }}</td>
                                                         <td>{{ $value->product->name }}</td>
+                                                        <td>{{ auth()->user()->priceFormat($value->discounted_amount / $value->quantity) }}
+                                                        </td>
+                                                        <td>{{ auth()->user()->priceFormat($value->rate) }}
+                                                        </td>
                                                         <td>{{ auth()->user()->priceFormat($value->discounted_amount / $value->quantity) }}
                                                         </td>
                                                         <td>{{ auth()->user()->priceFormat($value->discounted_amount) }}
