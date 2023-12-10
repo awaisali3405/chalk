@@ -41,7 +41,7 @@ class ReceiptController extends Controller
     {
         $data = $request->except('_token');
         $data['academic_year_id'] = auth()->user()->session()->id;
-        if ($data['amount']) {
+        if ($data['amount'] || $data['discount']) {
             if ($data['credit_note']) {
                 $data['credit_discount'] = $data['discount'];
                 $data['discount'] = 0;
