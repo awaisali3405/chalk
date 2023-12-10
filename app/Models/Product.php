@@ -43,7 +43,12 @@ class Product extends Model
         $rate = 0;
         $quantity = $this->purchase->sum('quantity');
         $amount = $this->purchase->sum('discounted_amount');
-        $rate = $amount / $quantity;
+        if ($quantity) {
+
+            $rate = $amount / $quantity;
+        } else {
+            $rate = 0;
+        }
         return number_format($rate, 2);
     }
 }

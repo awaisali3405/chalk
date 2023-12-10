@@ -47,14 +47,16 @@ class ReceiptController extends Controller
                 $data['discount'] = 0;
             }
             $receipt = StudentInvoiceReceipt::create($data);
-            CashFlow::create([
-                'date' => $receipt->date,
-                'branch_id' => $receipt->invoice->branch_id,
-                'description' => $receipt->invoice->student->name() . " (" . auth()->user()->session()->period() . ")",
-                'mode' => $receipt->mode,
-                'type' => $receipt->invoice->type == "Refundable" ? "Deposit" : $receipt->invoice->type,
-                'in' => $receipt->amount,
-            ]);
+            if (!str_contains($data['mode'], 'Wallet')) {
+                CashFlow::create([
+                    'date' => $receipt->date,
+                    'branch_id' => $receipt->invoice->branch_id,
+                    'description' => $receipt->invoice->student->name() . " (" . auth()->user()->session()->period() . ")",
+                    'mode' => $receipt->mode,
+                    'type' => $receipt->invoice->type == "Refundable" ? "Deposit" : $receipt->invoice->type,
+                    'in' => $receipt->amount,
+                ]);
+            }
             if ($data['mode'] == "Cash_Wallet") {
                 $receipt->invoice->student()->update([
                     'cash_balance' => $receipt->invoice->student->cash_balance - $data['amount']
@@ -77,7 +79,7 @@ class ReceiptController extends Controller
                     'branch_id' => $receipt->invoice->student->branch_id,
                     'year_id' => $receipt->invoice->student->currentYear()->id,
                     'student_id' => $receipt->invoice->student_id,
-                    'description' => "Add From Receipt by",
+                    'description' => "Amount Received by ",
                     'amount' => $data['add_to_wallet'],
                     'fixed' => 1,
                     'date' => $data['date'],

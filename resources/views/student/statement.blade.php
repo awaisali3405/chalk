@@ -288,7 +288,7 @@
                                     <tr>
 
                                         <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
-                                        <td>{{ $value11->description }} {{ $value11->mode }}</td>
+                                        <td>{{ $value11->description }} {{ $value11->mode }} {{ $value11 }}</td>
                                         <td class="text-align-end">£0</td>
                                         <td class="text-align-end">£{{ auth()->user()->priceFormat($value11->amount) }}
                                         </td>
@@ -307,7 +307,7 @@
                             @foreach ($value->wallet as $value1)
                                 <td rowspan="" class="text-center"></td>
                                 <td>{{ auth()->user()->ukFormat($value1->date) }}</td>
-                                <td>{{ $value1->description }} {{ $value1->mode }}</td>
+                                <td>{{ $value1->description }} {{ $value1->mode }} Credit</td>
                                 <td class="text-align-end"> £0</td>
                                 <td class="text-align-end"> £{{ auth()->user()->priceFormat($value1->amount) }}
                                 </td>
