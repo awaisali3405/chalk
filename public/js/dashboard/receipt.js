@@ -98,7 +98,7 @@ $(document).ready(function () {
         if (checked) {
             $('#credit-note-check').val(1);
             console.log($('.pay_amount').val() < $('#credit-note-amount').val());
-            if ($('.pay_amount').val() < $('#credit-note-amount').val()) {
+            if (parseFloat($('.pay_amount').val()) < parseFloat($('#credit-note-amount').val())) {
                 $('#credit-note-html').html($('#credit-note-amount').val() - $('.pay_amount').val())
                 $('#discount').attr('readonly', true).val($('.pay_amount').val());
             } else {

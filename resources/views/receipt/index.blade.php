@@ -202,19 +202,19 @@
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
-                                                                <label class="form-label">Add To Wallet</label>
+                                                                <label class="form-label">Receiving Amount</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
-                                                                    <input type="number" step="0.01"
-                                                                        class="form-control" id="add-to-wallet"
-                                                                        name="add_to_wallet" value="0"
-                                                                        placeholder=""
-                                                                        {{ $invoice->remainingAmount() <= 0 ? 'readonly' : '' }}>
+                                                                    <input type="text"
+                                                                        value="{{ $invoice->remainingAmount() }}"
+                                                                        id="total" class="form-control pay_amount"
+                                                                        placeholder="" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
+
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
                                                                 <label class="form-label">Date</label>
@@ -225,6 +225,21 @@
                                                                     <input type="date" class="form-control"
                                                                         value="{{ \Carbon\Carbon::now()->toDateString() }}"
                                                                         name="date" placeholder="" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Add To Wallet</label>
+                                                                <div class="input-group mb-2">
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">£</div>
+                                                                    </div>
+                                                                    <input type="number" step="0.01"
+                                                                        class="form-control" id="add-to-wallet"
+                                                                        name="add_to_wallet" value="0"
+                                                                        placeholder=""
+                                                                        {{ $invoice->remainingAmount() <= 0 ? 'readonly' : '' }}>
                                                                 </div>
                                                             </div>
                                                         </div>
