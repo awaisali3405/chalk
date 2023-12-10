@@ -619,6 +619,7 @@
                 amount = $('#actual_amount').val()
                 pay = (amount - discount) + +late
                 $('.pay_amount').val(pay)
+                $('.pay_amount').attr('max', pay)
             })
 
             $('.keyStage').on('change keyup', function() {
