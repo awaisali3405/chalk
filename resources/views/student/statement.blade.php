@@ -234,6 +234,10 @@
                                                     $row++;
                                                     // dd($row);
                                                 }
+                                                if ($value1Recipt->credit_discount > 0) {
+                                                    $row++;
+                                                    // dd($row);
+                                                }
                                                 if ($value1Recipt->late_fee > 0) {
                                                     $row++;
                                                 }
@@ -277,6 +281,37 @@
                                         $debit += $value11->late_fee;
 
                                     @endphp
+                                    @endphp
+                                    @if ($value11->credit_discount > 0)
+                                        <tr>
+
+                                            <td>{{ $value11->date }}</td>
+                                            <td>Credit Discount Debit</td>
+                                            <td class="text-align-end">
+                                                £{{ auth()->user()->priceFormat($value11->credit_discount) }}</td>
+                                            <td class="text-align-end">£0</td>
+                                            <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
+                                        </tr>
+                                        @php
+                                            $total = $total + $value11->credit_discount;
+                                            $debit += $value11->credit_discount;
+
+                                        @endphp
+                                        <tr>
+
+                                            <td>{{ $value11->date }}</td>
+                                            <td>Credit Discount Credit</td>
+                                            <td class="text-align-end">£0</td>
+                                            <td class="text-align-end">
+                                                £{{ auth()->user()->priceFormat($value11->credit_discount) }}</td>
+                                            <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
+                                            @php
+                                                $total = $total - $value11->credit_discount;
+                                                $credit += $value11->credit_discount;
+
+                                            @endphp
+                                        </tr>
+                                    @endif
                                     @if ($value11->late_fee > 0)
                                         <tr>
 
@@ -288,30 +323,12 @@
                                             <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
                                         </tr>
                                     @endif
-                                    @php
-                                        $total = $total - $value11->amount;
-
-                                    @endphp
-                                    <tr>
-
-                                        <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
-                                        <td>{{ $value11->description }} {{ $value11->mode }}
-                                            {{ str_contains($value11, 'Wallet') ? 'Credit' : '' }} </td>
-                                        <td class="text-align-end">£0</td>
-                                        <td class="text-align-end">£{{ auth()->user()->priceFormat($value11->amount) }}
-                                        </td>
-                                        <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
-
-
-                                    </tr>
                                     @if (str_contains($value11, 'Wallet'))
                                         @php
                                             $total = $total + $value11->amount;
                                             $debit += $value11->amount;
-
                                         @endphp
                                         <tr>
-
                                             <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
                                             <td>{{ $value11->description }} {{ $value11->mode }}
                                                 Debit </td>
@@ -320,10 +337,21 @@
                                             </td>
                                             <td class="text-align-end">£0</td>
                                             <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
-
-
                                         </tr>
                                     @endif
+                                    @php
+                                        $total = $total - $value11->amount;
+                                    @endphp
+                                    <tr>
+                                        <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
+                                        <td>{{ $value11->description }} {{ $value11->mode }}
+                                            {{ str_contains($value11, 'Wallet') ? 'Credit' : '' }} </td>
+                                        <td class="text-align-end">£0</td>
+                                        <td class="text-align-end">£{{ auth()->user()->priceFormat($value11->amount) }}
+                                        </td>
+                                        <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
+                                    </tr>
+
                                     @php
                                         $grandTotal += $total;
                                         $credit += $value11->amount;
