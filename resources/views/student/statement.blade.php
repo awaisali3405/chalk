@@ -260,7 +260,7 @@
                                     <td class="text-align-end"> £{{ auth()->user()->priceFormat($total) }}</td>
 
                                 </tr>
-                                < @foreach ($value1->receipt as $value11)
+                                @foreach ($value1->receipt as $value11)
                                     @php
                                         $total = $total - $value11->discount;
                                         $credit += $value11->discount;
@@ -342,7 +342,7 @@
                                     @php
                                         $total = $total - $value11->amount;
                                     @endphp
-                                    <tr>
+                                    <tr style="background-color: skyblue;">
                                         <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
                                         <td>{{ $value11->description }} {{ $value11->mode }}
                                             {{ str_contains($value11, 'Wallet') ? 'Credit' : '' }} </td>
@@ -357,7 +357,7 @@
                                         $credit += $value11->amount;
 
                                     @endphp
-                            @endforeach
+                                @endforeach
                             @endforeach
                             {{-- @foreach ($value->invoice as $value2)
                                 @foreach ($value2->receipt as $value3)
