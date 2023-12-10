@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CashFlow;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PurchaseController extends Controller
 {

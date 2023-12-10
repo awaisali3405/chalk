@@ -284,7 +284,12 @@ class User extends Authenticatable
     }
     public function purchaseProductRate($branch, $academicYear)
     {
-        return $this->purchaseProduct($branch, $academicYear)->sum('discounted_amount') / $this->purchaseProduct($branch, $academicYear)->sum('quantity');
+        if ($this->purchaseProduct($branch, $academicYear)->sum('quantity')) {
+
+            return $this->purchaseProduct($branch, $academicYear)->sum('discounted_amount') / $this->purchaseProduct($branch, $academicYear)->sum('quantity');
+        } else {
+            return 0;
+        }
     }
     public function productSale($branch, $academicYear)
     {

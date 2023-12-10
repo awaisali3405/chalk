@@ -471,4 +471,9 @@
 
             </div>
         </div>
+        <script>
+            if ("{!! session()->has('active') !!}") {
+                console.log("{!! session()->get('active') !!}");
+            }
+        </script>
     @endsection

@@ -24,7 +24,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title">{{ $product->name }}</h5>
-                            <h5 class="">Quantity: {{ $product->purchase->sum('quantity') }}</h5>
+                            <h5 class="">Quantity: {{ $product->remainingProduct() }}</h5>
                         </div>
                         <div class="card-body">
                             <form action="{{ route('product.transfer.store', $product->id) }}" method="post">
@@ -91,21 +91,21 @@
                                         <div class="form-group">
                                             <label class="form-label">Quantity</label>
                                             <input type="text" class="form-control" id="quantity-o"
-                                                value="{{ $product->purchase->sum('quantity') }}" disabled>
+                                                value="{{ $product->remainingProduct() }}" disabled>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Quantity</label>
                                             <input type="number" class="form-control" name="quantity" id="t-quantity"
-                                                max="{{ $product->purchase->sum('quantity') }}" value="0">
+                                                max="{{ $product->remainingProduct() }}" value="0">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Rate</label>
                                             <input type="number" class="form-control" name="rate"
-                                                value="{{ count($product->purchase) > 0 ? number_format($product->purchase[0]->rate) : 0 }}"
+                                                value="{{ count($product->purchase) > 0 ? number_format($product->rate()) : 0 }}"
                                                 disabled>
                                         </div>
                                     </div>

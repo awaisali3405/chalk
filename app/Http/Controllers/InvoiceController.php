@@ -141,9 +141,9 @@ class InvoiceController extends Controller
                     'academic_year_id' => auth()->user()->session()->id
                 ]);
             }
+            Session::put('action', route("invoice.print", $invoice->id));
             return redirect()->route('invoice.index')->with('success', 'invoice Created Successfully.');
         } else {
-            Session::put('action', route("invoice.print"));
             return redirect()->back()->with('error', 'Please Add Your Subject.');
         }
     }

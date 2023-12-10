@@ -126,20 +126,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-3">
-                                                    <div class="form-group">
-                                                        <label class="form-label">Know About Us</label>
-                                                        <select name="reference" id="" class="form-control">
 
-                                                            <option value="">None</option>
-                                                            @foreach ($knowUsAbout as $value)
-                                                                <option value="{{ $value }}"
-                                                                    {{ $value == request()->input('reference') ? 'selected' : '' }}>
-                                                                    {{ $value }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
                                                 <div class="col-3  pt-4">
                                                     <div class="row">
                                                         <div class="col-4">
@@ -161,8 +148,7 @@
                                                         </div>
                                                         <div class="col-4">
                                                             <div class="form-group">
-                                                                <button type="reset"
-                                                                    class=" btn btn-info">Print</button>
+                                                                <button type="reset" class=" btn btn-info">Print</button>
                                                             </div>
                                                         </div>
                                                     </div>
