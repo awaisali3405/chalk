@@ -97,7 +97,11 @@ $(document).ready(function () {
         checked = $(this).is(":checked");
         if (checked) {
             $('#credit-note-check').val(1);
-            $('#credit-note-html').html('0')
+            if ($('.pay_amount').val() < $('#credit-note-amount').val()) {
+                $('#credit-note-html').html($('#credit-note-amount').val() - $('.pay_amount').val())
+            } else {
+                $('#credit-note-html').html('0')
+            }
             $('#discount').attr('readonly', true).val($('#credit-note-amount').val());
             $('.pay_amount').val($('.pay_amount').val() - $('#discount').val());
         } else {
