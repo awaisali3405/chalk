@@ -151,26 +151,20 @@
                                                             disabled id="cash-balance">
                                                         {{-- <input type="hidden" name="" id=""> --}}
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
-                                                            <input type="hidden" name="invoice_id"
-                                                                value="{{ $invoice->id }}">
                                                             <div class="form-group">
-                                                                <label class="form-label">Balance To Pay</label>
+                                                                <label class="form-label">Receiving Amount</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
                                                                     </div>
-                                                                    {{-- @dd($invoice->receipt->sum('amount') - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee'))) --}}
-                                                                    <input type="hidden" class="form-control"
-                                                                        id="actual_amount"
-                                                                        value="{{ $invoice->amount - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount') }}">
-                                                                    <input type="number" step="0.01"
-                                                                        class="form-control pay_amount" id=""
+                                                                    <input type="text"
                                                                         value="{{ $invoice->remainingAmount() }}"
-                                                                        name="amount" required
-                                                                        {{ $invoice->remainingAmount() <= 0 ? 'readonly' : '' }}>
+                                                                        id="total" class="form-control pay_amount"
+                                                                        placeholder="" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
+
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
                                                                 <label class="form-label">Discount</label>
@@ -200,20 +194,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                                            <div class="form-group">
-                                                                <label class="form-label">Receiving Amount</label>
-                                                                <div class="input-group mb-2">
-                                                                    <div class="input-group-prepend">
-                                                                        <div class="input-group-text">£</div>
-                                                                    </div>
-                                                                    <input type="text"
-                                                                        value="{{ $invoice->remainingAmount() }}"
-                                                                        id="total" class="form-control pay_amount"
-                                                                        placeholder="" readonly>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+
 
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
@@ -225,6 +206,27 @@
                                                                     <input type="date" class="form-control"
                                                                         value="{{ \Carbon\Carbon::now()->toDateString() }}"
                                                                         name="date" placeholder="" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <input type="hidden" name="invoice_id"
+                                                                value="{{ $invoice->id }}">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Balance To Pay</label>
+                                                                <div class="input-group mb-2">
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">£</div>
+                                                                    </div>
+                                                                    {{-- @dd($invoice->receipt->sum('amount') - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee'))) --}}
+                                                                    <input type="hidden" class="form-control"
+                                                                        id="actual_amount"
+                                                                        value="{{ $invoice->amount - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount') }}">
+                                                                    <input type="number" step="0.01"
+                                                                        class="form-control pay_amount" id=""
+                                                                        value="{{ $invoice->remainingAmount() }}"
+                                                                        name="amount" required
+                                                                        {{ $invoice->remainingAmount() <= 0 ? 'readonly' : '' }}>
                                                                 </div>
                                                             </div>
                                                         </div>
