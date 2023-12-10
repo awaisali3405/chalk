@@ -382,7 +382,7 @@
                             @endforeach --}}
                             @foreach ($value->wallet as $value1)
                                 @php
-                                    $total = $total + $value1->amount;
+                                    $total = $total - $value1->amount;
                                     $grandTotal += $total;
                                     $credit += $value1->amount;
                                 @endphp
