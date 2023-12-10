@@ -152,7 +152,7 @@
                                                         {{-- <input type="hidden" name="" id=""> --}}
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
-                                                                <label class="form-label">Receiving Amount</label>
+                                                                <label class="form-label">Balance To Pay</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
@@ -194,7 +194,21 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
+                                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Add To Wallet</label>
+                                                                <div class="input-group mb-2">
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">£</div>
+                                                                    </div>
+                                                                    <input type="number" step="0.01"
+                                                                        class="form-control" id="add-to-wallet"
+                                                                        name="add_to_wallet" value="0"
+                                                                        placeholder=""
+                                                                        {{ $invoice->remainingAmount() <= 0 ? 'readonly' : '' }}>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
@@ -213,7 +227,7 @@
                                                             <input type="hidden" name="invoice_id"
                                                                 value="{{ $invoice->id }}">
                                                             <div class="form-group">
-                                                                <label class="form-label">Balance To Pay</label>
+                                                                <label class="form-label">Receiving Amount</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
@@ -230,21 +244,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                                            <div class="form-group">
-                                                                <label class="form-label">Add To Wallet</label>
-                                                                <div class="input-group mb-2">
-                                                                    <div class="input-group-prepend">
-                                                                        <div class="input-group-text">£</div>
-                                                                    </div>
-                                                                    <input type="number" step="0.01"
-                                                                        class="form-control" id="add-to-wallet"
-                                                                        name="add_to_wallet" value="0"
-                                                                        placeholder=""
-                                                                        {{ $invoice->remainingAmount() <= 0 ? 'readonly' : '' }}>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+
                                                         <div class="col-lg-12 col-md-6 col-sm-12">
                                                             <div class="form-group">
                                                                 <label class="form-label">Description</label>
