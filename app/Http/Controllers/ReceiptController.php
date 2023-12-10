@@ -79,7 +79,7 @@ class ReceiptController extends Controller
                     'branch_id' => $receipt->invoice->student->branch_id,
                     'year_id' => $receipt->invoice->student->currentYear()->id,
                     'student_id' => $receipt->invoice->student_id,
-                    'description' => "Amount Received by ",
+                    'description' => "Amount Credited to ",
                     'amount' => $data['add_to_wallet'],
                     'fixed' => 1,
                     'date' => $data['date'],

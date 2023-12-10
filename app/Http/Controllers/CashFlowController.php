@@ -46,6 +46,9 @@ class CashFlowController extends Controller
             if ($request->mode) {
                 $cashFlow = $cashFlow->where("mode", $request->mode);
             }
+            if ($request->type) {
+                $cashFlow = $cashFlow->where("type", "LIKE", $request->type);
+            }
 
             $cashFlow = $cashFlow->where('mode', '!=', 'Wallet')->get();
         } else {
