@@ -29,6 +29,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Sr</th>
+                                                    <th>Date</th>
                                                     <th>Branch</th>
                                                     <th>Year</th>
                                                     <th>Student Name</th>
@@ -41,6 +42,7 @@
                                                 @foreach ($wallet as $key => $value)
                                                     <tr>
                                                         <td>{{ $key + 1 }}</td>
+                                                        <td>{{ auth()->user()->ukFormat($value->date) }}</td>
                                                         <td>{{ $value->branch->name }}</td>
                                                         <td>{{ $value->year->name }}</td>
                                                         <td>{{ $value->student->name() }}</td>
