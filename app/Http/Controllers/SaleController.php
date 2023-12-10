@@ -50,6 +50,9 @@ class SaleController extends Controller
             'academic_year_id' => auth()->user()->session()->id
 
         ]);
+        $invoice->update([
+            'code' => "B00" . $invoice->id . '/' . auth()->user()->session()->InvoiceYearCode()
+        ]);
         $sale = Sale::create([
             'branch_id' => $data['branch_id'],
             'year_id' => $data['year_id'],
@@ -70,14 +73,14 @@ class SaleController extends Controller
                 'academic_year_id' => auth()->user()->session()->id
             ]);
         }
-        CashFlow::create([
-            'date' => $sale->date,
-            'branch_id' => $sale->branch_id,
-            'description' => "Sale To " . $sale->student->name() . "Qty(" . $sale->product->sum('quantity') . ")",
-            'mode' => "Cash",
-            'type' => "Sale",
-            'in' => $sale->productSum(),
-        ]);
+        // CashFlow::create([
+        //     'date' => $sale->date,
+        //     'branch_id' => $sale->branch_id,
+        //     'description' => "Sale To " . $sale->student->name() . "Qty(" . $sale->product->sum('quantity') . ")",
+        //     'mode' => "Cash",
+        //     'type' => "Sale",
+        //     'in' => $sale->productSum(),
+        // ]);
         return redirect()->route('sale.index')->withSuccess(__('Create Success'));
     }
 

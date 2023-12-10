@@ -243,7 +243,7 @@
                                     @endphp
                                     <td rowspan="{{ $row }}" class="text-center">{{ $value1->code }}</td>
                                     <td>{{ auth()->user()->ukFormat($value1->created_at->toDateString()) }}</td>
-                                    <td>{{ $value1->type=="Refundable"?'Deposit':$value1->type }}</td>
+                                    <td>{{ $value1->type == 'Refundable' ? 'Deposit' : $value1->type }}</td>
                                     <td class="text-align-end"> £{{ auth()->user()->priceFormat($value1->amount) }}
                                     </td>
                                     <td class="text-align-end"> £0</td>
@@ -303,6 +303,19 @@
 
                                     @endphp
                                 @endforeach
+                            @endforeach
+                            @foreach ($value->wallet as $value1)
+                                <td rowspan="" class="text-center"></td>
+                                <td>{{ auth()->user()->ukFormat($value1->date) }}</td>
+                                <td>{{ $value1->description }} {{ $value1->mode }}</td>
+                                <td class="text-align-end"> £0</td>
+                                <td class="text-align-end"> £{{ auth()->user()->priceFormat($value1->amount) }}
+                                </td>
+                                <td class="text-align-end"> £{{ auth()->user()->priceFormat($total) }}</td>
+                                @php
+                                    $grandTotal += $total;
+                                    $credit += $value11->amount;
+                                @endphp
                             @endforeach
                             <tr class="bg-grey">
                                 <th style="width: 15%;" class="text-center">
