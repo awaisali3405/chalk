@@ -57,8 +57,7 @@
                                                         </td>
                                                         <td>{{ auth()->user()->priceFormat($value->rate) }}
                                                         </td>
-                                                        <td>{{ auth()->user()->priceFormat($value->discounted_amount / $value->quantity) }}
-                                                        </td>
+
                                                         <td>{{ auth()->user()->priceFormat($value->discounted_amount) }}
                                                         </td>
                                                         <td>{{ $value->quantity }}</td>
