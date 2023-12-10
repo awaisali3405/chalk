@@ -251,7 +251,8 @@
                                         }
 
                                     @endphp
-                                    <td rowspan="{{ $row }}" class="text-center">{{ $value1->code }}</td>
+                                    <td rowspan="{{ $row }}" class="text-center" style="color: black;">
+                                        {{ $value1->code }}</td>
                                     <td>{{ auth()->user()->ukFormat($value1->created_at->toDateString()) }}</td>
                                     <td>{{ $value1->type == 'Refundable' ? 'Deposit' : $value1->type }}</td>
                                     <td class="text-align-end"> £{{ auth()->user()->priceFormat($value1->amount) }}
@@ -283,7 +284,7 @@
                                     @endphp
                                     {{-- @endphp --}}
                                     @if ($value11->credit_discount > 0)
-                                        <tr>
+                                        <tr style="color: rgb(7, 116, 7);">
 
                                             <td>{{ $value11->date }}</td>
                                             <td>Credit Discount Debit</td>
@@ -297,7 +298,7 @@
                                             $debit += $value11->credit_discount;
 
                                         @endphp
-                                        <tr>
+                                        <tr style="color: rgb(7, 116, 7);">
 
                                             <td>{{ $value11->date }}</td>
                                             <td>Credit Discount Credit</td>
@@ -313,7 +314,7 @@
                                         </tr>
                                     @endif
                                     @if ($value11->late_fee > 0)
-                                        <tr>
+                                        <tr style="color: rgb(7, 116, 7);">
 
                                             <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
                                             <td>Late Fee</td>
@@ -328,7 +329,7 @@
                                             $total = $total + $value11->amount;
                                             $debit += $value11->amount;
                                         @endphp
-                                        <tr>
+                                        <tr style="color: rgb(7, 116, 7);">
                                             <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
                                             <td>{{ $value11->description }} {{ $value11->mode }}
                                                 Debit </td>
@@ -342,7 +343,7 @@
                                     @php
                                         $total = $total - $value11->amount;
                                     @endphp
-                                    <tr>
+                                    <tr style="color: rgb(7, 116, 7);">
                                         <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
                                         <td>{{ $value11->description }} {{ $value11->mode }}
                                             {{ str_contains($value11, 'Wallet') ? 'Credit' : '' }} </td>
