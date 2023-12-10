@@ -122,7 +122,6 @@
                     <h6>{{ $invoice->student->parents[0]->res_town }}</h6>
                     <h6>
                         {{ $invoice->student->parents[0]->res_postal_code }}</h6>
-
                     <h6>
                         Email: {{ $invoice->student->parents[0]->email }}
                     </h6>
@@ -134,11 +133,7 @@
         </div>
         <div class="col-6 pr-4">
             <div class="border-black row pl-3">
-
                 <div class="pr-1 col-12">
-
-
-
                     <h6 style="text-align: end !important; padding-right:5px;">
                         From: {{ $invoice->student->branch->res_address }}</h6>
                     <h6 style="text-align: end !important; padding-right:5px;">
@@ -146,8 +141,8 @@
                         ,{{ $invoice->student->branch->res_third_address }}
                     </h6 style="text-align: end !important; padding-right:5px;">
                     <h6 style="text-align: end !important; padding-right:5px;">
-                        {{ $invoice->student->branch->res_postal_code }},
-                        {{ $invoice->student->branch->res_town }}
+                        {{ $invoice->student->branch->res_town }},
+                        {{ $invoice->student->branch->res_postal_code }}
                     </h6 style="text-align: end !important; padding-right:5px;">
                     <h6 style="text-align: end !important; padding-right:5px;">
                         Email: {{ $invoice->student->branch->email }}
@@ -256,7 +251,7 @@
                             {{ \Carbon\Carbon::parse($invoice->created_at->addDays(7))->format('d/m/Y') }}
                         </td>
                         <td>
-                            {{ $invoice->is_paid? auth()->user()->ukFormat($invoice->receipt[$invoice->receipt->count() - 1]->date): '' }}
+                            {{ $invoice->is_paid && $invoice->receipt->count() > 0? auth()->user()->ukFormat($invoice->receipt[$invoice->receipt->count() - 1]->date): '' }}
                         </td>
                     </tr>
                 </tbody>
@@ -304,7 +299,7 @@
                             <tr>
                                 <td></td>
                                 <td class="text-center">
-                                    <b>Resource Invoice - Academaic year
+                                    <b>Resource Invoice - Academic year
                                         {{ date('Y', strtotime($invoice->from_date)) }}/{{ date('Y', strtotime($invoice->to_date)) }}
                                     </b>
                                 </td>
@@ -455,7 +450,8 @@
                                     <td class="text-center text-center">
                                         <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
                                     </td>
-                                    <td class=" bg-grey " style="text-align: end !important; padding-right:5px;">
+                                    <td class=" bg-grey "
+                                        style="text-align: end !important; padding-right:5px;">
                                         <b>£{{ $value->subject_amount }}</b>
                                     </td>
                                 </tr>
@@ -669,7 +665,7 @@
                                     </td>
                                     <td class="text-center bg-grey"
                                         style="text-align: end !important; padding-right:5px;">
-                                        <b>£{{ str_contains($invoice->type, 'Month')? (str_contains($invoice->currentYear()->name, '11')? auth()->user()->priceFormat((($invoice->oneOnOneSubject()->sum('amount') * 40) / 9) * $months, 2): auth()->user()->priceFormat((($invoice->oneOnOneSubject()->sum('amount') * 52) / 12) * $months, 2)): auth()->user()->priceFormat($invoice->oneOnOneSubject()->sum('amount') * $weeks) }}</b>
+                                        <b>£{{ str_contains($invoice->type, 'Month')? (str_contains($invoice->student->currentYear()->name, '11')? auth()->user()->priceFormat((($invoice->oneOnOneSubject()->sum('amount') * 40) / 9) * $months, 2): auth()->user()->priceFormat((($invoice->oneOnOneSubject()->sum('amount') * 52) / 12) * $months, 2)): auth()->user()->priceFormat($invoice->oneOnOneSubject()->sum('amount') * $weeks) }}</b>
                                     </td>
                                 </tr>
                                 <tr>
@@ -969,7 +965,8 @@
                             <td class="">
                                 Sub Total INCLUSIVE VAT
                             </td>
-                            <th class="text-center" style="text-align: end !important; padding-right:5px;">
+                            <th class="text-center"
+                                style="text-align: end !important; padding-right:5px;">
                                 £{{ auth()->user()->priceFormat($invoice->amount - $invoice->receipt->sum('discount') + $invoice->receipt->sum('late_fee')) }}
                             </th>
                         </tr>
@@ -977,7 +974,8 @@
                             <td class="">
                                 Invoice Balance
                             </td>
-                            <th class="text-center" style="color:red; text-align: end !important; padding-right:5px;">
+                            <th class="text-center"
+                                style="color:red; text-align: end !important; padding-right:5px;">
 
                                 £{{ $invoice->remainingAmount() }}
 
@@ -989,7 +987,8 @@
                             <th class="" colspan="">
                                 Vat Inclusive
                             </th>
-                            <th class="text-center" style="text-align: end !important; padding-right:5px;">
+                            <th class="text-center"
+                                style="text-align: end !important; padding-right:5px;">
                                 £{{ auth()->user()->priceFormat($invoice->taxAmount()) }}
                             </th>
                         </tr>
@@ -997,7 +996,8 @@
                             <th class="" colspan="">
                                 Debit Brought Forward
                             </th>
-                            <th class="text-center" style="text-align: end !important; padding-right:5px;">
+                            <th class="text-center"
+                                style="text-align: end !important; padding-right:5px;">
                                 £{{ auth()->user()->priceFormat($invoice->debitBroughtForward()) }}
                             </th>
                         </tr>
@@ -1005,7 +1005,8 @@
                             <th class="" colspan="">
                                 Payment Due
                             </th>
-                            <th class="text-center" style="text-align: end !important; padding-right:5px;">
+                            <th class="text-center"
+                                style="text-align: end !important; padding-right:5px;">
                                 £{{ auth()->user()->priceFormat($invoice->debitBroughtForward() + $invoice->remainingAmount()) }}
                             </th>
                         </tr>
@@ -1028,9 +1029,9 @@
                 application form.</p>
         </div>
     </div>
-    <div class="row ">
+    <div class="row">
         <div class="col-12 d-flex justify-content-center" style="border: 2px solid black;">
-            <p>
+            <p style="font-size: 12px; padding-bottom:0px;">
 
                 Bank Details: {{ $invoice->branch->bank_name }} ,Company Name:
                 {{ $invoice->branch->name }},
