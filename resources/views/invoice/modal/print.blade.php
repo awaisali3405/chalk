@@ -416,7 +416,7 @@
                                             <td class="bg-grey"></td>
                                         </tr>
                                         @php
-                                            $sr = 2;
+                                            $sr = 1;
                                         @endphp
                                     @elseif (str_contains($invoice->type, 'Resource Fee'))
                                         @foreach ($invoice->resourceInvoiceSubject as $key => $value)
@@ -751,7 +751,7 @@
                                                     </b>
                                                 </td>
                                                 <td class="pl-2">
-                                                    <b>Credit Discount</b>
+                                                    <b>Credit Note</b>
                                                 </td>
                                                 <td class="bg-grey">
                                                     <b></b>
