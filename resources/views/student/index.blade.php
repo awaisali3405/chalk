@@ -224,7 +224,7 @@
                                                                             <a class="dropdown-item"
                                                                                 href="{{ route('student.show', $value->id) }}">Show</a>
                                                                             <a class="dropdown-item"
-                                                                                href="{{ route('invoice.show', $value->id) }}">Invoice</a>
+                                                                                href="{{ route('invoice.show', $value->id) }}">Invoices</a>
                                                                             <a class="dropdown-item" data-toggle="modal"
                                                                                 data-target="#statement-{{ $value->id }}">Statement</a>
                                                                             <a class="dropdown-item " data-toggle="modal"
@@ -250,7 +250,7 @@
                                                                             <a class="dropdown-item"
                                                                                 href="{{ route('student.show', $value->id) }}">Show</a>
                                                                             <a class="dropdown-item"
-                                                                                href="{{ route('invoice.show', $value->id) }}">Invoice</a>
+                                                                                href="{{ route('invoice.show', $value->id) }}">Invoices</a>
 
                                                                             <a class="dropdown-item" data-toggle="modal"
                                                                                 data-target="#statement-{{ $value->id }}">Statement</a>
