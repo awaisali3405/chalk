@@ -87,8 +87,8 @@ class ReceiptController extends Controller
                     'date' => $receipt->date,
                     'branch_id' => $receipt->invoice->branch_id,
                     'description' => $receipt->invoice->student->name() . " (" . auth()->user()->session()->period() . ")",
-                    'mode' => $data['mode'],
-                    'type' => $receipt->mode . " (" . $receipt->invoice->type . ")",
+                    'mode' => $data['mode'] == "Cash" ? 'Cash_Wallet' : ($data['mode'] == "Bank" ? 'Bank_Wallet' : "Cash_Wallet"),
+                    'type' => $receipt->mode . " (" . $receipt->invoice->type == "Refundable" ? "Deposit" : $receipt->invoice->type . ")",
                     'in' => $data['add_to_wallet'],
                 ]);
                 if ($data['mode'] == "Cash") {
