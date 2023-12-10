@@ -93,7 +93,7 @@
     /* Print End */
 </style>
 
-<body style="background-color:white;">
+<body style="background-color:white; width:90%; margin: auto;">
 
     <div class="row">
         <div class="col-6 ">

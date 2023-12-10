@@ -8,6 +8,7 @@ use App\Models\Sale;
 use App\Models\SaleProduct;
 use App\Models\StudentInvoice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class SaleController extends Controller
 {
@@ -81,6 +82,7 @@ class SaleController extends Controller
         //     'type' => "Sale",
         //     'in' => $sale->productSum(),
         // ]);
+        Session::flash('action', route("invoice.print", $invoice->id));
         return redirect()->route('sale.index')->withSuccess(__('Create Success'));
     }
 
