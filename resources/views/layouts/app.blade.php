@@ -1311,9 +1311,9 @@
         <script src="{{ asset('vendor/summernote/js/summernote.min.js') }}"></script>
         <!-- Summernote init -->
         <script src="{{ asset('js/plugins-init/summernote-init.js') }}"></script>
-        <script src="{{ asset('vendor/global/global.min.js') }}"></script>
-        <script src="{{ asset('vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
-        <script src="{{ asset('js/custom.min.js') }}"></script>
+        {{-- <script src="{{ asset('vendor/global/global.min.js') }}"></script>
+        <script src="{{ asset('vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script> --}}
+        {{-- <script src="{{ asset('js/custom.min.js') }}"></script> --}}
         <!-- Required vendors -->
         {{-- <script src="{{ asset('vendor/global/global.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script> --}}
