@@ -391,7 +391,7 @@ class User extends Authenticatable
         $feeReceivedByCash = $this->feeReceivedByCash($branch, $academicYear);
         $depositRegistrationByCash = $this->depositRegistrationByCash($branch, $academicYear);
         $depositRefundableByCash = $this->depositRefundableByCash($branch, $academicYear);
-        $walletByCash = $this->studentCashWallet($branch, $academicYear);
+        $walletByCash = $this->resourceFeeReceivedByCash($branch, $academicYear);
         return $feeReceivedByCash + $depositRegistrationByCash + $depositRefundableByCash + $walletByCash;
     }
     public function totalBankReceived($branch, $academicYear)
@@ -399,7 +399,7 @@ class User extends Authenticatable
         $feeReceivedByBank = $this->feeReceivedByBank($branch, $academicYear);
         $depositRegistrationByBank = $this->depositRegistrationByBank($branch, $academicYear);
         $depositRefundableByBank = $this->depositRefundableByBank($branch, $academicYear);
-        $walletByBank = $this->studentBankWallet($branch, $academicYear);
+        $walletByBank = $this->resourceFeeReceivedByBank($branch, $academicYear);
         return $feeReceivedByBank + $depositRegistrationByBank + $depositRefundableByBank + $walletByBank;
     }
     // Total Refunded
