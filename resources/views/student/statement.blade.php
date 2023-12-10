@@ -284,7 +284,7 @@
                                     @endphp
                                     {{-- @endphp --}}
                                     @if ($value11->credit_discount > 0)
-                                        <tr style="color: rgb(7, 116, 7);">
+                                        <tr style="color:rgb(146, 10, 10);">
 
                                             <td>{{ $value11->date }}</td>
                                             <td>Credit Discount Debit</td>
@@ -314,7 +314,7 @@
                                         </tr>
                                     @endif
                                     @if ($value11->late_fee > 0)
-                                        <tr style="color: rgb(7, 116, 7);">
+                                        <tr style="color:rgb(146, 10, 10);">
 
                                             <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
                                             <td>Late Fee</td>
@@ -329,7 +329,7 @@
                                             $total = $total + $value11->amount;
                                             $debit += $value11->amount;
                                         @endphp
-                                        <tr style="color: rgb(7, 116, 7);">
+                                        <tr style="color: rgb(146, 10, 10);">
                                             <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
                                             <td>{{ $value11->description }} {{ $value11->mode }}
                                                 Debit </td>
