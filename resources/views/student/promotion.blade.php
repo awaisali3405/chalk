@@ -17,7 +17,7 @@
                                     <option value="">-</option>
                                     @foreach ($academicCalender as $value2)
                                         @if (
-                                            $value2->id !=
+                                            $value2->id >
                                                 auth()->user()->session()->id)
                                             <option value="{{ $value2->id }}">{{ $value2->period() }}</option>
                                         @endif
@@ -31,7 +31,7 @@
                                 <select name="year_id" class="form-control" id="">
                                     <option value="">-</option>
                                     @foreach ($year as $value2)
-                                        @if ($value2->id != $value->year_id)
+                                        @if ($value2->id > $value->year_id)
                                             <option value="{{ $value2->id }}">{{ $value2->name }}</option>
                                         @endif
                                     @endforeach

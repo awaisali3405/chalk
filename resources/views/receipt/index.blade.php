@@ -35,7 +35,8 @@
                                 </div>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Roll
-                                            No</span> <strong class="text-muted">{{ $invoice->student->currentRollNo }}</strong></li>
+                                            No</span> <strong
+                                            class="text-muted">{{ $invoice->student->currentRollNo() }}</strong></li>
                                     <li class="list-group-item d-flex justify-content-between"><span
                                             class="mb-0">Year</span> <strong
                                             class="text-muted">{{ $invoice->student->year->name }}
