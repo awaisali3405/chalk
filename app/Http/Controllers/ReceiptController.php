@@ -9,6 +9,7 @@ use App\Models\StudentInvoiceReceipt;
 use App\Models\Transaction;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ReceiptController extends Controller
 {
@@ -114,6 +115,7 @@ class ReceiptController extends Controller
                     ]);
                 }
             }
+            Session::flash('action', route("invoice.print", $invoice->id));
             return redirect()->route('receipt.show', $request->invoice_id)->with('success', "Receipt Created Successfully");
         } else {
 
