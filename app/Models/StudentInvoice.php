@@ -19,7 +19,8 @@ class StudentInvoice extends Model
         'branch_id',
         'year_id',
         'academic_year_id',
-        'code'
+        'code',
+        'date'
     ];
     public function debitBroughtForward()
     {
@@ -70,6 +71,10 @@ class StudentInvoice extends Model
     public function normalSubject()
     {
         return $this->InvoiceSubject()->where('lesson_type_id', 1)->get();
+    }
+    public function book()
+    {
+        return $this->hasMany(StudentBook::class, 'invoice_id');
     }
     public function subject()
     {

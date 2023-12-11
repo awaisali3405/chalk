@@ -270,6 +270,20 @@
                                             <td class="bg-grey"></td>
                                             <td class="bg-grey"></td>
                                         </tr>
+                                    @elseif (str_contains($invoice->type, 'Addition Book Invoice'))
+                                        <tr>
+                                            <td></td>
+                                            <td class="text-center">
+                                                <b>Book Fee
+                                                    ({{ auth()->user()->ukFormat($invoice->from_date) }} -
+                                                    {{ auth()->user()->ukFormat($invoice->to_date) }})
+                                                </b>
+                                            </td>
+
+                                            <td class="bg-grey"></td>
+                                            <td class="bg-grey"></td>
+                                            <td class="bg-grey"></td>
+                                        </tr>
                                     @else
                                         <tr>
                                             <td></td>
@@ -367,7 +381,46 @@
                                                 </td>
                                                 <td class=" bg-grey "
                                                     style="text-align: end !important; padding-right:5px;">
-                                                    <b>£{{ $value->subject_amount }}</b>
+                                                    <b>£{{ auth()->user()->priceFormat($value->subject_amount) }}</b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td class="pl-2">
+                                                    <h6>Period ({{ auth()->user()->ukFormat($invoice->from_date) }} -
+                                                        {{ auth()->user()->ukFormat($invoice->to_date) }}) </h6>
+                                                </td>
+                                                <td class="bg-grey">
+                                                    {{-- <h5 class=" text-center"> {{ $value->subject_hr }} hr</b> --}}
+
+                                                </td>
+                                                <td class="bg-grey"></td>
+                                                <td class="bg-grey"></td>
+                                            </tr>
+                                            @php
+                                                $sr = $key + 1;
+                                            @endphp
+                                        @endforeach
+                                    @elseif (str_contains($invoice->type, 'Addition Book Invoice'))
+                                        @foreach ($invoice->book as $key => $value)
+                                            <tr>
+                                                <td class="text-center">
+                                                    <b>{{ $key + 1 }}</b>
+                                                </td>
+                                                <td class="pl-2 ">
+                                                    <b>Book ({{ $value->subject_name }} - {{ $value->book_name }}) -
+                                                        {{ $value->quantity }}
+                                                        qty</b>
+                                                </td>
+                                                <td class="text-center text-center">
+                                                    <b>£{{ auth()->user()->priceFormat($value->rate) }}</b>
+                                                </td>
+                                                <td class="text-center text-center">
+                                                    <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
+                                                </td>
+                                                <td class=" bg-grey "
+                                                    style="text-align: end !important; padding-right:5px;">
+                                                    <b>£{{ auth()->user()->priceFormat($value->amount) }}</b>
                                                 </td>
                                             </tr>
                                             <tr>

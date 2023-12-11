@@ -88,11 +88,12 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-lg-3 col-md-3 col-sm-12">
                                     <div class="form-group">
                                         <label class="form-label">Type</label>
                                         <div class="input-group mb-2">
-                                            <select name="type" id="" class="form-control ">
+                                            <select name="type[]" id="sel2" multiple class="form-control ">
                                                 <option value="">All</option>
                                                 @foreach ($type as $value)
                                                     <option value="{{ $value }}"
@@ -102,6 +103,16 @@
                                                 @endforeach
 
                                             </select>
+                                            <div class="form-group">
+                                                <label>Mutiple select list (hold shift to select more than one):</label>
+                                                <select multiple="" class="form-control" id="sel2">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -70,26 +70,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <div class="col-lg-4 col-md-3 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-label">Status</label>
-                                            <div class="input-group mb-2">
-                                                <select name="status" id="" class="form-control payment">
-                                                    <option value="0">All</option>
-                                                    <option value="paid"
-                                                        {{ request()->status == 'paid' ? 'selected' : '' }}>
-                                                        Due Student</option>
-                                                    <option value="un-paid"
-                                                        {{ request()->status == 'un-paid' ? 'selected' : '' }}>
-                                                        Fully Paid Student </option>
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div> --}}
-
-
-
 
                                     <div class="col-lg-12 col-md-6 col-sm-12 pt-4 justify-content-center d-flex pb-4">
                                         <button type="submit" class="btn btn-primary">Show</button>

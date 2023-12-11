@@ -696,6 +696,7 @@
                         // if (success.message == 'success') {
 
                         $('.student').html(success.data);
+                        $('.book-student').html(success.data);
                         // console.log(success.data);
                         // }
 
@@ -881,64 +882,7 @@
 
 
         {{-- Addition Invoice --}}
-        <script>
-            $('.addition-subject').on('click', function() {
-                // var subject = '';
-                subject_id = $(".subject option:selected").val()
-                subject = $(".subject option:selected").text()
-                hours = parseFloat($(".hours").val()).toFixed(2)
-                rate = parseFloat($(".rate").val()).toFixed(2)
-                amount = parseFloat($("#amount").val()).toFixed(2)
-                console.log(subject, hours, rate, amount)
-                if (subject && hours && rate && amount) {
-                    x = `<tr>
-                                        <td>
-                                            ${subject}
-                                            <input type="hidden" name="subject[]" value="${subject_id}">
-                                            </td>
-                                            <td>
-                                                ${hours}
-                                                <input type="hidden" name="hours[]" value="${hours}">
-                                                </td>
-                                                <td>${rate}
-                                                    <input type="hidden" name="rate[]" value="${rate}">
-                                                    </td>
-                                                    <td>
-                                                        <input type="hidden" name="amount[]" value="${amount}">
-                                                        ${amount}</td>
-
-                                        <td>
-
-                                            <a class="delete-addition-subject" href="javascript:void(0);"><i class=" fa fa-close color-danger"></i></a>
-                                        </td>
-                                    </tr>
-                    `;
-                    $('.addition-subject-add').append(x);
-                    $('.additional-invoice-btn').attr('disabled', false);
-                }
-
-
-                // }
-                // })
-            })
-            $('.addition-subject-add').on('click', '.delete-addition-subject', function() {
-                console.log('sdasas');
-                $(this).parent().parent().remove();
-            })
-
-            // Student Adittion sum rate and hr
-            $('.rate').on('change keyup', function() {
-                console.log('asasdsadas')
-                rate = parseFloat($(this).val()) || 0;
-                hour = parseFloat($(this).closest('.hours').val()) || 0;
-                $(this).closest('.amount').val(rate * hour)
-            })
-            $('.hours').on('change keyup', function() {
-                hour = parseFloat($(this).val()) || 0;
-                rate = parseFloat($(this).closest('.rate').val()) || 0;
-                $(this).closest('.amount').val(rate * hour)
-            })
-        </script>
+        <script src="{{ asset('js/dashboard/addition-invoice.js') }}"></script>
 
         {{-- Sale Product --}}
 
@@ -1253,7 +1197,7 @@
                 amount = $('#amount').val() == '' ? 0 : $('#amount').val();
                 patition = $("#partition").val() == '' ? 0 : $("#partition").val();
                 console.log(amount, patition);
-                total = parseFloat(amount) / parseFloat(patition).toFixed(2);
+                total = parseFloat(amount / patition).toFixed(2);
 
                 $('#installment').val(total);
             });
@@ -1334,6 +1278,8 @@
         <script src="{{ asset('js/dashboard/receipt.js') }}"></script>
         {{-- branch and year change --}}
         <script src="{{ asset('js/dashboard/branch-year-api.js') }}"></script>
+        {{-- Addition book invoice --}}
+        <script src="{{ asset('js/dashboard/addtional-book-invoice.js') }}"></script>
 
 
         <script src="{{ asset('vendor/jqueryui/js/jquery-ui.min.js') }}"></script>

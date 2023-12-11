@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\EnquirySubject;
 use App\Models\InvoiceSubject;
 use App\Models\Student;
+use App\Models\StudentBook;
 use App\Models\StudentInvoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -126,7 +127,8 @@ class InvoiceController extends Controller
                 'to_date' => $data['to_date'],
                 'branch_id' => $student->branch_id,
                 'year_id' => $student->currentYear()->id,
-                'academic_year_id' => auth()->user()->session()->id
+                'academic_year_id' => auth()->user()->session()->id,
+                'date' => $request->date
             ]);
             $invoice->update([
                 'code' => "F00" . $invoice->id . '/' . auth()->user()->session()->InvoiceYearCode()
@@ -138,7 +140,8 @@ class InvoiceController extends Controller
                     'subject_rate' => $data['rate'][$key],
                     'subject_hr' => $data['hours'][$key],
                     'subject_amount' => $data['amount'][$key],
-                    'academic_year_id' => auth()->user()->session()->id
+                    'academic_year_id' => auth()->user()->session()->id,
+
                 ]);
             }
             Session::put('action', route("invoice.print", $invoice->id));
@@ -263,5 +266,55 @@ class InvoiceController extends Controller
         $invoice = StudentInvoice::find($id);
         Session::forget('action');
         return view('invoice.print.pdf', compact('invoice'));
+    }
+    public function bookStore(Request $request)
+    {
+        $data = $request->except('_token');
+        // dd($data);
+        $data['type'] = 'Addition Book Invoice';
+        $student = Student::find($request->student_id);
+
+        if (isset($data['subject'])) {
+            $amount = 0;
+            foreach ($data['amount'] as $value) {
+                $amount += $value;
+            }
+            // dd($data, $amount);
+
+
+            $invoice = StudentInvoice::create([
+                'student_id' => $student->id,
+                'amount' => $amount,
+                'tax' => 0,
+                'type' => $data['type'],
+                'from_date' => $data['from_date'],
+                'to_date' => $data['to_date'],
+                'branch_id' => $student->branch_id,
+                'year_id' => $student->currentYear()->id,
+                'academic_year_id' => auth()->user()->session()->id,
+                'date' => $data['date']
+            ]);
+            $invoice->update([
+                'code' => "AR00" . $invoice->id . '/' . auth()->user()->session()->InvoiceYearCode()
+            ]);
+            foreach ($data['subject'] as $key => $value) {
+                StudentBook::create([
+
+                    'invoice_id' => $invoice->id,
+                    'subject_id' => $value,
+                    'subject_name' => EnquirySubject::find($value)->subject->name,
+                    'book_name' => $data['book_name'][$key],
+                    'rate' => $data['rate'][$key],
+                    'quantity' => $data['quantity'][$key],
+                    'amount' => $data['amount'][$key],
+                    'branch_id' => $invoice->branch_id,
+                    'academic_year_id' => auth()->user()->session()->id
+                ]);
+            }
+            Session::put('action', route("invoice.print", $invoice->id));
+            return redirect()->route('invoice.index')->with('success', 'invoice Created Successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Please Add Your Subject.');
+        }
     }
 }
