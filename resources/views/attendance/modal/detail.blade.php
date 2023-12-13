@@ -23,7 +23,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($value->attendance as $key => $value2)
+                            @foreach ($value->attendance->sortBy('date') as $key => $value2)
                                 <tr class="" style=" background-color:{{ $value2->status_color }};">
                                     <td>{{ auth()->user()->ukFormat($value2->date) }}</td>
                                     <td>Week {{ auth()->user()->week($value2->date) }}</td>
