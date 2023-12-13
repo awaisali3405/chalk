@@ -92,9 +92,9 @@
                                                     <th>Roll</th>
                                                     <th>Name</th>
                                                     <th>Present</th>
+                                                    <th>Additional Class</th>
                                                     <th>Authorised</th>
                                                     <th>Unathorized</th>
-                                                    <th>Additional Class</th>
                                                     <th>Cover Up</th>
                                                     <th>Detail</th>
                                                 </tr>
@@ -106,11 +106,11 @@
                                                         <td>{{ $value->first_name }}</td>
                                                         <td>{{ $value->totalAttendance(request()->get('from_date'), request()->get('to_date'))->where('status', 1)->count() }}
                                                         </td>
+                                                        <td>{{ $value->totalAttendance(request()->get('from_date'), request()->get('to_date'))->where('status', 4)->count() }}
+                                                        </td>
                                                         <td>{{ $value->totalAttendance(request()->get('from_date'), request()->get('to_date'))->where('status', 2)->count() }}
                                                         </td>
                                                         <td>{{ $value->totalAttendance(request()->get('from_date'), request()->get('to_date'))->where('status', 3)->count() }}
-                                                        </td>
-                                                        <td>{{ $value->totalAttendance(request()->get('from_date'), request()->get('to_date'))->where('status', 4)->count() }}
                                                         </td>
                                                         <td>{{ $value->totalAttendance(request()->get('from_date'), request()->get('to_date'))->where('status', 5)->count() }}
                                                         </td>
