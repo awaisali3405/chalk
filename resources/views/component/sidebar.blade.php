@@ -47,6 +47,7 @@
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{ route('student.index') }}">All Student</a></li>
+                        <li><a href="{{ route('student.deactive') }}">DeActive Student</a></li>
                         <li><a href="{{ route('student.create') }}">Add Student</a></li>
                         @if (auth()->user()->role->name != 'parent')
                             <li><a href="{{ route('student.request') }}">Student Request

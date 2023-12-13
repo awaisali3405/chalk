@@ -99,7 +99,7 @@
                                                     @foreach ($student as $key => $value)
                                                         @if (count($value->yearSubject) > 0)
                                                             <input type="hidden" name="student[]"
-                                                                value="{{ $value->id }}">
+                                                                value="{{ $value->currentRollNo() }}">
                                                         @endif
                                                         @foreach ($value->yearSubject as $key2 => $value1)
                                                             <tr>

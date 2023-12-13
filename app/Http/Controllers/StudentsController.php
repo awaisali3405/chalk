@@ -69,7 +69,52 @@ class StudentsController extends Controller
 
         return view('student.index', compact('student'));
     }
+    public function deActive(Request $request)
+    {
+        if (auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'super admin') {
 
+            if ($request->input()) {
+                $student = new Student();
+                if ($request->input('branch_id')) {
+                    $student = $student->where('branch_id', $request->input('branch_id'));
+                }
+                if ($request->input('from_date')) {
+                    $student = $student->where('admission_date', '>=', $request->input('from_date'));
+                }
+                if ($request->input('to_date')) {
+                    $student = $student->where('admission_date', '<=', $request->input('to_date'));
+                }
+                if ($request->input('current_school')) {
+                    $student = $student->where('current_school_name', $request->input('current_school'));
+                }
+                if ($request->input('from_week')) {
+                    $student = $student->where('promotion_date', '>=', auth()->user()->dateWeek($request->input('from_week')));
+                }
+                if ($request->input('to_week')) {
+                    $student = $student->where('promotion_date', '<=', auth()->user()->dateWeek($request->input('to_week')));
+                }
+                if ($request->input('know_about_us')) {
+                    $student = $student->where('know_about_us', $request->input('know_about_us'));
+                }
+                if ($request->input('payment_period')) {
+                    $student = $student->where('payment_period', $request->input('payment_period'));
+                }
+                $student = $student->where('active', true)->where('disable', false)->get();
+            } else {
+                $student = Student::where('active', true)->where('disable', false)->get();
+            }
+        } else if (auth()->user()->role->name == 'parent') {
+            $student = Parents::where('user_id', auth()->user()->id)->first();
+            if ($student) {
+                $student = $student->student->where('disable', false);
+                // dd($student);
+            } else {
+                $student = array();
+            }
+        }
+
+        return view('student.disable', compact('student'));
+    }
     /**
      * Show the form for creating a new resource.
      */

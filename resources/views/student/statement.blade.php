@@ -248,11 +248,6 @@
                                                     $row++;
                                                 }
                                             }
-                                            if ($value1->refund) {
-                                                if ($value1->refund->paid_by_bank || $value1->refund->paid_by_cash) {
-                                                    $row++;
-                                                }
-                                            }
                                         }
                                     @endphp
                                     <td rowspan="{{ $row }}" class="text-center" style="color: black;">
@@ -359,24 +354,6 @@
 
                                     @endphp
                                 @endforeach
-                                @if ($value1->refund)
-                                    @if ($value1->refund->paid_by_bank || $value1->refund->paid_by_cash)
-                                        @php
-                                            $total += $value1->amount;
-                                            $debit += $debit;
-                                        @endphp
-                                        <tr style="color: rgb(193, 186, 120);">
-                                            <td>{{ auth()->user()->ukFormat($value1->refund->updated_at) }}</td>
-                                            <td>Refund To Student By
-                                                {{ $value1->refund->pay_by_bank ? 'Bank' : 'Cash' }} Debit </td>
-                                            <td class="text-align-end">
-                                                £{{ auth()->user()->priceFormat($value1->amount) }}
-                                            </td>
-                                            <td class="text-align-end">£0</td>
-                                            <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
-                                        </tr>
-                                    @endif
-                                @endif
                             @endforeach
 
                             {{-- @foreach ($value->invoice as $value2)
@@ -417,7 +394,39 @@
                                     <td class="text-align-end"> £{{ auth()->user()->priceFormat($total) }}</td>
                                 </tr>
                             @endforeach
-
+                            @if ($value->invoice[0]->refund)
+                                @if ($value->invoice[0]->refund->paid_by_bank || $value->invoice[0]->refund->paid_by_cash)
+                                    @php
+                                        $total += $value->invoice[0]->amount;
+                                        $debit += $debit;
+                                    @endphp
+                                    <tr style="backgroud-color: rgb(193, 120, 120);">
+                                        <td>{{ auth()->user()->ukFormat($value->invoice[0]->refund->updated_at) }}</td>
+                                        <td>Refund To Student By
+                                            {{ $value->invoice[0]->refund->pay_by_bank ? 'Bank' : 'Cash' }} Debit </td>
+                                        <td class="text-align-end">
+                                            £{{ auth()->user()->priceFormat($value->invoice[0]->amount) }}
+                                        </td>
+                                        <td class="text-align-end">£0</td>
+                                        <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
+                                    </tr>
+                                    @php
+                                        $total -= $value->invoice[0]->amount;
+                                        $credit += $credit;
+                                    @endphp
+                                    <tr style="backgroud-color: rgb(193, 120, 120);">
+                                        <td>{{ auth()->user()->ukFormat($value->invoice[0]->refund->updated_at) }}</td>
+                                        <td>Refund To Student By
+                                            {{ $value->invoice[0]->refund->pay_by_bank ? 'Bank' : 'Cash' }} Credit
+                                        </td>
+                                        <td class="text-align-end">£0</td>
+                                        <td class="text-align-end">
+                                            £{{ auth()->user()->priceFormat($value->invoice[0]->amount) }}
+                                        </td>
+                                        <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
+                                    </tr>
+                                @endif
+                            @endif
                             <tr class="bg-grey">
                                 <th style="width: 15%;" class="text-center">
 

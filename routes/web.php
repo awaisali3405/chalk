@@ -80,6 +80,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/student/request/parent', [StudentsController::class, 'request'])->name('student.request');
     Route::post('/student/promote/{id}', [StudentsController::class, 'promote'])->name('student.promote');
     Route::get('/disable/student', [StudentsController::class, 'disable'])->name('student.disable');
+    Route::get('/disable/student', [StudentsController::class, 'deActive'])->name('student.deactive');
     // Enquiry
     Route::resource('enquiry', EnquiryController::class);
     Route::get('/enquiry/{id}/note', [EnquiryController::class, 'note'])->name('enquiry.note');
@@ -94,7 +95,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('invoice/group/generate', [InvoiceController::class, 'groupInvoice'])->name('group.invoice');
     Route::get('invoice/pdf/{id}', [InvoiceController::class, 'print'])->name('invoice.print');
     Route::get('invoice/due/payment', [InvoiceController::class, 'dueStudent'])->name('invoice.due');
-    Route::post('invoice/store/book',[InvoiceController::class,'bookStore'])->name('invoice.book.store');
+    Route::post('invoice/store/book', [InvoiceController::class, 'bookStore'])->name('invoice.book.store');
     Route::resource('receipt', ReceiptController::class);
     // Product
     Route::resource('product', ProductController::class);
