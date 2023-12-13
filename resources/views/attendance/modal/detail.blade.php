@@ -26,7 +26,7 @@
                             @foreach ($value->attendance as $key => $value2)
                                 <tr class="" style=" background-color:{{ $value2->status_color }};">
                                     <td>{{ $value2->date }}</td>
-                                    <td>Week {{ auth()->user()->week($value2->updated_at) }}</td>
+                                    <td>Week {{ auth()->user()->week($value2->date) }}</td>
                                     <td>{{ $value2->enquirySubject->subject->name }}</td>
                                     <td>{{ $value2->statusName() }}</td>
                                     <td>{{ $value2->note }}</td>
