@@ -125,7 +125,7 @@
                                     </td>
                                     <td class="text-center">
                                         <b>
-                                            {{ auth()->user()->ukFormat($invoice->created_at) }}</b>
+                                            {{ auth()->user()->ukFormat($invoice->date ? $invoice->date : $invoice->created_at) }}</b>
                                     </td>
                                 </tr>
                                 <tr>

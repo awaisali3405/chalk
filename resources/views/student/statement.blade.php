@@ -403,7 +403,7 @@
                                     <tr style="background-color: rgb(255, 148, 148);">
                                         <td></td>
                                         <td>{{ auth()->user()->ukFormat($value->invoice[0]->refund->updated_at) }}</td>
-                                        <td>Deposit credited from deposit account
+                                        <td>Deposit Credited from Deposit Account
                                         </td>
                                         <td class="text-align-end">£0</td>
                                         <td class="text-align-end">
