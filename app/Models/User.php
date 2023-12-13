@@ -182,7 +182,7 @@ class User extends Authenticatable
     }
     public function resourceFeeReceived($branch, $academicYear)
     {
-        $invoice = $this->invoice($branch, $academicYear)->where('type', 'Resource Fee');
+        $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Resource Fee','Addition Book Invoice']);
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
         $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->get();
@@ -193,7 +193,7 @@ class User extends Authenticatable
     }
     public function resourceFeeDue($branch, $academicYear)
     {
-        $invoice = $this->invoice($branch, $academicYear)->where('type', 'Resource Fee');
+        $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Resource Fee','Addition Book Invoice']);
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
         $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->get();
