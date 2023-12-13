@@ -31,11 +31,11 @@ class InvoiceController extends Controller
                 }
             })->whereHas('promotionDetail', function ($query) {
                 $query->where('academic_year_id', auth()->user()->session()->id);
-            })->get();
+            })->where('disable', false)->get();
         } else {
             $student = Student::where('payment_period', "Weekly")->whereHas('promotionDetail', function ($query) {
                 $query->where('academic_year_id', auth()->user()->session()->id);
-            })->get();
+            })->where('disable', false)->get();
         }
         return view('invoice.index', compact('student'));
     }
@@ -63,17 +63,15 @@ class InvoiceController extends Controller
                 $student->where('is_paid', false)->where('academic_year_id', auth()->user()->session()->id);
             });
             // }
-            $student = $student->get();
+            $student = $student->where('disable', false)->get();
             // dd($student);
         } else {
             $student = Student::where('payment_period', "Weekly")->where('is_promoted', false)->where('active', true)->whereHas('invoice', function ($query) {
                 $query->where('is_paid', false)->where('academic_year_id', auth()->user()->session()->id);
-            })->get();
+            })->where('disable', false)->get();
         }
-
         return view('invoice.add', compact('student'));
     }
-
     public function dueStudent(Request $request)
     {
         if (request()->input()) {
@@ -180,7 +178,6 @@ class InvoiceController extends Controller
         StudentInvoice::find($id)->update($data);
         return redirect()->route('invoice.index')->with('success', 'Invoice Updated Successfully');
     }
-
     /**
      * Remove the specified resource from storage.
      */
@@ -193,19 +190,12 @@ class InvoiceController extends Controller
     {
         $to = \Carbon\Carbon::parse($request->from_date);
         $from = \Carbon\Carbon::parse($request->to_date);
-
-
         $days = $to->diffInDays($from) + 1;
         $weeks = $to->diffInWeeks($from->addDay(1));
         $months = $to->diffInMonths($from->addDay(1));
-        // $days=$request->from_date
         $to = Carbon::createFromFormat('m/d/Y', $request->from_date)->format('Y-m-d');
         $from = Carbon::createFromFormat('m/d/Y', $request->to_date)->format('Y-m-d');
-        // dd($request, $days, $weeks, $to, $from, date('m/d/y', strtotime($to)));
-
         if ($request->student) {
-
-
             foreach ($request->student as $value) {
                 $student = Student::find($value);
                 if ($student->payment_period == "Weekly") {
@@ -232,12 +222,10 @@ class InvoiceController extends Controller
                     if (str_contains($student->year->name, "11")) {
                         $amount = ((($student->yearSubject->sum('amount')) * 40 / 9) * $months) - $student->fee_discount;
                     } else {
-
                         $amount = ((($student->yearSubject->sum('amount')) * 52 / 12) * $months) - $student->fee_discount;
                     }
                     // dd($amount, $months, ($student->yearSubject->sum('amount')));
                     if ($amount > 0) {
-
                         $invoice = StudentInvoice::create([
                             'student_id' => $student->id,
                             'type' => 'Monthly Fee',
@@ -279,9 +267,6 @@ class InvoiceController extends Controller
             foreach ($data['amount'] as $value) {
                 $amount += $value;
             }
-            // dd($data, $amount);
-
-
             $invoice = StudentInvoice::create([
                 'student_id' => $student->id,
                 'amount' => $amount,

@@ -58,7 +58,7 @@
                                             <label class="form-label">Payment</label>
                                             <div class="input-group mb-2">
                                                 <select name="payment_period" id="" class="form-control payment">
-                                                    {{-- <option value="0">All</option> --}}
+                                                    <option value="">All</option>
                                                     <option value="Weekly"
                                                         {{ request()->payment_period == 'Weekly' ? 'selected' : '' }}>
                                                         Weekly</option>
@@ -87,7 +87,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     {{-- <div class="col-lg-4 col-md-3 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Status</label>

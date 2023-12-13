@@ -232,8 +232,6 @@
                                                         <div class="col-12" style="">
                                                             <div class="card">
                                                                 <div class="card-header">
-
-
                                                                 </div>
                                                                 <div class="card-body">
                                                                     @if ($student->parent_subject)
@@ -244,7 +242,6 @@
                                                                                     @foreach (json_decode($student->parent_subject) as $value)
                                                                                         <li>{{ $value }}</li>
                                                                                     @endforeach
-
                                                                                 </ul>
                                                                             </div>
                                                                         </div>
@@ -944,7 +941,7 @@
                                                         @foreach ($parent as $value)
                                                             <option value="{{ $value->id }}"
                                                                 {{ $value->id == $student->parents[0]->id ? 'selected' : '' }}>
-                                                                {{ $value->given_name }}
+                                                                {{ $value->name() }}
                                                             </option>
                                                         @endforeach
                                                     </select>

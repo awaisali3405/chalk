@@ -79,7 +79,8 @@ class Student extends Model
         'roll_no',
         'cash_balance',
         'bank_balance',
-        'credit_note'
+        'credit_note',
+        'disable'
     ];
     public function wallet()
     {

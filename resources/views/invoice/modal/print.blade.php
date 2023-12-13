@@ -274,9 +274,9 @@
                                         <tr>
                                             <td></td>
                                             <td class="text-center">
-                                                <b>Book Fee
-                                                    ({{ auth()->user()->ukFormat($invoice->from_date) }} -
-                                                    {{ auth()->user()->ukFormat($invoice->to_date) }})
+                                                <b>
+                                                    {{ auth()->user()->ukFormat($invoice->from_date) }} -
+                                                    {{ auth()->user()->ukFormat($invoice->to_date) }}
                                                 </b>
                                             </td>
 
@@ -408,7 +408,9 @@
                                                     <b>{{ $key + 1 }}</b>
                                                 </td>
                                                 <td class="pl-2 ">
-                                                    <b>Book ({{ $value->subject_name }} - {{ $value->book_name }}) -
+                                                    <b>{{ $invoice->student->currentYear()->name }}
+                                                        ({{ $value->subject_name }} - {{ $value->book_name }})
+                                                        -
                                                         {{ $value->quantity }}
                                                         qty</b>
                                                 </td>
@@ -985,7 +987,7 @@
                 </div>
                 <div class="row pt-3">
                     <div class="col-12">
-                        <b>Term & Condition</b>
+                        <b>Term's & Condition</b>
                         <p class="justify-end " style="font-size: x-small;">Once you pay your deposit, you have agreed
                             to start your course with
                             Chalk n Duster. If under any circumstances you change your mind or you're not able to

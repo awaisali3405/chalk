@@ -52,7 +52,7 @@ class AttendanceController extends Controller
             }
             $student = $student->where('active', true)->where('is_promoted', false)->whereHas('promotionDetail', function ($query) {
                 $query->where('academic_year_id', auth()->user()->session()->id);
-            })->get();
+            })->where('disable', false)->get();
         } else {
             $student = array();
         }

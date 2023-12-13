@@ -58,28 +58,22 @@
                                             <label class="form-label">Payment</label>
                                             <div class="input-group mb-2">
                                                 <select name="payment_period" id="" class="form-control payment">
-                                                    {{-- <option value="0">All</option> --}}
+                                                    <option value="">All</option>
                                                     <option value="Weekly"
                                                         {{ request()->payment_period == 'Weekly' ? 'selected' : '' }}>
                                                         Weekly</option>
                                                     <option value="Monthly"
                                                         {{ request()->payment_period == 'Monthly' ? 'selected' : '' }}>
                                                         Monthly</option>
-
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="col-lg-12 col-md-6 col-sm-12 pt-4 justify-content-center d-flex pb-4">
                                         <button type="submit" class="btn btn-primary">Show</button>
-
-                                        {{-- <button type="submit" class="btn btn-light">Cancel</button> --}}
                                     </div>
-
                                 </div>
                             </form>
-
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="row tab-content">
@@ -87,7 +81,6 @@
                                             <div class="card">
                                                 <div class="card-header">
                                                     <h4 class="card-title">Student </h4>
-
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="table-responsive">
@@ -104,7 +97,6 @@
                                                                     <th>Paid</th>
                                                                     <th>Due</th>
                                                                     <th>Invoice</th>
-                                                                    {{-- <th>Action</th> --}}
                                                                 </tr>
                                                             </thead>
                                                             <tbody>

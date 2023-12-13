@@ -158,70 +158,9 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
-                                                {{-- <div class="form-group">
-                                                    <label class="form-label">Current Year</label>
-                                                    <input type="date" class="form-control" name="current_year"
-                                                        value="{{ old('current_year') }}" required>
-                                                </div> --}}
+
                                             </div>
 
-                                            {{-- <div class="col-lg-12 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">Lesson Type</label>
-                                                    <div class="row">
-                                                        <div class="col-3 ">
-
-                                                            <div class="form-check">
-
-                                                                <input type="radio" name="lesson_type"
-                                                                    value="Normal Group" id="Normal Group"
-                                                                    {{ old('lesson_type') == 'Normal Group' ? 'checked' : '' }}
-                                                                    required>
-                                                                <label class="form-check-label" for="Normal Group">Normal
-                                                                    Group</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-3 ">
-
-                                                            <div class="form-check">
-
-                                                                <input type="radio" name="lesson_type"
-                                                                    value="Small Group" id="Small Group"
-                                                                    {{ old('lesson_type') == 'Small Group' ? 'checked' : '' }}
-                                                                    required>
-                                                                <label class="form-check-label" for="Small Group">Small
-                                                                    Group</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-3 ">
-
-                                                            <div class="form-check">
-
-                                                                <input type="radio" name="lesson_type"
-                                                                    value="One - One" id="One - One"
-                                                                    {{ old('lesson_type') == 'One - One' ? 'checked' : '' }}
-                                                                    required>
-                                                                <label class="form-check-label" for="One - One">One -
-                                                                    One</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-3 ">
-
-                                                            <div class="form-check">
-
-                                                                <input type="radio" name="lesson_type"
-                                                                    value="H/W Help Group" id="H/W Help Group"
-                                                                    {{ old('lesson_type') == 'H/W Help Group' ? 'checked' : '' }}
-                                                                    required>
-                                                                <label class="form-check-label" for="H/W Help Group">H/W
-                                                                    Help Group</label>
-                                                            </div>
-                                                        </div>
-
-
-                                                    </div>
-                                                </div>
-                                            </div> --}}
 
                                             <div class="col-12">
 
@@ -265,24 +204,13 @@
                                                             </div>
                                                             <div class=" pl-3">
                                                                 <div class="row checkbox">
-
-
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     @endif
-
-
-                                                    {{-- <div class="col-lg-12 col-md-12 col-sm-12">
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                        <button type="submit" class="btn btn-light">Cancel</button>
-                                                    </div> --}}
                                                 </div>
                                             </div>
-
-
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -676,9 +604,7 @@
                             </div>
                         </div>
                     @endif
-                    {{-- @endif --}}
                     <div class="col-12">
-
                         <div class="card">
                             <div class="card-header d-flex justify-content-center">
                                 <h2>Parent Guardian Detail</h2>
@@ -686,17 +612,13 @@
                         </div>
                     </div>
                     <div class="row">
-
                         @if (auth()->user()->role->name == 'parent')
                             <div class="col-xl-6 col-xxl-6 col-sm-12">
                                 <div class="card">
                                     <div class="card-header">
                                         <h5 class="card-title">Parent 1 /Guardian 1 Details</h5>
                                     </div>
-
                                     <div class="card-body " id="parent">
-                                        {{-- @dd($student->parents) --}}
-                                        {{-- @dd(auth()->user()->parent) --}}
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
@@ -899,7 +821,7 @@
                                                         required>
                                                         <option value="">-</option>
                                                         @foreach ($parent as $value)
-                                                            <option value="{{ $value->id }}">{{ $value->given_name }}
+                                                            <option value="{{ $value->id }}">{{ $value->name() }}
                                                             </option>
                                                         @endforeach
                                                     </select>

@@ -35,6 +35,10 @@ class StudentInvoice extends Model
     {
         return auth()->user()->ukFormat($this->from_date) . ' - ' . auth()->user()->ukFormat($this->to_date);
     }
+    public function refund()
+    {
+        return $this->hasOne(Refund::class, 'invoice_id');
+    }
     public function academicYear()
     {
         return $this->belongsTo(AcademicCalender::class, 'academic_year_id');

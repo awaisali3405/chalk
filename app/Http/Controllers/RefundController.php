@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CashFlow;
 use App\Models\Refund;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class RefundController extends Controller
@@ -65,8 +67,17 @@ class RefundController extends Controller
     }
     public function paidByBank($id)
     {
-        Refund::find($id)->update([
+        $refund =  Refund::find($id);
+        $refund->update([
             'paid_by_bank' => true
+        ]);
+        CashFlow::create([
+            'date' => Carbon::now(),
+            'branch_id' => $refund->invoice->branch_id,
+            'description' => $refund->invoice->student->name() . " (" . auth()->user()->session()->period() . ") Refind",
+            'mode' => "Bank",
+            'type' => "Bank",
+            'out' => $refund->invoice->amount,
         ]);
         return redirect()->route('refund.index')->with('success', 'Paid by Bank Successfully');
     }

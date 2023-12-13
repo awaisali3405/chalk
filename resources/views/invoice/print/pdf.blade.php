@@ -464,7 +464,8 @@
                                     <td class="text-center text-center">
                                         <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
                                     </td>
-                                    <td class=" bg-grey " style="text-align: end !important; padding-right:5px;">
+                                    <td class=" bg-grey "
+                                        style="text-align: end !important; padding-right:5px;">
                                         <b>£{{ auth()->user()->priceFormat($value->subject_amount) }}</b>
                                     </td>
                                 </tr>
@@ -492,7 +493,9 @@
                                         <b>{{ $key + 1 }}</b>
                                     </td>
                                     <td class="pl-2 ">
-                                        <b>Book ({{ $value->subject_name }} - {{ $value->book_name }}) -
+                                        <b>{{ $invoice->student->currentYear()->name }}
+                                            ({{ $value->subject_name }} - {{ $value->book_name }})
+                                            -
                                             {{ $value->quantity }}
                                             qty</b>
                                     </td>
@@ -502,7 +505,8 @@
                                     <td class="text-center text-center">
                                         <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
                                     </td>
-                                    <td class=" bg-grey " style="text-align: end !important; padding-right:5px;">
+                                    <td class=" bg-grey "
+                                        style="text-align: end !important; padding-right:5px;">
                                         <b>£{{ auth()->user()->priceFormat($value->amount) }}</b>
                                     </td>
                                 </tr>
@@ -1016,7 +1020,8 @@
                             <td class="">
                                 Sub Total INCLUSIVE VAT
                             </td>
-                            <th class="text-center" style="text-align: end !important; padding-right:5px;">
+                            <th class="text-center"
+                                style="text-align: end !important; padding-right:5px;">
                                 £{{ auth()->user()->priceFormat($invoice->amount - $invoice->receipt->sum('discount') + $invoice->receipt->sum('late_fee')) }}
                             </th>
                         </tr>
@@ -1024,7 +1029,8 @@
                             <td class="">
                                 Invoice Balance
                             </td>
-                            <th class="text-center" style="color:red; text-align: end !important; padding-right:5px;">
+                            <th class="text-center"
+                                style="color:red; text-align: end !important; padding-right:5px;">
 
                                 £{{ $invoice->remainingAmount() }}
 
@@ -1036,7 +1042,8 @@
                             <th class="" colspan="">
                                 Vat Inclusive
                             </th>
-                            <th class="text-center" style="text-align: end !important; padding-right:5px;">
+                            <th class="text-center"
+                                style="text-align: end !important; padding-right:5px;">
                                 £{{ auth()->user()->priceFormat($invoice->taxAmount()) }}
                             </th>
                         </tr>
@@ -1044,7 +1051,8 @@
                             <th class="" colspan="">
                                 Debit Brought Forward
                             </th>
-                            <th class="text-center" style="text-align: end !important; padding-right:5px;">
+                            <th class="text-center"
+                                style="text-align: end !important; padding-right:5px;">
                                 £{{ auth()->user()->priceFormat($invoice->debitBroughtForward()) }}
                             </th>
                         </tr>
@@ -1052,7 +1060,8 @@
                             <th class="" colspan="">
                                 Payment Due
                             </th>
-                            <th class="text-center" style="text-align: end !important; padding-right:5px;">
+                            <th class="text-center"
+                                style="text-align: end !important; padding-right:5px;">
                                 £{{ auth()->user()->priceFormat($invoice->debitBroughtForward() + $invoice->remainingAmount()) }}
                             </th>
                         </tr>
@@ -1063,7 +1072,7 @@
     </div>
     <div class="row pt-3">
         <div class="col-12">
-            <b>Term & Condition</b>
+            <b>Term's & Condition</b>
             <p class="justify-end " style="font-size: x-small;">Once you pay your deposit, you have agreed
                 to start your course with
                 Chalk n Duster. If under any circumstances you change your mind or you're not able to

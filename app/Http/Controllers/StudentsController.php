@@ -53,14 +53,14 @@ class StudentsController extends Controller
                 if ($request->input('payment_period')) {
                     $student = $student->where('payment_period', $request->input('payment_period'));
                 }
-                $student = $student->where('active', true)->get();
+                $student = $student->where('active', true)->where('disable', false)->get();
             } else {
-                $student = Student::where('active', true)->get();
+                $student = Student::where('active', true)->where('disable', false)->get();
             }
         } else if (auth()->user()->role->name == 'parent') {
             $student = Parents::where('user_id', auth()->user()->id)->first();
             if ($student) {
-                $student = $student->student;
+                $student = $student->student->where('disable', false);
                 // dd($student);
             } else {
                 $student = array();
@@ -621,14 +621,14 @@ class StudentsController extends Controller
                 if ($request->input('know_about_us')) {
                     $student = $student->where('know_about_us', $request->input('know_about_us'));
                 }
-                $student = $student->where('is_disable', true)->get();
+                $student = $student->where('is_disable', true)->where('disable', false)->get();
             } else {
-                $student = Student::where('is_disable', true)->get();
+                $student = Student::where('is_disable', true)->where('disable', false)->get();
             }
         } else if (auth()->user()->role->name == 'parent') {
             $student = Parents::where('user_id', auth()->user()->id)->first();
             if ($student) {
-                $student = $student->student;
+                $student = $student->student->where('disable', false);
             } else {
                 $student = array();
             }
@@ -641,7 +641,7 @@ class StudentsController extends Controller
         $year = Year::find($id);
         $string = '<option value="">-</option>';
         // dd($year);
-        foreach ($year->student as $key => $value) {
+        foreach ($year->student->where('disable', false) as $key => $value) {
 
             $string .= "<option value='" . $value->id . "'>" . $value->first_name . "</option>";
         }
@@ -652,7 +652,7 @@ class StudentsController extends Controller
         $year = Year::find($id);
         $string = '<option value="">-</option>';
         // dd($year);
-        foreach ($year->student->where('branch_id', $branch) as $key => $value) {
+        foreach ($year->student->where('branch_id', $branch)->where('disable', false) as $key => $value) {
 
             $string .= "<option value='" . $value->id . "'>" . $value->first_name . "</option>";
         }
