@@ -17,8 +17,12 @@ class CashFlow extends Model
         'type',
         'in',
         'out',
-        // 'academic_year_id'
+        'academic_year_id'
     ];
+    public function academicYear()
+    {
+        return $this->belongsTo(AcademicCalender::class, 'academic_year_id');
+    }
     public function branch()
     {
         return $this->belongsTo(Branch::class, 'branch_id');

@@ -21,20 +21,15 @@ class CashFlowController extends Controller
         $type = CashFlow::distinct('type')->pluck("type");
         View::share('type', $type);
         if ($request->input()) {
-
             $cashFlow = new CashFlow();
             if ($request->input('branch_id')) {
                 $cashFlow = $cashFlow->where('branch_id', $request->input('branch_id'));
             }
-
             // dd($cashFlow->where('date', '>=', $request->form_date)->get(), $request->from_date);
             if ($request->from_date) {
-
                 $cashFlow = $cashFlow->where('date', '>=', $request->from_date);
             }
-
             if ($request->to_date) {
-
                 $cashFlow = $cashFlow->where("date", '<=', $request->to_date);
             }
             if ($request->from_week) {
@@ -50,9 +45,9 @@ class CashFlowController extends Controller
                 $cashFlow = $cashFlow->where("type", "LIKE", $request->type);
             }
 
-            $cashFlow = $cashFlow->where('mode', '!=', 'Wallet')->get();
+            $cashFlow = $cashFlow->where('mode', '!=', 'Wallet')->where('academic_year_id', auth()->user()->session()->id)->get();
         } else {
-            $cashFlow = CashFlow::where('mode', '!=', 'Wallet')->get();
+            $cashFlow = CashFlow::where('mode', '!=', 'Wallet')->where('academic_year_id', auth()->user()->session()->id)->get();
         }
         $mode = [
             'Cash',

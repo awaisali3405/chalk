@@ -17,15 +17,14 @@ class RefundController extends Controller
         $refund = Refund::where('paid_by_cash', 0)->where('paid_by_bank', 0)->get();
         return view('refund.index', compact('refund'));
     }
-
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        $refund = Refund::where('paid_by_cash', 1)->orWhere('paid_by_bank', 1)->get();
+        return view('refund.list', compact('refund'));
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -33,7 +32,6 @@ class RefundController extends Controller
     {
         //
     }
-
     /**
      * Display the specified resource.
      */
@@ -49,7 +47,6 @@ class RefundController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      */

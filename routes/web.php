@@ -101,7 +101,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('product', ProductController::class);
     Route::get('/product/transfer/{id}', [ProductController::class, 'transfer'])->name('product.transfer');
     Route::post('/product/transfer/{id}/store', [ProductController::class, 'transferPost'])->name('product.transfer.store');
-
     Route::resource('purchase', PurchaseController::class);
     Route::resource('sale', SaleController::class);
     Route::resource('supplier', SupplierControlller::class);
@@ -109,17 +108,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('attendance', AttendanceController::class);
     Route::resource('balanceSheet', BalanceSheetController::class);
 
-
     Route::resource('refund', RefundController::class);
     Route::get('/paid-by-cash/{id}', [RefundController::class, 'paidByBank'])->name('refund.paid.bank');
     Route::get('/paid-by-bank/{id}', [RefundController::class, 'paidByCash'])->name('refund.paid.cash');
-
-
-
     // Expense Account Type
     Route::resource('expenseTypeAccount', ExpenseAccountTypeController::class);
     Route::resource('expense', ExpenseController::class);
-
     // Teacher Enquiry
     Route::resource('enquiryTeacher', TeacherEnquiryController::class);
     Route::get('enquiry/upload/{id}', [TeacherEnquiryController::class, 'upload'])->name('enquiryTeacher.upload');
@@ -142,7 +136,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('staff/invoice/pay/{id}', [StaffController::class, 'invoicePay'])->name('staff.invoice.pay');
     Route::get('staff/statement/{id}', [StaffController::class, 'statement'])->name('staff.statement');
     Route::post('staff/pay/store', [StaffController::class, 'payStore'])->name('staff.pay.store');
-
     // Event Calender
     Route::resource('eventCalender', EventController::class);
     // Generate Salary

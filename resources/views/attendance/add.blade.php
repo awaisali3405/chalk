@@ -23,7 +23,7 @@
                             <div class="form-group">
                                 <label class="form-label">Branch</label>
                                 <div class="input-group mb-2">
-                                    <select name="branch" id="branch_id" class="form-control">
+                                    <select name="branch" id="branch_id" class="form-control single-select">
                                         <option value="">All</option>
                                         @foreach ($branch as $value)
                                             <option value="{{ $value->id }}"
@@ -36,13 +36,13 @@
                         </div>
                         <div class="col-lg-4 col-md-3 col-sm-12">
                             <div class="form-group">
+
                                 <label class="form-label">Year</label>
                                 <div class="input-group mb-2">
-                                    <select name="year_id" class="form-control year">
-                                        <option value="">All</option>
+                                    <select name="year_id[]" multiple class="form-control js-example-theme-multiple">
                                         @foreach ($year as $value)
                                             <option value={{ $value->id }}
-                                                {{ request()->get('year_id') == $value->id ? 'selected' : '' }}>
+                                                {{ request()->get('year_id') && in_array($value->id, request()->get('year_id')) ? 'selected' : '' }}>
                                                 {{ $value->name }}</option>
                                         @endforeach
                                     </select>
@@ -54,7 +54,8 @@
                                 <label class="form-label">Date</label>
                                 <div class="input-group mb-2">
                                     <input type="date" class="form-control" id="" name="date" placeholder=""
-                                        value="{{ request()->get('date') }}" required>
+                                        onchange="this.closest('form').submit()" value="{{ request()->get('date') }}"
+                                        keyup="this.closest('form').submit()" value="{{ request()->get('date') }}" required>
                                 </div>
                             </div>
                         </div>

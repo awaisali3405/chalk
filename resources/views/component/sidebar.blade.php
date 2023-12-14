@@ -27,7 +27,6 @@
                         <li><a href="{{ route('wallet.create') }}">Add Wallet</a></li>
                     </ul>
                 </li>
-
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-user"></i>
                         <span class="nav-text">Parent</span>
@@ -198,6 +197,7 @@
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{ route('refund.index') }}">Student Deposit</a></li>
+                        <li><a href="{{ route('refund.create') }}">All Refund</a></li>
                     </ul>
                 </li>
                 <li class="mm-active"><a class="has-arrow" href="javascript:void()" aria-expanded="false">
