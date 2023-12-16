@@ -48,7 +48,8 @@ class SaleController extends Controller
             'branch_id' => $data['branch_id'],
             'from_date' => auth()->user()->session()->start_date,
             'to_date' => auth()->user()->session()->end_date,
-            'academic_year_id' => auth()->user()->session()->id
+            'academic_year_id' => auth()->user()->session()->id,
+            'date' => $data['date']
 
         ]);
         $invoice->update([

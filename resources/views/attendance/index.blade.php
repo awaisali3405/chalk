@@ -36,11 +36,10 @@
                             <div class="form-group">
                                 <label class="form-label">Year</label>
                                 <div class="input-group mb-2">
-                                    <select name="year_id" class="form-control year">
-                                        <option value="">All</option>
+                                    <select name="year_id[]" multiple class="form-control js-example-theme-multiple">
                                         @foreach ($year as $value)
                                             <option value={{ $value->id }}
-                                                {{ request()->get('year_id') == $value->id ? 'selected' : '' }}>
+                                                {{ request()->get('year_id') && in_array($value->id, request()->get('year_id')) ? 'selected' : '' }}>
                                                 {{ $value->name }}</option>
                                         @endforeach
                                     </select>

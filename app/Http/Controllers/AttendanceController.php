@@ -17,7 +17,7 @@ class AttendanceController extends Controller
             $student = new Student;
             if (request()->input('year_id') != '') {
 
-                $student = $student->where('year_id', $request->year_id);
+                $student = $student->whereIn('year_id', request()->get('year_id'));
             }
             if (request()->input('branch_id') != '') {
 
