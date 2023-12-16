@@ -740,7 +740,8 @@ class StudentsController extends Controller
                 'to_date' => auth()->user()->session()->end_date,
                 'branch_id' => $student->branch_id,
                 'year_id' => $student->currentYear()->id,
-                'academic_year_id' => auth()->user()->session()->id
+                'academic_year_id' => auth()->user()->session()->id,
+                'date' => $student->admission_date
             ]);
             $invoice->update([
                 'code' => "F00" . $invoice->id . '/' . auth()->user()->session()->InvoiceYearCode()
@@ -758,7 +759,8 @@ class StudentsController extends Controller
                 'to_date' => auth()->user()->session()->end_date,
                 'branch_id' => $student->branch_id,
                 'year_id' => $student->currentYear()->id,
-                'academic_year_id' => auth()->user()->session()->id
+                'academic_year_id' => auth()->user()->session()->id,
+                'date' => $student->admission_date
             ]);
             $invoice->update([
                 'code' => "A00" . $invoice->id . '/' . auth()->user()->session()->InvoiceYearCode()
@@ -828,7 +830,8 @@ class StudentsController extends Controller
             'to_date' => auth()->user()->session()->end_date,
             'branch_id' => $student->branch_id,
             'year_id' => $student->currentYear()->id,
-            'academic_year_id' => auth()->user()->session()->id
+            'academic_year_id' => auth()->user()->session()->id,
+            'date' => $student->admission_date
         ]);
         $subject->update([
             'resource_invoice_id' => $invoice->id

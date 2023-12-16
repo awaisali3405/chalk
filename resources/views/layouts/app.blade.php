@@ -316,6 +316,26 @@
     <script src="{{ asset('js/dashboard/branch.js') }}"></script>
     {{-- Invoice --}}
     <script src="{{ asset('js/dashboard/invoice.js') }}"></script>
+    {{-- Addition Invoice --}}
+    <script src="{{ asset('js/dashboard/addition-invoice.js') }}"></script>
+
+    {{-- Sale Product --}}
+
+    <script src="{{ asset('js/dashboard/sale-product.js') }}"></script>
+
+
+    {{-- branch and year change --}}
+    <script src="{{ asset('js/dashboard/branch-year-api.js') }}"></script>
+
+
+    {{-- Enquiry  --}}
+    <script src="{{ asset('js/dashboard/enquiry.js') }}"></script>
+
+
+
+    {{-- Teacher Enquiry --}}
+    <script src="{{ asset('js/dashboard/teacher-enquiry.js') }}"></script>
+
     <!-- Demo scripts -->
     <!-- Demo scripts -->
     <script src="{{ asset('js/dashboard/dashboard-2.js') }}"></script>
@@ -416,24 +436,6 @@
 
 
 
-    {{-- Addition Invoice --}}
-    <script src="{{ asset('js/dashboard/addition-invoice.js') }}"></script>
-
-    {{-- Sale Product --}}
-
-    <script src="{{ asset('js/dashboard/sale-product.js') }}"></script>
-
-
-
-
-
-    {{-- Enquiry  --}}
-    <script src="{{ asset('js/dashboard/enquiry.js') }}"></script>
-
-
-
-    {{-- Teacher Enquiry --}}
-    <script src="{{ asset('js/dashboard/teacher-enquiry.js') }}"></script>
 
 
 
@@ -549,8 +551,7 @@
     <script src="{{ asset('js/dashboard/purchase.js') }}"></script>
     {{-- Receipt Js --}}
     <script src="{{ asset('js/dashboard/receipt.js') }}"></script>
-    {{-- branch and year change --}}
-    <script src="{{ asset('js/dashboard/branch-year-api.js') }}"></script>
+
     {{-- Addition book invoice --}}
     <script src="{{ asset('js/dashboard/addtional-book-invoice.js') }}"></script>
 

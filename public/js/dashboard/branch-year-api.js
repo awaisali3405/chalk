@@ -1,5 +1,6 @@
 $('.year_student_branch').add('#branch_id').on('change keyup', function () {
     id = $(this).val()
+    console.log(id);
     branch = $('#branch_id').val();
     if (id && branch) {
 
@@ -9,8 +10,8 @@ $('.year_student_branch').add('#branch_id').on('change keyup', function () {
             success: function (success) {
                 // if (success.message == 'success') {
 
+                console.log(success.data);
                 $('.student').html(success.data);
-                // console.log(success.data);
                 // }
 
 
