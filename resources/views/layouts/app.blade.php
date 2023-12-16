@@ -335,10 +335,18 @@
 
     {{-- Teacher Enquiry --}}
     <script src="{{ asset('js/dashboard/teacher-enquiry.js') }}"></script>
+    <script src="{{ asset('js/dashboard/sale.js') }}"></script>
+    {{-- Purhcase --}}
+    <script src="{{ asset('js/dashboard/purchase.js') }}"></script>
+    {{-- Receipt Js --}}
+    <script src="{{ asset('js/dashboard/receipt.js') }}"></script>
 
+    {{-- Addition book invoice --}}
+    <script src="{{ asset('js/dashboard/addtional-book-invoice.js') }}"></script>
     <!-- Demo scripts -->
     <!-- Demo scripts -->
     <script src="{{ asset('js/dashboard/dashboard-2.js') }}"></script>
+
 
 
     <!-- Svganimation scripts -->
@@ -546,14 +554,6 @@
     <!-- Summernote init -->
     <script src="{{ asset('js/plugins-init/summernote-init.js') }}"></script>
 
-    <script src="{{ asset('js/dashboard/sale.js') }}"></script>
-    {{-- Purhcase --}}
-    <script src="{{ asset('js/dashboard/purchase.js') }}"></script>
-    {{-- Receipt Js --}}
-    <script src="{{ asset('js/dashboard/receipt.js') }}"></script>
-
-    {{-- Addition book invoice --}}
-    <script src="{{ asset('js/dashboard/addtional-book-invoice.js') }}"></script>
 
     <script src="{{ asset('vendor/jqueryui/js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('vendor/moment/moment.min.js') }}"></script>

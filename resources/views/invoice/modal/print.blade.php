@@ -163,7 +163,7 @@
                                 <tr>
                                     <td class="text-center">
 
-                                        {{ \Carbon\Carbon::parse($invoice->created_at->addDays(7))->format('d/m/Y') }}
+                                        {{ \Carbon\Carbon::parse($invoice->date)->addDays(7)->format('d/m/Y') }}
                                     </td>
                                     <td>
                                         {{ $invoice->is_paid && $invoice->receipt->count() > 0? auth()->user()->ukFormat($invoice->receipt[$invoice->receipt->count() - 1]->date): '' }}
