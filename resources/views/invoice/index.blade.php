@@ -609,7 +609,7 @@
                                                                         </div>
                                                                         <div class="col-lg-2 col-md-6 col-sm-12">
                                                                             <div class="form-group">
-                                                                                <label class="form-label">To Date</label>
+                                                                                <label class="form-label">Date</label>
                                                                                 <div class="input-group mb-2">
                                                                                     <input type="date"
                                                                                         class="form-control"
