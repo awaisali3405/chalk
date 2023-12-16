@@ -583,7 +583,7 @@
                                                                 <div class="card">
                                                                     <div class="card-header">
                                                                         <h4 class="card-title">Student </h4>
-                                                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                                                        <div class="col-lg-2 col-md-6 col-sm-12">
                                                                             <div class="form-group">
                                                                                 <label class="form-label">From Date</label>
                                                                                 <div class="input-group mb-2">
@@ -595,16 +595,26 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                                                        <div class="col-lg-2 col-md-6 col-sm-12">
                                                                             <div class="form-group">
                                                                                 <label class="form-label">To Date</label>
                                                                                 <div class="input-group mb-2">
-
                                                                                     <input type="text"
                                                                                         class="form-control end_date"
                                                                                         name="to_date" placeholder=""
                                                                                         value="{{ request()->to_date }}"
                                                                                         required readonly>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-2 col-md-6 col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label class="form-label">To Date</label>
+                                                                                <div class="input-group mb-2">
+                                                                                    <input type="date"
+                                                                                        class="form-control"
+                                                                                        name="date" placeholder=""
+                                                                                        required>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -628,7 +638,6 @@
                                                                                         <th>Branch</th>
                                                                                         <th>Fee</th>
                                                                                         <th>Invoice</th>
-                                                                                        {{-- <th>Action</th> --}}
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
