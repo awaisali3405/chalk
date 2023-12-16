@@ -53,9 +53,13 @@ class StudentsController extends Controller
                 if ($request->input('payment_period')) {
                     $student = $student->where('payment_period', $request->input('payment_period'));
                 }
-                $student = $student->where('active', true)->where('disable', false)->get();
+                $student = $student->where('active', true)->where('disable', false)->whereHas('promotionDetail', function ($query) {
+                    $query->where('academic_year_id', auth()->user()->session()->id);
+                })->get();
             } else {
-                $student = Student::where('active', true)->where('disable', false)->get();
+                $student = Student::where('active', true)->where('disable', false)->whereHas('promotionDetail', function ($query) {
+                    $query->where('academic_year_id', auth()->user()->session()->id);
+                })->get();
             }
         } else if (auth()->user()->role->name == 'parent') {
             $student = Parents::where('user_id', auth()->user()->id)->first();
@@ -99,14 +103,18 @@ class StudentsController extends Controller
                 if ($request->input('payment_period')) {
                     $student = $student->where('payment_period', $request->input('payment_period'));
                 }
-                $student = $student->where('active', true)->where('disable', false)->get();
+                $student = $student->where('active', true)->where('disable', false)->whereHas('promotionDetail', function ($query) {
+                    $query->where('academic_year_id', auth()->user()->session()->id);
+                })->get();
             } else {
-                $student = Student::where('active', true)->where('disable', false)->get();
+                $student = Student::where('active', true)->where('disable', false)->whereHas('promotionDetail', function ($query) {
+                    $query->where('academic_year_id', auth()->user()->session()->id);
+                })->get();
             }
         } else if (auth()->user()->role->name == 'parent') {
             $student = Parents::where('user_id', auth()->user()->id)->first();
             if ($student) {
-                $student = $student->student->where('disable', false);
+                $student = $student->student->where('disable', true);
                 // dd($student);
             } else {
                 $student = array();
@@ -568,17 +576,11 @@ class StudentsController extends Controller
             'note' => $request->note
         ]);
         if (str_contains(url()->current(), 'request')) {
-
             return redirect()->route('student.request')->with('success', 'Branch Updated Successfully');
         } else {
             return redirect()->route('student.index')->with('success', 'Branch Updated Successfully');
         }
     }
-    // public function redirect($message){
-    //     if(str_contain(url()->)){
-
-    //     }
-    // }
     public function upload($id)
     {
 
@@ -666,14 +668,18 @@ class StudentsController extends Controller
                 if ($request->input('know_about_us')) {
                     $student = $student->where('know_about_us', $request->input('know_about_us'));
                 }
-                $student = $student->where('is_disable', true)->where('disable', false)->get();
+                $student = $student->where('is_disable', true)->where('is_disable', false)->whereHas('promotionDetail', function ($query) {
+                    $query->where('academic_year_id', auth()->user()->session()->id);
+                })->get();
             } else {
-                $student = Student::where('is_disable', true)->where('disable', false)->get();
+                $student = Student::where('is_disable', true)->where('is_disable', false)->whereHas('promotionDetail', function ($query) {
+                    $query->where('academic_year_id', auth()->user()->session()->id);
+                })->get();
             }
         } else if (auth()->user()->role->name == 'parent') {
             $student = Parents::where('user_id', auth()->user()->id)->first();
             if ($student) {
-                $student = $student->student->where('disable', false);
+                $student = $student->student->where('is_disable', false);
             } else {
                 $student = array();
             }

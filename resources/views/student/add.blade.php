@@ -385,8 +385,8 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="form-label">Branch</label>
-                                                        <select class="form-control branch_student" name="branch_id"
-                                                            required>
+                                                        <select class="form-control branch_student" id=""
+                                                            name="branch_id" required>
                                                             <option value="">Select Branch</option>
                                                             @foreach ($branch as $value)
                                                                 <option value="{{ $value->id }}"
@@ -985,14 +985,6 @@
                                                         name="res_address1[]" disabled>
                                                 </div>
                                             </div>
-
-
-
-
-
-
-
-
                                         </div>
 
 
@@ -1007,22 +999,18 @@
                                 </div>
 
                                 <div class="card-body " id="parent">
-                                    {{-- @dd($student->parents) --}}
                                     <div class="card-body " id="parent">
-                                        {{-- @dd($student->parents) --}}
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Mr./Mrs./Ms./Other</label>
                                                     <input type="text" class="form-control" name="first_name1">
-
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">First Name</label>
                                                     <input type="text" class="form-control" name="last_name1">
-
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -1113,12 +1101,6 @@
                                                     <input type="text" class="form-control" name="email1">
                                                 </div>
                                             </div>
-
-
-
-
-
-
                                         </div>
 
 

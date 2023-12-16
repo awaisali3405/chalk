@@ -129,4 +129,17 @@ class StudentInvoice extends Model
     {
         return $this->receipt->sum('amount');
     }
+    public function status()
+    {
+        return $this->is_paid ? ($this->refunded() ? 'Refunded' : 'Paid') : 'Un Paid';
+    }
+    public function refunded()
+    {
+        if ($this->refund) {
+
+            return $this->refund->where('paid_by_bank', true)->orWhere('paid_by_cash', true)->count();
+        } else {
+            return 0;
+        }
+    }
 }

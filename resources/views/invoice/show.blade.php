@@ -34,38 +34,33 @@
                 <div class="col-4">
                     <div>
 
-                        <label for="upload" class="mt-3 mb-1 text-bold"> Roll No: {{ $student->id }} </label>
+                        <label for="upload" class="mt-3 mb-1 text-bold"> Roll No: {{ $student->currentRollNo() }} </label>
                     </div>
                     <div>
-
                         <label for="upload" class="mt-3 mb-1 text-bold"> Year
-                            :{{ $student->currentYear()->name }}
+                            : {{ $student->currentYear()->name }}
                         </label>
                     </div>
                     <div>
-
                         <label for="upload" class="mt-3 mb-1 text-bold"> Payment : {{ $student->payment_period }}
                         </label>
                     </div>
                     <div>
-
                         <label for="upload" class="mt-3 mb-1 text-bold"> Branch :
                             {{ $student->branch ? $student->branch->name : '' }}</label>
                     </div>
                 </div>
-
             </div>
             <div class="col-lg-12">
                 <div class="row tab-content">
                     <div id="list-view" class="tab-pane fade active show col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Invoice </h4>
-                                {{-- <a href="{{ route('board.create') }}" class="btn btn-primary">+ Add new</a> --}}
+                                <h4 class="card-title">Invoice</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="example5" class="display" style="min-width: 845px">
+                                    <table id="example5" class="display">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -110,7 +105,7 @@
                                                     </td>
                                                     <td>£{{ $value->amount - ($value->receipt->sum('discount') + $value->receipt->sum('credit_discount') - $value->receipt->sum('late_fee')) - $value->receipt->sum('amount') }}
                                                     </td>
-                                                    <td>{{ $value->is_paid ? 'Paid' : 'Unpaid' }}</td>
+                                                    <td>{{ $value->status() }}</td>
                                                     <td>{{ $value->period() }}</td>
                                                     <td>
                                                         <button type="button" class="btn btn-primary dropdown-toggle"
