@@ -10,6 +10,7 @@ use App\Models\Enquiry;
 use App\Models\Parents;
 use App\Models\EnquirySubject;
 use App\Models\EnquiryUpload;
+use App\Models\Refund;
 use App\Models\Student;
 use App\Models\StudentInvoice;
 use App\Models\StudentPromotionDetail;
@@ -725,10 +726,7 @@ class StudentsController extends Controller
     }
     public function getStudentData($id)
     {
-        // $year = Year::find($id);
-        // dd($year);
         $student = Student::with('branch', 'year')->find($id);
-        // dd($student->year->name);
         $html = '<option value="">-</option>';
         foreach ($student->EnquirySubject as $key => $value) {
             $html .= "<option value='" . $value->id . "'>" . $value->subject->name . "</option>";
@@ -805,6 +803,9 @@ class StudentsController extends Controller
             'to_year_id' => $request->year_id,
             'academic_year_id' => $request->academic_year_id,
             'roll_no' => $rollNo
+        ]);
+        Refund::where('paid_by_bank', false)->where('paid_by_cash', false)->where('academic_year_id', auth()->user()->session()->id)->update([
+            'academic_year_id' => $request->academic_year_id
         ]);
         $student->invoice()->where('is_paid', false)->whereHas('receipt', function ($query) {
             $query->where('id', '!=', 0);
