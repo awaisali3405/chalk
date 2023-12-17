@@ -797,7 +797,6 @@ class StudentsController extends Controller
             'resource_discount' => 0,
             'exercise_book_fee' => 0,
             'fee' => 0,
-            'fee_discount' => 0,
         ]);
         $rollNo =  $this->generatePromotionRollNo($student, $request);
         StudentPromotionDetail::create([
