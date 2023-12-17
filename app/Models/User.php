@@ -74,6 +74,7 @@ class User extends Authenticatable
     {
         return AcademicCalender::find($id);
     }
+
     public function invoice($branch, $academicYear)
     {
         return StudentInvoice::whereHas('student', function ($query) use ($branch, $academicYear) {
@@ -127,7 +128,6 @@ class User extends Authenticatable
     {
         $invoice = $this->invoice($branch, $academicYear)->where('type', 'Refundable');
         $invoice_id = $invoice->pluck('id');
-        $invoice_sum = $invoice->get()->sum('amount');
         $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->whereIn('mode', ['Cash', "Cash_Wallet"])->get();
         $received = $invoiceReceived->sum('amount');
         $refund = $this->totalRefundedByCash($branch, $academicYear);
@@ -137,7 +137,6 @@ class User extends Authenticatable
     {
         $invoice = $this->invoice($branch, $academicYear)->where('type', 'Refundable');
         $invoice_id = $invoice->pluck('id');
-        $invoice_sum = $invoice->get()->sum('amount');
         $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->whereIn('mode', ['Bank', 'Bank_Wallet'])->get();
         $received = $invoiceReceived->sum('amount');
         $refund = $this->totalRefundedByBank($branch, $academicYear);
@@ -345,7 +344,7 @@ class User extends Authenticatable
         $received = $invoiceReceived->sum('amount');
         $discount = $invoiceReceived->sum('discount');
         $late_fee = $invoiceReceived->sum('late_fee');
-        // dd();
+
         return ($received);
     }
     public function totalAsset($branch, $academicYear)
@@ -362,14 +361,6 @@ class User extends Authenticatable
         $availableStock = $this->availableStock($branch, $academicYear);
         return  (float) $feeReceived + (float) $depositReceived +  (float) $resourceReceived +  (float) $resourceFeeReceived + (float) $availableStock + (float)$loanPaid + (float)$feeDue + (float)$depositDue + (float)$resourceFeeDue + (float)$resourceDue;
     }
-    // public function totalLiability(){
-
-    //     return
-    // }
-
-
-
-
     //Cash and Bank
     public function totalCashReceived($branch, $academicYear)
     {
@@ -414,6 +405,23 @@ class User extends Authenticatable
                 $query->where('branch_id', $branch);
             }
         })->where('academic_year_id', $academicYear)->where('paid_by_bank', true)->orWhere('paid_by_cash', true);
+    }
+    public function refundable($branch, $academicYear)
+    {
+        return Refund::whereHas('invoice', function ($query) use ($branch, $academicYear) {
+            if ($branch != -1) {
+
+                $query->where('branch_id', $branch);
+            }
+        })->where('academic_year_id', $academicYear)->where('paid_by_bank', false)->where('paid_by_cash', false);
+    }
+    public function totalRefundable($branch, $academicYear)
+    {
+        $total = 0;
+        foreach (self::refundable($branch, $academicYear) as  $value) {
+            $total += $value->invoice->amount;
+        }
+        return $total;
     }
     public function totalRefunded($branch, $academicYear)
     {

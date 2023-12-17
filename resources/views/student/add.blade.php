@@ -1469,6 +1469,18 @@
 
                                         </div>
                                     </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 d-none" id="reference-student-container">
+                                        <div class="form-group">
+                                            <label class="form-label">Referred Student</label>
+
+                                            <select name="reference_student" id="" class="form-control">
+                                                <option value="">Select Student</option>
+                                                @foreach ($referenceStudent as $value)
+                                                    <option value="{{ $value->id }}">{{ $value->name() }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Do you have any comments or feedback?</label>

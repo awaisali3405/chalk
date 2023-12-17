@@ -82,6 +82,14 @@ class Student extends Model
         'credit_note',
         'disable'
     ];
+    public function referred()
+    {
+        return $this->hasMany(StudentReference::class, 'reference_student');
+    }
+    public function reference()
+    {
+        return $this->hasOne(StudentReference::class, 'referred_student');
+    }
     public function wallet()
     {
         return $this->hasMany(Wallet::class, 'student_id');

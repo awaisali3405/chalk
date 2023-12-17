@@ -151,12 +151,12 @@
                                                     </td>
                                                     <td class="text-left">Deposit Refundables</td>
                                                     <td class="text-left">
-                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->depositRefundable(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
+                                                        {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->totalRefundable(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-left">Addition Resource Received</td>
+                                                    <td class="text-left">Publisher Book Received</td>
                                                     <td class="text-left">
 
                                                         {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->resourceReceived(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
@@ -168,7 +168,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-left">Addition Resource Due</td>
+                                                    <td class="text-left">Publisher Book Due</td>
                                                     <td class="text-left">
 
                                                         {{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->resourceDue(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}

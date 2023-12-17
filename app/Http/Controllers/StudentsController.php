@@ -13,6 +13,7 @@ use App\Models\EnquiryUpload;
 use App\Models\Student;
 use App\Models\StudentInvoice;
 use App\Models\StudentPromotionDetail;
+use App\Models\StudentReference;
 use App\Models\Year;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -72,6 +73,12 @@ class StudentsController extends Controller
         }
 
         return view('student.index', compact('student'));
+    }
+    public function reference(Request $request)
+    {
+
+        $reference = StudentReference::where('academic_year_id', auth()->user()->session()->id)->get();
+        return view('student.reference', compact('reference'));
     }
     public function deActive(Request $request)
     {
@@ -212,6 +219,13 @@ class StudentsController extends Controller
             $data['enquiry_id'] = $request->enquiry_id;
         }
         $student = Student::create($data);
+        if ($request->reference_student) {
+            StudentReference::create([
+                'referred_student' => $student->id,
+                'reference_student' => $request->reference_student,
+                'academic_year_id' => auth()->user()->session()->id
+            ]);
+        }
         if (isset($request->enquiry_id)) {
             $enquiry = Enquiry::find($request->enquiry_id);
             $enquiry->upload()->update([
@@ -767,20 +781,6 @@ class StudentsController extends Controller
             ]);
             // $invoice->student()->
         }
-        // if ($request->annual_resource_fee + $request->exercise_book_fee > 0) {
-
-        //     $invoice = StudentInvoice::create([
-        //         'student_id' => $student->id,
-        //         'amount' => $request->annual_resource_fee + $request->exercise_book_fee,
-        //         'type' => 'Resource Fee',
-        //         'tax' => 0,
-        //         'from_date' => auth()->user()->session()->start_date,
-        //         'to_date' => auth()->user()->session()->end_date,
-        //         'branch_id' => $student->branch_id,
-        //         'year_id' => $student->currentYear()->id,
-        //         'academic_year_id' => auth()->user()->session()->id
-        //     ]);
-        // }
     }
     public function promote($id, Request $request)
     {

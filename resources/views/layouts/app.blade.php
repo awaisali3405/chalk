@@ -343,6 +343,8 @@
 
     {{-- Addition book invoice --}}
     <script src="{{ asset('js/dashboard/addtional-book-invoice.js') }}"></script>
+    {{-- Student --}}
+    <script src="{{ asset('js/dashboard/student.js') }}"></script>
     <!-- Demo scripts -->
     <!-- Demo scripts -->
     <script src="{{ asset('js/dashboard/dashboard-2.js') }}"></script>

@@ -197,7 +197,7 @@
                                                             <td>
                                                                 {{ $value->currentYear()->name }}
                                                             </td>
-                                                            <td>{{ auth()->user()->ukFormat($value->promotion_date) }}</td>
+                                                            <td>{{ auth()->user()->ukFormat($value->admission_date) }}</td>
                                                             <td>Week
                                                                 {{ auth()->user()->week($value->promotion_date) }}
                                                             </td>

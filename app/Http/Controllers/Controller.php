@@ -68,6 +68,13 @@ class Controller extends BaseController
         $academicCalender = AcademicCalender::where('active', 1)->first();
         $invoiceType = StudentInvoice::where('academic_year_id', $academicCalender->id)->distinct('type')->pluck('type');
         View::share('invoiceType', $invoiceType);
+        $referenceStudent = Student::whereHas(
+            'promotionDetail',
+            function ($query) use ($academicCalender) {
+                $query->where('academic_year_id', $academicCalender->id);
+            }
+        )->get();
+        View::share('referenceStudent', $referenceStudent);
 
         // $studentRequest=
     }

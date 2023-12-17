@@ -53,6 +53,7 @@
                                     ({{ auth()->user()->studentRequest()->count() }})</a></li>
                             <li><a href="{{ route('student.disable') }}">Disabled Student
                                     ({{ auth()->user()->studentDisable()->count() }})</a></li>
+                            <li><a href="{{ route('student.reference') }}">Reference Student</a></li>
                         @endif
                     </ul>
                 </li>
