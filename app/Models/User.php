@@ -418,8 +418,7 @@ class User extends Authenticatable
     public function totalRefundable($branch, $academicYear)
     {
         $total = 0;
-        dd(self::refundable($branch, $academicYear));
-        foreach (self::refundable($branch, $academicYear) as  $value) {
+        foreach (self::refundable($branch, $academicYear)->get() as  $value) {
             $total += $value->invoice->amount;
         }
         return $total;
