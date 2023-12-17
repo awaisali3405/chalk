@@ -911,6 +911,41 @@
                                             </tr>
                                         @endforeach
                                     @endif
+                                    @if ($invoice->paidRefund)
+                                        <tr>
+                                            <td class=" text-center">
+
+                                            </td>
+                                            <td class="pl-2">
+                                                <b>
+                                                    Amount Refunded By
+                                                    {{ $invoice->paidRefund->mode() }}</b>
+                                            </td>
+                                            <td class="bg-grey">
+                                                <b></b>
+                                            </td>
+                                            <td class="bg-grey">
+                                                <b></b>
+                                            </td>
+                                            <td class="bg-grey text-center"
+                                                style="text-align: end !important; padding-right:5px;">
+                                                <b>
+
+                                                    £{{ auth()->user()->priceFormat($invoice->amount) }}
+                                                </b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td class="pl-2">
+                                                <h6>{{ auth()->user()->ukFormat($invoice->paidRefund->updated_at) }}
+                                                </h6>
+                                            </td>
+                                            <td class="bg-grey"></td>
+                                            <td class="bg-grey"></td>
+                                            <td class="bg-grey"></td>
+                                        </tr>
+                                    @endif
 
                                 </tbody>
                             </table>

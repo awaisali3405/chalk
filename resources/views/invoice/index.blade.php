@@ -150,9 +150,11 @@
                                                             <div class="form-group">
                                                                 <label class="form-label">From Date</label>
                                                                 <div class="input-group mb-2">
-                                                                    <input type="date" class="form-control"
-                                                                        id="discount" name="from_date" placeholder=""
-                                                                        required>
+                                                                    <input type="date"
+                                                                        max="{{ auth()->user()->session()->end_date }}"
+                                                                        min="{{ auth()->user()->session()->start_date }}"
+                                                                        class="form-control" id="discount"
+                                                                        name="from_date" placeholder="" required>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -161,9 +163,11 @@
                                                                 <label class="form-label">To Date</label>
                                                                 <div class="input-group mb-2">
 
-                                                                    <input type="date" class="form-control"
-                                                                        id="late_fee" name="to_date" placeholder=""
-                                                                        required>
+                                                                    <input type="date"
+                                                                        max="{{ auth()->user()->session()->end_date }}"
+                                                                        min="{{ auth()->user()->session()->start_date }}"
+                                                                        class="form-control" id="late_fee"
+                                                                        name="to_date" placeholder="" required>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -172,8 +176,11 @@
                                                                 <label class="form-label">Date</label>
                                                                 <div class="input-group mb-2">
 
-                                                                    <input type="date" class="form-control"
-                                                                        name="date" placeholder="" required>
+                                                                    <input type="date"
+                                                                        max="{{ auth()->user()->session()->end_date }}"
+                                                                        min="{{ auth()->user()->session()->start_date }}"
+                                                                        class="form-control" name="date"
+                                                                        placeholder="" required>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -352,9 +359,11 @@
                                                             <div class="form-group">
                                                                 <label class="form-label">From Date</label>
                                                                 <div class="input-group mb-2">
-                                                                    <input type="date" class="form-control"
-                                                                        id="discount" name="from_date" placeholder=""
-                                                                        required>
+                                                                    <input type="date"
+                                                                        max="{{ auth()->user()->session()->end_date }}"
+                                                                        min="{{ auth()->user()->session()->start_date }}"
+                                                                        class="form-control" id="discount"
+                                                                        name="from_date" placeholder="" required>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -363,9 +372,11 @@
                                                                 <label class="form-label">To Date</label>
                                                                 <div class="input-group mb-2">
 
-                                                                    <input type="date" class="form-control"
-                                                                        id="late_fee" name="to_date" placeholder=""
-                                                                        required>
+                                                                    <input type="date"
+                                                                        max="{{ auth()->user()->session()->end_date }}"
+                                                                        min="{{ auth()->user()->session()->start_date }}"
+                                                                        class="form-control" id="late_fee"
+                                                                        name="to_date" placeholder="" required>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -373,8 +384,11 @@
                                                             <div class="form-group">
                                                                 <label class="form-label">Date</label>
                                                                 <div class="input-group mb-2">
-                                                                    <input type="date" class="form-control"
-                                                                        name="date" placeholder="" required>
+                                                                    <input type="date"
+                                                                        max="{{ auth()->user()->session()->end_date }}"
+                                                                        min="{{ auth()->user()->session()->start_date }}"
+                                                                        class="form-control" name="date"
+                                                                        placeholder="" required>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -612,6 +626,8 @@
                                                                                 <label class="form-label">Date</label>
                                                                                 <div class="input-group mb-2">
                                                                                     <input type="date"
+                                                                                        max="{{ auth()->user()->session()->end_date }}"
+                                                                                        min="{{ auth()->user()->session()->start_date }}"
                                                                                         class="form-control"
                                                                                         name="date" placeholder=""
                                                                                         required>

@@ -15,8 +15,9 @@
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label class="form-label">Date</label>
-                                <input type="date" class="form-control" name="date" value="{{ $value->date }}"
-                                    id="">
+                                <input type="date" max="{{ auth()->user()->session()->end_date }}"
+                                    min="{{ auth()->user()->session()->start_date }}" class="form-control"
+                                    name="date" value="{{ $value->date }}" id="">
 
 
                             </div>

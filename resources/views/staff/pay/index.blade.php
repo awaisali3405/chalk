@@ -286,8 +286,11 @@
                                                                     {{-- <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
                                                                     </div> --}}
-                                                                    <input type="date" class="form-control"
-                                                                        name="date" placeholder="" required>
+                                                                    <input type="date"
+                                                                        max="{{ auth()->user()->session()->end_date }}"
+                                                                        min="{{ auth()->user()->session()->start_date }}"
+                                                                        class="form-control" name="date"
+                                                                        placeholder="" required>
                                                                 </div>
                                                             </div>
                                                         </div>

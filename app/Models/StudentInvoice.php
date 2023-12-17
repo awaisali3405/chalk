@@ -84,6 +84,10 @@ class StudentInvoice extends Model
     {
         return $this->hasMany(InvoiceSubject::class, 'invoice_id');
     }
+    public function lastReceipt()
+    {
+        return $this->hasMany(StudentInvoiceReceipt::class, 'invoice_id')->where('academic_year_id', '<', auth()->user()->session()->id);
+    }
     public function receipt()
     {
         return $this->hasMany(StudentInvoiceReceipt::class, 'invoice_id')->where('academic_year_id', auth()->user()->session()->id);
@@ -141,5 +145,9 @@ class StudentInvoice extends Model
         } else {
             return 0;
         }
+    }
+    public function paidRefund()
+    {
+        return $this->hasOne(Refund::class, 'invoice_id')->where('paid_by_bank', true)->orWhere('paid_by_cash', true);
     }
 }

@@ -704,12 +704,15 @@ class StudentsController extends Controller
     }
     public function getStudent($id)
     {
+        $academicYear = AcademicCalender::where('active', true)->first();
         $year = Year::find($id);
         $string = '<option value="">-</option>';
         // dd($year);
-        foreach ($year->student->where('disable', false) as $key => $value) {
+        foreach ($year->student->where('disable', false)->whereHas('promotionDetail', function ($query) use ($academicYear) {
+            $query->where('academic_year_id', $academicYear->id);
+        }) as $key => $value) {
 
-            $string .= "<option value='" . $value->id . "'>" . $value->first_name . "</option>";
+            $string .= "<option value='" . $value->id . "'>" . $value->name() . "</option>";
         }
         return response()->json(['data' => $string]);
     }
@@ -832,7 +835,7 @@ class StudentsController extends Controller
             'branch_id' => $student->branch_id,
             'year_id' => $student->currentYear()->id,
             'academic_year_id' => auth()->user()->session()->id,
-            'date' => $student->admission_date
+            'date' => auth()->user()->session()->start_date
         ]);
         $subject->update([
             'resource_invoice_id' => $invoice->id

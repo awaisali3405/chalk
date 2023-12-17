@@ -51,12 +51,7 @@
                                             <input type="text" class="form-control uppercase" name="last_name" required>
                                         </div>
                                     </div>
-                                    {{-- <div class="col-lg-6 col-md-6 col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-label">Date of Birth</label>
-                                            <input type="date" class="form-control" name="dob" required>
-                                        </div>
-                                    </div> --}}
+
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Email <input type="checkbox" name="email_receive"
@@ -142,13 +137,15 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Enquiry Date *</label>
-                                            <input type="date" class="form-control" name="enquiry_date" required>
+                                            <input  type="date" max="{{ auth()->user()->session()->end_date }}"
+                                        min="{{ auth()->user()->session()->start_date }}" class="form-control" name="enquiry_date" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Assessment Date</label>
-                                            <input type="date" class="form-control" name="assessment_date">
+                                            <input  type="date" max="{{ auth()->user()->session()->end_date }}"
+                                        min="{{ auth()->user()->session()->start_date }}" class="form-control" name="assessment_date">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">

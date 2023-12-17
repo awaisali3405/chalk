@@ -79,7 +79,9 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="interview-time" class="form-label">Date of Join</label>
-                                <input type="date" class="form-control" name="date_of_join" id="" required>
+                                <input type="date" max="{{ auth()->user()->session()->end_date }}"
+                                    min="{{ auth()->user()->session()->start_date }}" class="form-control"
+                                    name="date_of_join" id="" required>
                             </div>
                         </div>
                         <div class="col-6">

@@ -194,6 +194,10 @@ class Student extends Model
             return $this->attendance();
         }
     }
+    public function lastInvoice()
+    {
+        return $this->hasMany(StudentInvoice::class, 'student_id')->where('academic_year_id', '<', auth()->user()->session()->id);
+    }
     public function invoice()
     {
         return $this->hasMany(StudentInvoice::class, 'student_id')->where('academic_year_id', auth()->user()->session()->id);
@@ -249,5 +253,21 @@ class Student extends Model
     {
         $due = $this->totalAmount() - $this->paid();
         return $due;
+    }
+    public function debitBroughtForward()
+    {
+        $debit = 0;
+        $credit = 0;
+        $balance = 0;
+        foreach ($this->lastInvoice as $key => $value) {
+            $debit += $value->amount;
+            $balance += $value->amount;
+            foreach ($value->lastReceipt as $value1) {
+                // dd($balance
+                $credit += $value1->amount;
+                $balance -= $value1->amount;
+            }
+        }
+        return ['balance' => $balance, 'credit' => $credit, 'debit' => $debit];
     }
 }

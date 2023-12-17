@@ -158,7 +158,8 @@
                                                             <div class="form-group">
                                                                 <label class="form-label">Date</label>
                                                                 <div class="input-group mb-2">
-                                                                    <input type="date" class="form-control"
+                                                                    <input  type="date" max="{{ auth()->user()->session()->end_date }}"
+                                        min="{{ auth()->user()->session()->start_date }}" class="form-control"
                                                                         id="discount" name="date" placeholder="" value="{{ $sale->date }}"
                                                                         required>
                                                                 </div>

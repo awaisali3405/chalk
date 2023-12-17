@@ -217,7 +217,10 @@
                                                                     {{-- <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
                                                                     </div> --}}
-                                                                    <input type="date" class="form-control"
+                                                                    <input type="date"
+                                                                        max="{{ auth()->user()->session()->end_date }}"
+                                                                        min="{{ auth()->user()->session()->start_date }}"
+                                                                        class="form-control"
                                                                         value="{{ \Carbon\Carbon::now()->toDateString() }}"
                                                                         name="date" placeholder="" required>
                                                                 </div>
@@ -238,7 +241,8 @@
                                                                         value="{{ $invoice->amount - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount') }}">
                                                                     <input type="number" step="0.01"
                                                                         class="form-control pay_amount" id=""
-                                                                        value="{{ $invoice->remainingAmount() }}" max="{{ $invoice->remainingAmount() }}"
+                                                                        value="{{ $invoice->remainingAmount() }}"
+                                                                        max="{{ $invoice->remainingAmount() }}"
                                                                         name="amount" required
                                                                         {{ $invoice->remainingAmount() <= 0 ? 'readonly' : '' }}>
                                                                 </div>

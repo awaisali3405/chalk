@@ -53,8 +53,11 @@
                             <div class="form-group">
                                 <label class="form-label">From Date</label>
                                 <div class="input-group mb-2">
-                                    <input type="date" class="form-control" id="" name="from_date"
-                                        placeholder="" value="{{ request()->get('from_date') }}" required>
+                                    <input type="date" max="{{ auth()->user()->session()->end_date }}"
+                                        min="{{ auth()->user()->session()->start_date }}" class="form-control"
+                                        id="" name="from_date" max="{{ auth()->user()->session()->end_date }}"
+                                        min="{{ auth()->user()->session()->start_date }}" placeholder=""
+                                        value="{{ request()->get('from_date') }}" required>
                                 </div>
                             </div>
                         </div>
@@ -62,7 +65,11 @@
                             <div class="form-group">
                                 <label class="form-label">To Date</label>
                                 <div class="input-group mb-2">
-                                    <input type="date" class="form-control" id="" name="to_date" placeholder=""
+                                    <input type="date" max="{{ auth()->user()->session()->end_date }}"
+                                        min="{{ auth()->user()->session()->start_date }}" class="form-control"
+                                        id="" name="to_date" placeholder=""
+                                        max="{{ auth()->user()->session()->end_date }}"
+                                        min="{{ auth()->user()->session()->start_date }}"
                                         value="{{ request()->get('to_date') }}" required>
                                 </div>
                             </div>

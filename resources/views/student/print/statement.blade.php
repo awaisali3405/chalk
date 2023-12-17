@@ -113,7 +113,6 @@
 
 
 <body class="pt-5" style="padding-left: 6rem!important; width:70%; background-color:white;">
-
     <div class="row">
         <div class="col-12 d-flex justify-content-center">
 
@@ -130,8 +129,9 @@
 
 
             <h3 class="">
-                {{ $student->branch->res_address }},{{ $student->branch->res_second_address }}
-                ,{{ $student->branch->res_postal_code }}, {{ $student->branch->res_town }}, United Kingdom</h3>
+                {{ $value->branch->res_address }},{{ $value->branch->res_second_address }}
+                ,{{ $value->branch->res_postal_code }}, {{ $value->branch->res_town }}, United Kingdom
+            </h3>
 
         </div>
 
@@ -152,7 +152,7 @@
                             <h4 class="font-weight-bolder">Roll No</h4>
                         </td>
                         <td class="">
-                            <h4 class="font-weight-bolder">{{ $student->id }}</h4>
+                            <h4 class="font-weight-bolder">{{ $value->currentRollNo() }}</h4>
                         </td>
                     </tr>
                     <tr>
@@ -160,7 +160,8 @@
                             <h4 class="font-weight-bolder">Name</h4>
                         </td>
                         <td class="">
-                            <h4 class="font-weight-bolder">{{ $student->first_name }}{{ $student->last_name }}</h4>
+                            <h4 class="font-weight-bolder">
+                                {{ $value->first_name }} {{ $value->last_name }}</h4>
                         </td>
                     </tr>
                     <tr>
@@ -169,7 +170,8 @@
                         </td>
                         <td class="">
                             <h4 class="font-weight-bolder">
-                                {{ $student->parents[0]->first_name }}{{ $student->parents[0]->last_name }}</h4>
+                                {{ $value->parents[0]->first_name }} {{ $value->parents[0]->last_name }}
+                            </h4>
                         </td>
                     </tr>
                     <tr>
@@ -178,7 +180,7 @@
                         </td>
                         <td class="">
                             <h4 class="font-weight-bolder">
-                                {{ $student->promotionDetail()->where('academic_year_id',auth()->user()->session()->id)->first()->toYear->name }}
+                                {{ $value->currentYear()->name }}
                             </h4>
                         </td>
                     </tr>
@@ -190,10 +192,10 @@
         </div>
         <div class="col-3"></div>
         <div class="col-3 text-align-end border-black">
-            <h4> {{ $student->parents[0]->res_address }}</h4>
-            <h4 class="">{{ $student->parents[0]->res_second_address }}</h4>
-            <h4 class="">{{ $student->parents[0]->res_town }}</h4>
-            <h4 class="">{{ $student->parents[0]->res_postal_code }}</h4>
+            <h4> {{ $value->parents[0]->res_address }}</h4>
+            <h4 class="">{{ $value->parents[0]->res_second_address }}</h4>
+            <h4 class="">{{ $value->parents[0]->res_town }}</h4>
+            <h4 class="">{{ $value->parents[0]->res_postal_code }}</h4>
         </div>
 
 
@@ -209,10 +211,10 @@
                     <th style="width: 15%;" class="text-center">
                         Invoice
                     </th>
-                    <th style="width: 15%;" class="text-center">
+                    <th style="width: 10%;" class="text-center">
                         Date
                     </th>
-                    <th style="width: 25%;" class="text-center">
+                    <th style="width: 30%;" class="text-center">
                         Detail
                     </th>
                     <th style="width: 15%;" class="text-center">Debit</th>
@@ -221,13 +223,24 @@
                 </tr>
             </thead>
             <tbody>
+                <tr style="color: rgb(7, 116, 7);">
+                    <td></td>
+                    <td></td>
+                    <td>Debit Brought Forward</td>
+                    <td class="text-align-end">
+                        £{{ auth()->user()->priceFormat($value->debitBroughtForward()['debit']) }}</td>
+                    <td class="text-align-end">
+                        £{{ auth()->user()->priceFormat($value->debitBroughtForward()['credit']) }}</td>
+                    <td class="text-align-end">
+                        £{{ auth()->user()->priceFormat($value->debitBroughtForward()['balance']) }}</td>
+                </tr>
                 @php
                     $grandTotal = 0;
                     $debit = 0;
                     $credit = 0;
                     $total = 0;
                 @endphp
-                @foreach ($student->invoice as $value1)
+                @foreach ($value->invoice as $value1)
                     @php
                         $total += $value1->amount;
                         $debit += $value1->amount;
@@ -256,11 +269,6 @@
                                         $row++;
                                     }
                                     if ($value1Recipt->mode == 'Cash_Wallet') {
-                                        $row++;
-                                    }
-                                }
-                                if ($value1->refund) {
-                                    if ($value1->refund->paid_by_bank || $value1->refund->paid_by_cash) {
                                         $row++;
                                     }
                                 }
@@ -370,27 +378,9 @@
 
                         @endphp
                     @endforeach
-                    @if ($value1->refund)
-                        @if ($value1->refund->paid_by_bank || $value1->refund->paid_by_cash)
-                            @php
-                                $total += $value1->amount;
-                                $debit += $debit;
-                            @endphp
-                            <tr style="color: rgb(193, 186, 120);">
-                                <td>{{ auth()->user()->ukFormat($value1->refund->updated_at) }}</td>
-                                <td>Refund To Student By
-                                    {{ $value1->refund->pay_by_bank ? 'Bank' : 'Cash' }} Debit </td>
-                                <td class="text-align-end">
-                                    £{{ auth()->user()->priceFormat($value1->amount) }}
-                                </td>
-                                <td class="text-align-end">£0</td>
-                                <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
-                            </tr>
-                        @endif
-                    @endif
                 @endforeach
 
-                {{-- @foreach ($student->invoice as $value2)
+                {{-- @foreach ($value->invoice as $value2)
                     @foreach ($value2->receipt as $value3)
                         @if (str_contains($value3->mode, 'Wallet'))
                             <tr>
@@ -411,7 +401,7 @@
                         @endif
                     @endforeach
                 @endforeach --}}
-                @foreach ($student->wallet as $value1)
+                @foreach ($value->wallet as $value1)
                     @php
                         $total = $total - $value1->amount;
                         $grandTotal += $total;
@@ -428,7 +418,41 @@
                         <td class="text-align-end"> £{{ auth()->user()->priceFormat($total) }}</td>
                     </tr>
                 @endforeach
+                @if (count($value->invoice) && $value->invoice[0]->refund)
+                    @if ($value->invoice[0]->refund->paid_by_bank || $value->invoice[0]->refund->paid_by_cash)
+                        @php
+                            $total -= $value->invoice[0]->amount;
+                            $credit += $credit;
+                        @endphp
+                        <tr style="background-color: rgb(255, 148, 148);">
+                            <td></td>
+                            <td>{{ auth()->user()->ukFormat($value->invoice[0]->refund->updated_at) }}</td>
+                            <td>Deposit Credited from Deposit Account
+                            </td>
+                            <td class="text-align-end">£0</td>
+                            <td class="text-align-end">
+                                £{{ auth()->user()->priceFormat($value->invoice[0]->amount) }}
+                            </td>
+                            <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
+                        </tr>
+                        @php
+                            $total += $value->invoice[0]->amount;
+                            $debit += $debit;
+                        @endphp
 
+                        <tr style="background-color: rgb(247, 150, 150);">
+                            <td></td>
+                            <td>{{ auth()->user()->ukFormat($value->invoice[0]->refund->updated_at) }}</td>
+                            <td>Refund to Student by
+                                {{ $value->invoice[0]->refund->pay_by_bank ? 'Bank' : 'Cash' }} </td>
+                            <td class="text-align-end">
+                                £{{ auth()->user()->priceFormat($value->invoice[0]->amount) }}
+                            </td>
+                            <td class="text-align-end">£0</td>
+                            <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
+                        </tr>
+                    @endif
+                @endif
                 <tr class="bg-grey">
                     <th style="width: 15%;" class="text-center">
 

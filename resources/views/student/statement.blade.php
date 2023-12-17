@@ -139,7 +139,7 @@
                                         <h4 class="font-weight-bolder">Roll No</h4>
                                     </td>
                                     <td class="">
-                                        <h4 class="font-weight-bolder">{{ $value->roll_no }}</h4>
+                                        <h4 class="font-weight-bolder">{{ $value->currentRollNo() }}</h4>
                                     </td>
                                 </tr>
                                 <tr>
@@ -210,6 +210,21 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @if ($value->debitBroughtForward()['balance'])
+                                <tr style="color: rgb(7, 116, 7);">
+                                    <td></td>
+                                    <td></td>
+                                    <td>Debit Brought Forward</td>
+                                    <td class="text-align-end">
+                                        £{{ auth()->user()->priceFormat($value->debitBroughtForward()['debit']) }}</td>
+                                    <td class="text-align-end">
+                                        £{{ auth()->user()->priceFormat($value->debitBroughtForward()['credit']) }}
+                                    </td>
+                                    <td class="text-align-end">
+                                        £{{ auth()->user()->priceFormat($value->debitBroughtForward()['balance']) }}
+                                    </td>
+                                </tr>
+                            @endif
                             @php
                                 $grandTotal = 0;
                                 $debit = 0;

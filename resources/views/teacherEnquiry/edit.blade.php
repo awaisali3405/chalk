@@ -74,8 +74,10 @@
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Date of Birth</label>
-                                                    <input type="date" name="dob" id="" class="form-control"
-                                                        value="{{ $enquiry->dob }}" required>
+                                                    <input type="date" max="{{ auth()->user()->session()->end_date }}"
+                                                        min="{{ auth()->user()->session()->start_date }}" name="dob"
+                                                        id="" class="form-control" value="{{ $enquiry->dob }}"
+                                                        required>
                                                 </div>
                                             </div>
 

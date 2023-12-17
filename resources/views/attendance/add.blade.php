@@ -53,9 +53,14 @@
                             <div class="form-group">
                                 <label class="form-label">Date</label>
                                 <div class="input-group mb-2">
-                                    <input type="date" class="form-control" id="" name="date" placeholder=""
+                                    <input type="date" max="{{ auth()->user()->session()->end_date }}"
+                                        min="{{ auth()->user()->session()->start_date }}" class="form-control"
+                                        id="" name="date" placeholder=""
+                                        max="{{ auth()->user()->session()->end_date }}"
+                                        min="{{ auth()->user()->session()->start_date }}"
                                         onchange="this.closest('form').submit()" value="{{ request()->get('date') }}"
-                                        keyup="this.closest('form').submit()" value="{{ request()->get('date') }}" required>
+                                        keyup="this.closest('form').submit()" value="{{ request()->get('date') }}"
+                                        required>
                                 </div>
                             </div>
                         </div>

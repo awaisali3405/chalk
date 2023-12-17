@@ -135,7 +135,8 @@
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Date of Birth</label>
-                                                    <input type="date" class="form-control" name="dob"
+                                                    <input type="date"
+                                                        class="form-control" name="dob"
                                                         value="{{ old('dob', $student->dob) }}" required>
                                                 </div>
                                             </div>
@@ -164,12 +165,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
-                                                {{-- <div class="form-group">
-                                                    <label class="form-label">Current Year</label>
-                                                    <input type="date" class="form-control" name="current_year"
-                                                        value="{{ old('current_year', $student->current_year) }}"
-                                                        required>
-                                                </div> --}}
+
                                             </div>
                                             <div class="col-12">
 
@@ -661,7 +657,8 @@
                                                                 <div class="input-group mb-2">
 
 
-                                                                    <input type="date" class="form-control"
+                                                                    <input type="date"
+                                                                        class="form-control"
                                                                         value="{{ $student->promotion_date }}"
                                                                         name="admission_date"
                                                                         @if (!$student->is_active) required  @else readonly @endif>

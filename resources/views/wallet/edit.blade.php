@@ -63,8 +63,9 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Date</label>
-                                            <input type="date" name="date" id="" value="{{ $wallet->date }}"
-                                                class="form-control">
+                                            <input type="date" max="{{ auth()->user()->session()->end_date }}"
+                                                min="{{ auth()->user()->session()->start_date }}" name="date"
+                                                id="" value="{{ $wallet->date }}" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">

@@ -94,7 +94,6 @@
 </style>
 
 <body style="background-color:white; width:90%; margin: auto;">
-
     <div class="row">
         <div class="col-6 ">
             <img src="{{ asset('images/logo.png') }}" width="300" alt="">
@@ -210,7 +209,7 @@
                         </td>
                         <td class="text-center">
                             <b>
-                                {{ auth()->user()->ukFormat($invoice->created_at) }}</b>
+                                {{ auth()->user()->ukFormat($invoice->date ? $invoice->date : $invoice->created_at) }}</b>
                         </td>
                     </tr>
                     <tr>
@@ -248,7 +247,7 @@
                     <tr>
                         <td class="text-center">
 
-                            {{ \Carbon\Carbon::parse($invoice->created_at->addDays(7))->format('d/m/Y') }}
+                            {{ \Carbon\Carbon::parse($invoice->date)->addDays(7)->format('d/m/Y') }}
                         </td>
                         <td>
                             {{ $invoice->is_paid && $invoice->receipt->count() > 0? auth()->user()->ukFormat($invoice->receipt[$invoice->receipt->count() - 1]->date): '' }}
@@ -359,9 +358,9 @@
                             <tr>
                                 <td></td>
                                 <td class="text-center">
-                                    <b>Book Fee
-                                        ({{ auth()->user()->ukFormat($invoice->from_date) }} -
-                                        {{ auth()->user()->ukFormat($invoice->to_date) }})
+                                    <b>
+                                        {{ auth()->user()->ukFormat($invoice->from_date) }} -
+                                        {{ auth()->user()->ukFormat($invoice->to_date) }}
                                     </b>
                                 </td>
 
@@ -464,8 +463,7 @@
                                     <td class="text-center text-center">
                                         <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
                                     </td>
-                                    <td class=" bg-grey "
-                                        style="text-align: end !important; padding-right:5px;">
+                                    <td class=" bg-grey " style="text-align: end !important; padding-right:5px;">
                                         <b>£{{ auth()->user()->priceFormat($value->subject_amount) }}</b>
                                     </td>
                                 </tr>
@@ -505,8 +503,7 @@
                                     <td class="text-center text-center">
                                         <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
                                     </td>
-                                    <td class=" bg-grey "
-                                        style="text-align: end !important; padding-right:5px;">
+                                    <td class=" bg-grey " style="text-align: end !important; padding-right:5px;">
                                         <b>£{{ auth()->user()->priceFormat($value->amount) }}</b>
                                     </td>
                                 </tr>
@@ -996,6 +993,41 @@
                                 </tr>
                             @endforeach
                         @endif
+                        @if ($invoice->paidRefund)
+                            <tr>
+                                <td class=" text-center">
+
+                                </td>
+                                <td class="pl-2">
+                                    <b>
+                                        Amount Refunded By
+                                        {{ $invoice->paidRefund->mode() }}</b>
+                                </td>
+                                <td class="bg-grey">
+                                    <b></b>
+                                </td>
+                                <td class="bg-grey">
+                                    <b></b>
+                                </td>
+                                <td class="bg-grey text-center"
+                                    style="text-align: end !important; padding-right:5px;">
+                                    <b>
+
+                                        £{{ auth()->user()->priceFormat($invoice->amount) }}
+                                    </b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="pl-2">
+                                    <h6>{{ auth()->user()->ukFormat($invoice->paidRefund->updated_at) }}
+                                    </h6>
+                                </td>
+                                <td class="bg-grey"></td>
+                                <td class="bg-grey"></td>
+                                <td class="bg-grey"></td>
+                            </tr>
+                        @endif
 
                     </tbody>
                 </table>
@@ -1020,8 +1052,7 @@
                             <td class="">
                                 Sub Total INCLUSIVE VAT
                             </td>
-                            <th class="text-center"
-                                style="text-align: end !important; padding-right:5px;">
+                            <th class="text-center" style="text-align: end !important; padding-right:5px;">
                                 £{{ auth()->user()->priceFormat($invoice->amount - $invoice->receipt->sum('discount') + $invoice->receipt->sum('late_fee')) }}
                             </th>
                         </tr>
@@ -1029,8 +1060,7 @@
                             <td class="">
                                 Invoice Balance
                             </td>
-                            <th class="text-center"
-                                style="color:red; text-align: end !important; padding-right:5px;">
+                            <th class="text-center" style="color:red; text-align: end !important; padding-right:5px;">
 
                                 £{{ $invoice->remainingAmount() }}
 
@@ -1042,8 +1072,7 @@
                             <th class="" colspan="">
                                 Vat Inclusive
                             </th>
-                            <th class="text-center"
-                                style="text-align: end !important; padding-right:5px;">
+                            <th class="text-center" style="text-align: end !important; padding-right:5px;">
                                 £{{ auth()->user()->priceFormat($invoice->taxAmount()) }}
                             </th>
                         </tr>
@@ -1051,8 +1080,7 @@
                             <th class="" colspan="">
                                 Debit Brought Forward
                             </th>
-                            <th class="text-center"
-                                style="text-align: end !important; padding-right:5px;">
+                            <th class="text-center" style="text-align: end !important; padding-right:5px;">
                                 £{{ auth()->user()->priceFormat($invoice->debitBroughtForward()) }}
                             </th>
                         </tr>
@@ -1060,8 +1088,7 @@
                             <th class="" colspan="">
                                 Payment Due
                             </th>
-                            <th class="text-center"
-                                style="text-align: end !important; padding-right:5px;">
+                            <th class="text-center" style="text-align: end !important; padding-right:5px;">
                                 £{{ auth()->user()->priceFormat($invoice->debitBroughtForward() + $invoice->remainingAmount()) }}
                             </th>
                         </tr>

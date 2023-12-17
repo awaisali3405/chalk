@@ -34,15 +34,17 @@
                                 <div class="col-3">
                                     <div class="form-group">
                                         <label class="form-label">From Date</label>
-                                        <input type="date" class="form-control" name="from_date"
-                                            value="{{ request()->input('from_date') }}">
+                                        <input type="date" max="{{ auth()->user()->session()->end_date }}"
+                                            min="{{ auth()->user()->session()->start_date }}" class="form-control"
+                                            name="from_date" value="{{ request()->input('from_date') }}">
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="form-group">
                                         <label class="form-label">To Date</label>
-                                        <input type="date" class="form-control" name="to_date"
-                                            value="{{ request()->input('to_date') }}">
+                                        <input type="date" max="{{ auth()->user()->session()->end_date }}"
+                                            min="{{ auth()->user()->session()->start_date }}" class="form-control"
+                                            name="to_date" value="{{ request()->input('to_date') }}">
                                     </div>
                                 </div>
                                 <div class="col-3">

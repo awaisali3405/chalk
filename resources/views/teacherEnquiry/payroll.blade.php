@@ -54,7 +54,9 @@
 
 
 
-                                            <input type="date" class="form-control" name="date" required>
+                                            <input type="date" max="{{ auth()->user()->session()->end_date }}"
+                                                min="{{ auth()->user()->session()->start_date }}" class="form-control"
+                                                name="date" required>
                                             {{-- <div class="custom-file">
 
                                             </div> --}}

@@ -27,14 +27,16 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Start Date</label>
-                                            <input type="date" class="form-control"
+                                            <input type="date" max="{{ auth()->user()->session()->end_date }}"
+                                                min="{{ auth()->user()->session()->start_date }}" class="form-control"
                                                 value="{{ $academicCalender->start_date }}" name="start_date">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">End Date</label>
-                                            <input type="date" class="form-control"
+                                            <input type="date" max="{{ auth()->user()->session()->end_date }}"
+                                                min="{{ auth()->user()->session()->start_date }}" class="form-control"
                                                 value="{{ $academicCalender->end_date }}" name="end_date">
                                         </div>
                                     </div>

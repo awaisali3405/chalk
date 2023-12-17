@@ -23,4 +23,8 @@ class Refund extends Model
     {
         return $this->belongsTo(AcademicCalender::class, 'academic_year_id');
     }
+    public function mode()
+    {
+        return $this->paid_by_cash ? 'Cash' : ($this->paid_by_bank ? 'Bank' : '');
+    }
 }
