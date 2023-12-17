@@ -65,9 +65,9 @@ $('#add-subject').on('click', function () {
                                 <td>${success.data.board ? success.data.board.name : '-'}</td>
                                 <td>${success.data.paper ? success.data.paper.name : "-"}</td>
                                 <td>${success.data.science_type ? success.data.science_type.name : '-'}</td>
-                                <td>${success.data.rate_per_hr}</td>
+                                <td>£${success.data.rate_per_hr}</td>
                                 <td>${success.data.no_hr_weekly}</td>
-                                <td>${success.data.amount}</td>
+                                <td>£${success.data.amount}</td>
 
                                 <td>
 

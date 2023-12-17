@@ -16,12 +16,12 @@ $('.addition-subject').on('click', function () {
                                     ${hours}
                                     <input type="hidden" name="hours[]" value="${hours}">
                                     </td>
-                                    <td>${rate}
+                                    <td>£${rate}
                                         <input type="hidden" name="rate[]" value="${rate}">
                                         </td>
                                         <td>
                                             <input type="hidden" name="amount[]" value="${amount}">
-                                            ${amount}</td>
+                                            £${amount}</td>
 
                             <td>
 
@@ -46,7 +46,6 @@ $('.addition-subject-add').on('click', '.delete-addition-subject', function () {
 
 // Student Adittion sum rate and hr
 $('.rate').add('.hours').on('change keyup', function () {
-    console.log('asasdsadas')
     rate = parseFloat($('.rate').val()) || 0;
     hour = parseFloat($('.hours').val()) || 0;
     $('.amount').val(rate * hour)

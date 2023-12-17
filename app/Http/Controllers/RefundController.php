@@ -71,9 +71,9 @@ class RefundController extends Controller
         CashFlow::create([
             'date' => Carbon::now(),
             'branch_id' => $refund->invoice->branch_id,
-            'description' => $refund->invoice->student->name() . " (" . auth()->user()->session()->period() . ") Refind",
+            'description' => $refund->invoice->student->name() . " (" . auth()->user()->session()->period() . ") Refund",
             'mode' => "Bank",
-            'type' => "Bank",
+            'type' => "Refund",
             'out' => $refund->invoice->amount,
         ]);
         return redirect()->route('refund.index')->with('success', 'Paid by Bank Successfully');

@@ -1,9 +1,7 @@
 
 
-console.log('asdasasdadas');
 $('#payment-type').on('keyup change', function () {
     type = $("#payment-type").val();
-    console.log(type)
     if (type != 'Weekly') {
         $('#monthly-fee').removeClass('d-none')
     } else {

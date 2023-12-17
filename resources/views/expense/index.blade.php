@@ -45,7 +45,7 @@
                                                         <td>{{ $value->name }}</td>
                                                         <td>{{ $value->accountType->name }}</td>
                                                         <td>{{ $value->date }}</td>
-                                                        <td>{{ $value->amount }}</td>
+                                                        <td>£{{ $value->amount }}</td>
                                                         <td>{{ $value->payment_type }}</td>
                                                         <td>
                                                             <button type="button" class="btn btn-primary dropdown-toggle"

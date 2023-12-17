@@ -665,7 +665,7 @@
                                                                                                     id=""
                                                                                                     class="checkbox">
                                                                                             </td>
-                                                                                            <td>{{ $value->roll_no }}
+                                                                                            <td>{{ $value->currentRollNo() }}
                                                                                             </td>
                                                                                             <td>{{ $value->first_name }}
                                                                                                 {{ $value->last_name }}
@@ -674,7 +674,7 @@
                                                                                             </td>
                                                                                             <td>{{ $value->branch->name }}
                                                                                             </td>
-                                                                                            <td>£{{ $value->payment_period == 'Monthly'? (str_contains('11', $value->year->name)? auth()->user()->priceFormat(($value->fee * 49) / 12 - $value->fee_discount): auth()->user()->priceFormat(($value->fee * 52) / 12 - $value->fee_discount)): $value->fee - $value->fee_discount }}
+                                                                                            <td>£{{ $value->payment_period == 'Monthly'? (str_contains('11', $value->year->name)? auth()->user()->priceFormat(($value->fee * 49) / 12 - $value->fee_discount): auth()->user()->priceFormat(($value->fee * 52) / 12 - $value->fee_discount)): auth()->user()->priceFormat($value->fee - $value->fee_discount) }}
                                                                                             </td>
                                                                                             <td>
                                                                                                 <a class="btn btn-primary"

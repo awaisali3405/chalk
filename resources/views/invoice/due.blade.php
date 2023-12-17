@@ -169,8 +169,8 @@
                                                                         <td>£{{ $value->amount - ($value->receipt->sum('discount') - $value->receipt->sum('late_fee')) - $value->receipt->sum('amount') }}
                                                                         </td>
                                                                         <td>{{ $value->is_paid ? 'Paid' : 'Unpaid' }}</td>
-                                                                        <td>{{ $value->from_date }} -
-                                                                            {{ $value->to_date }}</td>
+                                                                        <td>{{ auth()->user()->ukFormat($value->from_date) }} -
+                                                                            {{ auth()->user()->ukFormat($value->to_date) }}</td>
                                                                         <td>
                                                                             <button type="button"
                                                                                 class="btn btn-primary dropdown-toggle"

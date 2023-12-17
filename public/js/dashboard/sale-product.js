@@ -15,12 +15,12 @@ $('.add-resource').on('click', function() {
                                     ${quantity}
                                     <input type="hidden" name="quantity[]" value="${quantity}">
                                     </td>
-                                    <td>${rate}
+                                    <td>£${rate}
                                         <input type="hidden" name="rate[]" value="${rate}">
                                         </td>
                                         <td>
                                             <input type="hidden" name="amount[]"  value="${amount}">
-                                            ${amount}</td>
+                                            £${amount}</td>
 
                             <td>
 

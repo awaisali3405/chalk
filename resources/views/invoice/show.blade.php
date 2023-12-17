@@ -3,27 +3,17 @@
     <div class="content-body">
         <!-- row -->
         <div class="container-fluid">
-
             <div class="row page-titles mx-0">
                 <div class="col-sm-6 p-md-0">
                     <div class="welcome-text">
                         <h4>Student Invoice</h4>
                     </div>
                 </div>
-                <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0);">Invoice</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0);">Student Invoice</a></li>
-                    </ol>
-                </div>
             </div>
-
             <div class="row bg-white d-flex justify-content-center">
                 <div class="col-4">
                     <div class="text-center p-3 " style="">
                         <div class="profile-photo">
-                            {{-- @dd($invoice) --}}
                             <img id="img" src="{{ asset($student->profile_pic) }}" width="100" height="100"
                                 class="img-fluid rounded-circle" alt="">
                         </div>
@@ -33,7 +23,6 @@
                 </div>
                 <div class="col-4">
                     <div>
-
                         <label for="upload" class="mt-3 mb-1 text-bold"> Roll No: {{ $student->currentRollNo() }} </label>
                     </div>
                     <div>

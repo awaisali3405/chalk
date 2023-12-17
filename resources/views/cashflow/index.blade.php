@@ -15,7 +15,7 @@
 
             <div class="profile-personal-info pt-4">
                 <form action="{{ route('cashFlow.index') }}" class="" method="GET">
-                    <div class="card d-none" id="filter-form">
+                    <div class="card {{ request()->input() ? '' : 'd-none' }} " id="filter-form">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-3">
@@ -104,7 +104,7 @@
                                                 <option value="">All</option>
                                                 @foreach ($type as $value)
                                                     <option value="{{ $value }}"
-                                                        {{ $value == request()->input('type') ? 'selected' : '' }}>
+                                                        {{ request()->input('type') && in_array($value, request()->input('type')) ? 'selected' : '' }}>
                                                         {{ $value }}
                                                     </option>
                                                 @endforeach
