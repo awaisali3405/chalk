@@ -223,7 +223,7 @@
                 </tr>
             </thead>
             <tbody>
-                @if ($value->debitBroughtForward()['balance'])
+                {{-- @if ($value->debitBroughtForward()['balance'])
                     <tr style="color: rgb(7, 116, 7);">
                         <td></td>
                         <td></td>
@@ -237,7 +237,7 @@
                             £{{ auth()->user()->priceFormat($value->debitBroughtForward()['balance']) }}
                         </td>
                     </tr>
-                @endif
+                @endif --}}
                 @php
                     $grandTotal = 0;
                     $debit = 0;
