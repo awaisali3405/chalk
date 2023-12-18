@@ -188,6 +188,9 @@ class InvoiceController extends Controller
     }
     public function groupInvoice(Request $request)
     {
+        if (!$request->from_date || !$request->to_date) {
+            return redirect()->back()->with('error', 'Please fill from and to date');
+        }
         $to = \Carbon\Carbon::parse($request->from_date);
         $from = \Carbon\Carbon::parse($request->to_date);
         $days = $to->diffInDays($from) + 1;
@@ -211,13 +214,15 @@ class InvoiceController extends Controller
                             'to_date' => $from,
                             'branch_id' => $student->branch_id,
                             'year_id' => $student->currentYear()->id,
-                            'academic_year_id' => auth()->user()->session()->id
+                            'academic_year_id' => auth()->user()->session()->id,
+                            'discount' => $student->fee_discount
+
                         ]);
+                        $invoice->update([
+                            'code' => "F00" . $invoice->id . '/' . auth()->user()->session()->InvoiceYearCode()
+                        ]);
+                        $invoice->invoiceSubject()->sync($student->yearSubject()->pluck('id')->toArray());
                     }
-                    $invoice->update([
-                        'code' => "F00" . $invoice->id . '/' . auth()->user()->session()->InvoiceYearCode()
-                    ]);
-                    $invoice->invoiceSubject()->sync($student->yearSubject()->pluck('id')->toArray());
                 } else {
                     if (str_contains($student->year->name, "11")) {
                         $amount = ((($student->yearSubject->sum('amount')) * 40 / 9) * $months) - $student->fee_discount;
@@ -235,7 +240,8 @@ class InvoiceController extends Controller
                             'to_date' => $from,
                             'branch_id' => $student->branch_id,
                             'year_id' => $student->currentYear()->id,
-                            'academic_year_id' => auth()->user()->session()->id
+                            'academic_year_id' => auth()->user()->session()->id,
+                            'discount' => $student->fee_discount
                         ]);
                         $invoice->update([
                             'code' => "F00" . $invoice->id . '/' . auth()->user()->session()->InvoiceYearCode()
@@ -277,7 +283,7 @@ class InvoiceController extends Controller
                 'branch_id' => $student->branch_id,
                 'year_id' => $student->currentYear()->id,
                 'academic_year_id' => auth()->user()->session()->id,
-                'date' => $data['date']
+                'date' => $data['date'],
             ]);
             $invoice->update([
                 'code' => "AR00" . $invoice->id . '/' . auth()->user()->session()->InvoiceYearCode()

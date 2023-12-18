@@ -355,7 +355,9 @@
                                     @endphp
                                     <tr style="color: rgb(7, 116, 7);">
                                         <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
-                                        <td>{{ $value11->description }} {{ $value11->mode }}
+                                        <td>{{ $value11->description }} @if ($value11->mode != 'transfer')
+                                                {{ $value11->mode }}
+                                            @endif
                                             {{ str_contains($value11, 'Wallet') ? 'Credit' : '' }} </td>
                                         <td class="text-align-end">£0</td>
                                         <td class="text-align-end">£{{ auth()->user()->priceFormat($value11->amount) }}

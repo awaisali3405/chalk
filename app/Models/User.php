@@ -83,6 +83,11 @@ class User extends Authenticatable
             }
         })->where('academic_year_id', $academicYear);
     }
+    public function transferDue($branch, $academicYear)
+    {
+        $invoice = $this->invoice($branch, $academicYear)->where('type', 'Transferred Invoice')->get();
+        return $invoice->sum('amount');
+    }
     public function deposit($branch, $academicYear)
     {
         $invoice = $this->invoice($branch, $academicYear)->where('type', 'Refundable')->get();
@@ -92,7 +97,7 @@ class User extends Authenticatable
     public function depositReceived($branch, $academicYear)
     {
         $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Refundable', 'Registration'])->pluck('id');
-        $invoiceReceived = StudentInvoiceReceipt::whereIn('invoice_id', $invoice)->get();
+        $invoiceReceived = $this->receipt($invoice)->get();
         $received = $invoiceReceived->sum('amount');
         return ($received);
     }
@@ -170,7 +175,7 @@ class User extends Authenticatable
         $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Resource Fee', 'Addition Book Invoice']);
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
-        $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->get();
+        $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->where('mode', '!=', 'transfer')->get();
         $received = $invoiceReceived->sum('amount');
         return ($received);
     }
@@ -203,7 +208,7 @@ class User extends Authenticatable
     }
     public function feeReceived($branch, $academicYear)
     {
-        $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Monthly Fee', 'Weekly Fee', 'Addition Invoice']);
+        $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Monthly Fee', 'Weekly Fee', 'Addition Invoice', "Transferred Invoice"]);
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
         $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->get();
@@ -214,7 +219,7 @@ class User extends Authenticatable
     }
     public function feeReceivedByBank($branch, $academicYear)
     {
-        $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Monthly Fee', 'Weekly Fee', 'Addition Invoice']);
+        $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Monthly Fee', 'Weekly Fee', 'Addition Invoice', 'Transferred Invoice']);
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
         $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->whereIn('mode', ['Bank', 'Bank_Wallet'])->get();
@@ -243,7 +248,7 @@ class User extends Authenticatable
     }
     public function feeReceivedByCash($branch, $academicYear)
     {
-        $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Monthly Fee', 'Weekly Fee', 'Addition Invoice']);
+        $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Monthly Fee', 'Weekly Fee', 'Addition Invoice', 'Transferred Invoice']);
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
         $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->whereIn('mode', ['Cash', "Cash_Wallet"])->get();
@@ -359,7 +364,8 @@ class User extends Authenticatable
         $loanPaid = $this->totalSalaryLoan($branch, $academicYear);
         $resourceFeeReceived = $this->resourceFeeReceived($branch, $academicYear);
         $availableStock = $this->availableStock($branch, $academicYear);
-        return  (float) $feeReceived + (float) $depositReceived +  (float) $resourceReceived +  (float) $resourceFeeReceived + (float) $availableStock + (float)$loanPaid + (float)$feeDue + (float)$depositDue + (float)$resourceFeeDue + (float)$resourceDue;
+        $transfer = $this->transferDue($branch, $academicYear);
+        return  (float) $feeReceived + (float) $depositReceived +  (float) $resourceReceived +  (float) $resourceFeeReceived + (float) $availableStock + (float)$loanPaid + (float)$feeDue + (float)$depositDue + (float)$resourceFeeDue + (float)$resourceDue + (float)$transfer;
     }
     //Cash and Bank
     public function totalCashReceived($branch, $academicYear)

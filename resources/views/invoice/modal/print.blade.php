@@ -256,6 +256,17 @@
                                             <td class="bg-grey"></td>
                                             <td class="bg-grey"></td>
                                         </tr>
+                                    @elseif(str_contains($invoice->type, 'Transferred Invoice'))
+                                        <tr>
+                                            <td></td>
+                                            <td class="text-center">
+                                                <b>Transferred Invoice</b>
+                                            </td>
+
+                                            <td class="bg-grey"></td>
+                                            <td class="bg-grey"></td>
+                                            <td class="bg-grey"></td>
+                                        </tr>
                                     @elseif (str_contains($invoice->type, 'Addition Invoice'))
                                         <tr>
                                             <td></td>
@@ -304,6 +315,37 @@
                                             </td>
                                             <td class="pl-2 ">
                                                 <b> Deposit (Refundable)</b>
+                                            </td>
+                                            <td class="text-center bg-grey">
+                                                <b>£{{ auth()->user()->priceFormat($invoice->amount) }}</b>
+                                            </td>
+                                            <td class="text-center bg-grey">
+                                                <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
+                                            </td>
+                                            <td class="text-center bg-grey"
+                                                style="text-align: end !important; padding-right:5px;">
+                                                <b>£{{ auth()->user()->priceFormat($invoice->amount) }}</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td class="pl-2 pt-1 text-white">
+                                                blank
+                                            </td>
+                                            <td class="bg-grey"></td>
+                                            <td class="bg-grey"></td>
+                                            <td class="bg-grey"></td>
+                                        </tr>
+                                        @php
+                                            $sr = 2;
+                                        @endphp
+                                    @elseif ($invoice->type == 'Transferred Invoice')
+                                        <tr>
+                                            <td class="text-center">
+                                                <b>1</b>
+                                            </td>
+                                            <td class="pl-2 ">
+                                                <b> {{ $invoice->description }}</b>
                                             </td>
                                             <td class="text-center bg-grey">
                                                 <b>£{{ auth()->user()->priceFormat($invoice->amount) }}</b>
@@ -653,7 +695,7 @@
                                                 <td class="bg-grey"></td>
                                             </tr>
                                         @endif
-                                        @if ($invoice->student->fee_discount > 0 && !str_contains($invoice->type, 'Resource'))
+                                        @if ($invoice->discount > 0 && !str_contains($invoice->type, 'Resource'))
                                             @php
                                                 $sr++;
                                             @endphp
@@ -661,7 +703,6 @@
                                                 <td class=" text-center">
                                                     <b>
                                                         {{ $sr }}
-
                                                     </b>
                                                 </td>
                                                 <td class="pl-2">

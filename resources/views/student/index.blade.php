@@ -205,7 +205,7 @@
                                                             </td>
                                                             <td>{{ auth()->user()->ukFormat($value->admission_date) }}</td>
                                                             <td>Week
-                                                                {{ auth()->user()->week($value->promotion_date) }}
+                                                                {{ auth()->user()->week($value->admission_date) == 0? auth()->user()->week($value->promotion_date): auth()->user()->week($value->admission_date) }}
                                                             </td>
                                                             <td>
                                                                 <button type="button"

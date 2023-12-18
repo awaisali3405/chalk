@@ -16,6 +16,7 @@ use App\Models\StudentInvoice;
 use App\Models\StudentPromotionDetail;
 use App\Models\StudentReference;
 use App\Models\Year;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -756,7 +757,8 @@ class StudentsController extends Controller
                 'branch_id' => $student->branch_id,
                 'year_id' => $student->currentYear()->id,
                 'academic_year_id' => auth()->user()->session()->id,
-                'date' => $student->admission_date
+                'date' => $student->admission_date,
+                'discount' => $student->fee_discount
             ]);
             $invoice->update([
                 'code' => "F00" . $invoice->id . '/' . auth()->user()->session()->InvoiceYearCode()
@@ -775,7 +777,9 @@ class StudentsController extends Controller
                 'branch_id' => $student->branch_id,
                 'year_id' => $student->currentYear()->id,
                 'academic_year_id' => auth()->user()->session()->id,
-                'date' => $student->admission_date
+                'date' => $student->admission_date,
+                'discount' => $student->fee_discount
+
             ]);
             $invoice->update([
                 'code' => "A00" . $invoice->id . '/' . auth()->user()->session()->InvoiceYearCode()
@@ -785,18 +789,60 @@ class StudentsController extends Controller
     }
     public function promote($id, Request $request)
     {
+        $academicYear = AcademicCalender::find($request->academic_year_id);
         $student = Student::find($id);
+        $invoice = $student->invoice()->with('receipt')->where('is_paid', false)->get();
+        $total = 0;
+        foreach ($invoice as $value) {
+            if (count($value->receipt) == 0 && $value->is_paid == false) {
+                $value->update([
+                    'academic_year_id' => $academicYear->id
+                ]);
+            } elseif ($value->remainingAmount() > 0) {
+                $total += $value->remainingAmount();
+                $value->receipt()->create([
+                    'amount' => $value->remainingAmount(),
+                    'description' => "Transfer to Year " . $academicYear->InvoiceYearCode(),
+                    'mode' => 'transfer',
+                    'date' => Carbon::now(),
+                    'academic_year_id' => auth()->user()->session()->id
+                ]);
+            }
+            $value->update([
+                'is_paid' => true
+            ]);
+        }
+        // dd($invoice);
         $student->update([
             'year_id' => $request->year_id,
             'is_promoted' => true,
-            'promotion_date' => AcademicCalender::find($request->academic_year_id)->start_date,
+            'promotion_date' => $academicYear->start_date,
             'total_fee' => 0,
             'deposit' => 0,
             'registration_fee' => 0,
             'annual_resource_fee' => 0,
             'resource_discount' => 0,
             'exercise_book_fee' => 0,
+
             'fee' => 0,
+        ]);
+        $invoice =  StudentInvoice::create(
+            [
+                'student_id' => $student->id,
+                'amount' => $total,
+                'type' => "Transferred Invoice",
+                'from_date' => $academicYear->start_date,
+                'to_date' => $academicYear->end_date,
+                'branch_id' => $student->branch_id,
+                'year_id' => $student->year_id,
+                'academic_year_id' => $academicYear->id,
+                'description' => "Transferred form year " . $academicYear->InvoiceYearCode(),
+                'date' => $academicYear->start_date,
+                'discount' => $student->fee_discount
+            ]
+        );
+        $invoice->update([
+            'code' => "TR00" . $invoice->id . '/' . $academicYear->InvoiceYearCode(),
         ]);
         $rollNo =  $this->generatePromotionRollNo($student, $request);
         StudentPromotionDetail::create([
@@ -809,18 +855,10 @@ class StudentsController extends Controller
         Refund::where('paid_by_bank', false)->where('paid_by_cash', false)->where('academic_year_id', auth()->user()->session()->id)->update([
             'academic_year_id' => $request->academic_year_id
         ]);
-        $student->invoice()->where('is_paid', false)->whereHas('receipt', function ($query) {
-            $query->where('id', '!=', 0);
-        }, '=', 0)->update(
-            [
-                'academic_year_id' => $request->academic_year_id
-            ]
-        );
         return redirect()->back()->with('success', 'Student Promoted Successfully.');
     }
     public function generateResource($request, $student, $subject)
     {
-
         $annual_resource_fee = $this->sumRate($subject->get());
         $exercise_book_fee = $this->sumBookRate($subject->get());
         $student = Student::find($student->id);
@@ -834,7 +872,9 @@ class StudentsController extends Controller
             'branch_id' => $student->branch_id,
             'year_id' => $student->currentYear()->id,
             'academic_year_id' => auth()->user()->session()->id,
-            'date' => auth()->user()->session()->start_date
+            'date' => auth()->user()->session()->start_date,
+            'discount' => $student->fee_discount
+
         ]);
         $subject->update([
             'resource_invoice_id' => $invoice->id

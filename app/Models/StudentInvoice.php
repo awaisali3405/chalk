@@ -15,12 +15,15 @@ class StudentInvoice extends Model
         'type',
         'is_paid',
         'from_date',
-        'to_date', 'tax',
+        'to_date',
+        'tax',
         'branch_id',
         'year_id',
         'academic_year_id',
         'code',
-        'date'
+        'date',
+        'discount',
+        'description'
     ];
     public function debitBroughtForward()
     {

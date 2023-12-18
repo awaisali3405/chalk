@@ -53,7 +53,7 @@
                 </form>
 
             </div>
-          <div class="row">
+            <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="row tab-content">
                         <div id="list-view" class="tab-pane fade active show col-lg-12">
@@ -96,8 +96,17 @@
                                                     </td>
                                                     <td class="text-left">Salaries Payable</td>
                                                     <td class="text-left">
-
                                                         £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->totalSalary(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Transfer Invoice Due</td>
+                                                    <td class="text-left">
+                                                        £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->transferDue(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
+                                                    </td>
+                                                    <td class="text-left"></td>
+                                                    <td class="text-left">
+
                                                     </td>
                                                 </tr>
                                                 <tr>
