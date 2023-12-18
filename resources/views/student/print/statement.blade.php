@@ -223,17 +223,21 @@
                 </tr>
             </thead>
             <tbody>
-                <tr style="color: rgb(7, 116, 7);">
-                    <td></td>
-                    <td></td>
-                    <td>Debit Brought Forward</td>
-                    <td class="text-align-end">
-                        £{{ auth()->user()->priceFormat($value->debitBroughtForward()['debit']) }}</td>
-                    <td class="text-align-end">
-                        £{{ auth()->user()->priceFormat($value->debitBroughtForward()['credit']) }}</td>
-                    <td class="text-align-end">
-                        £{{ auth()->user()->priceFormat($value->debitBroughtForward()['balance']) }}</td>
-                </tr>
+                @if ($value->debitBroughtForward()['balance'])
+                    <tr style="color: rgb(7, 116, 7);">
+                        <td></td>
+                        <td></td>
+                        <td>Debit Brought Forward</td>
+                        <td class="text-align-end">
+                            £{{ auth()->user()->priceFormat($value->debitBroughtForward()['debit']) }}</td>
+                        <td class="text-align-end">
+                            £{{ auth()->user()->priceFormat($value->debitBroughtForward()['credit']) }}
+                        </td>
+                        <td class="text-align-end">
+                            £{{ auth()->user()->priceFormat($value->debitBroughtForward()['balance']) }}
+                        </td>
+                    </tr>
+                @endif
                 @php
                     $grandTotal = 0;
                     $debit = 0;
@@ -276,7 +280,7 @@
                         @endphp
                         <td rowspan="{{ $row }}" class="text-center" style="color: black;">
                             {{ $value1->code }}</td>
-                        <td>{{ auth()->user()->ukFormat($value1->created_at->toDateString()) }}</td>
+                        <td>{{ auth()->user()->ukFormat($value1->date) }}</td>
                         <td>{{ $value1->type == 'Refundable' ? 'Deposit' : $value1->type }}</td>
                         <td class="text-align-end"> £{{ auth()->user()->priceFormat($value1->amount) }}
                         </td>
@@ -364,7 +368,9 @@
                         @endphp
                         <tr style="color: rgb(7, 116, 7);">
                             <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
-                            <td>{{ $value11->description }} {{ $value11->mode }}
+                            <td>{{ $value11->description }} @if ($value11->mode != 'transfer')
+                                    {{ $value11->mode }}
+                                @endif
                                 {{ str_contains($value11, 'Wallet') ? 'Credit' : '' }} </td>
                             <td class="text-align-end">£0</td>
                             <td class="text-align-end">£{{ auth()->user()->priceFormat($value11->amount) }}
