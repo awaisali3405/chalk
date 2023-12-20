@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AcademicCalender;
 use App\Models\Board;
 use App\Models\Branch;
+use App\Models\BranchTransfer;
 use App\Models\Email;
 use App\Models\Enquiry;
 use App\Models\Parents;
@@ -15,6 +16,7 @@ use App\Models\Student;
 use App\Models\StudentInvoice;
 use App\Models\StudentPromotionDetail;
 use App\Models\StudentReference;
+use App\Models\Wallet;
 use App\Models\Year;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -841,6 +843,34 @@ class StudentsController extends Controller
                 'discount' => $student->fee_discount
             ]
         );
+        if ($student->cash_balance > 0) {
+
+            Wallet::create([
+                'branch_id' => $student->branch_id,
+                'year_id' => $student->year_id,
+                'student_id' => $student->id,
+                'date' => $academicYear->start_date,
+                'mode' => 'Cash',
+                'amount' => $student->cash_balance,
+                'description' => 'Amount Credited from ' . $academicYear->InvoiceYearCode() . ' to ',
+                'fixed' => true,
+                'academic_year_id' => $academicYear->id
+            ]);
+        }
+        if ($student->bank_balance > 0) {
+
+            Wallet::create([
+                'branch_id' => $student->branch_id,
+                'year_id' => $student->year_id,
+                'student_id' => $student->id,
+                'date' => $academicYear->start_date,
+                'mode' => 'Bank',
+                'amount' => $student->bank_balance,
+                'description' => 'Amount Credited from ' . $academicYear->InvoiceYearCode() . ' to ',
+                'fixed' => true,
+                'academic_year_id' => $academicYear->id
+            ]);
+        }
         $invoice->update([
             'code' => "TR00" . $invoice->id . '/' . $academicYear->InvoiceYearCode(),
         ]);
@@ -882,6 +912,103 @@ class StudentsController extends Controller
         $invoice->update([
             'code' => "R00" . $invoice->id . '/' . auth()->user()->session()->InvoiceYearCode()
         ]);
+    }
+    public function transfer(Request $request, $id)
+    {
+        $data = $request->except("_token");
+        // dd($data);
+        $academicYear = AcademicCalender::find($request->academic_year_id);
+        $branch = Branch::find($request->branch_id);
+        $student = Student::find($id);
+        BranchTransfer::where('student_id', $student->id)->update([
+            'active' => false
+        ]);
+        BranchTransfer::create([
+            'student_id' => $student->id,
+            'last_roll_no' => $student->currentRollNo(),
+            'last_branch_id' => $student->branch_id,
+            'branch_id' => $request->branch_id,
+            'academic_year_id' => $request->academic_year_id,
+            'year_id' => $request->year_id,
+        ]);
+        $invoice = $student->invoice()->with('receipt')->where('is_paid', false)->get();
+        $total = 0;
+        foreach ($invoice as $value) {
+            if (count($value->receipt) == 0 && $value->is_paid == false) {
+                $value->update([
+                    'academic_year_id' => $academicYear->id
+                ]);
+            } elseif ($value->remainingAmount() > 0) {
+                $total += $value->remainingAmount();
+                $value->receipt()->create([
+                    'amount' => $value->remainingAmount(),
+                    'description' => "Transfer to Branch " . $branch->name,
+                    'mode' => 'transfer',
+                    'date' => Carbon::now(),
+                    'academic_year_id' => auth()->user()->session()->id
+                ]);
+            }
+            $value->update([
+                'is_paid' => true
+            ]);
+        }
+        $invoice =  StudentInvoice::create(
+            [
+                'student_id' => $student->id,
+                'amount' => $total,
+                'type' => "Transferred Invoice",
+                'from_date' => $academicYear->start_date,
+                'to_date' => $academicYear->end_date,
+                'branch_id' => $student->branch_id,
+                'year_id' => $student->year_id,
+                'academic_year_id' => $academicYear->id,
+                'description' => "Transferred form Branch " . $branch->name,
+                'date' => $academicYear->start_date,
+                'discount' => $student->fee_discount
+            ]
+        );
+        // Wallet Transfer
+        if ($student->cash_balance > 0) {
+
+            Wallet::create([
+                'branch_id' => $student->branch_id,
+                'year_id' => $student->year_id,
+                'student_id' => $student->id,
+                'date' => $academicYear->start_date,
+                'mode' => 'Cash',
+                'amount' => $student->cash_balance,
+                'description' => 'Amount Credited from ' . $student->branch->name . ' to ' . $branch->name . ' in ',
+                'fixed' => true,
+                'academic_year_id' => $academicYear->id
+            ]);
+        }
+        if ($student->bank_balance > 0) {
+
+            Wallet::create([
+                'branch_id' => $student->branch_id,
+                'year_id' => $student->year_id,
+                'student_id' => $student->id,
+                'date' => $academicYear->start_date,
+                'mode' => 'Bank',
+                'amount' => $student->bank_balance,
+                'description' => 'Amount Credited from ' . $student->branch->name . ' to ' . $branch->name . ' in ',
+                'fixed' => true,
+                'academic_year_id' => $academicYear->id
+            ]);
+        }
+        // Refund Transfer
+        Refund::where('paid_by_bank', false)->where('paid_by_cash', false)->where('academic_year_id', auth()->user()->session()->id)->update([
+            'academic_year_id' => $request->academic_year_id,
+            'branch_id' => $request->branch_id
+        ]);
+        // Roll Updated
+        $student->update([
+            'branch_id' => $request->branch_id
+        ]);
+        $student->update([
+            'roll_no' => $this->generateRollNo($student)
+        ]);
+        return redirect()->back()->with('success', 'Student Transfer Successfully.');
     }
     public function sumRate($subject)
     {

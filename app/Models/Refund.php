@@ -13,8 +13,13 @@ class Refund extends Model
         'invoice_id',
         'paid_by_cash',
         'paid_by_bank',
-        'academic_year_id'
+        'academic_year_id',
+        'branch_id'
     ];
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class, 'branch_id');
+    }
     public function invoice()
     {
         return $this->belongsTo(StudentInvoice::class, 'invoice_id');

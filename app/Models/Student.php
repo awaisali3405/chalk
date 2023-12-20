@@ -92,7 +92,7 @@ class Student extends Model
     }
     public function wallet()
     {
-        return $this->hasMany(Wallet::class, 'student_id');
+        return $this->hasMany(Wallet::class, 'student_id')->where('academic_year_id', auth()->user()->session()->id);
     }
     public function currentRollNo()
     {

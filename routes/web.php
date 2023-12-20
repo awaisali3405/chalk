@@ -82,6 +82,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/disable/student', [StudentsController::class, 'disable'])->name('student.disable');
     Route::get('/deactive/student', [StudentsController::class, 'deActive'])->name('student.deactive');
     Route::get('/reference/student', [StudentsController::class, 'reference'])->name('student.reference');
+    Route::post('/student/transfer/{id}', [StudentsController::class, 'transfer'])->name('student.transfer');
     // Enquiry
     Route::resource('enquiry', EnquiryController::class);
     Route::get('/enquiry/{id}/note', [EnquiryController::class, 'note'])->name('enquiry.note');

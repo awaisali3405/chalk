@@ -414,12 +414,12 @@ class User extends Authenticatable
     }
     public function refundable($branch, $academicYear)
     {
-        return Refund::whereHas('invoice', function ($query) use ($branch, $academicYear) {
-            if ($branch != -1) {
+        $refund = Refund::where('academic_year_id', $academicYear)->where('paid_by_bank', false)->where('paid_by_cash', false);
 
-                $query->where('branch_id', $branch);
-            }
-        })->where('academic_year_id', $academicYear)->where('paid_by_bank', false)->where('paid_by_cash', false);
+        if ($branch != -1) {
+            $refund = $refund->where('branch_id', $branch);
+        }
+        return $refund;
     }
     public function totalRefundable($branch, $academicYear)
     {

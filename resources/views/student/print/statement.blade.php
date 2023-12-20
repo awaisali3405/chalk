@@ -223,21 +223,7 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- @if ($value->debitBroughtForward()['balance'])
-                    <tr style="color: rgb(7, 116, 7);">
-                        <td></td>
-                        <td></td>
-                        <td>Debit Brought Forward</td>
-                        <td class="text-align-end">
-                            £{{ auth()->user()->priceFormat($value->debitBroughtForward()['debit']) }}</td>
-                        <td class="text-align-end">
-                            £{{ auth()->user()->priceFormat($value->debitBroughtForward()['credit']) }}
-                        </td>
-                        <td class="text-align-end">
-                            £{{ auth()->user()->priceFormat($value->debitBroughtForward()['balance']) }}
-                        </td>
-                    </tr>
-                @endif --}}
+           
                 @php
                     $grandTotal = 0;
                     $debit = 0;

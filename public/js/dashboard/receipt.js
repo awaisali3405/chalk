@@ -40,7 +40,6 @@ $(document).ready(function () {
                 $('#mode option[value="Bank_Wallet"]').attr('disabled', true).change();
                 $('#mode option[value=Cash]').attr('disabled', false).change();
                 $('#mode option[value=Bank]').attr('disabled', false).change();
-
             }
         }
     })

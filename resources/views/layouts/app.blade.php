@@ -263,6 +263,8 @@
     <script src="{{ asset('vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
     <script src="{{ asset('js/custom.min.js') }}"></script>
     <script src="{{ asset('vendor/select2/js/select2.full.min.js') }}"></script>
+    {{-- Receipt Js --}}
+    <script src="{{ asset('js/dashboard/receipt.js') }}"></script>
     <script src="{{ asset('js/plugins-init/select2-init.js') }}"></script>
     {{-- <!-- Chart sparkline plugin files -->
         <script src="{{ asset('vendor/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
@@ -338,8 +340,6 @@
     <script src="{{ asset('js/dashboard/sale.js') }}"></script>
     {{-- Purhcase --}}
     <script src="{{ asset('js/dashboard/purchase.js') }}"></script>
-    {{-- Receipt Js --}}
-    <script src="{{ asset('js/dashboard/receipt.js') }}"></script>
 
     {{-- Addition book invoice --}}
     <script src="{{ asset('js/dashboard/addtional-book-invoice.js') }}"></script>

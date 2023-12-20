@@ -206,6 +206,7 @@
                                                             <td>{{ auth()->user()->ukFormat($value->admission_date) }}</td>
                                                             <td>Week
                                                                 {{ auth()->user()->week($value->admission_date) == 0? auth()->user()->week($value->promotion_date): auth()->user()->week($value->admission_date) }}
+
                                                             </td>
                                                             <td>
                                                                 <button type="button"
@@ -232,9 +233,14 @@
                                                                             <a class="dropdown-item"
                                                                                 href="{{ route('invoice.show', $value->id) }}">Invoices</a>
                                                                             <a class="dropdown-item" data-toggle="modal"
-                                                                                data-target="#statement-{{ $value->id }}">Statement</a>
-                                                                            <a class="dropdown-item " data-toggle="modal"
+                                                                                data-target="#statement-{{ $value->id }}">Statement
+                                                                            </a>
+                                                                            <a class="dropdown-item  {{ $value->promotionDetail->where('academic_year_id','>',auth()->user()->session()->id)->count() > 0? 'd-none': '' }}"
+                                                                                data-toggle="modal"
                                                                                 data-target="#promotion-{{ $value->id }}">Promotion</a>
+                                                                            <a class="dropdown-item " data-toggle="modal"
+                                                                                data-target="#transfer-{{ $value->id }}">Transfer
+                                                                            </a>
                                                                         @endif
                                                                     @else
                                                                         @if (!$value->active)
@@ -286,6 +292,7 @@
     </div>
     @foreach ($student as $value)
         @include('student.promotion')
+        @include('student.transfer')
         @if ($value->branch)
             @include('student.statement')
         @endif

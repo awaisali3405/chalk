@@ -113,7 +113,8 @@ class ReceiptController extends Controller
                 if ($invoice->type == "Refundable") {
                     Refund::create([
                         'academic_year_id' => auth()->user()->session()->id,
-                        'invoice_id' => $invoice->id
+                        'invoice_id' => $invoice->id,
+                        'branch_id' => $invoice->branch_id
                     ]);
                 }
             }
