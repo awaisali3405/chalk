@@ -213,8 +213,8 @@
                                                                     {{-- @dd($invoice->receipt->sum('amount') - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee'))) --}}
 
                                                                     <input type="text" class="form-control"
-                                                                        value="0" id="dbs" name="dbs"
-                                                                        required>
+                                                                        value="{{ $staff->request->sum('deduction_amount') - $staff->dbs_deduct }}"
+                                                                        id="dbs" name="dbs" required>
                                                                 </div>
                                                             </div>
                                                         </div>

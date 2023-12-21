@@ -13,6 +13,7 @@ use App\Models\LessonType;
 use App\Models\Paper;
 use App\Models\Parents;
 use App\Models\ScienceType;
+use App\Models\Staff;
 use App\Models\Student;
 use App\Models\StudentInvoice;
 use App\Models\Subject;
@@ -75,6 +76,8 @@ class Controller extends BaseController
             }
         )->get();
         View::share('referenceStudent', $referenceStudent);
+        $staff = Staff::latest()->get();
+        View::share('staff', $staff);
 
         // $studentRequest=
     }

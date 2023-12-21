@@ -30,6 +30,7 @@ use App\Http\Controllers\ScienceTypeController;
 use App\Http\Controllers\SMSController;
 use App\Http\Controllers\StaffAttendanceController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\StaffRequestController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\SupplierControlller;
@@ -161,6 +162,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('taxFlow', TaxFlowController::class);
     // Wallet
     Route::resource('wallet', WalletController::class);
+    // Staff Request
+    Route::resource('staffRequest', StaffRequestController::class);
 });
 
 Route::get('test', [EnquiryController::class, 'test']);

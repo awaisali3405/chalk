@@ -21,7 +21,12 @@ class Staff extends Model
         'teacher_enquiry_id',
         'email',
         'password',
+        'dbs_deduct'
     ];
+    public function request()
+    {
+        return $this->hasMany(StaffRequest::class, 'staff_id');
+    }
     public function teacherEnquiry()
     {
         return $this->belongsTo(TeacherEnquiry::class, 'teacher_enquiry_id');
@@ -63,5 +68,4 @@ class Staff extends Model
     {
         return $this->hasMany(SalaryInvoice::class, 'staff_id');
     }
-    
 }

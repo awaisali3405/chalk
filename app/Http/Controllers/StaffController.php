@@ -7,6 +7,7 @@ use App\Models\Staff;
 use App\Models\StaffAttendance;
 use App\Models\StaffLoan;
 use App\Models\StaffReceipt;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class StaffController extends Controller
@@ -106,12 +107,20 @@ class StaffController extends Controller
     public function payStore(Request $request)
     {
         $data = $request->except('_token');
+        $data['from_date'] =   Carbon::createFromFormat('m/d/Y', $request->from_date)->format('Y-m-d');
+        $data['to_date'] = Carbon::createFromFormat('m/d/Y', $request->to_date)->format('Y-m-d');
         $data['academic_year_id'] = auth()->user()->session()->id;
         StaffReceipt::create($data);
-        StaffAttendance::where('date', '>=', $request->from_date)->where('date', '<=', $request->to_date)->where('staff_id', $request->staff_id)->update([
+        StaffAttendance::where('date', '>=',  $data['from_date'])->where('date', '<=',    $data['to_date'])->where('staff_id', $request->staff_id)->update([
             'is_paid' => true
         ]);
         $staff = Staff::find($request->staff_id);
+        $staff->update([
+            'dbs_deduct' => $request->dbs + $staff->dbs_deduct
+        ]);
+        $staff->request()->update([
+            'fixed' => true
+        ]);
         if (count($staff->loan) > 0 && $staff->loan[0]->remaining() <= 0) {
             $loanId =  $staff->loan[0]->id;
             StaffLoan::find($loanId)->update([

@@ -155,6 +155,15 @@
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-university"></i>
+                        <span class="nav-text">Staff Request </span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('staffRequest.index') }}">All Staff Request</a></li>
+                        <li><a href="{{ route('staffRequest.create') }}">Add Staff Request</a></li>
+                    </ul>
+                </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-university"></i>
                         <span class="nav-text">Loan </span>
                     </a>
                     <ul aria-expanded="false">
