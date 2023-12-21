@@ -41,7 +41,8 @@ class CashFlowController extends Controller
             if ($request->mode) {
                 $cashFlow = $cashFlow->where("mode", $request->mode);
             }
-            if ($request->type) {
+            if ($request->type &&  !in_array(null, $request->type)) {
+                // dd($request->type);
                 $cashFlow = $cashFlow->whereIn("type", $request->type);
             }
 
@@ -54,6 +55,7 @@ class CashFlowController extends Controller
             'Bank',
             'Cash_Wallet',
             'Bank_Wallet',
+            'transfer'
         ];
         return view('cashflow.index', compact('cashFlow', 'mode'));
     }
