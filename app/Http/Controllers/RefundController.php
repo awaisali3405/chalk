@@ -75,6 +75,7 @@ class RefundController extends Controller
             'mode' => "Bank",
             'type' => "Refund",
             'out' => $refund->invoice->amount,
+            'academic_year_id' => auth()->user()->session()->id
         ]);
         return redirect()->route('refund.index')->with('success', 'Paid by Bank Successfully');
     }

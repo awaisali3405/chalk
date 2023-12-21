@@ -22,6 +22,7 @@
                                                     <th>Sr</th>
                                                     <th>Student</th>
                                                     <th>Amount</th>
+                                                    <th>Date</th>
                                                     <th>Paid By</th>
                                                 </tr>
                                             </thead>
@@ -33,6 +34,7 @@
                                                             ({{ $value->invoice->receipt[0]->mode }})
                                                         </td>
                                                         <td>{{ $value->invoice->amount }}</td>
+                                                        <td>{{ auth()->user()->ukFormat($value->updated_at) }}</td>
                                                         <td>
                                                             @if ($value->paid_by_cash)
                                                                 Cash
