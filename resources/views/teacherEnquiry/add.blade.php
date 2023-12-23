@@ -7,7 +7,7 @@
             <div class="row page-titles mx-0">
                 <div class="col-sm-6 p-md-0">
                     <div class="welcome-text">
-                        <h4>Add Expense </h4>
+                        <h4>Add Teacher Enquiry</h4>
                     </div>
                 </div>
 
@@ -66,9 +66,8 @@
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Date of Birth</label>
-                                                    <input type="date" max="{{ auth()->user()->session()->end_date }}"
-                                                        min="{{ auth()->user()->session()->start_date }}" name="dob"
-                                                        id="" class="form-control" required>
+                                                    <input type="date" name="dob" id="" class="form-control"
+                                                        required>
                                                 </div>
                                             </div>
 
@@ -119,8 +118,7 @@
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Postal Code</label>
-                                                    <input type="text" class="form-control" name="postal_code"
-                                                        required>
+                                                    <input type="text" class="form-control" name="postal_code" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">

@@ -55,7 +55,7 @@ class ExpenseController extends Controller
             'date' => $expense->date,
             'branch_id' => $expense->accountType->branch_id,
             'description' => $expense->description,
-            'mode' => $expense->mode,
+            'mode' => $expense->payment_type,
             'type' => "Expense",
             'out' => $expense->amount,
         ]);
