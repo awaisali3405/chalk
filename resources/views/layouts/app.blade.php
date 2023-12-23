@@ -526,9 +526,11 @@
     <!-- Summernote init -->
     <script src="{{ asset('js/plugins-init/summernote-init.js') }}"></script>
 
+    @if (str_contains(url()->current(), 'eventCalender'))
+        <script src="{{ asset('vendor/global/global.min.js') }}"></script>
+    @endif
 
 
-    <script src="{{ asset('vendor/global/global.min.js') }}"></script>
     <script src="{{ asset('vendor/jqueryui/js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('vendor/moment/moment.min.js') }}"></script>
     <script src="{{ asset('vendor/fullcalendar/js/fullcalendar.min.js') }}"></script>
