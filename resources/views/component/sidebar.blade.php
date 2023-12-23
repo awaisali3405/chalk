@@ -155,6 +155,15 @@
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-university"></i>
+                        <span class="nav-text">Staff Attendance </span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('staffAttendance.index') }}">All Staff Attendance</a></li>
+                        <li><a href="{{ route('staffAttendance.create') }}">Add Staff Attendance</a></li>
+                    </ul>
+                </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-university"></i>
                         <span class="nav-text">Staff Request </span>
                     </a>
                     <ul aria-expanded="false">
@@ -267,6 +276,13 @@
                                 <li><a href="{{ route('department.create') }}">Add Department</a></li>
                             </ul>
                         </li>
+                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                <i class="la la-home"></i>
+                                <span class="nav-text">Event Calender</span>
+                                <ul aria-expanded="false">
+                                    <li><a href="{{ route('eventCalender.index') }}">Event Calender</a></li>
+                                </ul>
+                            </a>
 
                         <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                                 <i class="la la-home"></i>
@@ -321,11 +337,7 @@
                     </a>
                 </li> --}}
             {{-- @endif --}}
-            {{-- <li><a class="ai-icon" href="event-management.html" aria-expanded="false">
-                    <i class="la la-calendar"></i>
-                    <span class="nav-text">Event Management</span>
-                </a>
-            </li>
+            {{--
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="la la-user"></i>
                     <span class="nav-text">Professors</span>

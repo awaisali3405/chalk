@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Enquiry;
 use App\Models\Student;
+use App\Models\TeacherEnquiryInterview;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
@@ -15,6 +16,7 @@ class EventController extends Controller
      */
     public function index()
     {
+
         return view('eventCalender.index');
     }
 
@@ -77,19 +79,31 @@ class EventController extends Controller
             } else {
                 $data['start'] = null;
             }
-            $data['className'] = 'bg-danger';
+            $data['className'] = 'bg-primary';
 
             array_push($event, $data);
         }
         $enquiry = Enquiry::all();
-        foreach ($student as $value) {
+        foreach ($enquiry as $value) {
             $data['title'] = $value->name();
             if (!is_null($value->assessment_date)) {
                 $data['start'] = Carbon::parse($value->assessment_date . ' ' . $value->assessment_time);
             } else {
                 $data['start'] = null;
             }
-            $data['className'] = 'bg-primary';
+            $data['className'] = 'bg-success';
+
+            array_push($event, $data);
+        }
+        $interview = TeacherEnquiryInterview::all();
+        foreach ($interview as $value) {
+            $data['title'] = $value->teacherEnquiry->name();
+            if (!is_null($value->date)) {
+                $data['start'] = Carbon::parse($value->date . ' ' . $value->time);
+            } else {
+                $data['start'] = null;
+            }
+            $data['className'] = 'bg-warning';
 
             array_push($event, $data);
         }

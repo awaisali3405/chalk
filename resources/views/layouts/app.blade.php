@@ -360,18 +360,19 @@
     <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('js/plugins-init/datatables.init.js') }}"></script>
 
-    {{-- Calender --}}
     {{-- <script src="{{ asset('js/plugins-init/fullcalendar-init.js') }}"></script> --}}
-    <script src="https://cdn.getaddress.io/scripts/getaddress-autocomplete-1.1.3.min.js"></script>
+    {{-- <script src="https://cdn.getaddress.io/scripts/getaddress-autocomplete-1.1.3.min.js"></script> --}}
 
     <!-- after your form -->
-    <script>
+    {{-- <script>
         getAddress.autocomplete('formatted_address_0', 'uIIn_5Plkk2X3bCt-L3Cjw40707');
-    </script>
+    </script> --}}
     {{-- Stock JS --}}
 
 
     <script src="{{ asset('js/dashboard/general.js') }}"></script>
+
+    {{-- Calender --}}
     {{-- Datepicker --}}
     <!-- ✅ load jQuery ✅ -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -443,37 +444,6 @@
 
     {{-- Student Subject Amount --}}
     <script src="{{ asset('js/dashboard/student-subject.js') }}"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <script type="text/javascript" src="https://www.codehim.com/demo/jquery-printthis/printThis.js"></script>
-
-
-
-
 
     {{-- File Format --}}
     <script>
@@ -557,6 +527,8 @@
     <script src="{{ asset('js/plugins-init/summernote-init.js') }}"></script>
 
 
+
+    <script src="{{ asset('vendor/global/global.min.js') }}"></script>
     <script src="{{ asset('vendor/jqueryui/js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('vendor/moment/moment.min.js') }}"></script>
     <script src="{{ asset('vendor/fullcalendar/js/fullcalendar.min.js') }}"></script>

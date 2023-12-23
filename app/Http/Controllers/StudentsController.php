@@ -967,6 +967,9 @@ class StudentsController extends Controller
                 'discount' => $student->fee_discount
             ]
         );
+        $invoice->update([
+            'code' => "BT00" . $invoice->id . '/' . $academicYear->InvoiceYearCode(),
+        ]);
         // Wallet Transfer
         if ($student->cash_balance > 0) {
 

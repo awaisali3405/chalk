@@ -13,7 +13,7 @@ class StaffAttendanceController extends Controller
     public function index()
     {
         $staff = Staff::all();
-        return view('staffAttendance.add', compact('staff'));
+        return view('staffAttendance.index', compact('staff'));
     }
 
     /**
@@ -21,7 +21,8 @@ class StaffAttendanceController extends Controller
      */
     public function create()
     {
-        return view('staffAttendance.add');
+        $staff = Staff::where('salary_type', "Monthly")->get();
+        return view('staffAttendance.add', compact('staff'));
     }
 
     /**
@@ -30,8 +31,12 @@ class StaffAttendanceController extends Controller
     public function store(Request $request)
     {
         $data = $request->except('_token');
-        $data['academic_year_id'] = auth()->user()->session()->id;
-        Staff::create($data);
+        // dd($data);
+        foreach ($data['teacher'] as $value) {
+            $staff = Staff::find($value);
+            $staff->attendance()->create($data);
+        }
+        // Staff::create($data);
         return redirect()->route('staffAttendance.index')->with('success', 'Staff Attendance Created Successfully.');
     }
 

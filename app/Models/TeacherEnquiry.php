@@ -57,6 +57,10 @@ class TeacherEnquiry extends Model
         'kin_relation',
         'kin_address',
     ];
+    public function name()
+    {
+        return $this->first_name . " " . $this->last_name;
+    }
     public function department()
     {
         return $this->belongsTo(Department::class, 'department_id');

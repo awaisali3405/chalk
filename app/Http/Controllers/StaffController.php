@@ -126,14 +126,11 @@ class StaffController extends Controller
             StaffLoan::find($loanId)->update([
                 'is_paid' => true
             ]);
-            // dd($staff->loan[0]->is_paid);
         }
-        // dd($data);
         if (isset($request->invoice_id)) {
             SalaryInvoice::find($request->invoice_id)->update([
                 'is_paid' => true
             ]);
-            // dd($request->invoice_id);
         }
         return redirect()->back()->with('success', 'Pay Created Successfully.');
     }
