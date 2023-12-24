@@ -151,6 +151,8 @@
                     <ul aria-expanded="false">
                         <li><a href="{{ route('staff.index') }}">All Staff</a></li>
                         <li><a href="{{ route('staff.create') }}">Add Staff</a></li>
+                        <li><a href="{{ route('staff.hmrc') }}">Staff HMRC</a></li>
+
                     </ul>
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -217,6 +219,23 @@
                     <ul aria-expanded="false">
                         <li><a href="{{ route('refund.index') }}">Student Deposit</a></li>
                         <li><a href="{{ route('refund.create') }}">All Refund</a></li>
+                    </ul>
+                </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-university"></i>
+                        <span class="nav-text">Report</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="">Staff Report</a></li>
+                        <li><a href="">Staff HMRC Report</a></li>
+                        <li><a href="">Staff DBS Report</a></li>
+                        <li><a href="">Purchase Report</a></li>
+                        <li><a href="">Sale Report</a></li>
+                        <li><a href="">Product Report</a></li>
+                        <li><a href="">Student Receipt Report</a></li>
+                        <li><a href="">Student Invoice Report</a></li>
+                        <li><a href="test">Student Report</a></li>
+                        {{-- <li><a href="{{ route('scienceType.create') }}">Add Science Type</a></li> --}}
                     </ul>
                 </li>
                 <li class="mm-active"><a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -302,6 +321,7 @@
                                 <li><a href="{{ route('scienceType.create') }}">Add Science Type</a></li>
                             </ul>
                         </li>
+
 
                         <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                                 <i class="la la-home"></i>

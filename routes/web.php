@@ -139,8 +139,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('staff/invoice/pay/{id}', [StaffController::class, 'invoicePay'])->name('staff.invoice.pay');
     Route::get('staff/statement/{id}', [StaffController::class, 'statement'])->name('staff.statement');
     Route::post('staff/pay/store', [StaffController::class, 'payStore'])->name('staff.pay.store');
+    // Staff HMRC
+    Route::get('staff/hmrc/report', [StaffController::class, 'hmrc'])->name('staff.hmrc');
     // Staff Attendance
-    Route::resource('staffAttendance',StaffAttendanceController::class);
+    Route::resource('staffAttendance', StaffAttendanceController::class);
     // Event Calender
     Route::resource('eventCalender', EventController::class);
     // Generate Salary
@@ -166,6 +168,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('wallet', WalletController::class);
     // Staff Request
     Route::resource('staffRequest', StaffRequestController::class);
+    // Staff Report
+    Route::get('staff/report', [StaffController::class, 'report'])->name('staff.report');
 });
 
 Route::get('test', [EnquiryController::class, 'test']);

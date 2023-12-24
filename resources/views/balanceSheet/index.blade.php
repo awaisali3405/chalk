@@ -85,7 +85,6 @@
                                                 <td class="text-left">Salaries Paid</td>
                                                 <td class="text-left">
                                                     £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->totalSalaryPaid(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
-
                                                 </td>
                                                 </td>
                                                 <tr>
@@ -178,8 +177,10 @@
 
                                                         £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->resourceDue(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
                                                     </td>
-                                                    <td class="text-left"></td>
-                                                    <td class="text-left"></td>
+                                                    <td class="text-left">Payable HMRC</td>
+                                                    <td class="text-left">
+                                                        £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->payableHMRC(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left">Available Stock</td>
@@ -197,12 +198,22 @@
 
                                                     </td>
 
-                                                    <td colspan="2" class="text-left"></td>
+                                                    <td class="text-left">Paid HMRC</td>
+                                                    <td class="text-left"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left">Wallet</td>
                                                     <td class="text-left">
                                                         £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->studentWallet(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
+
+                                                    </td>
+
+                                                    <td colspan="2" class="text-left"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">DBS Recieved</td>
+                                                    <td class="text-left">
+                                                        £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->dbsReceived(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                     </td>
 

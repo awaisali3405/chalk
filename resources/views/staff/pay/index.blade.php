@@ -95,7 +95,6 @@
                                                                 <div class="form-group">
                                                                     <label class="form-label">To Date</label>
                                                                     <div class="input-group mb-2">
-
                                                                         <input
                                                                             type="{{ $staff->salary_type == 'Monthly' ? 'text' : 'date' }}"
                                                                             class="form-control {{ $staff->salary_type == 'Monthly' ? 'end_date' : '' }}"
@@ -190,7 +189,7 @@
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
-                                                                <label class="form-label">NI</label>
+                                                                <label class="form-label">Employee NI</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
@@ -220,7 +219,7 @@
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
-                                                                <label class="form-label">Pension</label>
+                                                                <label class="form-label">Employee Pension</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
@@ -265,6 +264,21 @@
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
+                                                                <label class="form-label">Student Loan </label>
+                                                                <div class="input-group mb-2">
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">£</div>
+                                                                    </div>
+                                                                    {{-- @dd($invoice->receipt->sum('amount') - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee'))) --}}
+
+                                                                    <input type="text" class="form-control"
+                                                                        value="0" id="student_loan"
+                                                                        name="student_loan" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <div class="form-group">
                                                                 <label class="form-label">Total</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
@@ -275,6 +289,36 @@
                                                                     <input type="text" class="form-control"
                                                                         value="{{ (isset($invoice) ? $invoice->amount : $staff->salary_type == 'Monthly') ? $staff->salary : 0 }}"
                                                                         id="total" name="total" required readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Employer NI </label>
+                                                                <div class="input-group mb-2">
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">£</div>
+                                                                    </div>
+                                                                    {{-- @dd($invoice->receipt->sum('amount') - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee'))) --}}
+
+                                                                    <input type="text" class="form-control"
+                                                                        value="0" id="emp_ni" name="employer_ni"
+                                                                        required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Employer Pension </label>
+                                                                <div class="input-group mb-2">
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">£</div>
+                                                                    </div>
+                                                                    {{-- @dd($invoice->receipt->sum('amount') - ($invoice->receipt->sum('discount') - $invoice->receipt->sum('late_fee'))) --}}
+
+                                                                    <input type="text" class="form-control"
+                                                                        value="0" id="emp_pension"
+                                                                        name="employer_pension" required>
                                                                 </div>
                                                             </div>
                                                         </div>

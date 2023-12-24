@@ -365,7 +365,8 @@ class User extends Authenticatable
         $resourceFeeReceived = $this->resourceFeeReceived($branch, $academicYear);
         $availableStock = $this->availableStock($branch, $academicYear);
         $transfer = $this->transferDue($branch, $academicYear);
-        return  (float) $feeReceived + (float) $depositReceived +  (float) $resourceReceived +  (float) $resourceFeeReceived + (float) $availableStock + (float)$loanPaid + (float)$feeDue + (float)$depositDue + (float)$resourceFeeDue + (float)$resourceDue + (float)$transfer;
+        $dbsReceived = $this->dbsReceived($branch, $academicYear);
+        return  (float) $feeReceived + (float) $depositReceived +  (float) $resourceReceived +  (float) $resourceFeeReceived + (float) $availableStock + (float)$loanPaid + (float)$feeDue + (float)$depositDue + (float)$resourceFeeDue + (float)$resourceDue + (float)$transfer + (float)$dbsReceived;
     }
     //Cash and Bank
     public function totalCashReceived($branch, $academicYear)
@@ -459,19 +460,60 @@ class User extends Authenticatable
     {
         return Expense::where('id', '!=', 0);
     }
+    public function dbs()
+    {
+        return StaffRequest::where('id', '!=', 0);
+    }
+    public function totalDbs($branch, $academicYear)
+    {
+        $dbs = $this->dbs()->where('academic_year_id', $academicYear);
+        if ($branch != -1) {
+            $dbs = $dbs->where('branch_id', $branch);
+        }
+        // dd($dbs->get());
+        return $dbs->sum('request_amount');
+    }
     public function totalExpense($branch, $academicYear)
     {
         if ($branch == -1) {
             // dd($this->expense()->where("academic_year_id",$academicYear)->get());
-
-            return $this->expense()->where('academic_year_id', $academicYear)->get()->sum('amount');
+            $expense = $this->expense()->where('academic_year_id', $academicYear)->get()->sum('amount');
+            // return $expense;
         } else {
-            return $this->expense()->where('branch_id', $branch)->where('created_at', ">=", $this->getAcademicYear($academicYear)->start_date)->where('created_at', '<=', $this->getAcademicYear($academicYear))->sum('amount');
+            $expense = $this->expense()->where('branch_id', $branch)->where('created_at', ">=", $this->getAcademicYear($academicYear)->start_date)->where('created_at', '<=', $this->getAcademicYear($academicYear))->sum('amount');
+            // $dbs = $this->totalDbs($branch, $academicYear);
         }
+        $dbs = $this->totalDbs($branch, $academicYear);
+        return $expense + $dbs;
     }
-
-
-
+    public function staffPay($branch, $academicYear)
+    {
+        $receipt = StaffReceipt::where('academic_year_id', $academicYear);
+        if ($branch != -1) {
+            $receipt = $receipt->where('branch_id', $branch);
+        }
+        return $receipt->get();
+    }
+    // HMRC
+    public function payableHMRC($branch, $academicYear)
+    {
+        $tax = $this->staffPay($branch, $academicYear)->sum('tax');
+        $ni = $this->staffPay($branch, $academicYear)->sum('ni');
+        $pension = $this->staffPay($branch, $academicYear)->sum('pension');
+        $empNi = $this->staffPay($branch, $academicYear)->sum('employer_ni');
+        $empPension = $this->staffPay($branch, $academicYear)->sum('employer_pension');
+        $studentLoan = $this->staffPay($branch, $academicYear)->sum('student_loan');
+        return $tax + $ni + $pension + $empNi + $empPension + $studentLoan;
+    }
+    public function paidHMRC($branch, $academicYear)
+    {
+        $amount = $this->payableHMRC($branch, $academicYear);
+        return $amount;
+    }
+    public function dbsReceived($branch, $academicYear)
+    {
+        return $this->staffPay($branch, $academicYear)->sum('dbs');
+    }
     // Week
     public function week($date)
     {

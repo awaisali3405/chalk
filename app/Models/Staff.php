@@ -68,4 +68,37 @@ class Staff extends Model
     {
         return $this->hasMany(SalaryInvoice::class, 'staff_id');
     }
+
+    public function tax()
+    {
+        return $this->receipt()->sum('tax');
+    }
+    public function empNI()
+    {
+        return $this->receipt()->sum('ni');
+    }
+    public function empPension()
+    {
+        return $this->receipt()->sum('pension');
+    }
+    public function salary()
+    {
+        return $this->receipt()->sum('salary');
+    }
+    public function employerNI()
+    {
+        return $this->receipt()->sum('employer_ni');
+    }
+    public function employerPension()
+    {
+        return $this->receipt()->sum('employer_pension');
+    }
+    public function studentLoan()
+    {
+        return $this->receipt()->sum('student_loan');
+    }
+    public function hmrc()
+    {
+        return $this->empNI() + $this->empPension() + $this->tax() + $this->salary() + $this->studentLoan();
+    }
 }

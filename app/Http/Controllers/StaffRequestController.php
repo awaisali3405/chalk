@@ -30,6 +30,7 @@ class StaffRequestController extends Controller
     public function store(Request $request)
     {
         $data = $request->except('_token');
+        $data['academic_year_id'] = auth()->user()->session()->id;
         StaffRequest::create($data);
         return redirect()->route('staffRequest.index')->with('success', 'Staff Request Created Successfully');
     }
@@ -48,6 +49,7 @@ class StaffRequestController extends Controller
      */
     public function edit(string $id)
     {
+
         $staffRequest = StaffRequest::find($id);
         return view('staff.request.edit', compact('staffRequest'));
     }

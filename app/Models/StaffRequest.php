@@ -14,7 +14,9 @@ class StaffRequest extends Model
         'request_amount',
         'deduction_amount',
         'date',
-        'fixed'
+        'fixed',
+        'branch_id',
+        'academic_year_id',
     ];
     public function staff()
     {

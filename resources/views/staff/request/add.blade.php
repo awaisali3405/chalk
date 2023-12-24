@@ -25,6 +25,17 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
+                                            <label class="form-label">Branch</label>
+                                            <select name="branch_id" id="" required>
+                                                <option value="">-</option>
+                                                @foreach ($branch as $value)
+                                                    <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
                                             <label class="form-label">Staff</label>
                                             <select name="staff_id" id="" required>
                                                 <option value="">-</option>

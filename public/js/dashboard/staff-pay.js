@@ -24,11 +24,12 @@ $('#from_date').add('#to_date').on('keyup change', function () {
                 var bonus = $("#bonus").val() == "" ? 0 : $("#bonus").val();
                 var pension = $("#pension").val() == "" ? 0 : $("#pension").val();
                 var deduction = $("#deduction").val() == "" ? 0 : $("#deduction").val();
+                var studentLoan = $("#student_loan").val() == "" ? 0 : $("#student_loan").val();
                 var loan = $("#loan").val() == "" ? 0 : parseFloat($("#loan").val()).toFixed(2);
                 var net = (parseFloat(salary) + parseFloat(ssp) + parseFloat(bonus)) - (
                     parseFloat(deduction) +
                     parseFloat(loan) +
-                    parseFloat(ni) + parseFloat(dbs) + parseFloat(tax) + parseFloat(pension)
+                    parseFloat(ni) + parseFloat(dbs) + parseFloat(tax) + parseFloat(pension) + parseFloat(studentLoan)
                 );
                 $('#total').val(net);
                 $('#hour').html(success.paid_hour)
@@ -37,7 +38,7 @@ $('#from_date').add('#to_date').on('keyup change', function () {
         })
     }
 })
-$('#deduction').add('#tax').add("#ssp").add("#ni").add("#dbs").add("#bonus").add('#pension').add("#loan").on(
+$('#deduction').add('#tax').add("#ssp").add("#ni").add("#dbs").add("#bonus").add('#pension').add("#loan").add('#student_loan').on(
     'change keyup',
     function () {
         var salary = $('#salary').val();
@@ -48,10 +49,11 @@ $('#deduction').add('#tax').add("#ssp").add("#ni").add("#dbs").add("#bonus").add
         var dbs = $("#dbs").val() == "" ? 0 : $("#dbs").val();
         var bonus = $("#bonus").val() == "" ? 0 : $("#bonus").val();
         var pension = $("#pension").val() == "" ? 0 : $("#pension").val();
+        var studentLoan = $("#student_loan").val() == "" ? 0 : $("#student_loan").val();
         var deduction = $("#deduction").val() == "" ? 0 : $("#deduction").val();
         var loan = $("#loan").val() == "" ? 0 : parseFloat($("#loan").val()).toFixed(2);
         var net = (parseFloat(salary) + parseFloat(ssp) + parseFloat(bonus)) - (parseFloat(deduction) +
-            parseFloat(loan) +
+            parseFloat(loan) + parseFloat(studentLoan) +
             parseFloat(ni) + parseFloat(dbs) + parseFloat(tax) + parseFloat(pension));
         $('#total').val(net);
     })

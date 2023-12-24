@@ -27,7 +27,11 @@ class StaffReceipt extends Model
         'date',
         'note',
         'mode',
-        'academic_year_id'
+        'academic_year_id',
+        'branch_id',
+        'student_loan',
+        'employer_ni',
+        'employer_pension',
     ];
 
     public function academicYear()

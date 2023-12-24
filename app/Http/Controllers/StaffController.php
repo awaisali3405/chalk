@@ -107,9 +107,14 @@ class StaffController extends Controller
     public function payStore(Request $request)
     {
         $data = $request->except('_token');
+        if ($data['total'] <= 0) {
+            return redirect()->back()->with('error', 'Amount Must be greater than zero.');
+        }
         $data['from_date'] =   Carbon::createFromFormat('m/d/Y', $request->from_date)->format('Y-m-d');
         $data['to_date'] = Carbon::createFromFormat('m/d/Y', $request->to_date)->format('Y-m-d');
         $data['academic_year_id'] = auth()->user()->session()->id;
+        $staff = Staff::find($data['staff_id']);
+        $data['branch_id'] = $staff->branch_id;
         StaffReceipt::create($data);
         StaffAttendance::where('date', '>=',  $data['from_date'])->where('date', '<=',    $data['to_date'])->where('staff_id', $request->staff_id)->update([
             'is_paid' => true
@@ -173,6 +178,15 @@ class StaffController extends Controller
         return response()->json([
             'html' => $string
         ]);
+    }
+    public function hmrc(Request $request)
+    {
+        if (request()->input()) {
+            $staff = Staff::where('created_at', '>=', request()->input('from_date'))->where('created_at', '<=', request()->input('to_date'))->get();
+        } else {
+            $staff = Staff::latest()->get();
+        }
+        return view('hmrc.index', compact('staff'));
     }
     public function statement($id)
     {
