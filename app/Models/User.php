@@ -85,9 +85,14 @@ class User extends Authenticatable
     }
     public function transferDue($branch, $academicYear)
     {
-        $invoice = $this->invoice($branch, $academicYear)->where('type', 'Transferred Invoice')->get();
-        return $invoice->sum('amount') - $this->depositReceived($branch, $academicYear);
+        $invoice = $this->invoice($branch, $academicYear)->where('type', 'Transferred Invoice')->where('is_paid', false)->get();
+
+        return $invoice->sum('amount');
     }
+    public function transfer()
+    {
+    }
+
     public function deposit($branch, $academicYear)
     {
         $invoice = $this->invoice($branch, $academicYear)->where('type', 'Refundable')->get();
