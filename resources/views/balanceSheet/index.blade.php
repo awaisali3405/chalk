@@ -189,7 +189,8 @@
 
                                                     </td>
 
-                                                    <td colspan="2" class="text-left"></td>
+                                                    <td class="text-left">Paid HMRC</td>
+                                                    <td class="text-left"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left">Loan Received</td>
@@ -197,9 +198,9 @@
                                                         £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->totalSalaryLoan(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                     </td>
+                                                    <td class="text-left"> Default Amount</td>
+                                                    <td class="text-left"> </td>
 
-                                                    <td class="text-left">Paid HMRC</td>
-                                                    <td class="text-left"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left">Wallet</td>
