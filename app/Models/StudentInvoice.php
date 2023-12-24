@@ -93,7 +93,7 @@ class StudentInvoice extends Model
     }
     public function receipt()
     {
-        return $this->hasMany(StudentInvoiceReceipt::class, 'invoice_id')->where('academic_year_id', auth()->user()->session()->id);
+        return $this->hasMany(StudentInvoiceReceipt::class, 'invoice_id');
     }
     public function sale()
     {
