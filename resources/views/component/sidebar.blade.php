@@ -166,7 +166,7 @@
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-university"></i>
-                        <span class="nav-text">Staff Request </span>
+                        <span class="nav-text">Staff DBS Request </span>
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{ route('staffRequest.index') }}">All Staff Request</a></li>
@@ -203,12 +203,12 @@
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-university"></i>
-                        <span class="nav-text">Flow</span>
+                        <span class="nav-text">Statement</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="{{ route('cashFlow.index') }}">Cash Flow</a></li>
-                        <li><a href="{{ route('taxFlow.index') }}">Tax Flow</a></li>
-                        <li><a href="{{ route('loan.flow') }}">Loan Flow</a></li>
+                        <li><a href="{{ route('cashFlow.index') }}">Company Statement</a></li>
+                        <li><a href="{{ route('taxFlow.index') }}">VAT Statement</a></li>
+                        <li><a href="{{ route('loan.flow') }}">Staff Loan Statement</a></li>
                         {{-- <li><a href="{{ route('branch.create') }}"></a></li> --}}
                     </ul>
                 </li>

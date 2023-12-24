@@ -36,7 +36,7 @@
                                                     <tr>
                                                         <td>{{ $key + 1 }}</td>
                                                         <td>{{ $value->invoice->student->name() }}
-                                                            ({{ $value->invoice->receipt[0]->mode }})
+
                                                         </td>
                                                         <td>{{ $value->invoice->amount }}</td>
                                                         <td>
