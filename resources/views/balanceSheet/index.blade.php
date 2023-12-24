@@ -99,7 +99,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-left">Transfer Invoice Due</td>
+                                                    <td class="text-left">Previous Year Fee Due</td>
                                                     <td class="text-left">
                                                         £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->transferDue(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
                                                     </td>
