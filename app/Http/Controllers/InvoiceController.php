@@ -81,7 +81,7 @@ class InvoiceController extends Controller
                 }
                 if ($request->year_id) {
 
-                    $query->where('year_id', $request->year_id);
+                    $query->whereIn('year_id', $request->year_id);
                 }
                 if ($request->payment_period != 0) {
 

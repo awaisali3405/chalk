@@ -61,7 +61,7 @@
             @if (auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'super admin')
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-home"></i>
-                        <span class="nav-text">Attedance</span>
+                        <span class="nav-text">Student Attedance</span>
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{ route('attendance.index') }}">All Attendance</a></li>

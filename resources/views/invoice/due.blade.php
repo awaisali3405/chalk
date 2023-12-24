@@ -42,6 +42,16 @@
                                         <div class="form-group">
                                             <label class="form-label">Year</label>
                                             <div class="input-group mb-2">
+                                                <select name="year_id[]" multiple class="form-control js-example-theme-multiple">
+                                                    @foreach ($year as $value)
+                                                        <option value={{ $value->id }}
+                                                            {{ request()->get('year_id') && in_array($value->id, request()->get('year_id')) ? 'selected' : '' }}>
+                                                            {{ $value->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            {{-- <div class="input-group mb-2">
+
                                                 <select name="year_id" id="year" class="form-control">
                                                     <option value="0">All</option>
                                                     @foreach ($year as $value)
@@ -50,7 +60,7 @@
                                                             {{ $value->name }}</option>
                                                     @endforeach
                                                 </select>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-3 col-sm-12">

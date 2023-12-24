@@ -1049,6 +1049,15 @@
                                     </tr>
                                     <tr>
                                         <th class="" colspan="">
+                                            Wallet
+                                        </th>
+                                        <th class="text-center"
+                                            style="text-align: end !important; padding-right:5px;">
+                                            £{{ auth()->user()->priceFormat($invoice->student->bank_balance+$invoice->s) }}
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th class="" colspan="">
                                             Payment Due
                                         </th>
                                         <th class="text-center"
