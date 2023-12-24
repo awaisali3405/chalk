@@ -79,7 +79,7 @@
                                                     @foreach ($invoiceType as $value)
                                                         <option value="{{ $value }}"
                                                             {{ $value == str_replace(['+'], ' ', request()->get('type')) ? 'selected' : '' }}>
-                                                            {{ ($value == 'Refundable' ? 'Deposit' : $value == 'Resource Fee') ? 'Resources' : $value }}
+                                                            {{ $value == 'Refundable' ? 'Deposit' : ($value == 'Resource Fee' ? 'Resources' : $value) }}
                                                         </option>
                                                     @endforeach
 
@@ -161,7 +161,7 @@
                                                                         <td>{{ $value->code }}</td>
                                                                         <td>{{ auth()->user()->ukFormat($value->created_at) }}
                                                                         </td>
-                                                                        <td>{{ ($value->type == 'Refundable' ? 'Deposit' : $value->type == 'Resource Fee') ? 'Resources' : $value->type }}
+                                                                        <td>{{ $value->type == 'Refundable' ? 'Deposit' : ($value->type == 'Resource Fee' ? 'Resources' : $value->type) }}
                                                                         </td>
                                                                         <td>
                                                                             {{ $value->student->name() }}
@@ -169,8 +169,10 @@
                                                                         <td>£{{ $value->amount - ($value->receipt->sum('discount') - $value->receipt->sum('late_fee')) - $value->receipt->sum('amount') }}
                                                                         </td>
                                                                         <td>{{ $value->is_paid ? 'Paid' : 'Unpaid' }}</td>
-                                                                        <td>{{ auth()->user()->ukFormat($value->from_date) }} -
-                                                                            {{ auth()->user()->ukFormat($value->to_date) }}</td>
+                                                                        <td>{{ auth()->user()->ukFormat($value->from_date) }}
+                                                                            -
+                                                                            {{ auth()->user()->ukFormat($value->to_date) }}
+                                                                        </td>
                                                                         <td>
                                                                             <button type="button"
                                                                                 class="btn btn-primary dropdown-toggle"

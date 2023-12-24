@@ -184,6 +184,7 @@ class StaffController extends Controller
         if (request()->input()) {
             $staff = Staff::where('created_at', '>=', request()->input('from_date'))->where('created_at', '<=', request()->input('to_date'))->get();
         } else {
+           
             $staff = Staff::latest()->get();
         }
         return view('hmrc.index', compact('staff'));
