@@ -83,11 +83,17 @@ class User extends Authenticatable
             }
         })->where('academic_year_id', $academicYear);
     }
+    public function transferReceived($branch,$academicYear){
+        $invoice=
+    }
     public function transferDue($branch, $academicYear)
     {
-        $invoice = $this->invoice($branch, $academicYear)->where('type', 'Transferred Invoice')->where('is_paid', false)->get();
-
-        return $invoice->sum('amount');
+        $invoice = $this->invoice($branch, $academicYear)->where('type', 'Transferred Invoice')->get();
+        $due=0;
+        foreach ($invoice as $key => $value) {
+            $due=$value->remainingAmount();
+        }
+        return $due;
     }
     public function transfer()
     {
