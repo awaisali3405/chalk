@@ -141,6 +141,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('staff/pay/store', [StaffController::class, 'payStore'])->name('staff.pay.store');
     // Staff HMRC
     Route::get('staff/hmrc/report', [StaffController::class, 'hmrc'])->name('staff.hmrc');
+    Route::get('staff/hmrc/list', [StaffController::class, 'hmrcList'])->name('staff.hmrc.list');
+    Route::post('staff/hmrc/report/store', [StaffController::class, 'hmrcStore'])->name('staff.hmrc.store');
     // Staff Attendance
     Route::resource('staffAttendance', StaffAttendanceController::class);
     // Event Calender

@@ -190,7 +190,10 @@
                                                     </td>
 
                                                     <td class="text-left">Paid HMRC</td>
-                                                    <td class="text-left"></td>
+                                                    <td class="text-left">
+                                                        £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->paidHMRC(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
+
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left">Loan Received</td>

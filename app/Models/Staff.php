@@ -69,36 +69,36 @@ class Staff extends Model
         return $this->hasMany(SalaryInvoice::class, 'staff_id');
     }
 
-    public function tax()
+    public function tax($from_date, $to_date)
     {
-        return $this->receipt()->sum('tax');
+        return $this->receipt()->where('date', '>=', $from_date)->where('date', '<=', $to_date)->sum('tax');
     }
-    public function empNI()
+    public function empNI($from_date, $to_date)
     {
-        return $this->receipt()->sum('ni');
+        return $this->receipt()->where('date', '>=', $from_date)->where('date', '<=', $to_date)->sum('ni');
     }
-    public function empPension()
+    public function empPension($from_date, $to_date)
     {
-        return $this->receipt()->sum('pension');
+        return $this->receipt()->where('date', '>=', $from_date)->where('date', '<=', $to_date)->sum('pension');
     }
-    public function salary()
+    public function salary($from_date, $to_date)
     {
-        return $this->receipt()->sum('salary');
+        return $this->receipt()->where('date', '>=', $from_date)->where('date', '<=', $to_date)->sum('salary');
     }
-    public function employerNI()
+    public function employerNI($from_date, $to_date)
     {
-        return $this->receipt()->sum('employer_ni');
+        return $this->receipt()->where('date', '>=', $from_date)->where('date', '<=', $to_date)->sum('employer_ni');
     }
-    public function employerPension()
+    public function employerPension($from_date, $to_date)
     {
-        return $this->receipt()->sum('employer_pension');
+        return $this->receipt()->where('date', '>=', $from_date)->where('date', '<=', $to_date)->sum('employer_pension');
     }
-    public function studentLoan()
+    public function studentLoan($from_date, $to_date)
     {
-        return $this->receipt()->sum('student_loan');
+        return $this->receipt()->where('date', '>=', $from_date)->where('date', '<=', $to_date)->sum('student_loan');
     }
-    public function hmrc()
+    public function hmrc($from_date, $to_date)
     {
-        return $this->empNI() + $this->empPension() + $this->tax() + $this->salary() + $this->studentLoan();
+        return $this->empNI($from_date, $to_date) + $this->empPension($from_date, $to_date) + $this->tax($from_date, $to_date) + $this->salary($from_date, $to_date) + $this->studentLoan($from_date, $to_date);
     }
 }

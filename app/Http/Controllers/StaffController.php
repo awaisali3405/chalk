@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HMRC;
 use App\Models\SalaryInvoice;
 use App\Models\Staff;
 use App\Models\StaffAttendance;
@@ -181,13 +182,42 @@ class StaffController extends Controller
     }
     public function hmrc(Request $request)
     {
+        $from_date = auth()->user()->session()->start_date;
+        $to_date = auth()->user()->session()->end_date;
         if (request()->input()) {
-            $staff = Staff::where('created_at', '>=', request()->input('from_date'))->where('created_at', '<=', request()->input('to_date'))->get();
-        } else {
-           
-            $staff = Staff::latest()->get();
+            if ($request->from_date) {
+                $from_date = $request->from_date;
+            }
+            if ($request->to_date) {
+                $to_date = $request->to_date;
+            }
         }
-        return view('hmrc.index', compact('staff'));
+        $staff = Staff::where('created_at', '>=', $from_date)->where('created_at', '<=', $to_date);
+        if (request()->input('branch_id')) {
+            $staff = $staff->where('branch_id', request()->input('branch_id'))->get();
+        } else {
+            $staff = $staff->get();
+        }
+        return view('hmrc.index', compact('staff', 'from_date', 'to_date'));
+    }
+    public function hmrcStore(Request $request)
+    {
+        // dd($request);
+        $data = $request->validate([
+            'payment_type' => 'required',
+            'from_date' => 'required',
+            'to_date' => 'required',
+            'date' => 'required',
+            'amount' => 'required',
+            'discount' => 'required'
+        ]);
+        HMRC::create($data);
+        return redirect()->back()->with('success', "HMRC has been added successfully");
+    }
+    public function hmrcList(Request $request)
+    {
+        $hmrc = HMRC::latest()->get();
+        return view('hmrc.list', compact('hmrc'));
     }
     public function statement($id)
     {

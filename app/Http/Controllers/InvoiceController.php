@@ -7,6 +7,7 @@ use App\Models\InvoiceSubject;
 use App\Models\Student;
 use App\Models\StudentBook;
 use App\Models\StudentInvoice;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Session;
@@ -134,7 +135,7 @@ class InvoiceController extends Controller
             foreach ($data['subject'] as $key => $value) {
                 InvoiceSubject::create([
                     'invoice_id' => $invoice->id,
-                    'subject_name' => EnquirySubject::find($value)->subject->name,
+                    'subject_name' => Subject::find($value)->name,
                     'subject_rate' => $data['rate'][$key],
                     'subject_hr' => $data['hours'][$key],
                     'subject_amount' => $data['amount'][$key],

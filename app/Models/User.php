@@ -514,9 +514,19 @@ class User extends Authenticatable
         $studentLoan = $this->staffPay($branch, $academicYear)->sum('student_loan');
         return $tax + $ni + $pension + $empNi + $empPension + $studentLoan;
     }
+    public function hmrc($branch, $academicYear)
+    {
+        $hmrc = HMRC::where('academic_year_id', $academicYear);
+        if ($branch != -1) {
+            $hmrc = $hmrc->where('branch_id', $branch);
+        }
+
+        return $hmrc;
+    }
     public function paidHMRC($branch, $academicYear)
     {
-        $amount = $this->payableHMRC($branch, $academicYear);
+        // dd($this->hmrc($branch, $academicYear)->get());
+        $amount = $this->hmrc($branch, $academicYear)->sum('amount');
         return $amount;
     }
     public function dbsReceived($branch, $academicYear)

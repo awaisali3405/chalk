@@ -46,6 +46,9 @@ class ReceiptController extends Controller
                 $data['credit_discount'] = $data['discount'];
                 $data['discount'] = 0;
             }
+            if ($data['add_to_wallet']) {
+                $data['wallet_amount'] = $data['add_to_wallet'];
+            }
             $receipt = StudentInvoiceReceipt::create($data);
             if (!str_contains($data['mode'], 'Wallet')) {
                 CashFlow::create([

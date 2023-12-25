@@ -732,10 +732,13 @@ class StudentsController extends Controller
     }
     public function getStudentData($id)
     {
+        $academicYear = AcademicCalender::where('active', true)->first();
         $student = Student::with('branch', 'year')->find($id);
         $html = '<option value="">-</option>';
-        foreach ($student->EnquirySubject as $key => $value) {
-            $html .= "<option value='" . $value->id . "'>" . $value->subject->name . "</option>";
+        $subject = StudentPromotionDetail::where('student_id', $student->id)->where('academic_year_id', $academicYear->id)->first()->toYear->subject;
+        // dd($subject);
+        foreach ($subject as $key => $value) {
+            $html .= "<option value='" . $value->id . "'>" . $value->name . "</option>";
         }
         return response()->json(['data' => $student, 'html' => $html]);
     }
