@@ -70,6 +70,13 @@
                                                 {{ $invoice->student->credit_note <= 0 && $invoice->amount > 0 ? 'disabled' : '' }}>
                                         </strong>
                                     </li>
+                                    <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Student
+                                            Deposit</span> <strong class="text-muted">£<span
+                                                id="deposit-html">{{ $invoice->student->depositInvoice()->depositRefunded() }}</span>
+                                            <input type="checkbox" name="" id="deposit-add" id=""
+                                                {{ $invoice->student->depositInvoice()->depositRefunded() <= 0 && $invoice->amount > 0 ? 'disabled' : '' }}>
+                                        </strong>
+                                    </li>
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Invoice
                                             #</span> <strong class="text-muted"><a
                                                 href="{{ route('invoice.show', $invoice->student->id) }}">{{ $invoice->code }}</a></strong>
@@ -143,12 +150,17 @@
                                                             value="{{ $invoice->student->credit_note }}">
                                                         <input type="hidden" name="credit_note" id="credit-note-check"
                                                             value="0">
+                                                        <input type="hidden" name="deposit" id="deposit-check"
+                                                            value="0">
                                                         <input type="hidden"
                                                             value="{{ $invoice->student->bank_balance }}" name=""
                                                             disabled id="bank-balance">
                                                         <input type="hidden"
                                                             value="{{ $invoice->student->cash_balance }}" name=""
                                                             disabled id="cash-balance">
+                                                        <input type="hidden"
+                                                            value="{{ auth()->user()->priceFormat($invoice->student->depositInvoice()->depositRefunded()) }}"
+                                                            name="" disabled id="deposit">
                                                         {{-- <input type="hidden" name="" id=""> --}}
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">

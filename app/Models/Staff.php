@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -42,6 +43,18 @@ class Staff extends Model
     public function attendance()
     {
         return $this->hasMany(StaffAttendance::class, 'staff_id');
+    }
+    public function hours()
+    {
+        $hour = 0;
+        $min = 0;
+        foreach ($this->attendance as $key => $value) {
+            $time = Carbon::parse($value->start_time)->diff($value->end_time);
+            $hour += $time->h;
+            $min += $time->i;
+        }
+        $hour += $min / 56;
+        return number_format($hour, 2);
     }
     public function pay()
     {

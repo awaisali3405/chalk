@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CashFlow;
+use App\Models\InvoiceRefunded;
 use App\Models\Refund;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class RefundController extends Controller
      */
     public function index()
     {
-        $refund = Refund::where('paid_by_cash', 0)->where('paid_by_bank', 0)->get();
+        $refund = Refund::all();
         return view('refund.index', compact('refund'));
     }
     /**
@@ -22,9 +23,10 @@ class RefundController extends Controller
      */
     public function create()
     {
-        $refund = Refund::where('paid_by_cash', 1)->orWhere('paid_by_bank', 1)->get();
+        $refund = Refund::all();
         return view('refund.list', compact('refund'));
     }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -85,5 +87,25 @@ class RefundController extends Controller
             'paid_by_cash' => true
         ]);
         return redirect()->route('refund.index')->with('success', 'Paid by Cash Successfully');
+    }
+    public function unlock($id)
+    {
+        Refund::find($id)->update([
+            'lock' => false
+        ]);
+        return redirect()->back()->with('success', 'Refund Unlock Successfully.');
+    }
+    public function pay($id)
+    {
+        $refund = Refund::find($id);
+        return view('refund.form', compact('refund'));
+    }
+    public function payStore(Request $request)
+    {
+        $data = $request->except('_token');
+
+        $data['description'] = "Amount Refunded by";
+        InvoiceRefunded::create($data);
+        return redirect()->route('refund.index')->with('success', 'Refunded Successfully.');
     }
 }

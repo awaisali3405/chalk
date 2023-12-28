@@ -420,11 +420,11 @@ class User extends Authenticatable
 
                 $query->where('branch_id', $branch);
             }
-        })->where('academic_year_id', $academicYear)->where('paid_by_bank', true)->orWhere('paid_by_cash', true);
+        })->where('academic_year_id', $academicYear);
     }
     public function refundable($branch, $academicYear)
     {
-        $refund = Refund::where('academic_year_id', $academicYear)->where('paid_by_bank', false)->where('paid_by_cash', false);
+        $refund = Refund::where('academic_year_id', $academicYear);
 
         if ($branch != -1) {
             $refund = $refund->where('branch_id', $branch);
@@ -435,15 +435,16 @@ class User extends Authenticatable
     {
         $total = 0;
         foreach (self::refundable($branch, $academicYear)->get() as  $value) {
-            $total += $value->invoice->amount;
+            $total += $value->remainingDeposit();
         }
         return $total;
     }
     public function totalRefunded($branch, $academicYear)
     {
         $total = 0;
+        // dd($total, $this->refund($branch, $academicYear)->get());
         foreach ($this->refund($branch, $academicYear)->get() as $value) {
-            $total += $value->invoice->amount;
+            $total += $value->refundedAmount();
         }
         return $total;
     }

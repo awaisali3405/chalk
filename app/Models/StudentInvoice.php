@@ -153,4 +153,24 @@ class StudentInvoice extends Model
     {
         return $this->hasOne(Refund::class, 'invoice_id')->where('paid_by_bank', true)->orWhere('paid_by_cash', true);
     }
+    public function refundedInvoice()
+    {
+        return $this->hasMany(InvoiceRefunded::class, 'transfer_invoice_id');
+    }
+    public function depositRefunded()
+    {
+        if ($this->refund->lock) {
+
+            return $this->refund->remainingDeposit();
+        }
+        return 0;
+    }
+    public function depositTransfer()
+    {
+        if ($this->refund) {
+            return $this->refund->refunded;
+        } else {
+            return array();
+        }
+    }
 }

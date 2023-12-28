@@ -22,27 +22,30 @@
                                                     <th>Sr</th>
                                                     <th>Student</th>
                                                     <th>Amount</th>
-                                                    <th>Date</th>
+                                                    <th>Dates</th>
                                                     <th>Paid By</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach ($refund as $key => $value)
-                                                    <tr>
-                                                        <td>{{ $key + 1 }}</td>
-                                                        <td>{{ $value->invoice->student->name() }}
-                                                            ({{ $value->invoice->receipt[0]->mode }})
-                                                        </td>
-                                                        <td>{{ $value->invoice->amount }}</td>
-                                                        <td>{{ auth()->user()->ukFormat($value->updated_at) }}</td>
-                                                        <td>
-                                                            @if ($value->paid_by_cash)
-                                                                Cash
-                                                            @elseif ($value->paid_by_bank)
-                                                                Bank
-                                                            @endif
-                                                        </td>
-                                                    </tr>
+                                                    @if ($value->refundedAmount())
+                                                        <tr>
+                                                            <td>{{ $key + 1 }}</td>
+                                                            <td>{{ $value->invoice->student->name() }}
+                                                            </td>
+                                                            <td>{{ $value->amount }}</td>
+                                                            <td>
+                                                                @foreach ($value->refunded as $value1)
+                                                                    {{ auth()->user()->ukFormat($value1->date) . ' ' }}
+                                                                @endforeach
+                                                            </td>
+                                                            <td>
+                                                                @foreach ($value->refunded as $value1)
+                                                                    {{ $value1->mode . ' ' }}
+                                                                @endforeach
+                                                            </td>
+                                                        </tr>
+                                                    @endif
                                                 @endforeach
                                             </tbody>
                                         </table>

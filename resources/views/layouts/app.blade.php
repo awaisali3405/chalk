@@ -349,8 +349,8 @@
     <!-- Demo scripts -->
     <script src="{{ asset('js/dashboard/dashboard-2.js') }}"></script>
 
-
-
+{{-- Time Calculate --}}
+    <script src="{{{ asset('js/dashboard/staff-attendance.js') }}}"></script>
     <!-- Svganimation scripts -->
     <script src="{{ asset('vendor/svganimation/vivus.min.js') }}"></script>
     <script src="{{ asset('vendor/svganimation/svg.animation.js') }}"></script>

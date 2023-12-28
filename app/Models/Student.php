@@ -82,6 +82,10 @@ class Student extends Model
         'credit_note',
         'disable'
     ];
+    public function depositInvoice()
+    {
+        return $this->invoice->where('type', 'Refundable')->first();
+    }
     public function referred()
     {
         return $this->hasMany(StudentReference::class, 'reference_student');

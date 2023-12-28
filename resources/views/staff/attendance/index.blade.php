@@ -29,8 +29,8 @@
                                     <div class="col-lg-3 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Staff Time</label>
-                                            <input type="time" class="form-control" name="start_time" value=""
-                                                required id="">
+                                            <input type="time" class="form-control" name="start_time" id="start_time"
+                                                value="" required id="">
 
 
                                         </div>
@@ -39,11 +39,22 @@
                                         <div class="form-group">
                                             <label class="form-label">End Time</label>
                                             <input type="time" class="form-control" name="end_time" value=""
-                                                required id="">
+                                                id="end_time" required id="">
 
 
                                         </div>
                                     </div>
+
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Calculated Time</label>
+                                            <input type="text" class="form-control" name="" id="calculated_time"
+                                                value="" readonly id="">
+
+
+                                        </div>
+                                    </div>
+
                                     @if ($staff->salary_type == 'Hourly')
                                         <div class="col-lg-3 col-md-6 col-sm-12">
                                             <div class="form-group">
@@ -97,6 +108,7 @@
                                                     <th>Date</th>
                                                     <th>Start Time</th>
                                                     <th>End Time</th>
+                                                    <th>Calculated Time</th>
                                                     @if ($staff->salary_type == 'Hourly')
                                                         <th>Paid Hour</th>
                                                         <th>Rate per Hour</th>
@@ -107,13 +119,18 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($staff->attendance as $key => $value)
+                                                @foreach ($staff->attendance()->latest()->get() as $key => $value)
+                                                    @php
+                                                        $time = \Carbon\Carbon::parse($value->start_time)->diff(\Carbon\Carbon::parse($value->end_time));
+                                                    @endphp
                                                     <tr>
                                                         <td>{{ $key + 1 }}</td>
                                                         <td>{{ auth()->user()->ukFormat($value->date) }}</td>
                                                         <td>{{ auth()->user()->timeFormat($value->start_time) }}</td>
 
                                                         <td>{{ auth()->user()->timeFormat($value->end_time) }}</td>
+                                                        <td>{!! $time->h . '.' . $time->i !!} Hr
+                                                        </td>
                                                         @if ($staff->salary_type == 'Hourly')
                                                             <td>{{ $value->paid_hour }}</td>
                                                             <td>{{ $value->rate }}</td>

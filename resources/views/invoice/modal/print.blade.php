@@ -136,15 +136,9 @@
                                         <b>{{ $invoice->code }}</b>
                                     </td>
                                 </tr>
-
                             </tbody>
                         </table>
-
                     </div>
-
-
-
-
                 </div>
                 <div class="row pt-3 text-center">
                     <div class="col-6">
@@ -950,7 +944,7 @@
                                                 <td class="bg-grey"></td>
                                                 <td class="bg-grey"></td>
                                             </tr>
-                                            @if ($value->wallet_amount)
+                                            @if ($value->wallet_amount > 0)
                                                 <tr>
                                                     <td class=" text-center">
 
@@ -984,6 +978,42 @@
                                                 </tr>
                                             @endif
                                         @endforeach
+
+                                        @foreach ($invoice->depositTransfer() as $key => $value)
+                                            <tr>
+                                                <td class=" text-center">
+
+                                                </td>
+                                                <td class="pl-2">
+                                                    <b> {{ $value->description }}
+                                                        {{ $value->mode }}</b>
+                                                </td>
+                                                <td class="bg-grey">
+                                                    <b></b>
+                                                </td>
+                                                <td class="bg-grey">
+                                                    <b></b>
+                                                </td>
+                                                <td class="bg-grey text-center"
+                                                    style="text-align: end !important; padding-right:5px;">
+                                                    <b>
+
+
+                                                        £{{ auth()->user()->priceFormat($value->amount) }}
+                                                    </b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td class="pl-2">
+                                                    <h6>{{ auth()->user()->ukFormat($value->date) }}</h6>
+                                                </td>
+                                                <td class="bg-grey"></td>
+                                                <td class="bg-grey"></td>
+                                                <td class="bg-grey"></td>
+                                            </tr>
+                                        @endforeach
+
                                     @endif
                                     @if ($invoice->paidRefund)
                                         <tr>

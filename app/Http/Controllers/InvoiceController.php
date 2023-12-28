@@ -52,7 +52,7 @@ class InvoiceController extends Controller
             }
             if ($request->year_id) {
 
-                $student = $student->where('year_id', $request->year_id);
+                $student = $student->whereIn('year_id', $request->year_id);
             }
             if ($request->payment_period != 0) {
 

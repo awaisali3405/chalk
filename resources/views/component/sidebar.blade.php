@@ -7,7 +7,7 @@
             Session
         </div>
         <ul class="metismenu mm-show" id="menu">
-            <li class="nav-label first">Main Menu</li>
+            <li class="nav-label first">Student Management</li>
             @if (auth()->user()->role->name == 'super admin' || auth()->user()->role->name == 'admin')
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-headphones"></i>
@@ -78,66 +78,13 @@
                         <li><a href="{{ route('invoice.due') }}">Due Invoice</a></li>
                     </ul>
                 </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-home"></i>
-                        <span class="nav-text">SMS/Email</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        {{-- <li><a href="{{ route('invoice.create') }}">All Invoice</a></li> --}}
-                        <li><a href="{{ route('email.index') }}">All Email</a></li>
-                        <li><a href="{{ route('sms.index') }}">All SMS</a></li>
-                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="la la-home"></i>
-                                <span class="nav-text">Notification</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="{{ route('generalNotification.index') }}">Send Notification</a></li>
-                                <li><a href="{{ route('generalNotification.create') }}">History Notification</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-home"></i>
-                        <span class="nav-text">Purchase/Sale</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('product.index') }}">Product</a></li>
-                        <li><a href="{{ route('supplier.index') }}">Supplier</a></li>
-                        <li><a href="{{ route('purchase.index') }}">Purchase</a></li>
-                        <li><a href="{{ route('sale.index') }}">Sale</a></li>
-                    </ul>
-                </li>
+
+                <li class="nav-label first">HR Management</li>
+
+
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-university"></i>
-                        <span class="nav-text">Branch</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('branch.index') }}">All Branch</a></li>
-                        <li><a href="{{ route('branch.create') }}">Add Branch</a></li>
-                    </ul>
-                </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-university"></i>
-                        <span class="nav-text">Expense Acount Type</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('expenseTypeAccount.index') }}">All Expense Acount Type</a></li>
-                        <li><a href="{{ route('expenseTypeAccount.create') }}">Add Expense Acount Type</a></li>
-                    </ul>
-                </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-university"></i>
-                        <span class="nav-text">Expense</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('expense.index') }}">All Expense</a></li>
-                        <li><a href="{{ route('expense.create') }}">Add Expense</a></li>
-                    </ul>
-                </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-university"></i>
-                        <span class="nav-text">Teacher Enquiry</span>
+                        <span class="nav-text">Staff Enquiry</span>
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{ route('enquiryTeacher.index') }}">All Staff Enquiry</a></li>
@@ -176,16 +123,16 @@
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-university"></i>
-                        <span class="nav-text">Loan </span>
+                        <span class="nav-text">Staff Loan </span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="{{ route('loan.index') }}">All Loan</a></li>
-                        <li><a href="{{ route('loan.create') }}">Add Loan</a></li>
+                        <li><a href="{{ route('loan.index') }}">All Staff Loan</a></li>
+                        <li><a href="{{ route('loan.create') }}">Add Staff Loan</a></li>
                     </ul>
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-university"></i>
-                        <span class="nav-text">Salary </span>
+                        <span class="nav-text">Staff Salary </span>
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{ route('generateSalary.index') }}">Generate Salary</a></li>
@@ -222,28 +169,118 @@
                         <li><a href="{{ route('refund.create') }}">All Refund</a></li>
                     </ul>
                 </li>
+                <li class="nav-label first">Resource Book</li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-university"></i>
-                        <span class="nav-text">Report</span>
+                        <i class="la la-home"></i>
+                        <span class="nav-text">Purchase/Sale</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="">Staff Report</a></li>
-                        <li><a href="">Staff HMRC Report</a></li>
-                        <li><a href="">Staff DBS Report</a></li>
-                        <li><a href="">Purchase Report</a></li>
+                        <li><a href="{{ route('product.index') }}">Product</a></li>
+                        <li><a href="{{ route('supplier.index') }}">Supplier</a></li>
+                        <li><a href="{{ route('purchase.index') }}">Purchase</a></li>
+                        <li><a href="{{ route('sale.index') }}">Sale</a></li>
+                    </ul>
+                </li>
+                <li class="nav-label first">Expense</li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-university"></i>
+                        <span class="nav-text">Expense Acount Type</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('expenseTypeAccount.index') }}">All Expense Acount Type</a></li>
+                        <li><a href="{{ route('expenseTypeAccount.create') }}">Add Expense Acount Type</a></li>
+                    </ul>
+                </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-university"></i>
+                        <span class="nav-text">Expense</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('expense.index') }}">All Expense</a></li>
+                        <li><a href="{{ route('expense.create') }}">Add Expense</a></li>
+                    </ul>
+                </li>
+                <li class="nav-label first">Report</li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-university"></i>
+                        <span class="nav-text">Admin Report</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="">Enquiry List</a></li>
+                        <li><a href="">Student List</a></li>
+                        <li><a href="">Admission Report</a></li>
+                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                <i class="la la-home"></i>
+                                <span class="nav-text">Publisher Report</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="">Sale Report</a></li>
+                                <li><a href="">Purcahse Report</a></li>
+                                <li><a href="">Product Report</a></li>
+                            </ul>
+                        </li>
+                        {{-- <li><a href="">Purchase Report</a></li>
                         <li><a href="">Sale Report</a></li>
                         <li><a href="">Product Report</a></li>
                         <li><a href="">Student Receipt Report</a></li>
                         <li><a href="">Student Invoice Report</a></li>
-                        <li><a href="test">Student Report</a></li>
+                        <li><a href="test">Student Report</a></li> --}}
                         {{-- <li><a href="{{ route('scienceType.create') }}">Add Science Type</a></li> --}}
                     </ul>
                 </li>
-                <li class="mm-active"><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-th-list"></i>
-                        <span class="nav-text">Hr Department</span>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-university"></i>
+                        <span class="nav-text">Accounting Report</span>
                     </a>
-                    <ul aria-expanded="false" class="mm-collapse " style="">
+                    <ul aria-expanded="false">
+                        <li><a href="">Invoice Report</a></li>
+
+                    </ul>
+                </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-university"></i>
+                        <span class="nav-text">HR Report</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="">Staff Report</a></li>
+                        <li><a href="">Staff DBS Report</a></li>
+                        <li><a href="">Statement Loan Report</a></li>
+
+                    </ul>
+                </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-university"></i>
+                        <span class="nav-text">Management Report</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="">Company Statement</a></li>
+                        <li><a href="">Vat Statement</a></li>
+                        <li><a href="{{ route('balanceSheet.index') }}">Balance Sheet</a></li>
+                        <li><a href="">Ledger Report</a></li>
+
+                    </ul>
+                </li>
+
+
+                <li class="nav-label first">Setting</li>
+
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-home"></i>
+                        <span class="nav-text">SMS/Email</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        {{-- <li><a href="{{ route('invoice.create') }}">All Invoice</a></li> --}}
+                        <li><a href="{{ route('email.index') }}">All Email</a></li>
+                        <li><a href="{{ route('sms.index') }}">All SMS</a></li>
+                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                <i class="la la-home"></i>
+                                <span class="nav-text">Notification</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="{{ route('generalNotification.index') }}">Send Notification</a></li>
+                                <li><a href="{{ route('generalNotification.create') }}">History Notification</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -285,6 +322,15 @@
                             <ul aria-expanded="false">
                                 <li><a href="{{ route('board.index') }}">All Board</a></li>
                                 <li><a href="{{ route('board.create') }}">Add Board</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                <i class="la la-university"></i>
+                                <span class="nav-text">Branch</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="{{ route('branch.index') }}">All Branch</a></li>
+                                <li><a href="{{ route('branch.create') }}">Add Branch</a></li>
                             </ul>
                         </li>
                         <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">

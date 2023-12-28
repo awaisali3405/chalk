@@ -33,12 +33,25 @@
                                                 <tr>
                                                     <th>Sr</th>
                                                     <th>Name</th>
-                                                    <th>Attendance </th>
+                                                    <th>Hours </th>
                                                     <th>Salary</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach ($staff as $key => $value)
+                                                    <tr>
+                                                        <td>{{ $key + 1 }}</td>
+                                                        <td>{{ $value->name }}</td>
+                                                        <td>{{ $value->hours() }}</td>
+                                                        <td>{{ $value->salary }}</td>
+                                                        <td>
+
+                                                            <a href="{{ route('staff.attendance.index', $value->id) }}"
+                                                                class="btn btn-primary">Attendance</a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

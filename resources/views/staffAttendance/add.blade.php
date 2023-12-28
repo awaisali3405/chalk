@@ -3,6 +3,69 @@
     <div class="content-body">
         <!-- row -->
         <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-12 col-xxl-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title"></h5>
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ route('staffAttendance.create') }}" method="get">
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Branch</label>
+                                            <select name="branch_id" id="" class="form-control">
+                                                <option value="">All</option>
+                                                @foreach ($branch as $value)
+                                                    <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                                @endforeach
+                                            </select>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Department</label>
+                                            <select name="department_id" id="" class="form-control">
+                                                <option value="">All</option>
+                                                @foreach ($department as $value)
+                                                    <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                                @endforeach
+                                            </select>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Salary Type</label>
+
+                                            <select name="salary_type" id="" class="form-control">
+
+                                                <option value="Monthly"
+                                                    {{ request()->input('salary_type') == 'Monthly' ? 'selected' : '' }}>
+                                                    Monthly
+                                                </option>
+                                                <option value="Hourly"
+                                                    {{ request()->input('salary_type') == 'Hourly' ? 'selected' : '' }}>
+                                                    Hourly</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 justify-content-center d-flex">
+                                        <div>
+                                            <button type="submit" class="btn btn-primary">Apply</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
             <form action="{{ route('staffAttendance.store') }}" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-xl-12 col-xxl-12 col-sm-12">
@@ -28,8 +91,8 @@
                                     <div class="col-lg-3 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">Staff Time</label>
-                                            <input type="time" class="form-control" name="start_time" value=""
-                                                required id="">
+                                            <input type="time" class="form-control" name="start_time" id="start_time"
+                                                value="" required id="">
 
 
                                         </div>
@@ -37,12 +100,32 @@
                                     <div class="col-lg-3 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">End Time</label>
-                                            <input type="time" class="form-control" name="end_time" value=""
-                                                required id="">
+                                            <input type="time" class="form-control" name="end_time" id="end_time"
+                                                value="" required id="">
 
 
                                         </div>
                                     </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Calculated Hour</label>
+                                            <input type="" class="form-control" id="calculated_time" value=""
+                                                readonly id="">
+
+
+                                        </div>
+                                    </div>
+                                    @if (request()->input('salary_type'))
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">Paid</label>
+                                                <input type="number" step="0.01" class="form-control" name="paid_hour"
+                                                    value="" id="">
+
+
+                                            </div>
+                                        </div>
+                                    @endif
 
                                     <div class="col-lg-12 col-md-12 col-sm-12 justify-content-center d-flex">
                                         <div>

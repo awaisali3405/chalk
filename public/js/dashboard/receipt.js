@@ -113,5 +113,40 @@ $(document).ready(function () {
 
         }
     });
+    $('#deposit-add').on('click', function () {
+        checked = $(this).is(":checked");
+        deposit = $('#deposit').val();
+        actual = parseFloat($('#actual_amount').val());
+        if (checked) {
+            $('#deposit-check').val(1);
+            $('#cash-balance-add').prop('disabled', true);
+            $('#bank-balance-add').prop('disabled', true);
+            newBalance = parseFloat(deposit - actual).toFixed(2);
+            if (newBalance < 0) {
+                newBalance = 0
+            }
+            $('#discount').attr('readonly', true).val(0);
+            $('#late_fee').attr('readonly', true).val(0);
+            $('#add-to-wallet').attr('readonly', true).val(0);
+            $("#deposit-html").html(newBalance);
+            if (deposit <= actual) {
+                $('.pay_amount').attr('readonly', true).val(deposit);
+            } else {
+                $('.pay_amount').attr('readonly', true).val(actual);
+            }
+
+        } else {
+            $('#deposit-check').val(0);
+            $('#cash-balance-add').prop('disabled', false);
+            $('#bank-balance-add').prop('disabled', false);
+            $("#deposit-html").html(deposit);
+            $('#discount').attr('readonly', false).val(0);
+            $('#late_fee').attr('readonly', false).val(0);
+            $('#add-to-wallet').attr('readonly', false).val(0);
+            $('.pay_amount').attr('readonly', false).val($('#actual_amount').val());
+         
+        }
+    })
 })
+
 // end

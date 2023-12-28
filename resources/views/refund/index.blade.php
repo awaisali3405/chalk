@@ -33,31 +33,33 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($refund as $key => $value)
-                                                    <tr>
-                                                        <td>{{ $key + 1 }}</td>
-                                                        <td>{{ $value->invoice->student->name() }}
+                                                    @if ($value->remainingDeposit() > 0)
+                                                        <tr>
+                                                            <td>{{ $key + 1 }}</td>
+                                                            <td>{{ $value->invoice->student->name() }}
 
-                                                        </td>
-                                                        <td>{{ $value->invoice->amount }}</td>
-                                                        <td>
-                                                            @if ($value->invoice->student->isFullyPaid())
-                                                                <button type="button"
-                                                                    class="btn btn-primary dropdown-toggle"
-                                                                    data-toggle="dropdown" aria-expanded="true">
-                                                                    Action
-                                                                </button>
-                                                                <div class="dropdown-menu" x-placement="bottom-start"
-                                                                    style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ route('refund.paid.bank', $value->id) }}">Paid
-                                                                        By Bank</a>
-                                                                    <a class="dropdown-item"
-                                                                        href="{{ route('refund.paid.cash', $value->id) }}">Paid
-                                                                        By Cash</a>
-                                                                </div>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
+                                                            </td>
+                                                            <td>{{ $value->remainingDeposit() }}</td>
+                                                            <td>
+                                                                @if ($value->invoice->student->isFullyPaid() && $value->remainingDeposit() > 0)
+                                                                    <button type="button"
+                                                                        class="btn btn-primary dropdown-toggle"
+                                                                        data-toggle="dropdown" aria-expanded="true">
+                                                                        Action
+                                                                    </button>
+                                                                    <div class="dropdown-menu" x-placement="bottom-start"
+                                                                        style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
+                                                                        @if ($value->lock)
+                                                                            <a class="dropdown-item"
+                                                                                href="{{ route('refund.unlock', $value->id) }}">Unlock</a>
+                                                                        @endif
+                                                                        <a class="dropdown-item"
+                                                                            href="{{ route('refund.pay', $value->id) }}">Pay</a>
+                                                                    </div>
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                    @endif
                                                 @endforeach
                                             </tbody>
                                         </table>

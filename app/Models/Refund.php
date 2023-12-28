@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 
 class Refund extends Model
 {
@@ -14,7 +15,9 @@ class Refund extends Model
         'paid_by_cash',
         'paid_by_bank',
         'academic_year_id',
-        'branch_id'
+        'branch_id',
+        'amount',
+        'lock'
     ];
     public function branch()
     {
@@ -31,5 +34,21 @@ class Refund extends Model
     public function mode()
     {
         return $this->paid_by_cash ? 'Cash' : ($this->paid_by_bank ? 'Bank' : '');
+    }
+    public function refunded()
+    {
+        return $this->hasMany(InvoiceRefunded::class, 'refund_id');
+    }
+    public function refundedAmount()
+    {
+        if ($this->refunded) {
+            return $this->refunded->sum('amount');
+        } else {
+            return 0;
+        }
+    }
+    public function remainingDeposit()
+    {
+        return $this->amount - $this->refundedAmount();
     }
 }

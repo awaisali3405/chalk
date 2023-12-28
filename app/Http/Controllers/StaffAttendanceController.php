@@ -19,9 +19,23 @@ class StaffAttendanceController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        $staff = Staff::where('salary_type', "Monthly")->get();
+        if (request()->input()) {
+            $staff = new Staff;
+            if (request()->input('branch_id')) {
+                $staff = $staff->where('branch_id', request()->input('branch_id'));
+            }
+            if (request()->input('department_id')) {
+                $staff = $staff->where('department_id', request()->input('department_id'));
+            }
+            if (request()->input('salary_type')) {
+                $staff = $staff->where('salary_type', request()->input('salary_type'));
+            }
+            $staff = $staff->get();
+        } else {
+            $staff = Staff::where('salary_type', "Monthly")->get();
+        }
         return view('staffAttendance.add', compact('staff'));
     }
 
@@ -32,9 +46,19 @@ class StaffAttendanceController extends Controller
     {
         $data = $request->except('_token');
         // dd($data);
-        foreach ($data['teacher'] as $value) {
-            $staff = Staff::find($value);
-            $staff->attendance()->create($data);
+
+        if (isset($data['teacher'])) {
+
+            foreach ($data['teacher'] as $value) {
+                $staff = Staff::find($value);
+                if (isset($data['paid_hour'])) {
+                    $data['rate'] = $staff->salary;
+                }
+                $staff->attendance()->create($data);
+            }
+        } else {
+
+            return redirect()->back()->with('error', 'Please Select Teacher.');
         }
         // Staff::create($data);
         return redirect()->route('staffAttendance.index')->with('success', 'Staff Attendance Created Successfully.');

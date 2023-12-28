@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CashFlow;
+use App\Models\InvoiceRefunded;
 use App\Models\Refund;
 use App\Models\StudentInvoice;
 use App\Models\StudentInvoiceReceipt;
@@ -40,6 +41,7 @@ class ReceiptController extends Controller
     public function store(Request $request)
     {
         $data = $request->except('_token');
+        $student = StudentInvoice::find($data['invoice_id'])->student;
         $data['academic_year_id'] = auth()->user()->session()->id;
         if ($data['amount'] || $data['discount']) {
             if ($data['credit_note']) {
@@ -49,16 +51,54 @@ class ReceiptController extends Controller
             if ($data['add_to_wallet']) {
                 $data['wallet_amount'] = $data['add_to_wallet'];
             }
+            if ($data['deposit']) {
+                $data['description'] = 'Transfer Refunded Amount from ' . $student->depositInvoice()->code . ' by ';
+            }
             $receipt = StudentInvoiceReceipt::create($data);
             if (!str_contains($data['mode'], 'Wallet')) {
-                CashFlow::create([
-                    'date' => $receipt->date,
-                    'branch_id' => $receipt->invoice->branch_id,
-                    'description' => $receipt->invoice->student->name() . " (" . auth()->user()->session()->period() . ")",
-                    'mode' => $receipt->mode,
-                    'type' => $receipt->invoice->type == "Refundable" ? "Deposit" : $receipt->invoice->type,
-                    'in' => $receipt->amount,
-                ]);
+                if ($data['deposit']) {
+                    InvoiceRefunded::create([
+                        'academic_year_id' => auth()->user()->session()->id,
+                        'branch_id' => $receipt->invoice->branch_id,
+                        'amount' => $data['amount'],
+                        'date' => $data['date'],
+                        'mode' => $data['mode'],
+                        'description' =>  'Deposit Transfer to ' . $receipt->invoice->code,
+                        'refund_id' => $student->depositInvoice()->refund->id,
+                        'transfer_invoice_id' => $data['invoice_id'],
+
+                    ]);
+                    CashFlow::create([
+                        'date' => $receipt->date,
+                        'branch_id' => $receipt->invoice->branch_id,
+                        'description' => $receipt->invoice->student->name() . " (" . auth()->user()->session()->period() . ")",
+                        'mode' => "Refunded",
+                        'type' => $receipt->invoice->type == "Refundable" ? "Deposit" : $receipt->invoice->type,
+                        'out' => $receipt->amount,
+                        'academic_year_id'=>auth()->user()->session()->id
+                    ]);
+                    CashFlow::create([
+                        'date' => $receipt->date,
+                        'branch_id' => $receipt->invoice->branch_id,
+                        'description' => $receipt->invoice->student->name() . " (" . auth()->user()->session()->period() . ")",
+                        'mode' => "Refunded",
+                        'type' => $receipt->invoice->type == "Refundable" ? "Deposit" : $receipt->invoice->type,
+                        'in' => $receipt->amount,
+                        'academic_year_id'=>auth()->user()->session()->id
+                    ]);
+
+                } else {
+
+                    CashFlow::create([
+                        'date' => $receipt->date,
+                        'branch_id' => $receipt->invoice->branch_id,
+                        'description' => $receipt->invoice->student->name() . " (" . auth()->user()->session()->period() . ")",
+                        'mode' => $receipt->mode,
+                        'type' => $receipt->invoice->type == "Refundable" ? "Deposit" : $receipt->invoice->type,
+                        'in' => $receipt->amount,
+                        'academic_year_id'=>auth()->user()->session()->id
+                    ]);
+                }
             }
             if ($data['mode'] == "Cash_Wallet") {
                 $receipt->invoice->student()->update([
@@ -96,6 +136,7 @@ class ReceiptController extends Controller
                     'mode' => $data['mode'] == "Cash" ? 'Cash_Wallet' : ($data['mode'] == "Bank" ? 'Bank_Wallet' : "Cash_Wallet"),
                     'type' => $data['mode'] == "Cash" ? 'Cash_Wallet' : ($data['mode'] == "Bank" ? 'Bank_Wallet' : "Cash_Wallet" . " (" . ($receipt->invoice->type == "Refundable" ? "Deposit" : $receipt->invoice->type) . ")"),
                     'in' => $data['add_to_wallet'],
+                    'academic_year_id'=>auth()->user()->session()->id
                 ]);
                 if ($data['mode'] == "Cash") {
 
@@ -117,7 +158,8 @@ class ReceiptController extends Controller
                     Refund::create([
                         'academic_year_id' => auth()->user()->session()->id,
                         'invoice_id' => $invoice->id,
-                        'branch_id' => $invoice->branch_id
+                        'branch_id' => $invoice->branch_id,
+                        'amount' => $invoice->amount
                     ]);
                 }
             }

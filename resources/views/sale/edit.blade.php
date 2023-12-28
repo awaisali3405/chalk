@@ -147,7 +147,8 @@
                                                                 <label class="form-label">Student</label>
                                                                 <div class="input-group mb-2">
                                                                     <select name="student_id" class="form-control student">
-                                                                        <option value="{{ $sale->student_id }}">{{ $sale->student->name }}</option>
+                                                                        <option value="{{ $sale->student_id }}">
+                                                                            {{ $sale->student->name }}</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -158,74 +159,74 @@
                                                             <div class="form-group">
                                                                 <label class="form-label">Date</label>
                                                                 <div class="input-group mb-2">
-                                                                    <input  type="date" max="{{ auth()->user()->session()->end_date }}"
-                                        min="{{ auth()->user()->session()->start_date }}" class="form-control"
-                                                                        id="discount" name="date" placeholder="" value="{{ $sale->date }}"
-                                                                        required>
+                                                                    <input type="date"
+                                                                        max="{{ auth()->user()->session()->end_date }}"
+                                                                        min="{{ auth()->user()->session()->start_date }}"
+                                                                        class="form-control" id="discount"
+                                                                        name="date" placeholder=""
+                                                                        value="{{ $sale->date }}" required>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="subject-resource">
                                                             @foreach ($sale->product as $value)
-
-                                                            <div class="row">
-                                                                <div class="col-lg-3 col-md-3 col-sm-12">
-                                                                    <div class="form-group">
-                                                                        <label class="form-label">Resource</label>
-                                                                        <div class="input-group mb-2">
-                                                                            <select name="product_id[]"
-                                                                                class="form-control subject">
-                                                                                {{-- @foreach ( as )
-
-                                                                                @endforeach --}}
-
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-3 col-md-3 col-sm-12">
-                                                                    <div class="form-group">
-                                                                        <label class="form-label">Quantiy</label>
-                                                                        <div class="input-group mb-2">
-                                                                            <input type="text" name="quantity[]"
-                                                                                class="form-control quantity">
+                                                                <div class="row">
+                                                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                                                        <div class="form-group">
+                                                                            <label class="form-label">Resource</label>
+                                                                            <div class="input-group mb-2">
+                                                                                <select name="product_id[]"
+                                                                                    class="form-control subject">
 
 
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-3 col-md-3 col-sm-12">
-                                                                    <div class="form-group">
-                                                                        <label class="form-label">Rate</label>
-                                                                        <div class="input-group mb-2">
-                                                                            <div class="input-group-prepend">
-                                                                                <div class="input-group-text">£</div>
+                                                                                </select>
                                                                             </div>
-                                                                            <input name="rate[]"
-                                                                                class="form-control rate">
-
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-lg-2 col-md-3 col-sm-12">
-                                                                    <div class="form-group">
-                                                                        <label class="form-label">Amount</label>
-                                                                        <div class="input-group mb-2">
-                                                                            <div class="input-group-prepend">
-                                                                                <div class="input-group-text">£</div>
+                                                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                                                        <div class="form-group">
+                                                                            <label class="form-label">Quantiy</label>
+                                                                            <div class="input-group mb-2">
+                                                                                <input type="text" name="quantity[]"
+                                                                                    class="form-control quantity">
+
+
                                                                             </div>
-                                                                            <input name="amount[]"
-                                                                                class="form-control amount">
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-lg-1 col-md-3 col-sm-12 pt-4">
-                                                                    <div class="form-group">
-                                                                        <span class="add-resource btn btn-primary">+</span>
-                                                                    </div>
-                                                                </div>
+                                                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                                                        <div class="form-group">
+                                                                            <label class="form-label">Rate</label>
+                                                                            <div class="input-group mb-2">
+                                                                                <div class="input-group-prepend">
+                                                                                    <div class="input-group-text">£</div>
+                                                                                </div>
+                                                                                <input name="rate[]"
+                                                                                    class="form-control rate">
 
-                                                            </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-2 col-md-3 col-sm-12">
+                                                                        <div class="form-group">
+                                                                            <label class="form-label">Amount</label>
+                                                                            <div class="input-group mb-2">
+                                                                                <div class="input-group-prepend">
+                                                                                    <div class="input-group-text">£</div>
+                                                                                </div>
+                                                                                <input name="amount[]"
+                                                                                    class="form-control amount">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-1 col-md-3 col-sm-12 pt-4">
+                                                                        <div class="form-group">
+                                                                            <span
+                                                                                class="add-resource btn btn-primary">+</span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
                                                             @endforeach
                                                         </div>
 

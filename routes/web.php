@@ -112,8 +112,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('balanceSheet', BalanceSheetController::class);
 
     Route::resource('refund', RefundController::class);
-    Route::get('/paid-by-cash/{id}', [RefundController::class, 'paidByBank'])->name('refund.paid.bank');
-    Route::get('/paid-by-bank/{id}', [RefundController::class, 'paidByCash'])->name('refund.paid.cash');
+    Route::get('/unlock/refund/{id}', [RefundController::class, 'unlock'])->name('refund.unlock');
+    Route::get('/pay/refund/{id}', [RefundController::class, 'pay'])->name('refund.pay');
+    Route::post('/pay/refund-store', [RefundController::class, 'payStore'])->name('refund.pay.store');
     // Expense Account Type
     Route::resource('expenseTypeAccount', ExpenseAccountTypeController::class);
     Route::resource('expense', ExpenseController::class);
@@ -174,4 +175,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('staff/report', [StaffController::class, 'report'])->name('staff.report');
 });
 
-Route::get('test', [EnquiryController::class, 'test']);
+Route::get('test', [EnquiryController::class, 'test'])->name('test');
