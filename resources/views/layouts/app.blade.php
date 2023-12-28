@@ -361,12 +361,12 @@
     <script src="{{ asset('js/plugins-init/datatables.init.js') }}"></script>
 
     {{-- <script src="{{ asset('js/plugins-init/fullcalendar-init.js') }}"></script> --}}
-    {{-- <script src="https://cdn.getaddress.io/scripts/getaddress-autocomplete-1.1.3.min.js"></script> --}}
+    <script src="https://cdn.getaddress.io/scripts/getaddress-autocomplete-1.1.3.min.js"></script>
 
     <!-- after your form -->
-    {{-- <script>
+    <script>
         getAddress.autocomplete('formatted_address_0', 'uIIn_5Plkk2X3bCt-L3Cjw40707');
-    </script> --}}
+    </script>
     {{-- Stock JS --}}
 
 
