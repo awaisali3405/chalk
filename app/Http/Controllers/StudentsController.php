@@ -710,10 +710,12 @@ class StudentsController extends Controller
         $academicYear = AcademicCalender::where('active', true)->first();
         $year = Year::find($id);
         $string = '<option value="">-</option>';
-        // dd($year);
-        foreach ($year->student->where('disable', false)->whereHas('promotionDetail', function ($query) use ($academicYear) {
+        // dd($year->student()->whereHas('promotionDetail', function ($query) use ($academicYear) {
+        //     $query->where('academic_year_id', $academicYear->id);
+        // })->get());
+        foreach ($year->student()->where('disable', false)->whereHas('promotionDetail', function ($query) use ($academicYear) {
             $query->where('academic_year_id', $academicYear->id);
-        }) as $key => $value) {
+        })->get() as $key => $value) {
 
             $string .= "<option value='" . $value->id . "'>" . $value->name() . "</option>";
         }
