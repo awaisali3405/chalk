@@ -200,23 +200,23 @@
                         <li><a href="{{ route('expense.create') }}">Add Expense</a></li>
                     </ul>
                 </li>
-                <li class="nav-label first">Report</li>
+                <li class="nav-label first">Report (Peding)</li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-university"></i>
                         <span class="nav-text">Admin Report</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="">Enquiry List</a></li>
-                        <li><a href="">Student List</a></li>
-                        <li><a href="">Admission Report</a></li>
+                        <li><a href="#">Enquiry List</a></li>
+                        <li><a href="{{ route('test') }}">Student List</a></li>
+                        <li><a href="{{ route('test') }}">Admission Report</a></li>
                         <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                                 <i class="la la-home"></i>
                                 <span class="nav-text">Publisher Report</span>
                             </a>
                             <ul aria-expanded="false">
-                                <li><a href="">Sale Report</a></li>
-                                <li><a href="">Purcahse Report</a></li>
-                                <li><a href="">Product Report</a></li>
+                                <li><a href="{{ route('test') }}">Sale Report</a></li>
+                                <li><a href="{{ route('test') }}">Purcahse Report</a></li>
+                                <li><a href="{{ route('test') }}">Product Report</a></li>
                             </ul>
                         </li>
                         {{-- <li><a href="">Purchase Report</a></li>
@@ -233,7 +233,7 @@
                         <span class="nav-text">Accounting Report</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="">Invoice Report</a></li>
+                        <li><a href="{{ route('test') }}">Invoice Report</a></li>
 
                     </ul>
                 </li>
@@ -242,9 +242,9 @@
                         <span class="nav-text">HR Report</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="">Staff Report</a></li>
-                        <li><a href="">Staff DBS Report</a></li>
-                        <li><a href="">Statement Loan Report</a></li>
+                        <li><a href="{{ route('test') }}">Staff Report</a></li>
+                        <li><a href="{{ route('test') }}">Staff DBS Report</a></li>
+                        <li><a href="{{ route('test') }}">Statement Loan Report</a></li>
 
                     </ul>
                 </li>
@@ -253,10 +253,10 @@
                         <span class="nav-text">Management Report</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="">Company Statement</a></li>
-                        <li><a href="">Vat Statement</a></li>
+                        <li><a href="{{ route('test') }}">Company Statement</a></li>
+                        <li><a href="{{ route('test') }}">Vat Statement</a></li>
                         <li><a href="{{ route('balanceSheet.index') }}">Balance Sheet</a></li>
-                        <li><a href="">Ledger Report</a></li>
+                        <li><a href="{{ route('test') }}">Ledger Report</a></li>
 
                     </ul>
                 </li>
