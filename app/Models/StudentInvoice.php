@@ -159,9 +159,10 @@ class StudentInvoice extends Model
     }
     public function depositRefunded()
     {
-        if ($this->refund->lock) {
-
-            return $this->refund->remainingDeposit();
+        if ($this->refund) {
+            if ($this->refund->lock) {
+                return $this->refund->remainingDeposit();
+            }
         }
         return 0;
     }
