@@ -205,7 +205,7 @@ class InvoiceController extends Controller
                 if ($student->payment_period == "Weekly") {
                     $amount = (($student->yearSubject->sum('amount') - $student->fee_discount) * $weeks);
                     // dd($amount, $weeks, $to, $from);
-                    // if ($amount > 0) {
+                    if ($amount > 0) {
                         $invoice = StudentInvoice::create([
                             'student_id' => $student->id,
                             'type' => 'Weekly Fee',
@@ -217,7 +217,7 @@ class InvoiceController extends Controller
                             'year_id' => $student->currentYear()->id,
                             'academic_year_id' => auth()->user()->session()->id,
                             'discount' => $student->fee_discount,
-                            'date'=>$request->date
+                            'date' => $request->date
 
                         ]);
                         $invoice->update([
@@ -244,7 +244,7 @@ class InvoiceController extends Controller
                             'year_id' => $student->currentYear()->id,
                             'academic_year_id' => auth()->user()->session()->id,
                             'discount' => $student->fee_discount,
-                            'date'=>$request->date
+                            'date' => $request->date
                         ]);
                         $invoice->update([
                             'code' => "F00" . $invoice->id . '/' . auth()->user()->session()->InvoiceYearCode()
