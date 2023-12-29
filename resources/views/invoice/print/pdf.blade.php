@@ -1034,7 +1034,7 @@
                                     <td class="bg-grey"></td>
                                     <td class="bg-grey"></td>
                                 </tr>
-                                @if ($value->wallet_amount)
+                                @if ($value->wallet_amount > 0)
                                     <tr>
                                         <td class=" text-center">
 
@@ -1069,7 +1069,7 @@
                                 @endif
                             @endforeach
 
-                            @foreach ($invoice->refundedInvoice as $key => $value)
+                            @foreach ($invoice->depositTransfer() as $key => $value)
                                 <tr>
                                     <td class=" text-center">
 
@@ -1088,7 +1088,8 @@
                                         style="text-align: end !important; padding-right:5px;">
                                         <b>
 
-                                            -£{{ auth()->user()->priceFormat($value->amount) }}
+
+                                            £{{ auth()->user()->priceFormat($value->amount) }}
                                         </b>
                                     </td>
                                 </tr>

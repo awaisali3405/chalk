@@ -44,7 +44,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label">Student First Name</label>
+                                            <label class="form-label">Student First Name*</label>
                                             <input type="text" class="form-control uppercase" name="first_name"
                                                 value="{{ $enquiry->first_name }}" required>
                                         </div>
@@ -53,7 +53,7 @@
                                         <div class="form-group">
                                             <label class="form-label">Student Last Name</label>
                                             <input type="text" class="form-control uppercase" name="last_name"
-                                                value="{{ $enquiry->last_name }}" required>
+                                                value="{{ $enquiry->last_name }}">
                                         </div>
                                     </div>
                                     {{-- <div class="col-lg-6 col-md-6 col-sm-12">

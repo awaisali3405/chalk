@@ -57,7 +57,7 @@ class Parents extends Model
     }
     public function name()
     {
-        return $this->first_name . " " . $this->last_name;
+        return $this->last_name . " " . $this->given_name;
     }
     public function address()
     {

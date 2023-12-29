@@ -130,9 +130,8 @@
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Date of Birth</label>
-                                                    <input type="date"
-                                                        class="form-control" name="dob" value="{{ old('dob') }}"
-                                                        required>
+                                                    <input type="date" class="form-control" name="dob"
+                                                        value="{{ old('dob') }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -1477,7 +1476,8 @@
                                             <select name="reference_student" id="" class="form-control">
                                                 <option value="">Select Student</option>
                                                 @foreach ($referenceStudent as $value)
-                                                    <option value="{{ $value->id }}">{{ $value->name() }}</option>
+                                                    <option value="{{ $value->id }}">{{ $value->name() }}
+                                                        ({{ $value->currentYear()->name }})</option>
                                                 @endforeach
                                             </select>
                                         </div>
