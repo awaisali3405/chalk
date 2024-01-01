@@ -240,7 +240,7 @@
                                     @php
 
                                         if ($value1->receipt) {
-                                            $row = 2;
+                                            $row = 1;
                                             foreach ($value1->receipt as $key => $value1Recipt) {
                                                 if ($value1Recipt->amount > 0) {
                                                     $row++;
@@ -257,10 +257,10 @@
                                                     $row++;
                                                 }
                                                 if ($value1Recipt->mode == 'Bank_Wallet') {
-                                                    $row += 2;
+                                                    $row++;
                                                 }
                                                 if ($value1Recipt->mode == 'Cash_Wallet') {
-                                                    $row += 2;
+                                                    $row++;
                                                 }
                                             }
                                         }
