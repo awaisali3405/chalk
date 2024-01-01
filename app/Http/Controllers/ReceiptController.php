@@ -75,7 +75,7 @@ class ReceiptController extends Controller
                         'mode' => "Refunded",
                         'type' => $receipt->invoice->type == "Refundable" ? "Deposit" : $receipt->invoice->type,
                         'out' => $receipt->amount,
-                        'academic_year_id'=>auth()->user()->session()->id
+                        'academic_year_id' => auth()->user()->session()->id
                     ]);
                     CashFlow::create([
                         'date' => $receipt->date,
@@ -84,9 +84,8 @@ class ReceiptController extends Controller
                         'mode' => "Refunded",
                         'type' => $receipt->invoice->type == "Refundable" ? "Deposit" : $receipt->invoice->type,
                         'in' => $receipt->amount,
-                        'academic_year_id'=>auth()->user()->session()->id
+                        'academic_year_id' => auth()->user()->session()->id
                     ]);
-
                 } else {
 
                     CashFlow::create([
@@ -96,7 +95,7 @@ class ReceiptController extends Controller
                         'mode' => $receipt->mode,
                         'type' => $receipt->invoice->type == "Refundable" ? "Deposit" : $receipt->invoice->type,
                         'in' => $receipt->amount,
-                        'academic_year_id'=>auth()->user()->session()->id
+                        'academic_year_id' => auth()->user()->session()->id
                     ]);
                 }
             }
@@ -136,7 +135,7 @@ class ReceiptController extends Controller
                     'mode' => $data['mode'] == "Cash" ? 'Cash_Wallet' : ($data['mode'] == "Bank" ? 'Bank_Wallet' : "Cash_Wallet"),
                     'type' => $data['mode'] == "Cash" ? 'Cash_Wallet' : ($data['mode'] == "Bank" ? 'Bank_Wallet' : "Cash_Wallet" . " (" . ($receipt->invoice->type == "Refundable" ? "Deposit" : $receipt->invoice->type) . ")"),
                     'in' => $data['add_to_wallet'],
-                    'academic_year_id'=>auth()->user()->session()->id
+                    'academic_year_id' => auth()->user()->session()->id
                 ]);
                 if ($data['mode'] == "Cash") {
 
@@ -150,7 +149,7 @@ class ReceiptController extends Controller
                 }
             }
             $invoice = StudentInvoice::find($request->invoice_id);
-            if ($invoice->amount - ($invoice->receipt->sum('discount') + $invoice->receipt->sum('credit_discount') - $invoice->receipt->sum('late_fee')) - $invoice->receipt->sum('amount') <= 0) {
+            if ($invoice->remainingAmount() <= 0) {
                 $invoice->update([
                     'is_paid' => 1
                 ]);
