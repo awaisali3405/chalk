@@ -862,7 +862,7 @@
                                     style="text-align: end !important; padding-right:5px;">
                                     <b>
 
-                                        -£{{ auth()->user()->priceFormat($value4->amount) }}
+                                        £{{ auth()->user()->priceFormat($value4->amount) }}
                                     </b>
                                 </td>
                             </tr>
