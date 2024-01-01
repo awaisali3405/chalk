@@ -332,14 +332,14 @@
                                     @endif
                                     @if ($value1->refunded_discount > 0)
                                         @php
-                                            $total = $total - $value11->refunded_discount;
-                                            $credit += $value11->refunded_discount;
+                                            $total = $total - $value1->refunded_discount;
+                                            $credit += $value1->refunded_discount;
                                         @endphp
                                         <tr style="color:rgb(7, 116, 7);">
-                                            <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
+                                            <td>{{ auth()->user()->ukFormat($value1->date) }}</td>
                                             <td>Refunded Discount</td>
                                             <td class="text-align-end">
-                                                £{{ auth()->user()->priceFormat($value11->refunded_discount) }}</td>
+                                                £{{ auth()->user()->priceFormat($value1->refunded_discount) }}</td>
                                             <td class="text-align-end">£0</td>
                                             <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
                                         </tr>
