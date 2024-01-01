@@ -84,7 +84,7 @@ class Student extends Model
     ];
     public function depositInvoice()
     {
-        return $this->invoice()->orWhere('academic_year_id',auth()->user()->session()->id)->where('type', 'Refundable')->first();
+        return $this->invoice()->where('type', 'Refundable')->first();
     }
     public function referred()
     {
