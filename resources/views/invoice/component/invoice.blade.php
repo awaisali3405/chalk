@@ -715,7 +715,7 @@
                                 <td class="bg-grey text-center"
                                     style="text-align: end !important; padding-right:5px;">
                                     <b>
-                                        £{{ $invoice->refunded_discount }}
+                                        -£{{ auth()->user()->priceFormat($invoice->refunded_discount) }}
                                     </b>
                                 </td>
                             </tr>
@@ -736,7 +736,9 @@
                         @if (
                             $invoice->receipt->sum('discount') > 0 ||
                                 $invoice->receipt->sum('late_fee') > 0 ||
-                                $invoice->receipt->sum('credit_discount') > 0)
+                                $invoice->receipt->sum('credit_discount') > 0 ||
+                                $invoice->refunded_discount > 0 ||
+                                $invoice->discount > 0)
                             <tr class="border-x-black">
                                 <td class=" text-center">
 
@@ -753,7 +755,7 @@
                                     style="text-align: end !important; padding-right:5px;">
                                     <b>
 
-                                        £{{ auth()->user()->priceFormat($invoice->amount + $invoice->receipt->sum('late_fee') - ($invoice->receipt->sum('discount') + $invoice->receipt->sum('credit_discount'))) }}
+                                        £{{ auth()->user()->priceFormat($invoice->amount + $invoice->receipt->sum('late_fee') - ($invoice->receipt->sum('discount') + $invoice->receipt->sum('credit_discount') + $invoice->refunded_discount)) }}
                                     </b>
                                 </td>
                             </tr>
