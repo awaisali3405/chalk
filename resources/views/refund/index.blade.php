@@ -41,7 +41,7 @@
                                                             </td>
                                                             <td>{{ $value->remainingDeposit() }}</td>
                                                             <td>
-                                                                @if ($value->invoice->student->isFullyPaid() && $value->remainingDeposit() > 0)
+                                                                @if ($value->remainingDeposit() > 0)
                                                                     <button type="button"
                                                                         class="btn btn-primary dropdown-toggle"
                                                                         data-toggle="dropdown" aria-expanded="true">
