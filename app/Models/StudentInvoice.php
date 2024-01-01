@@ -155,7 +155,7 @@ class StudentInvoice extends Model
         $refundAmount = $this->invoiceRefund->sum('amount');
         $paid = $this->paidAmount();
         $due = $paid - $refundAmount;
-        return $due > 0 ? 'Partially Refunded' : ($due == $paid ? 'Fully Refunded' : 'paid');
+        return $due > 0 ? ($due == $paid ? 'Fully Refunded' : 'paid') : 'Partially Refunded';
     }
 
     public function paidRefund()
