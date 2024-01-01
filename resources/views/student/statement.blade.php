@@ -269,7 +269,7 @@
                                                 $row += 2;
                                             }
                                         }
-                                        if ($value1->refunded_amount > 0) {
+                                        if ($value1->refunded_discount > 0) {
                                             $row++;
                                         }
                                     @endphp
