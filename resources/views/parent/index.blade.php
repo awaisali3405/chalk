@@ -50,7 +50,7 @@
                                                     <tr>
                                                         <td>{{ $key + 1 }}</td>
 
-                                                        <td>{{ $value->given_name }}</td>
+                                                        <td>{{ $value->name() }}</td>
                                                         <td>{{ $value->relationship }}</td>
                                                         <td>{{ $value->email }}</td>
                                                         <td>{{ $value->mobile_number }}</td>
