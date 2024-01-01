@@ -208,12 +208,13 @@ class User extends Authenticatable
         $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Monthly Fee', 'Weekly Fee', 'Addition Invoice']);
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
+        $refunded_discount = $invoice->get()->sum('refunded_discount');
         $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->get();
         $received = $invoiceReceived->sum('amount');
         $discount = $invoiceReceived->sum('discount') + $invoiceReceived->sum('credit_discount');
         $late_fee = $invoiceReceived->sum('late_fee');
         // dd(number_format($invoice_sum - ($received + $discount - $late_fee)), ($invoice_sum - ($received + $discount - $late_fee)), number_format($invoice_sum - ($received + $discount - $late_fee)) != ($invoice_sum - ($received + $discount - $late_fee)) ? number_format($invoice_sum - ($received + $discount - $late_fee), 2) : number_format(($invoice_sum - ($received + $discount - $late_fee))));
-        return ($invoice_sum - ($received + $discount - $late_fee));
+        return (($invoice_sum - $refunded_discount) - ($received + $discount - $late_fee));
     }
     public function feeReceived($branch, $academicYear)
     {
