@@ -386,7 +386,7 @@
                                         $total = $total + $value12->amount;
                                         $debit += $value12->amount;
                                     @endphp
-                                    <tr style="color: rgb(146, 10, 10);">
+                                    <tr style="color: rgb(152, 138, 35);">
                                         <td>{{ auth()->user()->ukFormat($value12->date) }}</td>
                                         <td>{{ $value12->description }} {{ $value12->mode }}
                                             Debit </td>
@@ -400,7 +400,7 @@
                                         $total = $total - $value12->amount;
                                         $credit += $value12->amount;
                                     @endphp
-                                    <tr style="color: rgb(146, 10, 10);">
+                                    <tr style="color: rgb(152, 138, 35);">
                                         <td>{{ auth()->user()->ukFormat($value12->date) }}</td>
                                         <td>{{ $value12->description }} {{ $value12->mode }}
                                             Credit </td>
