@@ -240,7 +240,7 @@
                                     @php
 
                                         if ($value1->receipt) {
-                                            $row = 1;
+                                            $row = 2;
                                             foreach ($value1->receipt as $key => $value1Recipt) {
                                                 if ($value1Recipt->amount > 0) {
                                                     $row++;
