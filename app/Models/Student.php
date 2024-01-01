@@ -84,7 +84,7 @@ class Student extends Model
     ];
     public function depositInvoice()
     {
-        return $this->hasOne(StudentInvoice::class, 'student_id')->where('type', 'Refundable');
+        return $this->hasOne(StudentInvoice::class, 'student_id')->where('type', 'Refundable')->first() ;
     }
     public function referred()
     {
