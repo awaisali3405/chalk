@@ -451,7 +451,7 @@
                                     <td class="text-align-end"> £{{ auth()->user()->priceFormat($total) }}</td>
                                 </tr>
                             @endforeach
-                            @if (count($value->invoice) && $value->invoice[0]->refund)
+                            @if (count($value->invoice) && $value->depositInvoice()->refund)
                                 @if ($value->depositInvoice()->refund->refundedAmount() > 0)
                                     @php
                                         $total -= $value->depositInvoice()->amount;
@@ -459,7 +459,8 @@
                                     @endphp
                                     <tr style="background-color: rgb(255, 148, 148);">
                                         <td></td>
-                                        <td>{{ auth()->user()->ukFormat($value->depositInvoice()->refund()->lastest()->first()) }}</td>
+                                        <td>{{ auth()->user()->ukFormat($value->depositInvoice()->refund()->lastest()->first()) }}
+                                        </td>
                                         <td>Deposit Credited from Deposit Account
                                         </td>
                                         <td class="text-align-end">£0</td>
