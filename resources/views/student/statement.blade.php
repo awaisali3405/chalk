@@ -459,7 +459,7 @@
                                     @endphp
                                     <tr style="background-color: rgb(255, 148, 148);">
                                         <td></td>
-                                        <td>{{ auth()->user()->ukFormat($value->depositInvoice()->refund()->lastest()->first()) }}
+                                        <td>{{ auth()->user()->ukFormat($value->depositInvoice()->refund()->latest()->first()) }}
                                         </td>
                                         <td>Deposit Credited from Deposit Account
                                         </td>
