@@ -426,16 +426,16 @@ class StudentsController extends Controller
 
             $email = Email::find(2);
             // dd(gettype($email->template));
-            $email->name = str_replace("[Student's Name]", $student->first_name . " " . $student->last_name, $email->name);
-            $email->template = str_replace("[Parent/Guardian's Name]", $student->parents[0]->given_name, $email->template);
-            $email->template = str_replace("[Student's Name]", $student->name(), $email->template);
-            $email->template = str_replace("[year]", $student->year->name, $email->template);
-            $email->template = str_replace("[Start Date]", $student->admission_date, $email->template);
+            // $email->name = str_replace("[Student's Name]", $student->first_name . " " . $student->last_name, $email->name);
+            // $email->template = str_replace("[Parent/Guardian's Name]", $student->parents[0]->given_name, $email->template);
+            // $email->template = str_replace("[Student's Name]", $student->name(), $email->template);
+            // $email->template = str_replace("[year]", $student->year->name, $email->template);
+            // $email->template = str_replace("[Start Date]", $student->admission_date, $email->template);
 
-            Mail::send('notification.enquiry', ['template' => $email->template], function ($message) use ($student, $email) {
-                $message->to($student->parents[0]->email);
-                $message->subject($email->name);
-            });
+            // Mail::send('notification.enquiry', ['template' => $email->template], function ($message) use ($student, $email) {
+            //     $message->to($student->parents[0]->email);
+            //     $message->subject($email->name);
+            // });
         }
         if ($student->is_promoted) {
             $data['is_promoted'] = false;
