@@ -27,6 +27,8 @@
                                                 <tr>
                                                     <th>Sr</th>
                                                     <th>Student</th>
+                                                    <th>Received By Cash</th>
+                                                    <th>Received By Bank</th>
                                                     <th>Amount</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -38,6 +40,10 @@
                                                             <td>{{ $key + 1 }}</td>
                                                             <td>{{ $value->invoice->student->name() }}
 
+                                                            </td>
+                                                            <td>{{ $value->invoice->receipt()->where('mode', 'Cash')->sum('amount') }}
+                                                            </td>
+                                                            <td>{{ $value->invoice->receipt()->where('mode', 'Bank')->sum('amount') }}
                                                             </td>
                                                             <td>{{ $value->remainingDeposit() }}</td>
                                                             <td>
