@@ -53,8 +53,10 @@
                                                                             <a class="dropdown-item"
                                                                                 href="{{ route('refund.unlock', $value->id) }}">Unlock</a>
                                                                         @endif
-                                                                        <a class="dropdown-item"
-                                                                            href="{{ route('refund.pay', $value->id) }}">Pay</a>
+                                                                        @if ($value->invoice->student->isFullyPaid())
+                                                                            <a class="dropdown-item"
+                                                                                href="{{ route('refund.pay', $value->id) }}">Pay</a>
+                                                                        @endif
                                                                     </div>
                                                                 @endif
                                                             </td>

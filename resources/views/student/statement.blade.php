@@ -303,19 +303,7 @@
                                     @endphp
                                     {{-- @endphp --}}
                                     @if ($value11->credit_discount > 0)
-                                        {{-- <tr style="color:rgb(146, 10, 10);">
-
-                                            <td>{{ $value11->date }}</td>
-                                            <td>Credit Discount Debit</td>
-                                            <td class="text-align-end">
-                                                £{{ auth()->user()->priceFormat($value11->credit_discount) }}</td>
-                                            <td class="text-align-end">£0</td>
-                                            <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
-                                        </tr>
-                                        @php
-                                            $total = $total + $value11->credit_discount;
-                                            $debit += $value11->credit_discount;
-                                        @endphp --}}
+                                
                                         <tr style="color: rgb(7, 116, 7);">
                                             <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
                                             <td>Credit Discount Credit</td>
