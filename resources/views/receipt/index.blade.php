@@ -72,7 +72,7 @@
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between"><span class="mb-0">Student
                                             Deposit</span> <strong class="text-muted">£<span
-                                                id="deposit-html">{{ $invoice->student->depositInvoice()->depositRefunded() }}</span>
+                                                id="deposit-html">{{ $invoice->student->depositInvoice() }}</span>
                                             <input type="checkbox" name="" id="deposit-add" id=""
                                                 {{ $invoice->student->depositInvoice()->depositRefunded() <= 0 && $invoice->amount > 0 ? 'disabled' : '' }}>
                                         </strong>
