@@ -454,35 +454,50 @@
                             @if (count($value->invoice) && $value->depositInvoice()->refund)
                                 @if ($value->depositInvoice()->refund->refundedAmount() > 0)
                                     @php
-                                        $total -= $value->depositInvoice()->refund->refunded->sum('amount');
-                                        $credit += $value->depositInvoice()->refund->refunded->sum('amount');
+                                        $total -= $value
+                                            ->depositInvoice()
+                                            ->refund->refunded()
+                                            ->where('transfer_invoice_id', null)
+                                            ->sum('amount');
+                                        $credit += $value
+                                            ->depositInvoice()
+                                            ->refund->refunded->where('transfer_invoice_id', null)
+                                            ->sum('amount');
                                     @endphp
                                     <tr style="background-color: rgb(255, 148, 148);">
                                         <td></td>
-                                        <td>{{ auth()->user()->ukFormat($value->depositInvoice()->refund->refunded()->latest()->first()->date) }}
+                                        <td>{{ auth()->user()->ukFormat($value->depositInvoice()->refund->refunded()->where('transfer_invoice_id', null)->latest()->first()->date) }}
                                         </td>
                                         <td>Deposit Credited from Deposit Account
                                         </td>
                                         <td class="text-align-end">£0</td>
                                         <td class="text-align-end">
-                                            £{{ auth()->user()->priceFormat($value->depositInvoice()->refund->refunded->sum('amount')) }}
+                                            £{{ auth()->user()->priceFormat($value->depositInvoice()->refund->refunded()->where('transfer_invoice_id', null)->sum('amount')) }}
                                         </td>
                                         <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
                                     </tr>
                                     @php
-                                        $total += $value->depositInvoice()->refund->refunded->sum('amount');
-                                        $debit += $value->depositInvoice()->refund->refunded->sum('amount');
+                                        $total += $value
+                                            ->depositInvoice()
+                                            ->refund->refunded()
+                                            ->where('transfer_invoice_id', null)
+                                            ->sum('amount');
+                                        $debit += $value
+                                            ->depositInvoice()
+                                            ->refund->refunded()
+                                            ->where('transfer_invoice_id', null)
+                                            ->sum('amount');
                                     @endphp
 
                                     <tr style="background-color: rgb(247, 150, 150);">
                                         <td></td>
-                                        <td>{{ auth()->user()->ukFormat($value->depositInvoice()->refund->refunded()->latest()->first()->date) }}
+                                        <td>{{ auth()->user()->ukFormat($value->depositInvoice()->refund->refunded()->where('transfer_invoice_id', null)->latest()->first()->date) }}
                                         </td>
                                         <td>Refund to Student by
-                                            {{ $value->depositInvoice()->refund->refunded()->latest()->first()->mode }}
+                                            {{ $value->depositInvoice()->refund->refunded()->where('transfer_invoice_id', null)->latest()->first()->mode }}
                                         </td>
                                         <td class="text-align-end">
-                                            £{{ auth()->user()->priceFormat($value->depositInvoice()->refund->refunded->sum('amount')) }}
+                                            £{{ auth()->user()->priceFormat($value->depositInvoice()->refund->refunded()->where('transfer_invoice_id', null)->sum('amount')) }}
                                         </td>
                                         <td class="text-align-end">£0</td>
                                         <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
