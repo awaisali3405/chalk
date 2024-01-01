@@ -30,6 +30,7 @@
                                                     <th>Received By Cash</th>
                                                     <th>Received By Bank</th>
                                                     <th>Amount</th>
+                                                    <th>Date</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -49,6 +50,9 @@
                                                             </td>
                                                             <td>
                                                                 £{{ auth()->user()->priceFormat($value->remainingDeposit()) }}
+                                                            </td>
+                                                            <td>
+                                                                {{ auth()->user()->ukFormat($value->receipt()->latest()->first()->date) }}
                                                             </td>
                                                             <td>
                                                                 @if ($value->remainingDeposit() > 0)
