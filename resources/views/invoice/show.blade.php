@@ -85,7 +85,7 @@
                                                     <td>{{ auth()->user()->ukFormat($value->date) }}</td>
                                                     <td>{{ $value->type == 'Refundable' ? 'Deposit' : ($value->type == 'Resource Fee' ? 'Resources' : $value->type) }}
                                                     </td>
-                                                    <td>£{{ $value->amount }}</td>
+                                                    <td>£{{ auth()->user()->priceFormat($value->amount) }}</td>
                                                     <td>{{ auth()->user()->priceFormat($value->tax) }}%</td>
                                                     {{-- <td>£{{ $value->receipt->sum('discount') + $value->receipt->sum('credit_discount') }}
                                                     </td> --}}
