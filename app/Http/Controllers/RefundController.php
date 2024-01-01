@@ -91,8 +91,9 @@ class RefundController extends Controller
     }
     public function unlock($id)
     {
-        Refund::find($id)->update([
-            'lock' => false
+        $refund = Refund::find($id);
+        $refund->update([
+            'lock' => !$refund->lock
         ]);
         return redirect()->back()->with('success', 'Refund Unlock Successfully.');
     }

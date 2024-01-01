@@ -66,6 +66,9 @@
                                                                         @if ($value->lock)
                                                                             <a class="dropdown-item"
                                                                                 href="{{ route('refund.unlock', $value->id) }}">Unlock</a>
+                                                                        @else
+                                                                            <a class="dropdown-item"
+                                                                                href="{{ route('refund.unlock', $value->id) }}">Lock</a>
                                                                         @endif
                                                                         @if ($value->invoice->student->isFullyPaid())
                                                                             <a class="dropdown-item"
