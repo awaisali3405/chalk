@@ -242,7 +242,7 @@
                                         if ($value1->receipt) {
                                             $row = 1;
                                             foreach ($value1->receipt as $key => $value1Recipt) {
-                                                if ($value1Recipt->amount > 0) {
+                                                if ($value1Recipt->amount) {
                                                     $row++;
                                                 }
                                                 if ($value1Recipt->discount > 0) {
