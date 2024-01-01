@@ -41,11 +41,12 @@
                                                             <td>{{ $value->invoice->student->name() }}
 
                                                             </td>
-                                                            <td>{{ $value->invoice->receipt()->where('mode', 'Cash')->sum('amount') }}
+                                                            <td>£{{ auth()->user()->priceFormat($value->invoice->receipt()->where('mode', 'Cash')->sum('amount')) }}
                                                             </td>
-                                                            <td>{{ $value->invoice->receipt()->where('mode', 'Bank')->sum('amount') }}
+                                                            <td>£{{ auth()->user()->priceFormat($value->invoice->receipt()->where('mode', 'Bank')->sum('amount')) }}
                                                             </td>
-                                                            <td>{{ $value->remainingDeposit() }}</td>
+                                                            <td>£{{ auth()->user()->priceFormat($value->remainingDeposit()) }}
+                                                            </td>
                                                             <td>
                                                                 @if ($value->remainingDeposit() > 0)
                                                                     <button type="button"
