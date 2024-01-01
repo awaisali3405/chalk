@@ -299,18 +299,18 @@ class StudentsController extends Controller
             $this->generateInvoice($student, $request);
             // $subject1 = EnquirySubject::whereIn('id', $subject);
             $this->generateResource($request, $student, $subject);
-            $email = Email::find(2);
-            $email->name = str_replace("[Student's Name]", $student->first_name . " " . $student->last_name, $email->name);
-            $email->template = str_replace("[Parent/Guardian's Name]", $student->parents[0]->given_name, $email->template);
-            $email->template = str_replace("[Student's Name]", $student->name(), $email->template);
-            $email->template = str_replace("[year]", $student->year->name, $email->template);
-            $email->template = str_replace("[Start Date]", auth()->user()->ukFormat($student->admission_date), $email->template);
+            // $email = Email::find(2);
+            // $email->name = str_replace("[Student's Name]", $student->first_name . " " . $student->last_name, $email->name);
+            // $email->template = str_replace("[Parent/Guardian's Name]", $student->parents[0]->given_name, $email->template);
+            // $email->template = str_replace("[Student's Name]", $student->name(), $email->template);
+            // $email->template = str_replace("[year]", $student->year->name, $email->template);
+            // $email->template = str_replace("[Start Date]", auth()->user()->ukFormat($student->admission_date), $email->template);
 
-            // $template = str_replace("[Student's Name]", $enquiry->first_name . " " . $enquiry->last_name, $template);
-            Mail::send('notification.enquiry', ['template' => $email->template], function ($message) use ($student, $email) {
-                $message->to($student->parents[0]->email);
-                $message->subject($email->name);
-            });
+            // // $template = str_replace("[Student's Name]", $enquiry->first_name . " " . $enquiry->last_name, $template);
+            // Mail::send('notification.enquiry', ['template' => $email->template], function ($message) use ($student, $email) {
+            //     $message->to($student->parents[0]->email);
+            //     $message->subject($email->name);
+            // });
         }
 
         // $subject = EnquirySubject::whereIn('id', $data1['student_subject'])->update([
