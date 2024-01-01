@@ -452,14 +452,14 @@
                                 </tr>
                             @endforeach
                             @if (count($value->invoice) && $value->invoice[0]->refund)
-                                @if ($value->invoice[0]->refund->paid_by_bank || $value->invoice[0]->refund->paid_by_cash)
+                                @if ($value->invoice[0]->refund->refundedAmount() > 0)
                                     @php
                                         $total -= $value->invoice[0]->amount;
                                         $credit += $credit;
                                     @endphp
                                     <tr style="background-color: rgb(255, 148, 148);">
                                         <td></td>
-                                        <td>{{ auth()->user()->ukFormat($value->invoice[0]->refund->updated_at) }}</td>
+                                        <td>{{ auth()->user()->ukFormat($value->invoice[0]->refund()->lastest()->first()) }}</td>
                                         <td>Deposit Credited from Deposit Account
                                         </td>
                                         <td class="text-align-end">£0</td>
