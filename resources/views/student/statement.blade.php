@@ -266,8 +266,11 @@
                                         }
                                         if ($value1->invoiceRefund) {
                                             foreach ($value1->invoiceRefund as $key => $value23) {
-                                                $row++;
+                                                $row += 2;
                                             }
+                                        }
+                                        if ($value1->refunded_amount > 0) {
+                                            $row++;
                                         }
                                     @endphp
                                     <td rowspan="{{ $row }}" class="text-center" style="color: black;">
@@ -296,14 +299,13 @@
                                             <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
                                         </tr>
                                     @endif
-                                    @php
-                                        $total = $total + $value11->late_fee;
-                                        $debit += $value11->late_fee;
 
-                                    @endphp
                                     {{-- @endphp --}}
                                     @if ($value11->credit_discount > 0)
-                                
+                                        @php
+                                            $total = $total - $value11->credit_discount;
+                                            $credit += $value11->credit_discount;
+                                        @endphp
                                         <tr style="color: rgb(7, 116, 7);">
                                             <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
                                             <td>Credit Discount Credit</td>
@@ -311,18 +313,33 @@
                                             <td class="text-align-end">
                                                 £{{ auth()->user()->priceFormat($value11->credit_discount) }}</td>
                                             <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
-                                            @php
-                                                $total = $total - $value11->credit_discount;
-                                                $credit += $value11->credit_discount;
-                                            @endphp
                                         </tr>
                                     @endif
                                     @if ($value11->late_fee > 0)
+                                        @php
+                                            $total = $total + $value11->late_fee;
+                                            $debit += $value11->late_fee;
+
+                                        @endphp
                                         <tr style="color:rgb(146, 10, 10);">
                                             <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
                                             <td>Late Fee</td>
                                             <td class="text-align-end">
                                                 £{{ auth()->user()->priceFormat($value11->late_fee) }}</td>
+                                            <td class="text-align-end">£0</td>
+                                            <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
+                                        </tr>
+                                    @endif
+                                    @if ($value11->refunded_discount > 0)
+                                        @php
+                                            $total = $total - $value11->refunded_discount;
+                                            $credit += $value11->refunded_discount;
+                                        @endphp
+                                        <tr style="color:rgb(7, 116, 7);">
+                                            <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
+                                            <td>Refunded Discount</td>
+                                            <td class="text-align-end">
+                                                £{{ auth()->user()->priceFormat($value11->refunded_discount) }}</td>
                                             <td class="text-align-end">£0</td>
                                             <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
                                         </tr>
@@ -377,6 +394,20 @@
                                             £{{ auth()->user()->priceFormat($value12->amount) }}
                                         </td>
                                         <td class="text-align-end">£0</td>
+                                        <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
+                                    </tr>
+                                    @php
+                                        $total = $total - $value12->amount;
+                                        $credit += $value12->amount;
+                                    @endphp
+                                    <tr style="color: rgb(146, 10, 10);">
+                                        <td>{{ auth()->user()->ukFormat($value12->date) }}</td>
+                                        <td>{{ $value12->description }} {{ $value12->mode }}
+                                            Credit </td>
+                                        <td class="text-align-end">£0</td>
+                                        <td class="text-align-end">
+                                            £{{ auth()->user()->priceFormat($value12->amount) }}
+                                        </td>
                                         <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
                                     </tr>
                                 @endforeach
