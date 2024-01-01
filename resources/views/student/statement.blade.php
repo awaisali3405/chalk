@@ -452,24 +452,24 @@
                                 </tr>
                             @endforeach
                             @if (count($value->invoice) && $value->invoice[0]->refund)
-                                @if ($value->invoice[0]->refund->refundedAmount() > 0)
+                                @if ($value->depositInvoice()->refund->refundedAmount() > 0)
                                     @php
-                                        $total -= $value->invoice[0]->amount;
+                                        $total -= $value->depositInvoice()->amount;
                                         $credit += $credit;
                                     @endphp
                                     <tr style="background-color: rgb(255, 148, 148);">
                                         <td></td>
-                                        <td>{{ auth()->user()->ukFormat($value->invoice[0]->refund()->lastest()->first()) }}</td>
+                                        <td>{{ auth()->user()->ukFormat($value->depositInvoice()->refund()->lastest()->first()) }}</td>
                                         <td>Deposit Credited from Deposit Account
                                         </td>
                                         <td class="text-align-end">£0</td>
                                         <td class="text-align-end">
-                                            £{{ auth()->user()->priceFormat($value->invoice[0]->amount) }}
+                                            £{{ auth()->user()->priceFormat($value->depositInvoice()->amount) }}
                                         </td>
                                         <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
                                     </tr>
                                     @php
-                                        $total += $value->invoice[0]->amount;
+                                        $total += $value->depositInvoice()->amount;
                                         $debit += $debit;
                                     @endphp
 
