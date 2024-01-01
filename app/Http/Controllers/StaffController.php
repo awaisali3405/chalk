@@ -108,11 +108,16 @@ class StaffController extends Controller
     public function payStore(Request $request)
     {
         $data = $request->except('_token');
+        $staff = Staff::find($data['staff_id']);
+
         if ($data['total'] <= 0) {
             return redirect()->back()->with('error', 'Amount Must be greater than zero.');
         }
-        $data['from_date'] =   Carbon::createFromFormat('m/d/Y', $request->from_date)->format('Y-m-d');
-        $data['to_date'] = Carbon::createFromFormat('m/d/Y', $request->to_date)->format('Y-m-d');
+        if ($staff->salary_type == 'Monthly') {
+
+            $data['from_date'] =   Carbon::createFromFormat('m/d/Y', $request->from_date)->format('Y-m-d');
+            $data['to_date'] = Carbon::createFromFormat('m/d/Y', $request->to_date)->format('Y-m-d');
+        }
         $data['academic_year_id'] = auth()->user()->session()->id;
         $staff = Staff::find($data['staff_id']);
         $data['branch_id'] = $staff->branch_id;

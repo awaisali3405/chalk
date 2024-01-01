@@ -464,6 +464,14 @@ class User extends Authenticatable
         }
         return $total;
     }
+    public function invoiceRefund($branch, $academicYear)
+    {
+        $refund =  InvoiceRefunded::where('academic_year_id', $academicYear);
+        if ($branch != -1) {
+            $refund = $refund->where('branch_id', $branch);
+        }
+        return $refund->sum('amount');
+    }
     // Refunded End
     // Expense
     public function expense()

@@ -814,10 +814,10 @@ class StudentsController extends Controller
                     'date' => Carbon::now(),
                     'academic_year_id' => auth()->user()->session()->id
                 ]);
+                $value->update([
+                    'is_paid' => true
+                ]);
             }
-            $value->update([
-                'is_paid' => true
-            ]);
         }
         // dd($invoice);
         $student->update([

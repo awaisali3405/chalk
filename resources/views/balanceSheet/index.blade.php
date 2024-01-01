@@ -103,8 +103,10 @@
                                                     <td class="text-left">
                                                         £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->transferDue(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
                                                     </td>
-                                                    <td class="text-left"></td>
+                                                    <td class="text-left">Refunded Invoice</td>
                                                     <td class="text-left">
+
+                                                        £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->invoiceRefund(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                     </td>
                                                 </tr>

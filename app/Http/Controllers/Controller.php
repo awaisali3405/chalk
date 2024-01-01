@@ -85,4 +85,7 @@ class Controller extends BaseController
     {
         return Carbon::parse($date)->format('d/m/Y');
     }
+    public function academicYear(){
+        return AcademicCalender::where('active',true)->first();
+    }
 }

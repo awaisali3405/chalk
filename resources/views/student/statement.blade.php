@@ -210,7 +210,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if ($value->debitBroughtForward()['balance'])
+                            {{-- @if ($value->debitBroughtForward()['balance'])
                                 <tr style="color: rgb(7, 116, 7);">
                                     <td></td>
                                     <td></td>
@@ -224,7 +224,7 @@
                                         £{{ auth()->user()->priceFormat($value->debitBroughtForward()['balance']) }}
                                     </td>
                                 </tr>
-                            @endif
+                            @endif --}}
                             @php
                                 $grandTotal = 0;
                                 $debit = 0;
@@ -257,11 +257,16 @@
                                                     $row++;
                                                 }
                                                 if ($value1Recipt->mode == 'Bank_Wallet') {
-                                                    $row++;
+                                                    $row += 2;
                                                 }
                                                 if ($value1Recipt->mode == 'Cash_Wallet') {
-                                                    $row++;
+                                                    $row += 2;
                                                 }
+                                            }
+                                        }
+                                        if ($value1->invoiceRefund) {
+                                            foreach ($value1->invoiceRefund as $key => $value23) {
+                                                $row++;
                                             }
                                         }
                                     @endphp
@@ -298,7 +303,7 @@
                                     @endphp
                                     {{-- @endphp --}}
                                     @if ($value11->credit_discount > 0)
-                                        <tr style="color:rgb(146, 10, 10);">
+                                        {{-- <tr style="color:rgb(146, 10, 10);">
 
                                             <td>{{ $value11->date }}</td>
                                             <td>Credit Discount Debit</td>
@@ -310,7 +315,7 @@
                                         @php
                                             $total = $total + $value11->credit_discount;
                                             $debit += $value11->credit_discount;
-                                        @endphp
+                                        @endphp --}}
                                         <tr style="color: rgb(7, 116, 7);">
                                             <td>{{ $value11->date }}</td>
                                             <td>Credit Discount Credit</td>
@@ -371,6 +376,22 @@
 
                                     @endphp
                                 @endforeach
+                                @foreach ($value1->invoiceRefund as $value12)
+                                    @php
+                                        $total = $total + $value12->amount;
+                                        $debit += $value12->amount;
+                                    @endphp
+                                    <tr style="color: rgb(146, 10, 10);">
+                                        <td>{{ auth()->user()->ukFormat($value12->date) }}</td>
+                                        <td>{{ $value12->description }} {{ $value12->mode }}
+                                            Debit </td>
+                                        <td class="text-align-end">
+                                            £{{ auth()->user()->priceFormat($value12->amount) }}
+                                        </td>
+                                        <td class="text-align-end">£0</td>
+                                        <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
+                                    </tr>
+                                @endforeach
                             @endforeach
 
                             {{-- @foreach ($value->invoice as $value2)
@@ -394,6 +415,7 @@
                                     @endif
                                 @endforeach
                             @endforeach --}}
+                            {{-- @dd(count($value->wallet)); --}}
                             @foreach ($value->wallet as $value1)
                                 @php
                                     $total = $total - $value1->amount;

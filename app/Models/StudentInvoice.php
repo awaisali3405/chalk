@@ -23,8 +23,17 @@ class StudentInvoice extends Model
         'code',
         'date',
         'discount',
-        'description'
+        'description',
+        'refunded_discount'
     ];
+    public function invoiceRefund()
+    {
+        return $this->hasMany(StudentInvoiceRefund::class, 'invoice_id');
+    }
+    public function refundable()
+    {
+        return $this->paidAmount() - $this->invoiceRefund->sum('amount');
+    }
     public function debitBroughtForward()
     {
         $total = 0;
@@ -138,17 +147,17 @@ class StudentInvoice extends Model
     }
     public function status()
     {
-        return $this->is_paid ? ($this->refunded() ? 'Refunded' : 'Paid') : 'Un Paid';
+        return $this->is_paid ? ($this->refunded() == 'Fully Refunded' ? 'Refunded' : ($this->refunded() == 'Partially Refunded' ?  'Partially Refunded' : 'Paid')) : 'Un Paid';
     }
     public function refunded()
     {
-        if ($this->refund) {
-
-            return $this->refund->where('paid_by_bank', true)->orWhere('paid_by_cash', true)->count();
-        } else {
-            return 0;
-        }
+        // dd($this->invoiceRefund);
+        $refundAmount = $this->invoiceRefund->sum('amount');
+        $paid = $this->paidAmount();
+        $due = $paid - $refundAmount;
+        return $due > 0 ? 'Partially Refunded' : ($due == $paid ? 'Fully Refunded' : 'paid');
     }
+
     public function paidRefund()
     {
         return $this->hasOne(Refund::class, 'invoice_id')->where('paid_by_bank', true)->orWhere('paid_by_cash', true);

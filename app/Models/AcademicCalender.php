@@ -60,4 +60,8 @@ class AcademicCalender extends Model
     {
         return $this->hasMany(StaffLoan::class, 'academic_year_id');
     }
+    public function invoiceRefund()
+    {
+        return $this->hasMany(StudentInvoiceRefund::class, 'academic_year_id');
+    }
 }

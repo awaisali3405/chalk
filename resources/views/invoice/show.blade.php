@@ -58,8 +58,8 @@
                                                 <th>Type</th>
                                                 <th>Amount</th>
                                                 <th>Vat%</th>
-                                                <th>Discount</th>
-                                                <th>Late Fee</th>
+                                                {{-- <th>Discount</th>
+                                                <th>Late Fee</th> --}}
                                                 <th>Paid Amount</th>
                                                 <th>Payable</th>
                                                 <th>Status</th>
@@ -82,14 +82,14 @@
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ $value->code }}</td>
-                                                    <td>{{ auth()->user()->ukFormat($value->created_at) }}</td>
+                                                    <td>{{ auth()->user()->ukFormat($value->date) }}</td>
                                                     <td>{{ $value->type == 'Refundable' ? 'Deposit' : ($value->type == 'Resource Fee' ? 'Resources' : $value->type) }}
                                                     </td>
                                                     <td>£{{ $value->amount }}</td>
                                                     <td>{{ auth()->user()->priceFormat($value->tax) }}%</td>
-                                                    <td>£{{ $value->receipt->sum('discount') + $value->receipt->sum('credit_discount') }}
-                                                    </td>
-                                                    <td>£{{ $value->receipt->sum('late_fee') }}</td>
+                                                    {{-- <td>£{{ $value->receipt->sum('discount') + $value->receipt->sum('credit_discount') }}
+                                                    </td> --}}
+                                                    {{-- <td>£{{ $value->receipt->sum('late_fee') }}</td> --}}
                                                     <td>£{{ $value->receipt->sum('amount') }}
                                                     </td>
                                                     <td>£{{ $value->remainingAmount() }}
@@ -112,6 +112,13 @@
                                                                 @if (!$value->is_paid)
                                                                     <a class="dropdown-item"
                                                                         href="{{ route('receipt.show', $value->id) }}">Recieve</a>
+                                                                    @if ($value->receipt->count() > 0)
+                                                                        <a class="dropdown-item"
+                                                                            href="{{ route('invoice.refund.index', $value->id) }}">Refund</a>
+                                                                    @endif
+                                                                @elseif ($value->receipt->count() > 0)
+                                                                    <a class="dropdown-item"
+                                                                        href="{{ route('invoice.refund.index', $value->id) }}">Refund</a>
                                                                 @endif
                                                                 <a class="dropdown-item btn-event"
                                                                     href="{{ route('invoice.print', $value->id) }}"
@@ -149,8 +156,8 @@
                                                 <th></th>
                                                 <th>£{{ $total }}</th>
                                                 <th></th>
-                                                <th></th>
-                                                <th></th>
+                                                {{-- <th></th>
+                                                <th></th> --}}
                                                 <th>£{{ $total_paid }}</th>
                                                 <th>£{{ $total_remaining }}</th>
                                                 <th></th>

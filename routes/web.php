@@ -14,6 +14,7 @@ use App\Http\Controllers\ExpenseAccountTypeController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\GenerateSalaryController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\InvoiceRefundController;
 use App\Http\Controllers\KeyStageController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\NotificationController;
@@ -100,6 +101,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('invoice/due/payment', [InvoiceController::class, 'dueStudent'])->name('invoice.due');
     Route::post('invoice/store/book', [InvoiceController::class, 'bookStore'])->name('invoice.book.store');
     Route::resource('receipt', ReceiptController::class);
+
     // Product
     Route::resource('product', ProductController::class);
     Route::get('/product/transfer/{id}', [ProductController::class, 'transfer'])->name('product.transfer');
@@ -173,6 +175,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('staffRequest', StaffRequestController::class);
     // Staff Report
     Route::get('staff/report', [StaffController::class, 'report'])->name('staff.report');
+
+
+    // Invoice Refund
+    Route::get('invoice/refund/{id}', [InvoiceRefundController::class, 'create'])->name('invoice.refund.index');
+    Route::post('invoice/refund/{id}/store',[InvoiceRefundController::class,'store'])->name('invoice.refund.store');
 });
 
 Route::get('test', [EnquiryController::class, 'test'])->name('test');

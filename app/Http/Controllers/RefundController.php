@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CashFlow;
 use App\Models\InvoiceRefunded;
 use App\Models\Refund;
+use App\Models\StudentInvoice;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -105,7 +106,30 @@ class RefundController extends Controller
         $data = $request->except('_token');
 
         $data['description'] = "Amount Refunded by";
-        InvoiceRefunded::create($data);
+        $refund = InvoiceRefunded::create($data);
+        CashFlow::create([
+            'date' => $data['date'],
+            'branch_id' => $refund->refund->branch_id,
+            'description' => $refund->refund->invoice->student->name() . " (" . auth()->user()->session()->period() . ") Refund Transfer",
+            'mode' => $data['mode'],
+            'type' => "Refund",
+            'out' => $refund->amount,
+            'academic_year_id' => auth()->user()->session()->id
+        ]);
+        // CashFlow::create([
+        //     'date' => $data['date'],
+        //     'branch_id' => $refund->refund->branch_id,
+        //     'description' => $refund->refund->invoice->student->name() . " (" . auth()->user()->session()->period() . ") Refund Transfer",
+        //     'mode' => $data['mode'],
+        //     'type' => "Refund",
+        //     'in' => $refund->amount,
+        //     'academic_year_id' => auth()->user()->session()->id
+        // ]);
         return redirect()->route('refund.index')->with('success', 'Refunded Successfully.');
+    }
+    public function invoiceRefund($id)
+    {
+        $invoice = StudentInvoice::find($id);
+        return view('invoice.refund.index', compact('invoice'));
     }
 }
