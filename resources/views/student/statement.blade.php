@@ -246,7 +246,7 @@
                                                     $row++;
                                                 }
                                                 if ($value1Recipt->discount > 0) {
-                                                    $row += 2;
+                                                    $row++;
                                                     // dd($row);
                                                 }
                                                 if ($value1Recipt->credit_discount > 0) {
