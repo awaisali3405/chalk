@@ -466,7 +466,7 @@ class User extends Authenticatable
     }
     public function invoiceRefund($branch, $academicYear)
     {
-        $refund =  InvoiceRefunded::where('academic_year_id', $academicYear);
+        $refund =  StudentInvoiceRefund::where('academic_year_id', $academicYear);
         if ($branch != -1) {
             $refund = $refund->where('branch_id', $branch);
         }
