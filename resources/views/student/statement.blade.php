@@ -288,7 +288,7 @@
                                     @if ($value11->discount > 0)
                                         <tr style="color: rgb(7, 116, 7);">
 
-                                            <td>{{ $value11->date }}</td>
+                                            <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
                                             <td>Discount</td>
                                             <td class="text-align-end">£0</td>
                                             <td class="text-align-end">
@@ -317,7 +317,7 @@
                                             $debit += $value11->credit_discount;
                                         @endphp --}}
                                         <tr style="color: rgb(7, 116, 7);">
-                                            <td>{{ $value11->date }}</td>
+                                            <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
                                             <td>Credit Discount Credit</td>
                                             <td class="text-align-end">£0</td>
                                             <td class="text-align-end">
