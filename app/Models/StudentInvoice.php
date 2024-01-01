@@ -121,7 +121,7 @@ class StudentInvoice extends Model
     }
     public function remainingAmount()
     {
-        return ($this->amount - (($this->receipt->sum('discount') + $this->receipt->sum('credit_discount')) - $this->receipt->sum('late_fee'))) - $this->receipt->sum('amount') >= 0 ? ($this->amount - (($this->receipt->sum('discount') + $this->receipt->sum('credit_discount')) - $this->receipt->sum('late_fee'))) - $this->receipt->sum('amount') : 0;
+        return ($this->amount - (($this->receipt->sum('discount') + $this->receipt->sum('credit_discount') - $this->refunded_discount) - $this->receipt->sum('late_fee'))) - $this->receipt->sum('amount') >= 0 ? ($this->amount - (($this->receipt->sum('discount') + $this->receipt->sum('credit_discount')) - $this->receipt->sum('late_fee'))) - $this->receipt->sum('amount') : 0;
     }
     public function totalAmount()
     {

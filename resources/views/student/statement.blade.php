@@ -389,7 +389,7 @@
                                     <tr style="background-color: rgb(241, 231, 155);">
                                         <td>{{ auth()->user()->ukFormat($value12->date) }}</td>
                                         <td>{{ $value12->description }} {{ $value12->mode }}
-                                            Debit </td>
+                                        </td>
                                         <td class="text-align-end">
                                             £{{ auth()->user()->priceFormat($value12->amount) }}
                                         </td>
@@ -402,8 +402,7 @@
                                     @endphp
                                     <tr style="background-color: rgb(241, 231, 155);">
                                         <td>{{ auth()->user()->ukFormat($value12->date) }}</td>
-                                        <td>{{ $value12->description }} {{ $value12->mode }}
-                                            Credit </td>
+                                        <td>{{ $value12->description }} {{ $value12->mode }} </td>
                                         <td class="text-align-end">£0</td>
                                         <td class="text-align-end">
                                             £{{ auth()->user()->priceFormat($value12->amount) }}
