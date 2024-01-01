@@ -77,7 +77,7 @@
                                                 @php
                                                     $total += $value->amount;
                                                     $total_paid += $value->receipt->sum('amount');
-                                                    $total_remaining += $value->remainigAmount();
+                                                    $total_remaining += $value->remainingAmount();
                                                 @endphp
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
