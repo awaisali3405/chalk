@@ -52,7 +52,7 @@
                                                                 £{{ auth()->user()->priceFormat($value->remainingDeposit()) }}
                                                             </td>
                                                             <td>
-                                                                {{ auth()->user()->ukFormat($value->receipt()->latest()->first()->date) }}
+                                                                {{ auth()->user()->ukFormat($value->invoice->receipt()->latest()->first()->date) }}
                                                             </td>
                                                             <td>
                                                                 @if ($value->remainingDeposit() > 0)
