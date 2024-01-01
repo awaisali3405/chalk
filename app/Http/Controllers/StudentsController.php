@@ -833,21 +833,24 @@ class StudentsController extends Controller
 
             'fee' => 0,
         ]);
-        $invoice =  StudentInvoice::create(
-            [
-                'student_id' => $student->id,
-                'amount' => $total,
-                'type' => "Transferred Invoice",
-                'from_date' => $academicYear->start_date,
-                'to_date' => $academicYear->end_date,
-                'branch_id' => $student->branch_id,
-                'year_id' => $student->year_id,
-                'academic_year_id' => $academicYear->id,
-                'description' => "Transferred form year " . $academicYear->InvoiceYearCode(),
-                'date' => $academicYear->start_date,
-                'discount' => $student->fee_discount
-            ]
-        );
+        if ($total > 0) {
+
+            $invoice =  StudentInvoice::create(
+                [
+                    'student_id' => $student->id,
+                    'amount' => $total,
+                    'type' => "Transferred Invoice",
+                    'from_date' => $academicYear->start_date,
+                    'to_date' => $academicYear->end_date,
+                    'branch_id' => $student->branch_id,
+                    'year_id' => $student->year_id,
+                    'academic_year_id' => $academicYear->id,
+                    'description' => "Transferred form year " . $academicYear->InvoiceYearCode(),
+                    'date' => $academicYear->start_date,
+                    'discount' => $student->fee_discount
+                ]
+            );
+        }
         if ($student->cash_balance > 0) {
 
             Wallet::create([
