@@ -849,6 +849,9 @@ class StudentsController extends Controller
                     'discount' => $student->fee_discount
                 ]
             );
+            $invoice->update([
+                'code' => "TR00" . $invoice->id . '/' . $academicYear->InvoiceYearCode(),
+            ]);
         }
         if ($student->cash_balance > 0) {
 
@@ -878,9 +881,7 @@ class StudentsController extends Controller
                 'academic_year_id' => $academicYear->id
             ]);
         }
-        $invoice->update([
-            'code' => "TR00" . $invoice->id . '/' . $academicYear->InvoiceYearCode(),
-        ]);
+
         $rollNo =  $this->generatePromotionRollNo($student, $request);
         StudentPromotionDetail::create([
             'student_id' => $student->id,
