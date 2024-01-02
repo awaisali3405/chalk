@@ -19,15 +19,6 @@
                     </ul>
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-headphones"></i>
-                        <span class="nav-text">Wallet</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('wallet.index') }}">All Wallet</a></li>
-                        <li><a href="{{ route('wallet.create') }}">Add Wallet</a></li>
-                    </ul>
-                </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-user"></i>
                         <span class="nav-text">Parent</span>
                     </a>
@@ -36,28 +27,38 @@
                         <li><a href="{{ route('parent.create') }}">Add Parent</a></li>
                     </ul>
                 </li>
-            @endif
-            @if (auth()->user()->role->name == 'parent' ||
-                    auth()->user()->role->name == 'admin' ||
-                    auth()->user()->role->name == 'super admin')
+                @if (auth()->user()->role->name == 'parent' ||
+                        auth()->user()->role->name == 'admin' ||
+                        auth()->user()->role->name == 'super admin')
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="la la-graduation-cap"></i>
+                            <span class="nav-text">Student</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{ route('student.index') }}">All Student</a></li>
+                            <li><a href="{{ route('student.deactive') }}">DeActive Student</a></li>
+                            <li><a href="{{ route('student.create') }}">Add Student</a></li>
+                            @if (auth()->user()->role->name != 'parent')
+                                <li><a href="{{ route('student.request') }}">Student Request
+                                        ({{ auth()->user()->studentRequest()->count() }})</a></li>
+                                <li><a href="{{ route('student.disable') }}">Disabled Student
+                                        ({{ auth()->user()->studentDisable()->count() }})</a></li>
+                                <li><a href="{{ route('student.reference') }}">Reference Student</a></li>
+                            @endif
+                        </ul>
+                    </li>
+                @endif
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-graduation-cap"></i>
-                        <span class="nav-text">Student</span>
+                        <i class="la la-headphones"></i>
+                        <span class="nav-text">Wallet</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="{{ route('student.index') }}">All Student</a></li>
-                        <li><a href="{{ route('student.deactive') }}">DeActive Student</a></li>
-                        <li><a href="{{ route('student.create') }}">Add Student</a></li>
-                        @if (auth()->user()->role->name != 'parent')
-                            <li><a href="{{ route('student.request') }}">Student Request
-                                    ({{ auth()->user()->studentRequest()->count() }})</a></li>
-                            <li><a href="{{ route('student.disable') }}">Disabled Student
-                                    ({{ auth()->user()->studentDisable()->count() }})</a></li>
-                            <li><a href="{{ route('student.reference') }}">Reference Student</a></li>
-                        @endif
+                        <li><a href="{{ route('wallet.index') }}">All Wallet</a></li>
+                        <li><a href="{{ route('wallet.create') }}">Add Wallet</a></li>
                     </ul>
                 </li>
             @endif
+
             @if (auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'super admin')
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-home"></i>
@@ -157,7 +158,6 @@
                         <li><a href="{{ route('cashFlow.index') }}">Company Statement</a></li>
                         <li><a href="{{ route('taxFlow.index') }}">VAT Statement</a></li>
                         <li><a href="{{ route('loan.flow') }}">Staff Loan Statement</a></li>
-                        {{-- <li><a href="{{ route('branch.create') }}"></a></li> --}}
                     </ul>
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">

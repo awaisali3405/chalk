@@ -675,7 +675,7 @@ class User extends Authenticatable
         if ($branch != -1) {
             $wallet = $wallet->where('branch_id', $branch);
         }
-        return $wallet->sum('bank_balance');
+        return $wallet->get()->sum('bank_balance');
     }
     public function studentCashWallet($branch, $academicYear)
     {
@@ -683,7 +683,7 @@ class User extends Authenticatable
         if ($branch != -1) {
             $wallet = $wallet->where('branch_id', $branch);
         }
-        return $wallet->sum('cash_balance');
+        return $wallet->get()->sum('cash_balance');
     }
     public function studentWallet($branch, $academicYear)
     {

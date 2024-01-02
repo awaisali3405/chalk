@@ -107,7 +107,7 @@
                                                 <b>Student Year</b>
                                             </td>
                                             <td>
-                                                <b>{{ $invoice->student->currentYear()->name }}
+                                                <b>{{ $invoice->year->name }}
                                                 </b>
                                             </td>
                                         </tr>
@@ -171,7 +171,7 @@
                 @include('invoice.component.invoice')
                 <div class="row pt-3">
                     <div class="col-12">
-                        <b>Term's & Condition</b>
+                        <b>Terms & Condition</b>
                         <p class="justify-end " style="font-size: x-small;">Once you pay your deposit, you have agreed
                             to start your course with
                             Chalk n Duster. If under any circumstances you change your mind or you're not able to
