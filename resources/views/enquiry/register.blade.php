@@ -622,7 +622,7 @@
                                                         </option>
                                                         @foreach ($parent as $value)
                                                             <option value="{{ $value->id }}">
-                                                                {{ $value->given_name }}
+                                                                {{ $value->name() }}
                                                             </option>
                                                         @endforeach
                                                     </select>
