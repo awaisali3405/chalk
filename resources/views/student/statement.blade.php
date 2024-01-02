@@ -452,7 +452,9 @@
                                 </tr>
                             @endforeach
                             @if (count($value->invoice) && $value->depositInvoice()->refund)
-                                @if ($value->depositInvoice()->refund->refundedAmount() > 0)
+                                @if (
+                                    $value->depositInvoice()->refund->refundedAmount() > 0 &&
+                                        $value->depositInvoice()->refund->refunded()->where('transfer_invoice_id', null)->latest()->first())
                                     @php
                                         $total -= $value
                                             ->depositInvoice()

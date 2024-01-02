@@ -52,7 +52,7 @@ class ReceiptController extends Controller
                 $data['wallet_amount'] = $data['add_to_wallet'];
             }
             if ($data['deposit']) {
-                $data['description'] = 'Transfer Refunded Amount from ' . $student->depositInvoice()->code . ' by ';
+                $data['description'] = 'Transfer Deposit Amount from ' . $student->depositInvoice()->code . ' by ';
             }
             $receipt = StudentInvoiceReceipt::create($data);
             if (!str_contains($data['mode'], 'Wallet')) {
@@ -116,7 +116,7 @@ class ReceiptController extends Controller
                     'fixed' => 1,
                     'date' => $data['date'],
                     'mode' => $data['mode'],
-                    
+
                     'academic_year_id' => auth()->user()->session()->id
                 ]);
             }
