@@ -943,7 +943,9 @@ class StudentsController extends Controller
         foreach ($invoice as $value) {
             if (count($value->receipt) == 0 && $value->is_paid == false) {
                 $value->update([
-                    'academic_year_id' => $academicYear->id
+                    'academic_year_id' => $academicYear->id,
+                    'branch_id' => $branch->id,
+                    'tax'=>$branch->tax
                 ]);
             } elseif ($value->remainingAmount() > 0) {
                 $total += $value->remainingAmount();
@@ -964,15 +966,16 @@ class StudentsController extends Controller
                 [
                     'student_id' => $student->id,
                     'amount' => $total,
-                    'type' => "Transferred Invoice",
+                    'type' => "Branch Transferred Invoice",
                     'from_date' => $academicYear->start_date,
                     'to_date' => $academicYear->end_date,
-                    'branch_id' => $student->branch_id,
+                    'branch_id' => $request->branch_id,
                     'year_id' => $student->year_id,
                     'academic_year_id' => $academicYear->id,
                     'description' => "Transferred form Branch " . $branch->name,
                     'date' => $academicYear->start_date,
-                    'discount' => $student->fee_discount
+                    'discount' => $student->fee_discount,
+
                 ]
             );
             $invoice->update([

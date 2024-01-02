@@ -205,7 +205,7 @@ class User extends Authenticatable
 
     public function feeDue($branch, $academicYear)
     {
-        $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Monthly Fee', 'Weekly Fee', 'Addition Invoice']);
+        $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Monthly Fee', 'Weekly Fee', 'Addition Invoice', 'Branch Transferred Invoice']);
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
         $refunded_discount = $invoice->get()->sum('refunded_discount');
@@ -218,7 +218,7 @@ class User extends Authenticatable
     }
     public function feeReceived($branch, $academicYear)
     {
-        $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Monthly Fee', 'Weekly Fee', 'Addition Invoice', "Transferred Invoice"]);
+        $invoice = $this->invoice($branch, $academicYear)->whereIn('type', ['Monthly Fee', 'Weekly Fee', 'Addition Invoice', "Transferred Invoice", "Branch Transferred Invoice"]);
         $invoice_id = $invoice->pluck('id');
         $invoice_sum = $invoice->get()->sum('amount');
         $invoiceReceived = $this->receipt($invoice_id)->where('academic_year_id', $academicYear)->get();
