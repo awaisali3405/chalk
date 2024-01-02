@@ -24,7 +24,10 @@ class EnquirySubject extends Model
         'no_hr_weekly',
         'amount',
         'year_id',
-        'academic_year_id', 'invoice_id', 'resource_invoice_id'
+        'academic_year_id',
+        'invoice_id',
+        'resource_invoice_id',
+        'active'
     ];
     public function resourceInvoice()
     {

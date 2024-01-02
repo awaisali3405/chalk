@@ -41,4 +41,15 @@ class EnquirySubjectController extends Controller
             'message' => 'success', 'data' => $enquirySubject->subject, 'enquiry' => $enquirySubject
         ]);
     }
+    public function deactivate($id)
+    {
+        $enquirySubject = EnquirySubject::whereId($id)->first();
+
+        $enquirySubject->update([
+            'active' => false
+        ]);
+        return response()->json([
+            'message' => 'success', 'data' => $enquirySubject->subject, 'enquiry' => $enquirySubject
+        ]);
+    }
 }

@@ -135,8 +135,7 @@
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Date of Birth</label>
-                                                    <input type="date"
-                                                        class="form-control" name="dob"
+                                                    <input type="date" class="form-control" name="dob"
                                                         value="{{ old('dob', $student->dob) }}" required>
                                                 </div>
                                             </div>
@@ -437,6 +436,17 @@
                                                                                             </td>
 
                                                                                             <td>
+                                                                                                @if ($value->active)
+                                                                                                    <input type="hidden"
+                                                                                                        value="{{ $value->id }}"
+                                                                                                        class="id"
+                                                                                                        name="enquiry_subject1[]">
+                                                                                                    <a class="deactivate-subject"
+                                                                                                        href="javascript:void(0);"><i
+                                                                                                            class=" fa fa-close color-danger"></i></a>
+                                                                                                @else
+                                                                                                Deactivated
+                                                                                                @endif
                                                                                             </td>
                                                                                         </tr>
                                                                                     @endforeach
@@ -474,8 +484,8 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="form-label">Branch</label>
-                                                        <select class="form-control branch_student" name="branch_id" readonly
-                                                            required>
+                                                        <select class="form-control branch_student" name="branch_id"
+                                                            readonly required>
                                                             <option value="">Select Branch</option>
                                                             @foreach ($branch as $value)
                                                                 <option value="{{ $value->id }}"
@@ -657,8 +667,7 @@
                                                                 <div class="input-group mb-2">
 
 
-                                                                    <input type="date"
-                                                                        class="form-control"
+                                                                    <input type="date" class="form-control"
                                                                         value="{{ $student->promotion_date }}"
                                                                         name="admission_date"
                                                                         @if (!$student->is_active) required  @else readonly @endif>

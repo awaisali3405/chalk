@@ -154,6 +154,7 @@ class EnquiryController extends Controller
         Enquiry::find($id)->delete();
         return redirect()->route('enquiry.index')->with('success', 'Enquiry Deleted Successfully');
     }
+  
     public function note($id)
     {
         $enquiry = Enquiry::find($id);

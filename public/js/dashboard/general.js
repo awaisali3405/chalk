@@ -229,6 +229,52 @@ $(document).on("click", ".delete-subject", function () {
 
     $(this).parent().parent().remove()
 });
+$(document).on("click", ".deactivate-subject", function () {
+    // $('.delete-subject').on('click', function() {
+    id = $(this).parent().children('.id').val();
+    // $(this).parent().parent().remove()
+
+    console.log(id, $(this).parent().parent());
+    $.ajax({
+        method: "GET",
+        'url': `/api/enquiry/subject/deactivate/${id}`,
+        success: function (success) {
+            // if (success.message == 'success') {
+            console.log(success, $(this).parent().parent());
+            // }
+            price = parseFloat($('#annual_resource_fee').val() - +success.data.rate).toFixed(2)
+            if (price && price < 0) {
+
+                $('#annual_resource_fee').val(0)
+            } else {
+                $('#annual_resource_fee').val(price)
+            }
+            e_price = parseFloat($('#exercise_book').val() - +success.data.book_rate).toFixed(2)
+            console.log(e_price);
+            if (e_price && e_price < 0) {
+
+                $('#exercise_book').val(0)
+            } else {
+
+                $('#exercise_book').val(e_price)
+            }
+            // total = parseFloat($('.fee-total').val());
+            discount = parseFloat($('#fee_discount').val()).toFixed(2);
+            total = parseFloat($('.fee').val()).toFixed(2);
+            $('.fee').val(parseFloat(total - +success.enquiry.amount).toFixed(2))
+            $('.fee-total').val(parseFloat((total - parseFloat(success.enquiry.amount)) -
+                discount).toFixed(2))
+            total = parseFloat($('.fee-total').val()).toFixed(2)
+            fee_tax = calculateFeeTax(total, $('.tax').val())
+            $('.fee-tax').val(fee_tax);
+            monthly = parseFloat((parseFloat($('.fee-total').val()) * 52) / 12).toFixed(2);
+            $('.monthly-fee').val(monthly)
+
+        }
+    })
+
+    $(this).parent().parent().remove()
+});
 $(document).on("click", ".remove-parent", function () {
 
 
