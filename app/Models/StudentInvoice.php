@@ -147,7 +147,7 @@ class StudentInvoice extends Model
     }
     public function status()
     {
-        return $this->is_paid ? ($this->refunded() == 'Fully Refunded' ? 'Refunded' : ($this->refunded() == 'Partially Refunded' ?  'Partially Refunded' : 'Paid')) : 'Un Paid';
+        return $this->is_paid ? ($this->refunded() == 'Fully Refunded' ? 'Paid' : ($this->refunded() == 'Partially Refunded' ?  'Partially Refunded' : 'Paid')) : 'Un Paid';
     }
     public function refunded()
     {
