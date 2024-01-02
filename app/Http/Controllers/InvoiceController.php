@@ -203,7 +203,7 @@ class InvoiceController extends Controller
             foreach ($request->student as $value) {
                 $student = Student::find($value);
                 if ($student->payment_period == "Weekly") {
-                    $amount = (($student->yearSubject->sum('amount') - $student->fee_discount) * $weeks);
+                    $amount = (($student->yearSubject->where('active', true)->sum('amount') - $student->fee_discount) * $weeks);
                     // dd($amount, $weeks, $to, $from);
                     if ($amount > 0) {
                         $invoice = StudentInvoice::create([
@@ -227,9 +227,9 @@ class InvoiceController extends Controller
                     }
                 } else {
                     if (str_contains($student->year->name, "11")) {
-                        $amount = ((($student->yearSubject->sum('amount')) * 40 / 9) * $months) - $student->fee_discount;
+                        $amount = ((($student->yearSubject->where('active', true)->sum('amount')) * 40 / 9) * $months) - $student->fee_discount;
                     } else {
-                        $amount = ((($student->yearSubject->sum('amount')) * 52 / 12) * $months) - $student->fee_discount;
+                        $amount = ((($student->yearSubject->where('active', true)->sum('amount')) * 52 / 12) * $months) - $student->fee_discount;
                     }
                     // dd($amount, $months, ($student->yearSubject->sum('amount')));
                     if ($amount > 0) {
