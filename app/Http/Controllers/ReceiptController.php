@@ -107,6 +107,18 @@ class ReceiptController extends Controller
                 $receipt->invoice->student()->update([
                     'bank_balance' => $receipt->invoice->student->bank_balance - $data['amount']
                 ]);
+                $wallet = Wallet::create([
+                    'branch_id' => $receipt->invoice->student->branch_id,
+                    'year_id' => $receipt->invoice->student->currentYear()->id,
+                    'student_id' => $receipt->invoice->student_id,
+                    'description' => "Amount Credited to ",
+                    'amount' => $data['add_to_wallet'],
+                    'fixed' => 1,
+                    'date' => $data['date'],
+                    'mode' => $data['mode'],
+                    
+                    'academic_year_id' => auth()->user()->session()->id
+                ]);
             }
             if ($data['credit_note']) {
                 $receipt->invoice->student()->update([

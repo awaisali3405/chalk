@@ -249,7 +249,7 @@ class InvoiceController extends Controller
                         $invoice->update([
                             'code' => "F00" . $invoice->id . '/' . auth()->user()->session()->InvoiceYearCode()
                         ]);
-                        $invoice->invoiceSubject()->sync($student->yearSubject()->pluck('id')->toArray());
+                        $invoice->invoiceSubject()->sync($student->yearSubject()->where('active', true)->pluck('id')->toArray());
                     }
                 }
             }
@@ -291,7 +291,7 @@ class InvoiceController extends Controller
             $invoice->update([
                 'code' => "AR00" . $invoice->id . '/' . auth()->user()->session()->InvoiceYearCode()
             ]);
-            
+
             foreach ($data['subject'] as $key => $value) {
                 StudentBook::create([
                     'invoice_id' => $invoice->id,
