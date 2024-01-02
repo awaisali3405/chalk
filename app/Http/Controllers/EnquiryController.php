@@ -72,10 +72,10 @@ class EnquiryController extends Controller
             if ($request->input('know_about_us')) {
                 $enquiry = $enquiry->where('know_about_us', $request->input('know_about_us'));
             }
-            $enquiry = $enquiry->get();
+            $enquiry = $enquiry->where('academic_year_id', auth()->user()->session()->id)->get();
         } else {
 
-            $enquiry = Enquiry::all();
+            $enquiry = Enquiry::where('academic_year_id', auth()->user()->session()->id)->get();
         }
         // dd($enquiry);
         return view('enquiry.index', compact('enquiry'));
@@ -154,7 +154,7 @@ class EnquiryController extends Controller
         Enquiry::find($id)->delete();
         return redirect()->route('enquiry.index')->with('success', 'Enquiry Deleted Successfully');
     }
-  
+
     public function note($id)
     {
         $enquiry = Enquiry::find($id);

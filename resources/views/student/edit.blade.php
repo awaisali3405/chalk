@@ -434,7 +434,6 @@
                                                                                             <td>
                                                                                                 {{ $value->amount }}
                                                                                             </td>
-
                                                                                             <td>
                                                                                                 @if ($value->active)
                                                                                                     <input type="hidden"
