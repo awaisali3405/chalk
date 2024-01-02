@@ -954,29 +954,31 @@ class StudentsController extends Controller
                     'date' => Carbon::now(),
                     'academic_year_id' => auth()->user()->session()->id
                 ]);
+                $value->update([
+                    'is_paid' => true
+                ]);
             }
-            $value->update([
-                'is_paid' => true
+        }
+        if ($total > 0) {
+            $invoice =  StudentInvoice::create(
+                [
+                    'student_id' => $student->id,
+                    'amount' => $total,
+                    'type' => "Transferred Invoice",
+                    'from_date' => $academicYear->start_date,
+                    'to_date' => $academicYear->end_date,
+                    'branch_id' => $student->branch_id,
+                    'year_id' => $student->year_id,
+                    'academic_year_id' => $academicYear->id,
+                    'description' => "Transferred form Branch " . $branch->name,
+                    'date' => $academicYear->start_date,
+                    'discount' => $student->fee_discount
+                ]
+            );
+            $invoice->update([
+                'code' => "BT00" . $invoice->id . '/' . $academicYear->InvoiceYearCode(),
             ]);
         }
-        $invoice =  StudentInvoice::create(
-            [
-                'student_id' => $student->id,
-                'amount' => $total,
-                'type' => "Transferred Invoice",
-                'from_date' => $academicYear->start_date,
-                'to_date' => $academicYear->end_date,
-                'branch_id' => $student->branch_id,
-                'year_id' => $student->year_id,
-                'academic_year_id' => $academicYear->id,
-                'description' => "Transferred form Branch " . $branch->name,
-                'date' => $academicYear->start_date,
-                'discount' => $student->fee_discount
-            ]
-        );
-        $invoice->update([
-            'code' => "BT00" . $invoice->id . '/' . $academicYear->InvoiceYearCode(),
-        ]);
         // Wallet Transfer
         if ($student->cash_balance > 0) {
 

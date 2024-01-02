@@ -77,11 +77,11 @@ class User extends Authenticatable
 
     public function invoice($branch, $academicYear)
     {
-        return StudentInvoice::whereHas('student', function ($query) use ($branch, $academicYear) {
-            if ($branch != -1) {
-                $query->where('branch_id', $branch);
-            }
-        })->where('academic_year_id', $academicYear);
+        $invoice = StudentInvoice::where('academic_year_id', $academicYear);
+        if ($branch != 0) {
+            $invoice->where('branch_id', $branch);
+        }
+        return $invoice;
     }
 
     public function transferDue($branch, $academicYear)
