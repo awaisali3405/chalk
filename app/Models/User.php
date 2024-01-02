@@ -78,7 +78,7 @@ class User extends Authenticatable
     public function invoice($branch, $academicYear)
     {
         $invoice = StudentInvoice::where('academic_year_id', $academicYear);
-        if ($branch != 0) {
+        if ($branch != -1) {
             $invoice->where('branch_id', $branch);
         }
         return $invoice;
