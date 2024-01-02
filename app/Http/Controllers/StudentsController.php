@@ -139,7 +139,7 @@ class StudentsController extends Controller
      */
     public function create()
     {
-        $EnquirySubject = EnquirySubject::where('student_id', null)->where('student_id', null)->delete();
+        // $EnquirySubject = EnquirySubject::where('student_id', null)->where('student_id', null)->delete();
         return view('student.add');
     }
 
@@ -825,7 +825,7 @@ class StudentsController extends Controller
             'is_promoted' => true,
             'promotion_date' => $academicYear->start_date,
             'total_fee' => 0,
-            'deposit' => 0, 
+            'deposit' => 0,
             'annual_resource_fee' => 0,
             'resource_discount' => 0,
             'exercise_book_fee' => 0,

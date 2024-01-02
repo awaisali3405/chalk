@@ -293,10 +293,9 @@ class InvoiceController extends Controller
             ]);
             foreach ($data['subject'] as $key => $value) {
                 StudentBook::create([
-
                     'invoice_id' => $invoice->id,
                     'subject_id' => $value,
-                    'subject_name' => EnquirySubject::find($value)->subject->name,
+                    'subject_name' => Subject::find($value)->name,
                     'book_name' => $data['book_name'][$key],
                     'rate' => $data['rate'][$key],
                     'quantity' => $data['quantity'][$key],

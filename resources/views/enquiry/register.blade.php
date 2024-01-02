@@ -886,18 +886,33 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <div class="col-lg-6 col-md-12 col-sm-12">
                                                     <div class="form-group">
-                                                        <label class="form-label">Relationship
-                                                            to Student</label>
+                                                        <label class="form-label">How do you Know About Us</label>
 
-                                                        <input type="text" list="parent" class="form-control"
-                                                            name="relationship1">
-                                                        <datalist id="parent">
-                                                            <option>Father</option>
-                                                            <option>Mother</option>
-                                                            <option>Uncle</option>
+                                                        <input list="browsers" name="know_about_us" id="browser"
+                                                            value="{{ old('know_about_us') }}" class="form-control" required>
+                                                        <datalist id="browsers">
+                                                            <option value="Leaflet">
+                                                            <option value="Google">
+                                                            <option value="Facebook">
+                                                            <option value="Friends/Family">
+
                                                         </datalist>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12 col-sm-12 d-none" id="reference-student-container">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Referred Student</label>
+
+                                                        <select name="reference_student" id="" class="form-control">
+                                                            <option value="">Select Student</option>
+                                                            @foreach ($referenceStudent as $value)
+                                                                <option value="{{ $value->id }}">{{ $value->name() }}
+                                                                    ({{ $value->currentYear()->name }})</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
