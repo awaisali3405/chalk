@@ -191,7 +191,7 @@
                                     <b>Student Year</b>
                                 </td>
                                 <td>
-                                    <b>{{ $invoice->student->currentYear()->name }}
+                                    <b>{{ $invoice->year->name }}
                                     </b>
                                 </td>
                             </tr>

@@ -291,6 +291,7 @@ class InvoiceController extends Controller
             $invoice->update([
                 'code' => "AR00" . $invoice->id . '/' . auth()->user()->session()->InvoiceYearCode()
             ]);
+            
             foreach ($data['subject'] as $key => $value) {
                 StudentBook::create([
                     'invoice_id' => $invoice->id,
