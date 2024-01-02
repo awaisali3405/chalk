@@ -687,6 +687,7 @@ class User extends Authenticatable
     }
     public function studentWallet($branch, $academicYear)
     {
+        // dd();
         return $this->studentBankWallet($branch, $academicYear) + $this->studentCashWallet($branch, $academicYear);
     }
 }

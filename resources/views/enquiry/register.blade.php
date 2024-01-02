@@ -24,6 +24,7 @@
 
             <form action="{{ route('student.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="academic_year_id" value="{{ auth()->user()->session()->id }}">
                 <div class="text-center p-3 bg-white" style="">
                     <div class="profile-photo">
                         <img id="img" src="{{ asset('images/avatar/1.png') }}" width="100" height="100"
@@ -108,7 +109,8 @@
                                                                 <input type="radio" class="form-check-input"
                                                                     id="other" value="other" name="gender"
                                                                     {{ old('gender') == 'other' ? 'checked' : '' }}>
-                                                                <label class="form-check-label" for="other">Other</label>
+                                                                <label class="form-check-label"
+                                                                    for="other">Other</label>
                                                             </div>
 
                                                         </div>
@@ -891,7 +893,8 @@
                                                         <label class="form-label">How do you Know About Us</label>
 
                                                         <input list="browsers" name="know_about_us" id="browser"
-                                                            value="{{ old('know_about_us') }}" class="form-control" required>
+                                                            value="{{ old('know_about_us') }}" class="form-control"
+                                                            required>
                                                         <datalist id="browsers">
                                                             <option value="Leaflet">
                                                             <option value="Google">
@@ -902,15 +905,18 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6 col-md-12 col-sm-12 d-none" id="reference-student-container">
+                                                <div class="col-lg-6 col-md-12 col-sm-12 d-none"
+                                                    id="reference-student-container">
                                                     <div class="form-group">
                                                         <label class="form-label">Referred Student</label>
 
-                                                        <select name="reference_student" id="" class="form-control">
+                                                        <select name="reference_student" id=""
+                                                            class="form-control">
                                                             <option value="">Select Student</option>
                                                             @foreach ($referenceStudent as $value)
                                                                 <option value="{{ $value->id }}">{{ $value->name() }}
-                                                                    ({{ $value->currentYear()->name }})</option>
+                                                                    ({{ $value->currentYear()->name }})
+                                                                </option>
                                                             @endforeach
                                                         </select>
                                                     </div>

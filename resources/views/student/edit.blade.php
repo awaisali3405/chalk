@@ -25,6 +25,7 @@
             <form action="{{ route('student.update', $student->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')
+                <input type="hidden" name="academic_year_id" value="{{ auth()->user()->session()->id }}">
                 <div class="text-center p-3 bg-white" style="">
                     <div class="profile-photo">
                         <img id="img" src="{{ asset($student->profile_pic) }}" width="100" height="100"

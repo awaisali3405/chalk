@@ -24,6 +24,7 @@
 
             <form action="{{ route('student.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="academic_year_id" value="{{ auth()->user()->session()->id }}">
                 <div class="text-center p-3 bg-white" style="">
                     <div class="profile-photo">
                         <img id="img" src="{{ asset('images/avatar/1.png') }}" width="100" height="100"
