@@ -32,6 +32,7 @@ use App\Http\Controllers\SMSController;
 use App\Http\Controllers\StaffAttendanceController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StaffRequestController;
+use App\Http\Controllers\StudentDebtController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\SupplierControlller;
@@ -85,6 +86,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/deactive/student', [StudentsController::class, 'deActive'])->name('student.deactive');
     Route::get('/reference/student', [StudentsController::class, 'reference'])->name('student.reference');
     Route::post('/student/transfer/{id}', [StudentsController::class, 'transfer'])->name('student.transfer');
+    Route::get('/student/debt/collection/{id}', [StudentDebtController::class, 'debt'])->name('student.debt');
+    Route::get('/student/debt/list', [StudentDebtController::class, 'index'])->name('student.debt.index');
     // Enquiry
     Route::resource('enquiry', EnquiryController::class);
     Route::get('/enquiry/{id}/note', [EnquiryController::class, 'note'])->name('enquiry.note');
@@ -179,7 +182,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Invoice Refund
     Route::get('invoice/refund/{id}', [InvoiceRefundController::class, 'create'])->name('invoice.refund.index');
-    Route::post('invoice/refund/{id}/store',[InvoiceRefundController::class,'store'])->name('invoice.refund.store');
+    Route::post('invoice/refund/{id}/store', [InvoiceRefundController::class, 'store'])->name('invoice.refund.store');
 });
 
 Route::get('test', [EnquiryController::class, 'test'])->name('test');

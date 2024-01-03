@@ -204,8 +204,11 @@
 
                                                     </td>
                                                     {{-- <td class="text-left"> Default Amount</td> --}}
-                                                    <td class="text-left"></td>
-                                                    <td class="text-left"> </td>
+                                                    <td class="text-left">Debt Collection Due</td>
+                                                    <td class="text-left">
+                                                        £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->debtCollectionDue(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
+
+                                                    </td>
 
                                                 </tr>
                                                 <tr>
@@ -216,11 +219,21 @@
                                                     </td>
 
                                                     <td colspan="2" class="text-left"></td>
+
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left">DBS Recieved</td>
                                                     <td class="text-left">
                                                         £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->dbsReceived(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
+
+                                                    </td>
+
+                                                    <td colspan="2" class="text-left"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Debt Collection Recieved</td>
+                                                    <td class="text-left">
+                                                        £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->debtCollectionReceived(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                     </td>
 

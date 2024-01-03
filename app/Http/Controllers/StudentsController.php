@@ -64,12 +64,12 @@ class StudentsController extends Controller
             } else {
                 $student = Student::where('active', true)->where('disable', false)->whereHas('promotionDetail', function ($query) {
                     $query->where('academic_year_id', auth()->user()->session()->id);
-                })->get();
+                })->where('debt_collection', false)->get();
             }
         } else if (auth()->user()->role->name == 'parent') {
             $student = Parents::where('user_id', auth()->user()->id)->first();
             if ($student) {
-                $student = $student->student->where('disable', false);
+                $student = $student->student->where('disable', false)->where('debt_collection', false);
                 // dd($student);
             } else {
                 $student = array();
@@ -116,16 +116,16 @@ class StudentsController extends Controller
                 }
                 $student = $student->where('active', true)->where('disable', false)->whereHas('promotionDetail', function ($query) {
                     $query->where('academic_year_id', auth()->user()->session()->id);
-                })->get();
+                })->where('debt_collection', false)->get();
             } else {
                 $student = Student::where('active', true)->where('disable', false)->whereHas('promotionDetail', function ($query) {
                     $query->where('academic_year_id', auth()->user()->session()->id);
-                })->get();
+                })->where('debt_collection', false)->get();
             }
         } else if (auth()->user()->role->name == 'parent') {
             $student = Parents::where('user_id', auth()->user()->id)->first();
             if ($student) {
-                $student = $student->student->where('disable', true);
+                $student = $student->student->where('disable', true)->where('debt_collection', false);
                 // dd($student);
             } else {
                 $student = array();
@@ -645,12 +645,12 @@ class StudentsController extends Controller
                 }
                 $student = $student->where('active', false)->get();
             } else {
-                $student = Student::where('active', false)->get();
+                $student = Student::where('active', false)->where('debt_collection', false)->get();
             }
         } else if (auth()->user()->role->name == 'parent') {
             $student = Parents::where('user_id', auth()->user()->id)->first();
             if ($student) {
-                $student = $student->student;
+                $student = $student->student->where('debt_collection', false);
             } else {
                 $student = array();
             }
@@ -688,16 +688,16 @@ class StudentsController extends Controller
                 }
                 $student = $student->where('is_disable', true)->where('is_disable', false)->whereHas('promotionDetail', function ($query) {
                     $query->where('academic_year_id', auth()->user()->session()->id);
-                })->get();
+                })->where('debt_collection', false)->get();
             } else {
                 $student = Student::where('is_disable', true)->where('is_disable', false)->whereHas('promotionDetail', function ($query) {
                     $query->where('academic_year_id', auth()->user()->session()->id);
-                })->get();
+                })->where('debt_collection', false)->get();
             }
         } else if (auth()->user()->role->name == 'parent') {
             $student = Parents::where('user_id', auth()->user()->id)->first();
             if ($student) {
-                $student = $student->student->where('is_disable', false);
+                $student = $student->student->where('is_disable', false)->where('debt_collection', false);
             } else {
                 $student = array();
             }
@@ -946,7 +946,7 @@ class StudentsController extends Controller
                 $value->update([
                     'academic_year_id' => $academicYear->id,
                     'branch_id' => $branch->id,
-                    'tax'=>$branch->tax
+                    'tax' => $branch->tax
                 ]);
             } elseif ($value->remainingAmount() > 0) {
                 $total += $value->remainingAmount();

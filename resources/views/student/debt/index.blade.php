@@ -236,9 +236,9 @@
                                                                             {{-- <a class="dropdown-item " data-toggle="modal"
                                                                                 data-target="#debit-{{ $value->id }}">Debt
                                                                             </a> --}}
-                                                                            <a class="dropdown-item"
+                                                                            {{-- <a class="dropdown-item"
                                                                                 href="{{ route('student.debt', $value->id) }}">Debit
-                                                                                Collection</a>
+                                                                                Collection</a> --}}
                                                                             <a class="dropdown-item" data-toggle="modal"
                                                                                 data-target="#statement-{{ $value->id }}">Statement
                                                                             </a>

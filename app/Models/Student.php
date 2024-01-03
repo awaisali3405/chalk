@@ -80,11 +80,12 @@ class Student extends Model
         'cash_balance',
         'bank_balance',
         'credit_note',
-        'disable'
+        'disable',
+        'debt_collection'
     ];
     public function depositInvoice()
     {
-        return $this->hasOne(StudentInvoice::class, 'student_id')->where('type', 'Refundable')->first() ;
+        return $this->hasOne(StudentInvoice::class, 'student_id')->where('type', 'Refundable')->first();
     }
     public function referred()
     {

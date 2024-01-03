@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('student_invoice', function (Blueprint $table) {
-            $table->integer('year_id')->nullable();
+        Schema::table('student', function (Blueprint $table) {
+            $table->boolean('debt_collection')->default(false);
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('student_invoice', function (Blueprint $table) {
+        Schema::table('student', function (Blueprint $table) {
             //
         });
     }
