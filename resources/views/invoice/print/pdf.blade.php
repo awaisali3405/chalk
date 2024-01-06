@@ -112,12 +112,12 @@
                 <div class="pr-4 col-11">
                     <h6>{{ $invoice->student->parents[0]->name() }}</h6>
                     <h6>
+                        {{ $invoice->student->parents[0]->res_address }}</h6>
+                    <h6>
                         {{ $invoice->student->parents[0]->res_second_address }}
                     </h6>
                     <h6>{{ $invoice->student->parents[0]->res_third_address }}
                     </h6>
-                    <h6>
-                        {{ $invoice->student->parents[0]->res_address }}</h6>
                     <h6>{{ $invoice->student->parents[0]->res_town }}</h6>
                     <h6>
                         {{ $invoice->student->parents[0]->res_postal_code }}</h6>
@@ -261,7 +261,7 @@
     @include('invoice.component.invoice')
     <div class="row pt-3">
         <div class="col-12">
-            <b>Terms & Condition</b>
+            <b>Terms & Conditions</b>
             <p class="justify-end " style="font-size: x-small;">Once you pay your deposit, you have agreed
                 to start your course with
                 Chalk n Duster. If under any circumstances you change your mind or you're not able to

@@ -28,12 +28,12 @@
                             <div class="pr-4 col-11">
                                 <h6>{{ $invoice->student->parents[0]->name() }}</h6>
                                 <h6>
+                                    {{ $invoice->student->parents[0]->res_address }}</h6>
+                                <h6>
                                     {{ $invoice->student->parents[0]->res_second_address }}
                                 </h6>
                                 <h6>{{ $invoice->student->parents[0]->res_third_address }}
                                 </h6>
-                                <h6>
-                                    {{ $invoice->student->parents[0]->res_address }}</h6>
                                 <h6>{{ $invoice->student->parents[0]->res_town }}</h6>
                                 <h6>
                                     {{ $invoice->student->parents[0]->res_postal_code }}</h6>
