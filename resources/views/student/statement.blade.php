@@ -231,6 +231,23 @@
                                 $credit = 0;
                                 $total = 0;
                             @endphp
+                            @foreach ($value->wallet as $value1)
+                                @php
+                                    $total = $total - $value1->amount;
+                                    $grandTotal += $total;
+                                    $credit += $value1->amount;
+                                @endphp
+                                <tr style="background-color: skyblue;">
+
+                                    <td rowspan="" class="text-center"></td>
+                                    <td>{{ auth()->user()->ukFormat($value1->date) }}</td>
+                                    <td>{{ $value1->description }} {{ $value1->mode }} Credit</td>
+                                    <td class="text-align-end"> £0</td>
+                                    <td class="text-align-end"> £{{ auth()->user()->priceFormat($value1->amount) }}
+                                    </td>
+                                    <td class="text-align-end"> £{{ auth()->user()->priceFormat($total) }}</td>
+                                </tr>
+                            @endforeach
                             @foreach ($value->invoice as $value1)
                                 @php
                                     $total += $value1->amount;
@@ -435,23 +452,7 @@
                                 @endforeach
                             @endforeach --}}
                             {{-- @dd(count($value->wallet)); --}}
-                            @foreach ($value->wallet as $value1)
-                                @php
-                                    $total = $total - $value1->amount;
-                                    $grandTotal += $total;
-                                    $credit += $value1->amount;
-                                @endphp
-                                <tr style="background-color: skyblue;">
 
-                                    <td rowspan="" class="text-center"></td>
-                                    <td>{{ auth()->user()->ukFormat($value1->date) }}</td>
-                                    <td>{{ $value1->description }} {{ $value1->mode }} Credit</td>
-                                    <td class="text-align-end"> £0</td>
-                                    <td class="text-align-end"> £{{ auth()->user()->priceFormat($value1->amount) }}
-                                    </td>
-                                    <td class="text-align-end"> £{{ auth()->user()->priceFormat($total) }}</td>
-                                </tr>
-                            @endforeach
                             @if (count($value->invoice) && $value->depositInvoice()->refund)
                                 @if (
                                     $value->depositInvoice()->refund->refundedAmount() > 0 &&
