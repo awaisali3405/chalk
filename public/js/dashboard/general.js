@@ -405,7 +405,7 @@ $('.year_student').on('change keyup', function () {
 $('.rate').on('change keyup', function () {
     rate = $('.rate').val()
     quantity = $('.quantity').val()
-    $('.amount').val((rate * quantity).toFixed(0))
+    $('.amount').val((rate * quantity).toFixed(2))
 })
 
 $('.student').on('change keyup', function () {
