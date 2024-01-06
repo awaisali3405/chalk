@@ -35,16 +35,16 @@
                             <span class="nav-text">Student</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ route('student.index') }}">All Student</a></li>
+                            <li><a href="{{ route('student.index') }}">All Students</a></li>
                             {{-- <li><a href="{{ route('student.deactive') }}">DeActive Student</a></li> --}}
                             <li><a href="{{ route('student.create') }}">Add Student</a></li>
                             @if (auth()->user()->role->name != 'parent')
-                                <li><a href="{{ route('student.debt.index') }}">Deactivate Students</a></li>
+                                <li><a href="{{ route('student.debt.index') }}">Deactivated Students</a></li>
                                 <li><a href="{{ route('student.request') }}">Student Request
                                         ({{ auth()->user()->studentRequest()->count() }})</a></li>
-                                <li><a href="{{ route('student.disable') }}">Disabled Student
+                                <li><a href="{{ route('student.disable') }}">Disabled Students
                                         ({{ auth()->user()->studentDisable()->count() }})</a></li>
-                                <li><a href="{{ route('student.reference') }}">Reference Student</a></li>
+                                <li><a href="{{ route('student.reference') }}">Students Reference</a></li>
                             @endif
                         </ul>
                     </li>
