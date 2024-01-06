@@ -88,6 +88,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/student/transfer/{id}', [StudentsController::class, 'transfer'])->name('student.transfer');
     Route::get('/student/debt/collection/{id}', [StudentDebtController::class, 'debt'])->name('student.debt');
     Route::get('/student/debt/list', [StudentDebtController::class, 'index'])->name('student.debt.index');
+    Route::get('activate/student/{id}', [StudentDebtController::class, 'activate'])->name('student.activate');
     // Enquiry
     Route::resource('enquiry', EnquiryController::class);
     Route::get('/enquiry/{id}/note', [EnquiryController::class, 'note'])->name('enquiry.note');

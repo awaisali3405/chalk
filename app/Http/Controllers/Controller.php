@@ -74,7 +74,7 @@ class Controller extends BaseController
             function ($query) use ($academicCalender) {
                 $query->where('academic_year_id', $academicCalender->id);
             }
-        )->get();
+        )->where('debt_collection', false)->where('disable', true)->get();
         View::share('referenceStudent', $referenceStudent);
         $staff = Staff::latest()->get();
         View::share('staff', $staff);
@@ -85,7 +85,8 @@ class Controller extends BaseController
     {
         return Carbon::parse($date)->format('d/m/Y');
     }
-    public function academicYear(){
-        return AcademicCalender::where('active',true)->first();
+    public function academicYear()
+    {
+        return AcademicCalender::where('active', true)->first();
     }
 }

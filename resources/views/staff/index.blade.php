@@ -50,7 +50,7 @@
                                                                 Action
                                                             </button>
                                                             <div class="dropdown-menu" x-placement="bottom-start"
-                                                                style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
+                                                                style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px); height:150px; overflow:auto;">
                                                                 <a class="dropdown-item"
                                                                     href="{{ route('staff.show', $value->id) }}">Show</a>
                                                                 <a class="dropdown-item"

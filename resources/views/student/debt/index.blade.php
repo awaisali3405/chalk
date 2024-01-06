@@ -183,8 +183,8 @@
                                                     <th>Roll</th>
                                                     <th>Name</th>
                                                     <th>Year</th>
-                                                    <th>Date</th>
                                                     <th>Week</th>
+                                                    <th>Remaining Amount</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -203,10 +203,12 @@
                                                             <td>
                                                                 {{ $value->currentYear()->name }}
                                                             </td>
-                                                            <td>{{ auth()->user()->ukFormat($value->admission_date) }}</td>
                                                             <td>Week
                                                                 {{ auth()->user()->week($value->admission_date) == 0? auth()->user()->week($value->promotion_date): auth()->user()->week($value->admission_date) }}
 
+                                                            </td>
+                                                            <td>
+                                                                £{{ auth()->user()->priceFormat($value->due()) }}
                                                             </td>
                                                             <td>
                                                                 {{-- @dd($value->wallet) --}}
@@ -216,7 +218,7 @@
                                                                     Action
                                                                 </button>
                                                                 <div class="dropdown-menu" x-placement="bottom-start"
-                                                                    style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
+                                                                    style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px); height:150px; overflow:auto;">
                                                                     @if (auth()->user()->role->name != 'parent')
                                                                         @if ($value->active)
                                                                         @endif
@@ -236,9 +238,8 @@
                                                                             {{-- <a class="dropdown-item " data-toggle="modal"
                                                                                 data-target="#debit-{{ $value->id }}">Debt
                                                                             </a> --}}
-                                                                            {{-- <a class="dropdown-item"
-                                                                                href="{{ route('student.debt', $value->id) }}">Debit
-                                                                                Collection</a> --}}
+                                                                            <a class="dropdown-item"
+                                                                                href="{{ route('student.activate', $value->id) }}">Activate</a>
                                                                             <a class="dropdown-item" data-toggle="modal"
                                                                                 data-target="#statement-{{ $value->id }}">Statement
                                                                             </a>

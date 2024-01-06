@@ -136,14 +136,12 @@
                             <td class="text-center text-white">
                                 blank
                             </td>
-
                             <td class="bg-grey"></td>
                             <td class="bg-grey"></td>
                             <td class="bg-grey"></td>
                         </tr>
                     @endif
                     @if ($invoice->type == 'Refundable')
-
                         <tr>
                             <td class="text-center">
                                 <b>1</b>
@@ -203,7 +201,7 @@
                         @php
                             $sr = 2;
                         @endphp
-                    @elseif ($invoice->type == 'Transferred Invoice')
+                    @elseif ($invoice->type == 'Branch Transferred Invoice')
                         <tr>
                             <td class="text-center">
                                 <b>1</b>

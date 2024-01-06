@@ -69,7 +69,7 @@ class EventController extends Controller
     }
     public function getEvent()
     {
-        $student = Student::all();
+        $student = Student::where('debt_collection', false)->where('disable', false)->get();
         $event = array();
 
         foreach ($student as $value) {

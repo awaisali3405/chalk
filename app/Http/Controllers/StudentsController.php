@@ -60,7 +60,7 @@ class StudentsController extends Controller
                 }
                 $student = $student->where('active', true)->where('disable', false)->whereHas('promotionDetail', function ($query) {
                     $query->where('academic_year_id', auth()->user()->session()->id);
-                })->get();
+                })->where('debt_collection', false)->get();
             } else {
                 $student = Student::where('active', true)->where('disable', false)->whereHas('promotionDetail', function ($query) {
                     $query->where('academic_year_id', auth()->user()->session()->id);
@@ -643,14 +643,14 @@ class StudentsController extends Controller
                 if ($request->input('to_week')) {
                     $student = $student->where('admission_date', '<=', auth()->user()->dateWeek($request->input('to_week')));
                 }
-                $student = $student->where('active', false)->get();
+                $student = $student->where('active', false)->where('debt_collection', false)->get();
             } else {
                 $student = Student::where('active', false)->where('debt_collection', false)->get();
             }
         } else if (auth()->user()->role->name == 'parent') {
             $student = Parents::where('user_id', auth()->user()->id)->first();
             if ($student) {
-                $student = $student->student->where('debt_collection', false);
+                $student = $student->student->where('debt_collection', false)->where('is_disable', true);
             } else {
                 $student = array();
             }
@@ -715,7 +715,7 @@ class StudentsController extends Controller
         // })->get());
         foreach ($year->student()->where('disable', false)->whereHas('promotionDetail', function ($query) use ($academicYear) {
             $query->where('academic_year_id', $academicYear->id);
-        })->get() as $key => $value) {
+        })->where('debt_collection', false)->get() as $key => $value) {
 
             $string .= "<option value='" . $value->id . "'>" . $value->name() . "</option>";
         }
@@ -725,9 +725,7 @@ class StudentsController extends Controller
     {
         $year = Year::find($id);
         $string = '<option value="">-</option>';
-        // dd($year);
-        foreach ($year->student->where('branch_id', $branch)->where('disable', false) as $key => $value) {
-
+        foreach ($year->student->where('branch_id', $branch)->where('disable', false)->where('debt_collection', false) as $key => $value) {
             $string .= "<option value='" . $value->id . "'>" . $value->first_name . "</option>";
         }
         return response()->json(['data' => $string]);
@@ -890,7 +888,7 @@ class StudentsController extends Controller
             'academic_year_id' => $request->academic_year_id,
             'roll_no' => $rollNo
         ]);
-        Refund::where('paid_by_bank', false)->where('paid_by_cash', false)->where('academic_year_id', auth()->user()->session()->id)->update([
+        Refund::where('academic_year_id', auth()->user()->session()->id)->update([
             'academic_year_id' => $request->academic_year_id
         ]);
         return redirect()->back()->with('success', 'Student Promoted Successfully.');
@@ -973,7 +971,8 @@ class StudentsController extends Controller
                     'branch_id' => $request->branch_id,
                     'year_id' => $student->year_id,
                     'academic_year_id' => $academicYear->id,
-                    'description' => "Transferred form Branch " . $branch->name,
+                    'tax' => $branch->tax,
+                    'description' => "Transferred from Branch " . $student->branch->name,
                     'date' => $academicYear->start_date,
                     'discount' => $student->fee_discount,
 
@@ -1013,7 +1012,7 @@ class StudentsController extends Controller
             ]);
         }
         // Refund Transfer
-        Refund::where('paid_by_bank', false)->where('paid_by_cash', false)->where('academic_year_id', auth()->user()->session()->id)->update([
+        Refund::where('academic_year_id', auth()->user()->session()->id)->update([
             'academic_year_id' => $request->academic_year_id,
             'branch_id' => $request->branch_id
         ]);

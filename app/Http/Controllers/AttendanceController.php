@@ -27,7 +27,7 @@ class AttendanceController extends Controller
                 $query->where('academic_year_id', auth()->user()->session()->id);
             })->get();
         } else {
-            $student = Student::where('active', true)->whereHas('promotionDetail', function ($query) {
+            $student = Student::where('active', true)->where('debt_collection', false)->whereHas('promotionDetail', function ($query) {
                 $query->where('academic_year_id', auth()->user()->session()->id);
             })->get();
         }
@@ -50,7 +50,7 @@ class AttendanceController extends Controller
 
                 $student = $student->where('branch_id', $request->branch_id);
             }
-            $student = $student->where('active', true)->where('is_promoted', false)->whereHas('promotionDetail', function ($query) {
+            $student = $student->where('active', true)->where('debt_collection', false)->where('is_promoted', false)->whereHas('promotionDetail', function ($query) {
                 $query->where('academic_year_id', auth()->user()->session()->id);
             })->where('disable', false)->get();
         } else {

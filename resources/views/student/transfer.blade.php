@@ -28,7 +28,7 @@
                                 <select name="academic_year_id" class="form-control" id="" required>
                                     @foreach ($academicCalender as $value2)
                                         <option value="{{ $value2->id }}"
-                                            {{ $value2->id == $value->currentYear()->id ? 'selected' : '' }}>
+                                            {{ $value2->id ==auth()->user()->session()->id? 'selected': '' }}>
                                             {{ $value2->period() }}</option>
                                     @endforeach
                                 </select>

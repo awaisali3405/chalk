@@ -64,12 +64,12 @@ class InvoiceController extends Controller
                 $student->where('is_paid', false)->where('academic_year_id', auth()->user()->session()->id);
             });
             // }
-            $student = $student->where('disable', false)->get();
+            $student = $student->where('disable', false)->where('debt_collection', false)->get();
             // dd($student);
         } else {
             $student = Student::where('payment_period', "Weekly")->where('is_promoted', false)->where('active', true)->whereHas('invoice', function ($query) {
                 $query->where('is_paid', false)->where('academic_year_id', auth()->user()->session()->id);
-            })->where('disable', false)->get();
+            })->where('disable', false)->where('debt_collection', false)->get();
         }
         return view('invoice.add', compact('student'));
     }

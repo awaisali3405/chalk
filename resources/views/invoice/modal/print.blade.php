@@ -50,26 +50,26 @@
                         <div class="border-black row pl-3">
                             <div class="pr-1 col-12">
                                 <h6 style="text-align: end !important; padding-right:5px;">
-                                    From: {{ $invoice->student->branch->res_address }}</h6>
+                                    From: {{ $invoice->branch->res_address }}</h6>
                                 <h6 style="text-align: end !important; padding-right:5px;">
-                                    {{ $invoice->student->branch->res_second_address }}
-                                    ,{{ $invoice->student->branch->res_third_address }}
+                                    {{ $invoice->branch->res_second_address }}
+                                    ,{{ $invoice->branch->res_third_address }}
                                 </h6 style="text-align: end !important; padding-right:5px;">
                                 <h6 style="text-align: end !important; padding-right:5px;">
-                                    {{ $invoice->student->branch->res_town }},
-                                    {{ $invoice->student->branch->res_postal_code }}
+                                    {{ $invoice->branch->res_town }},
+                                    {{ $invoice->branch->res_postal_code }}
                                 </h6 style="text-align: end !important; padding-right:5px;">
                                 <h6 style="text-align: end !important; padding-right:5px;">
-                                    Email: {{ $invoice->student->branch->email }}
+                                    Email: {{ $invoice->branch->email }}
                                 </h6>
                                 <h6 style="text-align: end !important; padding-right:5px;">
-                                    Phone: {{ $invoice->student->branch->phone_number }}
+                                    Phone: {{ $invoice->branch->phone_number }}
                                 </h6>
                                 <h6 style="text-align: end !important; padding-right:5px;">
-                                    Company No: {{ $invoice->student->branch->company_number }}
+                                    Company No: {{ $invoice->branch->company_number }}
                                 </h6>
                                 <h6 style="text-align: end !important; padding-right:5px;">
-                                    VAT reg No: {{ $invoice->student->branch->vat_reg_no }}
+                                    VAT reg No: {{ $invoice->branch->vat_reg_no }}
                                 </h6>
 
                             </div>

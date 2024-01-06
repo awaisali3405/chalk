@@ -51,7 +51,6 @@ class StudentDebtController extends Controller
             ]);
         }
         return redirect()->back()->with('success', 'Student Added To Debt Collection Successfully.');
-        // dd($total);
     }
     public function index(Request $request)
     {
@@ -101,5 +100,17 @@ class StudentDebtController extends Controller
             }
         }
         return view('student.debt.index', compact('student'));
+    }
+    public function activate($id)
+    {
+        $student = Student::find($id);
+        if ($student->due() == 0) {
+            $student->update([
+                'debt_collection' => false
+            ]);
+            return redirect()->back()->with('success', 'Student Activate Successfully.');
+        } else {
+            return redirect()->back()->with('success', 'Student Cannot Activate, Because He/She have some debt to pay.');
+        }
     }
 }

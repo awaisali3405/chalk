@@ -216,7 +216,7 @@
                                                                     Action
                                                                 </button>
                                                                 <div class="dropdown-menu" x-placement="bottom-start"
-                                                                    style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
+                                                                    style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px); height:150px; overflow:auto;">
                                                                     @if (auth()->user()->role->name != 'parent')
                                                                         @if ($value->active)
                                                                         @endif
@@ -237,8 +237,7 @@
                                                                                 data-target="#debit-{{ $value->id }}">Debt
                                                                             </a> --}}
                                                                             <a class="dropdown-item"
-                                                                                href="{{ route('student.debt', $value->id) }}">Debit
-                                                                                Collection</a>
+                                                                                href="{{ route('student.debt', $value->id) }}">Suspend</a>
                                                                             <a class="dropdown-item" data-toggle="modal"
                                                                                 data-target="#statement-{{ $value->id }}">Statement
                                                                             </a>

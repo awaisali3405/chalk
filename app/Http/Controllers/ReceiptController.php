@@ -175,10 +175,10 @@ class ReceiptController extends Controller
                 }
             }
             Session::flash('action', route("invoice.print", $invoice->id));
-            return redirect()->route('receipt.show', $request->invoice_id)->with('success', "Receipt Created Successfully");
+            return redirect()->route('invoice.show', $invoice->student_id)->with('success', "Receipt Created Successfully");
         } else {
 
-            return redirect()->route('receipt.show', $request->invoice_id)->with('error', "Enter Balance To Pay Field");
+            return redirect()->back()->with('error', "Enter Balance To Pay Field");
         }
     }
 

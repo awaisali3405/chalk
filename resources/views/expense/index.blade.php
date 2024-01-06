@@ -53,7 +53,7 @@
                                                                 Action
                                                             </button>
                                                             <div class="dropdown-menu" x-placement="bottom-start"
-                                                                style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
+                                                                style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px); height:150px; overflow:auto;">
                                                                 <a href="{{ asset($value->file) }}" target="_blank"
                                                                     class="dropdown-item">View</a>
                                                                 <a class="dropdown-item"
