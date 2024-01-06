@@ -623,7 +623,7 @@
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
-                                                                <label class="form-label">Sub total Fee</label>
+                                                                <label class="form-label">Gross Weekly Fee</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
@@ -649,7 +649,7 @@
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
-                                                                <label class="form-label">Total Fee</label>
+                                                                <label class="form-label">Net Weekly Fee</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>

@@ -429,21 +429,21 @@
                                                 </div>
                                                 <div class="col-3">
                                                     <div class="form-group">
-                                                        <label for="" class="form-label">VAT</label>
+                                                        <label for="" class="form-label">VAT%</label>
                                                         <input type="text" name="tax" id=""
                                                             class="form-control tax" value="0">
                                                     </div>
                                                 </div>
                                                 <div class="col-3">
                                                     <div class="form-group">
-                                                        <label for="" class="form-label">Fee Tax</label>
+                                                        <label for="" class="form-label">VAT(Fee) </label>
                                                         <input type="text" name="fee_tax" id=""
                                                             class="form-control fee-tax" value="0" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-3">
                                                     <div class="form-group">
-                                                        <label for="" class="form-label">Registration Tax</label>
+                                                        <label for="" class="form-label">VAT(Registration)</label>
                                                         <input type="text" name="reg_tax" id="reg_tax"
                                                             id="" class="form-control" value="0" readonly>
                                                     </div>
@@ -518,7 +518,7 @@
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
-                                                                <label class="form-label">Gross Fee *</label>
+                                                                <label class="form-label">Gross Weekly Fee*</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
@@ -543,7 +543,7 @@
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
-                                                                <label class="form-label">Net Fee</label>
+                                                                <label class="form-label">Net Weekly Fee</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>
@@ -1478,7 +1478,8 @@
                                                 <option value="">Select Student</option>
                                                 @foreach ($referenceStudent as $value)
                                                     <option value="{{ $value->id }}">{{ $value->name() }}
-                                                        ({{ $value->currentYear()->name }})</option>
+                                                        ({{ $value->currentYear()->name }})
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>
