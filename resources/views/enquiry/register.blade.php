@@ -562,8 +562,6 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Admission Date</label>
                                                     <div class="input-group mb-2">
-
-
                                                         <input type="date" class="form-control" name="admission_date"
                                                             required>
                                                     </div>
@@ -598,12 +596,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-
-
                             <div class="col-xl-6 col-xxl-6 col-sm-12">
 
                                 <div class="card">
@@ -611,7 +603,6 @@
                                         <h5 class="card-title">Parent 1 /Guardian 1
                                             Details</h5>
                                     </div>
-
                                     <div class="card-body " id="parent">
                                         <div class="row">
                                             <div class="col-6">
@@ -638,7 +629,6 @@
                                                     <label class="form-label">Mr./Mrs./Ms./Other</label>
                                                     <input type="text" class="form-control" id="p_first_name"
                                                         name="first_name[]" disabled>
-
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -888,7 +878,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6 col-md-12 col-sm-12">
+                                                {{-- <div class="col-lg-6 col-md-12 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="form-label">How do you Know About Us</label>
 
@@ -920,7 +910,7 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label class="form-label">Employment
