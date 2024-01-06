@@ -7,7 +7,7 @@
             Session
         </div>
         <ul class="metismenu mm-show" id="menu">
-            <li class="nav-label first">Student Management</li>
+            <li class="nav-label first" style="color: #ffbd33;">Student Management</li>
             @if (auth()->user()->role->name == 'super admin' || auth()->user()->role->name == 'admin')
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-headphones"></i>
@@ -63,7 +63,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-label first">Account</li>
+                <li class="nav-label first" style="color: #ffbd33;">Account</li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-home"></i>
                         <span class="nav-text">Invoice</span>
@@ -103,7 +103,7 @@
                         <li><a href="{{ route('refund.create') }}">All Refund</a></li>
                     </ul>
                 </li>
-                {{-- <li class="nav-label first">Expense</li> --}}
+                {{-- <li class="nav-label first" style="color: #ffbd33;">Expense</li> --}}
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-university"></i>
                         <span class="nav-text">Expense Acount Type</span>
@@ -122,7 +122,7 @@
                         <li><a href="{{ route('expense.create') }}">Add Expense</a></li>
                     </ul>
                 </li>
-                <li class="nav-label first">Account Management</li>
+                <li class="nav-label first" style="color: #ffbd33;">Account Management</li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-university"></i>
                         <span class="nav-text">Balance Sheet</span>
@@ -142,8 +142,8 @@
                         <li><a href="{{ route('loan.flow') }}">Staff Loan Statement</a></li>
                     </ul>
                 </li>
-                {{-- <li class="nav-label first">Resource Book</li> --}}
-                <li class="nav-label first">HR Management</li>
+                {{-- <li class="nav-label first" style="color: #ffbd33;">Resource Book</li> --}}
+                <li class="nav-label first" style="color: #ffbd33;">HR Management</li>
 
 
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -209,7 +209,7 @@
 
 
 
-                <li class="nav-label first">Report (Peding)</li>
+                <li class="nav-label first" style="color: #ffbd33;">Report (Peding)</li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-university"></i>
                         <span class="nav-text">Admin Report</span>
@@ -271,7 +271,7 @@
                 </li>
 
 
-                <li class="nav-label first">Setting</li>
+                <li class="nav-label first" style="color: #ffbd33;">Setting</li>
 
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-home"></i>
