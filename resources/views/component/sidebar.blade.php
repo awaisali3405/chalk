@@ -7,7 +7,7 @@
             Session
         </div>
         <ul class="metismenu mm-show" id="menu">
-            <li class="nav-label first" style="color: #ffbd33;">Student Management</li>
+            <li class="nav-label first" style="color: #ffbd33; ">Student Management</li>
             @if (auth()->user()->role->name == 'super admin' || auth()->user()->role->name == 'admin')
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-headphones"></i>
@@ -100,7 +100,7 @@
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{ route('refund.index') }}">Student Deposit</a></li>
-                        <li><a href="{{ route('refund.create') }}">All Refund</a></li>
+                        <li><a href="{{ route('refund.create') }}">Deposit Refunded List</a></li>
                     </ul>
                 </li>
                 {{-- <li class="nav-label first" style="color: #ffbd33;">Expense</li> --}}
