@@ -198,7 +198,7 @@
                                 <th style="width: 15%;" class="text-center">
                                     Invoice
                                 </th>
-                                <th style="width: 3%;" class="text-center">
+                                <th style="width: 5%;" class="text-center">
                                     Date
                                 </th>
                                 <th style="width: 35%;" class="text-center">
