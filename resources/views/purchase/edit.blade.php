@@ -125,7 +125,7 @@
                                             </label>
                                             <div class="input-group mb-2">
                                                 <div class="input-group-prepend">
-                                                    <div class="input-group-text symbol">
+                                                    <div class="input-group-text ">
                                                         £</div>
                                                 </div>
                                                 <input type="number" step="0.01" class="form-control amount"
@@ -165,7 +165,8 @@
                                             </label>
                                             <div class="input-group mb-2">
                                                 <div class="input-group-prepend">
-                                                    <div class="input-group-text symbol">£</div>
+                                                    <div class="input-group-text symbol">
+                                                        {{ $purchase->is_discount_price ? '£' : '%' }}</div>
                                                 </div>
                                                 <input type="number" step="0.01"
                                                     class="form-control discount_purchase" name="discount"
