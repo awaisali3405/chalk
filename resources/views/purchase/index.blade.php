@@ -56,7 +56,7 @@
                                                         <td>{{ $value->year->name }}</td>
                                                         <td>{{ $value->branch->name }}</td>
                                                         <td>{{ $value->product->name }}</td>
-                                                        <td>{{ auth()->user()->priceFormat($value->discounted_amount / $value->quantity) }}
+                                                        <td>£{{ auth()->user()->priceFormat($value->discounted_amount / $value->quantity) }}
                                                         </td>
                                                         <td>£{{ auth()->user()->priceFormat($value->rate) }}
                                                         </td>
