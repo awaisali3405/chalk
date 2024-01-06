@@ -39,7 +39,7 @@
                                                         Branch
                                                     </th>
                                                     <th>
-                                                        Product
+                                                        Book
                                                     </th>
                                                     <th>Rate</th>
                                                     <th>RRP</th>
@@ -58,10 +58,10 @@
                                                         <td>{{ $value->product->name }}</td>
                                                         <td>{{ auth()->user()->priceFormat($value->discounted_amount / $value->quantity) }}
                                                         </td>
-                                                        <td>{{ auth()->user()->priceFormat($value->rate) }}
+                                                        <td>£{{ auth()->user()->priceFormat($value->rate) }}
                                                         </td>
 
-                                                        <td>{{ auth()->user()->priceFormat($value->discounted_amount) }}
+                                                        <td>£{{ auth()->user()->priceFormat($value->discounted_amount) }}
                                                         </td>
                                                         <td>{{ $value->quantity }}</td>
                                                         <td>
