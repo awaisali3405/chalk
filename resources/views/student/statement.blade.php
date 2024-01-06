@@ -201,7 +201,7 @@
                                 <th style="width: 3%;" class="text-center">
                                     Date
                                 </th>
-                                <th style="width: 45%;" class="text-center">
+                                <th style="width: 35%;" class="text-center">
                                     Detail
                                 </th>
                                 <th style="width: 15%;" class="text-center">Debit</th>
