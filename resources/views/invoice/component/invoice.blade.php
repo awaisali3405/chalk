@@ -457,10 +457,10 @@
                             </td>
                         </tr>
                     @elseif (str_contains($invoice->type, 'Fee'))
+                        @if (count($invoice->normalSubject()) > 0)
                         @php
                             $sr++;
                         @endphp
-                        @if (count($invoice->normalSubject()) > 0)
 
                             <tr>
                                 <td class="text-center">
