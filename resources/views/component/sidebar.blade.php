@@ -49,15 +49,7 @@
                         </ul>
                     </li>
                 @endif
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-headphones"></i>
-                        <span class="nav-text">Wallet</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('wallet.index') }}">All Wallet</a></li>
-                        <li><a href="{{ route('wallet.create') }}">Add Wallet</a></li>
-                    </ul>
-                </li>
+
             @endif
 
             @if (auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'super admin')
@@ -70,6 +62,8 @@
                         <li><a href="{{ route('attendance.create') }}">Add Attendance</a></li>
                     </ul>
                 </li>
+
+                <li class="nav-label first">Account</li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-home"></i>
                         <span class="nav-text">Invoice</span>
@@ -80,7 +74,75 @@
                         <li><a href="{{ route('invoice.due') }}">Due Invoice</a></li>
                     </ul>
                 </li>
-
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-home"></i>
+                        <span class="nav-text">Resource Book</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('product.index') }}">Book</a></li>
+                        <li><a href="{{ route('supplier.index') }}">Book Supplier</a></li>
+                        <li><a href="{{ route('purchase.index') }}">Book Purchase</a></li>
+                        <li><a href="{{ route('sale.index') }}">Book Sale</a></li>
+                    </ul>
+                </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-headphones"></i>
+                        <span class="nav-text">Wallet</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('wallet.index') }}">All Wallet</a></li>
+                        <li><a href="{{ route('wallet.create') }}">Add Wallet</a></li>
+                    </ul>
+                </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-university"></i>
+                        <span class="nav-text">Student Deposit</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('refund.index') }}">Student Deposit</a></li>
+                        <li><a href="{{ route('refund.create') }}">All Refund</a></li>
+                    </ul>
+                </li>
+                {{-- <li class="nav-label first">Expense</li> --}}
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-university"></i>
+                        <span class="nav-text">Expense Acount Type</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('expenseTypeAccount.index') }}">All Expense Acount Type</a></li>
+                        <li><a href="{{ route('expenseTypeAccount.create') }}">Add Expense Acount Type</a></li>
+                    </ul>
+                </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-university"></i>
+                        <span class="nav-text">Expense</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('expense.index') }}">All Expense</a></li>
+                        <li><a href="{{ route('expense.create') }}">Add Expense</a></li>
+                    </ul>
+                </li>
+                <li class="nav-label first">Account Management</li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-university"></i>
+                        <span class="nav-text">Balance Sheet</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('balanceSheet.index') }}">Balance Sheet</a></li>
+                        {{-- <li><a href="{{ route('branch.create') }}"></a></li> --}}
+                    </ul>
+                </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-university"></i>
+                        <span class="nav-text">Statement</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('cashFlow.index') }}">Company Statement</a></li>
+                        <li><a href="{{ route('taxFlow.index') }}">VAT Statement</a></li>
+                        <li><a href="{{ route('loan.flow') }}">Staff Loan Statement</a></li>
+                    </ul>
+                </li>
+                {{-- <li class="nav-label first">Resource Book</li> --}}
                 <li class="nav-label first">HR Management</li>
 
 
@@ -142,65 +204,11 @@
                     </ul>
                 </li>
 
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-university"></i>
-                        <span class="nav-text">Balance Sheet</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('balanceSheet.index') }}">Balance Sheet</a></li>
-                        {{-- <li><a href="{{ route('branch.create') }}"></a></li> --}}
-                    </ul>
-                </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-university"></i>
-                        <span class="nav-text">Statement</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('cashFlow.index') }}">Company Statement</a></li>
-                        <li><a href="{{ route('taxFlow.index') }}">VAT Statement</a></li>
-                        <li><a href="{{ route('loan.flow') }}">Staff Loan Statement</a></li>
-                    </ul>
-                </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-university"></i>
-                        <span class="nav-text">Student Deposit</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('refund.index') }}">Student Deposit</a></li>
-                        <li><a href="{{ route('refund.create') }}">All Refund</a></li>
-                    </ul>
-                </li>
-                <li class="nav-label first">Resource Book</li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-home"></i>
-                        <span class="nav-text">Purchase/Sale</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('product.index') }}">Product</a></li>
-                        <li><a href="{{ route('supplier.index') }}">Product Supplier</a></li>
-                        <li><a href="{{ route('purchase.index') }}">Purchase</a></li>
-                        <li><a href="{{ route('sale.index') }}">Sale</a></li>
-                    </ul>
-                </li>
-                <li class="nav-label first">Expense</li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-university"></i>
-                        <span class="nav-text">Expense Acount Type</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('expenseTypeAccount.index') }}">All Expense Acount Type</a></li>
-                        <li><a href="{{ route('expenseTypeAccount.create') }}">Add Expense Acount Type</a></li>
-                    </ul>
-                </li>
-                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="la la-university"></i>
-                        <span class="nav-text">Expense</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="{{ route('expense.index') }}">All Expense</a></li>
-                        <li><a href="{{ route('expense.create') }}">Add Expense</a></li>
-                    </ul>
-                </li>
+
+
+
+
+
                 <li class="nav-label first">Report (Peding)</li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-university"></i>
