@@ -33,7 +33,7 @@
                                                             <td>{{ $key + 1 }}</td>
                                                             <td>{{ $value->invoice->student->name() }}
                                                             </td>
-                                                            <td>{{ $value->amount }}</td>
+                                                            <td>£{{ auth()->user()->priceFormat($value->amount) }}</td>
                                                             <td>
                                                                 @foreach ($value->refunded as $value1)
                                                                     {{ auth()->user()->ukFormat($value1->date) . ' ' }}

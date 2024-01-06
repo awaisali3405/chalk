@@ -39,7 +39,7 @@
                             {{-- <li><a href="{{ route('student.deactive') }}">DeActive Student</a></li> --}}
                             <li><a href="{{ route('student.create') }}">Add Student</a></li>
                             @if (auth()->user()->role->name != 'parent')
-                                <li><a href="{{ route('student.debt.index') }}">Suspend Student</a></li>
+                                <li><a href="{{ route('student.debt.index') }}">In Active Student</a></li>
                                 <li><a href="{{ route('student.request') }}">Student Request
                                         ({{ auth()->user()->studentRequest()->count() }})</a></li>
                                 <li><a href="{{ route('student.disable') }}">Disabled Student
