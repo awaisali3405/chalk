@@ -275,7 +275,7 @@
     </div>
     <div class="row">
         <div class="col-12 d-flex justify-content-center" style="border: 2px solid black;">
-            <p style="font-size: 12px; padding-bottom:0px;">
+            <p style="font-size: 12px; padding-bottom:0px;padding-top:10px;">
 
                 Bank Details: {{ $invoice->branch->bank_name }} ,Company Name:
                 {{ $invoice->branch->name }},
