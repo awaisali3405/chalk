@@ -361,7 +361,22 @@
                                             <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
                                         </tr>
                                     @endif
-
+                                    @if (str_contains($value11, 'Wallet'))
+                                        @php
+                                            $total = $total + $value11->amount;
+                                            $debit += $value11->amount;
+                                        @endphp
+                                        <tr style="color: rgb(146, 10, 10);">
+                                            <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
+                                            <td>{{ $value11->description }} {{ $value11->mode }}
+                                                Debit </td>
+                                            <td class="text-align-end">
+                                                £{{ auth()->user()->priceFormat($value11->amount) }}
+                                            </td>
+                                            <td class="text-align-end">£0</td>
+                                            <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
+                                        </tr>
+                                    @endif
                                     @php
                                         $total = $total - $value11->amount;
                                     @endphp
@@ -382,22 +397,6 @@
                                         $credit += $value11->amount;
 
                                     @endphp
-                                    @if (str_contains($value11, 'Wallet'))
-                                        @php
-                                            $total = $total + $value11->amount;
-                                            $debit += $value11->amount;
-                                        @endphp
-                                        <tr style="color: rgb(146, 10, 10);">
-                                            <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
-                                            <td>{{ $value11->description }} {{ $value11->mode }}
-                                                Debit </td>
-                                            <td class="text-align-end">
-                                                £{{ auth()->user()->priceFormat($value11->amount) }}
-                                            </td>
-                                            <td class="text-align-end">£0</td>
-                                            <td class="text-align-end">£{{ auth()->user()->priceFormat($total) }}</td>
-                                        </tr>
-                                    @endif
                                 @endforeach
                                 @foreach ($value1->invoiceRefund as $value12)
                                     @php
