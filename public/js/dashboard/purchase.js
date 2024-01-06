@@ -2,7 +2,7 @@ $('.quantity').on('change keyup', function () {
     rate = $('.rate').val()
     quantity = $('.quantity').val()
 
-    $('.amount').val((rate * quantity).toFixed(0))
+    $('.amount').val((rate * quantity).toFixed(2))
 })
 $('.is-discount-price').on('change', function () {
     is_discount_price = $(this).val();
