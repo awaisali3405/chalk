@@ -98,7 +98,7 @@ class EnquiryController extends Controller
         if (isset($data['subject'])) {
             $data['subject'] = json_encode($data['subject']);
         }
-
+        $data['academic_year_id'] = auth()->user()->session()->id;
         $enquiry = Enquiry::create($data);
         // dd($enquiry  );
         if ($request->email_received && $request->email) {

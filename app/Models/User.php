@@ -378,6 +378,10 @@ class User extends Authenticatable
         $dbsReceived = $this->dbsReceived($branch, $academicYear);
         return  (float) $feeReceived + (float) $depositReceived +  (float) $resourceReceived +  (float) $resourceFeeReceived + (float) $availableStock + (float)$loanPaid + (float)$feeDue + (float)$depositDue + (float)$resourceFeeDue + (float)$resourceDue + (float)$transfer + (float)$dbsReceived;
     }
+    // public function totalLiability($branch, $academicYear)
+    // {
+
+    // }
     //Cash and Bank
     public function totalCashReceived($branch, $academicYear)
     {
