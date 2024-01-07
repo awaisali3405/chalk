@@ -63,7 +63,7 @@
                                                                     data-target="#notification-{{ $value->id }}">Notification</a>
                                                                 @if (!$value->staff)
                                                                     <a class="dropdown-item btn-event" data-toggle="modal"
-                                                                        data-target="#registration-{{ $value->id }}">Registration</a>
+                                                                        data-target="#registration-{{ $value->id }}">Hire</a>
                                                                 @endif
                                                                 {{-- <a class="dropdown-item"
                                                                     href="{{ route('enquiryTeacher.upload', $value->id) }}">Document</a>
