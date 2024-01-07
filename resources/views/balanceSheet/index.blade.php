@@ -93,7 +93,7 @@
                                                         £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->feeDue(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                     </td>
-                                                    <td class="text-left">Salaries Payable</td>
+                                                    <td class="text-left">Salaries Due</td>
                                                     <td class="text-left">
                                                         £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->totalSalary(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
                                                     </td>
@@ -204,12 +204,12 @@
 
                                                     </td>
                                                     {{-- <td class="text-left"> Default Amount</td> --}}
-
-                                                    <td class="text-left">Pension Due</td>
+                                                    <td class="text-left">Pension Paid</td>
                                                     <td class="text-left">
-                                                        £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->pensionDue(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
+                                                        £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->pensionPaid(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                     </td>
+
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left">Wallet</td>
@@ -217,9 +217,9 @@
                                                         £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->studentWallet(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                     </td>
-                                                    <td class="text-left">Pension Paid</td>
+                                                    <td class="text-left">Pension Due</td>
                                                     <td class="text-left">
-                                                        £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->pensionPaid(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
+                                                        £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->pensionDue(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                     </td>
 

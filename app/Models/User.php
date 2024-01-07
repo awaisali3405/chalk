@@ -523,7 +523,8 @@ class User extends Authenticatable
     {
         $empPension = $this->staffPay($branch, $academicYear)->sum('employer_pension');
         $pension = $this->staffPay($branch, $academicYear)->sum('pension');
-        return $empPension + $pension;
+        $paid = $this->hmrc($branch, $academicYear)->where('payment_type', 'third_party')->sum('amount');
+        return $empPension + $pension - $paid;
     }
     public function pensionPaid($branch, $academicYear)
     {
@@ -537,7 +538,7 @@ class User extends Authenticatable
         $ni = $this->staffPay($branch, $academicYear)->sum('ni');
         $empNi = $this->staffPay($branch, $academicYear)->sum('employer_ni');
         $studentLoan = $this->staffPay($branch, $academicYear)->sum('student_loan');
-        $paid = $this->hmrc($branch, $academicYear)->sum('amount');
+        $paid = $this->hmrc($branch, $academicYear)->where('payment_type', 'gov')->sum('amount');
         return $tax + $ni +  $empNi + $studentLoan - $paid;
     }
     public function hmrc($branch, $academicYear)
