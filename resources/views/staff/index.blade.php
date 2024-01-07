@@ -57,8 +57,8 @@
                                                                     href="{{ route('staff.edit', $value->id) }}">Edit</a>
                                                                 <a class="dropdown-item"
                                                                     href="{{ route('staff.attendance.index', $value->id) }}">Attendance</a>
-                                                                <a class="dropdown-item"
-                                                                    href="{{ route('staff.pay', $value->id) }}">Pay</a>
+                                                                {{-- <a class="dropdown-item"
+                                                                    href="{{ route('staff.pay', $value->id) }}">Pay</a> --}}
                                                                 <a class="dropdown-item"
                                                                     href="{{ route('staff.statement', $value->id) }}">Statement</a>
                                                                 <a class="dropdown-item"

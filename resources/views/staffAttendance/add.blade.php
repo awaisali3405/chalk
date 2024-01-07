@@ -118,7 +118,7 @@
                                     @if (request()->input('salary_type'))
                                         <div class="col-lg-3 col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label class="form-label">Paid</label>
+                                                <label class="form-label">Paid Hour</label>
                                                 <input type="number" step="0.01" class="form-control" name="paid_hour"
                                                     value="" id="">
 
@@ -160,7 +160,7 @@
                                                         <th>Name</th>
                                                         <th>Email</th>
                                                         <th>Branch</th>
-                                                        <th>Invoice</th>
+                                                        <th>Attendance</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -177,7 +177,7 @@
                                                             </td>
                                                             <td>
                                                                 <a class="btn btn-primary"
-                                                                    href="{{ route('staff.attendance.index', $value->id) }}">Invoice</a>
+                                                                    href="{{ route('staff.attendance.index', $value->id) }}">Attendance</a>
                                                             </td>
                                                         </tr>
                                                     @endforeach

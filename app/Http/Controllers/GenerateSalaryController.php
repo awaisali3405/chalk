@@ -88,9 +88,42 @@ class GenerateSalaryController extends Controller
      */
     public function show(string $id)
     {
-        //
-    }
+        if (request()->input()) {
+            $staff = new Staff();
+            if ($request->branch_id) {
 
+                $staff = $staff->where("branch_id", request()->input('branch_id'));
+            }
+            if ($request->department_id) {
+
+                $staff = $staff->where("department_id", request()->input('department_id'));
+            }
+            $staff = $staff->where('salary_type', "Hourly")->get();
+        } else {
+
+            $staff = Staff::where('salary_type', "Hourly")->get();
+        }
+        return view('salaryGenerate.hourly-index', compact('staff'));
+    }
+    public function hourly(Request $request)
+    {
+        if (request()->input()) {
+            $staff = new Staff();
+            if ($request->branch_id) {
+
+                $staff = $staff->where("branch_id", request()->input('branch_id'));
+            }
+            if ($request->department_id) {
+
+                $staff = $staff->where("department_id", request()->input('department_id'));
+            }
+            $staff = $staff->where('salary_type', "Hourly")->get();
+        } else {
+
+            $staff = Staff::where('salary_type', "Hourly")->get();
+        }
+        return view('salaryGenerate.hourly-index', compact('staff'));
+    }
     /**
      * Show the form for editing the specified resource.
      */

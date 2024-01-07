@@ -156,6 +156,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('eventCalender', EventController::class);
     // Generate Salary
     Route::resource('generateSalary', GenerateSalaryController::class);
+    Route::get('hour/staff', [GenerateSalaryController::class, 'hourly'])->name('hourly.staff');
     // General Notification
     Route::resource('generalNotification', NotificationController::class);
     // Staff Attendance
