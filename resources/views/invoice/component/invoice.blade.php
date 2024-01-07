@@ -14,10 +14,12 @@
                         <th class="">
                             Rate
                         </th>
-                        {{-- @if($invoice) --}}
-                        <th>
-                            VAT%
-                        </th>
+                        @if ($invoice->branch->tax != 0)
+                            <th>
+                                VAT%
+                            </th>
+                        @endif
+
                         <th class="">
                             Amount
                         </th>
@@ -43,7 +45,9 @@
                                     {{ date('Y', strtotime($invoice->from_date)) }}/{{ date('Y', strtotime($invoice->to_date)) }}
                                 </b>
                             </td>
-                            <td class="bg-grey"></td>
+                            @if ($invoice->branch->tax != 0)
+                                <td class="bg-grey"></td>
+                            @endif
                             <td class="bg-grey"></td>
                             <td class="bg-grey"></td>
                         </tr>
@@ -55,7 +59,9 @@
                                     {{ date('Y', strtotime($invoice->from_date)) }}/{{ date('Y', strtotime($invoice->to_date)) }}
                                 </b>
                             </td>
-                            <td class="bg-grey"></td>
+                            @if ($invoice->branch->tax != 0)
+                                <td class="bg-grey"></td>
+                            @endif
                             <td class="bg-grey"></td>
                             <td class="bg-grey"></td>
                         </tr>
@@ -65,8 +71,9 @@
                             <td class="text-center">
                                 <b>{{ $weeks }} Week</b>
                             </td>
-
-                            <td class="bg-grey"></td>
+                            @if ($invoice->branch->tax != 0)
+                                <td class="bg-grey"></td>
+                            @endif
                             <td class="bg-grey"></td>
                             <td class="bg-grey"></td>
                         </tr>
@@ -76,8 +83,9 @@
                             <td class="text-center">
                                 <b>{{ $months }} Month</b>
                             </td>
-
-                            <td class="bg-grey"></td>
+                            @if ($invoice->branch->tax != 0)
+                                <td class="bg-grey"></td>
+                            @endif
                             <td class="bg-grey"></td>
                             <td class="bg-grey"></td>
                         </tr>
@@ -87,8 +95,9 @@
                             <td class="text-center">
                                 <b> Debt Collection</b>
                             </td>
-
-                            <td class="bg-grey"></td>
+                            @if ($invoice->branch->tax != 0)
+                                <td class="bg-grey"></td>
+                            @endif
                             <td class="bg-grey"></td>
                             <td class="bg-grey"></td>
                         </tr>
@@ -98,8 +107,9 @@
                             <td class="text-center">
                                 <b>Transferred Invoice</b>
                             </td>
-
-                            <td class="bg-grey"></td>
+                            @if ($invoice->branch->tax != 0)
+                                <td class="bg-grey"></td>
+                            @endif
                             <td class="bg-grey"></td>
                             <td class="bg-grey"></td>
                         </tr>
@@ -112,8 +122,9 @@
                                     {{ auth()->user()->ukFormat($invoice->to_date) }})
                                 </b>
                             </td>
-
-                            <td class="bg-grey"></td>
+                            @if ($invoice->branch->tax != 0)
+                                <td class="bg-grey"></td>
+                            @endif
                             <td class="bg-grey"></td>
                             <td class="bg-grey"></td>
                         </tr>
@@ -126,8 +137,9 @@
                                     {{ auth()->user()->ukFormat($invoice->to_date) }}
                                 </b>
                             </td>
-
-                            <td class="bg-grey"></td>
+                            @if ($invoice->branch->tax != 0)
+                                <td class="bg-grey"></td>
+                            @endif
                             <td class="bg-grey"></td>
                             <td class="bg-grey"></td>
                         </tr>
@@ -137,7 +149,9 @@
                             <td class="text-center text-white">
                                 blank
                             </td>
-                            <td class="bg-grey"></td>
+                            @if ($invoice->branch->tax != 0)
+                                <td class="bg-grey"></td>
+                            @endif
                             <td class="bg-grey"></td>
                             <td class="bg-grey"></td>
                         </tr>
@@ -153,9 +167,11 @@
                             <td class="text-center bg-grey">
                                 <b>£{{ auth()->user()->priceFormat($invoice->amount) }}</b>
                             </td>
-                            <td class="text-center bg-grey">
-                                <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
-                            </td>
+                            @if ($invoice->branch->tax != 0)
+                                <td class="text-center bg-grey">
+                                    <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
+                                </td>
+                            @endif
                             <td class="text-center bg-grey" style="text-align: end !important; padding-right:5px;">
                                 <b>£{{ auth()->user()->priceFormat($invoice->amount) }}</b>
                             </td>
@@ -165,7 +181,9 @@
                             <td class="pl-2 pt-1 text-white">
                                 blank
                             </td>
-                            <td class="bg-grey"></td>
+                            @if ($invoice->branch->tax != 0)
+                                <td class="bg-grey"></td>
+                            @endif
                             <td class="bg-grey"></td>
                             <td class="bg-grey"></td>
                         </tr>
@@ -183,9 +201,11 @@
                             <td class="text-center bg-grey">
                                 <b>£{{ auth()->user()->priceFormat($invoice->amount) }}</b>
                             </td>
-                            <td class="text-center bg-grey">
-                                <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
-                            </td>
+                            @if ($invoice->branch->tax != 0)
+                                <td class="text-center bg-grey">
+                                    <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
+                                </td>
+                            @endif
                             <td class="text-center bg-grey" style="text-align: end !important; padding-right:5px;">
                                 <b>£{{ auth()->user()->priceFormat($invoice->amount) }}</b>
                             </td>
@@ -195,7 +215,9 @@
                             <td class="pl-2 pt-1 text-white">
                                 blank
                             </td>
-                            <td class="bg-grey"></td>
+                            @if ($invoice->branch->tax != 0)
+                                <td class="bg-grey"></td>
+                            @endif
                             <td class="bg-grey"></td>
                             <td class="bg-grey"></td>
                         </tr>
@@ -213,9 +235,11 @@
                             <td class="text-center bg-grey">
                                 <b>£{{ auth()->user()->priceFormat($invoice->amount) }}</b>
                             </td>
-                            <td class="text-center bg-grey">
-                                <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
-                            </td>
+                            @if ($invoice->branch->tax != 0)
+                                <td class="text-center bg-grey">
+                                    <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
+                                </td>
+                            @endif
                             <td class="text-center bg-grey" style="text-align: end !important; padding-right:5px;">
                                 <b>£{{ auth()->user()->priceFormat($invoice->amount) }}</b>
                             </td>
@@ -225,7 +249,9 @@
                             <td class="pl-2 pt-1 text-white">
                                 blank
                             </td>
-                            <td class="bg-grey"></td>
+                            @if ($invoice->branch->tax != 0)
+                                <td class="bg-grey"></td>
+                            @endif
                             <td class="bg-grey"></td>
                             <td class="bg-grey"></td>
                         </tr>
@@ -244,9 +270,11 @@
                                 <td class="text-center bg-grey">
                                     <b>£{{ $value->rate }}</b>
                                 </td>
-                                <td class="text-center bg-grey">
-                                    <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
-                                </td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="text-center bg-grey">
+                                        <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
+                                    </td>
+                                @endif
                                 <td class="text-center bg-grey" style="text-align: end !important; padding-right:5px;">
                                     <b>£{{ auth()->user()->priceFormat($value->amount) }}</b>
                                 </td>
@@ -259,7 +287,9 @@
                                     <h6>{{ $value->quantity }} Qty </h6>
 
                                 </td>
-                                <td class="bg-grey"></td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey"></td>
+                                @endif
                                 <td class="bg-grey"></td>
                             </tr>
                         @endforeach
@@ -279,9 +309,11 @@
                                 <td class="text-center text-center">
                                     <b>£{{ auth()->user()->priceFormat($value->subject_rate) }}</b>
                                 </td>
-                                <td class="text-center text-center">
-                                    <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
-                                </td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="text-center text-center">
+                                        <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
+                                    </td>
+                                @endif
                                 <td class=" bg-grey " style="text-align: end !important; padding-right:5px;">
                                     <b>£{{ auth()->user()->priceFormat($value->subject_amount) }}</b>
                                 </td>
@@ -296,7 +328,9 @@
                                     {{-- <h5 class=" text-center"> {{ $value->subject_hr }} hr</b> --}}
 
                                 </td>
-                                <td class="bg-grey"></td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey"></td>
+                                @endif
                                 <td class="bg-grey"></td>
                             </tr>
                             @php
@@ -319,9 +353,11 @@
                                 <td class="text-center text-center">
                                     <b>£{{ auth()->user()->priceFormat($value->rate) }}</b>
                                 </td>
-                                <td class="text-center text-center">
-                                    <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
-                                </td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="text-center text-center">
+                                        <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
+                                    </td>
+                                @endif
                                 <td class=" bg-grey " style="text-align: end !important; padding-right:5px;">
                                     <b>£{{ auth()->user()->priceFormat($value->amount) }}</b>
                                 </td>
@@ -336,7 +372,9 @@
                                     {{-- <h5 class=" text-center"> {{ $value->subject_hr }} hr</b> --}}
 
                                 </td>
-                                <td class="bg-grey"></td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey"></td>
+                                @endif
                                 <td class="bg-grey"></td>
                             </tr>
                             @php
@@ -354,9 +392,11 @@
                             <td class="text-center bg-grey">
                                 <b>£{{ auth()->user()->priceFormat($invoice->amount) }}</b>
                             </td>
-                            <td class="text-center bg-grey">
-                                <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
-                            </td>
+                            @if ($invoice->branch->tax != 0)
+                                <td class="text-center bg-grey">
+                                    <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
+                                </td>
+                            @endif
                             <td class="text-center bg-grey" style="text-align: end !important; padding-right:5px;">
                                 <b>£{{ auth()->user()->priceFormat($invoice->amount) }}</b>
                             </td>
@@ -366,7 +406,9 @@
                             <td class="pl-2 pt-1 text-white">
                                 blanck
                             </td>
-                            <td class="bg-grey"></td>
+                            @if ($invoice->branch->tax != 0)
+                                <td class="bg-grey"></td>
+                            @endif
                             <td class="bg-grey"></td>
                             <td class="bg-grey"></td>
                         </tr>
@@ -389,9 +431,11 @@
                                 <td class="text-center bg-grey">
                                     <b>£{{ auth()->user()->priceFormat($value->subject->rate) }}</b>
                                 </td>
-                                <td class="text-center bg-grey">
-                                    <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
-                                </td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="text-center bg-grey">
+                                        <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
+                                    </td>
+                                @endif
                                 <td class="text-center bg-grey"
                                     style="text-align: end !important; padding-right:5px;">
                                     <b>£{{ auth()->user()->priceFormat($value->subject->rate) }}</b>
@@ -407,8 +451,10 @@
                                 <td class="bg-grey text-grey">
                                     blanck
                                 </td>
-                                <td class="bg-grey text-center">
-                                </td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey text-center">
+                                    </td>
+                                @endif
                                 <td class="bg-grey text-center">
 
                                 </td>
@@ -432,9 +478,11 @@
                                     {{-- {{ $invoice->resourceInvoiceSubject()->first()->subject->book_rate * count($invoice->resourceInvoiceSubject) }} --}}
                                     £{{ auth()->user()->priceFormat($invoice->resourceInvoiceSubject()->first()->subject->book_rate) }}</b>
                             </td>
-                            <td class="text-center bg-grey">
-                                <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
-                            </td>
+                            @if ($invoice->branch->tax != 0)
+                                <td class="text-center bg-grey">
+                                    <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
+                                </td>
+                            @endif
                             <td class="text-center bg-grey" style="text-align: end !important; padding-right:5px;">
                                 <b>
                                     £{{ auth()->user()->priceFormat($invoice->resourceInvoiceSubject()->first()->subject->book_rate * count($invoice->resourceInvoiceSubject)) }}</b>
@@ -451,17 +499,19 @@
                             <td class="bg-grey text-grey">
                                 blanck
                             </td>
-                            <td class="bg-grey text-center">
-                            </td>
+                            @if ($invoice->branch->tax != 0)
+                                <td class="bg-grey text-center">
+                                </td>
+                            @endif
                             <td class="bg-grey text-center">
 
                             </td>
                         </tr>
                     @elseif (str_contains($invoice->type, 'Fee'))
                         @if (count($invoice->normalSubject()) > 0)
-                        @php
-                            $sr++;
-                        @endphp
+                            @php
+                                $sr++;
+                            @endphp
 
                             <tr>
                                 <td class="text-center">
@@ -482,11 +532,13 @@
                                         </b>
                                     </h6>
                                 </td>
-                                <td class="text-center bg-grey">
-                                    <h6>
-                                        <b> {{ auth()->user()->priceFormat($invoice->tax) }}% </b>
-                                    </h6>
-                                </td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="text-center bg-grey">
+                                        <h6>
+                                            <b> {{ auth()->user()->priceFormat($invoice->tax) }}% </b>
+                                        </h6>
+                                    </td>
+                                @endif
                                 <td class="text-center bg-grey"
                                     style="text-align: end !important; padding-right:5px;">
                                     <b>
@@ -506,7 +558,9 @@
                                         £{{ $invoice->normalSubject()->sum('amount') }}
                                         Weekly</h6>
                                 </td>
-                                <td class="bg-grey"></td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey"></td>
+                                @endif
                                 <td class="bg-grey"></td>
                             </tr>
                         @endif
@@ -529,9 +583,11 @@
                                 <td class="text-center bg-grey">
                                     <b>£{{ auth()->user()->priceFormat($invoice->oneOnOneSubject($invoice->id)[0]->rate_per_hr) }}</b>
                                 </td>
-                                <td class="text-center bg-grey">
-                                    <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
-                                </td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="text-center bg-grey">
+                                        <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
+                                    </td>
+                                @endif
                                 <td class="text-center bg-grey"
                                     style="text-align: end !important; padding-right:5px;">
                                     <b>£{{ str_contains($invoice->type, 'Month')? (str_contains($invoice->student->currentYear()->name, '11')? auth()->user()->priceFormat((($invoice->oneOnOneSubject()->sum('amount') * 40) / 9) * $months, 2): auth()->user()->priceFormat((($invoice->oneOnOneSubject()->sum('amount') * 52) / 12) * $months, 2)): auth()->user()->priceFormat($invoice->oneOnOneSubject()->sum('amount') * $weeks) }}</b>
@@ -548,7 +604,9 @@
                                         £{{ $invoice->oneOnOneSubject()->sum('amount') }}
                                         Weekly</h6>
                                 </td>
-                                <td class="bg-grey"></td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey"></td>
+                                @endif
                                 <td class="bg-grey"></td>
                             </tr>
                         @endif
@@ -568,9 +626,11 @@
                                 <td class="bg-grey">
                                     <b></b>
                                 </td>
-                                <td class="bg-grey text-center">
-                                    <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
-                                </td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey text-center">
+                                        <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
+                                    </td>
+                                @endif
                                 <td class="bg-grey text-center"
                                     style="text-align: end !important; padding-right:5px;">
                                     <b>
@@ -592,8 +652,10 @@
                                 <td class="bg-grey text-grey">
                                     blanck
                                 </td>
-                                <td class="bg-grey text-center">
-                                </td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey text-center">
+                                    </td>
+                                @endif
                                 <td class="bg-grey text-center">
 
                                 </td>
@@ -621,9 +683,11 @@
                                 <td class="bg-grey">
                                     <b></b>
                                 </td>
-                                <td class="bg-grey text-center">
-                                    <b>{{ $invoice->student->branch->tax_type == 'flat'? auth()->user()->priceFormat($invoice->student->branch->tax): 0 }}%</b>
-                                </td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey text-center">
+                                        <b>{{ $invoice->student->branch->tax_type == 'flat'? auth()->user()->priceFormat($invoice->student->branch->tax): 0 }}%</b>
+                                    </td>
+                                @endif
                                 <td class="bg-grey text-center"
                                     style="text-align: end !important; padding-right:5px;">
                                     <b>
@@ -642,9 +706,11 @@
                                 <td class="bg-grey">
 
                                 </td>
-                                <td class="bg-grey">
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey">
 
-                                </td>
+                                    </td>
+                                @endif
                                 <td class="bg-grey text-center">
 
                                 </td>
@@ -668,9 +734,11 @@
                                 <td class="bg-grey">
                                     <b></b>
                                 </td>
-                                <td class="bg-grey text-center">
-                                    <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
-                                </td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey text-center">
+                                        <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
+                                    </td>
+                                @endif
                                 <td class="bg-grey text-center"
                                     style="text-align: end !important; padding-right:5px;">
                                     <b>
@@ -687,8 +755,10 @@
                                 <td class="bg-grey text-grey">
                                     blanck
                                 </td>
-                                <td class="bg-grey text-center">
-                                </td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey text-center">
+                                    </td>
+                                @endif
                                 <td class="bg-grey text-center">
                                 </td>
                             </tr>
@@ -709,9 +779,11 @@
                                 <td class="bg-grey">
                                     <b></b>
                                 </td>
-                                <td class="bg-grey text-center">
-                                    <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
-                                </td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey text-center">
+                                        <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
+                                    </td>
+                                @endif
                                 <td class="bg-grey text-center"
                                     style="text-align: end !important; padding-right:5px;">
                                     <b>
@@ -727,8 +799,10 @@
                                 <td class="bg-grey text-grey">
                                     blanck
                                 </td>
-                                <td class="bg-grey text-center">
-                                </td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey text-center">
+                                    </td>
+                                @endif
                                 <td class="bg-grey text-center">
                                 </td>
                             </tr>
@@ -749,9 +823,11 @@
                                 <td class="bg-grey">
                                     <b></b>
                                 </td>
-                                <td class="bg-grey text-center">
-                                    <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
-                                </td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey text-center">
+                                        <b>{{ auth()->user()->priceFormat($invoice->tax) }}%</b>
+                                    </td>
+                                @endif
                                 <td class="bg-grey text-center"
                                     style="text-align: end !important; padding-right:5px;">
                                     <b>
@@ -767,8 +843,10 @@
                                 <td class="bg-grey text-grey">
                                     blanck
                                 </td>
-                                <td class="bg-grey text-center">
-                                </td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey text-center">
+                                    </td>
+                                @endif
                                 <td class="bg-grey text-center">
                                 </td>
                             </tr>
@@ -789,8 +867,10 @@
                                 <td class="bg-grey">
                                     <b></b>
                                 </td>
-                                <td class="bg-grey text-center">
-                                </td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey text-center">
+                                    </td>
+                                @endif
                                 <td class="bg-grey text-center"
                                     style="text-align: end !important; padding-right:5px;">
                                     <b>
@@ -809,8 +889,10 @@
                                 <td class="bg-grey text-grey">
                                     blanck
                                 </td>
-                                <td class="bg-grey text-center">
-                                </td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey text-center">
+                                    </td>
+                                @endif
                                 <td class="bg-grey text-center">
 
                                 </td>
@@ -829,9 +911,11 @@
                                 <td class="bg-grey">
                                     <b></b>
                                 </td>
-                                <td class="bg-grey">
-                                    <b></b>
-                                </td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey">
+                                        <b></b>
+                                    </td>
+                                @endif
                                 <td class="bg-grey text-center"
                                     style="text-align: end !important; padding-right:5px;">
                                     <b>
@@ -845,7 +929,9 @@
                                 <td class="pl-2">
                                     <h6>{{ auth()->user()->ukFormat($value->date) }}</h6>
                                 </td>
-                                <td class="bg-grey"></td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey"></td>
+                                @endif
                                 <td class="bg-grey"></td>
                                 <td class="bg-grey"></td>
                             </tr>
@@ -861,9 +947,11 @@
                                     <td class="bg-grey">
                                         <b></b>
                                     </td>
-                                    <td class="bg-grey">
-                                        <b></b>
-                                    </td>
+                                    @if ($invoice->branch->tax != 0)
+                                        <td class="bg-grey">
+                                            <b></b>
+                                        </td>
+                                    @endif
                                     <td class="bg-grey text-center"
                                         style="text-align: end !important; padding-right:5px;">
                                         <b>
@@ -877,7 +965,9 @@
                                     <td class="pl-2">
                                         <h6>{{ auth()->user()->ukFormat($value->date) }}</h6>
                                     </td>
-                                    <td class="bg-grey"></td>
+                                    @if ($invoice->branch->tax != 0)
+                                        <td class="bg-grey"></td>
+                                    @endif
                                     <td class="bg-grey"></td>
                                     <td class="bg-grey"></td>
                                 </tr>
@@ -895,9 +985,11 @@
                                 <td class="bg-grey">
                                     <b></b>
                                 </td>
-                                <td class="bg-grey">
-                                    <b></b>
-                                </td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey">
+                                        <b></b>
+                                    </td>
+                                @endif
                                 <td class="bg-grey text-center"
                                     style="text-align: end !important; padding-right:5px;">
                                     <b>

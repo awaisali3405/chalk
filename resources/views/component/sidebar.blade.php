@@ -202,9 +202,9 @@
                         <span class="nav-text">Staff Salary </span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="{{ route('generateSalary.index') }}">Generate Monthly Salary</a></li>
-                        <li><a href="{{ route('hourly.staff') }}">Generate Hourly Salary</a></li>
-                        <li><a href="{{ route('generateSalary.create') }}">Show Generate Salary</a></li>
+                        <li><a href="{{ route('generateSalary.index') }}">Generate Monthly Staff Salary</a></li>
+                        <li><a href="{{ route('hourly.staff') }}">Pay Hourly Staff Salary</a></li>
+                        <li><a href="{{ route('generateSalary.create') }}">System Generated Payslip</a></li>
                     </ul>
                 </li>
 
