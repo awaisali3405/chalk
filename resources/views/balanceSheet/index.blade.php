@@ -179,9 +179,10 @@
 
                                                         £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->resourceDue(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
                                                     </td>
-                                                    <td class="text-left">Payable HMRC</td>
+                                                    <td class="text-left">HMRC Paid</td>
                                                     <td class="text-left">
-                                                        £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->payableHMRC(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
+                                                        £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->paidHMRC(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
+
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -190,12 +191,11 @@
                                                         £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->availableStock(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                     </td>
-
-                                                    <td class="text-left">Paid HMRC</td>
+                                                    <td class="text-left">HMRC Due</td>
                                                     <td class="text-left">
-                                                        £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->paidHMRC(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
-
+                                                        £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->payableHMRC(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
                                                     </td>
+
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left">Loan Received</td>
