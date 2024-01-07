@@ -173,6 +173,7 @@
                                                         $hmrc = 0;
                                                         $employerNI = 0;
                                                         $employerPension = 0;
+                                                        $deduction = 0;
                                                     @endphp
                                                     @foreach ($staff as $key => $value)
                                                         @php
