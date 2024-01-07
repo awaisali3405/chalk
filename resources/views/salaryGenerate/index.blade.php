@@ -136,7 +136,7 @@
                                                                                 </td>
                                                                                 <td>{{ $value->branch->name }}
                                                                                 </td>
-                                                                                <td>{{ $value->salary }}
+                                                                                <td>£{{ $value->salary }}
                                                                                 </td>
                                                                                 <td>{{ $value->salary_type }}
                                                                                 </td>

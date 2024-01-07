@@ -40,8 +40,8 @@
                                                     <tr>
                                                         <td>{{ $key + 1 }}</td>
                                                         <td>{{ $value->staff->name }}</td>
-                                                        <td>{{ auth()->user()->priceFormat($value->deduction_amount) }}</td>
-                                                        <td>{{ auth()->user()->priceFormat($value->request_amount) }}</td>
+                                                        <td>£{{ auth()->user()->priceFormat($value->deduction_amount) }}</td>
+                                                        <td>£{{ auth()->user()->priceFormat($value->request_amount) }}</td>
                                                         <td>
                                                             @if (!$value->fixed)
                                                                 <a href="{{ route('staffRequest.edit', $value->id) }}"

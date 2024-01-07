@@ -87,6 +87,8 @@
                                                                             class="form-control {{ $staff->salary_type == 'Monthly' ? 'start_date' : '' }}"
                                                                             id="from_date" name="from_date" placeholder=""
                                                                             {{ $staff->salary_type == 'Monthly' ? 'readonly' : '' }}
+                                                                            max="{{ auth()->user()->session()->end_date }}"
+                                                                            min="{{ auth()->user()->session()->start_date }}"
                                                                             required>
                                                                     </div>
                                                                 </div>
@@ -100,6 +102,8 @@
                                                                             class="form-control {{ $staff->salary_type == 'Monthly' ? 'end_date' : '' }}"
                                                                             id="to_date" name="to_date" placeholder=""
                                                                             required
+                                                                            max="{{ auth()->user()->session()->end_date }}"
+                                                                            min="{{ auth()->user()->session()->start_date }}"
                                                                             {{ $staff->salary_type == 'Monthly' ? 'readonly' : '' }}>
                                                                     </div>
                                                                 </div>
