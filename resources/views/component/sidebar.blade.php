@@ -127,7 +127,7 @@
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-university"></i>
-                        <span class="nav-text">HMRC</span>
+                        <span class="nav-text">Pay HMRC</span>
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{ route('staff.hmrc') }}">Employer's Summary</a></li>
@@ -213,7 +213,7 @@
                     <ul aria-expanded="false">
                         <li><a href="{{ route('generateSalary.index') }}">Generate Monthly Staff Salary</a></li>
                         <li><a href="{{ route('hourly.staff') }}">Pay Hourly Staff Salary</a></li>
-                        <li><a href="{{ route('generateSalary.create') }}">System Generated Payslip</a></li>
+                        <li><a href="{{ route('generateSalary.create') }}">Pay Monthly Staff Salary</a></li>
                     </ul>
                 </li>
 
