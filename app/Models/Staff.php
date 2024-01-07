@@ -112,6 +112,6 @@ class Staff extends Model
     }
     public function hmrc($from_date, $to_date)
     {
-        return $this->empNI($from_date, $to_date) + $this->empPension($from_date, $to_date) + $this->tax($from_date, $to_date) + $this->salary($from_date, $to_date) + $this->studentLoan($from_date, $to_date);
+        return +$this->salary($from_date, $to_date) - ($this->empNI($from_date, $to_date) + $this->empPension($from_date, $to_date) + $this->tax($from_date, $to_date)  + $this->studentLoan($from_date, $to_date));
     }
 }

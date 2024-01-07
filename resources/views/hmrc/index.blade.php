@@ -86,7 +86,8 @@
                                 @csrf
                                 <div class="card">
                                     <div class="card-header">
-                                        <input type="hidden" name="academic_year_id" value="{{ auth()->user()->session()->id }}" id="">
+                                        <input type="hidden" name="academic_year_id"
+                                            value="{{ auth()->user()->session()->id }}" id="">
                                         <input type="hidden" name="from_date" value="{{ $from_date }}">
                                         <input type="hidden" name="to_date" value="{{ $to_date }}">
                                         <div class="col-lg-2 col-md-6 col-sm-12">
@@ -153,7 +154,7 @@
                                                         <th>Name</th>
                                                         <th>Payment</th>
                                                         <th>TAX</th>
-                                                        <th>Student</th>
+                                                        <th>Student Loan</th>
                                                         <th>Employee NI</th>
                                                         <th>Employee Pension</th>
                                                         <th>Net Pay</th>
