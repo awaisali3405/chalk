@@ -26,7 +26,10 @@ $('#start_time').add('#end_time').on('change keyup', function () {
     if (start && end) {
 
         var timeDifference = calculateTimeDifference(start, end);
-        var calculatedTime = timeDifference['hours'] + '.' + timeDifference['minutes'];
+        if(timeDifference['minutes'] < 10){
+            timeDifference['minutes'] ='0'+timeDifference['minutes'];
+        }
+        var calculatedTime = timeDifference['hours'] + '.' + timeDifference['minutes'] ;
         $('#calculated_time').val(calculatedTime);
     }
     // var start_time = Date.parse(start, "hh:mm tt");  //Convert Time from A/PM to time
@@ -45,7 +48,10 @@ $('.start_time1').add('.end_time1').on('change keyup', function () {
     if (start && end) {
 
         var timeDifference = calculateTimeDifference(start, end);
-        var calculatedTime = timeDifference['hours'] + '.' + timeDifference['minutes'];
+        if(timeDifference['minutes'] < 10){
+            timeDifference['minutes'] ='0'+timeDifference['minutes'];
+        }
+        var calculatedTime = timeDifference['hours'] + '.' + timeDifference['minutes'] ;
         $('.calculated_time1').val(calculatedTime);
     }
     // var start_time1 = Date.parse(start, "hh:mm tt");  //Convert Time from A/PM to time
@@ -54,6 +60,5 @@ $('.start_time1').add('.end_time1').on('change keyup', function () {
     // var startDate = new Date("1/1/1900 " + start_time);
     // var endDate = new Date("1/1/1900 " + end_time);
     // diff_in_min = (Date.parse(day + end) - Date.parse(day + start)) //diff in milliseconds'
-
-    console.log(timeDifference,);
+    console.log(timeDifference);
 })

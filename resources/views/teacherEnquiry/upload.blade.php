@@ -23,6 +23,7 @@
                                             <select class="form-control" name="document_name" required>
                                                 <option value="">-</option>
                                                 @foreach (auth()->user()->uploadDocument() as $value)
+                                                
                                                     <option value="{{ $value->name }}">{{ $value->name }}</option>
                                                 @endforeach
 

@@ -69,7 +69,7 @@
                                                                             data-target="#registration-{{ $value->id }}">Hire</a>
                                                                     @endif
                                                                     <a class="dropdown-item"
-                                                                        href="{{ route('enquiryTeacher.upload', $value->id) }}">Document</a>
+                                                                        href="{{ route('enquiryTeacher.upload', $value->id) }}">Documents</a>
                                                                     {{--
                                                                     <a class="dropdown-item"
                                                                     href="{{ route('enquiryTeacher.payroll', $value->id) }}">Upload</a> --}}

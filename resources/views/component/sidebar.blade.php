@@ -7,7 +7,10 @@
             Session
         </div>
         <ul class="metismenu mm-show" id="menu">
-            <li class="nav-label first" style="color: #ffbd33; ">Student Management</li>
+            <li class="nav-label first" style="color: #ffbd33;  font-size:12px">Student Management</li>
+            <li>
+                <hr>
+            </li>
             @if (auth()->user()->role->name == 'super admin' || auth()->user()->role->name == 'admin')
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-headphones"></i>
