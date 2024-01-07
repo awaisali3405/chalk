@@ -197,7 +197,9 @@ class StaffController extends Controller
                 $to_date = $request->to_date;
             }
         }
-        $staff = Staff::where('created_at', '>=', $from_date)->where('created_at', '<=', $to_date);
+        $staff = Staff::whereHas('receipt', function ($query) use ($from_date, $to_date) {
+            $query->where('created_at', '>=', $from_date)->where('created_at', '<=', $to_date);
+        });
         if (request()->input('branch_id')) {
             $staff = $staff->where('branch_id', request()->input('branch_id'))->get();
         } else {
