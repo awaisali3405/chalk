@@ -1,12 +1,14 @@
 
-$('#staff_branch').on('change keyup ready', function () {
+$('#staff_branch').on('change keyup', function () {
     branch = $(this).val();
     // alert(branch);
+    console.log(branch);
     $.ajax({
         method: "GET",
         url: `/api/get/staff/${branch}`,
         success: function (success) {
             $('#staff').html(success.html);
+            console.log(success.html);
         }
     })
 })
