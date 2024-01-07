@@ -237,7 +237,7 @@
                                                             HMRC Total
                                                         </th>
                                                         <th colspan="2">
-                                                            £{{ auth()->user()->priceFormat($tax + $studentLoan + $ni) }}
+                                                            £{{ auth()->user()->priceFormat($tax + $studentLoan + $ni + $employerNI) }}
                                                         </th>
                                                         <th colspan="2">
                                                             Pension Total
