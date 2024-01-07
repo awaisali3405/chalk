@@ -12,4 +12,12 @@ class Department extends Model
     protected $fillable = [
         'name'
     ];
+    public function staff()
+    {
+        return $this->hasMany(Staff::class, 'department_id');
+    }
+    public function enquiry()
+    {
+        return $this->hasMany(TeacherEnquiry::class, 'department_id');
+    }
 }

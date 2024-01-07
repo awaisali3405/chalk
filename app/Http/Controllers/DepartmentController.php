@@ -39,7 +39,9 @@ class DepartmentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $department = Department::find($id);
+        $department->delete();
+        return redirect()->back()->with('success', 'Department Deleted Successfully');
     }
 
     /**

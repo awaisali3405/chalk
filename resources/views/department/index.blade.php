@@ -44,9 +44,11 @@
                                                             <a href="{{ route('department.edit', $value->id) }}"
                                                                 class="btn btn-sm btn-primary"><i
                                                                     class="la la-pencil"></i></a>
-                                                            {{-- <a href="{{ route('branch.show', $value->id) }}"
-                                                                class="btn btn-sm btn-danger"><i
-                                                                    class="la la-trash-o"></i></a> --}}
+                                                            @if ($value->staff->count() == 0 && $value->enquiry->count() == 0)
+                                                                <a href="{{ route('department.show', $value->id) }}"
+                                                                    class="btn btn-sm btn-danger"><i
+                                                                        class="la la-trash-o"></i></a>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach
