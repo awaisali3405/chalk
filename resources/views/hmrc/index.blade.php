@@ -128,7 +128,7 @@
                                                 <label class="form-label">NIC Emp Allowance</label>
                                                 <div class="input-group mb-2">
                                                     <input type="text" class="form-control" step="0.01"
-                                                        name="discount" required>
+                                                        value="" name="discount" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -153,7 +153,7 @@
                                                         <th>Sr</th>
                                                         <th>Name</th>
                                                         <th>Payment</th>
-                                                        <th>Deduction</th>
+                                                        <th>Deduction <br> BDS</th>
                                                         <th>TAX</th>
                                                         <th>Student Loan</th>
                                                         <th>Employee NI</th>

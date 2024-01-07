@@ -127,7 +127,7 @@
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-university"></i>
-                        <span class="nav-text">Pay HMRC</span>
+                        <span class="nav-text">HMRC</span>
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{ route('staff.hmrc') }}">Employer's Summary</a></li>
