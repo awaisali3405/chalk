@@ -230,7 +230,7 @@
                                                         <th>£{{ auth()->user()->priceFormat($employerPension) }}</th>
                                                     </tr>
                                                     <tr>
-
+                                                        <th></th>
                                                         <th colspan="3">
                                                             HMRC Total
                                                         </th>
