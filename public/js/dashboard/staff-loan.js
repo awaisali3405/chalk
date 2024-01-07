@@ -1,5 +1,5 @@
-
-$('#staff_branch').on('change keyup', function () {
+console.log('dassadas');
+$('.staff_branch').on('change keyup', function () {
     branch = $(this).val();
     // alert(branch);
     console.log(branch);
