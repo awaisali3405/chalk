@@ -41,50 +41,54 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($enquiry as $key => $value)
-                                                    <tr>
-                                                        <td>{{ $key + 1 }}</td>
+                                                    @if (!$value->staff)
+                                                        <tr>
+                                                            <td>{{ $key + 1 }}</td>
 
-                                                        <td>{{ $value->first_name }} {{ $value->last_name }}</td>
-                                                        <td>{{ $value->designation }}</td>
-                                                        <td>{{ $value->branch->name }}</td>
-                                                        <td>{{ $value->phone }}</td>
-                                                        <td>{{ $value->address }}</td>
-                                                        <td>{{ $value->email }}</td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-primary dropdown-toggle"
-                                                                data-toggle="dropdown" aria-expanded="true">
-                                                                Action
-                                                            </button>
-                                                            <div class="dropdown-menu" x-placement="bottom-start"
-                                                                style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px); height:150px; overflow:auto;">
-                                                                <a class="dropdown-item"
-                                                                    href="{{ route('enquiryTeacher.edit', $value->id) }}">Edit</a>
-                                                                <a class="dropdown-item btn-event" data-toggle="modal"
-                                                                    data-target="#notification-{{ $value->id }}">Notification</a>
-                                                                @if (!$value->staff)
+                                                            <td>{{ $value->first_name }} {{ $value->last_name }}</td>
+                                                            <td>{{ $value->designation }}</td>
+                                                            <td>{{ $value->branch->name }}</td>
+                                                            <td>{{ $value->phone }}</td>
+                                                            <td>{{ $value->address }}</td>
+                                                            <td>{{ $value->email }}</td>
+                                                            <td>
+                                                                <button type="button"
+                                                                    class="btn btn-primary dropdown-toggle"
+                                                                    data-toggle="dropdown" aria-expanded="true">
+                                                                    Action
+                                                                </button>
+                                                                <div class="dropdown-menu" x-placement="bottom-start"
+                                                                    style=" position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px); height:150px; overflow:auto;">
+                                                                    <a class="dropdown-item"
+                                                                        href="{{ route('enquiryTeacher.edit', $value->id) }}">Edit</a>
                                                                     <a class="dropdown-item btn-event" data-toggle="modal"
-                                                                        data-target="#registration-{{ $value->id }}">Hire</a>
-                                                                @endif
-                                                                {{-- <a class="dropdown-item"
+                                                                        data-target="#notification-{{ $value->id }}">Notification</a>
+                                                                    @if (!$value->staff)
+                                                                        <a class="dropdown-item btn-event"
+                                                                            data-toggle="modal"
+                                                                            data-target="#registration-{{ $value->id }}">Hire</a>
+                                                                    @endif
+                                                                    {{-- <a class="dropdown-item"
                                                                     href="{{ route('enquiryTeacher.upload', $value->id) }}">Document</a>
-                                                                <a class="dropdown-item"
+                                                                    <a class="dropdown-item"
                                                                     href="{{ route('enquiryTeacher.payroll', $value->id) }}">Upload</a> --}}
-                                                                <a class="dropdown-item"
-                                                                    href="{{ route('enquiryTeacher.note', $value->id) }}">Note</a>
+                                                                    <a class="dropdown-item"
+                                                                        href="{{ route('enquiryTeacher.note', $value->id) }}">Note</a>
 
-                                                                @if (!$value->staff)
-                                                                    <form
-                                                                        action="{{ route('enquiryTeacher.destroy', $value->id) }}"
-                                                                        method="POST">
-                                                                        @csrf
-                                                                        @method('delete')
-                                                                        <button class="dropdown-item"
-                                                                            href="{{ route('enquiryTeacher.destroy', $value->id) }}">Delete</button>
-                                                                    </form>
-                                                                @endif
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                                    @if (!$value->staff)
+                                                                        <form
+                                                                            action="{{ route('enquiryTeacher.destroy', $value->id) }}"
+                                                                            method="POST">
+                                                                            @csrf
+                                                                            @method('delete')
+                                                                            <button class="dropdown-item"
+                                                                                href="{{ route('enquiryTeacher.destroy', $value->id) }}">Delete</button>
+                                                                        </form>
+                                                                    @endif
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endif
                                                 @endforeach
                                             </tbody>
                                         </table>

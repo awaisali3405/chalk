@@ -87,7 +87,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="interview-time" class="form-label">Email</label>
-                                <input type="text" class="form-control" name="email" {{ $value->email }}
+                                <input type="text" class="form-control" name="email" {{ $value->email }} required
                                     id="">
                             </div>
                         </div>
