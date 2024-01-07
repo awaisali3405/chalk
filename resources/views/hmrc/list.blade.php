@@ -29,8 +29,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>Sr</th>
-                                                    <th>Branch</th>
                                                     <th>Supplier</th>
+                                                    <th>Branch</th>
                                                     <th>Amount</th>
                                                     <th>NIC Emp Allowance</th>
                                                     <th>Net Paid</th>
