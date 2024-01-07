@@ -147,12 +147,12 @@
                 </li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <i class="la la-university"></i>
-                        <span class="nav-text">Statement</span>
+                        <span class="nav-text">HMRC</span>
+                    </a>
                         <ul aria-expanded="false">
                             <li><a href="{{ route('staff.hmrc') }}">Employer's Summary</a></li>
                             <li><a href="{{ route('staff.hmrc.list') }}">HMRC Paid Report</a></li>
                         </ul>
-                    </a>
                 </li>
                 {{-- <li class="nav-label first" style="color: #ffbd33;">Resource Book</li> --}}
                 <li class="nav-label first" style="color: #ffbd33;">HR Management</li>
