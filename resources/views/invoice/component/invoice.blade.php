@@ -14,6 +14,7 @@
                         <th class="">
                             Rate
                         </th>
+                        {{-- @if($invoice) --}}
                         <th>
                             VAT%
                         </th>
