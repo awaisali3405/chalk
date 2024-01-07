@@ -96,7 +96,7 @@ class Staff extends Model
     }
     public function salary($from_date, $to_date)
     {
-        return $this->receipt()->where('date', '>=', $from_date)->where('date', '<=', $to_date)->sum('salary');
+        return $this->receipt()->where('date', '>=', $from_date)->where('date', '<=', $to_date)->sum('salary') - $this->receipt()->where('date', '>=', $from_date)->where('date', '<=', $to_date)->sum('deduction');
     }
     public function employerNI($from_date, $to_date)
     {
