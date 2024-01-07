@@ -229,6 +229,22 @@
                                                         <th>£{{ auth()->user()->priceFormat($employerNI) }}</th>
                                                         <th>£{{ auth()->user()->priceFormat($employerPension) }}</th>
                                                     </tr>
+                                                    <tr>
+
+                                                        <th colspan="3">
+                                                            HMRC Total
+                                                        </th>
+                                                        <th colspan="3">
+                                                            £{{ auth()->user()->priceFormat($tax + $studentLoan + $ni) }}
+                                                        </th>
+                                                        <th colspan="3">
+                                                            Pension Total
+                                                        </th>
+                                                        <th colspan='2'>
+                                                            £{{ auth()->user()->priceFormat($pension + $employerPension) }}
+                                                        </th>
+
+                                                    </tr>
                                                 </thead>
                                             </table>
                                         </div>
