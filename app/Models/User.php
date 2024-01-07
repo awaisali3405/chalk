@@ -542,7 +542,7 @@ class User extends Authenticatable
     public function paidHMRC($branch, $academicYear)
     {
         // dd($this->hmrc($branch, $academicYear)->get());
-        $amount = $this->hmrc($branch, $academicYear)->sum('amount');
+        $amount = $this->hmrc($branch, $academicYear)->sum('amount') - $this->hmrc($branch, $academicYear)->sum('discount');
         return $amount;
     }
     public function dbsReceived($branch, $academicYear)

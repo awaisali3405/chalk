@@ -218,6 +218,7 @@ class StaffController extends Controller
             'amount' => 'required',
             'discount' => 'required'
         ]);
+        $data['academic_year_id'] = auth()->user()->session()->id;
         HMRC::create($data);
         return redirect()->back()->with('success', "HMRC has been added successfully");
     }
