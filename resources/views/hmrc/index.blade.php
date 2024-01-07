@@ -231,13 +231,15 @@
                                                     </tr>
                                                     <tr>
                                                         <th></th>
-                                                        <th colspan="3">
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th colspan="2">
                                                             HMRC Total
                                                         </th>
-                                                        <th colspan="3">
+                                                        <th colspan="2">
                                                             £{{ auth()->user()->priceFormat($tax + $studentLoan + $ni) }}
                                                         </th>
-                                                        <th colspan="3">
+                                                        <th colspan="2">
                                                             Pension Total
                                                         </th>
                                                         <th colspan='2'>
@@ -250,11 +252,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card">
+                                {{-- <div class="card">
                                     <div class="card-header">
-                                        d
+
                                     </div>
-                                </div>
+                                </div> --}}
                         </div>
                         </form>
 
