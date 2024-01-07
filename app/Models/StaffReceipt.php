@@ -44,6 +44,6 @@ class StaffReceipt extends Model
     }
     public function total()
     {
-        return ($this->salary + $this->ssp + $this->bonus) - ($this->tax + $this->pension + $this->dbs + $this->ni + $this->loan + $this->deduction);
+        return ($this->salary + $this->ssp + $this->bonus) - ($this->tax + $this->pension + $this->dbs + $this->ni + $this->loan + $this->deduction + $this->student_loan);
     }
 }
