@@ -149,7 +149,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Staff HMRC
     Route::get('staff/hmrc/report', [StaffController::class, 'hmrc'])->name('staff.hmrc');
     Route::get('staff/hmrc/list', [StaffController::class, 'hmrcList'])->name('staff.hmrc.list');
-    Route::get('staff/hmrc/list/hr', [StaffController::class, 'hmrcList'])->name('staff.hmrc.list.hr');
+    // Route::get('staff/hmrc/list/hr', [StaffController::class, 'hmrcList'])->name('staff.hmrc.list.hr');
     Route::post('staff/hmrc/report/store', [StaffController::class, 'hmrcStore'])->name('staff.hmrc.store');
     // Staff Attendance
     Route::resource('staffAttendance', StaffAttendanceController::class);
