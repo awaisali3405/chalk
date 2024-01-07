@@ -861,7 +861,7 @@ class StudentsController extends Controller
                 'date' => $academicYear->start_date,
                 'mode' => 'Cash',
                 'amount' => $student->cash_balance,
-                'description' => 'Amount Credited from ' . $academicYear->InvoiceYearCode() . ' to ',
+                'description' => 'Wallet Balance From ' . auth()->user()->session()->InvoiceYearCode() . ' to ',
                 'fixed' => true,
                 'academic_year_id' => $academicYear->id
             ]);

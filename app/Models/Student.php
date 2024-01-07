@@ -275,4 +275,13 @@ class Student extends Model
         }
         return ['balance' => $balance, 'credit' => $credit, 'debit' => $debit];
     }
+    public function lastYear()
+    {
+
+        return !is_null($this->promotionDetail()->where('academic_year_id', auth()->user()->session()->id - 1)->first()) ? $this->promotionDetail()->where('academic_year_id', auth()->user()->session()->id - 1)->first()->toYear : $this->year;
+    }
+    public function previousYearRecord()
+    {
+        return $this->hasMany(EnquirySubject::class, 'student_id')->where('year_id', $this->currentYear()->id)->where('academic_year_id', auth()->user()->session()->id - 1);
+    }
 }

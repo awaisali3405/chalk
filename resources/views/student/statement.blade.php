@@ -241,7 +241,7 @@
 
                                     <td rowspan="" class="text-center"></td>
                                     <td>{{ auth()->user()->ukFormat($value1->date) }}</td>
-                                    <td>{{ $value1->description }} {{ $value1->mode }} Credit</td>
+                                    <td>{{ $value1->description }} {{ $value1->mode }} </td>
                                     <td class="text-align-end"> £0</td>
                                     <td class="text-align-end"> £{{ auth()->user()->priceFormat($value1->amount) }}
                                     </td>
@@ -325,7 +325,7 @@
                                         @endphp
                                         <tr style="color: rgb(7, 116, 7);">
                                             <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
-                                            <td>Credit Discount Credit</td>
+                                            <td>Credit Discount </td>
                                             <td class="text-align-end">£0</td>
                                             <td class="text-align-end">
                                                 £{{ auth()->user()->priceFormat($value11->credit_discount) }}</td>
@@ -369,7 +369,7 @@
                                         <tr style="color: rgb(146, 10, 10);">
                                             <td>{{ auth()->user()->ukFormat($value11->date) }}</td>
                                             <td>{{ $value11->description }} {{ $value11->mode }}
-                                                Debit </td>
+                                            </td>
                                             <td class="text-align-end">
                                                 £{{ auth()->user()->priceFormat($value11->amount) }}
                                             </td>
@@ -385,7 +385,8 @@
                                         <td>{{ $value11->description }} @if ($value11->mode != 'transfer')
                                                 {{ $value11->mode }}
                                             @endif
-                                            {{ str_contains($value11, 'Wallet') ? 'Credit' : '' }} </td>
+                                            {{-- {{ str_contains($value11, 'Wallet') ? 'Credit' : '' }} --}}
+                                        </td>
                                         <td class="text-align-end">£0</td>
                                         <td class="text-align-end">£{{ auth()->user()->priceFormat($value11->amount) }}
                                         </td>

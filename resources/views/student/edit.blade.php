@@ -249,6 +249,29 @@
                                                                             </div>
                                                                         </div>
                                                                     @endif
+                                                                    @if ($student->is_promoted)
+                                                                        <div class="row enquiry-subject-list d-none">
+                                                                            <div class="col-12">
+                                                                                <h4>Previous Subject List</h4>
+                                                                                <ul>
+                                                                                    {{-- @dd($student->previousyearRecord,auth()->user()->session()->id-1) --}}
+                                                                                    @foreach ($student->previousYearRecord as $value)
+                                                                                        <li>{{ $value->subject->name }}
+                                                                                            (£{{ $value->rate_per_hr }} x
+                                                                                            {{ $value->no_hr_weekly }}hr)
+                                                                                        </li>
+                                                                                    @endforeach
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row pb-4">
+                                                                            <div class="col-12 d-flex justify-content-end">
+                                                                                <span class="btn btn-primary "
+                                                                                    id="veiw-enquiry-list">View Previous
+                                                                                    Subject</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endif
                                                                     <div class="row">
                                                                         <div class="col-2">
                                                                             <div class="form-group">
@@ -427,13 +450,13 @@
                                                                                                 {{ $value->scienceType ? $value->scienceType->name : '-' }}
                                                                                             </td>
                                                                                             <td>
-                                                                                                {{ $value->rate_per_hr }}
+                                                                                                £{{ $value->rate_per_hr }}
                                                                                             </td>
                                                                                             <td>
                                                                                                 {{ $value->no_hr_weekly }}
                                                                                             </td>
                                                                                             <td>
-                                                                                                {{ $value->amount }}
+                                                                                                £{{ $value->amount }}
                                                                                             </td>
                                                                                             <td>
                                                                                                 @if ($value->active)
@@ -445,7 +468,7 @@
                                                                                                         href="javascript:void(0);"><i
                                                                                                             class=" fa fa-close color-danger"></i></a>
                                                                                                 @else
-                                                                                                Deactivated
+                                                                                                    Deactivated
                                                                                                 @endif
                                                                                             </td>
                                                                                         </tr>
@@ -516,25 +539,22 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-3">
-
                                                 </div>
                                                 <div class="col-6 ">
-
                                                     <h4 class="hr-lines">Tax Calculate</h4>
                                                 </div>
                                                 <div class="col-3">
-
                                                 </div>
                                                 <div class="col-3">
                                                     <div class="form-group">
-                                                        <label for="" class="form-label">VAT</label>
+                                                        <label for="" class="form-label">VAT%</label>
                                                         <input type="text" name="tax" id=""
                                                             class="form-control tax" value="{{ $student->tax }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-3">
                                                     <div class="form-group">
-                                                        <label for="" class="form-label">Fee Tax</label>
+                                                        <label for="" class="form-label">VAT(Fee) </label>
                                                         <input type="text" name="fee_tax" id=""
                                                             class="form-control fee-tax" value="{{ $student->fee_tax }}"
                                                             readonly>
@@ -542,14 +562,13 @@
                                                 </div>
                                                 <div class="col-3">
                                                     <div class="form-group">
-                                                        <label for="" class="form-label">Registration Tax</label>
+                                                        <label for="" class="form-label">VAT(Registration)</label>
                                                         <input type="text" name="reg_tax" id="reg_tax"
                                                             id="" class="form-control"
                                                             value="{{ $student->reg_tax ? $student->reg_tax : 0 }}"
                                                             readonly>
                                                     </div>
                                                 </div>
-
                                                 @if (auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'super admin')
                                                     <div class="row card-body">
                                                         <div class="col-lg-6 col-md-6 col-sm-12">

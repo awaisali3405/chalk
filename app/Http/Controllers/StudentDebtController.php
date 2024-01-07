@@ -26,7 +26,7 @@ class StudentDebtController extends Controller
                     'description' => 'Amount Transfer to ',
                     'amount' => $value->remainingAmount(),
                     'date' => Carbon::now(),
-                    'mode' => 'Debt',
+                    'mode' => 'Debt Collection',
                     'academic_year_id' => auth()->user()->session()->id
                 ]);
                 $value->update([

@@ -434,23 +434,24 @@
                                             <div class="col-3">
 
                                             </div>
+
                                             <div class="col-3">
                                                 <div class="form-group">
-                                                    <label for="" class="form-label">VAT</label>
+                                                    <label for="" class="form-label">VAT%</label>
                                                     <input type="text" name="tax" id=""
-                                                        class="form-control tax" value="0" required>
+                                                        class="form-control tax" value="0">
                                                 </div>
                                             </div>
                                             <div class="col-3">
                                                 <div class="form-group">
-                                                    <label for="" class="form-label">Fee Tax</label>
+                                                    <label for="" class="form-label">VAT(Fee) </label>
                                                     <input type="text" name="fee_tax" id=""
                                                         class="form-control fee-tax" value="0" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-3">
                                                 <div class="form-group">
-                                                    <label for="" class="form-label">Registration Tax</label>
+                                                    <label for="" class="form-label">VAT(Registration)</label>
                                                     <input type="text" name="reg_tax" id="reg_tax" id=""
                                                         class="form-control" value="0" readonly>
                                                 </div>
