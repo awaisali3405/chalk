@@ -153,6 +153,7 @@
                                                         <th>Sr</th>
                                                         <th>Name</th>
                                                         <th>Payment</th>
+                                                        <th>Deduction</th>
                                                         <th>TAX</th>
                                                         <th>Student Loan</th>
                                                         <th>Employee NI</th>
@@ -183,12 +184,15 @@
                                                             $hmrc += $value->hmrc($from_date, $to_date);
                                                             $employerNI += $value->employerNI($from_date, $to_date);
                                                             $employerPension += $value->employerPension($from_date, $to_date);
+                                                            $deduction += $value->deduction($from_date, $to_date);
 
                                                         @endphp
                                                         <tr>
                                                             <td>{{ $key + 1 }}</td>
                                                             <td>{{ $value->name }}</td>
                                                             <td>£{{ auth()->user()->priceFormat($value->salary($from_date, $to_date)) }}
+                                                            </td>
+                                                            <td>£{{ auth()->user()->priceFormat($value->deduction($from_date, $to_date)) }}
                                                             </td>
                                                             <td>£{{ auth()->user()->priceFormat($value->tax($from_date, $to_date)) }}
                                                             </td>
@@ -215,6 +219,7 @@
                                                             Total
                                                         </th>
                                                         <th>£{{ auth()->user()->priceFormat($payment) }}</th>
+                                                        <th>£{{ auth()->user()->priceFormat($deduction) }}</th>
                                                         <th>£{{ auth()->user()->priceFormat($tax) }}</th>
                                                         <th>£{{ auth()->user()->priceFormat($studentLoan) }}</th>
                                                         <th>£{{ auth()->user()->priceFormat($ni) }}</th>

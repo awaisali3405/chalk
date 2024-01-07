@@ -96,7 +96,11 @@ class Staff extends Model
     }
     public function salary($from_date, $to_date)
     {
-        return $this->receipt()->where('date', '>=', $from_date)->where('date', '<=', $to_date)->sum('salary') - $this->receipt()->where('date', '>=', $from_date)->where('date', '<=', $to_date)->sum('deduction');
+        return $this->receipt()->where('date', '>=', $from_date)->where('date', '<=', $to_date)->sum('salary');
+    }
+    public function deduction($from_date, $to_date)
+    {
+        return $this->receipt()->where('date', '>=', $from_date)->where('date', '<=', $to_date)->sum('deduction') + $this->receipt()->where('date', '>=', $from_date)->where('date', '<=', $to_date)->sum('dbs');
     }
     public function employerNI($from_date, $to_date)
     {
@@ -112,6 +116,6 @@ class Staff extends Model
     }
     public function hmrc($from_date, $to_date)
     {
-        return +$this->salary($from_date, $to_date) - ($this->empNI($from_date, $to_date) + $this->empPension($from_date, $to_date) + $this->tax($from_date, $to_date)  + $this->studentLoan($from_date, $to_date));
+        return +$this->salary($from_date, $to_date) - ($this->deduction($from_date, $to_date) + $this->empNI($from_date, $to_date) + $this->empPension($from_date, $to_date) + $this->tax($from_date, $to_date)  + $this->studentLoan($from_date, $to_date));
     }
 }
