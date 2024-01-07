@@ -204,12 +204,12 @@
 
                                                     </td>
                                                     {{-- <td class="text-left"> Default Amount</td> --}}
-                                                    <td class="text-left">Debt Collection Due</td>
+
+                                                    <td class="text-left">Pension Due</td>
                                                     <td class="text-left">
-                                                        £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->debtCollectionDue(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
+                                                        £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->pensionDue(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                     </td>
-
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left">Wallet</td>
@@ -217,8 +217,13 @@
                                                         £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->studentWallet(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
                                                     </td>
+                                                    <td class="text-left">Pension Paid</td>
+                                                    <td class="text-left">
+                                                        £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->pensionPaid(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
 
-                                                    <td colspan="2" class="text-left"></td>
+                                                    </td>
+
+                                                    {{-- <td colspan="2" class="text-left"></td> --}}
 
                                                 </tr>
                                                 <tr>
@@ -228,7 +233,12 @@
 
                                                     </td>
 
-                                                    <td colspan="2" class="text-left"></td>
+                                                    <td class="text-left">Debt Collection Due</td>
+                                                    <td class="text-left">
+                                                        £{{ !is_null(request()->get('branch_id')) && request()->get('academic_year_id')? auth()->user()->priceFormat(auth()->user()->debtCollectionDue(request()->get('branch_id'), request()->get('academic_year_id'))): 0 }}
+
+                                                    </td>
+                                                    {{-- <td colspan="2" class="text-left"></td> --}}
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left">Debt Collection Recieved</td>

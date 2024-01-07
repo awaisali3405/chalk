@@ -519,17 +519,26 @@ class User extends Authenticatable
         }
         return $receipt->get();
     }
+    public function pensionDue($branch, $academicYear)
+    {
+        $empPension = $this->staffPay($branch, $academicYear)->sum('employer_pension');
+        $pension = $this->staffPay($branch, $academicYear)->sum('pension');
+        return $empPension + $pension;
+    }
+    public function pensionPaid($branch, $academicYear)
+    {
+        $amount = $this->hmrc($branch, $academicYear)->where('payment_type', 'third_party')->sum('amount') - $this->hmrc($branch, $academicYear)->where('payment_type', 'third_party')->sum('discount');
+        return $amount;
+    }
     // HMRC
     public function payableHMRC($branch, $academicYear)
     {
         $tax = $this->staffPay($branch, $academicYear)->sum('tax');
         $ni = $this->staffPay($branch, $academicYear)->sum('ni');
-        $pension = $this->staffPay($branch, $academicYear)->sum('pension');
         $empNi = $this->staffPay($branch, $academicYear)->sum('employer_ni');
-        $empPension = $this->staffPay($branch, $academicYear)->sum('employer_pension');
         $studentLoan = $this->staffPay($branch, $academicYear)->sum('student_loan');
-        $paid = $this->paidHMRC($branch, $academicYear);
-        return $tax + $ni + $pension + $empNi + $empPension + $studentLoan - $paid;
+        $paid = $this->hmrc($branch, $academicYear)->sum('amount');
+        return $tax + $ni +  $empNi + $studentLoan - $paid;
     }
     public function hmrc($branch, $academicYear)
     {
@@ -543,7 +552,7 @@ class User extends Authenticatable
     public function paidHMRC($branch, $academicYear)
     {
         // dd($this->hmrc($branch, $academicYear)->get());
-        $amount = $this->hmrc($branch, $academicYear)->sum('amount') - $this->hmrc($branch, $academicYear)->sum('discount');
+        $amount = $this->hmrc($branch, $academicYear)->where('payment_type', 'gov')->sum('amount') - $this->hmrc($branch, $academicYear)->where('payment_type', 'gov')->sum('discount');
         return $amount;
     }
     public function dbsReceived($branch, $academicYear)
