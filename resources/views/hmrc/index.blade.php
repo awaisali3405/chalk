@@ -153,7 +153,7 @@
                                                         <th>Sr</th>
                                                         <th>Name</th>
                                                         <th>Payment</th>
-                                                        <th>Deduction <br> BDS</th>
+                                                        <th>Deduction/ <br> DbS</th>
                                                         <th>TAX</th>
                                                         <th>Student Loan</th>
                                                         <th>Employee NI</th>
