@@ -21,7 +21,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">All HMRC Report </h4>
-                                    <a href="{{ route('staff.hmrc') }}" class="btn btn-primary">+ Add new</a>
+                                    {{-- <a href="{{ route('staff.hmrc') }}" class="btn btn-primary">+ Add new</a> --}}
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">

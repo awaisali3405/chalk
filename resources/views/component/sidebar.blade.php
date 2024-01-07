@@ -165,8 +165,8 @@
                     <ul aria-expanded="false">
                         <li><a href="{{ route('staff.index') }}">All Staff</a></li>
                         <li><a href="{{ route('staff.create') }}">Add Staff</a></li>
-                        <li><a href="{{ route('staff.hmrc') }}">Staff HMRC</a></li>
-                        <li><a href="{{ route('staff.hmrc.list') }}">Staff HMRC Paid</a></li>
+                        <li><a href="{{ route('staff.hmrc') }}">Employer Summary</a></li>
+                        <li><a href="{{ route('staff.hmrc.list') }}">HMRC Paid Report</a></li>
 
                     </ul>
                 </li>
