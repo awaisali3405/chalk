@@ -253,7 +253,7 @@
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group">
-                                                                <label class="form-label">Loan </label>
+                                                                <label class="form-label">Staff Loan</label>
                                                                 <div class="input-group mb-2">
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">£</div>

@@ -1003,7 +1003,9 @@
                                 <td class="pl-2">
                                     <h6>{{ auth()->user()->ukFormat($value4->date) }}</h6>
                                 </td>
-                                <td class="bg-grey"></td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey"></td>
+                                @endif
                                 <td class="bg-grey"></td>
                                 <td class="bg-grey"></td>
                             </tr>
@@ -1020,9 +1022,11 @@
                                 <td class="bg-grey">
                                     <b></b>
                                 </td>
-                                <td class="bg-grey">
-                                    <b></b>
-                                </td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey">
+                                        <b></b>
+                                    </td>
+                                @endif
                                 <td class="bg-grey text-center"
                                     style="text-align: end !important; padding-right:5px;">
                                     <b>
@@ -1037,7 +1041,9 @@
                                 <td class="pl-2">
                                     <h6>{{ auth()->user()->ukFormat($value->date) }}</h6>
                                 </td>
-                                <td class="bg-grey"></td>
+                                @if ($invoice->branch->tax != 0)
+                                    <td class="bg-grey"></td>
+                                @endif
                                 <td class="bg-grey"></td>
                                 <td class="bg-grey"></td>
                             </tr>
@@ -1057,9 +1063,11 @@
                             <td class="bg-grey">
                                 <b></b>
                             </td>
-                            <td class="bg-grey">
-                                <b></b>
-                            </td>
+                            @if ($invoice->branch->tax != 0)
+                                <td class="bg-grey">
+                                    <b></b>
+                                </td>
+                            @endif
                             <td class="bg-grey text-center" style="text-align: end !important; padding-right:5px;">
                                 <b>
 
@@ -1073,7 +1081,9 @@
                                 <h6>{{ auth()->user()->ukFormat($invoice->paidRefund->updated_at) }}
                                 </h6>
                             </td>
-                            <td class="bg-grey"></td>
+                            @if ($invoice->branch->tax != 0)
+                                <td class="bg-grey"></td>
+                            @endif
                             <td class="bg-grey"></td>
                             <td class="bg-grey"></td>
                         </tr>
