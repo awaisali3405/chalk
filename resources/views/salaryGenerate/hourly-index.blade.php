@@ -117,7 +117,7 @@
                                                                                 <td>
                                                                                     <a href="{{ route('staff.pay', $value->id) }}"
                                                                                         title="pay"
-                                                                                        class="btn btn-sm btn-info">Pay</a>
+                                                                                        class="btn btn-sm btn-primary">Pay</a>
                                                                                 </td>
                                                                             </tr>
                                                                         @endforeach
