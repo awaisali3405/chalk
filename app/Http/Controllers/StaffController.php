@@ -113,7 +113,7 @@ class StaffController extends Controller
         if ($data['total'] <= 0) {
             return redirect()->back()->with('error', 'Amount Must be greater than zero.');
         }
-        if ($staff->salary_type == 'Monthly' && isset($data['invoice_id'])) {
+        if ($staff->salary_type == 'Monthly' && !isset($data['invoice_id'])) {
 
             $data['from_date'] =   Carbon::createFromFormat('m/d/Y', $request->from_date)->format('Y-m-d');
             $data['to_date'] = Carbon::createFromFormat('m/d/Y', $request->to_date)->format('Y-m-d');
