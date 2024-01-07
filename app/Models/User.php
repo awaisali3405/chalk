@@ -528,7 +528,8 @@ class User extends Authenticatable
         $empNi = $this->staffPay($branch, $academicYear)->sum('employer_ni');
         $empPension = $this->staffPay($branch, $academicYear)->sum('employer_pension');
         $studentLoan = $this->staffPay($branch, $academicYear)->sum('student_loan');
-        return $tax + $ni + $pension + $empNi + $empPension + $studentLoan;
+        $paid = $this->paidHMRC($branch, $academicYear);
+        return $tax + $ni + $pension + $empNi + $empPension + $studentLoan - $paid;
     }
     public function hmrc($branch, $academicYear)
     {
