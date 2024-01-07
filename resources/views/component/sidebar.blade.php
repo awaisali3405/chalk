@@ -145,6 +145,15 @@
                         <li><a href="{{ route('loan.flow') }}">Staff Loan Statement</a></li>
                     </ul>
                 </li>
+                <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="la la-university"></i>
+                        <span class="nav-text">Statement</span>
+                        <ul aria-expanded="false">
+                            <li><a href="{{ route('staff.hmrc') }}">Employer's Summary</a></li>
+                            <li><a href="{{ route('staff.hmrc.list') }}">HMRC Paid Report</a></li>
+                        </ul>
+                    </a>
+                </li>
                 {{-- <li class="nav-label first" style="color: #ffbd33;">Resource Book</li> --}}
                 <li class="nav-label first" style="color: #ffbd33;">HR Management</li>
 
@@ -165,8 +174,7 @@
                     <ul aria-expanded="false">
                         <li><a href="{{ route('staff.index') }}">All Staff</a></li>
                         <li><a href="{{ route('staff.create') }}">Add Staff</a></li>
-                        <li><a href="{{ route('staff.hmrc') }}">Employer's Summary</a></li>
-                        <li><a href="{{ route('staff.hmrc.list') }}">HMRC Paid Report</a></li>
+
 
                     </ul>
                 </li>
